@@ -19,6 +19,9 @@ var dash_direction = Vector3.ZERO
 var target_h_offset = 1.0
 var mouse_sensitivity: float = 2.0 # User-friendly number
 var sens_popup_timer = 0.0
+var show_room_ui = false
+
+@export var show_target_marker: bool = true
 
 var team_color: Color = Color.WHITE
 
@@ -90,6 +93,46 @@ func _ready():
 		sens_label.add_theme_constant_override("outline_size", 4)
 		canvas.add_child(sens_label)
 		
+		# Create the Room ID display (Hidden by default)
+		var room_bg = ColorRect.new()
+		room_bg.name = "RoomIDBackground"
+		room_bg.color = Color(0, 0, 0, 0.6) # Dark overlay
+		room_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		room_bg.hide()
+		canvas.add_child(room_bg)
+		
+		var room_vbox = VBoxContainer.new()
+		room_vbox.name = "RoomVBox"
+		room_vbox.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+		room_vbox.add_theme_constant_override("separation", 20)
+		room_bg.add_child(room_vbox)
+		
+		var room_label = Label.new()
+		room_label.name = "RoomIDLabel"
+		room_label.text = "Fetching Room ID..."
+		room_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		room_label.add_theme_font_size_override("font_size", 48)
+		room_label.add_theme_color_override("font_outline_color", Color.BLACK)
+		room_label.add_theme_constant_override("outline_size", 8)
+		room_vbox.add_child(room_label)
+		
+		var copy_btn = Button.new()
+		copy_btn.name = "CopyButton"
+		copy_btn.text = "Copy to Clipboard"
+		copy_btn.add_theme_font_size_override("font_size", 24)
+		copy_btn.pressed.connect(func():
+			var client_node = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI/Client")
+			if client_node and client_node.get("lobby"):
+				var code = client_node.lobby
+				if OS.has_feature("web"):
+					var js = "const el = document.createElement('textarea'); el.value = '%s'; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);" % code
+					JavaScriptBridge.eval(js)
+				else:
+					DisplayServer.clipboard_set(code)
+				copy_btn.text = "Copied!"
+		)
+		room_vbox.add_child(copy_btn)
+		
 		add_child(canvas)
 		
 		# DEBUG MARKER: A red sphere to show EXACTLY where the raycast hits
@@ -143,6 +186,27 @@ func _input(event):
 			target_h_offset = -1.0
 		else:
 			target_h_offset = 1.0
+			
+	# Web Browser Fallback: Browsers require a physical click to hide the cursor!
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and not show_room_ui:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			
+	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_TAB and not event.echo:
+		show_room_ui = !show_room_ui
+		var room_bg = get_node_or_null("PlayerCanvas/RoomIDBackground")
+		if room_bg:
+			room_bg.visible = show_room_ui
+			if show_room_ui:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+				# Update the text just in case it wasn't fetched yet
+				var client_node = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI/Client")
+				if client_node and client_node.get("lobby"):
+					room_bg.get_node("RoomVBox/RoomIDLabel").text = "Room ID:\n" + str(client_node.lobby)
+				var btn = room_bg.get_node_or_null("RoomVBox/CopyButton")
+				if btn: btn.text = "Copy to Clipboard"
+			else:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func show_sensitivity_popup():
 	var label = get_node_or_null("PlayerCanvas/SensLabel")
@@ -268,6 +332,7 @@ func _physics_process(delta):
 	var marker = get_node_or_null("/root/TargetMarker")
 	if marker:
 		marker.global_position = target_pos
+		marker.visible = show_target_marker
 
 	# Shoot Plunger
 	if Input.is_action_just_pressed("ui_select") and shoot_cooldown <= 0 and not is_dashing:

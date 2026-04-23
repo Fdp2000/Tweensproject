@@ -19,6 +19,7 @@ properties/2/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=692488303]
 script = ExtResource("1_p0vlq")
+show_target_marker = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1769027693]
 mesh = SubResource("CapsuleMesh_kpjcp")
@@ -35,6 +36,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5529072)
 h_offset = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1310813326]
-root_path = NodePath("..")
 replication_config = SubResource("SceneReplicationConfig_e80uo")
-

@@ -4,7 +4,7 @@ var progress: float = 1.0
 var ring_color: Color = Color(1.0, 0.84, 0.0, 0.9)
 var ready_color: Color = Color(1.0, 0.84, 0.0, 0.9)
 
-func _process(delta):
+func _process(_delta):
 	queue_redraw()
 
 func _draw():
