@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bfi02p842hxck"]
+
+[ext_resource type="Script" uid="uid://drqhtg0onjeuf" path="res://scripts/main.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://bvlpyq23crr3g" path="res://scenes/Plunger.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://d0xak1rv4tda0" path="res://scenes/client_ui.tscn" id="2_sugp2"]
+
+[node name="Control" type="Control" unique_id=846917499]
+layout_mode = 3
+anchor_left = 0.0136719
+anchor_top = 0.0166667
+anchor_right = 0.986328
+anchor_bottom = 0.983333
+script = ExtResource("1_0wfyh")
+plunger_scene = ExtResource("2_jyhfs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=692986734]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Signaling" type="HBoxContainer" parent="VBoxContainer" unique_id=1704468021]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Signaling" unique_id=2030172392]
+layout_mode = 2
+text = "Signaling server:"
+
+[node name="Port" type="SpinBox" parent="VBoxContainer/Signaling" unique_id=947653214]
+layout_mode = 2
+min_value = 1025.0
+max_value = 65535.0
+value = 9080.0
+
+[node name="ListenButton" type="Button" parent="VBoxContainer/Signaling" unique_id=889164289]
+layout_mode = 2
+toggle_mode = true
+text = "Listen"
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/Signaling" unique_id=83347839]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LinkButton" type="LinkButton" parent="VBoxContainer/Signaling/CenterContainer" unique_id=2117678697]
+modulate = Color(1, 0.956863, 0.207843, 1)
+layout_mode = 2
+text = "Make sure to download the GDExtension WebRTC Plugin and place it in the project folder"
+
+[node name="Clients" type="GridContainer" parent="VBoxContainer" unique_id=381667770]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="ClientUI" parent="VBoxContainer/Clients" unique_id=1326961882 instance=ExtResource("2_sugp2")]
+layout_mode = 2
+
+
+[node name="SpawnedObjects" type="Node3D" parent="." unique_id=1234567890]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=624736189]
+_spawnable_scenes = PackedStringArray("uid://8f4mshrrem6r", "uid://bvlpyq23crr3g")
+spawn_path = NodePath("../SpawnedObjects")
+
+[connection signal="toggled" from="VBoxContainer/Signaling/ListenButton" to="." method="_on_listen_toggled"]
+[connection signal="pressed" from="VBoxContainer/Signaling/CenterContainer/LinkButton" to="." method="_on_LinkButton_pressed"]
