@@ -90,7 +90,7 @@ func _build_main_menu():
 	host_btn.add_theme_font_size_override("font_size", 32)
 	host_btn.pressed.connect(func():
 		local_player_name = name_input.text.strip_edges()
-		client.start(host.text, "", true)
+		client.start(host.text, "", false)
 	)
 	vbox.add_child(host_btn)
 	
@@ -110,7 +110,7 @@ func _build_main_menu():
 		local_player_name = name_input.text.strip_edges()
 		var code = join_input.text.strip_edges().to_upper()
 		if code != "":
-			client.start(host.text, code, true)
+			client.start(host.text, code, false)
 	)
 	join_hbox.add_child(join_btn)
 @rpc("any_peer", "call_local")
@@ -132,8 +132,12 @@ func _mp_peer_connected(id: int) -> void:
 	if multiplayer.is_server():
 		var pf = player_scene.instantiate()
 		pf.name = str(id)
-		get_node("/root/World/main/SpawnedObjects").call_deferred("add_child", pf)
 		
+		# Set the team index. The MultiplayerSynchronizer will automatically send this to everyone!
+		var spawned = get_node("/root/World/main/SpawnedObjects")
+		pf.team_index = spawned.get_child_count() % 2 
+		
+		spawned.add_child(pf, true)
 
 
 func _mp_peer_disconnected(id: int) -> void:

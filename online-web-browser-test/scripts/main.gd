@@ -3,21 +3,22 @@ extends Control
 @export var plunger_scene: PackedScene
 
 @rpc("any_peer", "call_local")
-func spawn_plunger(muzzle_pos: Vector3, shoot_dir: Vector3, team_color: Color, shooter_team_index: int, shooter_id: int):
+func spawn_plunger(muzzle_pos: Vector3, shoot_dir: Vector3, shooter_id: int): # <-- Removed color and team args
 	if not multiplayer.is_server():
 		return
+		
+	# Security: Look up the REAL team data on the server!
+	var real_shooter = $SpawnedObjects.get_node_or_null(str(shooter_id))
+	if not real_shooter: return
+	
 	var p = plunger_scene.instantiate()
-	p.team_color = team_color
-	p.shooter_team_index = shooter_team_index
+	p.team_color = real_shooter.plunger_color
+	p.shooter_team_index = real_shooter.team_index
 	p.shooter_id = shooter_id
 	
-	# 1. Add it to the tree FIRST
 	$SpawnedObjects.add_child(p, true) 
-	
-	# 2. Now you can set the global position without errors
 	p.global_position = muzzle_pos
 	
-	# Point the plunger in the shoot direction. We use Vector3.RIGHT as a fallback up vector if shooting straight up/down
 	if abs(shoot_dir.dot(Vector3.UP)) < 0.999:
 		p.look_at(muzzle_pos + shoot_dir, Vector3.UP)
 	else:

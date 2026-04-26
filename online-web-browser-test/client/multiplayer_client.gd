@@ -69,7 +69,7 @@ func _connected(id: int, use_mesh: bool) -> void:
 	elif id == 1:
 		rtc_mp.create_server()
 	else:
-		rtc_mp.create_client(id)
+		rtc_mp.create_client(id) # <--- CHANGE THIS BACK TO 'id'
 	multiplayer.multiplayer_peer = rtc_mp
 
 
@@ -88,6 +88,8 @@ func _disconnected() -> void:
 
 
 func _peer_connected(id: int) -> void:
+		# ADD THIS: If not mesh, and I am not the host, and the new peer is not the host -> Ignore!
+	if not mesh and id != 1 and rtc_mp.get_unique_id() != 1: return
 	print("Peer connected: %d" % id)
 	_create_peer(id)
 
@@ -98,6 +100,8 @@ func _peer_disconnected(id: int) -> void:
 
 
 func _offer_received(id: int, offer: String) -> void:
+		# ADD THIS HERE TOO:
+	if not mesh and id != 1 and rtc_mp.get_unique_id() != 1: return
 	print("Got offer: %d" % id)
 	if rtc_mp.has_peer(id):
 		rtc_mp.get_peer(id).connection.set_remote_description("offer", offer)

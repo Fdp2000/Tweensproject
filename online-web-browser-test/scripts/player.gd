@@ -28,10 +28,11 @@ var shoot_ui_ref: Control
 
 var team_color: Color = Color.WHITE
 var plunger_color: Color = Color("ff1d1d")
-var team_index: int = 0 # 0 = blue, 1 = red
 var player_name: String = ""
 var kills: int = 0
 var deaths: int = 0
+@export var team_index: int = 0
+
 
 @onready var spring_arm = $SpringArm3D
 @onready var camera = $SpringArm3D/Camera3D
@@ -45,15 +46,20 @@ func _ready():
 	# Wait one frame to ensure authority is synced across the network
 	await get_tree().process_frame
 	
+		# If I am the Server, I already know the truth. Apply it immediately!
+	if multiplayer.is_server():
+		_apply_team_colors()
+	# If I am a Client, I must ask the Server what color this player is!
+	else:
+		rpc_id(1, "request_team_color")
+	
 	# Assign team color based on join order (sibling index)
-	if get_index() % 2 == 0:
+	if team_index == 0:
 		team_color = Color(0.4, 0.6, 1.0) # Light Blue
 		plunger_color = Color("1d56ffff") # Vivid Blue
-		team_index = 0
 	else:
 		team_color = Color(1.0, 0.4, 0.4) # Light Red
 		plunger_color = Color("ff1d1d") # Vivid Red
-		team_index = 1
 	
 	# Set player name from menu input or default
 	if is_multiplayer_authority():
@@ -429,6 +435,8 @@ func _make_player_row(data: Dictionary) -> HBoxContainer:
 var shoot_cooldown: float = 0.0
 
 func _physics_process(delta):
+	if multiplayer.is_server():
+		rpc("relay_position", global_position, rotation)
 	if not is_multiplayer_authority(): return
 	
 	# Real-time scoreboard update
@@ -576,13 +584,14 @@ func _physics_process(delta):
 				muzzle_pos = muzzle_hit.position - (ideal_muzzle_pos - chest_pos).normalized() * 0.1
 			
 			var shoot_dir = (target_pos - muzzle_pos).normalized()
-			main_node.rpc("spawn_plunger", muzzle_pos, shoot_dir, plunger_color, team_index, multiplayer.get_unique_id())
+			main_node.rpc("spawn_plunger", muzzle_pos, shoot_dir, multiplayer.get_unique_id())
+
 
 var health = 3
 var last_shooter_id: int = -1
 
 @rpc("any_peer", "call_local")
-func take_damage(hit_pos: Vector3, hit_normal: Vector3, plunger_color: Color = Color("ff1d1d"), shooter_id: int = -1):
+func take_damage(hit_pos: Vector3, hit_normal: Vector3, incoming_plunger_color: Color = Color("ff1d1d"), shooter_id: int = -1): # <--- CHANGED NAME HERE
 	health -= 1
 	last_shooter_id = shooter_id
 	
@@ -593,7 +602,7 @@ func take_damage(hit_pos: Vector3, hit_normal: Vector3, plunger_color: Color = C
 	
 	# Apply the shooter's team color to the plunger head
 	var head_mat = StandardMaterial3D.new()
-	head_mat.albedo_color = plunger_color
+	head_mat.albedo_color = incoming_plunger_color # <--- USE NEW NAME HERE
 	var head_mesh = dummy_plunger.get_node_or_null("MeshInstance3D2")
 	if head_mesh:
 		head_mesh.set_surface_override_material(0, head_mat)
@@ -672,3 +681,47 @@ func _sync_name(n: String):
 @rpc("any_peer", "call_local")
 func register_kill():
 	kills += 1
+	
+
+
+func _apply_team_colors():
+	if team_index == 0:
+		team_color = Color(0.4, 0.6, 1.0) # Light Blue
+		plunger_color = Color("1d56ffff") # Vivid Blue
+	else:
+		team_color = Color(1.0, 0.4, 0.4) # Light Red
+		plunger_color = Color("ff1d1d") # Vivid Red
+		
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = team_color
+	
+	# Safe check to make sure the mesh exists
+	if has_node("MeshInstance3D"):
+		$MeshInstance3D.set_surface_override_material(0, mat)
+		
+	# Update local UI if I own this player
+	if is_inside_tree() and is_multiplayer_authority() and shoot_ui_ref:
+		shoot_ui_ref.ring_color = team_color
+		shoot_ui_ref.ready_color = team_color
+		
+@rpc("any_peer", "call_remote", "reliable")
+func request_team_color():
+	# Only the Server is allowed to answer this question
+	if multiplayer.is_server():
+		var requester = multiplayer.get_remote_sender_id()
+		# Send the true team index back to the specific client who asked
+		rpc_id(requester, "sync_team", team_index)
+
+@rpc("any_peer", "call_local", "reliable")
+func sync_team(assigned_team: int):
+	team_index = assigned_team
+	_apply_team_colors()
+	
+@rpc("any_peer", "call_remote", "unreliable")
+func relay_position(pos: Vector3, rot: Vector3):
+	# If I am the client who owns this player, ignore this (so my movement doesn't stutter)
+	if is_multiplayer_authority(): return
+	
+	# If I am a peer watching this player, update their visual position!
+	global_position = pos
+	rotation = rot
