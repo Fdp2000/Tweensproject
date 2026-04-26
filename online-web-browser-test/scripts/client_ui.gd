@@ -39,6 +39,53 @@ func _ready() -> void:
 			});
 		"""
 		JavaScriptBridge.eval(js)
+		
+		# iOS Fullscreen Workaround: Inject CSS and viewport fixes
+		var ios_css = """
+			(function() {
+				// Fix viewport for iOS
+				var meta = document.querySelector('meta[name="viewport"]');
+				if (!meta) {
+					meta = document.createElement('meta');
+					meta.name = 'viewport';
+					document.head.appendChild(meta);
+				}
+				meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
+				
+				// Add apple-mobile-web-app meta tags
+				var awc = document.createElement('meta');
+				awc.name = 'apple-mobile-web-app-capable';
+				awc.content = 'yes';
+				document.head.appendChild(awc);
+				
+				var aws = document.createElement('meta');
+				aws.name = 'apple-mobile-web-app-status-bar-style';
+				aws.content = 'black-translucent';
+				document.head.appendChild(aws);
+				
+				// CSS to use full dynamic viewport height (iOS Safari)
+				var style = document.createElement('style');
+				style.textContent = `
+					html, body {
+						height: 100dvh !important;
+						width: 100dvw !important;
+						overflow: hidden !important;
+						margin: 0 !important;
+						padding: 0 !important;
+						touch-action: none;
+					}
+					canvas#canvas {
+						height: 100dvh !important;
+						width: 100dvw !important;
+					}
+				`;
+				document.head.appendChild(style);
+				
+				// Scroll to hide address bar
+				setTimeout(function() { window.scrollTo(0, 1); }, 100);
+			})();
+		"""
+		JavaScriptBridge.eval(ios_css)
 	
 	_build_main_menu()
 
@@ -85,7 +132,17 @@ func _build_main_menu():
 	name_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	name_input.add_theme_font_size_override("font_size", 24)
 	name_input.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	name_input.focus_entered.connect(func(): if is_mobile_device(): DisplayServer.virtual_keyboard_show(""))
+	if is_mobile_device() and OS.has_feature("web"):
+		# Use HTML prompt for iOS compatibility (bypasses WebKit keyboard restrictions)
+		name_input.editable = false
+		name_input.gui_input.connect(func(event):
+			if event is InputEventScreenTouch and event.pressed:
+				var result = JavaScriptBridge.eval("prompt('Enter your name:', '')")
+				if result != null and str(result).strip_edges() != "":
+					name_input.text = str(result).strip_edges().substr(0, 16)
+		)
+	else:
+		name_input.focus_entered.connect(func(): if is_mobile_device(): DisplayServer.virtual_keyboard_show(""))
 	vbox.add_child(name_input)
 	
 	var host_btn = Button.new()
@@ -104,13 +161,18 @@ func _build_main_menu():
 	join_input.placeholder_text = "Paste Room Key Here"
 	join_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	join_input.add_theme_font_size_override("font_size", 24)
-	join_input.virtual_keyboard_enabled = true
-	# iOS Fix: Trigger keyboard on GUI input (touch) rather than focus_entered
-	join_input.gui_input.connect(func(event):
-		if event is InputEventScreenTouch and event.pressed:
-			if is_mobile_device():
-				DisplayServer.virtual_keyboard_show(join_input.text, join_input.get_global_rect())
-	)
+	if is_mobile_device() and OS.has_feature("web"):
+		# Use HTML prompt for iOS compatibility (bypasses WebKit keyboard restrictions)
+		join_input.editable = false
+		join_input.gui_input.connect(func(event):
+			if event is InputEventScreenTouch and event.pressed:
+				var result = JavaScriptBridge.eval("prompt('Enter Room Code:', '')")
+				if result != null and str(result).strip_edges() != "":
+					var code = str(result).strip_edges().to_upper()
+					join_input.text = code
+		)
+	else:
+		join_input.virtual_keyboard_enabled = true
 	join_hbox.add_child(join_input)
 	
 	var join_btn = Button.new()
