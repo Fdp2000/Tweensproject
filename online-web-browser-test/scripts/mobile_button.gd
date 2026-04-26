@@ -18,17 +18,28 @@ func _ready():
 func _input(event):
 	if event is InputEventScreenTouch:
 		if event.pressed and touch_id == -1:
-			var local_pos = get_local_mouse_position()
+			var local_pos = (event.position - global_position)
 			if local_pos.distance_to(center) <= radius:
 				touch_id = event.index
 				is_pressed = true
-				Input.action_press(action_name)
+				if action_name == "mobile_shoot" or action_name == "secondary_action":
+					var player = owner if owner else get_parent()
+					while player and not player is CharacterBody3D:
+						player = player.get_parent()
+					if player:
+						if action_name == "mobile_shoot" and "is_mobile_shooting" in player:
+							player.is_mobile_shooting = true
+						elif action_name == "secondary_action" and player.has_method("toggle_camera"):
+							player.toggle_camera()
+				else:
+					Input.action_press(action_name)
 				queue_redraw()
 				get_viewport().set_input_as_handled()
 		elif not event.pressed and event.index == touch_id:
 			touch_id = -1
 			is_pressed = false
-			Input.action_release(action_name)
+			if action_name != "mobile_shoot":
+				Input.action_release(action_name)
 			queue_redraw()
 			get_viewport().set_input_as_handled()
 
@@ -39,7 +50,7 @@ func _draw():
 	# Draw text
 	if button_text != "":
 		var font = ThemeDB.fallback_font
-		var font_size = 24
+		var font_size = int(radius * 0.5)
 		var string_size = font.get_string_size(button_text, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size)
 		var text_pos = center + Vector2(-string_size.x / 2.0, string_size.y * 0.3) # Approximate vertical centering
 		draw_string(font, text_pos, button_text, HORIZONTAL_ALIGNMENT_CENTER, -1, font_size, text_color)

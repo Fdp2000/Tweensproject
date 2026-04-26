@@ -20,9 +20,12 @@ var target_h_offset = 1.0
 var mouse_sensitivity: float = 2.0 # User-friendly number
 var sens_popup_timer = 0.0
 var show_room_ui = false
+var look_touch_index: int = -1
+var last_look_pos: Vector2 = Vector2.ZERO
 
 var dash_ui_ref: Control
 var shoot_ui_ref: Control
+var is_mobile_shooting: bool = false
 
 @export var show_target_marker: bool = true
 
@@ -78,7 +81,7 @@ func _ready():
 	
 	if is_multiplayer_authority():
 		camera.current = true
-		if not OS.has_feature("mobile"):
+		if not is_mobile_device():
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
 		# Dynamically create a simple dot crosshair for the local player
@@ -142,7 +145,10 @@ func _ready():
 		var room_key_label = Label.new()
 		room_key_label.name = "RoomKeyLabel"
 		room_key_label.text = "Room Key: ..."
-		room_key_label.add_theme_font_size_override("font_size", 20)
+		if is_mobile_device():
+			room_key_label.add_theme_font_size_override("font_size", 32)
+		else:
+			room_key_label.add_theme_font_size_override("font_size", 20)
 		room_key_label.add_theme_color_override("font_outline_color", Color.BLACK)
 		room_key_label.add_theme_constant_override("outline_size", 4)
 		room_key_label.position = Vector2(20, 15)
@@ -210,63 +216,108 @@ func _ready():
 		add_child(canvas)
 		
 		# --- MOBILE CONTROLS ---
-		if OS.has_feature("mobile"):
+		if is_mobile_device():
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			var screen_size = DisplayServer.window_get_size()
+			# Smaller, more conservative scaling (reference height 720p)
+			var ui_scale = min(screen_size.x, screen_size.y) / 720.0 
+			ui_scale = clamp(ui_scale, 0.8, 2.0) 
 			var mobile_ui = Control.new()
 			mobile_ui.name = "MobileUI"
 			mobile_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			mobile_ui.mouse_filter = Control.MOUSE_FILTER_PASS
 			canvas.add_child(mobile_ui)
+			
+			# Look Area (Background for rotation, handles touches that buttons don't)
+			var look_area = Control.new()
+			look_area.name = "LookArea"
+			look_area.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			look_area.mouse_filter = Control.MOUSE_FILTER_STOP
+			look_area.gui_input.connect(func(event):
+				if event is InputEventScreenTouch:
+					if event.pressed:
+						if look_touch_index == -1:
+							look_touch_index = event.index
+							last_look_pos = event.position
+					elif event.index == look_touch_index:
+						look_touch_index = -1
+				
+				if event is InputEventScreenDrag and event.index == look_touch_index:
+					var drag_relative = event.position - last_look_pos
+					last_look_pos = event.position
+					
+					var actual_sens = mouse_sensitivity * 0.001
+					rotate_y(-drag_relative.x * actual_sens)
+					spring_arm.rotate_x(-drag_relative.y * actual_sens)
+					spring_arm.rotation.x = clamp(spring_arm.rotation.x, -1.0, 1.0)
+					get_viewport().set_input_as_handled()
+			)
+			mobile_ui.add_child(look_area)
 			
 			var joystick = load("res://scripts/virtual_joystick.gd").new()
 			joystick.name = "Joystick"
+			# Apply scale to joystick (Increased by 40%)
+			var joy_size = 200 * ui_scale
+			joystick.custom_minimum_size = Vector2(joy_size, joy_size)
+			joystick.radius = 70 * ui_scale
+			joystick.anchor_top = 1.0
+			joystick.anchor_bottom = 1.0
+			joystick.anchor_left = 0.0
+			joystick.anchor_right = 0.0
+			joystick.offset_left = 40 * ui_scale
+			joystick.offset_right = (40 + 200) * ui_scale
+			joystick.offset_top = - (220 * ui_scale)
+			joystick.offset_bottom = - (20 * ui_scale)
 			mobile_ui.add_child(joystick)
 			
-			# Camera switch button (lower-right of joystick)
+			# Camera switch button (Increased size & moved closer to joystick)
 			var cam_btn = load("res://scripts/mobile_button.gd").new()
 			cam_btn.action_name = "secondary_action"
 			cam_btn.button_text = "CAM"
-			cam_btn.radius = 25.0
+			cam_btn.radius = 45.0 * ui_scale 
 			cam_btn.base_color = Color(0.5, 0.5, 0.5, 0.4)
 			cam_btn.anchor_top = 1.0
 			cam_btn.anchor_bottom = 1.0
 			cam_btn.anchor_left = 0.0
 			cam_btn.anchor_right = 0.0
-			cam_btn.offset_left = 210
-			cam_btn.offset_top = -55
-			cam_btn.offset_right = 210 + 50
-			cam_btn.offset_bottom = -55 + 50
+			cam_btn.offset_left = 220 * ui_scale # Moved from 300 to 220 (closer to joystick)
+			cam_btn.offset_top = - (80 * ui_scale)
+			cam_btn.offset_right = (220 + 80) * ui_scale
+			cam_btn.offset_bottom = - (0 * ui_scale)
 			mobile_ui.add_child(cam_btn)
 			
 			var jump_btn = load("res://scripts/mobile_button.gd").new()
 			jump_btn.action_name = "ui_accept"
 			jump_btn.button_text = "JUMP"
+			jump_btn.radius = 52.0 * ui_scale # Was 40 (+30%)
 			jump_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-			jump_btn.offset_left = -150
-			jump_btn.offset_top = -150
-			jump_btn.offset_right = -150 + 80
-			jump_btn.offset_bottom = -150 + 80
+			jump_btn.offset_left = - (160 * ui_scale)
+			jump_btn.offset_top = - (160 * ui_scale)
+			jump_btn.offset_right = - (60 * ui_scale)
+			jump_btn.offset_bottom = - (60 * ui_scale)
 			mobile_ui.add_child(jump_btn)
 			
 			var shoot_btn = load("res://scripts/mobile_button.gd").new()
-			shoot_btn.action_name = "ui_select"
+			shoot_btn.action_name = "mobile_shoot" # CUSTOM ACTION
 			shoot_btn.button_text = "FIRE"
-			shoot_btn.radius = 50.0
+			shoot_btn.radius = 72.0 * ui_scale # Was 55 (+30%)
 			shoot_btn.base_color = Color(1, 0.2, 0.2, 0.5)
 			shoot_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-			shoot_btn.offset_left = -280
-			shoot_btn.offset_top = -200
-			shoot_btn.offset_right = -280 + 100
-			shoot_btn.offset_bottom = -200 + 100
+			shoot_btn.offset_left = - (320 * ui_scale)
+			shoot_btn.offset_top = - (240 * ui_scale)
+			shoot_btn.offset_right = - (180 * ui_scale)
+			shoot_btn.offset_bottom = - (100 * ui_scale)
 			mobile_ui.add_child(shoot_btn)
 			
 			var dash_btn = load("res://scripts/mobile_button.gd").new()
 			dash_btn.action_name = "dash"
 			dash_btn.button_text = "DASH"
+			dash_btn.radius = 52.0 * ui_scale # Was 40 (+30%)
 			dash_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-			dash_btn.offset_left = -120
-			dash_btn.offset_top = -280
-			dash_btn.offset_right = -120 + 80
-			dash_btn.offset_bottom = -280 + 80
+			dash_btn.offset_left = - (130 * ui_scale)
+			dash_btn.offset_top = - (300 * ui_scale)
+			dash_btn.offset_right = - (30 * ui_scale)
+			dash_btn.offset_bottom = - (200 * ui_scale)
 			mobile_ui.add_child(dash_btn)
 			
 			# Move cooldown rings inside buttons for mobile
@@ -275,6 +326,15 @@ func _ready():
 			
 			shoot_ui.reparent(shoot_btn, false)
 			shoot_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			
+			# Auto-show scoreboard for host on spawn (to see room key)
+			if multiplayer.get_unique_id() == 1:
+				show_room_ui = true
+				score_bg.visible = true
+				get_tree().create_timer(5.0).timeout.connect(func():
+					show_room_ui = false
+					score_bg.visible = false
+				)
 		# DEBUG MARKER: A red sphere to show EXACTLY where the raycast hits
 		var debug_mesh = SphereMesh.new()
 		debug_mesh.radius = 0.1
@@ -304,20 +364,16 @@ func _ready():
 func _input(event):
 	if not is_multiplayer_authority(): return
 	
-	# Handle Mouse Movement separately
-	if event is InputEventMouseMotion:
-		if OS.has_feature("mobile"):
-			var joystick = get_node_or_null("PlayerCanvas/MobileUI/Joystick")
-			if joystick:
-				var joystick_rect = Rect2(joystick.global_position, joystick.size)
-				if joystick_rect.has_point(event.position):
-					return
-			
-		var actual_sens = mouse_sensitivity * 0.001 # Convert user number to radians
+	# Desktop Look Rotation (Mouse only)
+	if event is InputEventMouseMotion and not is_mobile_device():
+		var actual_sens = mouse_sensitivity * 0.001
 		rotate_y(-event.relative.x * actual_sens)
 		spring_arm.rotate_x(-event.relative.y * actual_sens)
 		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -1.0, 1.0)
-		return # Stop here for mouse motion
+		return
+
+func _unhandled_input(event):
+	if not is_multiplayer_authority(): return
 		
 	# Handle Scroll Wheel Sensitivity
 	if event is InputEventMouseButton and event.pressed:
@@ -328,18 +384,15 @@ func _input(event):
 			mouse_sensitivity = clamp(mouse_sensitivity - 0.20, 0.2, 10)
 			show_sensitivity_popup()
 
-	if Input.is_action_just_pressed("secondary_action"):
-		if target_h_offset == 1.0:
-			target_h_offset = -1.0
-		else:
-			target_h_offset = 1.0
+	if event.is_action_pressed("secondary_action"):
+		toggle_camera()
 			
 	# Web Browser Fallback: Browsers require a physical click to hide the cursor!
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and not show_room_ui:
-			if not OS.has_feature("mobile"):
+			if not is_mobile_device():
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			
+
 	# TAB hold to show scoreboard
 	if event is InputEventKey and event.physical_keycode == KEY_TAB:
 		var score_bg = get_node_or_null("PlayerCanvas/ScoreboardBackground")
@@ -350,6 +403,8 @@ func _input(event):
 			elif not event.pressed:
 				show_room_ui = false
 				score_bg.visible = false
+	
+
 
 func show_sensitivity_popup():
 	var label = get_node_or_null("PlayerCanvas/SensLabel")
@@ -508,7 +563,7 @@ func _physics_process(delta):
 			velocity.z = dash_direction.z * DASH_SPEED
 	else:
 		# Check for Dash Trigger
-		if (Input.is_physical_key_pressed(KEY_SHIFT) or Input.is_action_pressed("dash")) and is_on_floor() and dash_cooldown_left <= 0:
+		if (Input.is_physical_key_pressed(KEY_SHIFT) or Input.is_action_pressed("dash")) and dash_cooldown_left <= 0:
 			is_dashing = true
 			dash_time_left = DASH_DURATION
 			dash_cooldown_left = DASH_COOLDOWN
@@ -564,7 +619,14 @@ func _physics_process(delta):
 		marker.visible = show_target_marker
 
 	# Shoot Plunger
-	if Input.is_action_just_pressed("ui_select") and shoot_cooldown <= 0 and not is_dashing:
+	var wants_to_shoot = false
+	if is_mobile_device():
+		wants_to_shoot = is_mobile_shooting
+		is_mobile_shooting = false # Reset flag after checking
+	else:
+		wants_to_shoot = Input.is_action_just_pressed("ui_select") or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+		
+	if wants_to_shoot and shoot_cooldown <= 0 and not is_dashing:
 		shoot_cooldown = 0.6 # 0.5 seconds cooldown
 		var main_node = get_node("/root/World/main")
 		if main_node:
@@ -709,6 +771,16 @@ func _apply_team_colors():
 	if is_inside_tree() and is_multiplayer_authority() and shoot_ui_ref:
 		shoot_ui_ref.ring_color = team_color
 		shoot_ui_ref.ready_color = team_color
+
+func is_mobile_device() -> bool:
+	if OS.has_feature("mobile"): return true
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"): return true
+	if OS.has_feature("web") and DisplayServer.is_touchscreen_available():
+		var ua = JavaScriptBridge.eval("navigator.userAgent")
+		if ua:
+			for m in ["Android", "iPhone", "iPad", "iPod", "Mobile"]:
+				if m in ua: return true
+	return false
 		
 @rpc("any_peer", "call_remote", "reliable")
 func request_team_color():
@@ -731,3 +803,10 @@ func relay_position(pos: Vector3, rot: Vector3):
 	# If I am a peer watching this player, update their visual position!
 	global_position = pos
 	rotation = rot
+
+# Helper for toggling camera shoulder side (used by keyboard and mobile)
+func toggle_camera():
+	if target_h_offset == 1.0:
+		target_h_offset = -1.0
+	else:
+		target_h_offset = 1.0

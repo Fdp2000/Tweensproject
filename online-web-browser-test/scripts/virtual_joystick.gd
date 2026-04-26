@@ -7,26 +7,14 @@ var input_vector = Vector2.ZERO
 var touch_id = -1
 
 func _ready():
-	custom_minimum_size = Vector2(160, 160)
-	# Anchor to bottom left
-	anchor_top = 1.0
-	anchor_bottom = 1.0
-	anchor_left = 0.0
-	anchor_right = 0.0
-	
-	# Set position relative to its anchor
-	offset_left = 40
-	offset_right = 40 + 160
-	offset_top = -200
-	offset_bottom = -200 + 160
-	
+	# Use whatever custom_minimum_size was set by the parent
 	center = custom_minimum_size / 2.0
 	stick_pos = center
 
 func _input(event):
 	if event is InputEventScreenTouch:
 		if event.pressed and touch_id == -1:
-			var local_pos = get_local_mouse_position()
+			var local_pos = (event.position - global_position)
 			# Check if touch is within our invisible square boundary
 			if Rect2(Vector2.ZERO, custom_minimum_size).has_point(local_pos):
 				touch_id = event.index
@@ -38,7 +26,7 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 	
 	elif event is InputEventScreenDrag and event.index == touch_id:
-		update_stick(get_local_mouse_position())
+		update_stick(event.position - global_position)
 		get_viewport().set_input_as_handled() # Prevent camera rotation
 
 func update_stick(pos):

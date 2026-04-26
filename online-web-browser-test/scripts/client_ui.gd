@@ -19,6 +19,8 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_mp_peer_connected)
 	multiplayer.peer_disconnected.connect(_mp_peer_disconnected)
 	host.text = "wss://online-web-browser-test.onrender.com"
+	
+	# Hide the old debug menu and header from main.tscn
 
 	# Hide the old debug menu and header from main.tscn
 	$VBoxContainer.hide()
@@ -83,6 +85,7 @@ func _build_main_menu():
 	name_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	name_input.add_theme_font_size_override("font_size", 24)
 	name_input.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	name_input.focus_entered.connect(func(): if is_mobile_device(): DisplayServer.virtual_keyboard_show(""))
 	vbox.add_child(name_input)
 	
 	var host_btn = Button.new()
@@ -98,9 +101,16 @@ func _build_main_menu():
 	vbox.add_child(join_hbox)
 	
 	var join_input = LineEdit.new()
-	join_input.placeholder_text = "Paste Room ID Here"
+	join_input.placeholder_text = "Paste Room Key Here"
 	join_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	join_input.add_theme_font_size_override("font_size", 24)
+	join_input.virtual_keyboard_enabled = true
+	# iOS Fix: Trigger keyboard on GUI input (touch) rather than focus_entered
+	join_input.gui_input.connect(func(event):
+		if event is InputEventScreenTouch and event.pressed:
+			if is_mobile_device():
+				DisplayServer.virtual_keyboard_show(join_input.text, join_input.get_global_rect())
+	)
 	join_hbox.add_child(join_input)
 	
 	var join_btn = Button.new()
@@ -114,22 +124,38 @@ func _build_main_menu():
 	)
 	join_hbox.add_child(join_btn)
 	
+	# Mobile scaling adjust
+	if is_mobile_device():
+		vbox.scale = Vector2(1.4, 1.4)
+		vbox.pivot_offset = vbox.size / 2.0
+		# Scale the whole menu
+		menu.scale = Vector2(1.2, 1.2)
+		menu.pivot_offset = Vector2(DisplayServer.window_get_size()) / 2.0
+	
 	# Controls Info (Top Left)
 	var controls_vbox = VBoxContainer.new()
 	controls_vbox.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
 	controls_vbox.position = Vector2(20, 20)
 	menu.add_child(controls_vbox)
 	
+	if is_mobile_device():
+		controls_vbox.scale = Vector2(1.2, 1.2)
+		controls_vbox.hide() 
+	else:
+		controls_vbox.show() 
+
 	var controls_title = Label.new()
 	controls_title.text = "Controls"
 	controls_title.add_theme_font_size_override("font_size", 24)
 	controls_vbox.add_child(controls_title)
 	
 	var controls_list = Label.new()
-	controls_list.text = "WASD = Movement\nLeft Click = Shoot\nSpace = Jump\nShift = Dash\nAlt = Switch Camera Side"
+	controls_list.text = "WASD = Movement\nLeft Click = Shoot\nSpace = Jump\nShift = Dash\nAlt = Switch Camera Side\nTab = Scoreboard"
 	controls_list.add_theme_font_size_override("font_size", 18)
 	controls_list.modulate = Color(0.8, 0.8, 0.8) # Slightly grey
 	controls_vbox.add_child(controls_list)
+
+
 @rpc("any_peer", "call_local")
 func ping(argument: float) -> void:
 	_log("[Multiplayer] Ping from peer %d: arg: %f" % [multiplayer.get_remote_sender_id(), argument])
@@ -213,5 +239,12 @@ func _on_start_pressed() -> void:
 	client.start(host.text, room.text, mesh.button_pressed)
 
 
-func _on_stop_pressed() -> void:
-	client.stop()
+func is_mobile_device() -> bool:
+	if OS.has_feature("mobile"): return true
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"): return true
+	if OS.has_feature("web") and DisplayServer.is_touchscreen_available():
+		var ua = JavaScriptBridge.eval("navigator.userAgent")
+		if ua:
+			for m in ["Android", "iPhone", "iPad", "iPod", "Mobile"]:
+				if m in ua: return true
+	return false
