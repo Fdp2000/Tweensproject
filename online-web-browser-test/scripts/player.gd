@@ -21,9 +21,17 @@ var mouse_sensitivity: float = 2.0 # User-friendly number
 var sens_popup_timer = 0.0
 var show_room_ui = false
 
+var dash_ui_ref: Control
+var shoot_ui_ref: Control
+
 @export var show_target_marker: bool = true
 
 var team_color: Color = Color.WHITE
+var plunger_color: Color = Color("ff1d1d")
+var team_index: int = 0 # 0 = blue, 1 = red
+var player_name: String = ""
+var kills: int = 0
+var deaths: int = 0
 
 @onready var spring_arm = $SpringArm3D
 @onready var camera = $SpringArm3D/Camera3D
@@ -40,16 +48,31 @@ func _ready():
 	# Assign team color based on join order (sibling index)
 	if get_index() % 2 == 0:
 		team_color = Color(0.4, 0.6, 1.0) # Light Blue
+		plunger_color = Color("1d56ffff") # Vivid Blue
+		team_index = 0
 	else:
 		team_color = Color(1.0, 0.4, 0.4) # Light Red
-		
+		plunger_color = Color("ff1d1d") # Vivid Red
+		team_index = 1
+	
+	# Set player name from menu input or default
+	if is_multiplayer_authority():
+		var client_ui = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI")
+		if client_ui and client_ui.local_player_name != "":
+			player_name = client_ui.local_player_name
+		else:
+			player_name = "Player " + str(get_index() + 1)
+		# Sync name to all peers
+		_sync_name.rpc(player_name)
+	
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = team_color
 	$MeshInstance3D.set_surface_override_material(0, mat)
 	
 	if is_multiplayer_authority():
 		camera.current = true
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		if not OS.has_feature("mobile"):
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
 		# Dynamically create a simple dot crosshair for the local player
 		var canvas = CanvasLayer.new()
@@ -67,18 +90,25 @@ func _ready():
 		dash_ui.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
 		dash_ui.position.y -= 80 # Move up from the bottom edge
 		dash_ui.name = "DashUI"
+		dash_ui_ref = dash_ui
 		canvas.add_child(dash_ui)
 		
 		# Create the dynamic shoot cooldown ring
 		var shoot_ui = Control.new()
 		shoot_ui.set_script(preload("res://scripts/dash_ui.gd"))
-		shoot_ui.ring_color = Color(1.0, 0.2, 0.2, 0.9)
-		shoot_ui.ready_color = Color(1.0, 0.2, 0.2, 0.9)
+		# Color based on team
+		if team_index == 0: # Blue team
+			shoot_ui.ring_color = Color(0.2, 0.4, 1.0, 0.9)
+			shoot_ui.ready_color = Color(0.2, 0.4, 1.0, 0.9)
+		else: # Red team
+			shoot_ui.ring_color = Color(1.0, 0.2, 0.2, 0.9)
+			shoot_ui.ready_color = Color(1.0, 0.2, 0.2, 0.9)
 		shoot_ui.custom_minimum_size = Vector2(40, 40)
 		shoot_ui.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 		shoot_ui.position.x -= 60 # Move in from the right edge
 		shoot_ui.position.y -= 80 # Move up from the bottom edge
 		shoot_ui.name = "ShootUI"
+		shoot_ui_ref = shoot_ui
 		canvas.add_child(shoot_ui)
 		
 		# Create the sensitivity popup label
@@ -93,48 +123,151 @@ func _ready():
 		sens_label.add_theme_constant_override("outline_size", 4)
 		canvas.add_child(sens_label)
 		
-		# Create the Room ID display (Hidden by default)
-		var room_bg = ColorRect.new()
-		room_bg.name = "RoomIDBackground"
-		room_bg.color = Color(0, 0, 0, 0.6) # Dark overlay
-		room_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		room_bg.hide()
-		canvas.add_child(room_bg)
+		# Create the Scoreboard overlay (Hidden by default, toggled with TAB)
+		var score_bg = ColorRect.new()
+		score_bg.name = "ScoreboardBackground"
+		score_bg.color = Color(0, 0, 0, 0.75)
+		score_bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		score_bg.hide()
+		canvas.add_child(score_bg)
 		
-		var room_vbox = VBoxContainer.new()
-		room_vbox.name = "RoomVBox"
-		room_vbox.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-		room_vbox.add_theme_constant_override("separation", 20)
-		room_bg.add_child(room_vbox)
+		# Room Key label (top left)
+		var room_key_label = Label.new()
+		room_key_label.name = "RoomKeyLabel"
+		room_key_label.text = "Room Key: ..."
+		room_key_label.add_theme_font_size_override("font_size", 20)
+		room_key_label.add_theme_color_override("font_outline_color", Color.BLACK)
+		room_key_label.add_theme_constant_override("outline_size", 4)
+		room_key_label.position = Vector2(20, 15)
+		score_bg.add_child(room_key_label)
 		
-		var room_label = Label.new()
-		room_label.name = "RoomIDLabel"
-		room_label.text = "Fetching Room ID..."
-		room_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		room_label.add_theme_font_size_override("font_size", 48)
-		room_label.add_theme_color_override("font_outline_color", Color.BLACK)
-		room_label.add_theme_constant_override("outline_size", 8)
-		room_vbox.add_child(room_label)
+		# Scoreboard container (centered)
+		var scoreboard = VBoxContainer.new()
+		scoreboard.name = "Scoreboard"
+		scoreboard.anchor_left = 0.5
+		scoreboard.anchor_right = 0.5
+		scoreboard.anchor_top = 0.5
+		scoreboard.anchor_bottom = 0.5
+		scoreboard.offset_left = -340
+		scoreboard.offset_right = 340
+		scoreboard.offset_top = -200
+		scoreboard.offset_bottom = 200
+		scoreboard.add_theme_constant_override("separation", 5)
+		scoreboard.alignment = BoxContainer.ALIGNMENT_CENTER
+		score_bg.add_child(scoreboard)
 		
-		var copy_btn = Button.new()
-		copy_btn.name = "CopyButton"
-		copy_btn.text = "Copy to Clipboard"
-		copy_btn.add_theme_font_size_override("font_size", 24)
-		copy_btn.pressed.connect(func():
-			var client_node = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI/Client")
-			if client_node and client_node.get("lobby"):
-				var code = client_node.lobby
-				if OS.has_feature("web"):
-					var js = "const el = document.createElement('textarea'); el.value = '%s'; document.body.appendChild(el); el.select(); document.execCommand('copy'); document.body.removeChild(el);" % code
-					JavaScriptBridge.eval(js)
-				else:
-					DisplayServer.clipboard_set(code)
-				copy_btn.text = "Copied!"
-		)
-		room_vbox.add_child(copy_btn)
+		# Team headers row
+		var header_row = HBoxContainer.new()
+		header_row.name = "HeaderRow"
+		header_row.add_theme_constant_override("separation", 40)
+		header_row.alignment = BoxContainer.ALIGNMENT_CENTER
+		scoreboard.add_child(header_row)
+		
+		var red_header = Label.new()
+		red_header.name = "RedHeader"
+		red_header.text = "TEAM RED: 0"
+		red_header.add_theme_font_size_override("font_size", 28)
+		red_header.add_theme_color_override("font_color", Color("ff4444"))
+		red_header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		red_header.custom_minimum_size.x = 300
+		header_row.add_child(red_header)
+		
+		var blue_header = Label.new()
+		blue_header.name = "BlueHeader"
+		blue_header.text = "TEAM BLUE: 0"
+		blue_header.add_theme_font_size_override("font_size", 28)
+		blue_header.add_theme_color_override("font_color", Color("4488ff"))
+		blue_header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		blue_header.custom_minimum_size.x = 300
+		header_row.add_child(blue_header)
+		
+		# Team columns row
+		var columns_row = HBoxContainer.new()
+		columns_row.name = "ColumnsRow"
+		columns_row.add_theme_constant_override("separation", 40)
+		columns_row.alignment = BoxContainer.ALIGNMENT_CENTER
+		scoreboard.add_child(columns_row)
+		
+		var red_column = VBoxContainer.new()
+		red_column.name = "RedColumn"
+		red_column.custom_minimum_size = Vector2(300, 300)
+		red_column.add_theme_constant_override("separation", 4)
+		columns_row.add_child(red_column)
+		
+		var blue_column = VBoxContainer.new()
+		blue_column.name = "BlueColumn"
+		blue_column.custom_minimum_size = Vector2(300, 300)
+		blue_column.add_theme_constant_override("separation", 4)
+		columns_row.add_child(blue_column)
 		
 		add_child(canvas)
 		
+		# --- MOBILE CONTROLS ---
+		if OS.has_feature("mobile"):
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			var mobile_ui = Control.new()
+			mobile_ui.name = "MobileUI"
+			mobile_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			canvas.add_child(mobile_ui)
+			
+			var joystick = load("res://scripts/virtual_joystick.gd").new()
+			joystick.name = "Joystick"
+			mobile_ui.add_child(joystick)
+			
+			# Camera switch button (lower-right of joystick)
+			var cam_btn = load("res://scripts/mobile_button.gd").new()
+			cam_btn.action_name = "secondary_action"
+			cam_btn.button_text = "CAM"
+			cam_btn.radius = 25.0
+			cam_btn.base_color = Color(0.5, 0.5, 0.5, 0.4)
+			cam_btn.anchor_top = 1.0
+			cam_btn.anchor_bottom = 1.0
+			cam_btn.anchor_left = 0.0
+			cam_btn.anchor_right = 0.0
+			cam_btn.offset_left = 210
+			cam_btn.offset_top = -55
+			cam_btn.offset_right = 210 + 50
+			cam_btn.offset_bottom = -55 + 50
+			mobile_ui.add_child(cam_btn)
+			
+			var jump_btn = load("res://scripts/mobile_button.gd").new()
+			jump_btn.action_name = "ui_accept"
+			jump_btn.button_text = "JUMP"
+			jump_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+			jump_btn.offset_left = -150
+			jump_btn.offset_top = -150
+			jump_btn.offset_right = -150 + 80
+			jump_btn.offset_bottom = -150 + 80
+			mobile_ui.add_child(jump_btn)
+			
+			var shoot_btn = load("res://scripts/mobile_button.gd").new()
+			shoot_btn.action_name = "ui_select"
+			shoot_btn.button_text = "FIRE"
+			shoot_btn.radius = 50.0
+			shoot_btn.base_color = Color(1, 0.2, 0.2, 0.5)
+			shoot_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+			shoot_btn.offset_left = -280
+			shoot_btn.offset_top = -200
+			shoot_btn.offset_right = -280 + 100
+			shoot_btn.offset_bottom = -200 + 100
+			mobile_ui.add_child(shoot_btn)
+			
+			var dash_btn = load("res://scripts/mobile_button.gd").new()
+			dash_btn.action_name = "dash"
+			dash_btn.button_text = "DASH"
+			dash_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+			dash_btn.offset_left = -120
+			dash_btn.offset_top = -280
+			dash_btn.offset_right = -120 + 80
+			dash_btn.offset_bottom = -280 + 80
+			mobile_ui.add_child(dash_btn)
+			
+			# Move cooldown rings inside buttons for mobile
+			dash_ui.reparent(dash_btn, false)
+			dash_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			
+			shoot_ui.reparent(shoot_btn, false)
+			shoot_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		# DEBUG MARKER: A red sphere to show EXACTLY where the raycast hits
 		var debug_mesh = SphereMesh.new()
 		debug_mesh.radius = 0.1
@@ -166,6 +299,13 @@ func _input(event):
 	
 	# Handle Mouse Movement separately
 	if event is InputEventMouseMotion:
+		if OS.has_feature("mobile"):
+			var joystick = get_node_or_null("PlayerCanvas/MobileUI/Joystick")
+			if joystick:
+				var joystick_rect = Rect2(joystick.global_position, joystick.size)
+				if joystick_rect.has_point(event.position):
+					return
+			
 		var actual_sens = mouse_sensitivity * 0.001 # Convert user number to radians
 		rotate_y(-event.relative.x * actual_sens)
 		spring_arm.rotate_x(-event.relative.y * actual_sens)
@@ -190,23 +330,19 @@ func _input(event):
 	# Web Browser Fallback: Browsers require a physical click to hide the cursor!
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and not show_room_ui:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			
-	if event is InputEventKey and event.pressed and event.physical_keycode == KEY_TAB and not event.echo:
-		show_room_ui = !show_room_ui
-		var room_bg = get_node_or_null("PlayerCanvas/RoomIDBackground")
-		if room_bg:
-			room_bg.visible = show_room_ui
-			if show_room_ui:
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-				# Update the text just in case it wasn't fetched yet
-				var client_node = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI/Client")
-				if client_node and client_node.get("lobby"):
-					room_bg.get_node("RoomVBox/RoomIDLabel").text = "Room ID:\n" + str(client_node.lobby)
-				var btn = room_bg.get_node_or_null("RoomVBox/CopyButton")
-				if btn: btn.text = "Copy to Clipboard"
-			else:
+			if not OS.has_feature("mobile"):
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			
+	# TAB hold to show scoreboard
+	if event is InputEventKey and event.physical_keycode == KEY_TAB:
+		var score_bg = get_node_or_null("PlayerCanvas/ScoreboardBackground")
+		if score_bg:
+			if event.pressed and not event.echo:
+				show_room_ui = true
+				score_bg.visible = true
+			elif not event.pressed:
+				show_room_ui = false
+				score_bg.visible = false
 
 func show_sensitivity_popup():
 	var label = get_node_or_null("PlayerCanvas/SensLabel")
@@ -215,10 +351,91 @@ func show_sensitivity_popup():
 		label.modulate.a = 1.0
 		sens_popup_timer = 2.0
 
+func _populate_scoreboard(score_bg: Control):
+	# Update room key
+	var room_label = score_bg.get_node_or_null("RoomKeyLabel")
+	var client_node = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI/Client")
+	if room_label and client_node and client_node.get("lobby"):
+		room_label.text = "Room Key: " + str(client_node.lobby)
+	
+	# Get all players
+	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	if not spawned: return
+	
+	var red_kills_total = 0
+	var blue_kills_total = 0
+	
+	# Clear existing player rows
+	var red_col = score_bg.get_node_or_null("Scoreboard/ColumnsRow/RedColumn")
+	var blue_col = score_bg.get_node_or_null("Scoreboard/ColumnsRow/BlueColumn")
+	if not red_col or not blue_col: return
+	
+	for child in red_col.get_children(): child.queue_free()
+	for child in blue_col.get_children(): child.queue_free()
+	
+	# Collect player data into arrays for sorting
+	var red_players = []
+	var blue_players = []
+	
+	for p in spawned.get_children():
+		if not p is CharacterBody3D: continue
+		var p_name = p.player_name if p.player_name != "" else "Player " + str(p.get_index() + 1)
+		var p_kills = p.kills if p.get("kills") != null else 0
+		var p_deaths = p.deaths if p.get("deaths") != null else 0
+		var p_team = p.team_index if p.get("team_index") != null else 0
+		
+		var data = {"name": p_name, "kills": p_kills, "deaths": p_deaths}
+		if p_team == 1:
+			red_players.append(data)
+			red_kills_total += p_kills
+		else:
+			blue_players.append(data)
+			blue_kills_total += p_kills
+	
+	# Sort by kills descending
+	red_players.sort_custom(func(a, b): return a.kills > b.kills)
+	blue_players.sort_custom(func(a, b): return a.kills > b.kills)
+	
+	# Build rows in sorted order
+	for data in red_players:
+		red_col.add_child(_make_player_row(data))
+	for data in blue_players:
+		blue_col.add_child(_make_player_row(data))
+	
+	# Update team score headers
+	var red_header = score_bg.get_node_or_null("Scoreboard/HeaderRow/RedHeader")
+	var blue_header = score_bg.get_node_or_null("Scoreboard/HeaderRow/BlueHeader")
+	if red_header: red_header.text = "TEAM RED: %d" % red_kills_total
+	if blue_header: blue_header.text = "TEAM BLUE: %d" % blue_kills_total
+
+func _make_player_row(data: Dictionary) -> HBoxContainer:
+	var row = HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	
+	var name_label = Label.new()
+	name_label.text = data.name
+	name_label.add_theme_font_size_override("font_size", 18)
+	name_label.custom_minimum_size.x = 160
+	name_label.clip_text = true
+	row.add_child(name_label)
+	
+	var kd_label = Label.new()
+	kd_label.text = "K %d / D %d" % [data.kills, data.deaths]
+	kd_label.add_theme_font_size_override("font_size", 18)
+	row.add_child(kd_label)
+	
+	return row
+
 var shoot_cooldown: float = 0.0
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
+	
+	# Real-time scoreboard update
+	if show_room_ui:
+		var score_bg = get_node_or_null("PlayerCanvas/ScoreboardBackground")
+		if score_bg:
+			_populate_scoreboard(score_bg)
 	
 	# Smoothly lerp the camera over the shoulder
 	camera.h_offset = lerp(camera.h_offset, target_h_offset, 15.0 * delta)
@@ -240,16 +457,14 @@ func _physics_process(delta):
 		dash_cooldown_left -= delta
 		
 	# Update Dash UI
-	var dash_ui = get_node_or_null("PlayerCanvas/DashUI")
-	if dash_ui:
+	if dash_ui_ref:
 		if DASH_COOLDOWN > 0:
-			dash_ui.progress = 1.0 - (dash_cooldown_left / DASH_COOLDOWN)
+			dash_ui_ref.progress = 1.0 - (dash_cooldown_left / DASH_COOLDOWN)
 		else:
-			dash_ui.progress = 1.0
+			dash_ui_ref.progress = 1.0
 			
 	# Update Shoot UI
-	var shoot_ui = get_node_or_null("PlayerCanvas/ShootUI")
-	if shoot_ui:
+	if shoot_ui_ref:
 		var effective_shoot_cd = shoot_cooldown
 		var shoot_max_cd = 0.6
 		if is_dashing and dash_time_left > shoot_cooldown:
@@ -257,15 +472,19 @@ func _physics_process(delta):
 			shoot_max_cd = DASH_DURATION
 			
 		if shoot_max_cd > 0:
-			shoot_ui.progress = 1.0 - (effective_shoot_cd / shoot_max_cd)
+			shoot_ui_ref.progress = 1.0 - (effective_shoot_cd / shoot_max_cd)
 		else:
-			shoot_ui.progress = 1.0
+			shoot_ui_ref.progress = 1.0
 
 	if not is_on_floor(): velocity.y -= gravity * delta
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and not is_dashing: 
 		velocity.y = JUMP_VELOCITY
 
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var joystick = get_node_or_null("PlayerCanvas/MobileUI/Joystick")
+	if joystick and joystick.get_value() != Vector2.ZERO:
+		input_dir = joystick.get_value()
+		
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	if is_dashing:
@@ -279,7 +498,7 @@ func _physics_process(delta):
 			velocity.z = dash_direction.z * DASH_SPEED
 	else:
 		# Check for Dash Trigger
-		if Input.is_physical_key_pressed(KEY_SHIFT) and is_on_floor() and dash_cooldown_left <= 0:
+		if (Input.is_physical_key_pressed(KEY_SHIFT) or Input.is_action_pressed("dash")) and is_on_floor() and dash_cooldown_left <= 0:
 			is_dashing = true
 			dash_time_left = DASH_DURATION
 			dash_cooldown_left = DASH_COOLDOWN
@@ -357,18 +576,27 @@ func _physics_process(delta):
 				muzzle_pos = muzzle_hit.position - (ideal_muzzle_pos - chest_pos).normalized() * 0.1
 			
 			var shoot_dir = (target_pos - muzzle_pos).normalized()
-			main_node.rpc("spawn_plunger", muzzle_pos, shoot_dir)
+			main_node.rpc("spawn_plunger", muzzle_pos, shoot_dir, plunger_color, team_index, multiplayer.get_unique_id())
 
 var health = 3
+var last_shooter_id: int = -1
 
 @rpc("any_peer", "call_local")
-func take_damage(hit_pos: Vector3, hit_normal: Vector3):
+func take_damage(hit_pos: Vector3, hit_normal: Vector3, plunger_color: Color = Color("ff1d1d"), shooter_id: int = -1):
 	health -= 1
+	last_shooter_id = shooter_id
 	
 	# --- VISUAL STICKING PLUNGER ---
 	# Create a purely visual "dummy" plunger to stick to the player
 	var dummy_plunger = load("res://scenes/Plunger.tscn").instantiate()
 	dummy_plunger.set_script(null) # Remove logic
+	
+	# Apply the shooter's team color to the plunger head
+	var head_mat = StandardMaterial3D.new()
+	head_mat.albedo_color = plunger_color
+	var head_mesh = dummy_plunger.get_node_or_null("MeshInstance3D2")
+	if head_mesh:
+		head_mesh.set_surface_override_material(0, head_mat)
 	
 	# Strip physics and networking to prevent crashes
 	var col = dummy_plunger.get_node_or_null("CollisionShape3D")
@@ -390,7 +618,7 @@ func take_damage(hit_pos: Vector3, hit_normal: Vector3):
 	else:
 		dummy_plunger.look_at(look_target, Vector3.RIGHT)
 		
-	# --- FLASH RED ---
+	# --- FLASH BRIGHT ---
 	# Ensure we aren't sharing the material across all players
 	if not $MeshInstance3D.get_surface_override_material(0):
 		var mat = StandardMaterial3D.new()
@@ -398,7 +626,9 @@ func take_damage(hit_pos: Vector3, hit_normal: Vector3):
 		$MeshInstance3D.set_surface_override_material(0, mat)
 		
 	var unique_mat = $MeshInstance3D.get_surface_override_material(0)
-	unique_mat.albedo_color = Color.RED
+	# Create a vibrant version: keep hue, max out saturation and brightness
+	var flash_color = Color.from_hsv(team_color.h, 1.0, 1.0)
+	unique_mat.albedo_color = flash_color
 	await get_tree().create_timer(0.2).timeout
 	if is_inside_tree():
 		unique_mat.albedo_color = team_color
@@ -409,6 +639,16 @@ func take_damage(hit_pos: Vector3, hit_normal: Vector3):
 
 func die():
 	health = 3
+	deaths += 1
+	
+	# Credit the kill to the shooter (server only to prevent double-counting)
+	if multiplayer.is_server() and last_shooter_id > 0:
+		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+		if spawned:
+			var shooter = spawned.get_node_or_null(str(last_shooter_id))
+			if shooter and shooter.has_method("register_kill"):
+				shooter.rpc("register_kill")
+	last_shooter_id = -1
 	
 	# Clean up all stuck plungers
 	for child in $MeshInstance3D.get_children():
@@ -424,3 +664,11 @@ func die():
 			position.y += 1.0
 		else:
 			position = Vector3(randf_range(-2, 2), 4.0, randf_range(-2, 2))
+
+@rpc("any_peer", "call_local")
+func _sync_name(n: String):
+	player_name = n
+
+@rpc("any_peer", "call_local")
+func register_kill():
+	kills += 1

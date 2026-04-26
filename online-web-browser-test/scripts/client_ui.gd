@@ -5,6 +5,8 @@ extends Control
 @onready var room: LineEdit = $VBoxContainer/Connect/RoomSecret
 @onready var mesh: CheckBox = $VBoxContainer/Connect/Mesh
 
+var local_player_name: String = ""
+
 func _ready() -> void:
 	client.lobby_joined.connect(_lobby_joined)
 	client.lobby_sealed.connect(_lobby_sealed)
@@ -45,8 +47,9 @@ func _process(_delta: float) -> void:
 			JavaScriptBridge.eval("window.godot_pasted_text = ''")
 			var join_input = get_node_or_null("MainMenuCanvas/MainMenu/VBoxContainer/HBoxContainer/LineEdit")
 			if join_input:
-				join_input.text = pasted
-				client.start(host.text, pasted.strip_edges(), true)
+				var code = pasted.strip_edges().to_upper()
+				join_input.text = code
+				client.start(host.text, code, true)
 
 func _build_main_menu():
 	var canvas = CanvasLayer.new()
@@ -69,15 +72,24 @@ func _build_main_menu():
 	menu.add_child(vbox)
 	
 	var title = Label.new()
-	title.text = "PLUNGER WARS"
+	title.text = "    PLUNGER    "
 	title.add_theme_font_size_override("font_size", 64)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
+	
+	var name_input = LineEdit.new()
+	name_input.placeholder_text = "Enter Name"
+	name_input.max_length = 16
+	name_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	name_input.add_theme_font_size_override("font_size", 24)
+	name_input.alignment = HORIZONTAL_ALIGNMENT_CENTER
+	vbox.add_child(name_input)
 	
 	var host_btn = Button.new()
 	host_btn.text = "Host Game"
 	host_btn.add_theme_font_size_override("font_size", 32)
 	host_btn.pressed.connect(func():
+		local_player_name = name_input.text.strip_edges()
 		client.start(host.text, "", true)
 	)
 	vbox.add_child(host_btn)
@@ -95,7 +107,8 @@ func _build_main_menu():
 	join_btn.text = "Join Game"
 	join_btn.add_theme_font_size_override("font_size", 24)
 	join_btn.pressed.connect(func():
-		var code = join_input.text.strip_edges()
+		local_player_name = name_input.text.strip_edges()
+		var code = join_input.text.strip_edges().to_upper()
 		if code != "":
 			client.start(host.text, code, true)
 	)

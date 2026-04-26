@@ -47,7 +47,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.418504, 0, 0.39562988)
 [node name="Arena" type="Node" parent="." unique_id=332672818]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Arena" unique_id=74808884]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8972168, 0, -0.4359131)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8905773, 0.066511154, -0.27133512)
 use_collision = true
 size = Vector3(27.408691, 1, 40.948486)
 material = SubResource("StandardMaterial3D_kqs1s")

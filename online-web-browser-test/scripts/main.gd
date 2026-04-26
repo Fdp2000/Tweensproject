@@ -3,10 +3,13 @@ extends Control
 @export var plunger_scene: PackedScene
 
 @rpc("any_peer", "call_local")
-func spawn_plunger(muzzle_pos: Vector3, shoot_dir: Vector3):
+func spawn_plunger(muzzle_pos: Vector3, shoot_dir: Vector3, team_color: Color, shooter_team_index: int, shooter_id: int):
 	if not multiplayer.is_server():
 		return
 	var p = plunger_scene.instantiate()
+	p.team_color = team_color
+	p.shooter_team_index = shooter_team_index
+	p.shooter_id = shooter_id
 	
 	# 1. Add it to the tree FIRST
 	$SpawnedObjects.add_child(p, true) 
