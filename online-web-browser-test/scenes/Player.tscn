@@ -28,6 +28,9 @@ properties/5/replication_mode = 1
 properties/6/path = NodePath(":player_name")
 properties/6/spawn = true
 properties/6/replication_mode = 1
+properties/7/path = NodePath(":hits")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D" unique_id=692488303]
 script = ExtResource("1_p0vlq")

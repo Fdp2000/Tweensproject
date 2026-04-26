@@ -44,6 +44,14 @@ func _physics_process(delta):
 					return
 				
 				print("SERVER: Plunger hit player! Sending damage RPC...")
+				
+				# Credit the hit to the shooter
+				var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+				if spawned:
+					var shooter = spawned.get_node_or_null(str(shooter_id))
+					if shooter and shooter.has_method("register_hit"):
+						shooter.rpc("register_hit")
+
 				if body.has_method("take_damage"):
 					body.rpc("take_damage", result.position, result.normal, team_color, shooter_id)
 				else:

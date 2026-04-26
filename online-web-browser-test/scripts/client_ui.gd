@@ -113,6 +113,23 @@ func _build_main_menu():
 			client.start(host.text, code, false)
 	)
 	join_hbox.add_child(join_btn)
+	
+	# Controls Info (Top Left)
+	var controls_vbox = VBoxContainer.new()
+	controls_vbox.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	controls_vbox.position = Vector2(20, 20)
+	menu.add_child(controls_vbox)
+	
+	var controls_title = Label.new()
+	controls_title.text = "Controls"
+	controls_title.add_theme_font_size_override("font_size", 24)
+	controls_vbox.add_child(controls_title)
+	
+	var controls_list = Label.new()
+	controls_list.text = "WASD = Movement\nLeft Click = Shoot\nSpace = Jump\nShift = Dash\nAlt = Switch Camera Side"
+	controls_list.add_theme_font_size_override("font_size", 18)
+	controls_list.modulate = Color(0.8, 0.8, 0.8) # Slightly grey
+	controls_vbox.add_child(controls_list)
 @rpc("any_peer", "call_local")
 func ping(argument: float) -> void:
 	_log("[Multiplayer] Ping from peer %d: arg: %f" % [multiplayer.get_remote_sender_id(), argument])

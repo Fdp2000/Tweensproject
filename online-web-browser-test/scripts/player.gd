@@ -31,6 +31,7 @@ var plunger_color: Color = Color("ff1d1d")
 var player_name: String = ""
 var kills: int = 0
 var deaths: int = 0
+var hits: int = 0
 @export var team_index: int = 0
 
 
@@ -388,9 +389,10 @@ func _populate_scoreboard(score_bg: Control):
 		var p_name = p.player_name if p.player_name != "" else "Player " + str(p.get_index() + 1)
 		var p_kills = p.kills if p.get("kills") != null else 0
 		var p_deaths = p.deaths if p.get("deaths") != null else 0
+		var p_hits = p.hits if p.get("hits") != null else 0
 		var p_team = p.team_index if p.get("team_index") != null else 0
 		
-		var data = {"name": p_name, "kills": p_kills, "deaths": p_deaths}
+		var data = {"name": p_name, "kills": p_kills, "deaths": p_deaths, "hits": p_hits}
 		if p_team == 1:
 			red_players.append(data)
 			red_kills_total += p_kills
@@ -426,7 +428,7 @@ func _make_player_row(data: Dictionary) -> HBoxContainer:
 	row.add_child(name_label)
 	
 	var kd_label = Label.new()
-	kd_label.text = "K %d / D %d" % [data.kills, data.deaths]
+	kd_label.text = "K %d / HITS %d / D %d" % [data.kills, data.hits, data.deaths]
 	kd_label.add_theme_font_size_override("font_size", 18)
 	row.add_child(kd_label)
 	
@@ -681,6 +683,10 @@ func _sync_name(n: String):
 @rpc("any_peer", "call_local")
 func register_kill():
 	kills += 1
+
+@rpc("any_peer", "call_local")
+func register_hit():
+	hits += 1
 	
 
 
