@@ -249,8 +249,8 @@ func _mp_peer_disconnected(id: int) -> void:
 	_log("[Multiplayer] Peer %d disconnected" % id)
 
 
-func _connected(id: int, use_mesh: bool) -> void:
-	_log("[Signaling] Server connected with ID: %d. Mesh: %s" % [id, use_mesh])
+func _connected(id: int, _use_mesh: bool) -> void:
+	_log("[Signaling] Server connected with ID: %d. Enforced Client-Server Architecture (Mesh: %s)" % [id, client.mesh])
 	
 	# If I am the host (ID 1), I spawn my own character immediately
 	if id == 1:

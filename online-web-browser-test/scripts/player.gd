@@ -16,7 +16,7 @@ const DASH_PENALTY_DURATION = 0.1
 const DASH_PENALTY_SPEED = 2.0 # Move very slow during penalty
 var dash_direction = Vector3.ZERO
 
-var target_h_offset = 1.0
+var target_shoulder_x = 1.0
 var mouse_sensitivity: float = 2.0 # User-friendly number
 var sens_popup_timer = 0.0
 var show_room_ui = false
@@ -37,9 +37,14 @@ var deaths: int = 0
 var hits: int = 0
 @export var team_index: int = 0
 
+# Network sync targets for smooth interpolation
+var sync_target_position: Vector3 = Vector3.ZERO
+var sync_target_rotation: Vector3 = Vector3.ZERO
 
-@onready var spring_arm = $SpringArm3D
-@onready var camera = $SpringArm3D/Camera3D
+
+@onready var pitch_pivot = $PitchPivot
+@onready var spring_arm = $PitchPivot/SpringArm3D
+@onready var camera = $PitchPivot/SpringArm3D/Camera3D
 
 func _enter_tree() -> void:
 	var id = str(name).to_int()
@@ -78,6 +83,15 @@ func _ready():
 	var mat = StandardMaterial3D.new()
 	mat.albedo_color = team_color
 	$MeshInstance3D.set_surface_override_material(0, mat)
+	
+	# Give the camera arm physical volume so it doesn't clip through walls!
+	var cam_shape = SphereShape3D.new()
+	cam_shape.radius = 0.5
+	spring_arm.shape = cam_shape
+	spring_arm.margin = 0.1
+	
+	# MUST manually exclude the player, because the SpringArm is now a child of PitchPivot and no longer auto-excludes its grandparent!
+	spring_arm.add_excluded_object(get_rid())
 	
 	if is_multiplayer_authority():
 		camera.current = true
@@ -248,8 +262,8 @@ func _ready():
 					
 					var actual_sens = mouse_sensitivity * 0.001
 					rotate_y(-drag_relative.x * actual_sens)
-					spring_arm.rotate_x(-drag_relative.y * actual_sens)
-					spring_arm.rotation.x = clamp(spring_arm.rotation.x, -1.0, 1.0)
+					pitch_pivot.rotate_x(-drag_relative.y * actual_sens)
+					pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -1.0, 1.0)
 					get_viewport().set_input_as_handled()
 			)
 			mobile_ui.add_child(look_area)
@@ -364,12 +378,17 @@ func _ready():
 func _input(event):
 	if not is_multiplayer_authority(): return
 	
+	# Web Browser Fallback: Capture mouse on click (Moved to _input to ensure it fires on Itch.io!)
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if not is_mobile_device() and not show_room_ui and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			
 	# Desktop Look Rotation (Mouse only)
 	if event is InputEventMouseMotion and not is_mobile_device():
 		var actual_sens = mouse_sensitivity * 0.001
 		rotate_y(-event.relative.x * actual_sens)
-		spring_arm.rotate_x(-event.relative.y * actual_sens)
-		spring_arm.rotation.x = clamp(spring_arm.rotation.x, -1.0, 1.0)
+		pitch_pivot.rotate_x(-event.relative.y * actual_sens)
+		pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -1.0, 1.0)
 		return
 
 func _unhandled_input(event):
@@ -387,11 +406,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("secondary_action"):
 		toggle_camera()
 			
-	# Web Browser Fallback: Browsers require a physical click to hide the cursor!
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED and not show_room_ui:
-			if not is_mobile_device():
-				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	# Mouse capture logic was moved to _input for better browser reliability
 
 	# TAB hold to show scoreboard
 	if event is InputEventKey and event.physical_keycode == KEY_TAB:
@@ -492,9 +507,30 @@ func _make_player_row(data: Dictionary) -> HBoxContainer:
 var shoot_cooldown: float = 0.0
 
 func _physics_process(delta):
+	# The Server acts as the relay, broadcasting ALL player positions to EVERYONE
 	if multiplayer.is_server():
 		rpc("relay_position", global_position, rotation)
-	if not is_multiplayer_authority(): return
+		
+	if not is_multiplayer_authority():
+		# The Server already receives perfect position updates from the client via the MultiplayerSynchronizer.
+		# If the Server tries to interpolate, it fights the synchronizer and causes massive rubberbanding!
+		if multiplayer.is_server():
+			return
+			
+		# Observing Clients: Initialize targets on first frame so they don't fly to 0,0,0
+		if sync_target_position == Vector3.ZERO:
+			sync_target_position = global_position
+			sync_target_rotation = rotation
+			
+		# Smoothly interpolate position and rotation for observing peers
+		global_position = global_position.lerp(sync_target_position, 15.0 * delta)
+		
+		# Smooth rotation using spherical linear interpolation (slerp)
+		var current_quat = Quaternion(transform.basis)
+		var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
+		var new_quat = current_quat.slerp(target_quat, 15.0 * delta)
+		transform.basis = Basis(new_quat)
+		return # Stop processing local physics/inputs!
 	
 	# Real-time scoreboard update
 	if show_room_ui:
@@ -502,8 +538,15 @@ func _physics_process(delta):
 		if score_bg:
 			_populate_scoreboard(score_bg)
 	
-	# Smoothly lerp the camera over the shoulder
-	camera.h_offset = lerp(camera.h_offset, target_h_offset, 15.0 * delta)
+	# --- ANGLED SPRING ARM CAMERA ---
+	# By keeping the SpringArm origin dead-center and angling it to the shoulder,
+	# we guarantee the raycast NEVER bypasses walls!
+	var current_angle = spring_arm.rotation.y
+	var target_angle = atan2(target_shoulder_x, 4.711)
+	
+	var new_angle = lerp_angle(current_angle, target_angle, 15.0 * delta)
+	spring_arm.rotation.y = new_angle
+	camera.rotation.y = -new_angle
 	
 	# Fade out the sensitivity popup
 	if sens_popup_timer > 0:
@@ -593,9 +636,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 	# --- CONSTANT CROSSHAIR RAYCAST ---
-	# We MUST use project_ray_normal to calculate the ray because the Camera3D uses "h_offset"!
-	# h_offset skews the visual projection matrix without moving the physical camera.
-	# This means -basis.z is NOT the center of the screen!
+	# We use project_ray_normal to calculate the ray perfectly from the camera's physical origin.
 	var viewport_size = get_viewport().get_visible_rect().size
 	var screen_center = viewport_size / 2.0
 	
@@ -630,7 +671,7 @@ func _physics_process(delta):
 		shoot_cooldown = 0.6 # 0.5 seconds cooldown
 		var main_node = get_node("/root/World/main")
 		if main_node:
-			var shoulder_side = sign(camera.h_offset) 
+			var shoulder_side = sign(target_shoulder_x) 
 			if shoulder_side == 0: shoulder_side = 1.0
 			# global_position is the center of the 2.0 height capsule.
 			# So the top of the head is at +1.0. A Y-offset of 0.4 places it perfectly at chest/shoulder height.
@@ -800,13 +841,13 @@ func relay_position(pos: Vector3, rot: Vector3):
 	# If I am the client who owns this player, ignore this (so my movement doesn't stutter)
 	if is_multiplayer_authority(): return
 	
-	# If I am a peer watching this player, update their visual position!
-	global_position = pos
-	rotation = rot
+	# Set the TARGET goals, so _physics_process can smoothly lerp towards them!
+	sync_target_position = pos
+	sync_target_rotation = rot
 
 # Helper for toggling camera shoulder side (used by keyboard and mobile)
 func toggle_camera():
-	if target_h_offset == 1.0:
-		target_h_offset = -1.0
+	if target_shoulder_x == 1.0:
+		target_shoulder_x = -1.0
 	else:
-		target_h_offset = 1.0
+		target_shoulder_x = 1.0

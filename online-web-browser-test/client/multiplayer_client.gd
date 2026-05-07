@@ -31,16 +31,45 @@ func stop() -> void:
 	close()
 
 
+const FORCE_TURN = false # <-- Set to false when you are done testing!
+
 func _create_peer(id: int) -> WebRTCPeerConnection:
 	var peer: WebRTCPeerConnection = WebRTCPeerConnection.new()
-	# Use a public STUN server for moderate NAT traversal.
-	# Note that STUN cannot punch through strict NATs (such as most mobile connections),
-	# in which case TURN is required. TURN generally does not have public servers available,
-	# as it requires much greater resources to host (all traffic goes through
-	# the TURN server, instead of only performing the initial connection).
-	peer.initialize({
-		"iceServers": [ { "urls": ["stun:stun.l.google.com:19302"] } ]
-	})
+	# Use a public STUN server for fast P2P NAT traversal.
+	# Note: STUN fails on strict NATs (cellular hotspots, enterprise firewalls).
+	# The fallback TURN server is required to relay traffic when direct P2P fails.
+	# Replace OpenRelay with your own Metered.ca credentials for production.
+	
+	var config := {
+		"iceServers": [ 
+			{ "urls": ["stun:stun.l.google.com:19302", "stun:stun.relay.metered.ca:80"] },
+			{ 
+				"urls": ["turn:standard.relay.metered.ca:80"],
+				"username": "dc5a3375b81bdcfca10375c7",
+				"credential": "yg8ryaAKOFsPA461"
+			},
+			{ 
+				"urls": ["turn:standard.relay.metered.ca:80?transport=tcp"],
+				"username": "dc5a3375b81bdcfca10375c7",
+				"credential": "yg8ryaAKOFsPA461"
+			},
+			{ 
+				"urls": ["turn:standard.relay.metered.ca:443"],
+				"username": "dc5a3375b81bdcfca10375c7",
+				"credential": "yg8ryaAKOFsPA461"
+			},
+			{ 
+				"urls": ["turns:standard.relay.metered.ca:443?transport=tcp"],
+				"username": "dc5a3375b81bdcfca10375c7",
+				"credential": "yg8ryaAKOFsPA461"
+			}
+		]
+	}
+	
+	if FORCE_TURN:
+		config["iceTransportPolicy"] = "relay"
+		
+	peer.initialize(config)
 	peer.session_description_created.connect(_offer_created.bind(id))
 	peer.ice_candidate_created.connect(_new_ice_candidate.bind(id))
 	rtc_mp.add_peer(peer, id)
@@ -50,6 +79,11 @@ func _create_peer(id: int) -> WebRTCPeerConnection:
 
 
 func _new_ice_candidate(mid_name: String, index_name: int, sdp_name: String, id: int) -> void:
+	if "typ relay" in sdp_name:
+		print("📡 [WebRTC Debug] Generated TURN Relay Candidate! (Strict NAT Firewall bypassed)")
+	elif "typ srflx" in sdp_name:
+		print("🌐 [WebRTC Debug] Generated STUN Candidate (Direct P2P available)")
+		
 	send_candidate(id, mid_name, index_name, sdp_name)
 
 
@@ -62,9 +96,11 @@ func _offer_created(type: String, data: String, id: int) -> void:
 	else: send_answer(id, data)
 
 
-func _connected(id: int, use_mesh: bool) -> void:
-	print("Connected %d, mesh: %s" % [id, use_mesh])
-	if use_mesh:
+func _connected(id: int, _use_mesh: bool) -> void:
+	print("Connected %d, local mesh setting: %s" % [id, mesh])
+	
+	# We ignore the signaling server's 'use_mesh' parameter and enforce our own!
+	if mesh:
 		rtc_mp.create_mesh(id)
 	elif id == 1:
 		rtc_mp.create_server()

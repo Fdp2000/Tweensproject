@@ -57,6 +57,7 @@ func _physics_process(delta):
 				else:
 					body.call("take_damage", result.position, result.normal, team_color, shooter_id)
 				
+			set_physics_process(false) # Prevent double hits if multiple physics ticks run this frame!
 			queue_free()
 	else:
 		global_position = next_pos
