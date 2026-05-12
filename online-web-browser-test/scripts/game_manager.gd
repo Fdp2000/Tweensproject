@@ -55,13 +55,21 @@ func add_player(id: int, p_name: String = ""):
 			"name": p_name if p_name != "" else default_name,
 			"role": PlayerRole.THIEF
 		}
-		lobby_updated.emit()
+		
+		if multiplayer.is_server():
+			rpc("sync_full_lobby", players)
+		else:
+			lobby_updated.emit()
 
 func remove_player(id: int):
 	if players.has(id):
 		var role = players[id].get("role", PlayerRole.THIEF)
 		players.erase(id)
-		lobby_updated.emit()
+		
+		if multiplayer.is_server():
+			rpc("sync_full_lobby", players)
+		else:
+			lobby_updated.emit()
 		
 		if current_state == GameState.PLAYING and multiplayer.is_server():
 			if role == PlayerRole.THIEF:
@@ -70,11 +78,19 @@ func remove_player(id: int):
 
 @rpc("any_peer", "call_local")
 func sync_player_data(id: int, p_name: String):
+	if not multiplayer.is_server(): return
+	
 	if not players.has(id):
 		add_player(id, p_name)
 	else:
-		players[id]["name"] = p_name
-		lobby_updated.emit()
+		if p_name != "":
+			players[id]["name"] = p_name
+		rpc("sync_full_lobby", players)
+
+@rpc("authority", "call_local")
+func sync_full_lobby(lobby_data: Dictionary):
+	players = lobby_data
+	lobby_updated.emit()
 
 @rpc("any_peer", "call_local")
 func start_game(role_assignments: Dictionary):
@@ -183,7 +199,7 @@ func client_return_to_lobby():
 	if scoreboard:
 		scoreboard.queue_free()
 		
-	if multiplayer.is_server():
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
 		if spawned:
 			for child in spawned.get_children():

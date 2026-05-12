@@ -238,9 +238,8 @@ func _mp_server_connected() -> void:
 	var my_id = client.rtc_mp.get_unique_id()
 	_log("[Multiplayer] Server connected (I am %d)" % my_id)
 	if my_id != 1:
-		GameManager.add_player(my_id, local_player_name)
 		# Send my name to the host
-		GameManager.rpc("sync_player_data", my_id, local_player_name)
+		GameManager.rpc_id(1, "sync_player_data", my_id, local_player_name)
 
 
 func _mp_server_disconnect() -> void:
@@ -250,15 +249,8 @@ func _mp_server_disconnect() -> void:
 @export var player_scene: PackedScene
 
 func _mp_peer_connected(id: int) -> void:
-	# Register player in Lobby
-	GameManager.add_player(id)
-	
-	# Wait briefly to let the new peer's tree stabilize
-	await get_tree().create_timer(0.5).timeout
-	var my_id = multiplayer.get_unique_id()
-		
-	# Broadcast my identity to the new peer
-	GameManager.rpc_id(id, "sync_player_data", my_id, local_player_name)
+	# Handled completely by the server syncing the full lobby state
+	pass
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
@@ -327,12 +319,24 @@ func _lobby_joined(lobby_id: String) -> void:
 	DisplayServer.clipboard_set(lobby_id)
 	print("Room ID copied to clipboard: ", lobby_id)
 	
+	# Wait until we actually receive the player list before transitioning
+	if not GameManager.players.is_empty():
+		_transition_to_lobby()
+	else:
+		if not GameManager.lobby_updated.is_connected(_transition_to_lobby):
+			GameManager.lobby_updated.connect(_transition_to_lobby, CONNECT_ONE_SHOT)
+
+func _transition_to_lobby() -> void:
 	# Hides the entire connection UI so you can see the 3D world
 	var canvas = get_node_or_null("MainMenuCanvas")
 	if canvas: canvas.hide()
-	get_parent().get_parent().hide() 
 	
-	lobby_ui.show_lobby()
+	var parent_ui = get_parent().get_parent()
+	if parent_ui and parent_ui.has_method("hide"):
+		parent_ui.hide() 
+	
+	if lobby_ui:
+		lobby_ui.show_lobby()
 
 
 

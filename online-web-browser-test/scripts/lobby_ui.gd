@@ -75,7 +75,7 @@ func show_lobby():
 	show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	# Check if host
-	if multiplayer.is_server():
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		start_button.show()
 	else:
 		start_button.hide()
@@ -109,7 +109,7 @@ func update_ui():
 		lbl.add_theme_font_size_override("font_size", 24)
 		player_list.add_child(lbl)
 			
-	if multiplayer.is_server():
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		start_button.disabled = false
 		
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
