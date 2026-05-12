@@ -5,6 +5,7 @@ const INVISIBLE_TIME = 2.0
 var current_alpha = 1.0
 var target_alpha = 1.0
 var carried_artifact: Node3D = null
+var cash_contributed: int = 0
 var is_hypnotized: bool = false
 var is_rescue_halted: bool = false
 var is_jailed: bool = false
@@ -12,9 +13,13 @@ var jail_target: Vector3 = Vector3(0, 0, 0) # Placeholder jail coordinate
 var last_pos: Vector3 = Vector3.ZERO
 var nav_agent: NavigationAgent3D
 
+var rescue_progress: float = 0.0
+var active_rescuer_id: int = -1
 var is_rescuing: bool = false
-var rescue_target: Node3D = null
-var rescue_timer: float = 0.0
+var current_interact_target: Node3D = null
+var rescue_ui_ref: Control = null
+var last_outlined_target: Node3D = null
+var outline_mat: StandardMaterial3D = null
 const RESCUE_TIME_REQUIRED = 2.0
 
 func _ready():
@@ -23,58 +28,102 @@ func _ready():
 	nav_agent.path_desired_distance = 1.0
 	nav_agent.target_desired_distance = 1.0
 	add_child(nav_agent)
+	
+	if is_multiplayer_authority():
+		await get_tree().process_frame
+		var canvas = get_node_or_null("PlayerCanvas")
+		if canvas:
+			var ui = Control.new()
+			ui.set_script(preload("res://scripts/dash_ui.gd"))
+			ui.ring_color = Color(0.2, 1.0, 0.4, 0.9)
+			ui.ready_color = Color(1.0, 1.0, 1.0, 0.0)
+			ui.custom_minimum_size = Vector2(40, 40)
+			ui.set_anchors_preset(Control.PRESET_CENTER)
+			ui.offset_left = -20 + 40
+			ui.offset_right = 20 + 40
+			ui.offset_top = -20 - 20
+			ui.offset_bottom = 20 - 20
+			ui.hide_when_empty = true
+			ui.name = "RescueUI"
+			rescue_ui_ref = ui
+			canvas.add_child(ui)
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
-	if is_hypnotized or is_jailed: return # No inputs while hypnotized or interacting while jailed
+	
+	if is_hypnotized or is_jailed:
+		# Allow them to look around with the mouse, but only rotate the camera pivot, not the body
+		if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			var actual_sens = mouse_sensitivity * 0.001
+			pitch_pivot.rotate_y(-event.relative.x * actual_sens)
+			pitch_pivot.rotate_x(-event.relative.y * actual_sens)
+			pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -1.0, 1.0)
+		return
+		
 	super._unhandled_input(event)
 	
 	# Interact/Pickup/Drop/Rescue
-	if event is InputEventKey and event.physical_keycode == KEY_E:
-		if event.pressed and not event.echo:
-			if carried_artifact: _try_drop()
-			else: _try_interact()
-		elif not event.pressed:
-			_cancel_rescue()
-	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			if carried_artifact: _try_drop()
-			else: _try_interact()
+	var is_interact = (event is InputEventKey and event.physical_keycode == KEY_E and event.pressed and not event.echo) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
+	if is_interact:
+		if carried_artifact: 
+			_try_drop()
 		else:
-			_cancel_rescue()
+			var target = get_closest_interactable()
+			if target and not target.has_method("on_captured"): # Artifact
+				target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
 
 func _try_drop():
 	if carried_artifact:
 		carried_artifact.rpc("drop")
 		carried_artifact = null
 
-func _cancel_rescue():
-	if is_rescuing and rescue_target:
-		rescue_target.rpc_id(1, "set_rescue_halt", false)
-		rescue_target = null
-		is_rescuing = false
-		rescue_timer = 0.0
+func get_closest_interactable() -> Node3D:
+	var closest: Node3D = null
+	var min_dist: float = 3.0
+	
+	# Priority 1: Hypnotized Thieves
+	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+	if spawned:
+		for player in spawned.get_children():
+			if player != self and player.get("team_index") == 0 and player.get("is_hypnotized"):
+				var dist = global_position.distance_to(player.global_position)
+				if dist < min_dist:
+					closest = player
+					min_dist = dist
+					
+	if closest: return closest
+	
+	# Priority 2: Artifacts
+	var artifacts = get_tree().get_nodes_in_group("artifact")
+	for art in artifacts:
+		if not art.get("is_carried"):
+			var dist = global_position.distance_to(art.global_position)
+			if dist < min_dist:
+				closest = art
+				min_dist = dist
+				
+	return closest
 
-func _try_interact():
-	var space_state = get_world_3d().direct_space_state
-	var ray_start = global_position + Vector3(0, 1.0, 0)
-	var forward_dir = -camera.global_transform.basis.z.normalized()
-	var ray_end = ray_start + forward_dir * 3.5
+func _update_outlines(target: Node3D):
+	if target == last_outlined_target: return
 	
-	var query = PhysicsRayQueryParameters3D.create(ray_start, ray_end)
-	query.collide_with_areas = true
-	query.collide_with_bodies = true
-	query.exclude = [get_rid()]
-	var result = space_state.intersect_ray(query)
+	# Remove old outline
+	if last_outlined_target and is_instance_valid(last_outlined_target):
+		if last_outlined_target.has_node("MeshInstance3D"):
+			last_outlined_target.get_node("MeshInstance3D").material_overlay = null
+			
+	last_outlined_target = target
 	
-	if result and result.collider:
-		if result.collider.has_method("request_pickup"):
-			result.collider.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
-		elif result.collider is CharacterBody3D and result.collider.get("team_index") == 0 and result.collider.get("is_hypnotized") and not result.collider.get("is_jailed"):
-			rescue_target = result.collider
-			is_rescuing = true
-			rescue_timer = 0.0
-			rescue_target.rpc_id(1, "set_rescue_halt", true)
+	# Add new outline
+	if target and is_instance_valid(target):
+		if not outline_mat:
+			outline_mat = StandardMaterial3D.new()
+			outline_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			outline_mat.albedo_color = Color(1.0, 1.0, 0.2, 0.5) # Yellowish highlight
+			outline_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			
+		if target.has_node("MeshInstance3D"):
+			target.get_node("MeshInstance3D").material_overlay = outline_mat
 
 func on_artifact_pickup(artifact):
 	carried_artifact = artifact
@@ -91,27 +140,39 @@ func _custom_physics_process(delta, direction):
 	if is_hypnotized:
 		# The host takes over movement to march the thief to jail
 		if multiplayer.is_server():
-			if is_rescue_halted:
+			if active_rescuer_id != -1:
+				var rescuer = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(active_rescuer_id))
+				if rescuer and rescuer.global_position.distance_to(global_position) <= 4.0:
+					rescue_progress += delta
+					rpc("sync_rescue_progress", rescue_progress)
+					
+					if rescue_progress >= RESCUE_TIME_REQUIRED:
+						active_rescuer_id = -1
+						rescue_progress = 0.0
+						rpc("sync_rescue_progress", 0.0)
+						rpc("rescue_successful")
+				else:
+					active_rescuer_id = -1
+					
+			if active_rescuer_id != -1: # Halted by rescuer
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				velocity.z = move_toward(velocity.z, 0, SPEED)
 			else:
-				var dir_to_next = Vector3.ZERO
-				if nav_agent and not nav_agent.is_navigation_finished():
-					var next_pos = nav_agent.get_next_path_position()
-					dir_to_next = global_position.direction_to(next_pos)
+				var dist_to_target = global_position.distance_to(jail_target)
+				if dist_to_target < 1.0:
+					velocity.x = 0
+					velocity.z = 0
 				else:
-					# Fallback to straight line
-					dir_to_next = global_position.direction_to(jail_target)
+					var dir_to_next = global_position.direction_to(jail_target)
+					dir_to_next.y = 0
+					dir_to_next = dir_to_next.normalized()
 					
-				dir_to_next.y = 0
-				dir_to_next = dir_to_next.normalized()
-				
-				velocity.x = dir_to_next.x * (SPEED * 0.4)
-				velocity.z = dir_to_next.z * (SPEED * 0.4)
-				
-				if dir_to_next.length_squared() > 0.01:
-					var target_transform = transform.looking_at(global_position + dir_to_next, Vector3.UP)
-					transform = transform.interpolate_with(target_transform, 5.0 * delta)
+					velocity.x = dir_to_next.x * (SPEED * 0.4)
+					velocity.z = dir_to_next.z * (SPEED * 0.4)
+					
+					if dir_to_next.length_squared() > 0.01:
+						var target_transform = transform.looking_at(global_position + dir_to_next, Vector3.UP)
+						transform = transform.interpolate_with(target_transform, 5.0 * delta)
 		return
 		
 	# Override base class movement to apply weight penalty
@@ -127,16 +188,47 @@ func _custom_physics_process(delta, direction):
 		velocity.z = move_toward(velocity.z, 0, SPEED * speed_mult)
 	
 func _process(delta):
-	if is_hypnotized: return
+	if is_hypnotized:
+		if has_node("MeshInstance3D"):
+			var mat = $MeshInstance3D.get_surface_override_material(0)
+			if mat:
+				mat.albedo_color = Color(1.0, 0.2, 0.8, 1.0) # Bright Purple/Pink
+				mat.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+		return
 	
-	if is_rescuing and rescue_target:
-		if global_position.distance_to(rescue_target.global_position) > 4.0:
-			_cancel_rescue()
+	if is_multiplayer_authority() and not is_hypnotized and not is_jailed:
+		var target = null
+		if is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
+			target = current_interact_target
 		else:
-			rescue_timer += delta
-			if rescue_timer >= RESCUE_TIME_REQUIRED:
-				rescue_target.rpc_id(1, "rescue_successful")
-				_cancel_rescue()
+			target = get_closest_interactable()
+			
+		_update_outlines(target)
+		
+		if rescue_ui_ref:
+			if current_interact_target and is_instance_valid(current_interact_target) and current_interact_target.has_method("on_captured"):
+				rescue_ui_ref.progress = current_interact_target.rescue_progress / RESCUE_TIME_REQUIRED
+			else:
+				rescue_ui_ref.progress = 0.0
+				
+		if Input.is_physical_key_pressed(KEY_E) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			if not is_rescuing and target and is_instance_valid(target):
+				if target.has_method("on_captured") and not carried_artifact:
+					is_rescuing = true
+					current_interact_target = target
+					rpc_id(1, "request_start_rescue", int(str(target.name)))
+		else:
+			if is_rescuing:
+				if current_interact_target and is_instance_valid(current_interact_target):
+					rpc_id(1, "request_stop_rescue", int(str(current_interact_target.name)))
+				is_rescuing = false
+				current_interact_target = null
+				
+		if is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
+			if global_position.distance_to(current_interact_target.global_position) > 3.0 or not current_interact_target.get("is_hypnotized"):
+				rpc_id(1, "request_stop_rescue", int(str(current_interact_target.name)))
+				is_rescuing = false
+				current_interact_target = null
 	
 	# Compute visual speed (works for both local authority and remote clients observing)
 	var speed = 0.0
@@ -167,7 +259,8 @@ func _process(delta):
 				mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			else:
 				mat.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
-			mat.albedo_color.a = current_alpha
+			# Keep the inherited team color for the Thief, but update alpha
+			mat.albedo_color = Color(team_color.r, team_color.g, team_color.b, current_alpha)
 
 @rpc("any_peer", "call_local")
 func on_captured():
@@ -179,43 +272,69 @@ func on_captured():
 			carried_artifact.rpc("drop")
 		carried_artifact = null
 	
-	# The host takes over movement authority to enforce walking to jail
+	# EVERY peer must update authority, otherwise clients will spam unauthorized sync data
+	set_multiplayer_authority(1)
+	if has_node("MultiplayerSynchronizer"):
+		$MultiplayerSynchronizer.set_multiplayer_authority(1)
+	
+	# Only the host enforces the movement routing
 	if multiplayer.is_server():
-		set_multiplayer_authority(1)
-		if has_node("MultiplayerSynchronizer"):
-			$MultiplayerSynchronizer.set_multiplayer_authority(1)
+		var jails = get_tree().get_nodes_in_group("jail_zone")
+		if jails.size() > 0:
+			var jail = jails[0]
+			if jail.has_node("WalkTarget"):
+				update_jail_target(jail.get_node("WalkTarget").global_position)
+			
 		GameManager.rpc("thief_captured")
 
 @rpc("any_peer", "call_local")
-func set_rescue_halt(halted: bool):
+func request_start_rescue(target_id: int):
 	if not multiplayer.is_server(): return
-	is_rescue_halted = halted
+	var target = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(target_id))
+	if target and target.get("is_hypnotized"):
+		target.active_rescuer_id = multiplayer.get_remote_sender_id()
+
+@rpc("any_peer", "call_local")
+func request_stop_rescue(target_id: int):
+	if not multiplayer.is_server(): return
+	var target = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(target_id))
+	if target and target.active_rescuer_id == multiplayer.get_remote_sender_id():
+		target.active_rescuer_id = -1
+
+@rpc("any_peer", "call_local", "unreliable")
+func sync_rescue_progress(prog: float):
+	rescue_progress = prog
 
 @rpc("any_peer", "call_local")
 func rescue_successful():
-	if not multiplayer.is_server(): return
 	if not is_hypnotized: return
 	
 	is_hypnotized = false
 	is_rescue_halted = false
+	if pitch_pivot:
+		pitch_pivot.rotation.y = 0
 	
+	# All peers update authority so the client can move again
 	var peer_id = str(name).to_int()
 	set_multiplayer_authority(peer_id)
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(peer_id)
 		
-	GameManager.rpc("thief_rescued")
+	if multiplayer.is_server():
+		GameManager.rpc("thief_rescued")
 
 @rpc("any_peer", "call_local")
 func on_jailed(cell_pos: Vector3):
 	is_hypnotized = false
 	is_jailed = true
 	is_rescue_halted = false
+	if pitch_pivot:
+		pitch_pivot.rotation.y = 0
 	
 	global_position = cell_pos
 	
-	if multiplayer.is_server():
-		var peer_id = str(name).to_int()
-		set_multiplayer_authority(peer_id)
-		if has_node("MultiplayerSynchronizer"):
-			$MultiplayerSynchronizer.set_multiplayer_authority(peer_id)
+	# All peers update authority so the client can move inside the cell
+	var peer_id = str(name).to_int()
+	set_multiplayer_authority(peer_id)
+	if has_node("MultiplayerSynchronizer"):
+		$MultiplayerSynchronizer.set_multiplayer_authority(peer_id)

@@ -9,6 +9,9 @@ func _on_body_entered(body: Node3D):
 			if artifact:
 				GameManager.rpc("add_cash", artifact.cash_value)
 				
+				if "cash_contributed" in body:
+					body.cash_contributed += artifact.cash_value
+				
 				# Destroy artifact across all peers to prevent sync errors
 				artifact.rpc("destroy_artifact")
 				body.set("carried_artifact", null)

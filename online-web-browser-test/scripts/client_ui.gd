@@ -8,6 +8,7 @@ extends Control
 var local_player_name: String = ""
 var lobby_ui: Node
 var current_hud: Node = null
+var current_room_code: String = ""
 
 func _ready() -> void:
 	client.lobby_joined.connect(_lobby_joined)
@@ -158,6 +159,7 @@ func _build_main_menu():
 	host_btn.add_theme_font_size_override("font_size", 32)
 	host_btn.pressed.connect(func():
 		local_player_name = name_input.text.strip_edges()
+		current_room_code = ""
 		client.start(host.text, "", false)
 	)
 	vbox.add_child(host_btn)
@@ -190,6 +192,7 @@ func _build_main_menu():
 		local_player_name = name_input.text.strip_edges()
 		var code = join_input.text.strip_edges().to_upper()
 		if code != "":
+			current_room_code = code
 			client.start(host.text, code, false)
 	)
 	join_hbox.add_child(join_btn)
@@ -236,8 +239,8 @@ func _mp_server_connected() -> void:
 	_log("[Multiplayer] Server connected (I am %d)" % my_id)
 	if my_id != 1:
 		GameManager.add_player(my_id, local_player_name)
-		# Send my ready status and name to the host
-		GameManager.rpc("sync_player_data", my_id, local_player_name, false)
+		# Send my name to the host
+		GameManager.rpc("sync_player_data", my_id, local_player_name)
 
 
 func _mp_server_disconnect() -> void:
@@ -249,6 +252,13 @@ func _mp_server_disconnect() -> void:
 func _mp_peer_connected(id: int) -> void:
 	# Register player in Lobby
 	GameManager.add_player(id)
+	
+	# Wait briefly to let the new peer's tree stabilize
+	await get_tree().create_timer(0.5).timeout
+	var my_id = multiplayer.get_unique_id()
+		
+	# Broadcast my identity to the new peer
+	GameManager.rpc_id(id, "sync_player_data", my_id, local_player_name)
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
@@ -297,10 +307,21 @@ func _connected(id: int, _use_mesh: bool) -> void:
 
 func _disconnected() -> void:
 	_log("[Signaling] Server disconnected: %d - %s" % [client.code, client.reason])
-
+	
+	# If the host leaves or server crashes, everyone cleans up and goes back to main menu
+	GameManager.client_return_to_lobby()
+	GameManager.players.clear()
+	
+	var main_menu = get_node_or_null("MainMenuCanvas")
+	if main_menu:
+		main_menu.show()
+		
+	if lobby_ui:
+		lobby_ui.hide()
 
 func _lobby_joined(lobby_id: String) -> void:
 	_log("[Signaling] Joined lobby %s" % lobby_id)
+	current_room_code = lobby_id
 	
 	# Automatically copy to clipboard!
 	DisplayServer.clipboard_set(lobby_id)

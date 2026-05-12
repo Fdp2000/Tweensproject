@@ -65,6 +65,10 @@ func _ready():
 		else:
 			position = Vector3(randf_range(-2, 2), 4.0, randf_range(-2, 2))
 			
+		var canvas = CanvasLayer.new()
+		canvas.name = "PlayerCanvas"
+		add_child(canvas)
+		
 		setup_mobile_ui()
 	else:
 		camera.current = false
@@ -95,9 +99,7 @@ func setup_mobile_ui():
 	if not is_mobile_device(): return
 	
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	var canvas = CanvasLayer.new()
-	canvas.name = "PlayerCanvas"
-	add_child(canvas)
+	var canvas = get_node("PlayerCanvas")
 	
 	var screen_size = DisplayServer.window_get_size()
 	var ui_scale = min(screen_size.x, screen_size.y) / 720.0 
@@ -241,6 +243,7 @@ func _custom_physics_process(_delta, direction):
 
 @rpc("any_peer", "call_remote", "unreliable")
 func relay_position(pos: Vector3, rot: Vector3):
+	if not is_inside_tree(): return
 	if is_multiplayer_authority(): return
 	sync_target_position = pos
 	sync_target_rotation = rot

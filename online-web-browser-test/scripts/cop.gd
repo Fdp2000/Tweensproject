@@ -6,8 +6,12 @@ var charge_cooldown_left = 0.0
 const CHARGE_DURATION = 0.4
 const CHARGE_SPEED = 20.0
 const CHARGE_COOLDOWN = 3.0
+var total_captures = 0
 var charge_direction = Vector3.ZERO
 var charge_ui_ref: Control
+var is_debuffed = false
+var debuff_timer = 0.0
+const DEBUFF_TIME = 2.0
 
 func _ready():
 	super._ready()
@@ -53,6 +57,11 @@ func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
 func _custom_physics_process(delta, direction):
 	if charge_cooldown_left > 0:
 		charge_cooldown_left -= delta
+	
+	if is_debuffed:
+		debuff_timer -= delta
+		if debuff_timer <= 0:
+			is_debuffed = false
 		
 	if charge_ui_ref:
 		if CHARGE_COOLDOWN > 0:
@@ -62,13 +71,19 @@ func _custom_physics_process(delta, direction):
 		charge_time_left -= delta
 		if charge_time_left <= 0:
 			is_charging = false
+			is_debuffed = true
+			debuff_timer = DEBUFF_TIME
 		else:
 			velocity.x = charge_direction.x * CHARGE_SPEED
 			velocity.z = charge_direction.z * CHARGE_SPEED
+			if is_on_wall():
+				is_charging = false
+				is_debuffed = true
+				debuff_timer = DEBUFF_TIME
 			_detect_capture()
 			return
 
-	if (Input.is_physical_key_pressed(KEY_SHIFT) or Input.is_action_pressed("dash")) and charge_cooldown_left <= 0:
+	if (Input.is_physical_key_pressed(KEY_SHIFT) or Input.is_action_pressed("dash")) and charge_cooldown_left <= 0 and not is_debuffed:
 		is_charging = true
 		charge_time_left = CHARGE_DURATION
 		charge_cooldown_left = CHARGE_COOLDOWN
@@ -77,10 +92,14 @@ func _custom_physics_process(delta, direction):
 		else:
 			charge_direction = -camera.global_transform.basis.z.normalized()
 			charge_direction.y = 0
-			charge_direction = charge_direction.normalized()
+		charge_direction = charge_direction.normalized()
 			
 	if not is_charging:
-		super._custom_physics_process(delta, direction)
+		var speed_mult = 0.5 if is_debuffed else 1.0
+		# Apply debuff to direction before passing to super
+		var mod_dir = direction * speed_mult
+		super._custom_physics_process(delta, mod_dir)
+		_detect_capture()
 
 func _detect_capture():
 	for i in get_slide_collision_count():
@@ -88,9 +107,13 @@ func _detect_capture():
 		var collider = collision.get_collider()
 		# Make sure it's a player, has the method, and is on the enemy team (team_index 0 is Thief)
 		if collider is CharacterBody3D and collider.has_method("on_captured") and collider.get("team_index") != team_index:
-			rpc_id(1, "request_capture", int(str(collider.name)))
-			is_charging = false
-			return
+			if not collider.get("is_hypnotized") and not collider.get("is_jailed"):
+				rpc_id(1, "request_capture", int(str(collider.name)))
+				if is_charging:
+					is_charging = false
+					is_debuffed = true
+					debuff_timer = DEBUFF_TIME
+				return
 
 @rpc("any_peer", "call_local")
 func request_capture(thief_id: int):
@@ -102,6 +125,8 @@ func request_capture(thief_id: int):
 	
 	var thief = spawned.get_node_or_null(str(thief_id))
 	if thief and thief.has_method("on_captured"):
-		# Validate distance to prevent latency cheating
-		if global_position.distance_to(thief.global_position) < 4.0:
-			thief.rpc("on_captured")
+		if not thief.get("is_hypnotized") and not thief.get("is_jailed"):
+			# Validate distance to prevent latency cheating
+			if global_position.distance_to(thief.global_position) < 4.0:
+				total_captures += 1
+				thief.rpc("on_captured")

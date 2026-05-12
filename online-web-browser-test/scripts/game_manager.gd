@@ -50,9 +50,9 @@ func sync_time(time_left: int):
 
 func add_player(id: int, p_name: String = ""):
 	if not players.has(id):
+		var default_name = "Player " + str(players.size() + 1)
 		players[id] = {
-			"name": p_name if p_name != "" else "Player " + str(id),
-			"ready": false,
+			"name": p_name if p_name != "" else default_name,
 			"role": PlayerRole.THIEF
 		}
 		lobby_updated.emit()
@@ -69,10 +69,11 @@ func remove_player(id: int):
 			check_game_validity()
 
 @rpc("any_peer", "call_local")
-func sync_player_data(id: int, p_name: String, is_ready: bool):
-	if players.has(id):
+func sync_player_data(id: int, p_name: String):
+	if not players.has(id):
+		add_player(id, p_name)
+	else:
 		players[id]["name"] = p_name
-		players[id]["ready"] = is_ready
 		lobby_updated.emit()
 
 @rpc("any_peer", "call_local")
@@ -137,29 +138,83 @@ func end_game_with_winner(winner_team: int):
 	
 	game_over.emit(winner_team)
 	
-	# Delay before kicking players back to lobby screen
-	await get_tree().create_timer(5.0).timeout
-	
-	for id in players.keys():
-		players[id]["ready"] = false
-	game_ended.emit()
+	if multiplayer.is_server():
+		var winner_text = "COPS SECURED THE MUSEUM" if winner_team == PlayerRole.COP else "THE THIEVES ESCAPED WITH THE LOOT"
+		
+		var cops_data = []
+		var thieves_data = []
+		
+		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+		if spawned:
+			for player in spawned.get_children():
+				var p_name = player.get("player_name") if player.get("player_name") else "Player"
+				if player.get("team_index") == 1:
+					var caps = player.get("total_captures")
+					cops_data.append({"name": p_name, "captures": caps if caps != null else 0})
+				else:
+					var cash = player.get("cash_contributed")
+					thieves_data.append({"name": p_name, "cash": cash if cash != null else 0})
+					
+		rpc("show_scoreboard", winner_text, cops_data, thieves_data)
 
-func all_players_ready() -> bool:
-	if players.size() == 0: return false
+@rpc("any_peer", "call_local")
+func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array):
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
+	if client_ui and client_ui.get("current_hud"):
+		client_ui.current_hud.queue_free()
+		client_ui.current_hud = null
+		
+	var scoreboard_scene = load("res://scenes/Scoreboard.tscn")
+	if scoreboard_scene:
+		var scoreboard = scoreboard_scene.instantiate()
+		get_tree().get_root().add_child(scoreboard)
+		scoreboard.populate(winner_text, cops_data, thieves_data)
+
+@rpc("any_peer", "call_local")
+func return_to_lobby():
+	if not multiplayer.is_server(): return
+	rpc("client_return_to_lobby")
+
+@rpc("any_peer", "call_local")
+func client_return_to_lobby():
+	var scoreboard = get_tree().get_root().get_node_or_null("Scoreboard")
+	if scoreboard:
+		scoreboard.queue_free()
+		
+	if multiplayer.is_server():
+		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+		if spawned:
+			for child in spawned.get_children():
+				child.queue_free()
+				
+		var artifacts = get_tree().get_nodes_in_group("artifact")
+		for art in artifacts:
+			art.rpc("reset_artifact")
+			
+		# Reset global team cash and timer for the next round
+		team_cash = 0
+		
 	for id in players.keys():
-		if not players[id]["ready"]: return false
-	return true
+		pass # Ready state removed
+		
+	game_ended.emit()
 
 func host_start_game():
 	if not multiplayer.is_server(): return
-	if not all_players_ready(): return
 	
 	var peer_ids = players.keys()
 	peer_ids.shuffle()
 	
 	var assignments = {}
 	var total_players = peer_ids.size()
-	var num_cops = max(1, int(total_players / 4.0))
+	
+	var num_cops = 1
+	if total_players >= 6:
+		num_cops = 2
+	if total_players >= 9:
+		num_cops = 3
 	
 	for i in range(total_players):
 		var role = PlayerRole.COP if i < num_cops else PlayerRole.THIEF

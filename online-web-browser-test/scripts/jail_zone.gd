@@ -1,6 +1,6 @@
 extends Area3D
 
-@onready var cell_center = $Marker3D
+@onready var cell_center = $CellCenter
 
 func _on_body_entered(body: Node3D):
 	if not multiplayer.is_server(): return

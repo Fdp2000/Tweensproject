@@ -11,6 +11,7 @@ var carrier_id: int = -1
 # For syncing transform across peers
 var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
+var initial_position: Vector3 = Vector3.ZERO
 
 func _ready():
 	# Configure based on size
@@ -25,6 +26,7 @@ func _ready():
 			cash_value = 5000
 			weight_penalty = 0.4 # 60% slow
 
+	initial_position = global_position
 	sync_target_position = global_position
 	sync_target_rotation = rotation
 
@@ -91,3 +93,13 @@ func destroy_artifact():
 	carrier_id = -1
 	hide()
 	$CollisionShape3D.set_deferred("disabled", true)
+
+@rpc("any_peer", "call_local")
+func reset_artifact():
+	is_carried = false
+	carrier_id = -1
+	show()
+	$CollisionShape3D.set_deferred("disabled", false)
+	global_position = initial_position
+	sync_target_position = initial_position
+	sync_target_rotation = Vector3.ZERO

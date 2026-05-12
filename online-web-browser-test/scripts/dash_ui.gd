@@ -3,11 +3,15 @@ extends Control
 var progress: float = 1.0
 var ring_color: Color = Color(1.0, 0.84, 0.0, 0.9)
 var ready_color: Color = Color(1.0, 0.84, 0.0, 0.9)
+var hide_when_empty: bool = false
 
 func _process(_delta):
 	queue_redraw()
 
 func _draw():
+	if hide_when_empty and progress <= 0.0:
+		return
+		
 	var center = size / 2.0
 	var radius = min(size.x, size.y) / 2.0 - 4.0 # Leave room for thickness
 	
