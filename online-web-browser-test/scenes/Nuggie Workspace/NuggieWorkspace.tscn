@@ -1,7 +1,5 @@
 [gd_scene format=3 uid="uid://bvgp1rod3yrk0"]
 
-[ext_resource type="PackedScene" uid="uid://c0au7i4fnki7o" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer.glb" id="1_u2syy"]
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(10, 10)
 
@@ -9,5 +7,3 @@ size = Vector2(10, 10)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1518087552]
 mesh = SubResource("PlaneMesh_v7yhp")
-
-[node name="RedPanda_Character_materialer" parent="." unique_id=187563451 instance=ExtResource("1_u2syy")]
