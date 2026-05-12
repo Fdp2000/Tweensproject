@@ -1,9 +1,49 @@
 [gd_scene format=3 uid="uid://bvgp1rod3yrk0"]
 
+[ext_resource type="PackedScene" uid="uid://dcgfko1edbx8o" path="res://Assets/Models/Test Panda/cel_panda_test.tscn" id="1_u2syy"]
+[ext_resource type="Shader" uid="uid://c6whan157sd1b" path="res://Assets/Shaders/testShader.gdshader" id="1_v7yhp"]
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(10, 10)
+
+[sub_resource type="SphereMesh" id="SphereMesh_v7yhp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dg571"]
+render_priority = 0
+shader = ExtResource("1_v7yhp")
+shader_parameter/albedo_color = Color(0, 1, 1, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 3.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [node name="NuggieWorkspace" type="Node3D" unique_id=1619017634]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1518087552]
 mesh = SubResource("PlaneMesh_v7yhp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1072094335]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("SphereMesh_v7yhp")
+surface_material_override/0 = SubResource("ShaderMaterial_dg571")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=672382153]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2339699, 3.498612, 0.932847)
+
+[node name="RedPanda_Character_materialer2" parent="." unique_id=2109461473 instance=ExtResource("1_u2syy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)

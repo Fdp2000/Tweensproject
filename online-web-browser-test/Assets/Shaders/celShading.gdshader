@@ -1,14 +1,15 @@
 shader_type spatial;
 
-void vertex() {
-	// Called for every vertex the material is visible on.
-}
+uniform sampler2D tex : source_color;
+uniform sampler2D gradient : source_color;
 
 void fragment() {
-	// Called for every pixel the material is visible on.
+	ALBEDO = texture(tex, UV).rgb;
 }
 
-//void light() {
-//	// Called for every pixel for every light affecting the material.
-//	// Uncomment to replace the default light processing function with this one.
-//}
+void light() {
+	float d = clamp(dot(NORMAL, LIGHT), -1.0, 1.0);
+	float sample = clamp((d + 1.0) * ATTENUATION / 2.0, 0.0, 1.0);
+	vec4 shaded = texture(gradient, vec2(sample, 0.0));
+	DIFFUSE_LIGHT += clamp(shaded.rgb * LIGHT_COLOR, 0.0, 1.0);
+}
