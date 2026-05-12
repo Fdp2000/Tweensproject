@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://du573ptbq02lx"
-path="res://.godot/imported/RedPanda_Character.glb-6bb109fa18119dbb6f515aec63bf196b.scn"
+uid="uid://c0au7i4fnki7o"
+path="res://.godot/imported/RedPanda_Character_materialer.glb-50628f0b3371cf41d582d70013833543.scn"
 
 [deps]
 
-source_file="res://Assets/Models/RedPanda_Character.glb"
-dest_files=["res://.godot/imported/RedPanda_Character.glb-6bb109fa18119dbb6f515aec63bf196b.scn"]
+source_file="res://Assets/Models/Test Panda/RedPanda_Character_materialer.glb"
+dest_files=["res://.godot/imported/RedPanda_Character_materialer.glb-50628f0b3371cf41d582d70013833543.scn"]
 
 [params]
 

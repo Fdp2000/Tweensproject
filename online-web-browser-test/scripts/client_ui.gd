@@ -7,6 +7,7 @@ extends Control
 
 var local_player_name: String = ""
 var lobby_ui: Node
+var current_hud: Node = null
 
 func _ready() -> void:
 	client.lobby_joined.connect(_lobby_joined)
@@ -25,6 +26,7 @@ func _ready() -> void:
 	add_child(lobby_ui)
 	
 	GameManager.game_started.connect(_on_game_started)
+	GameManager.game_ended.connect(_on_game_ended)
 	
 	# Hide the old debug menu and header from main.tscn
 
@@ -54,7 +56,7 @@ func _ready() -> void:
 				if (!meta) {
 					meta = document.createElement('meta');
 					meta.name = 'viewport';
-					document.head.appendChild(meta);
+					meta.head.appendChild(meta);
 				}
 				meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
 				
@@ -230,7 +232,12 @@ func ping(argument: float) -> void:
 
 
 func _mp_server_connected() -> void:
-	_log("[Multiplayer] Server connected (I am %d)" % client.rtc_mp.get_unique_id())
+	var my_id = client.rtc_mp.get_unique_id()
+	_log("[Multiplayer] Server connected (I am %d)" % my_id)
+	if my_id != 1:
+		GameManager.add_player(my_id, local_player_name)
+		# Send my ready status and name to the host
+		GameManager.rpc("sync_player_data", my_id, local_player_name, false)
 
 
 func _mp_server_disconnect() -> void:
@@ -247,18 +254,33 @@ func _on_game_started() -> void:
 	if multiplayer.is_server():
 		var spawned = get_node("/root/World/main/SpawnedObjects")
 		for id in GameManager.players.keys():
-			var pf = player_scene.instantiate()
-			pf.name = str(id)
-			
-			# Set the team index. The MultiplayerSynchronizer will automatically send this to everyone!
 			var role = GameManager.players[id]["role"]
-			pf.team_index = role # 0 = Thief, 1 = Cop
+			
+			var pf
+			if role == GameManager.PlayerRole.COP:
+				pf = load("res://scenes/Cop.tscn").instantiate()
+			else:
+				pf = load("res://scenes/Thief.tscn").instantiate()
+				
+			pf.name = str(id)
+			pf.team_index = role
 			
 			spawned.add_child(pf, true)
 			
 	# Capture mouse when game starts
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	if current_hud:
+		current_hud.queue_free()
+	current_hud = load("res://scenes/HUD.tscn").instantiate()
+	add_child(current_hud)
 
+func _on_game_ended() -> void:
+	if current_hud:
+		current_hud.queue_free()
+		current_hud = null
+		
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _mp_peer_disconnected(id: int) -> void:
 	_log("[Multiplayer] Peer %d disconnected" % id)
@@ -289,12 +311,6 @@ func _lobby_joined(lobby_id: String) -> void:
 	if canvas: canvas.hide()
 	get_parent().get_parent().hide() 
 	
-	var my_id = multiplayer.get_unique_id()
-	if my_id != 1:
-		GameManager.add_player(my_id, local_player_name)
-		# Send my ready status and name to the host
-		GameManager.rpc("sync_player_data", my_id, local_player_name, false)
-		
 	lobby_ui.show_lobby()
 
 
