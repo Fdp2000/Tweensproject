@@ -6,6 +6,7 @@ extends Control
 @onready var mesh: CheckBox = $VBoxContainer/Connect/Mesh
 
 var local_player_name: String = ""
+var lobby_ui: Node
 
 func _ready() -> void:
 	client.lobby_joined.connect(_lobby_joined)
@@ -19,6 +20,11 @@ func _ready() -> void:
 	multiplayer.peer_connected.connect(_mp_peer_connected)
 	multiplayer.peer_disconnected.connect(_mp_peer_disconnected)
 	host.text = "wss://online-web-browser-test.onrender.com"
+	
+	lobby_ui = preload("res://scripts/lobby_ui.gd").new()
+	add_child(lobby_ui)
+	
+	GameManager.game_started.connect(_on_game_started)
 	
 	# Hide the old debug menu and header from main.tscn
 
@@ -234,27 +240,37 @@ func _mp_server_disconnect() -> void:
 @export var player_scene: PackedScene
 
 func _mp_peer_connected(id: int) -> void:
+	# Register player in Lobby
+	GameManager.add_player(id)
+
+func _on_game_started() -> void:
 	if multiplayer.is_server():
-		var pf = player_scene.instantiate()
-		pf.name = str(id)
-		
-		# Set the team index. The MultiplayerSynchronizer will automatically send this to everyone!
 		var spawned = get_node("/root/World/main/SpawnedObjects")
-		pf.team_index = spawned.get_child_count() % 2 
-		
-		spawned.add_child(pf, true)
+		for id in GameManager.players.keys():
+			var pf = player_scene.instantiate()
+			pf.name = str(id)
+			
+			# Set the team index. The MultiplayerSynchronizer will automatically send this to everyone!
+			var role = GameManager.players[id]["role"]
+			pf.team_index = role # 0 = Thief, 1 = Cop
+			
+			spawned.add_child(pf, true)
+			
+	# Capture mouse when game starts
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 
 func _mp_peer_disconnected(id: int) -> void:
 	_log("[Multiplayer] Peer %d disconnected" % id)
+	GameManager.remove_player(id)
 
 
 func _connected(id: int, _use_mesh: bool) -> void:
 	_log("[Signaling] Server connected with ID: %d. Enforced Client-Server Architecture (Mesh: %s)" % [id, client.mesh])
 	
-	# If I am the host (ID 1), I spawn my own character immediately
+	# If I am the host (ID 1), add myself to the lobby
 	if id == 1:
-		_mp_peer_connected(1)
+		GameManager.add_player(1, local_player_name)
 
 
 func _disconnected() -> void:
@@ -272,8 +288,14 @@ func _lobby_joined(lobby_id: String) -> void:
 	var canvas = get_node_or_null("MainMenuCanvas")
 	if canvas: canvas.hide()
 	get_parent().get_parent().hide() 
-	# Also capture the mouse so you can start looking around immediately
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	var my_id = multiplayer.get_unique_id()
+	if my_id != 1:
+		GameManager.add_player(my_id, local_player_name)
+		# Send my ready status and name to the host
+		GameManager.rpc("sync_player_data", my_id, local_player_name, false)
+		
+	lobby_ui.show_lobby()
 
 
 
