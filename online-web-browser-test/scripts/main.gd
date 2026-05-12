@@ -29,6 +29,12 @@ func spawn_plunger(muzzle_pos: Vector3, shoot_dir: Vector3, shooter_id: int): # 
 func _ready() -> void:
 	if OS.get_name() == "Web":
 		$VBoxContainer/Signaling.hide()
+		
+	var spawner = $MultiplayerSpawner
+	if spawner:
+		spawner.add_spawnable_scene("res://scenes/Cop.tscn")
+		spawner.add_spawnable_scene("res://scenes/Thief.tscn")
+		spawner.add_spawnable_scene("res://scenes/Artifact.tscn")
 
 
 func _on_listen_toggled(button_pressed: bool) -> void:

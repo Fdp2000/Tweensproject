@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://viakckuqn6jp"]
 
 [ext_resource type="PackedScene" uid="uid://bfi02p842hxck" path="res://scenes/main.tscn" id="1_kqs1s"]
+[ext_resource type="PackedScene" path="res://scenes/Artifact.tscn" id="2_32lhk"]
+[ext_resource type="PackedScene" path="res://scenes/VanZone.tscn" id="3_7g83o"]
+[ext_resource type="PackedScene" path="res://scenes/JailZone.tscn" id="4_d1c63"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -88,3 +91,12 @@ size = Vector3(3.2839088, 2.682129, 3.8417969)
 transform = Transform3D(-6.310577e-07, 0, 1, 0, 2, 0, -14.436917, 0, -4.371139e-08, 16.613407, 3.182129, -0.71962464)
 use_collision = true
 size = Vector3(2.8058014, 2.682129, 5.8081055)
+
+[node name="Artifact" parent="." unique_id=91930715 instance=ExtResource("2_32lhk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09499836, 1.5462799, 12.773682)
+
+[node name="VanZone" parent="." unique_id=1803785721 instance=ExtResource("3_7g83o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.244587, 3.0665112, 11.877657)
+
+[node name="JailZone" parent="." unique_id=839499034 instance=ExtResource("4_d1c63")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.904939, 3.0665102, -0.98147726)
