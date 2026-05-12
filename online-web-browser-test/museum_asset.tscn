@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dyxmdst8vfwug"]
+
+[ext_resource type="PackedScene" uid="uid://mlmrg2ab0pja" path="res://scenes/MuseumAsset/MuseumAsset.fbx" id="1_t4mxh"]
+
+[node name="MuseumAsset" unique_id=1405327761 instance=ExtResource("1_t4mxh")]
