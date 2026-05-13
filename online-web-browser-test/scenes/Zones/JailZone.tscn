@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c1dqxv23m7wqm"]
+
+[ext_resource type="Script" uid="uid://dtadine4x4l4o" path="res://scripts/Zones/jail_zone.gd" id="1_nboo2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kne1u"]
+size = Vector3(5, 5, 5)
+
+[node name="JailZone" type="Area3D" unique_id=1935731050 groups=["jail_zone"]]
+script = ExtResource("1_nboo2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=24635127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.2805176)
+shape = SubResource("BoxShape3D_kne1u")
+
+[node name="CellCenter" type="Marker3D" parent="." unique_id=1911859972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="WalkTarget" type="Marker3D" parent="." unique_id=2037168115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
