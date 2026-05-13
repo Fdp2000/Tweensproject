@@ -178,6 +178,16 @@ func _add_custom_mobile_ui(_mobile_ui: Control, _ui_scale: float):
 func _input(event):
 	if not is_multiplayer_authority(): return
 	
+	# Toggle cursor capture with Escape (desktop only)
+	if event is InputEventKey and event.physical_keycode == KEY_ESCAPE and event.pressed and not event.echo:
+		if not is_mobile_device():
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			else:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			get_viewport().set_input_as_handled()
+			return
+	
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not is_mobile_device() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
