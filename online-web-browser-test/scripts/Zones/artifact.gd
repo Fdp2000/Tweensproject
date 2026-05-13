@@ -239,3 +239,7 @@ func reset_artifact():
 	rotation = initial_rotation
 	sync_target_position = initial_position
 	sync_target_rotation = initial_rotation
+	
+func _exit_tree() -> void:
+	if synchronizer:
+		synchronizer.public_visibility = false

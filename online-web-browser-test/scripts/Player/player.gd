@@ -32,6 +32,10 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(id)
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(id)
+		
+func _exit_tree() -> void:
+	if has_node("MultiplayerSynchronizer"):
+		get_node("MultiplayerSynchronizer").public_visibility = false
 
 func _ready():
 	await get_tree().process_frame

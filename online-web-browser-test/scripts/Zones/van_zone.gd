@@ -1,8 +1,9 @@
 extends Area3D
 
 func _physics_process(delta):
-	# Only the Server processes scores and deletes items
-	if not multiplayer.is_server(): return
+	# FIX: Make sure the multiplayer peer actually exists before checking is_server()
+	if not multiplayer.has_multiplayer_peer() or not multiplayer.is_server(): 
+		return
 	
 	# Continuously scan for any body currently standing inside the van zone
 	for body in get_overlapping_bodies():
@@ -12,9 +13,6 @@ func _physics_process(delta):
 				
 				# If they are holding an artifact, cash it in instantly!
 				if artifact and not artifact.is_queued_for_deletion():
-					
-					# FIX 1: Add to the thief's personal score BEFORE telling GameManager!
-					# This ensures the scoreboard is accurate if this item ends the game.
 					if "cash_contributed" in body:
 						body.cash_contributed += artifact.cash_value
 					
