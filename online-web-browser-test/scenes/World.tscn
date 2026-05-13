@@ -28,4 +28,4 @@ shadow_enabled = true
 [node name="main" parent="." unique_id=846917499 instance=ExtResource("1_kqs1s")]
 
 [node name="PrototypeLevel" parent="." unique_id=1171028383 instance=ExtResource("2_proto")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03201866, -9.536743e-07, 0.007331848)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.03201866, -9.536743e-07, 0.007331848)
