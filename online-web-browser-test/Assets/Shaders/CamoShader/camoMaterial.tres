@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://dbw56odt726am"]
+
+[ext_resource type="Shader" uid="uid://b7s2dwa0rqu4m" path="res://Assets/Shaders/CamoShader/camoShader.tres" id="1_psu83"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_psu83")
+shader_parameter/rimSharpness2 = 10.0
+shader_parameter/camoColor = Color(1, 1, 1, 1)
+shader_parameter/colorAmount = 5.0
