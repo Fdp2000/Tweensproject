@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bfi02p842hxck"]
 
-[ext_resource type="Script" uid="uid://drqhtg0onjeuf" path="res://scripts/main.gd" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://bvlpyq23crr3g" path="res://scenes/Plunger.tscn" id="2_jyhfs"]
-[ext_resource type="PackedScene" uid="uid://d0xak1rv4tda0" path="res://scenes/client_ui.tscn" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://drqhtg0onjeuf" path="res://scripts/Networking/main.gd" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://bvlpyq23crr3g" path="res://scenes/MiscScenes/Plunger.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://d0xak1rv4tda0" path="res://scenes/Networking scenes/client_ui.tscn" id="2_sugp2"]
 
 [node name="Control" type="Control" unique_id=846917499]
 layout_mode = 3
@@ -60,7 +60,7 @@ layout_mode = 2
 [node name="SpawnedObjects" type="Node3D" parent="." unique_id=1234567890]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=624736189]
-_spawnable_scenes = PackedStringArray("uid://8f4mshrrem6r", "uid://bvlpyq23crr3g", "uid://bi6e376akpo28", "uid://cj2d8s11yuiqy")
+_spawnable_scenes = PackedStringArray("uid://bvlpyq23crr3g")
 spawn_path = NodePath("../SpawnedObjects")
 
 [connection signal="toggled" from="VBoxContainer/Signaling/ListenButton" to="." method="_on_listen_toggled"]

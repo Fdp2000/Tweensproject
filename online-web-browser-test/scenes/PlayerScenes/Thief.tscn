@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cj2d8s11yuiqy"]
 
-[ext_resource type="PackedScene" uid="uid://8f4mshrrem6r" path="res://scenes/Player.tscn" id="1_base"]
-[ext_resource type="Script" uid="uid://bwhf4pdxb8euc" path="res://scripts/thief.gd" id="2_thief"]
+[ext_resource type="PackedScene" uid="uid://8f4mshrrem6r" path="res://scenes/PlayerScenes/Player.tscn" id="1_base"]
+[ext_resource type="Script" uid="uid://bwhf4pdxb8euc" path="res://scripts/Player/thief.gd" id="2_thief"]
 [ext_resource type="PackedScene" uid="uid://c0au7i4fnki7o" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer.glb" id="3_model"]
 
 [node name="Thief" unique_id=938773751 instance=ExtResource("1_base")]

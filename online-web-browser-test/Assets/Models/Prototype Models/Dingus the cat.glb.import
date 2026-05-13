@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cp6s3mgu6vhlp"
-path="res://.godot/imported/Dingus the cat.glb-b1e81991b9c3e079049e5ba81fb8bd6f.scn"
+path="res://.godot/imported/Dingus the cat.glb-6af7519d1e212575cec9eccf5fd934d3.scn"
 
 [deps]
 
-source_file="res://scenes/Dingus the cat.glb"
-dest_files=["res://.godot/imported/Dingus the cat.glb-b1e81991b9c3e079049e5ba81fb8bd6f.scn"]
+source_file="res://Assets/Models/Prototype Models/Dingus the cat.glb"
+dest_files=["res://.godot/imported/Dingus the cat.glb-6af7519d1e212575cec9eccf5fd934d3.scn"]
 
 [params]
 

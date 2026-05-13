@@ -1,11 +1,11 @@
 [gd_scene format=4 uid="uid://crc86ugpb3vmu"]
 
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_hwn0u"]
-[ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://scenes/Dingus the cat.glb" id="3_ypmvb"]
-[ext_resource type="PackedScene" uid="uid://ch7e52146lh35" path="res://scenes/Jail.tscn" id="5_jail"]
-[ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/artifact.gd" id="6_artifact"]
-[ext_resource type="PackedScene" uid="uid://vr8fx5lt0ih2" path="res://scenes/Van.tscn" id="6_q60mh"]
-[ext_resource type="Script" uid="uid://ds52l3obmbjax" path="res://scripts/level_collision_generator.gd" id="7_collision"]
+[ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://Assets/Models/Prototype Models/Dingus the cat.glb" id="3_ypmvb"]
+[ext_resource type="PackedScene" uid="uid://ch7e52146lh35" path="res://scenes/Zones/Jail.tscn" id="5_jail"]
+[ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="6_artifact"]
+[ext_resource type="PackedScene" uid="uid://vr8fx5lt0ih2" path="res://scenes/Zones/Van.tscn" id="6_q60mh"]
+[ext_resource type="Script" uid="uid://ds52l3obmbjax" path="res://scripts/Misc/level_collision_generator.gd" id="7_collision"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwb7"]
 resource_name = "Material"

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d0xak1rv4tda0"]
 
-[ext_resource type="Script" uid="uid://wgfb8vvpxkha" path="res://scripts/client_ui.gd" id="1"]
+[ext_resource type="Script" uid="uid://wgfb8vvpxkha" path="res://scripts/UI/client_ui.gd" id="1"]
 [ext_resource type="Script" uid="uid://dd8irriksq2si" path="res://client/multiplayer_client.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://8f4mshrrem6r" path="res://scenes/Player.tscn" id="2_g8uup"]
+[ext_resource type="PackedScene" uid="uid://8f4mshrrem6r" path="res://scenes/PlayerScenes/Player.tscn" id="2_g8uup"]
 
 [node name="ClientUI" type="Control" unique_id=1968491779]
 layout_mode = 3

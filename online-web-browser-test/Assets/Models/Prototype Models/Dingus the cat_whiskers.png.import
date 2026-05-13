@@ -2,21 +2,21 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do02cxct1atuw"
-path.s3tc="res://.godot/imported/Dingus the cat_Maxwell.jpg-267fffffa7e39bbb810191d33a2dc51e.s3tc.ctex"
-path.etc2="res://.godot/imported/Dingus the cat_Maxwell.jpg-267fffffa7e39bbb810191d33a2dc51e.etc2.ctex"
+uid="uid://ckm7562m7qe2u"
+path.s3tc="res://.godot/imported/Dingus the cat_whiskers.png-bd37dd65f388a53392f30951630eb8f9.s3tc.ctex"
+path.etc2="res://.godot/imported/Dingus the cat_whiskers.png-bd37dd65f388a53392f30951630eb8f9.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "b38f4f276603b26223fe64b3a5298190"
+"md5": "0e294b964391b27bf10e5726183f6d0b"
 }
 
 [deps]
 
-source_file="res://scenes/Dingus the cat_Maxwell.jpg"
-dest_files=["res://.godot/imported/Dingus the cat_Maxwell.jpg-267fffffa7e39bbb810191d33a2dc51e.s3tc.ctex", "res://.godot/imported/Dingus the cat_Maxwell.jpg-267fffffa7e39bbb810191d33a2dc51e.etc2.ctex"]
+source_file="res://Assets/Models/Prototype Models/Dingus the cat_whiskers.png"
+dest_files=["res://.godot/imported/Dingus the cat_whiskers.png-bd37dd65f388a53392f30951630eb8f9.s3tc.ctex", "res://.godot/imported/Dingus the cat_whiskers.png-bd37dd65f388a53392f30951630eb8f9.etc2.ctex"]
 
 [params]
 
