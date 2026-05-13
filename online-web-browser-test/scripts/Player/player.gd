@@ -7,6 +7,8 @@ var mouse_sensitivity: float = 2.0
 var look_touch_index: int = -1
 var last_look_pos: Vector2 = Vector2.ZERO
 var target_shoulder_x = 1.0
+var disable_body_rotation: bool = false
+
 
 var player_name: String = ""
 @export var team_index: int = 0
@@ -19,6 +21,7 @@ var hits: int = 0
 # Network sync targets for smooth interpolation
 var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
+var _spawn_relay_ready: bool = false # FIX: Initialized the variable!
 
 @onready var pitch_pivot = $PitchPivot
 @onready var spring_arm = $PitchPivot/SpringArm3D
@@ -27,15 +30,14 @@ var sync_target_rotation: Vector3 = Vector3.ZERO
 func _enter_tree() -> void:
 	var id = str(name).to_int()
 	set_multiplayer_authority(id)
-	$MultiplayerSynchronizer.set_multiplayer_authority(id)
+	if has_node("MultiplayerSynchronizer"):
+		$MultiplayerSynchronizer.set_multiplayer_authority(id)
 
 func _ready():
 	await get_tree().process_frame
 	
-		# --- ADD THIS CHECK ---
 	if not is_inside_tree() or multiplayer == null:
 		return
-	# ----------------------
 	
 	if multiplayer.is_server():
 		_apply_team_colors()
@@ -68,12 +70,6 @@ func _ready():
 					part.layers = 2
 			camera.cull_mask = ~(1 << 1) # Ignore Layer 2
 		
-		# FIX for Issue 6: Prevent synchronizer errors during spawn
-		if has_node("MultiplayerSynchronizer"):
-			var sync_node = get_node("MultiplayerSynchronizer")
-			sync_node.public_visibility = false
-			get_tree().process_frame.connect(func(): sync_node.public_visibility = true, CONNECT_ONE_SHOT)
-		
 		if not is_mobile_device():
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
@@ -84,6 +80,23 @@ func _ready():
 		setup_mobile_ui()
 	else:
 		camera.current = false
+
+	if has_node("MultiplayerSynchronizer"):
+		var sync_node = get_node("MultiplayerSynchronizer")
+		if multiplayer.is_server():
+			sync_node.public_visibility = false
+			get_tree().create_timer(1.0).timeout.connect(func():
+				if is_inside_tree():
+					sync_node.public_visibility = true
+			)
+		else:
+			sync_node.public_visibility = true
+			
+	# FIX: Activate the relay flag for BOTH server and clients
+	get_tree().create_timer(1.0).timeout.connect(func():
+		if is_inside_tree():
+			_spawn_relay_ready = true
+	)
 
 func _set_layer_recursive(node: Node, layer: int):
 	if node is VisualInstance3D:
@@ -147,14 +160,20 @@ func setup_mobile_ui():
 			last_look_pos = event.position
 			
 			var actual_sens = mouse_sensitivity * 0.001
-			rotate_y(-drag_relative.x * actual_sens)
+			
+			# --- CAMERA FIX FOR MOBILE ---
+			if disable_body_rotation:
+				pitch_pivot.rotate_y(-drag_relative.x * actual_sens)
+			else:
+				rotate_y(-drag_relative.x * actual_sens)
+				
 			pitch_pivot.rotate_x(-drag_relative.y * actual_sens)
 			pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -1.0, 1.0)
 			get_viewport().set_input_as_handled()
 	)
 	mobile_ui.add_child(look_area)
 	
-	var joystick = load("res://scripts/virtual_joystick.gd").new()
+	var joystick = load("res://scripts/UI/virtual_joystick.gd").new()
 	joystick.name = "Joystick"
 	var joy_size = 200 * ui_scale
 	joystick.custom_minimum_size = Vector2(joy_size, joy_size)
@@ -171,14 +190,12 @@ func setup_mobile_ui():
 	
 	_add_custom_mobile_ui(mobile_ui, ui_scale)
 
-# For subclasses to override
 func _add_custom_mobile_ui(_mobile_ui: Control, _ui_scale: float):
 	pass
 
 func _input(event):
 	if not is_multiplayer_authority(): return
 	
-	# Toggle cursor capture with Escape (desktop only)
 	if event is InputEventKey and event.physical_keycode == KEY_ESCAPE and event.pressed and not event.echo:
 		if not is_mobile_device():
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -194,7 +211,14 @@ func _input(event):
 			
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var actual_sens = mouse_sensitivity * 0.001
-		rotate_y(-event.relative.x * actual_sens)
+		
+		# --- CAMERA FIX FOR PC ---
+		# If the body shouldn't rotate, route the X-axis input directly to the camera pivot
+		if disable_body_rotation:
+			pitch_pivot.rotate_y(-event.relative.x * actual_sens)
+		else:
+			rotate_y(-event.relative.x * actual_sens)
+			
 		pitch_pivot.rotate_x(-event.relative.y * actual_sens)
 		pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -1.0, 1.0)
 		
@@ -210,12 +234,11 @@ func toggle_camera():
 		target_shoulder_x = 1.0
 
 func _physics_process(delta):
-	if multiplayer.is_server():
+	# FIX: Let the CLIENT broadcast their own position, not the server!
+	if is_multiplayer_authority() and _spawn_relay_ready:
 		rpc("relay_position", global_position, rotation)
 		
 	if not is_multiplayer_authority():
-		if multiplayer.is_server(): return
-			
 		if sync_target_position == Vector3.ZERO:
 			sync_target_position = global_position
 			sync_target_rotation = rotation
@@ -226,6 +249,9 @@ func _physics_process(delta):
 		var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
 		var new_quat = current_quat.slerp(target_quat, 15.0 * delta)
 		transform.basis = Basis(new_quat)
+		
+		# FIX: Still call custom physics for non-authorities so the Server can check Rescue logic!
+		_custom_physics_process(delta, Vector3.ZERO)
 		return 
 		
 	var current_angle = spring_arm.rotation.y
@@ -247,7 +273,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-# Virtual function for subclasses to add abilities and set velocity
 func _custom_physics_process(_delta, direction):
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -263,8 +288,6 @@ func relay_position(pos: Vector3, rot: Vector3):
 	sync_target_position = pos
 	sync_target_rotation = rot
 
-## Called once by the server to tell each client where to spawn.
-## Unlike relay_position, this is accepted even by the authority player.
 @rpc("any_peer", "call_local", "reliable")
 func _set_spawn_position(pos: Vector3):
 	global_position = pos

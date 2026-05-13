@@ -1,4 +1,4 @@
-extends "res://scripts/player.gd"
+extends "res://scripts/Player/player.gd"
 
 var is_charging = false
 var charge_time_left = 0.0
@@ -27,7 +27,7 @@ func _ready():
 		var canvas = get_node_or_null("PlayerCanvas")
 		if canvas:
 			var charge_ui = Control.new()
-			charge_ui.set_script(preload("res://scripts/dash_ui.gd"))
+			charge_ui.set_script(preload("res://scripts/UI/dash_ui.gd"))
 			charge_ui.ring_color = Color(0.2, 0.4, 1.0, 0.9)
 			charge_ui.ready_color = Color(0.2, 0.4, 1.0, 0.9)
 			charge_ui.custom_minimum_size = Vector2(40, 40)
@@ -39,7 +39,7 @@ func _ready():
 			canvas.add_child(charge_ui)
 
 func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
-	var charge_btn = load("res://scripts/mobile_button.gd").new()
+	var charge_btn = load("res://scripts/UI/mobile_button.gd").new()
 	charge_btn.action_name = "dash" # Map to dash action
 	charge_btn.button_text = "CHARGE"
 	charge_btn.radius = 60.0 * ui_scale

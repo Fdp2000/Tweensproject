@@ -182,7 +182,7 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 		client_ui.current_hud.queue_free()
 		client_ui.current_hud = null
 		
-	var scoreboard_scene = load("res://scenes/Scoreboard.tscn")
+	var scoreboard_scene = load("res://scenes/Zones/Scoreboard.tscn")
 	if scoreboard_scene:
 		var scoreboard = scoreboard_scene.instantiate()
 		get_tree().get_root().add_child(scoreboard)

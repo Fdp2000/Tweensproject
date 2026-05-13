@@ -23,7 +23,7 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_mp_peer_disconnected)
 	host.text = "wss://online-web-browser-test.onrender.com"
 	
-	lobby_ui = preload("res://scripts/lobby_ui.gd").new()
+	lobby_ui = preload("res://scripts/UI/lobby_ui.gd").new()
 	add_child(lobby_ui)
 	
 	GameManager.game_started.connect(_on_game_started)
@@ -276,13 +276,13 @@ func _on_game_started() -> void:
 			var spawn_pos = Vector3(0, 3, 0)
 			
 			if role == GameManager.PlayerRole.COP:
-				pf = load("res://scenes/Cop.tscn").instantiate()
+				pf = load("res://scenes/PlayerScenes/Cop.tscn").instantiate()
 				if cop_spawns.size() > 0:
 					var sp = cop_spawns.pop_back()
 					spawn_pos = sp.global_position
 					print("[Spawn] Cop ", id, " -> ", spawn_pos)
 			else:
-				pf = load("res://scenes/Thief.tscn").instantiate()
+				pf = load("res://scenes/PlayerScenes/Thief.tscn").instantiate()
 				if thief_spawns.size() > 0:
 					var sp = thief_spawns.pop_back()
 					spawn_pos = sp.global_position
@@ -307,7 +307,7 @@ func _on_game_started() -> void:
 	
 	if current_hud:
 		current_hud.queue_free()
-	current_hud = load("res://scenes/HUD.tscn").instantiate()
+	current_hud = load("res://scenes/UIScenes/HUD.tscn").instantiate()
 	add_child(current_hud)
 
 func _on_game_ended() -> void:

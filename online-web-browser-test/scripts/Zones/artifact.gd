@@ -130,6 +130,7 @@ func request_pickup(player_id: int):
 func confirm_pickup(player_id: int):
 	is_carried = true
 	carrier_id = player_id
+	is_highlighted = false # FIX: Force highlight off when picked up
 	set_multiplayer_authority(player_id)
 	
 	var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
@@ -223,6 +224,7 @@ func destroy_artifact():
 			
 	is_carried = false
 	carrier_id = -1
+	is_highlighted = false # FIX: Force highlight off when destroyed
 	hide()
 	col.set_deferred("disabled", true)
 
@@ -230,6 +232,7 @@ func destroy_artifact():
 func reset_artifact():
 	is_carried = false
 	carrier_id = -1
+	is_highlighted = false # FIX: Force highlight off for the next round
 	show()
 	col.set_deferred("disabled", false)
 	global_position = initial_position

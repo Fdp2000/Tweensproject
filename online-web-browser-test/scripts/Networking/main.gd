@@ -32,9 +32,9 @@ func _ready() -> void:
 		
 	var spawner = $MultiplayerSpawner
 	if spawner:
-		spawner.add_spawnable_scene("res://scenes/Cop.tscn")
-		spawner.add_spawnable_scene("res://scenes/Thief.tscn")
-		spawner.add_spawnable_scene("res://scenes/Artifact.tscn")
+		spawner.add_spawnable_scene("res://scenes/PlayerScenes/Cop.tscn")
+		spawner.add_spawnable_scene("res://scenes/PlayerScenes/Thief.tscn")
+		spawner.add_spawnable_scene("res://scenes/MiscScenes/Artifact.tscn")
 
 
 func _on_listen_toggled(button_pressed: bool) -> void:
