@@ -9,9 +9,21 @@ var cash_contributed: int = 0
 var is_hypnotized: bool = false
 var is_rescue_halted: bool = false
 var is_jailed: bool = false
-var jail_target: Vector3 = Vector3(0, 0, 0) # Placeholder jail coordinate
+var jail_walk_target: Vector3 = Vector3.ZERO   # Where the thief walks to (outside jail door)
+var jail_cell_target: Vector3 = Vector3.ZERO   # Where the thief gets teleported (inside cell)
+var is_highlighted: bool = false
+var is_mobile_interact: bool = false
 var last_pos: Vector3 = Vector3.ZERO
 var nav_agent: NavigationAgent3D
+
+func get_carried_artifact():
+	return carried_artifact
+
+func on_artifact_pickup(artifact: Node3D):
+	carried_artifact = artifact
+
+func on_artifact_drop():
+	carried_artifact = null
 
 var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
@@ -25,8 +37,10 @@ const RESCUE_TIME_REQUIRED = 2.0
 func _ready():
 	super._ready()
 	nav_agent = NavigationAgent3D.new()
-	nav_agent.path_desired_distance = 1.0
-	nav_agent.target_desired_distance = 1.0
+	nav_agent.path_desired_distance = 1.5   # How close to a waypoint before moving to the next one
+	nav_agent.target_desired_distance = 1.5  # How close to the final target to consider "arrived"
+	nav_agent.radius = 0.6                   # Keeps paths away from walls by this distance
+	nav_agent.avoidance_enabled = false      # We don't need dynamic obstacle avoidance
 	add_child(nav_agent)
 	
 	if is_multiplayer_authority():
@@ -107,34 +121,28 @@ func get_closest_interactable() -> Node3D:
 func _update_outlines(target: Node3D):
 	if target == last_outlined_target: return
 	
-	# Remove old outline
+	# Turn off old highlight
 	if last_outlined_target and is_instance_valid(last_outlined_target):
-		if last_outlined_target.has_node("MeshInstance3D"):
-			last_outlined_target.get_node("MeshInstance3D").material_overlay = null
+		if last_outlined_target.has_method("set_highlight"):
+			last_outlined_target.set_highlight(false)
+		else:
+			last_outlined_target.set("is_highlighted", false)
 			
 	last_outlined_target = target
 	
-	# Add new outline
+	# Turn on new highlight
 	if target and is_instance_valid(target):
-		if not outline_mat:
-			outline_mat = StandardMaterial3D.new()
-			outline_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-			outline_mat.albedo_color = Color(1.0, 1.0, 0.2, 0.5) # Yellowish highlight
-			outline_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			
-		if target.has_node("MeshInstance3D"):
-			target.get_node("MeshInstance3D").material_overlay = outline_mat
+		if target.has_method("set_highlight"):
+			target.set_highlight(true)
+		else:
+			target.set("is_highlighted", true)
 
-func on_artifact_pickup(artifact):
-	carried_artifact = artifact
 
-func get_carried_artifact() -> Node3D:
-	return carried_artifact
-
-func update_jail_target(jail_pos: Vector3):
-	jail_target = jail_pos
+func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
+	jail_walk_target = walk_pos
+	jail_cell_target = cell_pos
 	if nav_agent:
-		nav_agent.target_position = jail_target
+		nav_agent.target_position = jail_walk_target
 
 func _custom_physics_process(delta, direction):
 	if is_hypnotized:
@@ -158,12 +166,16 @@ func _custom_physics_process(delta, direction):
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 				velocity.z = move_toward(velocity.z, 0, SPEED)
 			else:
-				var dist_to_target = global_position.distance_to(jail_target)
-				if dist_to_target < 1.0:
+				var dist_to_target = global_position.distance_to(jail_walk_target)
+				
+				# When close enough to the walk target, teleport into the cell
+				if dist_to_target < 1.5:
+					rpc("on_jailed", jail_cell_target)
 					velocity.x = 0
 					velocity.z = 0
 				else:
-					var dir_to_next = global_position.direction_to(jail_target)
+					var next_pos = nav_agent.get_next_path_position()
+					var dir_to_next = global_position.direction_to(next_pos)
 					dir_to_next.y = 0
 					dir_to_next = dir_to_next.normalized()
 					
@@ -188,14 +200,6 @@ func _custom_physics_process(delta, direction):
 		velocity.z = move_toward(velocity.z, 0, SPEED * speed_mult)
 	
 func _process(delta):
-	if is_hypnotized:
-		if has_node("MeshInstance3D"):
-			var mat = $MeshInstance3D.get_surface_override_material(0)
-			if mat:
-				mat.albedo_color = Color(1.0, 0.2, 0.8, 1.0) # Bright Purple/Pink
-				mat.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
-		return
-	
 	if is_multiplayer_authority() and not is_hypnotized and not is_jailed:
 		var target = null
 		if is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
@@ -211,7 +215,7 @@ func _process(delta):
 			else:
 				rescue_ui_ref.progress = 0.0
 				
-		if Input.is_physical_key_pressed(KEY_E) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if Input.is_physical_key_pressed(KEY_E) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or is_mobile_interact:
 			if not is_rescuing and target and is_instance_valid(target):
 				if target.has_method("on_captured") and not carried_artifact:
 					is_rescuing = true
@@ -244,7 +248,9 @@ func _process(delta):
 	else:
 		stationary_time = 0.0
 		
-	if stationary_time >= INVISIBLE_TIME:
+	if is_hypnotized:
+		target_alpha = 1.0
+	elif stationary_time >= INVISIBLE_TIME:
 		target_alpha = 0.1
 	else:
 		target_alpha = 1.0
@@ -252,20 +258,49 @@ func _process(delta):
 	# Smoothly tween the alpha for nice visual flair
 	current_alpha = lerp(current_alpha, target_alpha, 8.0 * delta)
 	
-	if has_node("MeshInstance3D"):
-		var mat = $MeshInstance3D.get_surface_override_material(0)
-		if mat:
-			if current_alpha < 0.99:
-				mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			else:
-				mat.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
-			# Keep the inherited team color for the Thief, but update alpha
-			mat.albedo_color = Color(team_color.r, team_color.g, team_color.b, current_alpha)
+	_apply_alpha_to_model(self, current_alpha)
+func _apply_alpha_to_model(node: Node, alpha: float):
+	if node is MeshInstance3D:
+		for i in range(node.mesh.get_surface_count()):
+			var mat = node.get_surface_override_material(i)
+			if not mat:
+				var mesh_mat = node.mesh.surface_get_material(i)
+				if mesh_mat:
+					mat = mesh_mat.duplicate()
+					node.set_surface_override_material(i, mat)
+			
+			if mat and mat is BaseMaterial3D:
+				
+				if not mat.has_meta("orig_color"):
+					mat.set_meta("orig_color", mat.albedo_color)
+				
+				var base_color = mat.get_meta("orig_color")
+				if base_color == null: base_color = Color.WHITE
+				
+				mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if alpha < 0.95 else BaseMaterial3D.TRANSPARENCY_DISABLED
+				
+				if is_highlighted:
+					mat.albedo_color = Color(1.0, 1.0, 0.4, alpha)
+					mat.emission_enabled = true
+					mat.emission = Color(0.4, 0.4, 0.0)
+				elif is_hypnotized:
+					mat.albedo_color = Color(1.0, 0.2, 0.8, alpha)
+					mat.emission_enabled = false
+				else:
+					mat.albedo_color = Color(base_color.r, base_color.g, base_color.b, alpha)
+					mat.emission_enabled = false
+			
+	for child in node.get_children():
+		if child.name == "InteractionArea": continue
+		_apply_alpha_to_model(child, alpha)
 
 @rpc("any_peer", "call_local")
 func on_captured():
 	if is_hypnotized: return
 	is_hypnotized = true
+	
+	collision_layer = 8 # Move to Layer 4
+	collision_mask = 5  # Collide with World (1) and Normal Thieves (3)
 	
 	if carried_artifact:
 		if multiplayer.is_server():
@@ -279,11 +314,12 @@ func on_captured():
 	
 	# Only the host enforces the movement routing
 	if multiplayer.is_server():
-		var jails = get_tree().get_nodes_in_group("jail_zone")
+		var jails = get_tree().get_nodes_in_group("jail")
 		if jails.size() > 0:
 			var jail = jails[0]
-			if jail.has_node("WalkTarget"):
-				update_jail_target(jail.get_node("WalkTarget").global_position)
+			var walk_pos = jail.get_node("WalkTarget").global_position
+			var cell_pos = jail.get_node("CellTarget").global_position
+			update_jail_targets(walk_pos, cell_pos)
 			
 		GameManager.rpc("thief_captured")
 
@@ -310,6 +346,10 @@ func rescue_successful():
 	if not is_hypnotized: return
 	
 	is_hypnotized = false
+	
+	collision_layer = 4 # Back to Layer 3
+	collision_mask = 15 # Collide with 1, 2, 3, and 4
+	
 	is_rescue_halted = false
 	if pitch_pivot:
 		pitch_pivot.rotation.y = 0
@@ -327,6 +367,8 @@ func rescue_successful():
 func on_jailed(cell_pos: Vector3):
 	is_hypnotized = false
 	is_jailed = true
+	collision_layer = 4 # Back to Layer 3
+	collision_mask = 15 # Collide with 1, 2, 3, and 4
 	is_rescue_halted = false
 	if pitch_pivot:
 		pitch_pivot.rotation.y = 0
@@ -338,3 +380,45 @@ func on_jailed(cell_pos: Vector3):
 	set_multiplayer_authority(peer_id)
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(peer_id)
+
+func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
+	var interact_btn = Button.new()
+	interact_btn.name = "InteractButton"
+	interact_btn.text = "INTERACT"
+	
+	var style = StyleBoxFlat.new()
+	style.bg_color = Color(1, 1, 1, 0.15)
+	style.set_corner_radius_all(100)
+	style.set_border_width_all(4)
+	style.border_color = Color(1, 1, 1, 0.4)
+	
+	interact_btn.add_theme_stylebox_override("normal", style)
+	interact_btn.add_theme_stylebox_override("hover", style)
+	interact_btn.add_theme_stylebox_override("pressed", style)
+	interact_btn.add_theme_font_size_override("font_size", 18 * ui_scale)
+	
+	var btn_size = 130 * ui_scale
+	interact_btn.custom_minimum_size = Vector2(btn_size, btn_size)
+	interact_btn.anchor_left = 1.0
+	interact_btn.anchor_top = 1.0
+	interact_btn.anchor_right = 1.0
+	interact_btn.anchor_bottom = 1.0
+	interact_btn.offset_left = -btn_size - (40 * ui_scale)
+	interact_btn.offset_top = -btn_size - (280 * ui_scale)
+	
+	mobile_ui.add_child(interact_btn)
+	
+	# Handle both Pickup (Single Press) and Rescue (Holding)
+	interact_btn.button_down.connect(func():
+		is_mobile_interact = true
+		# Trigger the "Single Press" logic for pickups
+		if not carried_artifact:
+			var target = get_closest_interactable()
+			if target and not target.has_method("on_captured"):
+				target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
+		else:
+			_try_drop()
+	)
+	interact_btn.button_up.connect(func():
+		is_mobile_interact = false
+	)

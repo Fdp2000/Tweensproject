@@ -3,8 +3,12 @@
 [ext_resource type="Script" uid="uid://p2bu2w7fgahu" path="res://scripts/player.gd" id="1_p0vlq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
+radius = 0.4
+height = 1.6
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
+radius = 0.4
+height = 1.6
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_e80uo"]
 properties/0/path = NodePath(":position")
@@ -33,22 +37,25 @@ properties/7/spawn = true
 properties/7/replication_mode = 2
 
 [node name="Player" type="CharacterBody3D" unique_id=692488303]
+collision_layer = 2
+collision_mask = 3
 script = ExtResource("1_p0vlq")
-show_target_marker = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1769027693]
 mesh = SubResource("CapsuleMesh_kpjcp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=607525419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 shape = SubResource("CapsuleShape3D_kne1u")
 
 [node name="PitchPivot" type="Node3D" parent="." unique_id=-1905862475]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="PitchPivot" unique_id=1865902027]
-spring_length = 4.816
+spring_length = 4.0
 
 [node name="Camera3D" type="Camera3D" parent="PitchPivot/SpringArm3D" unique_id=1092018305]
+fov = 85.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1310813326]
 replication_config = SubResource("SceneReplicationConfig_e80uo")

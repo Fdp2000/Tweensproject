@@ -57,11 +57,10 @@ columns = 2
 [node name="ClientUI" parent="VBoxContainer/Clients" unique_id=1326961882 instance=ExtResource("2_sugp2")]
 layout_mode = 2
 
-
 [node name="SpawnedObjects" type="Node3D" parent="." unique_id=1234567890]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=624736189]
-_spawnable_scenes = PackedStringArray("uid://8f4mshrrem6r", "uid://bvlpyq23crr3g")
+_spawnable_scenes = PackedStringArray("uid://8f4mshrrem6r", "uid://bvlpyq23crr3g", "uid://bi6e376akpo28", "uid://cj2d8s11yuiqy")
 spawn_path = NodePath("../SpawnedObjects")
 
 [connection signal="toggled" from="VBoxContainer/Signaling/ListenButton" to="." method="_on_listen_toggled"]

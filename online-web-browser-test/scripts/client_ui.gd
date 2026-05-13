@@ -255,19 +255,52 @@ func _mp_peer_connected(id: int) -> void:
 func _on_game_started() -> void:
 	if multiplayer.is_server():
 		var spawned = get_node("/root/World/main/SpawnedObjects")
+		
+		# Wait for physics to register collision shapes from the level
+		for i in 3:
+			await get_tree().physics_frame
+		
+		var cop_spawns = get_tree().get_nodes_in_group("cop_spawn")
+		var thief_spawns = get_tree().get_nodes_in_group("thief_spawn")
+		
+		print("[Spawn] Found ", cop_spawns.size(), " cop spawns, ", thief_spawns.size(), " thief spawns")
+		
+		# Shuffle so spawns are random each round
+		cop_spawns.shuffle()
+		thief_spawns.shuffle()
+		
 		for id in GameManager.players.keys():
 			var role = GameManager.players[id]["role"]
 			
 			var pf
+			var spawn_pos = Vector3(0, 3, 0)
+			
 			if role == GameManager.PlayerRole.COP:
 				pf = load("res://scenes/Cop.tscn").instantiate()
+				if cop_spawns.size() > 0:
+					var sp = cop_spawns.pop_back()
+					spawn_pos = sp.global_position
+					print("[Spawn] Cop ", id, " -> ", spawn_pos)
 			else:
 				pf = load("res://scenes/Thief.tscn").instantiate()
+				if thief_spawns.size() > 0:
+					var sp = thief_spawns.pop_back()
+					spawn_pos = sp.global_position
+					print("[Spawn] Thief ", id, " -> ", spawn_pos)
 				
 			pf.name = str(id)
 			pf.team_index = role
 			
+			# Set position on the server's copy before adding to the tree
+			pf.position = spawn_pos
 			spawned.add_child(pf, true)
+			
+			# RPC the spawn position to the owning client.
+			# This is necessary because:
+			# 1. MultiplayerSpawner doesn't transmit initial position
+			# 2. relay_position is rejected by the authority player (line: if is_multiplayer_authority(): return)
+			# So without this, every non-host client's local player starts at (0,0,0).
+			pf._set_spawn_position.rpc(spawn_pos)
 			
 	# Capture mouse when game starts
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

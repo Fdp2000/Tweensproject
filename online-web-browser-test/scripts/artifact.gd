@@ -1,4 +1,4 @@
-extends Area3D
+extends Node3D
 
 enum Size { SMALL, MEDIUM, LARGE }
 @export var artifact_size: Size = Size.SMALL
@@ -7,28 +7,116 @@ var cash_value: int = 100
 var weight_penalty: float = 1.0
 var is_carried: bool = false
 var carrier_id: int = -1
+var is_highlighted: bool = false
 
 # For syncing transform across peers
 var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
 var initial_position: Vector3 = Vector3.ZERO
+var initial_rotation: Vector3 = Vector3.ZERO
+
+var area: Area3D
+var col: CollisionShape3D
+var synchronizer: MultiplayerSynchronizer
 
 func _ready():
+	# Make sure this node is in the artifact group
+	if not is_in_group("artifact"):
+		add_to_group("artifact")
+		
+	# Programmatically create the interaction Area3D if it doesn't exist
+	area = get_node_or_null("InteractionArea")
+	if not area:
+		area = Area3D.new()
+		area.name = "InteractionArea"
+		add_child(area)
+	
+	# Artifacts are on Layer 4, and only check for Players (Layer 2)
+	area.collision_layer = 8 # Layer 4 (1 << 3)
+	area.collision_mask = 2  # Layer 2 (Players)
+	
+	# Programmatically create the CollisionShape3D if it doesn't exist
+	col = area.get_node_or_null("CollisionShape3D")
+	if not col:
+		col = CollisionShape3D.new()
+		col.name = "CollisionShape3D"
+		var box = BoxShape3D.new()
+		
+		# Try to auto-calculate size from meshes
+		var aabb = _calculate_meshes_aabb(self)
+		if aabb.size.length() > 0:
+			box.size = aabb.size * 1.2 # Give it some padding
+			col.position = aabb.position + aabb.size / 2.0
+		else:
+			box.size = Vector3(1, 1, 1)
+			
+		col.shape = box
+		area.add_child(col)
+	
+	# Programmatically create the MultiplayerSynchronizer if it doesn't exist
+	synchronizer = get_node_or_null("MultiplayerSynchronizer")
+	if not synchronizer:
+		synchronizer = MultiplayerSynchronizer.new()
+		synchronizer.name = "MultiplayerSynchronizer"
+		var config = SceneReplicationConfig.new()
+		
+		# Properties to sync
+		var properties = [
+			":artifact_size",
+			":is_carried",
+			":carrier_id"
+		]
+		
+		for prop in properties:
+			config.add_property(NodePath(prop))
+			config.property_set_spawn(NodePath(prop), true)
+			config.property_set_replication_mode(NodePath(prop), SceneReplicationConfig.REPLICATION_MODE_ALWAYS)
+		
+		synchronizer.replication_config = config
+		add_child(synchronizer)
+	
 	# Configure based on size
 	match artifact_size:
 		Size.SMALL:
-			cash_value = 500
+			cash_value = 5000
 			weight_penalty = 0.9 # 10% slow
 		Size.MEDIUM:
-			cash_value = 1500
+			cash_value = 10000
 			weight_penalty = 0.7 # 30% slow
 		Size.LARGE:
-			cash_value = 5000
+			cash_value = 15000
 			weight_penalty = 0.4 # 60% slow
 
 	initial_position = global_position
+	initial_rotation = rotation
 	sync_target_position = global_position
 	sync_target_rotation = rotation
+
+func _calculate_meshes_aabb(node: Node) -> AABB:
+	var total_aabb = AABB()
+	var found_mesh = false
+	
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			var mesh_aabb = child.get_mesh().get_aabb()
+			# Transform mesh AABB to parent space
+			var local_aabb = child.transform * mesh_aabb
+			if not found_mesh:
+				total_aabb = local_aabb
+				found_mesh = true
+			else:
+				total_aabb = total_aabb.merge(local_aabb)
+		
+		# Recurse
+		var sub_aabb = _calculate_meshes_aabb(child)
+		if sub_aabb.size.length() > 0:
+			if not found_mesh:
+				total_aabb = sub_aabb
+				found_mesh = true
+			else:
+				total_aabb = total_aabb.merge(sub_aabb)
+				
+	return total_aabb
 
 @rpc("any_peer", "call_local")
 func request_pickup(player_id: int):
@@ -57,20 +145,54 @@ func _process(delta):
 				var cam = carrier.get_node_or_null("PitchPivot/SpringArm3D/Camera3D")
 				if cam:
 					# Position it at the chest of the Thief
-					var chest_pos = carrier.global_position + Vector3(0, 1.0, 0)
+					var chest_pos = carrier.global_position + Vector3(0, 0.6, 0) # Lowered from 1.0 to 0.6
 					# Push it slightly forward relative to the Thief's body so it stays in their hands
-					global_position = chest_pos + (-carrier.global_transform.basis.z * 0.8)
-					# Keep the rotation anchored to the camera
-					global_transform.basis = cam.global_transform.basis
+					global_position = chest_pos + (-carrier.global_transform.basis.z * 0.4)					# Keep the rotation anchored to the camera
+					var target_basis = cam.global_transform.basis
+					# PRESERVE SCALE
+					global_transform.basis = target_basis.scaled(global_transform.basis.get_scale())
 			
 			# Relay position to others
 			rpc("relay_artifact_transform", global_position, rotation)
 		else:
 			# I am observing someone else carry it
 			global_position = global_position.lerp(sync_target_position, 15.0 * delta)
-			var current_quat = Quaternion(transform.basis)
+			var current_quat = transform.basis.get_rotation_quaternion()
 			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
-			transform.basis = Basis(current_quat.slerp(target_quat, 15.0 * delta))
+			transform.basis = Basis(current_quat.slerp(target_quat, 15.0 * delta)).scaled(transform.basis.get_scale())
+	
+	# Update visual highlights
+	_apply_visuals(self, is_highlighted)
+
+func _apply_visuals(node: Node, highlighted: bool):
+	if node is MeshInstance3D:
+		for i in range(node.mesh.get_surface_count()):
+			var mat = node.get_surface_override_material(i)
+			if not mat:
+				var mesh_mat = node.mesh.surface_get_material(i)
+				if mesh_mat:
+					mat = mesh_mat.duplicate()
+					node.set_surface_override_material(i, mat)
+			
+			if mat and mat is BaseMaterial3D:
+				
+				if not mat.has_meta("orig_color"):
+					mat.set_meta("orig_color", mat.albedo_color)
+				
+				var base_color = mat.get_meta("orig_color")
+				if base_color == null: base_color = Color.WHITE
+				
+				if highlighted:
+					mat.albedo_color = Color(1.0, 1.0, 0.4, 1.0) # Yellow glow
+					mat.emission_enabled = true
+					mat.emission = Color(0.4, 0.4, 0.0)
+				else:
+					mat.albedo_color = base_color
+					mat.emission_enabled = false
+					
+	for child in node.get_children():
+		if child.name == "InteractionArea": continue
+		_apply_visuals(child, highlighted)
 
 @rpc("any_peer", "unreliable", "call_local")
 func relay_artifact_transform(pos: Vector3, rot: Vector3):
@@ -80,6 +202,11 @@ func relay_artifact_transform(pos: Vector3, rot: Vector3):
 
 @rpc("any_peer", "call_local")
 func drop():
+	if carrier_id != -1:
+		var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
+		if carrier and carrier.has_method("on_artifact_drop"):
+			carrier.on_artifact_drop()
+			
 	is_carried = false
 	carrier_id = -1
 	if multiplayer.is_server():
@@ -89,17 +216,23 @@ func drop():
 
 @rpc("any_peer", "call_local")
 func destroy_artifact():
+	if carrier_id != -1:
+		var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
+		if carrier and carrier.has_method("on_artifact_drop"):
+			carrier.on_artifact_drop()
+			
 	is_carried = false
 	carrier_id = -1
 	hide()
-	$CollisionShape3D.set_deferred("disabled", true)
+	col.set_deferred("disabled", true)
 
 @rpc("any_peer", "call_local")
 func reset_artifact():
 	is_carried = false
 	carrier_id = -1
 	show()
-	$CollisionShape3D.set_deferred("disabled", false)
+	col.set_deferred("disabled", false)
 	global_position = initial_position
+	rotation = initial_rotation
 	sync_target_position = initial_position
-	sync_target_rotation = Vector3.ZERO
+	sync_target_rotation = initial_rotation

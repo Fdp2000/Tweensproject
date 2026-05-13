@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 const SPEED = 6.5
-const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var mouse_sensitivity: float = 2.0 
@@ -33,6 +32,11 @@ func _enter_tree() -> void:
 func _ready():
 	await get_tree().process_frame
 	
+		# --- ADD THIS CHECK ---
+	if not is_inside_tree() or multiplayer == null:
+		return
+	# ----------------------
+	
 	if multiplayer.is_server():
 		_apply_team_colors()
 	else:
@@ -54,17 +58,25 @@ func _ready():
 	
 	if is_multiplayer_authority():
 		camera.current = true
+		
+		# ONLY cull the head for COPS (Team 1)
+		if team_index == 1:
+			var head_parts = ["Head", "Nose", "Eyes"]
+			for part_name in head_parts:
+				var part = find_child(part_name, true, false)
+				if part and part is VisualInstance3D:
+					part.layers = 2
+			camera.cull_mask = ~(1 << 1) # Ignore Layer 2
+		
+		# FIX for Issue 6: Prevent synchronizer errors during spawn
+		if has_node("MultiplayerSynchronizer"):
+			var sync_node = get_node("MultiplayerSynchronizer")
+			sync_node.public_visibility = false
+			get_tree().process_frame.connect(func(): sync_node.public_visibility = true, CONNECT_ONE_SHOT)
+		
 		if not is_mobile_device():
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		
-		var spawn_points = get_node_or_null("/root/World/SpawnPoints")
-		if spawn_points and spawn_points.get_child_count() > 0:
-			var random_spawn = spawn_points.get_children().pick_random()
-			global_position = random_spawn.global_position
-			position.y += 1.0
-		else:
-			position = Vector3(randf_range(-2, 2), 4.0, randf_range(-2, 2))
-			
 		var canvas = CanvasLayer.new()
 		canvas.name = "PlayerCanvas"
 		add_child(canvas)
@@ -72,6 +84,12 @@ func _ready():
 		setup_mobile_ui()
 	else:
 		camera.current = false
+
+func _set_layer_recursive(node: Node, layer: int):
+	if node is VisualInstance3D:
+		node.layers = layer
+	for child in node.get_children():
+		_set_layer_recursive(child, layer)
 
 func _apply_team_colors():
 	if team_index == 1:
@@ -151,17 +169,6 @@ func setup_mobile_ui():
 	joystick.offset_bottom = - (20 * ui_scale)
 	mobile_ui.add_child(joystick)
 	
-	var jump_btn = load("res://scripts/mobile_button.gd").new()
-	jump_btn.action_name = "ui_accept"
-	jump_btn.button_text = "JUMP"
-	jump_btn.radius = 52.0 * ui_scale
-	jump_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	jump_btn.offset_left = - (160 * ui_scale)
-	jump_btn.offset_top = - (160 * ui_scale)
-	jump_btn.offset_right = - (60 * ui_scale)
-	jump_btn.offset_bottom = - (60 * ui_scale)
-	mobile_ui.add_child(jump_btn)
-	
 	_add_custom_mobile_ui(mobile_ui, ui_scale)
 
 # For subclasses to override
@@ -218,8 +225,6 @@ func _physics_process(delta):
 	camera.rotation.y = -new_angle
 	
 	if not is_on_floor(): velocity.y -= gravity * delta
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor(): 
-		velocity.y = JUMP_VELOCITY
 
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var joystick = get_node_or_null("PlayerCanvas/MobileUI/Joystick")
@@ -247,6 +252,12 @@ func relay_position(pos: Vector3, rot: Vector3):
 	if is_multiplayer_authority(): return
 	sync_target_position = pos
 	sync_target_rotation = rot
+
+## Called once by the server to tell each client where to spawn.
+## Unlike relay_position, this is accepted even by the authority player.
+@rpc("any_peer", "call_local", "reliable")
+func _set_spawn_position(pos: Vector3):
+	global_position = pos
 
 @rpc("any_peer", "call_local")
 func _sync_name(n: String):
