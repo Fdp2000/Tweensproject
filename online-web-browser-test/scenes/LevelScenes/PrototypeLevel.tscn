@@ -371,11 +371,16 @@ polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(3, 0, 4), PackedInt32Arr
 agent_radius = 0.25
 region_min_size = 1.0
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_08156"]
+load_path = "res://.godot/imported/ColorPaletteMuseum.png-006c654209f3879b6db7f47e99c36893.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqnu6"]
 albedo_color = Color(0.7058824, 0.6784314, 0.6313726, 1)
-metallic = 0.54
+albedo_texture = SubResource("CompressedTexture2D_08156")
+metallic = 1.0
 metallic_specular = 0.0
-roughness = 0.6
+metallic_texture = SubResource("CompressedTexture2D_08156")
+roughness_texture = ExtResource("1_hwn0u")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n7p0c"]
 size = Vector3(1.3199692, 4.501465, 1.1483612)
@@ -385,6 +390,7 @@ size = Vector3(0.6267929, 4.501465, 0.6138611)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7i4u3"]
 albedo_color = Color(0.7058824, 0.6784314, 0.6313726, 1)
+albedo_texture = ExtResource("1_hwn0u")
 metallic = 0.54
 metallic_specular = 0.0
 roughness = 0.6
@@ -394,9 +400,11 @@ size = Vector3(0.80526733, 4.501465, 0.8600464)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smyl8"]
 albedo_color = Color(0.69555134, 0.5772672, 0.49166006, 1)
-metallic = 0.54
+albedo_texture = ExtResource("1_hwn0u")
+metallic = 1.0
 metallic_specular = 0.0
-roughness = 0.6
+metallic_texture = ExtResource("1_hwn0u")
+roughness_texture = ExtResource("1_hwn0u")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5t0m"]
 albedo_color = Color(0, 0.34509805, 0, 1)
@@ -415,27 +423,33 @@ size = Vector3(1.5009766, 3.3792725, 1.5067139)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atqpw"]
 albedo_color = Color(0.7058824, 0.6784314, 0.6313726, 1)
+albedo_texture = ExtResource("1_hwn0u")
 metallic = 0.54
 metallic_specular = 0.0
 roughness = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oetox"]
 albedo_color = Color(0.7058824, 0.6784314, 0.6313726, 1)
-metallic = 0.54
+albedo_texture = ExtResource("1_hwn0u")
+metallic = 1.0
 metallic_specular = 0.0
-roughness = 0.6
+metallic_texture = ExtResource("1_hwn0u")
+roughness_texture = ExtResource("1_hwn0u")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pm873"]
 size = Vector3(1.8764648, 4.5772705, 0.2331543)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjl2b"]
 albedo_color = Color(0.7058824, 0.6784314, 0.6313726, 1)
-metallic = 0.54
+albedo_texture = ExtResource("1_hwn0u")
+metallic = 1.0
 metallic_specular = 0.0
-roughness = 0.6
+metallic_texture = ExtResource("1_hwn0u")
+roughness_texture = ExtResource("1_hwn0u")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46wyf"]
 albedo_color = Color(0.7647059, 0.6431373, 0.49019608, 1)
+albedo_texture = ExtResource("1_hwn0u")
 metallic = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p3k1"]
