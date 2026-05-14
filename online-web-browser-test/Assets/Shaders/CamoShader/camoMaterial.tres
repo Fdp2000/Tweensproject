@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://dbw56odt726am"]
 
-[ext_resource type="Shader" uid="uid://bhuh8brxkxoy5" path="res://Assets/Shaders/CamoShader/testCamo.gdshader" id="1_psu83"]
+[ext_resource type="Shader" uid="uid://bhuh8brxkxoy5" path="res://Assets/Shaders/CamoShader/finalCamo.gdshader" id="1_psu83"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_psu83"]
 
@@ -33,4 +33,4 @@ shader_parameter/traced_refraction_steps = 512
 shader_parameter/ssr_type = 2
 shader_parameter/traced_ssr_far_clip = 50.0
 shader_parameter/traced_ssr_steps = 512
-shader_parameter/ssr_screen_fade = 0.049999998882400004
+shader_parameter/ssr_screen_fade = 0.0499999988824

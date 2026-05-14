@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://h5p60ny43lr1"]
+
+[ext_resource type="Shader" uid="uid://5rghdem5q1q8" path="res://Assets/Shaders/HypnoShader/hypnoShader.tres" id="1_3qhp1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3qhp1")
