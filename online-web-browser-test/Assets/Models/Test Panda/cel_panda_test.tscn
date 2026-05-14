@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dcgfko1edbx8o"]
 
-[ext_resource type="Shader" uid="uid://c6whan157sd1b" path="res://Assets/Shaders/CelShading.gdshader" id="1_1lkcw"]
+[ext_resource type="Shader" path="res://Assets/Shaders/CelShading.gdshader" id="1_1lkcw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n08t5"]
 resource_name = "LightOrange"
