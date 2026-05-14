@@ -10,6 +10,22 @@ var target_camera: Camera3D
 
 
 func _ready():
+	var game_manager = get_tree().get_root().find_child("GameManager", true, false)
+
+	if game_manager:
+		game_manager.game_started.connect(_on_game_started)
+		print("CutsceneManager connected to GameManager.")
+	else:
+		push_error("Could not find GameManager.")
+
+
+#Temp løsning 
+func _process(_delta):
+	if Input.is_action_just_pressed("ui_accept"):
+		start_intro()
+
+
+func _on_game_started():
 	start_intro()
 
 
@@ -19,17 +35,13 @@ func start_intro():
 		push_error("No local player assigned.")
 		return
 
-	# Disable controls
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(false)
 
-	# Use intro camera
 	intro_camera.current = true
 
-	# Play museum pan animation
 	animation_player.play("museum_pan")
 
-	# Connect animation finished signal
 	if not animation_player.animation_finished.is_connected(_on_animation_finished):
 		animation_player.animation_finished.connect(_on_animation_finished)
 
@@ -50,10 +62,8 @@ func start_fly_to_player():
 
 	await move_intro_camera_to_target(target_camera)
 
-	# Switch to gameplay camera
 	target_camera.current = true
 
-	# Re-enable controls
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
 
@@ -82,8 +92,6 @@ func move_intro_camera_to_target(cam: Camera3D):
 
 		var t := timer / fly_to_player_time
 		t = clamp(t, 0.0, 1.0)
-
-		# Smooth ease
 		t = t * t * (3.0 - 2.0 * t)
 
 		intro_camera.global_transform = start_transform.interpolate_with(end_transform, t)
