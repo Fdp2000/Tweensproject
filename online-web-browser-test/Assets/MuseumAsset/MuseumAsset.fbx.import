@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://mlmrg2ab0pja"
-path="res://.godot/imported/MuseumAsset.fbx-95e26c96ba3eaa65c9a51a397c7e2df4.scn"
+path="res://.godot/imported/MuseumAsset.fbx-6fb1f7022e4d04f66030495f9d9273e3.scn"
 
 [deps]
 
-source_file="res://scenes/MuseumAsset/MuseumAsset.fbx"
-dest_files=["res://.godot/imported/MuseumAsset.fbx-95e26c96ba3eaa65c9a51a397c7e2df4.scn"]
+source_file="res://Assets/MuseumAsset/MuseumAsset.fbx"
+dest_files=["res://.godot/imported/MuseumAsset.fbx-6fb1f7022e4d04f66030495f9d9273e3.scn"]
 
 [params]
 
@@ -37,7 +37,19 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"meshes": {
+"Plane_581": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 20.0,
+"save_to_file/enabled": true,
+"save_to_file/fallback_path": "res://fas.res",
+"save_to_file/path": "uid://bkrrrx0of4ull"
+}
+}
+}
 fbx/importer=0
 fbx/allow_geometry_helper_nodes=false
 fbx/embedded_image_handling=1
