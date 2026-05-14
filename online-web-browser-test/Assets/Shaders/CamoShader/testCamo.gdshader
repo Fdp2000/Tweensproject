@@ -8,6 +8,10 @@ uniform vec3 transparency_colour : source_color;
 group_uniforms material;
 uniform float AirIOR = 1.0;
 uniform float IOR = 1.5;
+uniform float specular_intensity : hint_range(0.0, 1.0, 0.01) = 0.0;
+uniform float fresnel_intensity : hint_range(0.0, 1.0, 0.01) = 1.0;
+// Slider now goes from 0.0 (Black) to 5.0 (Bright Glow)
+uniform float refraction_boost : hint_range(0.0, 5.0, 0.1) = 1.0;
 
 group_uniforms textures;
 uniform vec2 uv1_scale = vec2(1.0);
@@ -41,7 +45,6 @@ float schlickfresnel(float ior1, float ior2, vec3 view, vec3 norm) {
 
 void vertex() {
 	UV = UV * uv1_scale + uv1_offset;
-	// Called for every vertex the material is visible on.
 }
 
 float snells_window(vec3 normal, vec3 view, float ior) {
@@ -56,23 +59,12 @@ float linear_depth(float nonlinear_depth, mat4 inv_projection_matrix) {
 	return 1.0 / (nonlinear_depth * inv_projection_matrix[2].w + inv_projection_matrix[3].w);
 }
 
-float nonlinear_depth(float linear_depth, mat4 inv_projection_matrix) {
-	#if CURRENT_RENDERER == RENDERER_COMPATIBILITY
-		linear_depth = linear_depth * 0.5 + 0.5;
-	#endif
-	return (1.0 / linear_depth - inv_projection_matrix[3].w) / inv_projection_matrix[2].w;
-}
-
-vec2 view2uv(vec3 position_view_space, mat4 proj_m)
-{
+vec2 view2uv(vec3 position_view_space, mat4 proj_m) {
 	vec4 position_clip_space = proj_m * vec4(position_view_space.xyz, 1.0);
 	vec2 position_ndc = position_clip_space.xy / position_clip_space.w;
 	return position_ndc.xy * 0.5 + 0.5;
 }
 
-float remap(float x, float min1, float max1, float min2, float max2) {
-	return ((x - min1) / (max1 - min1) + min2) * (max2 - min2);
-}
 float remap1(float x, float min1, float max1) {
 	return (x - min1) / (max1 - min1);
 }
@@ -88,16 +80,13 @@ float edge_fade(vec2 uv, float size) {
 void refraction(vec3 normal, vec3 vertex, vec3 colour, vec2 normmap, bool reverse, mat4 projection_matrix, vec3 tangent, vec3 binormal, vec2 screen_uv, vec2 viewport_size, inout vec3 emission) {
 	vec3 view = normalize(-vertex);
 	mat4 inv_proj_mat = inverse(projection_matrix);
+	
 	if (refraction_type == 3) {
-		
 		vec3 refracted = refract(view, normal, AirIOR / -IOR);
-		if (reverse) {
-			refracted = refract(view, normal, -IOR / AirIOR);
-		}
+		if (reverse) refracted = refract(view, normal, -IOR / AirIOR);
+		
 		vec3 pos = vertex;
-		float dist = 0.0;
 		int curstep = 0;
-		bool finished = false;
 		vec2 uv;
 		float currentdepth;
 		float lastdepth1 = -vertex.z;
@@ -106,34 +95,17 @@ void refraction(vec3 normal, vec3 vertex, vec3 colour, vec2 normmap, bool revers
 			float step_scale = float(curstep + 1) / float(traced_refraction_steps);
 			float step_dist = step_scale * step_scale * traced_refraction_far_clip;
 			pos += refracted * step_dist;
-			dist += step_dist;
 			curstep += 1;
 			float lastdepth2 = lastdepth1;
-			float lastdepth1 = currentdepth;
+			lastdepth1 = currentdepth;
 			currentdepth = -pos.z;
 			uv = view2uv(pos, projection_matrix);
 			float testdepth = linear_depth(texture(DEPTH_TEXTURE, uv).r, inv_proj_mat);
-			if (testdepth < lastdepth2) {
-				break;
-			}
-			if (testdepth < currentdepth) {
-				finished = true;
-				break;
-			}
+			if (testdepth < lastdepth2) break;
+			if (testdepth < currentdepth) break;
 		}
-		
-		
-		
-		
-		
-		
-		float lineardepth = linear_depth(texture(DEPTH_TEXTURE, uv).r, inv_proj_mat);
-		//float selfdepth = 1.0/(1.0 + 2.0 * distance(wposition, CAMERA_POSITION_WORLD));
-		//vec3 newvolcolour = mix(volumecolour, vec3(1.0), clamp(1.0 / (depth_diff * 1.0), 0.0, 1.0));
-		
 		emission = colour * texture(screen, uv).rgb;
 	} else if (refraction_type == 2) {
-		
 		float lineardepth = linear_depth(texture(DEPTH_TEXTURE, screen_uv).r, inv_proj_mat);
 		float selfdepth = -vertex.z;
 		float depth_diff = lineardepth - selfdepth;
@@ -142,19 +114,9 @@ void refraction(vec3 normal, vec3 vertex, vec3 colour, vec2 normmap, bool revers
 		vec2 offset = normal.xy * vec2(x_mult, 1.0);
 		vec2 refracted_uv = screen_uv + offset * simple_refraction_amount * depth_diff / lineardepth;
 		float newdepth = linear_depth(texture(DEPTH_TEXTURE, refracted_uv).r, inv_proj_mat);
-		if (newdepth >= selfdepth) {
-			depth_diff = newdepth - selfdepth;
-		}
-		//float selfdepth = 1.0/(1.0 + 2.0 * distance(wposition, CAMERA_POSITION_WORLD));
-		//vec3 newvolcolour = mix(volumecolour, vec3(1.0), clamp(1.0 / (depth_diff * 1.0), 0.0, 1.0));
-		emission = colour * texture(screen, refracted_uv).rgb;
-
-		if (newdepth < selfdepth) {
-			emission = colour * texture(screen, screen_uv).rgb;
-		}
-
-	} else if (refraction_type == 1) {
 		
+		emission = (newdepth >= selfdepth) ? colour * texture(screen, refracted_uv).rgb : colour * texture(screen, screen_uv).rgb;
+	} else if (refraction_type == 1) {
 		float lineardepth = linear_depth(texture(DEPTH_TEXTURE, screen_uv).r, inv_proj_mat);
 		float selfdepth = -vertex.z;
 		float depth_diff = lineardepth - selfdepth;
@@ -163,21 +125,9 @@ void refraction(vec3 normal, vec3 vertex, vec3 colour, vec2 normmap, bool revers
 		vec3 tany = tangent * (normmap.y - 0.5) * normalstrength;
 		vec2 refracted_uv = screen_uv + (tanx + tany).xy * simple_refraction_amount * depth_diff / lineardepth;
 		float newdepth = linear_depth(texture(DEPTH_TEXTURE, refracted_uv).r, inv_proj_mat);
-		if (newdepth >= selfdepth) {
-			depth_diff = newdepth - selfdepth;
-		}
-		//float selfdepth = 1.0/(1.0 + 2.0 * distance(wposition, CAMERA_POSITION_WORLD));
-		//vec3 newvolcolour = mix(volumecolour, vec3(1.0), clamp(1.0 / (depth_diff * 1.0), 0.0, 1.0));
-		emission = colour * texture(screen, refracted_uv).rgb;
-
-		if (newdepth < selfdepth) {
-			emission = colour * texture(screen, screen_uv).rgb;
-		}
-
+		
+		emission = (newdepth >= selfdepth) ? colour * texture(screen, refracted_uv).rgb : colour * texture(screen, screen_uv).rgb;
 	} else {
-		float lineardepth = linear_depth(texture(DEPTH_TEXTURE, screen_uv).r, inv_proj_mat);
-		float selfdepth = -vertex.z;
-		float depth_diff = lineardepth - selfdepth;
 		emission = colour * texture(screen, screen_uv).rgb;
 	}
 }
@@ -199,23 +149,18 @@ void reflection(vec3 normal, vec3 vertex, vec3 colour, mat4 projection_matrix, i
 			pos += reflected * step_dist;
 			curstep += 1;
 			float lastdepth2 = lastdepth1;
-			float lastdepth1 = currentdepth;
+			lastdepth1 = currentdepth;
 			currentdepth = -pos.z;
 			uv = view2uv(pos, projection_matrix);
-			if (!(uv.x < 1.0 && uv.y < 1.0 && uv.x > 0.0 && uv.y > 0.0)) {
-				break;
-			}
+			if (!(uv.x < 1.0 && uv.y < 1.0 && uv.x > 0.0 && uv.y > 0.0)) break;
 			float testdepth = linear_depth(texture(DEPTH_TEXTURE, uv).r, inv_proj_mat);
-			if (testdepth < lastdepth2) {
-				break;
-			}
+			if (testdepth < lastdepth2) break;
 			if (testdepth < currentdepth) {
 				finished = true;
 				break;
 			}
 		}
 		if (finished && currentdepth < traced_ssr_far_clip * 0.99) {
-			specular *= 1.0 - edge_fade(uv, ssr_screen_fade);
 			emission += texture(screen, uv).xyz * schlickfresnel(1.0, 1.33, view, normal) * edge_fade(uv, ssr_screen_fade) * colour;
 		}
 	} else if (ssr_type == 1) {
@@ -223,67 +168,48 @@ void reflection(vec3 normal, vec3 vertex, vec3 colour, mat4 projection_matrix, i
 		if (reflected.z < 0.0) {
 			vec2 uv = view2uv(reflected, projection_matrix);
 			float testdepth = texture(DEPTH_TEXTURE, uv).r;
-			
 			if (testdepth > 0.0) {
-				specular *= 1.0 - edge_fade(uv, ssr_screen_fade);
 				emission += texture(screen, uv).xyz * schlickfresnel(1.0, 1.33, view, normal) * edge_fade(uv, ssr_screen_fade) * colour; 
 			}
 		}
 	}
 }
 
-
 void fragment() {
-
-	vec3 onorm = NORMAL;
-
 	vec2 normmap = texture(normal_texture, UV).xy;
 	NORMAL += TANGENT * (normmap.x - 0.5) * normalstrength;
 	NORMAL += BINORMAL * (normmap.y - 0.5) * normalstrength;
+	
 	vec3 transparency = texture(transparency_texture, UV).xyz * transparency_colour;
-	vec3 wnorm = (vec4(NORMAL, 0.0) * VIEW_MATRIX).xyz;
-	vec3 wview = (vec4(VIEW, 0.0) * VIEW_MATRIX).xyz;
 	ROUGHNESS = 0.05;
 	METALLIC = 0.0;
 	ALBEDO = vec3(0.0);
+	
+	SPECULAR = specular_intensity;
+	float internal_spec = specular_intensity;
+
 	if (FRONT_FACING) {
 		float fres = clamp(schlickfresnel(AirIOR, IOR, VIEW, NORMAL), 0.0, 1.0);
+		float final_fresnel = fres * fresnel_intensity;
 
-		float lineardepth = linear_depth(texture(DEPTH_TEXTURE, SCREEN_UV).r, INV_PROJECTION_MATRIX);
-		float selfdepth = -VERTEX.z;
-		float depth_diff = lineardepth - selfdepth;
-		// REFRACTION
-		
 		refraction(NORMAL, VERTEX, transparency, normmap, false, PROJECTION_MATRIX, TANGENT, BINORMAL, SCREEN_UV, VIEWPORT_SIZE, EMISSION);
-		EMISSION *= 1.0 - fres;
-		// SSR
-		reflection(NORMAL, VERTEX, vec3(1.0), PROJECTION_MATRIX, EMISSION, SPECULAR);
-		// EDGE EFFECT
-
-
+		
+		// Applying the boost (0.0 will darken the character to black)
+		EMISSION *= (1.0 - final_fresnel) * refraction_boost;
+		
+		reflection(NORMAL, VERTEX, vec3(1.0), PROJECTION_MATRIX, EMISSION, internal_spec);
 	} else {
-
-		// SNELLS WINDOW
 		float window = dot(refract(VIEW, NORMAL, IOR / AirIOR), -NORMAL);
-
 		if (window >= 1.0) {
-			SPECULAR = 0.0;
 			refraction(NORMAL, VERTEX, transparency, normmap, true, PROJECTION_MATRIX, TANGENT, BINORMAL, SCREEN_UV, VIEWPORT_SIZE, EMISSION);
+			EMISSION *= refraction_boost;
 		} else if (window <= 0.0) {
-			// SSR
-
-			reflection(NORMAL, VERTEX, transparency, PROJECTION_MATRIX, EMISSION, SPECULAR);
-
+			reflection(NORMAL, VERTEX, transparency, PROJECTION_MATRIX, EMISSION, internal_spec);
 		} else {
-			SPECULAR *= clamp(1.0 - window, 0.0, 1.0);
-
 			refraction(NORMAL, VERTEX, transparency, normmap, true, PROJECTION_MATRIX, TANGENT, BINORMAL, SCREEN_UV, VIEWPORT_SIZE, EMISSION);
-			EMISSION *= window;
-			// SSR
-
-			reflection(NORMAL, VERTEX, transparency, PROJECTION_MATRIX, EMISSION, SPECULAR);
+			EMISSION *= window * refraction_boost;
+			reflection(NORMAL, VERTEX, transparency, PROJECTION_MATRIX, EMISSION, internal_spec);
 		}
-
 	}
-	ALPHA = clamp(ALPHA, 0.0, 1.0);
+	ALPHA = 1.0; 
 }
