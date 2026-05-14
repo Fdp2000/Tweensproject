@@ -150,6 +150,8 @@ func confirm_pickup(player_id: int):
 	if carrier and carrier.has_method("on_artifact_pickup"):
 		carrier.on_artifact_pickup(self)
 
+var outline_mat: ShaderMaterial = null
+
 func _process(delta):
 	if is_carried:
 		if is_multiplayer_authority():
@@ -182,30 +184,31 @@ func _process(delta):
 		_has_rendered_once = true
 
 func _apply_visuals(node: Node, highlighted: bool):
+	if not outline_mat:
+		outline_mat = ShaderMaterial.new()
+		var shader = preload("res://Assets/Shaders/HighlightShader/cartoony_outline.gdshader")
+		if shader:
+			outline_mat.shader = shader
+			
 	if node is MeshInstance3D:
 		for i in range(node.mesh.get_surface_count()):
 			var mat = node.get_surface_override_material(i)
 			if not mat:
-				var mesh_mat = node.mesh.surface_get_material(i)
-				if mesh_mat:
-					mat = mesh_mat.duplicate()
-					node.set_surface_override_material(i, mat)
-			
-			if mat and mat is BaseMaterial3D:
+				mat = node.mesh.surface_get_material(i)
 				
-				if not mat.has_meta("orig_color"):
-					mat.set_meta("orig_color", mat.albedo_color)
-				
-				var base_color = mat.get_meta("orig_color")
-				if base_color == null: base_color = Color.WHITE
+			if mat:
+				var unique_mat = null
+				if node.has_meta("unique_mat_" + str(i)):
+					unique_mat = node.get_meta("unique_mat_" + str(i))
+				else:
+					unique_mat = mat.duplicate()
+					node.set_meta("unique_mat_" + str(i), unique_mat)
+					node.set_surface_override_material(i, unique_mat)
 				
 				if highlighted:
-					mat.albedo_color = Color(1.0, 1.0, 0.4, 1.0) # Yellow glow
-					mat.emission_enabled = true
-					mat.emission = Color(0.4, 0.4, 0.0)
+					unique_mat.next_pass = outline_mat
 				else:
-					mat.albedo_color = base_color
-					mat.emission_enabled = false
+					unique_mat.next_pass = null
 					
 	for child in node.get_children():
 		if child.name == "InteractionArea": continue
@@ -228,10 +231,11 @@ func drop():
 	var particles = get_node("artifactParticles")
 	particles.emitting = true
 	carrier_id = -1
-	if multiplayer.is_server():
-		set_multiplayer_authority(1)
-		if has_node("MultiplayerSynchronizer"):
-			$MultiplayerSynchronizer.set_multiplayer_authority(1)
+	
+	# All peers must agree the server has taken back control!
+	set_multiplayer_authority(1)
+	if has_node("MultiplayerSynchronizer"):
+		$MultiplayerSynchronizer.set_multiplayer_authority(1)
 
 @rpc("any_peer", "call_local")
 func destroy_artifact():

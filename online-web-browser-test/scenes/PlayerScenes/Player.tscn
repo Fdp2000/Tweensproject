@@ -2,10 +2,6 @@
 
 [ext_resource type="Script" uid="uid://p2bu2w7fgahu" path="res://scripts/Player/player.gd" id="1_m43ed"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_kpjcp"]
-radius = 0.4
-height = 1.6
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
 radius = 0.4
 height = 1.6
@@ -35,9 +31,6 @@ collision_layer = 2
 collision_mask = 3
 floor_max_angle = 1.3962634
 script = ExtResource("1_m43ed")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1769027693]
-mesh = SubResource("CapsuleMesh_kpjcp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=607525419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)

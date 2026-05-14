@@ -1,12 +1,15 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://doxbpf613nmo5"]
+[gd_scene format=3 uid="uid://cpjlybwtadys3"]
 
-[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="1_se8bu"]
+[ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://Assets/Models/Prototype Models/Dingus the cat.glb" id="1_pvd6r"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_s8eil"]
+[ext_resource type="Texture2D" uid="uid://dl75yj34ys2iq" path="res://Assets/Models/Prototype Models/Dingus the cat_Maxwell.jpg" id="3_y5cep"]
 
-[resource]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ldbff"]
 render_priority = 0
-shader = ExtResource("1_se8bu")
+shader = ExtResource("2_s8eil")
 shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("3_y5cep")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0
@@ -28,3 +31,8 @@ shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 shader_parameter/highlight_blend = 0.0
 shader_parameter/highlight_color = Color(1, 1, 0, 1)
+
+[node name="Root Scene" unique_id=367774179 instance=ExtResource("1_pvd6r")]
+
+[node name="Maxwell" parent="RootNode" parent_id_path=PackedInt32Array(195854901) index="0" unique_id=608789167]
+surface_material_override/0 = SubResource("ShaderMaterial_ldbff")

@@ -1,4 +1,6 @@
 shader_type spatial;
+render_mode depth_draw_opaque, depth_prepass_alpha;
+uniform float stealth_fade : hint_range(0.0, 1.0) = 0.0;
 
 group_uniforms Shader.Albedo;
 uniform vec4 albedo_color : source_color  = vec4(1.0);
@@ -70,6 +72,7 @@ void fragment() {
 	NORMAL_MAP = mix(vec3(0.5,0.5,1.0), normal_map.rgb, normal_strength);
 
 	SPECULAR = specular;
+	ALPHA = 1.0 - stealth_fade;
 }
 
 void light () {

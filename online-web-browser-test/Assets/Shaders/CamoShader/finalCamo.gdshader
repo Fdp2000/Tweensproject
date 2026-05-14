@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode world_vertex_coords, cull_disabled, depth_draw_always;
+render_mode world_vertex_coords, cull_back, depth_draw_opaque;
 
 uniform sampler2D screen : hint_screen_texture, filter_linear_mipmap_anisotropic, repeat_disable;
 group_uniforms colours;
@@ -194,8 +194,8 @@ void fragment() {
 
 		refraction(NORMAL, VERTEX, transparency, normmap, false, PROJECTION_MATRIX, TANGENT, BINORMAL, SCREEN_UV, VIEWPORT_SIZE, EMISSION);
 		
-		// Applying the boost (0.0 will darken the character to black)
-		EMISSION *= (1.0 - final_fresnel) * refraction_boost;
+		// Applying the boost
+		EMISSION *= refraction_boost;
 		
 		reflection(NORMAL, VERTEX, vec3(1.0), PROJECTION_MATRIX, EMISSION, internal_spec);
 	} else {

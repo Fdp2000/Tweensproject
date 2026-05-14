@@ -15,6 +15,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dhr4vjav73n2v" path="res://Assets/Models/LowPolyMuseumAssets/Column.res" id="9_xm6hp"]
 [ext_resource type="ArrayMesh" uid="uid://0qdkejc5el5g" path="res://Assets/Models/LowPolyMuseumAssets/WallBig2.res" id="10_4r0pn"]
 [ext_resource type="ArrayMesh" uid="uid://bjx25a8qybv5" path="res://Assets/Models/LowPolyMuseumAssets/WallBigCorner2.res" id="11_08156"]
+[ext_resource type="PackedScene" uid="uid://cpjlybwtadys3" path="res://scenes/MiscScenes/BigDingus.tscn" id="14_46wyf"]
 [ext_resource type="ArrayMesh" uid="uid://opqe3wv5ki1f" path="res://Assets/Models/LowPolyMuseumAssets/Railing3.res" id="15_46wyf"]
 [ext_resource type="ArrayMesh" uid="uid://ccuyur5mh2xux" path="res://Assets/Models/LowPolyMuseumAssets/WallBigCorner1.res" id="17_srhcg"]
 [ext_resource type="ArrayMesh" uid="uid://bbgxqn83hphsm" path="res://Assets/Models/LowPolyMuseumAssets/Arch5.res" id="18_5p3k1"]
@@ -1327,6 +1328,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_atqpw")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4742165, -9.536743e-07, 2.079999)
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("StandardMaterial3D_atqpw")
+script = ExtResource("6_artifact")
 
 [node name="Column8" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Columns" unique_id=1062100688]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4742165, -9.536743e-07, 4.3636923)
@@ -1639,11 +1641,6 @@ use_collision = true
 
 [node name="Dinguses" type="Node3D" parent="Arena 2" unique_id=632446231]
 
-[node name="Big Dingus" parent="Arena 2/Dinguses" unique_id=529866407 instance=ExtResource("3_ypmvb")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.2901404, 0.6993227, -0.047213078)
-script = ExtResource("6_artifact")
-artifact_size = 2
-
 [node name="SmallDingus" parent="Arena 2/Dinguses" unique_id=639891862 instance=ExtResource("3_ypmvb")]
 transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 8.198381, 0.90322566, -8.524543)
 script = ExtResource("6_artifact")
@@ -1652,6 +1649,11 @@ script = ExtResource("6_artifact")
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -8.927105, 0.5793295, -8.763302)
 script = ExtResource("6_artifact")
 artifact_size = 1
+
+[node name="Big Dingus" parent="Arena 2/Dinguses" unique_id=367774179 instance=ExtResource("14_46wyf")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.2901404, 0.6993227, -0.047213078)
+script = ExtResource("6_artifact")
+artifact_size = 2
 
 [node name="Van" parent="." unique_id=1941149271 instance=ExtResource("6_q60mh")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.46578407, 0.11544132, 16.160692)
