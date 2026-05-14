@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6wlk4jxs0wym"
-path.s3tc="res://.godot/imported/pexels-tara-winstead-8850840.jpg-4ebabe46b8518f679a66e24f04f6443b.s3tc.ctex"
-path.etc2="res://.godot/imported/pexels-tara-winstead-8850840.jpg-4ebabe46b8518f679a66e24f04f6443b.etc2.ctex"
+path.s3tc="res://.godot/imported/pexels-tara-winstead-8850840.jpg-3d7330dbb75603d65f33206650dc8a7a.s3tc.ctex"
+path.etc2="res://.godot/imported/pexels-tara-winstead-8850840.jpg-3d7330dbb75603d65f33206650dc8a7a.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/MuseumAsset/pexels-tara-winstead-8850840.jpg"
-dest_files=["res://.godot/imported/pexels-tara-winstead-8850840.jpg-4ebabe46b8518f679a66e24f04f6443b.s3tc.ctex", "res://.godot/imported/pexels-tara-winstead-8850840.jpg-4ebabe46b8518f679a66e24f04f6443b.etc2.ctex"]
+source_file="res://scenes/MuseumAsset/pexels-tara-winstead-8850840.jpg"
+dest_files=["res://.godot/imported/pexels-tara-winstead-8850840.jpg-3d7330dbb75603d65f33206650dc8a7a.s3tc.ctex", "res://.godot/imported/pexels-tara-winstead-8850840.jpg-3d7330dbb75603d65f33206650dc8a7a.etc2.ctex"]
 
 [params]
 

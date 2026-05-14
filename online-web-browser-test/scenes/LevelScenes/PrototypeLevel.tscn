@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://crc86ugpb3vmu"]
 
-[ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://Assets/MuseumAsset/ColorPaletteMuseum.png" id="1_hwn0u"]
+[ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_hwn0u"]
 [ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://Assets/Models/Prototype Models/Dingus the cat.glb" id="3_ypmvb"]
 [ext_resource type="ArrayMesh" uid="uid://g8sgle1up8mo" path="res://Assets/Models/LowPolyMuseumAssets/Arch7.res" id="4_hlvdx"]
 [ext_resource type="ArrayMesh" uid="uid://b54pytv6rsvv4" path="res://Assets/Models/LowPolyMuseumAssets/Arch8.res" id="5_dgar3"]

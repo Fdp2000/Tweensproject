@@ -3,8 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://dcgfko1edbx8o" path="res://Assets/Models/Test Panda/cel_panda_test.tscn" id="1_u2syy"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="1_v7yhp"]
 [ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="2_eb1sy"]
-[ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://Assets/MuseumAsset/ColorPaletteMuseum.png" id="3_65afw"]
-[ext_resource type="PackedScene" uid="uid://cugxk5d3dxsan" path="res://Assets/Models/Test Panda/camo_panda_test.tscn" id="4_65afw"]
+[ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="3_65afw"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Test Panda/camo_panda_test.tscn" id="4_65afw"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)

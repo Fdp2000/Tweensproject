@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://mlmrg2ab0pja"
-path="res://.godot/imported/MuseumAsset.fbx-6fb1f7022e4d04f66030495f9d9273e3.scn"
+path="res://.godot/imported/MuseumAsset.fbx-95e26c96ba3eaa65c9a51a397c7e2df4.scn"
 
 [deps]
 
-source_file="res://Assets/MuseumAsset/MuseumAsset.fbx"
-dest_files=["res://.godot/imported/MuseumAsset.fbx-6fb1f7022e4d04f66030495f9d9273e3.scn"]
+source_file="res://scenes/MuseumAsset/MuseumAsset.fbx"
+dest_files=["res://.godot/imported/MuseumAsset.fbx-95e26c96ba3eaa65c9a51a397c7e2df4.scn"]
 
 [params]
 
