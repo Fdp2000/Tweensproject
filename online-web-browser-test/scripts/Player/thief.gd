@@ -221,6 +221,10 @@ func _custom_physics_process(delta, direction):
 		velocity.z = move_toward(velocity.z, 0, SPEED * current_speed_mult)
 	
 func _process(delta):
+		# --- ADD THIS LINE RIGHT HERE! ---
+	# This tells Godot to run the network smoothing math from Player.gd!
+	super._process(delta) 
+	# ---------------------------------
 	# 1. VISUAL TRANSPARENCY (Runs for EVERYONE to calculate smooth visual alpha)
 	var speed = 0.0
 	if is_multiplayer_authority():

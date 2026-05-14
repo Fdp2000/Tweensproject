@@ -9,7 +9,6 @@ var last_look_pos: Vector2 = Vector2.ZERO
 var target_shoulder_x = 1.0
 var disable_body_rotation: bool = false
 
-
 var player_name: String = ""
 @export var team_index: int = 0
 var team_color: Color = Color.WHITE
@@ -21,7 +20,8 @@ var hits: int = 0
 # Network sync targets for smooth interpolation
 var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
-var _spawn_relay_ready: bool = false # FIX: Initialized the variable!
+var sync_velocity: Vector3 = Vector3.ZERO # Velocity for Dead Reckoning
+var _spawn_relay_ready: bool = false 
 
 @onready var pitch_pivot = $PitchPivot
 @onready var spring_arm = $PitchPivot/SpringArm3D
@@ -96,7 +96,7 @@ func _ready():
 		else:
 			sync_node.public_visibility = true
 			
-	# FIX: Activate the relay flag for BOTH server and clients
+	# Activate the relay flag for BOTH server and clients
 	get_tree().create_timer(1.0).timeout.connect(func():
 		if is_inside_tree():
 			_spawn_relay_ready = true
@@ -165,7 +165,6 @@ func setup_mobile_ui():
 			
 			var actual_sens = mouse_sensitivity * 0.001
 			
-			# --- CAMERA FIX FOR MOBILE ---
 			if disable_body_rotation:
 				pitch_pivot.rotate_y(-drag_relative.x * actual_sens)
 			else:
@@ -216,8 +215,6 @@ func _input(event):
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var actual_sens = mouse_sensitivity * 0.001
 		
-		# --- CAMERA FIX FOR PC ---
-		# If the body shouldn't rotate, route the X-axis input directly to the camera pivot
 		if disable_body_rotation:
 			pitch_pivot.rotate_y(-event.relative.x * actual_sens)
 		else:
@@ -237,32 +234,57 @@ func toggle_camera():
 	else:
 		target_shoulder_x = 1.0
 
+
+# --- SMOOTH INTERPOLATION (Visual frames) ---
+func _process(delta):
+	# Visual smoothing for remote network players
+	if not is_multiplayer_authority():
+		if sync_target_position != Vector3.ZERO:
+			
+			# --- DEAD RECKONING ---
+			# Predict where the player is going by moving the target forward 
+			# using the exact velocity they had when they sent the packet!
+			sync_target_position += sync_velocity * delta
+			# ----------------------
+			
+			var dist = global_position.distance_to(sync_target_position)
+			
+			# If the distance is huge (lag spike or teleport), snap them instantly
+			if dist > 3.0:
+				global_position = sync_target_position
+			else:
+				# Now that the target never stops moving, standard lerp is buttery smooth!
+				global_position = global_position.lerp(sync_target_position, 15.0 * delta)
+			
+			# Slerp Rotation smoothly
+			var current_quat = Quaternion(transform.basis)
+			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
+			var new_quat = current_quat.slerp(target_quat, 15.0 * delta)
+			transform.basis = Basis(new_quat)
+			
+	# Camera shoulder toggle smoothing (Local Player Only)
+	else:
+		var current_angle = spring_arm.rotation.y
+		var target_angle = atan2(target_shoulder_x, 4.711)
+		var new_angle = lerp_angle(current_angle, target_angle, 15.0 * delta)
+		spring_arm.rotation.y = new_angle
+		camera.rotation.y = -new_angle
+
+
+# --- MOVEMENT REMAINS IN PHYSICS ---
 func _physics_process(delta):
-	# FIX: Let the CLIENT broadcast their own position, not the server!
+	# FIX: Send our position, rotation, AND VELOCITY to others!
 	if is_multiplayer_authority() and _spawn_relay_ready:
-		rpc("relay_position", global_position, rotation)
+		rpc("relay_position", global_position, rotation, velocity)
 		
 	if not is_multiplayer_authority():
+		# Initialize the sync target if it's zero
 		if sync_target_position == Vector3.ZERO:
 			sync_target_position = global_position
 			sync_target_rotation = rotation
 			
-		global_position = global_position.lerp(sync_target_position, 15.0 * delta)
-		
-		var current_quat = Quaternion(transform.basis)
-		var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
-		var new_quat = current_quat.slerp(target_quat, 15.0 * delta)
-		transform.basis = Basis(new_quat)
-		
-		# FIX: Still call custom physics for non-authorities so the Server can check Rescue logic!
 		_custom_physics_process(delta, Vector3.ZERO)
 		return 
-		
-	var current_angle = spring_arm.rotation.y
-	var target_angle = atan2(target_shoulder_x, 4.711)
-	var new_angle = lerp_angle(current_angle, target_angle, 15.0 * delta)
-	spring_arm.rotation.y = new_angle
-	camera.rotation.y = -new_angle
 	
 	if not is_on_floor(): velocity.y -= gravity * delta
 
@@ -277,6 +299,7 @@ func _physics_process(delta):
 
 	move_and_slide()
 
+
 func _custom_physics_process(_delta, direction):
 	if direction:
 		velocity.x = direction.x * SPEED
@@ -285,12 +308,27 @@ func _custom_physics_process(_delta, direction):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
+
+# --- UPDATED RPC: EXPECTS 3 ARGUMENTS ---
 @rpc("any_peer", "call_remote", "unreliable")
-func relay_position(pos: Vector3, rot: Vector3):
+func relay_position(pos: Vector3, rot: Vector3, vel: Vector3):
 	if not is_inside_tree(): return
+	
+	# Server acts as a relay tower and forwards all 3 arguments
+	if multiplayer.is_server():
+		var sender_id = multiplayer.get_remote_sender_id()
+		for peer in multiplayer.get_peers():
+			if peer != sender_id:
+				rpc_id(peer, "relay_position", pos, rot, vel)
+				
 	if is_multiplayer_authority(): return
+	
+	# Apply the newly received real network data
 	sync_target_position = pos
 	sync_target_rotation = rot
+	sync_velocity = vel 
+# ----------------------------------------
+
 
 @rpc("any_peer", "call_local", "reliable")
 func _set_spawn_position(pos: Vector3):
