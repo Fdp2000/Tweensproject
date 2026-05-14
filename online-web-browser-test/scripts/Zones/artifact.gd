@@ -1,5 +1,9 @@
 extends Node3D
 
+const ARTIFACT_PARTICLES = preload("uid://b4hha0q7y1chb")
+
+
+
 enum Size { SMALL, MEDIUM, LARGE }
 @export var artifact_size: Size = Size.SMALL
 
@@ -86,6 +90,11 @@ func _ready():
 		Size.LARGE:
 			cash_value = 15000
 			weight_penalty = 0.4 # 60% slow
+	
+	# Add Particles
+	var particles_instance = ARTIFACT_PARTICLES.instantiate()
+	self.add_child(particles_instance)
+	particles_instance.emitting = true
 
 	initial_position = global_position
 	initial_rotation = rotation
@@ -128,6 +137,8 @@ func request_pickup(player_id: int):
 
 @rpc("any_peer", "call_local")
 func confirm_pickup(player_id: int):
+	var particles = get_node("artifactParticles")
+	particles.emitting = false
 	is_carried = true
 	carrier_id = player_id
 	is_highlighted = false # FIX: Force highlight off when picked up
@@ -209,6 +220,8 @@ func drop():
 			carrier.on_artifact_drop()
 			
 	is_carried = false
+	var particles = get_node("artifactParticles")
+	particles.emitting = true
 	carrier_id = -1
 	if multiplayer.is_server():
 		set_multiplayer_authority(1)
