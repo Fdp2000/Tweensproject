@@ -1,6 +1,77 @@
 [gd_scene format=3 uid="uid://b7242slfjqtu5"]
 
-[node name="AlexLab" type="Node3D" unique_id=1378399561]
+[ext_resource type="Script" uid="uid://buorurrqe21ki" path="res://scripts/Cutscene/CutsceneManager.gd" id="1_5t51e"]
+[ext_resource type="Script" uid="uid://sfd2xufbn31u" path="res://scripts/Temp/ThiefPlayer.gd" id="2_yu8u7"]
+
+[sub_resource type="Animation" id="Animation_6hsxo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 3.9615097), Vector3(148.95023, 0, 145.00714)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lu52h"]
+resource_name = "museum_pan"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 3.9615097), Vector3(24.861332, 0, 14.136873)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.5108579, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5t51e"]
+_data = {
+&"RESET": SubResource("Animation_6hsxo"),
+&"museum_pan": SubResource("Animation_lu52h")
+}
+
+[node name="AlexLab" type="Node3D" unique_id=1378399561 node_paths=PackedStringArray("local_player")]
+script = ExtResource("1_5t51e")
+local_player = NodePath("ThiefPlayer")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=449140892]
+
+[node name="IntroCamera" type="Camera3D" parent="Node3D" unique_id=495601977]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.9615097)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=764878170]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 1, 24.981672, 0, 9.14502)
@@ -10,3 +81,19 @@ transform = Transform3D(1, 0, 0, 0, 10, 0, 0, 0, 1, 1.1, 1.707386, 2.4527855)
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1819734142]
 transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 1, 274.7984, -125.85425, -37.639107)
+
+[node name="ThiefPlayer" type="CharacterBody3D" parent="." unique_id=2015557856]
+script = ExtResource("2_yu8u7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ThiefPlayer" unique_id=1939568341]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ThiefPlayer" unique_id=1732104215]
+
+[node name="CameraPivot" type="Node3D" parent="ThiefPlayer" unique_id=1001835136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="ThirdPersonCamera" type="Camera3D" parent="ThiefPlayer/CameraPivot" unique_id=2049875032]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=669713136]
+root_node = NodePath("../Node3D/IntroCamera")
+libraries/ = SubResource("AnimationLibrary_5t51e")
