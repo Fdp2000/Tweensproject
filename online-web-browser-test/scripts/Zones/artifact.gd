@@ -13,11 +13,13 @@ var is_carried: bool = false
 var carrier_id: int = -1
 var is_highlighted: bool = false
 
-# For syncing transform across peers
 var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
 var initial_position: Vector3 = Vector3.ZERO
 var initial_rotation: Vector3 = Vector3.ZERO
+
+var _last_rendered_highlight: bool = false
+var _has_rendered_once: bool = false
 
 var area: Area3D
 var col: CollisionShape3D
@@ -174,7 +176,10 @@ func _process(delta):
 			transform.basis = Basis(current_quat.slerp(target_quat, 15.0 * delta)).scaled(transform.basis.get_scale())
 	
 	# Update visual highlights
-	_apply_visuals(self, is_highlighted)
+	if is_highlighted != _last_rendered_highlight or not _has_rendered_once:
+		_apply_visuals(self, is_highlighted)
+		_last_rendered_highlight = is_highlighted
+		_has_rendered_once = true
 
 func _apply_visuals(node: Node, highlighted: bool):
 	if node is MeshInstance3D:

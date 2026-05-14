@@ -17,6 +17,13 @@ var last_pos: Vector3 = Vector3.ZERO
 var nav_agent: NavigationAgent3D
 var current_speed_mult: float = 1.0
 
+var nearby_interactables: Array[Node3D] = []
+var interaction_scanner: Area3D
+
+var _last_rendered_alpha: float = -1.0
+var _last_rendered_highlight: bool = false
+var _last_rendered_hypnotized: bool = false
+
 
 func get_carried_artifact():
 	return carried_artifact
@@ -46,6 +53,23 @@ func _ready():
 	add_child(nav_agent)
 	
 	if is_multiplayer_authority():
+		interaction_scanner = Area3D.new()
+		interaction_scanner.name = "InteractionScanner"
+		interaction_scanner.collision_layer = 0
+		interaction_scanner.collision_mask = 10 # Layer 2 (Players) + Layer 4 (Artifacts)
+		add_child(interaction_scanner)
+		
+		var col = CollisionShape3D.new()
+		var sphere = SphereShape3D.new()
+		sphere.radius = 3.0
+		col.shape = sphere
+		interaction_scanner.add_child(col)
+		
+		interaction_scanner.body_entered.connect(_on_interactable_entered)
+		interaction_scanner.body_exited.connect(_on_interactable_exited)
+		interaction_scanner.area_entered.connect(_on_interactable_entered)
+		interaction_scanner.area_exited.connect(_on_interactable_exited)
+		
 		await get_tree().process_frame
 		var canvas = get_node_or_null("PlayerCanvas")
 		if canvas:
@@ -93,32 +117,45 @@ func _try_drop():
 		carried_artifact.rpc("drop")
 		carried_artifact = null
 
+func _on_interactable_entered(node: Node3D):
+	var target = node
+	if node is Area3D and node.get_parent().is_in_group("artifact"):
+		target = node.get_parent()
+		
+	if target not in nearby_interactables:
+		nearby_interactables.append(target)
+
+func _on_interactable_exited(node: Node3D):
+	var target = node
+	if node is Area3D and node.get_parent().is_in_group("artifact"):
+		target = node.get_parent()
+		
+	if target in nearby_interactables:
+		nearby_interactables.erase(target)
+
 func get_closest_interactable() -> Node3D:
-	var closest: Node3D = null
-	var min_dist: float = 3.0
+	var closest_thief: Node3D = null
+	var closest_art: Node3D = null
+	var min_dist_thief: float = 3.0
+	var min_dist_art: float = 3.0
 	
-	# Priority 1: Hypnotized Thieves
-	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
-	if spawned:
-		for player in spawned.get_children():
-			if player != self and player.get("team_index") == 0 and player.get("is_hypnotized"):
-				var dist = global_position.distance_to(player.global_position)
-				if dist < min_dist:
-					closest = player
-					min_dist = dist
-					
-	if closest: return closest
+	nearby_interactables = nearby_interactables.filter(func(n): return is_instance_valid(n))
 	
-	# Priority 2: Artifacts
-	var artifacts = get_tree().get_nodes_in_group("artifact")
-	for art in artifacts:
-		if not art.get("is_carried"):
-			var dist = global_position.distance_to(art.global_position)
-			if dist < min_dist:
-				closest = art
-				min_dist = dist
+	for target in nearby_interactables:
+		var dist = global_position.distance_to(target.global_position)
+		
+		if target.has_method("on_captured") and target != self and target.get("team_index") == 0 and target.get("is_hypnotized"):
+			if dist < min_dist_thief:
+				closest_thief = target
+				min_dist_thief = dist
 				
-	return closest
+		elif target.is_in_group("artifact") and not target.get("is_carried"):
+			if dist < min_dist_art:
+				closest_art = target
+				min_dist_art = dist
+				
+	if closest_thief: return closest_thief
+	return closest_art
 
 func _update_outlines(target: Node3D):
 	if target == last_outlined_target: return
@@ -247,7 +284,12 @@ func _process(delta):
 		target_alpha = 1.0
 		
 	current_alpha = lerp(current_alpha, target_alpha, 8.0 * delta)
-	_apply_alpha_to_model(self, current_alpha)
+	
+	if abs(current_alpha - _last_rendered_alpha) > 0.01 or is_highlighted != _last_rendered_highlight or is_hypnotized != _last_rendered_hypnotized:
+		_apply_alpha_to_model(self, current_alpha)
+		_last_rendered_alpha = current_alpha
+		_last_rendered_highlight = is_highlighted
+		_last_rendered_hypnotized = is_hypnotized
 
 
 	# 2. HIGHLIGHT & INTERACTION LOGIC (Runs ONLY for the local player)
