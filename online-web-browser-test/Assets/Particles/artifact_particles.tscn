@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://b4hha0q7y1chb"]
+
+[ext_resource type="Texture2D" uid="uid://dacgsmbpg58vd" path="res://Assets/Textures/ArtifactParticle.png" id="1_n2a5w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2a5w"]
+transparency = 1
+albedo_texture = ExtResource("1_n2a5w")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_k8q2s"]
+size = Vector2(0.3, 0.3)
+
+[sub_resource type="Curve" id="Curve_1sr51"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.24338624, 1), 0.0, 0.0, 0, 0, Vector2(0.75132275, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="artifactParticles" type="CPUParticles3D" unique_id=1757072748]
+material_override = SubResource("StandardMaterial3D_n2a5w")
+amount = 2
+lifetime = 3.0
+mesh = SubResource("QuadMesh_k8q2s")
+emission_shape = 1
+emission_sphere_radius = 3.0
+gravity = Vector3(0, 0.1, 0)
+scale_amount_min = 0.2
+scale_amount_max = 1.2
+scale_amount_curve = SubResource("Curve_1sr51")

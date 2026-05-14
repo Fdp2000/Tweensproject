@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://i5h5aykfxo2j"]
+
+[ext_resource type="Script" uid="uid://c5rie7oeh51t2" path="res://scripts/Cutscene/VersusScreen.gd" id="1_pil75"]
+
+[node name="VersusScreen" type="CanvasLayer" unique_id=1638437675]
+script = ExtResource("1_pil75")
+
+[node name="Panel" type="Panel" parent="." unique_id=1312387444]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="LeftName" type="Label" parent="Panel" unique_id=528362056]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="RightName" type="Label" parent="Panel" unique_id=1661069563]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="VSLabel" type="Label" parent="Panel" unique_id=1555587740]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=436511438]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=64292701]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport" unique_id=2132961436]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport" unique_id=132849565]
+
+[node name="LeftSpawn" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=2106085596]
+
+[node name="RightSpawn" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=1093837196]
