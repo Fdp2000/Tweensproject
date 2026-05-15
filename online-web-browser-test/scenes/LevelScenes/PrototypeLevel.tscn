@@ -23,19 +23,20 @@
 [ext_resource type="ArrayMesh" uid="uid://bbgxqn83hphsm" path="res://Assets/Models/LowPolyMuseumAssets/Arch5.res" id="18_5p3k1"]
 [ext_resource type="ArrayMesh" uid="uid://b6v0dfk368ywc" path="res://Assets/Models/LowPolyMuseumAssets/Floor2.res" id="19_nqnu6"]
 [ext_resource type="ArrayMesh" uid="uid://cla4asbgty3c6" path="res://Assets/Models/LowPolyMuseumAssets/Floor5.res" id="20_frt7c"]
-[ext_resource type="ArrayMesh" uid="uid://cs08cxkwtc3m" path="res://Assets/Models/LowPolyMuseumAssets/WallSmall1.res" id="21_qjt3t"]
 [ext_resource type="ArrayMesh" uid="uid://buhrjtl6444xd" path="res://Assets/Models/LowPolyMuseumAssets/Bench1.res" id="22_xm6hp"]
 [ext_resource type="ArrayMesh" uid="uid://de8vjbrnt64xx" path="res://Assets/Models/LowPolyMuseumAssets/Picture1Image.res" id="23_4r0pn"]
 [ext_resource type="ArrayMesh" uid="uid://na574yivw7li" path="res://Assets/Models/LowPolyMuseumAssets/Picture5Image.res" id="24_08156"]
 [ext_resource type="Texture2D" uid="uid://dtg7p0xjatwvb" path="res://Assets/Textures/leftPhoto.png" id="25_4r0pn"]
 [ext_resource type="Texture2D" uid="uid://cfgkdurh2muj5" path="res://Assets/Textures/panorama-great-nile-near-aswan-pyramids_219717-6797.jpg" id="26_08156"]
 [ext_resource type="ArrayMesh" uid="uid://bpo1q3kvmctxv" path="res://Assets/Models/LowPolyMuseumAssets/StoneSlab.res" id="27_08156"]
+[ext_resource type="Texture2D" uid="uid://c1weba8yk4325" path="res://Assets/environments/uninhabited-desert-landscape-blazing-sun-blue-sky-vector-cartoon-illustration-rocky-canyon-cliffs-sa/2304.w026.n002.3511B.p1.3511.jpg" id="27_atqpw"]
 [ext_resource type="ArrayMesh" uid="uid://qv4wgr0qt1yt" path="res://Assets/Models/LowPolyMuseumAssets/Railing.res" id="31_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://c40nrtnxo1v" path="res://Assets/Models/LowPolyMuseumAssets/Stairs.res" id="32_jjl2b"]
 [ext_resource type="Texture2D" uid="uid://cag3jmtqp8rha" path="res://Assets/Textures/5478911.jpg" id="33_nj0py"]
 [ext_resource type="ArrayMesh" uid="uid://dnv58nobc7b7j" path="res://Assets/Models/LowPolyMuseumAssets/WallBigOuter.res" id="34_oc075"]
 [ext_resource type="ArrayMesh" uid="uid://bjl7rtf27jwh8" path="res://Assets/environments/new_array_mesh.res" id="35_kdw74"]
 [ext_resource type="Texture2D" uid="uid://d0etc28un66rp" path="res://Assets/Textures/pexels-photo-6555895.jpeg" id="36_r7r08"]
+[ext_resource type="Texture2D" uid="uid://bi10c4k7ijxbm" path="res://Assets/environments/desert-landscape-arizona-africa-nature-scene/2208_w026_n002_2394b_p1_2394.jpg" id="37_oetox"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwb7"]
 resource_name = "Material"
@@ -406,6 +407,7 @@ size = Vector3(0.6267929, 4.501465, 0.6138611)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ydyp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1r7n"]
+albedo_texture = ExtResource("36_r7r08")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7i4u3"]
 albedo_color = Color(0.7058824, 0.6784314, 0.6313726, 1)
@@ -473,19 +475,43 @@ metallic_specular = 0.0
 metallic_texture = ExtResource("1_hwn0u")
 roughness_texture = ExtResource("1_hwn0u")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46wyf"]
-albedo_color = Color(0.7647059, 0.6431373, 0.49019608, 1)
-albedo_texture = ExtResource("1_hwn0u")
-metallic = 1.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nj0py"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5p3k1"]
 albedo_color = Color(0, 0, 0, 1)
 metallic = 1.0
 roughness = 0.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4r0pn"]
-albedo_color = Color(0.7647059, 0.6431373, 0.49019608, 1)
-metallic = 1.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oc075"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdw74"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r7r08"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf2ka"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gp0hk"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_88xne"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0hqwr"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c8qq2"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8w5a"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0t7hq"]
+albedo_texture = ExtResource("27_atqpw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_frt7c"]
 albedo_texture = ExtResource("25_4r0pn")
@@ -530,6 +556,28 @@ uv1_offset = Vector3(-0.05, 1.38, 0)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fjcnw"]
 albedo_texture = ExtResource("36_r7r08")
 uv1_scale = Vector3(0.45, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwy5l"]
+albedo_texture = ExtResource("37_oetox")
+uv1_scale = Vector3(1.93, 1.13, 1)
+uv1_offset = Vector3(0.29, -0.08, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ydp54"]
+albedo_color = Color(0.51052386, 0.40962186, 0.26457536, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_217hv"]
+albedo_color = Color(0.50980395, 0.40784314, 0.2627451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6te4"]
+albedo_color = Color(0.6501951, 1.0478702, 2.376466, 1)
+albedo_texture = ExtResource("36_r7r08")
+uv1_scale = Vector3(0.249, 1.11, 1)
+uv1_offset = Vector3(0.108, 0.415, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fvyjn"]
+albedo_color = Color(0.6501951, 1.0478702, 2.376466, 1)
+albedo_texture = ExtResource("36_r7r08")
+uv1_offset = Vector3(-0.41, -0.54, 0)
 
 [node name="PrototypeLevel" type="Node3D" unique_id=1441468162]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -2157,197 +2205,197 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jjl2b")
 [node name="WallBig1" type="MeshInstance3D" parent="." unique_id=482249619]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig6" type="MeshInstance3D" parent="." unique_id=1424620143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig12" type="MeshInstance3D" parent="." unique_id=103244226]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 15, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig13" type="MeshInstance3D" parent="." unique_id=616804033]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 17, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig14" type="MeshInstance3D" parent="." unique_id=1715976832]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 19, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig15" type="MeshInstance3D" parent="." unique_id=1455240429]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 21, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig16" type="MeshInstance3D" parent="." unique_id=823202556]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 23, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig17" type="MeshInstance3D" parent="." unique_id=194171899]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 25, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig18" type="MeshInstance3D" parent="." unique_id=1620318400]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 27, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig30" type="MeshInstance3D" parent="." unique_id=6579114]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 30, 0.07682103, 5)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig32" type="MeshInstance3D" parent="." unique_id=1421002283]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 30, 0.07682103, 3)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig31" type="MeshInstance3D" parent="." unique_id=652434341]
 transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 30, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig33" type="MeshInstance3D" parent="." unique_id=170033727]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, 24, 0.07682103, -4)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig34" type="MeshInstance3D" parent="." unique_id=851262371]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, 24, 0.07682103, -2)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig35" type="MeshInstance3D" parent="." unique_id=148226257]
 transform = Transform3D(-4.371138e-08, 0, -1, 0, 1, 0, 1, 0, -4.371138e-08, 24, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig19" type="MeshInstance3D" parent="." unique_id=1900826472]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 29, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig20" type="MeshInstance3D" parent="." unique_id=1661280916]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 31, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig21" type="MeshInstance3D" parent="." unique_id=2017783392]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 33, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig22" type="MeshInstance3D" parent="." unique_id=2071453854]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 35, 0.07682103, 7)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig23" type="MeshInstance3D" parent="." unique_id=982904587]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37, 0.07682103, 5)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig24" type="MeshInstance3D" parent="." unique_id=940822716]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37, 0.07682103, 3)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig25" type="MeshInstance3D" parent="." unique_id=323559699]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37, 0.07682103, 1)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig27" type="MeshInstance3D" parent="." unique_id=75418230]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37, 0.07682103, -1)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig28" type="MeshInstance3D" parent="." unique_id=533224474]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37, 0.07682103, -3)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig29" type="MeshInstance3D" parent="." unique_id=756257508]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37, 0.07682103, -4)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig7" type="MeshInstance3D" parent="." unique_id=897139203]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig8" type="MeshInstance3D" parent="." unique_id=1356230316]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig9" type="MeshInstance3D" parent="." unique_id=360076071]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig10" type="MeshInstance3D" parent="." unique_id=1079564927]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig11" type="MeshInstance3D" parent="." unique_id=1608175155]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig26" type="MeshInstance3D" parent="." unique_id=966102822]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0.07682103, -6)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig2" type="MeshInstance3D" parent="." unique_id=1926616354]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13, 0.07682103, -4)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig3" type="MeshInstance3D" parent="." unique_id=1567755865]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13, 0.07682103, -2)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig4" type="MeshInstance3D" parent="." unique_id=418016607]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13, 0.07682103, 3)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBig5" type="MeshInstance3D" parent="." unique_id=1325312316]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13, 0.07682103, 5)
 mesh = ExtResource("7_21tra")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBigCorner1" type="MeshInstance3D" parent="." unique_id=922757411]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.07682103, -6)
 mesh = ExtResource("17_srhcg")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBigCorner2" type="MeshInstance3D" parent="." unique_id=1570976715]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13, 0.07682103, 7)
 mesh = ExtResource("17_srhcg")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBigCorner3" type="MeshInstance3D" parent="." unique_id=1573109874]
 transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 37, 0.07682103, -6)
 mesh = ExtResource("17_srhcg")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="WallBigCorner4" type="MeshInstance3D" parent="." unique_id=934759502]
 transform = Transform3D(-1, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -1, 37, 0.07682103, 7)
 mesh = ExtResource("17_srhcg")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_nj0py")
 
 [node name="Arch5" type="MeshInstance3D" parent="." unique_id=187466290]
 transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -7)
@@ -2439,67 +2487,47 @@ surface_material_override/0 = SubResource("StandardMaterial3D_5p3k1")
 [node name="Floor7" type="MeshInstance3D" parent="." unique_id=613651431]
 transform = Transform3D(9.568001, 0, 0, 0, 1, 0, 0, 0, 2.5367537, 22.3, 0.1, -0.7)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_oc075")
 
 [node name="Floor8" type="MeshInstance3D" parent="." unique_id=1933705839]
 transform = Transform3D(4.1993957, 0, 0, 0, 1, 0, 0, 0, 1.8302697, 16, 0.1, -4.9)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_kdw74")
 
 [node name="Floor15" type="MeshInstance3D" parent="." unique_id=2013963011]
 transform = Transform3D(-1.9225762e-07, 0, -1.8302697, 0, 1, 0, 4.398341, 0, -8.000363e-08, 36, 0.1, -2.6000004)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_r7r08")
 
 [node name="Floor17" type="MeshInstance3D" parent="." unique_id=1982961594]
 transform = Transform3D(-1.2689003e-07, 0, -1.0981618, 0, 1, 0, 2.9029052, 0, -4.8002182e-08, 36.5, 0.1, 4.7)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_bf2ka")
 
 [node name="Floor18" type="MeshInstance3D" parent="." unique_id=244515572]
 transform = Transform3D(-3.0480504, 0, 7.680349e-08, 0, 1, 0, -2.6646904e-07, 0, -0.8785295, 15.5, 0.100000024, 2.4999998)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
-
-[node name="Floor16" type="MeshInstance3D" parent="." unique_id=2118451422]
-transform = Transform3D(-1.9225762e-07, 0, -1.3177942, 0, 1, 0, 4.398341, 0, -5.7602612e-08, 33, 0.1, -2.6000004)
-mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_gp0hk")
 
 [node name="Floor14" type="MeshInstance3D" parent="." unique_id=120149780]
 transform = Transform3D(4.1993957, 0, 0, 0, 1, 0, 0, 0, 1.8302697, 28, 0.1, -4.9)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_88xne")
 
 [node name="Floor11" type="MeshInstance3D" parent="." unique_id=1932152881]
 transform = Transform3D(1.432215, 0, 0, 0, 1, 0, 0, 0, 0.7774325, 17.300001, 0.1, 6.9)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_0hqwr")
 
 [node name="Floor13" type="MeshInstance3D" parent="." unique_id=1488705843]
 transform = Transform3D(-9.531473e-08, 0, 1.7142384, 0, 1, 0, -2.1805472, 0, -7.493175e-08, 14.200002, 0.1, 5.5)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
+surface_material_override/0 = SubResource("StandardMaterial3D_c8qq2")
 
 [node name="Floor12" type="MeshInstance3D" parent="." unique_id=1595371359]
 transform = Transform3D(6.2586637, 0, 0, 0, 1, 0, 0, 0, 3.3256838, 24.699999, 0.1, 4.5)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_46wyf")
-
-[node name="WallSmall1" type="MeshInstance3D" parent="." unique_id=1154474433]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 20, 0.099999964, 7)
-mesh = ExtResource("21_qjt3t")
-surface_material_override/0 = SubResource("StandardMaterial3D_4r0pn")
-
-[node name="WallSmall2" type="MeshInstance3D" parent="." unique_id=375451178]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 20, 0.099999964, 5)
-mesh = ExtResource("21_qjt3t")
-surface_material_override/0 = SubResource("StandardMaterial3D_4r0pn")
-
-[node name="WallSmall3" type="MeshInstance3D" parent="." unique_id=167916395]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 20, 0.099999964, 3)
-mesh = ExtResource("21_qjt3t")
-surface_material_override/0 = SubResource("StandardMaterial3D_4r0pn")
+surface_material_override/0 = SubResource("StandardMaterial3D_p8w5a")
 
 [node name="Bench1" type="MeshInstance3D" parent="." unique_id=321023672]
 transform = Transform3D(-1.2676303e-07, 0, -0.99999994, 0, 1, 0, 2.9, 0, -4.3711385e-08, 28.8, 0.099999964, 4.4)
@@ -2511,8 +2539,9 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25, 
 mesh = ExtResource("23_4r0pn")
 
 [node name="Picture5Image" type="MeshInstance3D" parent="." unique_id=334746517]
-transform = Transform3D(-8.742278e-08, 0, -0.99999994, 0, 1.9200001, 0, 2, 0, -4.3711385e-08, 29, 2.8, 4.7)
+transform = Transform3D(7.858619, 0, -4.470348e-08, 0, 3.8707201, 0, 2.342051e-07, 0, 0.9999998, 18.5, 2.1000001, -6.8)
 mesh = ExtResource("24_08156")
+surface_material_override/0 = SubResource("StandardMaterial3D_0t7hq")
 
 [node name="Picture1Image2" type="MeshInstance3D" parent="." unique_id=958141458]
 transform = Transform3D(-9.616505e-08, 0, -0.99999994, 0, 1.5, 0, 2.2, 0, -4.3711385e-08, 37.8, 2.2, 4.4)
@@ -2708,3 +2737,78 @@ surface_material_override/0 = SubResource("StandardMaterial3D_k6du8")
 transform = Transform3D(-6.0243745, 1.4136263e-07, 1.7484555e-07, -5.266675e-07, -1.617, 1.5285482e-14, 1.0533353e-06, 0, 0.9999999, 18.3, 2.2, -38.799995)
 mesh = ExtResource("23_4r0pn")
 surface_material_override/0 = SubResource("StandardMaterial3D_fjcnw")
+
+[node name="Picture5Image2" type="MeshInstance3D" parent="." unique_id=501191460]
+transform = Transform3D(-10.270854, 0, -8.7422805e-08, 0, 3.8219995, 0, 8.979065e-07, 0, -1.0000005, 20.7, 2.2, 7.8)
+mesh = ExtResource("24_08156")
+surface_material_override/0 = SubResource("StandardMaterial3D_xwy5l")
+
+[node name="NewArrayMesh6" type="MeshInstance3D" parent="." unique_id=1020725132]
+transform = Transform3D(0.14299999, 0, 0, 0, 0.182, 0, 0, 0, 0.13, 28, 0, -4)
+mesh = ExtResource("35_kdw74")
+surface_material_override/0 = SubResource("StandardMaterial3D_ydp54")
+
+[node name="NewArrayMesh8" type="MeshInstance3D" parent="." unique_id=870920918]
+transform = Transform3D(0.056982327, 0, -0.011330242, 0, 0.13194998, 0, 0.0049853064, 0, 0.12950529, 36, 0, -3)
+mesh = ExtResource("35_kdw74")
+surface_material_override/0 = SubResource("StandardMaterial3D_ydp54")
+
+[node name="NewArrayMesh7" type="MeshInstance3D" parent="." unique_id=2143436087]
+transform = Transform3D(-0.100099996, 0, -1.13649605e-08, 0, 0.18199998, 0, 8.75102e-09, 0, -0.13, 21, 0, 5)
+mesh = ExtResource("35_kdw74")
+surface_material_override/0 = SubResource("StandardMaterial3D_ydp54")
+
+[node name="NewArrayMesh9" type="MeshInstance3D" parent="." unique_id=1700586303]
+transform = Transform3D(-0.26151118, 1.1920924e-08, -1.3524303e-08, -2.9196963e-08, -0.14559993, -9.349477e-16, -4.5724065e-08, 7.743986e-16, 0.07735, 18.7, 3.7, -3)
+mesh = ExtResource("35_kdw74")
+surface_material_override/0 = SubResource("StandardMaterial3D_ydp54")
+
+[node name="NewArrayMesh10" type="MeshInstance3D" parent="." unique_id=1928555779]
+transform = Transform3D(0.30073777, -5.3644165e-09, 2.86397e-08, -3.35765e-08, -0.06551996, -1.3199264e-15, 7.8873995e-08, -8.1745133e-16, -0.10919999, 20.7, 3.7, 4.9)
+mesh = ExtResource("35_kdw74")
+surface_material_override/0 = SubResource("StandardMaterial3D_ydp54")
+
+[node name="10449RectangularBoxHedgeV1Iterations2" type="MeshInstance3D" parent="." unique_id=641126367]
+transform = Transform3D(-1.0490733e-09, -0.014336849, 0.0023587612, 0, 0.0012543127, 0.026960744, -0.023999998, 6.266836e-10, -1.0310473e-10, 12.5, 0.19999999, -4)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_217hv")
+
+[node name="10449RectangularBoxHedgeV1Iterations4" type="MeshInstance3D" parent="." unique_id=1158246968]
+transform = Transform3D(-0.023999998, -1.2627126e-09, 5.3362384e-12, -1.8474344e-17, 0.0012543127, 0.026960747, -2.0981468e-09, 0.014336852, -0.0023587612, 27.600002, 0.19999999, -6)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_217hv")
+
+[node name="10449RectangularBoxHedgeV1Iterations7" type="MeshInstance3D" parent="." unique_id=1754438680]
+transform = Transform3D(-0.1111055, -1.3947762e-09, 7.675905e-12, 9.6761905e-09, -0.015896793, 6.102025e-10, 8.465573e-10, 2.3283064e-10, 0.03892977, 24.800003, 3.7, -6.7)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_217hv")
+
+[node name="10449RectangularBoxHedgeV1Iterations9" type="MeshInstance3D" parent="." unique_id=751577422]
+transform = Transform3D(5.5879354e-09, -2.3283037e-10, -0.101252824, 3.9014383e-09, -0.015896788, 1.587082e-09, -0.044797726, -1.3947761e-09, -3.7252903e-09, 39.9, 3.7, -33.9)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_w6te4")
+
+[node name="10449RectangularBoxHedgeV1Iterations10" type="MeshInstance3D" parent="." unique_id=2097408541]
+transform = Transform3D(-5.533182e-09, 2.3283046e-10, 0.10844179, 3.901439e-09, -0.015896792, 1.6997648e-09, 0.04479773, 1.3947759e-09, 1.419904e-08, 9.000001, 3.7, -33.9)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_fvyjn")
+
+[node name="10449RectangularBoxHedgeV1Iterations8" type="MeshInstance3D" parent="." unique_id=1972735408]
+transform = Transform3D(-0.116660774, -1.3947762e-09, 7.675905e-12, 1.016e-08, -0.015896793, 6.102025e-10, 8.8888513e-10, 2.3283064e-10, 0.03892977, 25.300003, 3.7, 1.9000005)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_217hv")
+
+[node name="10449RectangularBoxHedgeV1Iterations6" type="MeshInstance3D" parent="." unique_id=102383728]
+transform = Transform3D(-2.2030542e-09, 0.014336851, -0.0023587616, -4.327402e-17, 0.0012543126, 0.02696074, 0.050399993, 6.266836e-10, -1.03104844e-10, 37.600002, 0.19999999, -2)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_217hv")
+
+[node name="10449RectangularBoxHedgeV1Iterations5" type="MeshInstance3D" parent="." unique_id=2106840067]
+transform = Transform3D(-0.0072, -1.2627125e-09, 5.3362384e-12, -5.5423037e-18, 0.0012543126, 0.026960747, -6.2944405e-10, 0.014336851, -0.0023587612, 36.600002, 0.19999999, -6)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_217hv")
+
+[node name="10449RectangularBoxHedgeV1Iterations3" type="MeshInstance3D" parent="." unique_id=396619138]
+transform = Transform3D(-1.0490733e-09, -0.014336849, 0.0023587612, 0, 0.0012543127, 0.026960744, -0.023999998, 6.266836e-10, -1.0310473e-10, 12.4, 0.19999999, 5)
+mesh = ExtResource("16_atqpw")
+surface_material_override/0 = SubResource("StandardMaterial3D_217hv")
