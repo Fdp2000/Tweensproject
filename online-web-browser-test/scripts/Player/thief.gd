@@ -51,6 +51,9 @@ var last_outlined_target: Node3D = null
 var outline_mat: StandardMaterial3D = null
 const RESCUE_TIME_REQUIRED = 2.0
 
+var debug_path_mesh: MeshInstance3D
+var debug_label: Label3D
+
 func _ready():
 	super._ready()
 	nav_agent = NavigationAgent3D.new()
@@ -59,6 +62,29 @@ func _ready():
 	nav_agent.radius = 0.5                   # Keeps paths away from walls by this distance
 	nav_agent.avoidance_enabled = false      # We don't need dynamic obstacle avoidance
 	add_child(nav_agent)
+	
+	if is_multiplayer_authority():
+		# Setup Debug Path Visualizer
+		debug_path_mesh = MeshInstance3D.new()
+		var mat = StandardMaterial3D.new()
+		mat.albedo_color = Color.MAGENTA
+		mat.emission_enabled = true
+		mat.emission = Color.MAGENTA
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.flags_no_depth_test = true
+		debug_path_mesh.material_override = mat
+		get_tree().root.call_deferred("add_child", debug_path_mesh)
+		
+		# Setup Debug Text Label
+		debug_label = Label3D.new()
+		debug_label.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		debug_label.position = Vector3(0, 2.5, 0)
+		debug_label.pixel_size = 0.005
+		debug_label.modulate = Color.GREEN
+		debug_label.outline_modulate = Color.BLACK
+		debug_label.no_depth_test = true
+		add_child(debug_label)
+
 	
 	if is_multiplayer_authority():
 		interaction_scanner = Area3D.new()
@@ -99,6 +125,11 @@ func _ready():
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	
+	# --- DEV TOOL: Toggle Hypnotized ---
+	if event is InputEventKey and event.physical_keycode == KEY_H and event.pressed and not event.echo:
+		rpc("dev_toggle_hypnotize")
+		return
+		
 	if is_hypnotized:
 		# Allow them to look around with the mouse, but only rotate the camera pivot, not the body
 		if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -204,16 +235,41 @@ func _custom_physics_process(delta, direction):
 					rpc("on_jailed", jail_cell_target)
 					velocity.x = 0
 					velocity.z = 0
+				elif nav_agent.is_navigation_finished():
+					# The path is finished, but we haven't reached the jail!
+					# This means the NavMesh is severed/broken and the jail is unreachable.
+					velocity.x = move_toward(velocity.x, 0, SPEED)
+					velocity.z = move_toward(velocity.z, 0, SPEED)
+					draw_debug_path()
 				else:
 					var next_pos = nav_agent.get_next_path_position()
-					var dir_to_next = global_position.direction_to(next_pos)
-					dir_to_next.y = 0
-					dir_to_next = dir_to_next.normalized()
+					draw_debug_path()
 					
-					velocity.x = dir_to_next.x * (SPEED * 0.4)
-					velocity.z = dir_to_next.z * (SPEED * 0.4)
+					# Dynamically negate any vertical mismatch between the NavMesh and the Thief's physical feet.
+					# This forces Godot's internal waypoint-clearance check to evaluate as a pure 2D horizontal distance,
+					# preventing the freezing bug while allowing us to keep a strict 0.5m path_desired_distance!
+					nav_agent.path_height_offset = next_pos.y - global_position.y
 					
-					if dir_to_next.length_squared() > 0.01:
+					# Flatten the positions to ignore vertical mismatches between NavMesh and Physics
+					var flat_global = Vector3(global_position.x, 0, global_position.z)
+					var flat_next = Vector3(next_pos.x, 0, next_pos.z)
+					var dist_to_next_flat = flat_global.distance_to(flat_next)
+					
+					if dist_to_next_flat < 0.1:
+						# We are practically standing on the waypoint horizontally.
+						# Stop applying velocity so we don't vibrate from floating point dust.
+						velocity.x = move_toward(velocity.x, 0, SPEED)
+						velocity.z = move_toward(velocity.z, 0, SPEED)
+						if debug_label: debug_label.text = "STOPPED (dist_flat < 0.1)\nVel: " + str(velocity.length())
+					else:
+						# Calculate pure horizontal direction
+						var dir_to_next = flat_global.direction_to(flat_next)
+						
+						velocity.x = dir_to_next.x * (SPEED * 0.4)
+						velocity.z = dir_to_next.z * (SPEED * 0.4)
+						
+						if debug_label: debug_label.text = "MOVING\ndist_flat: " + str(dist_to_next_flat).pad_decimals(2) + "\nVel: " + str(velocity.length()).pad_decimals(2)
+						
 						# --- CAMERA FIX: DECOUPLE FROM BODY ROTATION ---
 						var old_cam_basis = pitch_pivot.global_basis
 						var target_transform = transform.looking_at(global_position + dir_to_next, Vector3.UP)
@@ -479,6 +535,53 @@ func on_captured():
 		
 	if multiplayer.is_server():
 		GameManager.rpc("thief_captured")
+
+@rpc("any_peer", "call_local")
+func dev_toggle_hypnotize():
+	if not is_hypnotized:
+		is_hypnotized = true
+		disable_body_rotation = true
+		collision_layer = 8 
+		collision_mask = 5  
+		
+		var jails = get_tree().get_nodes_in_group("jail")
+		if jails.size() > 0:
+			var jail = jails[0]
+			var walk_pos = jail.get_node("WalkTarget").global_position
+			var cell_pos = jail.get_node("CellTarget").global_position
+			update_jail_targets(walk_pos, cell_pos)
+			
+		print("[DEV] Thief HYPNOTIZED via hotkey")
+	else:
+		is_hypnotized = false
+		disable_body_rotation = false
+		collision_layer = 2
+		collision_mask = 3
+		
+		# Reset camera to look forward again
+		pitch_pivot.rotation = Vector3.ZERO
+		
+		print("[DEV] Thief UN-hypnotized via hotkey")
+
+func _exit_tree():
+	if debug_path_mesh and is_instance_valid(debug_path_mesh):
+		debug_path_mesh.queue_free()
+
+func draw_debug_path():
+	if not debug_path_mesh: return
+	var path = nav_agent.get_current_navigation_path()
+	if path.size() < 2:
+		debug_path_mesh.mesh = null
+		return
+		
+	var im_mesh = ImmediateMesh.new()
+	im_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+	for i in range(path.size() - 1):
+		# Draw a bright line 0.5m above the ground
+		im_mesh.surface_add_vertex(path[i] + Vector3(0, 0.5, 0))
+		im_mesh.surface_add_vertex(path[i+1] + Vector3(0, 0.5, 0))
+	im_mesh.surface_end()
+	debug_path_mesh.mesh = im_mesh
 
 @rpc("any_peer", "call_local")
 func request_start_rescue(target_id: int):

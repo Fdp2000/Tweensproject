@@ -3,7 +3,7 @@
 [node name="Jail" type="Node3D" unique_id=489964162 groups=["jail"]]
 
 [node name="WalkTarget" type="Marker3D" parent="." unique_id=1903043954]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.573097)
 
 [node name="CellTarget" type="Marker3D" parent="." unique_id=18595314]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.004)
