@@ -220,6 +220,7 @@ transform = Transform3D(13.333332, 0, 0, 0, 13.333332, 0, 0, 0, 13.333332, 0.012
 mesh = SubResource("ArrayMesh_0bgvg")
 
 [node name="Object_9" type="MeshInstance3D" parent="pivotPoint/Camera_2" unique_id=1150603808]
+transform = Transform3D(1.19, 0, 0, 0, 1.19, 0, 0, 0, 1.19, 0.0030668397, 0.024847947, -0.054293424)
 mesh = SubResource("ArrayMesh_8c3ri")
 
 [node name="Object_10" type="MeshInstance3D" parent="pivotPoint/Camera_2" unique_id=2044148800]
@@ -228,9 +229,12 @@ mesh = SubResource("ArrayMesh_b1wav")
 [node name="Object_11" type="MeshInstance3D" parent="pivotPoint/Camera_2" unique_id=1721428639]
 mesh = SubResource("ArrayMesh_tt6s8")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=122643301]
-transform = Transform3D(-0.9984085, 0, -0.056396652, 0, 1, 0, 0.05639665, 0, -0.9984085, 0.025421409, 0.04192185, 0.24309254)
+[node name="CameraMount" type="Node3D" parent="." unique_id=1455180780]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="PingRay" type="RayCast3D" parent="Camera3D" unique_id=1059644809]
+[node name="Camera3D" type="Camera3D" parent="CameraMount" unique_id=122643301]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="PingRay" type="RayCast3D" parent="CameraMount/Camera3D" unique_id=1059644809]
 target_position = Vector3(0, 0, -100)
 collision_mask = 3

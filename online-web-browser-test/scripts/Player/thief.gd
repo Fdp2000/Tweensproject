@@ -19,6 +19,7 @@ var is_rescue_halted: bool = false
 var is_jailed: bool = false
 var jail_walk_target: Vector3 = Vector3.ZERO   # Where the thief walks to (outside jail door)
 var jail_cell_target: Vector3 = Vector3.ZERO   # Where the thief gets teleported (inside cell)
+var jail_cell_rot_y: float = 0.0 # <--- ADD THIS
 var is_highlighted: bool = false
 var is_mobile_interact: bool = false
 var last_pos: Vector3 = Vector3.ZERO
@@ -162,7 +163,7 @@ func _input(event):
 		if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			var actual_sens = mouse_sensitivity * 0.001
 			cam_yaw -= event.relative.x * actual_sens
-			cam_pitch += event.relative.y * actual_sens
+			cam_pitch -= event.relative.y * actual_sens
 			cam_yaw = clamp(cam_yaw, -1.0, 1.0)
 			cam_pitch = clamp(cam_pitch, -0.5, 0.5)
 			_update_camera_rotation()
@@ -275,7 +276,8 @@ func _custom_physics_process(delta, direction):
 				var dist_to_target = global_position.distance_to(jail_walk_target)
 				
 				if dist_to_target < 1.0:
-					rpc("on_jailed", jail_cell_target)
+					# --- PASS THE ROTATION IN THE RPC ---
+					rpc("on_jailed", jail_cell_target, jail_cell_rot_y)
 					velocity.x = 0
 					velocity.z = 0
 					_access_cameras()
@@ -394,7 +396,7 @@ func _process(delta):
 	else:
 		stationary_time = 0.0
 		
-	if is_hypnotized:
+	if is_hypnotized or is_jailed:
 		target_alpha = 1.0
 	elif stationary_time >= INVISIBLE_TIME:
 		target_alpha = 0.0
@@ -528,7 +530,7 @@ func _apply_visual_states(alpha_val: float, target_alpha: float):
 	
 	# Update Camo Meshes
 	for c_mesh in camo_meshes:
-		if is_stealthed and not is_hypnotized:
+		if is_stealthed and not is_hypnotized and not is_jailed:
 			c_mesh.show()
 		else:
 			c_mesh.hide()
@@ -576,8 +578,15 @@ func _apply_visual_states(alpha_val: float, target_alpha: float):
 func on_captured():
 	if is_hypnotized: return
 	is_hypnotized = true
-	disable_body_rotation = true # Toggle camera free-look
+	disable_body_rotation = true 
 	
+	# --- 1. FORCE GODOT TO SCRAMBLE ITS RANDOM NUMBERS ---
+	randomize() 
+	# -----------------------------------------------------
+	
+	if rescue_ui_ref:
+		rescue_ui_ref.visible = false
+		
 	collision_layer = 8 
 	collision_mask = 5  
 	
@@ -588,9 +597,26 @@ func on_captured():
 	
 	var jails = get_tree().get_nodes_in_group("jail")
 	if jails.size() > 0:
-		var jail = jails[0]
+		var jail = jails.pick_random() 
+		
+		# --- 2. FOOLPROOF EXPLICIT ARRAY ---
+		var possible_cells = [
+			jail.get_node_or_null("CellTarget"),
+			jail.get_node_or_null("CellTarget2"),
+			jail.get_node_or_null("CellTarget3"),
+			jail.get_node_or_null("CellTarget4")
+		]
+		
+		# Filter out any nulls (just in case you ever delete one of the cells in the editor!)
+		possible_cells = possible_cells.filter(func(node): return node != null)
+		
+		var cell_target = possible_cells.pick_random()
+		# -----------------------------------
+		
 		var walk_pos = jail.get_node("WalkTarget").global_position
-		var cell_pos = jail.get_node("CellTarget").global_position
+		var cell_pos = cell_target.global_position
+		
+		jail_cell_rot_y = cell_target.global_rotation.y 
 		update_jail_targets(walk_pos, cell_pos)
 		
 	if multiplayer.is_server():
@@ -683,8 +709,9 @@ func rescue_successful():
 	if multiplayer.is_server():
 		GameManager.rpc("thief_rescued")
 
+# --- ADD cell_rot_y TO THE ARGUMENTS ---
 @rpc("any_peer", "call_local")
-func on_jailed(cell_pos: Vector3):
+func on_jailed(cell_pos: Vector3, cell_rot_y: float):
 	is_hypnotized = false
 	is_jailed = true
 	disable_body_rotation = true 
@@ -692,11 +719,15 @@ func on_jailed(cell_pos: Vector3):
 	collision_layer = 4 
 	collision_mask = 15 
 	is_rescue_halted = false
+	
+	# --- ADD '+ PI' TO FLIP THEM 180 DEGREES ---
+	global_position = cell_pos
+	rotation.y = cell_rot_y + PI
+	# -------------------------------------------
+	
 	if pitch_pivot:
 		pitch_pivot.rotation.y = 0
 		pitch_pivot.rotation.z = 0
-	
-	global_position = cell_pos
 
 func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
 	var interact_btn = Button.new()
@@ -818,7 +849,7 @@ func _switch_to_camera(index: int):
 	var old_cam = available_cameras[current_cam_index]
 	if old_cam.has_method("release_control"):
 		old_cam.rpc("release_control", multiplayer.get_unique_id())
-	var old_cam3d = old_cam.get_node_or_null("Camera3D")
+	var old_cam3d = old_cam.get_node_or_null("CameraMount/Camera3D")
 	if old_cam3d:
 		old_cam3d.current = false
 		
@@ -828,7 +859,7 @@ func _switch_to_camera(index: int):
 	if new_cam.has_method("request_control"):
 		new_cam.rpc("request_control", multiplayer.get_unique_id())
 		
-	var new_cam3d = new_cam.get_node_or_null("pivotPoint/Camera3D")
+	var new_cam3d = new_cam.get_node_or_null("CameraMount/Camera3D")
 	if new_cam3d:
 		new_cam3d.current = true
 		
@@ -841,14 +872,16 @@ func _cycle_camera(dir: int):
 	_switch_to_camera(current_cam_index + dir)
 
 func _update_camera_rotation():
-	if not is_on_cameras or available_cameras.size() == 0: 
-		print("YO WTF")
-		return
+	if not is_on_cameras or available_cameras.size() == 0: return
 	var cam_root = available_cameras[current_cam_index]
-	var pivot = cam_root.get_node_or_null("pivotPoint")
-	if pivot:
-		pivot.rotation.y = cam_yaw
-		pivot.rotation.x = cam_pitch
+	
+	# 1. Rotate the local Camera3D instantly so it feels responsive to the player
+	var cam3d = cam_root.get_node_or_null("CameraMount/Camera3D")
+	if cam3d:
+		cam3d.rotation.y = cam_yaw
+		cam3d.rotation.x = cam_pitch
+		
+	# 2. Tell the network what we are looking at
 	if cam_root.has_method("sync_rotation"):
 		cam_root.rpc("sync_rotation", cam_yaw, cam_pitch, multiplayer.get_unique_id())
 
@@ -863,7 +896,7 @@ func _fire_camera_ping():
 	# ----------------------
 	
 	var cam_root = available_cameras[current_cam_index]
-	var ray = cam_root.get_node_or_null("pivotPoint/Camera3D/PingRay")
+	var ray = cam_root.get_node_or_null("CameraMount/Camera3D/PingRay")
 	if ray:
 		ray.force_raycast_update()
 		if ray.is_colliding():

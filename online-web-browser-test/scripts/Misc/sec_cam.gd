@@ -7,7 +7,7 @@ extends Node3D
 
 @onready var pivot = $pivotPoint
 # UPDATE PATH: Camera is no longer inside pivotPoint!
-@onready var cam = $Camera3D 
+@onready var cam = $CameraMount/Camera3D
 @onready var red_light = $pivotPoint/Camera_2/Object_9
 
 # The Queue: First person in this list is the primary controller
@@ -50,7 +50,7 @@ func sync_rotation(yaw: float, pitch: float, peer_id: int):
 	# Only listen to the person at the front of the queue
 	if primary_controller_id == peer_id:
 		target_rotation.y = yaw
-		target_rotation.x = pitch
+		target_rotation.x = -pitch
 
 func _update_red_light():
 	if not red_light: return
@@ -59,9 +59,12 @@ func _update_red_light():
 		if mat is StandardMaterial3D:
 			mat = mat.duplicate() 
 			if primary_controller_id != 0:
+				mat.albedo_color = Color(1.0, 0.0, 0.0)
 				mat.emission_enabled = true
-				mat.albedo_color = Color(1.0, 0.0, 0.0) 
+				mat.emission = Color(1.0, 0.0, 0.0)
+				# --- ADD THIS: Overdrive the brightness ---
+				mat.emission_energy_multiplier = 8.0 
 			else:
-				mat.emission_enabled = false
 				mat.albedo_color = Color(0.2, 0.2, 0.2) 
+				mat.emission_enabled = false
 			red_light.set_surface_override_material(0, mat)
