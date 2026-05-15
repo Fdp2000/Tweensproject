@@ -54,9 +54,9 @@ const RESCUE_TIME_REQUIRED = 2.0
 func _ready():
 	super._ready()
 	nav_agent = NavigationAgent3D.new()
-	nav_agent.path_desired_distance = 1.5   # How close to a waypoint before moving to the next one
-	nav_agent.target_desired_distance = 1.5  # How close to the final target to consider "arrived"
-	nav_agent.radius = 0.6                   # Keeps paths away from walls by this distance
+	nav_agent.path_desired_distance = 0.5   # Prevent cutting corners into walls
+	nav_agent.target_desired_distance = 1.0  # Get closer to the jail cell door
+	nav_agent.radius = 0.5                   # Keeps paths away from walls by this distance
 	nav_agent.avoidance_enabled = false      # We don't need dynamic obstacle avoidance
 	add_child(nav_agent)
 	
@@ -200,7 +200,7 @@ func _custom_physics_process(delta, direction):
 			else:
 				var dist_to_target = global_position.distance_to(jail_walk_target)
 				
-				if dist_to_target < 1.5:
+				if dist_to_target < 1.0:
 					rpc("on_jailed", jail_cell_target)
 					velocity.x = 0
 					velocity.z = 0
