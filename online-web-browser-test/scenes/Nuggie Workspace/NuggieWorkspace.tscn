@@ -2,9 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://dcgfko1edbx8o" path="res://Assets/Models/Test Panda/cel_panda_test.tscn" id="1_u2syy"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="1_v7yhp"]
+[ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="2_dpteq"]
 [ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="2_eb1sy"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="3_65afw"]
-[ext_resource type="PackedScene" path="res://Assets/Models/Test Panda/camo_panda_test.tscn" id="4_65afw"]
+[ext_resource type="PackedScene" uid="uid://cugxk5d3dxsan" path="res://Assets/Models/Test Panda/camo_panda_test.tscn" id="4_65afw"]
+[ext_resource type="PackedScene" uid="uid://uyed2qv4xkw6" path="res://Assets/Models/Test Panda/HypnoPanda.tscn" id="7_kcrnk"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
@@ -14,6 +16,7 @@ size = Vector2(64.835, 30.21)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dg571"]
 render_priority = 0
 shader = ExtResource("1_v7yhp")
+shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0, 1, 1, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 3.0
@@ -80,6 +83,7 @@ shadow_mesh = SubResource("ArrayMesh_hykh3")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_65afw"]
 render_priority = 0
 shader = ExtResource("1_v7yhp")
+shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/albedo_texture = ExtResource("3_65afw")
 shader_parameter/use_stepped = true
@@ -117,6 +121,11 @@ mesh = SubResource("PlaneMesh_v7yhp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 mesh = SubResource("SphereMesh_v7yhp")
 surface_material_override/0 = SubResource("ShaderMaterial_dg571")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="." unique_id=2067030197]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6279325, 2, 0.15961313)
+mesh = SubResource("SphereMesh_v7yhp")
+surface_material_override/0 = ExtResource("2_dpteq")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="." unique_id=379367690]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.512372, 2, 0)
@@ -169,4 +178,7 @@ spot_attenuation = -0.39
 spot_angle = 33.104214
 
 [node name="RedPanda_Character_materialer3" parent="." unique_id=427534513 instance=ExtResource("4_65afw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.237262, 0, -0.96090794)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.888521, 0, -0.96090794)
+
+[node name="RedPanda_Character_materialer4" parent="." unique_id=328487600 instance=ExtResource("7_kcrnk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.577389, 0, -1.2023191)
