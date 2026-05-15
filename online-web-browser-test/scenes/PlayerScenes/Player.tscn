@@ -29,7 +29,7 @@ properties/5/replication_mode = 2
 [node name="Player" type="CharacterBody3D" unique_id=692488303]
 collision_layer = 2
 collision_mask = 3
-floor_max_angle = 1.0471976
+floor_max_angle = 1.3089969
 floor_snap_length = 0.5
 script = ExtResource("1_m43ed")
 

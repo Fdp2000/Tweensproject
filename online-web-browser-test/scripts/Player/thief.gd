@@ -54,14 +54,17 @@ const RESCUE_TIME_REQUIRED = 2.0
 var debug_path_mesh: MeshInstance3D
 var debug_label: Label3D
 
+var custom_path_index: int = 0
+
 func _ready():
 	super._ready()
 	nav_agent = NavigationAgent3D.new()
-	nav_agent.path_desired_distance = 0.5   # Prevent cutting corners into walls
-	nav_agent.target_desired_distance = 1.0  # Get closer to the jail cell door
-	nav_agent.radius = 0.5                   # Keeps paths away from walls by this distance
-	nav_agent.avoidance_enabled = false      # We don't need dynamic obstacle avoidance
+	# We use nav_agent ONLY to generate the path. We will handle following it manually to avoid 3D distance bugs!
+	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
+
+func _on_path_changed():
+	custom_path_index = 0
 	
 	if is_multiplayer_authority():
 		# Setup Debug Path Visualizer
@@ -242,39 +245,49 @@ func _custom_physics_process(delta, direction):
 					velocity.z = move_toward(velocity.z, 0, SPEED)
 					draw_debug_path()
 				else:
-					var next_pos = nav_agent.get_next_path_position()
+					# --- CUSTOM 2D PATH FOLLOWER ---
+					var _ignore = nav_agent.get_next_path_position() # Keep agent internal state happy so it repaths if needed
 					draw_debug_path()
 					
-					# Dynamically negate any vertical mismatch between the NavMesh and the Thief's physical feet.
-					# This forces Godot's internal waypoint-clearance check to evaluate as a pure 2D horizontal distance,
-					# preventing the freezing bug while allowing us to keep a strict 0.5m path_desired_distance!
-					nav_agent.path_height_offset = next_pos.y - global_position.y
+					var path = nav_agent.get_current_navigation_path()
 					
-					# Flatten the positions to ignore vertical mismatches between NavMesh and Physics
-					var flat_global = Vector3(global_position.x, 0, global_position.z)
-					var flat_next = Vector3(next_pos.x, 0, next_pos.z)
-					var dist_to_next_flat = flat_global.distance_to(flat_next)
-					
-					if dist_to_next_flat < 0.1:
-						# We are practically standing on the waypoint horizontally.
-						# Stop applying velocity so we don't vibrate from floating point dust.
+					if path.size() == 0 or custom_path_index >= path.size():
 						velocity.x = move_toward(velocity.x, 0, SPEED)
 						velocity.z = move_toward(velocity.z, 0, SPEED)
-						if debug_label: debug_label.text = "STOPPED (dist_flat < 0.1)\nVel: " + str(velocity.length())
+						if debug_label: debug_label.text = "STOPPED (End of Path)\nVel: 0"
 					else:
-						# Calculate pure horizontal direction
-						var dir_to_next = flat_global.direction_to(flat_next)
+						var flat_global = Vector3(global_position.x, 0, global_position.z)
+						var target_pt = path[custom_path_index]
+						var flat_target = Vector3(target_pt.x, 0, target_pt.z)
+						var dist = flat_global.distance_to(flat_target)
 						
-						velocity.x = dir_to_next.x * (SPEED * 0.4)
-						velocity.z = dir_to_next.z * (SPEED * 0.4)
-						
-						if debug_label: debug_label.text = "MOVING\ndist_flat: " + str(dist_to_next_flat).pad_decimals(2) + "\nVel: " + str(velocity.length()).pad_decimals(2)
+						# Fast-forward through waypoints we are horizontally close to (Pure 2D check!)
+						while dist < 0.5 and custom_path_index < path.size():
+							custom_path_index += 1
+							if custom_path_index < path.size():
+								target_pt = path[custom_path_index]
+								flat_target = Vector3(target_pt.x, 0, target_pt.z)
+								dist = flat_global.distance_to(flat_target)
+								
+						if custom_path_index >= path.size():
+							# Reached the very end
+							velocity.x = move_toward(velocity.x, 0, SPEED)
+							velocity.z = move_toward(velocity.z, 0, SPEED)
+							if debug_label: debug_label.text = "STOPPED (Reached Target)\nVel: 0"
+						else:
+							# Move towards current target
+							var dir_to_next = flat_global.direction_to(flat_target)
+							velocity.x = dir_to_next.x * (SPEED * 0.4)
+							velocity.z = dir_to_next.z * (SPEED * 0.4)
+							
+							if debug_label: debug_label.text = "MOVING to WP " + str(custom_path_index) + "\nDist: " + str(dist).pad_decimals(2)
 						
 						# --- CAMERA FIX: DECOUPLE FROM BODY ROTATION ---
-						var old_cam_basis = pitch_pivot.global_basis
-						var target_transform = transform.looking_at(global_position + dir_to_next, Vector3.UP)
-						transform = transform.interpolate_with(target_transform, 5.0 * delta)
-						pitch_pivot.global_basis = old_cam_basis.orthonormalized()
+						if velocity.length_squared() > 0.01:
+							var old_cam_basis = pitch_pivot.global_basis
+							var target_transform = transform.looking_at(global_position + Vector3(velocity.x, 0, velocity.z).normalized(), Vector3.UP)
+							transform = transform.interpolate_with(target_transform, 5.0 * delta)
+							pitch_pivot.global_basis = old_cam_basis.orthonormalized()
 						# -----------------------------------------------
 						
 		if multiplayer.is_server():
