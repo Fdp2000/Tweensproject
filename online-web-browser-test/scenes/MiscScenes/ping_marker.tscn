@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://df234df3ping1"]
+
+[sub_resource type="GDScript" id="GDScript_ping"]
+script/source = "extends Node3D
+
+var lifetime = 2.0
+var age = 0.0
+
+func _process(delta):
+	age += delta
+	if age >= lifetime:
+		queue_free()
+	else:
+		var s = 1.0 + (age * 2.0)
+		scale = Vector3(s, s, s)
+		var mat = $MeshInstance3D.mesh.surface_get_material(0)
+		if mat:
+			mat.albedo_color.a = 1.0 - (age / lifetime)
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ping"]
+transparency = 1
+no_depth_test = true
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_ping"]
+material = SubResource("StandardMaterial3D_ping")
+inner_radius = 0.4
+outer_radius = 0.5
+rings = 16
+ring_segments = 8
+
+[node name="PingMarker" type="Node3D" unique_id=1967171049]
+script = SubResource("GDScript_ping")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=240334130]
+mesh = SubResource("TorusMesh_ping")

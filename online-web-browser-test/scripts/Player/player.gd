@@ -347,3 +347,35 @@ func is_mobile_device() -> bool:
 			for m in ["Android", "iPhone", "iPad", "iPod", "Mobile"]:
 				if m in ua: return true
 	return false
+
+
+# ================================
+# CAMERA PING SYSTEM
+# ================================
+var ping_timer: SceneTreeTimer = null
+var cop_ping_visual: Node3D = null
+
+func _ready_ping_visual():
+	if not cop_ping_visual:
+		var ping_scene = load("res://scenes/MiscScenes/cop_ping.tscn")
+		if ping_scene:
+			cop_ping_visual = ping_scene.instantiate()
+			add_child(cop_ping_visual)
+			cop_ping_visual.position = Vector3(0, 2.5, 0)
+			cop_ping_visual.visible = false
+
+@rpc("any_peer", "call_local")
+func get_pinged():
+	if not cop_ping_visual:
+		_ready_ping_visual()
+		
+	if cop_ping_visual:
+		cop_ping_visual.visible = true
+		if ping_timer:
+			ping_timer.timeout.disconnect(_hide_ping)
+		ping_timer = get_tree().create_timer(5.0)
+		ping_timer.timeout.connect(_hide_ping)
+
+func _hide_ping():
+	if cop_ping_visual:
+		cop_ping_visual.visible = false

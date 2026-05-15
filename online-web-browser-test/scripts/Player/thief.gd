@@ -25,12 +25,21 @@ var last_pos: Vector3 = Vector3.ZERO
 var nav_agent: NavigationAgent3D
 var current_speed_mult: float = 1.0
 
+var is_on_cameras: bool = false
+var current_cam_index: int = 0
+var available_cameras: Array[Node] = []
+var cam_yaw: float = 0.0
+var cam_pitch: float = 0.0
+
 var nearby_interactables: Array[Node3D] = []
 var interaction_scanner: Area3D
 
 var _last_rendered_alpha: float = -1.0
 var _last_rendered_highlight: bool = false
 var _last_rendered_hypnotized: bool = false
+
+var last_ping_msec: int = 0
+const PING_COOLDOWN_MS: int = 1000 # 1 second in milliseconds
 
 
 func get_carried_artifact():
@@ -62,9 +71,6 @@ func _ready():
 	# We use nav_agent ONLY to generate the path. We will handle following it manually to avoid 3D distance bugs!
 	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
-
-func _on_path_changed():
-	custom_path_index = 0
 	
 	if is_multiplayer_authority():
 		# Setup Debug Path Visualizer
@@ -125,21 +131,15 @@ func _on_path_changed():
 			rescue_ui_ref = ui
 			canvas.add_child(ui)
 
+func _on_path_changed():
+	custom_path_index = 0
+
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	
 	# --- DEV TOOL: Toggle Hypnotized ---
 	if event is InputEventKey and event.physical_keycode == KEY_H and event.pressed and not event.echo:
 		rpc("dev_toggle_hypnotize")
-		return
-		
-	if is_hypnotized:
-		# Allow them to look around with the mouse, but only rotate the camera pivot, not the body
-		if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			var actual_sens = mouse_sensitivity * 0.001
-			pitch_pivot.rotate_y(-event.relative.x * actual_sens)
-			pitch_pivot.rotate_x(-event.relative.y * actual_sens)
-			pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -1.0, 1.0)
 		return
 		
 	super._unhandled_input(event)
@@ -153,6 +153,41 @@ func _unhandled_input(event):
 			var target = get_closest_interactable()
 			if target and not target.has_method("on_captured"): # Artifact
 				target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
+
+func _input(event):
+	if not is_multiplayer_authority(): return
+	
+	# --- INTERCEPT SECURITY CAMERA INPUTS BEFORE PLAYER.GD ---
+	if is_on_cameras:
+		if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			var actual_sens = mouse_sensitivity * 0.001
+			cam_yaw -= event.relative.x * actual_sens
+			cam_pitch += event.relative.y * actual_sens
+			cam_yaw = clamp(cam_yaw, -1.0, 1.0)
+			cam_pitch = clamp(cam_pitch, -0.5, 0.5)
+			_update_camera_rotation()
+			
+			get_viewport().set_input_as_handled() # Consumes the input
+			return
+			
+		if event is InputEventKey and event.pressed and not event.echo:
+			if event.physical_keycode == KEY_A or event.physical_keycode == KEY_LEFT:
+				_cycle_camera(-1)
+				get_viewport().set_input_as_handled()
+				return
+			elif event.physical_keycode == KEY_D or event.physical_keycode == KEY_RIGHT:
+				_cycle_camera(1)
+				get_viewport().set_input_as_handled()
+				return
+				
+		var is_cam_interact = (event is InputEventKey and event.physical_keycode == KEY_E and event.pressed and not event.echo) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
+		if is_cam_interact:
+			_fire_camera_ping()
+			get_viewport().set_input_as_handled()
+			return
+			
+	# If we aren't on cameras, let the base player.gd script handle the input normally
+	super._input(event)
 
 func _try_drop():
 	if carried_artifact:
@@ -226,6 +261,11 @@ func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 		nav_agent.target_position = jail_walk_target
 
 func _custom_physics_process(delta, direction):
+	if is_jailed or is_on_cameras:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+		return
+	
 	if is_hypnotized:
 		if is_multiplayer_authority():
 			if is_rescue_halted:
@@ -238,6 +278,7 @@ func _custom_physics_process(delta, direction):
 					rpc("on_jailed", jail_cell_target)
 					velocity.x = 0
 					velocity.z = 0
+					_access_cameras()
 				elif nav_agent.is_navigation_finished():
 					# The path is finished, but we haven't reached the jail!
 					# This means the NavMesh is severed/broken and the jail is unreachable.
@@ -396,6 +437,12 @@ func _process(delta):
 			rescue_ui_ref.progress = current_interact_target.rescue_progress / RESCUE_TIME_REQUIRED
 		else:
 			rescue_ui_ref.progress = 0.0
+			
+	if is_on_cameras:
+		if is_mobile_interact:
+			is_mobile_interact = false
+			_fire_camera_ping()
+		return
 			
 	if Input.is_physical_key_pressed(KEY_E) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or is_mobile_interact:
 		if not is_rescuing and target and is_instance_valid(target):
@@ -640,7 +687,7 @@ func rescue_successful():
 func on_jailed(cell_pos: Vector3):
 	is_hypnotized = false
 	is_jailed = true
-	disable_body_rotation = false # No this needs to be false when jailed to gain control again normally
+	disable_body_rotation = true 
 	
 	collision_layer = 4 
 	collision_mask = 15 
@@ -692,3 +739,137 @@ func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
 	interact_btn.button_up.connect(func():
 		is_mobile_interact = false
 	)
+
+
+# =========================================================
+# SECURITY CAMERA LOGIC
+# =========================================================
+
+func _access_cameras():
+	available_cameras = get_tree().get_nodes_in_group("SecurityCameras")
+	if available_cameras.size() == 0:
+		print("No security cameras found!")
+		return
+		
+	is_on_cameras = true
+	
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Hide joystick if on mobile
+	var canvas = get_node_or_null("PlayerCanvas")
+	if canvas:
+		# --- ADD CROSSHAIR ---
+		var crosshair = canvas.get_node_or_null("CamCrosshair")
+		if not crosshair:
+			crosshair = ColorRect.new()
+			crosshair.name = "CamCrosshair"
+			crosshair.color = Color(1.0, 1.0, 1.0, 0.7) # Semi-transparent white
+			crosshair.custom_minimum_size = Vector2(4, 4) # 4x4 pixel dot
+			crosshair.set_anchors_preset(Control.PRESET_CENTER)
+			# Center it perfectly
+			crosshair.offset_left = -2
+			crosshair.offset_right = 2
+			crosshair.offset_top = -2
+			crosshair.offset_bottom = 2
+			crosshair.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			canvas.add_child(crosshair)
+		crosshair.visible = true
+		# ---------------------
+		
+		var touch_ui = canvas.get_node_or_null("TouchUI")
+		if touch_ui:
+			touch_ui.visible = false
+			
+		if is_mobile_device():
+			var left_btn = canvas.get_node_or_null("CamLeftBtn")
+			if not left_btn:
+				left_btn = Button.new()
+				left_btn.name = "CamLeftBtn"
+				left_btn.text = "<"
+				left_btn.set_anchors_preset(Control.PRESET_CENTER_LEFT)
+				left_btn.position = Vector2(20, -50)
+				left_btn.size = Vector2(100, 100)
+				left_btn.pressed.connect(func(): _cycle_camera(-1))
+				canvas.add_child(left_btn)
+				
+			var right_btn = canvas.get_node_or_null("CamRightBtn")
+			if not right_btn:
+				right_btn = Button.new()
+				right_btn.name = "CamRightBtn"
+				right_btn.text = ">"
+				right_btn.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
+				right_btn.position = Vector2(-120, -50)
+				right_btn.size = Vector2(100, 100)
+				right_btn.pressed.connect(func(): _cycle_camera(1))
+				canvas.add_child(right_btn)
+				
+			if left_btn: left_btn.visible = true
+			if right_btn: right_btn.visible = true
+	
+	current_cam_index = randi() % available_cameras.size()
+	_switch_to_camera(current_cam_index)
+
+func _switch_to_camera(index: int):
+	if available_cameras.size() == 0: 
+		print("No security cameras found in size!")
+		return
+	
+	# Release old camera
+	var old_cam = available_cameras[current_cam_index]
+	if old_cam.has_method("release_control"):
+		old_cam.rpc("release_control", multiplayer.get_unique_id())
+	var old_cam3d = old_cam.get_node_or_null("Camera3D")
+	if old_cam3d:
+		old_cam3d.current = false
+		
+	# Claim new camera
+	current_cam_index = posmod(index, available_cameras.size())
+	var new_cam = available_cameras[current_cam_index]
+	if new_cam.has_method("request_control"):
+		new_cam.rpc("request_control", multiplayer.get_unique_id())
+		
+	var new_cam3d = new_cam.get_node_or_null("pivotPoint/Camera3D")
+	if new_cam3d:
+		new_cam3d.current = true
+		
+	cam_yaw = 0.0
+	cam_pitch = 0.0
+	_update_camera_rotation()
+
+func _cycle_camera(dir: int):
+	if not is_on_cameras: return
+	_switch_to_camera(current_cam_index + dir)
+
+func _update_camera_rotation():
+	if not is_on_cameras or available_cameras.size() == 0: 
+		print("YO WTF")
+		return
+	var cam_root = available_cameras[current_cam_index]
+	var pivot = cam_root.get_node_or_null("pivotPoint")
+	if pivot:
+		pivot.rotation.y = cam_yaw
+		pivot.rotation.x = cam_pitch
+	if cam_root.has_method("sync_rotation"):
+		cam_root.rpc("sync_rotation", cam_yaw, cam_pitch, multiplayer.get_unique_id())
+
+func _fire_camera_ping():
+	if not is_on_cameras or available_cameras.size() == 0: return
+	
+	# --- COOLDOWN CHECK ---
+	var current_time = Time.get_ticks_msec()
+	if current_time - last_ping_msec < PING_COOLDOWN_MS:
+		return # Ignore input if still on cooldown
+	last_ping_msec = current_time
+	# ----------------------
+	
+	var cam_root = available_cameras[current_cam_index]
+	var ray = cam_root.get_node_or_null("pivotPoint/Camera3D/PingRay")
+	if ray:
+		ray.force_raycast_update()
+		if ray.is_colliding():
+			var collider = ray.get_collider()
+			if collider and collider.has_method("get_pinged") and collider.get("team_index") == 1:
+				collider.rpc("get_pinged")
+			else:
+				var hit_pos = ray.get_collision_point()
+				GameManager.rpc("spawn_location_ping", hit_pos)

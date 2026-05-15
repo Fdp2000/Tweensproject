@@ -237,3 +237,12 @@ func host_start_game():
 		assignments[str(peer_ids[i])] = role
 		
 	rpc("start_game", assignments)
+
+
+@rpc("any_peer", "call_local")
+func spawn_location_ping(pos: Vector3):
+	var ping_scene = load("res://scenes/MiscScenes/ping_marker.tscn")
+	if ping_scene:
+		var ping = ping_scene.instantiate()
+		add_child(ping)
+		ping.global_position = pos
