@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dbthrekbiny7b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_copping"]
+no_depth_test = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_copping"]
+material = SubResource("StandardMaterial3D_copping")
+size = Vector3(0.5, 0.5, 0.1)
+
+[node name="CopPing" type="Node3D" unique_id=1415273301]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=677134247]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+mesh = SubResource("PrismMesh_copping")

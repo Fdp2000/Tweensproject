@@ -112,7 +112,7 @@ func fire_camera_ping():
 				collider.rpc("get_pinged")
 			else:
 				var hit_pos = ray.get_collision_point()
-				GameManager.rpc("spawn_location_ping", hit_pos)
+				thief.rpc("sync_world_ping", hit_pos)
 
 func release_cameras():
 	is_on_cameras = false

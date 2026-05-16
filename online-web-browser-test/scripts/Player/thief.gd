@@ -5,7 +5,7 @@ extends "res://scripts/Player/player.gd"
 var ui_manager: Node = null
 var camera_manager: Node = null
 var stealth_manager: Node = null
-
+var world_ping_manager: Node = null
 
 var carried_artifact: Node3D = null
 var cash_contributed: int = 0
@@ -83,10 +83,17 @@ func _ready():
 		camera_manager = ThiefCameraManager.new()
 		add_child(camera_manager)
 		camera_manager.setup(self)
-		# Initialize Stealth Manager
-		stealth_manager = ThiefStealthManager.new()
-		add_child(stealth_manager)
-		stealth_manager.setup(self, camo_material, hypno_material)
+# =====================================================================
+	# --- MOVE THESE OUTSIDE! (Everyone needs to see visuals and pings) ---
+	# =====================================================================
+	
+	stealth_manager = ThiefStealthManager.new()
+	add_child(stealth_manager)
+	stealth_manager.setup(self, camo_material, hypno_material)
+	
+	world_ping_manager = ThiefPingManager.new()
+	add_child(world_ping_manager)
+	world_ping_manager.setup(self)
 
 	
 	if is_multiplayer_authority():
@@ -530,6 +537,11 @@ func sync_rescue_halt(halted: bool):
 @rpc("any_peer", "call_local", "reliable")
 func sync_active_rescuer(id: int):
 	active_rescuer_id = id
+	
+@rpc("any_peer", "call_local")
+func sync_world_ping(pos: Vector3):
+	if world_ping_manager:
+		world_ping_manager.trigger_ping(pos)
 
 @rpc("any_peer", "call_local")
 func rescue_successful():
