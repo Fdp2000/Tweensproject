@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 const SPEED = 6.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var mobile_input: Node = null
+var ping_manager: Node = null
 
 var mouse_sensitivity: float = 2.0 
-var look_touch_index: int = -1
-var last_look_pos: Vector2 = Vector2.ZERO
 var target_shoulder_x = 1.0
 var disable_body_rotation: bool = false
 
@@ -81,9 +81,16 @@ func _ready():
 		canvas.name = "PlayerCanvas"
 		add_child(canvas)
 		
-		setup_mobile_ui()
+		# Replace setup_mobile_ui() with:
+		mobile_input = MobileInputManager.new()
+		add_child(mobile_input)
+		mobile_input.setup(self)
 	else:
 		camera.current = false
+	# (Everyone needs to be able to render a ping)
+	ping_manager = PlayerPingManager.new()
+	add_child(ping_manager)
+	ping_manager.setup(self)
 
 	if has_node("MultiplayerSynchronizer"):
 		var sync_node = get_node("MultiplayerSynchronizer")
@@ -129,69 +136,6 @@ func request_team_color():
 func sync_team(assigned_team: int):
 	team_index = assigned_team
 	_apply_team_colors()
-
-func setup_mobile_ui():
-	if not is_mobile_device(): return
-	
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	var canvas = get_node("PlayerCanvas")
-	
-	var screen_size = DisplayServer.window_get_size()
-	var ui_scale = min(screen_size.x, screen_size.y) / 720.0 
-	ui_scale = clamp(ui_scale, 0.8, 2.0) 
-	
-	var mobile_ui = Control.new()
-	mobile_ui.name = "MobileUI"
-	mobile_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	mobile_ui.mouse_filter = Control.MOUSE_FILTER_PASS
-	canvas.add_child(mobile_ui)
-	
-	var look_area = Control.new()
-	look_area.name = "LookArea"
-	look_area.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	look_area.mouse_filter = Control.MOUSE_FILTER_STOP
-	look_area.gui_input.connect(func(event):
-		if event is InputEventScreenTouch:
-			if event.pressed:
-				if look_touch_index == -1:
-					look_touch_index = event.index
-					last_look_pos = event.position
-			elif event.index == look_touch_index:
-				look_touch_index = -1
-		
-		if event is InputEventScreenDrag and event.index == look_touch_index:
-			var drag_relative = event.position - last_look_pos
-			last_look_pos = event.position
-			
-			var actual_sens = mouse_sensitivity * 0.001
-			
-			if disable_body_rotation:
-				pitch_pivot.rotate_y(-drag_relative.x * actual_sens)
-			else:
-				rotate_y(-drag_relative.x * actual_sens)
-				
-			pitch_pivot.rotate_x(-drag_relative.y * actual_sens)
-			pitch_pivot.rotation.x = clamp(pitch_pivot.rotation.x, -1.0, 1.0)
-			get_viewport().set_input_as_handled()
-	)
-	mobile_ui.add_child(look_area)
-	
-	var joystick = load("res://scripts/UI/virtual_joystick.gd").new()
-	joystick.name = "Joystick"
-	var joy_size = 200 * ui_scale
-	joystick.custom_minimum_size = Vector2(joy_size, joy_size)
-	joystick.radius = 70 * ui_scale
-	joystick.anchor_top = 1.0
-	joystick.anchor_bottom = 1.0
-	joystick.anchor_left = 0.0
-	joystick.anchor_right = 0.0
-	joystick.offset_left = 40 * ui_scale
-	joystick.offset_right = (40 + 200) * ui_scale
-	joystick.offset_top = - (220 * ui_scale)
-	joystick.offset_bottom = - (20 * ui_scale)
-	mobile_ui.add_child(joystick)
-	
-	_add_custom_mobile_ui(mobile_ui, ui_scale)
 
 func _add_custom_mobile_ui(_mobile_ui: Control, _ui_scale: float):
 	pass
@@ -289,9 +233,8 @@ func _physics_process(delta):
 	if not is_on_floor(): velocity.y -= gravity * delta
 
 	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var joystick = get_node_or_null("PlayerCanvas/MobileUI/Joystick")
-	if joystick and joystick.get_value() != Vector2.ZERO:
-		input_dir = joystick.get_value()
+	if mobile_input and mobile_input.get_joystick_vector() != Vector2.ZERO:
+		input_dir = mobile_input.get_joystick_vector()
 		
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
@@ -352,30 +295,8 @@ func is_mobile_device() -> bool:
 # ================================
 # CAMERA PING SYSTEM
 # ================================
-var ping_timer: SceneTreeTimer = null
-var cop_ping_visual: Node3D = null
-
-func _ready_ping_visual():
-	if not cop_ping_visual:
-		var ping_scene = load("res://scenes/MiscScenes/cop_ping.tscn")
-		if ping_scene:
-			cop_ping_visual = ping_scene.instantiate()
-			add_child(cop_ping_visual)
-			cop_ping_visual.position = Vector3(0, 2.5, 0)
-			cop_ping_visual.visible = false
 
 @rpc("any_peer", "call_local")
 func get_pinged():
-	if not cop_ping_visual:
-		_ready_ping_visual()
-		
-	if cop_ping_visual:
-		cop_ping_visual.visible = true
-		if ping_timer:
-			ping_timer.timeout.disconnect(_hide_ping)
-		ping_timer = get_tree().create_timer(5.0)
-		ping_timer.timeout.connect(_hide_ping)
-
-func _hide_ping():
-	if cop_ping_visual:
-		cop_ping_visual.visible = false
+	if ping_manager:
+		ping_manager.trigger_ping()
