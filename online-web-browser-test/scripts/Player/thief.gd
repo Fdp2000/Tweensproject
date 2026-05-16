@@ -3,16 +3,10 @@ extends "res://scripts/Player/player.gd"
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
 var ui_manager: Node = null
+var camera_manager: Node = null
+var stealth_manager: Node = null
 
-var _is_dual_mesh_setup = false
-var base_meshes: Array[MeshInstance3D] = []
-var camo_meshes: Array[MeshInstance3D] = []
-var local_outline_mat: ShaderMaterial = null
 
-var stationary_time = 0.0
-const INVISIBLE_TIME = 2.0
-var current_alpha = 1.0
-var target_alpha = 1.0
 var carried_artifact: Node3D = null
 var cash_contributed: int = 0
 var is_hypnotized: bool = false
@@ -21,28 +15,15 @@ var is_jailed: bool = false
 var jail_walk_target: Vector3 = Vector3.ZERO   # Where the thief walks to (outside jail door)
 var jail_cell_target: Vector3 = Vector3.ZERO   # Where the thief gets teleported (inside cell)
 var jail_cell_rot_y: float = 0.0 # <--- ADD THIS
+
 var is_highlighted: bool = false
 var is_mobile_interact: bool = false
 var last_pos: Vector3 = Vector3.ZERO
 var nav_agent: NavigationAgent3D
 var current_speed_mult: float = 1.0
 
-var is_on_cameras: bool = false
-var current_cam_index: int = 0
-var available_cameras: Array[Node] = []
-var cam_yaw: float = 0.0
-var cam_pitch: float = 0.0
-
 var nearby_interactables: Array[Node3D] = []
 var interaction_scanner: Area3D
-
-var _last_rendered_alpha: float = -1.0
-var _last_rendered_highlight: bool = false
-var _last_rendered_hypnotized: bool = false
-
-var last_ping_msec: int = 0
-const PING_COOLDOWN_MS: int = 1000 # 1 second in milliseconds
-
 
 func get_carried_artifact():
 	return carried_artifact
@@ -57,7 +38,6 @@ var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
 var is_rescuing: bool = false
 var current_interact_target: Node3D = null
-var last_outlined_target: Node3D = null
 var outline_mat: StandardMaterial3D = null
 const RESCUE_TIME_REQUIRED = 2.0
 
@@ -94,10 +74,19 @@ func _ready():
 		debug_label.outline_modulate = Color.BLACK
 		debug_label.no_depth_test = true
 		add_child(debug_label)
+		
 		# Initialize UI Manager
 		ui_manager = ThiefUIManager.new()
 		add_child(ui_manager)
 		ui_manager.setup(self)
+		# Initialize Camera Manager
+		camera_manager = ThiefCameraManager.new()
+		add_child(camera_manager)
+		camera_manager.setup(self)
+		# Initialize Stealth Manager
+		stealth_manager = ThiefStealthManager.new()
+		add_child(stealth_manager)
+		stealth_manager.setup(self, camo_material, hypno_material)
 
 	
 	if is_multiplayer_authority():
@@ -146,7 +135,7 @@ func _unhandled_input(event):
 
 func _input(event):
 	if not is_multiplayer_authority(): return
-	# --- FIX: ALWAYS LET ESCAPE TOGGLE MOUSE MODE FIRST ---
+	
 	if event is InputEventKey and event.physical_keycode == KEY_ESCAPE and event.pressed and not event.echo:
 		if not is_mobile_device():
 			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -155,38 +144,12 @@ func _input(event):
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			get_viewport().set_input_as_handled()
 			return
-	# -------------------------------------------------------
-	
-	# --- INTERCEPT SECURITY CAMERA INPUTS BEFORE PLAYER.GD ---
-	if is_on_cameras:
-		if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			var actual_sens = mouse_sensitivity * 0.001
-			cam_yaw -= event.relative.x * actual_sens
-			cam_pitch -= event.relative.y * actual_sens
-			cam_yaw = clamp(cam_yaw, -1.0, 1.0)
-			cam_pitch = clamp(cam_pitch, -0.5, 0.5)
-			_update_camera_rotation()
 			
-			get_viewport().set_input_as_handled() # Consumes the input
-			return
-			
-		if event is InputEventKey and event.pressed and not event.echo:
-			if event.physical_keycode == KEY_A or event.physical_keycode == KEY_LEFT:
-				_cycle_camera(-1)
-				get_viewport().set_input_as_handled()
-				return
-			elif event.physical_keycode == KEY_D or event.physical_keycode == KEY_RIGHT:
-				_cycle_camera(1)
-				get_viewport().set_input_as_handled()
-				return
-				
-		var is_cam_interact = (event is InputEventKey and event.physical_keycode == KEY_E and event.pressed and not event.echo) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
-		if is_cam_interact:
-			_fire_camera_ping()
-			get_viewport().set_input_as_handled()
-			return
-			
-	# If we aren't on cameras, let the base player.gd script handle the input normally
+	# --- LET THE MANAGER HANDLE CAMERA INPUTS ---
+	if camera_manager and camera_manager.handle_input(event):
+		get_viewport().set_input_as_handled()
+		return
+		
 	super._input(event)
 
 func _try_drop():
@@ -234,24 +197,6 @@ func get_closest_interactable() -> Node3D:
 	if closest_thief: return closest_thief
 	return closest_art
 
-func _update_outlines(target: Node3D):
-	if target == last_outlined_target: return
-	
-	# Turn off old highlight
-	if last_outlined_target and is_instance_valid(last_outlined_target):
-		if last_outlined_target.has_method("set_highlight"):
-			last_outlined_target.set_highlight(false)
-		else:
-			last_outlined_target.set("is_highlighted", false)
-			
-	last_outlined_target = target
-	
-	# Turn on new highlight
-	if target and is_instance_valid(target):
-		if target.has_method("set_highlight"):
-			target.set_highlight(true)
-		else:
-			target.set("is_highlighted", true)
 
 
 func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
@@ -261,7 +206,7 @@ func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 		nav_agent.target_position = jail_walk_target
 
 func _custom_physics_process(delta, direction):
-	if is_jailed or is_on_cameras:
+	if is_jailed or (camera_manager and camera_manager.is_on_cameras):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		return
@@ -279,7 +224,7 @@ func _custom_physics_process(delta, direction):
 					rpc("on_jailed", jail_cell_target, jail_cell_rot_y)
 					velocity.x = 0
 					velocity.z = 0
-					_access_cameras()
+					if camera_manager: camera_manager.access_cameras()
 				elif nav_agent.is_navigation_finished():
 					# The path is finished, but we haven't reached the jail!
 					# This means the NavMesh is severed/broken and the jail is unreachable.
@@ -387,40 +332,22 @@ func _process(delta):
 	# This tells Godot to run the network smoothing math from Player.gd!
 	super._process(delta) 
 	# ---------------------------------
-	# 1. VISUAL TRANSPARENCY (Runs for EVERYONE to calculate smooth visual alpha)
-	var speed = 0.0
-	if is_multiplayer_authority():
-		speed = Vector3(velocity.x, 0, velocity.z).length()
-	else:
-		var dist = Vector3(global_position.x, 0, global_position.z).distance_to(Vector3(last_pos.x, 0, last_pos.z))
-		speed = dist / delta
-		last_pos = global_position
-		
-	if speed < 0.2:
-		stationary_time += delta
-	else:
-		stationary_time = 0.0
-		
-	if is_hypnotized or is_jailed:
-		target_alpha = 1.0
-	elif stationary_time >= INVISIBLE_TIME:
-		target_alpha = 0.0
-	else:
-		target_alpha = 1.0
-		
-	current_alpha = lerp(current_alpha, target_alpha, 8.0 * delta)
-	
-	if abs(current_alpha - _last_rendered_alpha) > 0.01 or is_highlighted != _last_rendered_highlight or is_hypnotized != _last_rendered_hypnotized:
-		_apply_visual_states(current_alpha, target_alpha)
-		_last_rendered_alpha = current_alpha
-		_last_rendered_highlight = is_highlighted
-		_last_rendered_hypnotized = is_hypnotized
+	# --- STEALTH & VISUALS ---
+	if stealth_manager:
+		var speed = 0.0
+		if is_multiplayer_authority():
+			speed = Vector3(velocity.x, 0, velocity.z).length()
+		else:
+			var dist = Vector3(global_position.x, 0, global_position.z).distance_to(Vector3(last_pos.x, 0, last_pos.z))
+			speed = dist / delta
+			last_pos = global_position
+			
+		stealth_manager.process_stealth(delta, speed, is_hypnotized, is_jailed, is_highlighted)
 
-
-	# 2. HIGHLIGHT & INTERACTION LOGIC (Runs ONLY for the local player)
+	# HIGHLIGHT & INTERACTION LOGIC (Runs ONLY for the local player)
 	if not is_multiplayer_authority(): return
 	
-	## --- NEW RESCUE UI LOGIC ---
+	## ---  RESCUE UI LOGIC ---
 	if ui_manager:
 		if is_jailed:
 			ui_manager.update_rescue_ring(0.0, false) # Hide in jail
@@ -439,7 +366,7 @@ func _process(delta):
 	
 	# FIX: If hypnotized or jailed, immediately clear highlights and stop rescuing!
 	if is_hypnotized or is_jailed:
-		_update_outlines(null)
+		if stealth_manager: stealth_manager.update_outlines(null)
 		if is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
 			rpc_id(1, "request_stop_rescue", int(str(current_interact_target.name)))
 			is_rescuing = false
@@ -453,13 +380,13 @@ func _process(delta):
 	else:
 		target = get_closest_interactable()
 		
-	_update_outlines(target)
+	if stealth_manager: stealth_manager.update_outlines(target)
 	
 
-	if is_on_cameras:
+	if camera_manager and camera_manager.is_on_cameras:
 		if is_mobile_interact:
 			is_mobile_interact = false
-			_fire_camera_ping()
+			camera_manager.fire_camera_ping()
 		return
 			
 	if Input.is_physical_key_pressed(KEY_E) or Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or is_mobile_interact:
@@ -481,114 +408,6 @@ func _process(delta):
 			is_rescuing = false
 			current_interact_target = null
 
-func _setup_dual_meshes(node: Node):
-	if node is MeshInstance3D and not node.has_meta("mats_setup"):
-		base_meshes.append(node)
-		
-		var node_mats = []
-		for i in range(node.mesh.get_surface_count()):
-			var mat = node.get_surface_override_material(i)
-			if not mat:
-				mat = node.mesh.surface_get_material(i)
-			
-			if mat and mat is ShaderMaterial:
-				mat = mat.duplicate()
-				mat.next_pass = null # Clean up old next_pass testing
-				node.set_surface_override_material(i, mat)
-				node_mats.append(mat)
-			else:
-				node_mats.append(mat)
-				
-		node.set_meta("orig_mats", node_mats)
-		node.set_meta("mats_setup", true)
-		
-		# Create local camo duplicate
-		var camo_mesh = MeshInstance3D.new()
-		camo_mesh.name = node.name + "_Camo"
-		camo_mesh.set_meta("is_camo", true)
-		camo_mesh.mesh = node.mesh
-		camo_mesh.transform = node.transform
-		# Shrink the camo mesh microscopically to prevent Z-fighting with the base mesh
-		camo_mesh.scale = Vector3(0.99, 0.99, 0.99)
-		if node.skeleton: camo_mesh.skeleton = node.skeleton
-		if node.skin: camo_mesh.skin = node.skin
-		
-		node.get_parent().add_child.call_deferred(camo_mesh)
-		
-		for i in range(camo_mesh.mesh.get_surface_count()):
-			if camo_material:
-				var c_mat = camo_material.duplicate()
-				c_mat.render_priority = -1 # Guarantee it draws BEFORE BaseMesh!
-				camo_mesh.set_surface_override_material(i, c_mat)
-		
-		camo_mesh.hide()
-		camo_meshes.append(camo_mesh)
-		
-	for child in node.get_children():
-		if child.name != "InteractionArea" and child.name != "InteractionScanner" and not child.has_meta("is_camo"):
-			_setup_dual_meshes(child)
-
-func _apply_visual_states(alpha_val: float, target_alpha: float):
-	if not _is_dual_mesh_setup:
-		_setup_dual_meshes(self)
-		_is_dual_mesh_setup = true
-		
-	if not local_outline_mat:
-		local_outline_mat = ShaderMaterial.new()
-		var shader = preload("res://Assets/Shaders/HighlightShader/cartoony_outline.gdshader")
-		if shader:
-			local_outline_mat.shader = shader
-			
-	var stealth_amount = 1.0 - alpha_val # 0 is visible, 1 is invisible
-	var is_stealthed = stealth_amount > 0.01
-	
-	local_outline_mat.set_shader_parameter("stealth_fade", stealth_amount)
-	
-	# Update Camo Meshes
-	for c_mesh in camo_meshes:
-		if is_stealthed and not is_hypnotized and not is_jailed:
-			c_mesh.show()
-		else:
-			c_mesh.hide()
-			
-	# Update Base Meshes
-	for b_mesh in base_meshes:
-		if is_stealthed and stealth_amount >= 0.99:
-			b_mesh.hide()
-		else:
-			b_mesh.show()
-			
-		# Turn off shadow instantly when aiming for invisible, turn on instantly when aiming for visible
-		if target_alpha > 0.0:
-			b_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
-		else:
-			b_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			
-		var orig_mats = b_mesh.get_meta("orig_mats")
-		for i in range(b_mesh.mesh.get_surface_count()):
-			var active_mat = null
-			
-			if is_hypnotized:
-				if hypno_material:
-					var h_mat = null
-					if b_mesh.has_meta("instanced_hypno"):
-						h_mat = b_mesh.get_meta("instanced_hypno")
-					else:
-						h_mat = hypno_material.duplicate()
-						b_mesh.set_meta("instanced_hypno", h_mat)
-					active_mat = h_mat
-			else:
-				active_mat = orig_mats[i] if i < orig_mats.size() else null
-				if active_mat and active_mat is ShaderMaterial:
-					active_mat.set_shader_parameter("stealth_fade", stealth_amount)
-					
-			if active_mat:
-				if is_highlighted:
-					active_mat.next_pass = local_outline_mat
-				else:
-					active_mat.next_pass = null
-					
-			b_mesh.set_surface_override_material(i, active_mat)
 
 @rpc("any_peer", "call_local")
 func on_captured():
@@ -757,97 +576,3 @@ func handle_mobile_interact_press():
 			target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
 	else:
 		_try_drop()
-
-
-
-# =========================================================
-# SECURITY CAMERA LOGIC
-# =========================================================
-
-func _access_cameras():
-	available_cameras = get_tree().get_nodes_in_group("SecurityCameras")
-	if available_cameras.size() == 0:
-		print("No security cameras found!")
-		return
-		
-	is_on_cameras = true
-	if ui_manager: ui_manager.toggle_camera_ui(true)
-	
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
-	# Hide joystick if on mobile
-	var canvas = get_node_or_null("PlayerCanvas")
-	if canvas:
-		var touch_ui = canvas.get_node_or_null("TouchUI")
-		if touch_ui:
-			touch_ui.visible = false
-	
-	current_cam_index = randi() % available_cameras.size()
-	_switch_to_camera(current_cam_index)
-
-func _switch_to_camera(index: int):
-	if available_cameras.size() == 0: 
-		print("No security cameras found in size!")
-		return
-	
-	# Release old camera
-	var old_cam = available_cameras[current_cam_index]
-	if old_cam.has_method("release_control"):
-		old_cam.rpc("release_control", multiplayer.get_unique_id())
-	var old_cam3d = old_cam.get_node_or_null("CameraMount/Camera3D")
-	if old_cam3d:
-		old_cam3d.current = false
-		
-	# Claim new camera
-	current_cam_index = posmod(index, available_cameras.size())
-	var new_cam = available_cameras[current_cam_index]
-	if new_cam.has_method("request_control"):
-		new_cam.rpc("request_control", multiplayer.get_unique_id())
-		
-	var new_cam3d = new_cam.get_node_or_null("CameraMount/Camera3D")
-	if new_cam3d:
-		new_cam3d.current = true
-		
-	cam_yaw = 0.0
-	cam_pitch = 0.0
-	_update_camera_rotation()
-
-func _cycle_camera(dir: int):
-	if not is_on_cameras: return
-	_switch_to_camera(current_cam_index + dir)
-
-func _update_camera_rotation():
-	if not is_on_cameras or available_cameras.size() == 0: return
-	var cam_root = available_cameras[current_cam_index]
-	
-	# 1. Rotate the local Camera3D instantly so it feels responsive to the player
-	var cam3d = cam_root.get_node_or_null("CameraMount/Camera3D")
-	if cam3d:
-		cam3d.rotation.y = cam_yaw
-		cam3d.rotation.x = cam_pitch
-		
-	# 2. Tell the network what we are looking at
-	if cam_root.has_method("sync_rotation"):
-		cam_root.rpc("sync_rotation", cam_yaw, cam_pitch, multiplayer.get_unique_id())
-
-func _fire_camera_ping():
-	if not is_on_cameras or available_cameras.size() == 0: return
-	
-	# --- COOLDOWN CHECK ---
-	var current_time = Time.get_ticks_msec()
-	if current_time - last_ping_msec < PING_COOLDOWN_MS:
-		return # Ignore input if still on cooldown
-	last_ping_msec = current_time
-	# ----------------------
-	
-	var cam_root = available_cameras[current_cam_index]
-	var ray = cam_root.get_node_or_null("CameraMount/Camera3D/PingRay")
-	if ray:
-		ray.force_raycast_update()
-		if ray.is_colliding():
-			var collider = ray.get_collider()
-			if collider and collider.has_method("get_pinged") and collider.get("team_index") == 1:
-				collider.rpc("get_pinged")
-			else:
-				var hit_pos = ray.get_collision_point()
-				GameManager.rpc("spawn_location_ping", hit_pos)
