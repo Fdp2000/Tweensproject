@@ -70,12 +70,12 @@ func _build_balance_tab():
 	var categories = {
 		# --- LIVE TUNING (Takes effect instantly mid-match) ---
 		"🟢 LIVE: Movement & Speeds": ["base_thief_speed", "cop_base_speed", "hypno_thief_speed", "thief_braking_friction", "cop_braking_friction"],
-		"🟢 LIVE: Abilities & Timers": ["cop_charge_speed_boost", "cop_charge_duration", "cop_charge_cooldown", "cop_charge_exhaustion_penalty", "thief_rescue_time"],
-		"🟢 LIVE: Stealth & Pings": ["thief_camo_activation_time", "thief_camo_transition_speed", "thief_spring_arm_length", "cam_laser_ping_cooldown_ms", "thief_map_ping_duration", "cop_spot_ping_duration"],
+		"🟢 LIVE: Abilities & Timers": ["cop_charge_speed_multiplier", "cop_charge_duration", "cop_charge_cooldown", "cop_exhaustion_speed_multiplier", "thief_rescue_time"],
+		"🟢 LIVE: Stealth & Pings": ["thief_camo_activation_time", "thief_camo_fade_duration_sec", "thief_spring_arm_length", "cam_laser_ping_cooldown_ms", "thief_map_ping_duration", "cop_spot_ping_duration"],
 
 		# --- PRE-MATCH SETUP (Requires a new round) ---
 		"🔴 SETUP: Radii & Collisions": ["delivery_zone_radius", "interact_shape_size", "camera_wall_radius", "cop_fov_angle"],
-		"🔴 SETUP: Artifact Economy": ["cash_small", "cash_medium", "cash_large", "weight_small", "weight_medium", "weight_large"],
+		"🔴 SETUP: Artifact Economy": ["cash_small", "cash_medium", "cash_large", "artifact_small_speed_multiplier", "artifact_medium_speed_multiplier", "artifact_large_speed_multiplier"],
 		"🔴 SETUP: Cop Thresholds": ["min_players_for_2_cops", "min_players_for_3_cops"],
 		"🔴 SETUP: Match Quotas": ["quota_2p", "quota_3p", "quota_4p", "quota_5p", "quota_6p", "quota_7p", "quota_8p", "quota_9p", "quota_10p"],
 		"🔴 SETUP: Match Timers": ["timer_2p", "timer_3p", "timer_4p", "timer_5p", "timer_6p", "timer_7p", "timer_8p", "timer_9p", "timer_10p"]
@@ -103,6 +103,7 @@ func _build_balance_tab():
 				var is_float = typeof(val) == TYPE_FLOAT
 				
 				var hbox = HBoxContainer.new()
+				hbox.set_meta("var_name", var_name)
 				
 				var lbl = Label.new()
 				# Clean up the variable name for the UI (e.g., "base_player_speed" -> "Base Player Speed")
@@ -237,10 +238,11 @@ func _refresh_presets_dropdown():
 		preset_dropdown.add_item(p_name)
 
 func _refresh_balance_sliders():
-	for hbox in balance_vbox.get_children():
-		var lbl = hbox.get_child(0) as Label
-		var spin = hbox.get_child(1) as SpinBox
-		# Convert Label text back to variable name format (e.g. "Base Player Speed" -> "base_player_speed")
-		var var_name = lbl.text.replace(" ", "_").to_lower()
-		if var_name in Balance:
-			spin.set_value_no_signal(Balance.get(var_name))
+	for child in balance_vbox.get_children():
+		# Safely check if this UI element is one of our tagged sliders!
+		if child.has_meta("var_name"):
+			var var_name = child.get_meta("var_name")
+			var spin = child.get_child(1) as SpinBox
+			
+			if var_name in Balance and spin:
+				spin.set_value_no_signal(Balance.get(var_name))

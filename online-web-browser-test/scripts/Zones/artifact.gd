@@ -85,13 +85,13 @@ func _ready():
 	match artifact_size:
 		Size.SMALL:
 			cash_value = Balance.cash_small
-			weight_penalty = Balance.weight_small
+			weight_penalty = Balance.artifact_small_speed_multiplier
 		Size.MEDIUM:
 			cash_value = Balance.cash_medium
-			weight_penalty = Balance.weight_medium
+			weight_penalty = Balance.artifact_medium_speed_multiplier
 		Size.LARGE:
 			cash_value = Balance.cash_large
-			weight_penalty = Balance.weight_large
+			weight_penalty = Balance.artifact_large_speed_multiplier
 	
 	# Add Particles
 	var particles_instance = ARTIFACT_PARTICLES.instantiate()

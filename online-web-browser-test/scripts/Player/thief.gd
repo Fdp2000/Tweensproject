@@ -1,6 +1,6 @@
 extends "res://scripts/Player/player.gd"
 
-const SMOKE_PARTICLES = preload("uid://bnktbuy2m80lu")
+const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
 
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial

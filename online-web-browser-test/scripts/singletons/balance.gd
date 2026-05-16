@@ -13,17 +13,17 @@ var cop_braking_friction: float = 6.5
 # 2. STEALTH & CAMERA PERSPECTIVE
 # ==========================================
 var thief_camo_activation_time: float = 2.0
-var thief_camo_transition_speed: float = 8.0 # Higher = faster fade
+var thief_camo_fade_duration_sec: float = 1.0 # Literal timer: Fades over 1.0 seconds
 var cop_fov_angle: float = 90.0
 var thief_spring_arm_length: float = 4.711 # (Your current X distance)
 
 # ==========================================
 # 3. ABILITIES & INTERACTION TIMERS
 # ==========================================
-var cop_charge_speed_boost: float = 1.5
+var cop_charge_speed_multiplier: float = 1.5 # 1.5x Base Speed
 var cop_charge_duration: float = 1.5
 var cop_charge_cooldown: float = 4.0
-var cop_charge_exhaustion_penalty: float = 0.6
+var cop_exhaustion_speed_multiplier: float = 0.6 # 0.6x Base Speed (40% slow)
 var thief_rescue_time: float = 2.0
 
 # ==========================================
@@ -33,17 +33,14 @@ var cash_small: int = 500
 var cash_medium: int = 1500
 var cash_large: int = 4000
 
-var weight_small: float = 0.9
-var weight_medium: float = 0.75
-var weight_large: float = 0.5
+var artifact_small_speed_multiplier: float = 0.9 # 90% Speed
+var artifact_medium_speed_multiplier: float = 0.75 # 75% Speed
+var artifact_large_speed_multiplier: float = 0.5 # 50% Speed
 
 var delivery_zone_radius: float = 5.0
 var interact_shape_size: float = 2.0
 var camera_wall_radius: float = 0.5
 
-# ==========================================
-# 5. MATCH STRUCTURE & SCALING
-# ==========================================
 # ==========================================
 # 5. MATCH STRUCTURE & SCALING
 # ==========================================

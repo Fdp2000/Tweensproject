@@ -72,17 +72,17 @@ func _custom_physics_process(delta, direction):
 			is_charging = false
 			is_debuffed = true
 			# --- USE EXHAUSTION DURATION ---
-			debuff_timer = Balance.cop_charge_exhaustion_penalty
+			debuff_timer = Balance.cop_exhaustion_speed_multiplier
 		else:
 			# --- USE BASE SPEED * CHARGE BOOST ---
-			var current_charge_speed = Balance.cop_base_speed * Balance.cop_charge_speed_boost
+			var current_charge_speed = Balance.cop_base_speed * Balance.cop_charge_speed_multiplier
 			velocity.x = charge_direction.x * current_charge_speed
 			velocity.z = charge_direction.z * current_charge_speed
 			
 			if is_on_wall():
 				is_charging = false
 				is_debuffed = true
-				debuff_timer = Balance.cop_charge_exhaustion_penalty
+				debuff_timer = Balance.cop_exhaustion_speed_multiplier
 			_detect_capture()
 			return
 
@@ -103,7 +103,7 @@ func _custom_physics_process(delta, direction):
 		# --- APPLY MOVEMENT AND DEBUFFS USING BALANCE VARIABLES ---
 		var active_speed = Balance.cop_base_speed
 		if is_debuffed:
-			active_speed *= Balance.cop_charge_exhaustion_penalty
+			active_speed *= Balance.cop_exhaustion_speed_multiplier
 			
 		if direction:
 			velocity.x = direction.x * active_speed
@@ -126,7 +126,7 @@ func _detect_capture():
 					is_charging = false
 					is_debuffed = true
 					# --- USE BALANCE PENALTY ---
-					debuff_timer = Balance.cop_charge_exhaustion_penalty
+					debuff_timer = Balance.cop_exhaustion_speed_multiplier
 				return
 
 @rpc("any_peer", "call_local")

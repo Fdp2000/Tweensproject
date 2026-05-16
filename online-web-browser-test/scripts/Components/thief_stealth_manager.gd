@@ -38,7 +38,9 @@ func process_stealth(delta: float, speed: float, is_hypnotized: bool, is_jailed:
 		target_alpha = 1.0
 		
 	# --- USE BALANCE TRANSITION SPEED ---
-	current_alpha = lerp(current_alpha, target_alpha, Balance.thief_camo_transition_speed * delta)
+	# By dividing 1.0 by the duration, it fades exactly 100% over the specified seconds!
+	var fade_rate = 1.0 / Balance.thief_camo_fade_duration_sec
+	current_alpha = move_toward(current_alpha, target_alpha, fade_rate * delta)
 	
 	if abs(current_alpha - _last_rendered_alpha) > 0.01 or is_highlighted != _last_rendered_highlight or is_hypnotized != _last_rendered_hypnotized:
 		_apply_visual_states(current_alpha, target_alpha, is_hypnotized, is_jailed, is_highlighted)
