@@ -2,6 +2,7 @@ extends "res://scripts/Player/player.gd"
 
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
+var ui_manager: Node = null
 
 var _is_dual_mesh_setup = false
 var base_meshes: Array[MeshInstance3D] = []
@@ -56,7 +57,6 @@ var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
 var is_rescuing: bool = false
 var current_interact_target: Node3D = null
-var rescue_ui_ref: Control = null
 var last_outlined_target: Node3D = null
 var outline_mat: StandardMaterial3D = null
 const RESCUE_TIME_REQUIRED = 2.0
@@ -94,6 +94,10 @@ func _ready():
 		debug_label.outline_modulate = Color.BLACK
 		debug_label.no_depth_test = true
 		add_child(debug_label)
+		# Initialize UI Manager
+		ui_manager = ThiefUIManager.new()
+		add_child(ui_manager)
+		ui_manager.setup(self)
 
 	
 	if is_multiplayer_authority():
@@ -115,22 +119,7 @@ func _ready():
 		interaction_scanner.area_exited.connect(_on_interactable_exited)
 		
 		await get_tree().process_frame
-		var canvas = get_node_or_null("PlayerCanvas")
-		if canvas:
-			var ui = Control.new()
-			ui.set_script(load("res://scripts/UI/dash_ui.gd"))
-			ui.ring_color = Color(0.2, 1.0, 0.4, 0.9)
-			ui.ready_color = Color(1.0, 1.0, 1.0, 0.0)
-			ui.custom_minimum_size = Vector2(40, 40)
-			ui.set_anchors_preset(Control.PRESET_CENTER)
-			ui.offset_left = -20 + 40
-			ui.offset_right = 20 + 40
-			ui.offset_top = -20 - 20
-			ui.offset_bottom = 20 - 20
-			ui.hide_when_empty = true
-			ui.name = "RescueUI"
-			rescue_ui_ref = ui
-			canvas.add_child(ui)
+
 
 func _on_path_changed():
 	custom_path_index = 0
@@ -157,6 +146,16 @@ func _unhandled_input(event):
 
 func _input(event):
 	if not is_multiplayer_authority(): return
+	# --- FIX: ALWAYS LET ESCAPE TOGGLE MOUSE MODE FIRST ---
+	if event is InputEventKey and event.physical_keycode == KEY_ESCAPE and event.pressed and not event.echo:
+		if not is_mobile_device():
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			else:
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			get_viewport().set_input_as_handled()
+			return
+	# -------------------------------------------------------
 	
 	# --- INTERCEPT SECURITY CAMERA INPUTS BEFORE PLAYER.GD ---
 	if is_on_cameras:
@@ -346,12 +345,18 @@ func _custom_physics_process(delta, direction):
 					
 					if rescue_progress >= RESCUE_TIME_REQUIRED:
 						active_rescuer_id = -1
+						rpc("sync_active_rescuer", -1) # <-- ADD THIS
 						rescue_progress = 0.0
 						rpc("sync_rescue_progress", 0.0)
 						rpc("sync_rescue_halt", false)
 						rpc("rescue_successful")
 				else:
 					active_rescuer_id = -1
+					rpc("sync_active_rescuer", -1) # <-- ADD THIS
+					
+					rescue_progress = 0.0 # <-- FIX: Reset progress if they walk away!
+					rpc("sync_rescue_progress", 0.0) 
+					
 					if is_rescue_halted:
 						is_rescue_halted = false
 						rpc("sync_rescue_halt", false)
@@ -415,6 +420,23 @@ func _process(delta):
 	# 2. HIGHLIGHT & INTERACTION LOGIC (Runs ONLY for the local player)
 	if not is_multiplayer_authority(): return
 	
+	## --- NEW RESCUE UI LOGIC ---
+	if ui_manager:
+		if is_jailed:
+			ui_manager.update_rescue_ring(0.0, false) # Hide in jail
+		elif is_hypnotized:
+			# Feature: See your OWN rescue progress, but ONLY if someone is rescuing you!
+			if active_rescuer_id != -1:
+				ui_manager.update_rescue_ring(rescue_progress / RESCUE_TIME_REQUIRED, true)
+			else:
+				ui_manager.update_rescue_ring(0.0, false) # Hide if nobody is rescuing
+		elif is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
+			# Normal: See the progress of the person you are saving
+			ui_manager.update_rescue_ring(current_interact_target.rescue_progress / RESCUE_TIME_REQUIRED, true)
+		else:
+			ui_manager.update_rescue_ring(0.0, false) # Default hide ring when empty
+			
+	
 	# FIX: If hypnotized or jailed, immediately clear highlights and stop rescuing!
 	if is_hypnotized or is_jailed:
 		_update_outlines(null)
@@ -433,13 +455,7 @@ func _process(delta):
 		
 	_update_outlines(target)
 	
-	# UI and Input Handling
-	if rescue_ui_ref:
-		if current_interact_target and is_instance_valid(current_interact_target) and current_interact_target.has_method("on_captured"):
-			rescue_ui_ref.progress = current_interact_target.rescue_progress / RESCUE_TIME_REQUIRED
-		else:
-			rescue_ui_ref.progress = 0.0
-			
+
 	if is_on_cameras:
 		if is_mobile_interact:
 			is_mobile_interact = false
@@ -584,8 +600,7 @@ func on_captured():
 	randomize() 
 	# -----------------------------------------------------
 	
-	if rescue_ui_ref:
-		rescue_ui_ref.visible = false
+
 		
 	collision_layer = 8 
 	collision_mask = 5  
@@ -675,6 +690,7 @@ func request_start_rescue(target_id: int):
 	var target = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(target_id))
 	if target and target.get("is_hypnotized"):
 		target.active_rescuer_id = multiplayer.get_remote_sender_id()
+		target.rpc("sync_active_rescuer", target.active_rescuer_id) # <-- ADD THIS
 
 @rpc("any_peer", "call_local")
 func request_stop_rescue(target_id: int):
@@ -682,6 +698,7 @@ func request_stop_rescue(target_id: int):
 	var target = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(target_id))
 	if target and target.active_rescuer_id == multiplayer.get_remote_sender_id():
 		target.active_rescuer_id = -1
+		target.rpc("sync_active_rescuer", -1) # <-- ADD THIS
 
 @rpc("any_peer", "call_local", "unreliable")
 func sync_rescue_progress(prog: float):
@@ -690,6 +707,10 @@ func sync_rescue_progress(prog: float):
 @rpc("any_peer", "call_local", "reliable")
 func sync_rescue_halt(halted: bool):
 	is_rescue_halted = halted
+	
+@rpc("any_peer", "call_local", "reliable")
+func sync_active_rescuer(id: int):
+	active_rescuer_id = id
 
 @rpc("any_peer", "call_local")
 func rescue_successful():
@@ -728,48 +749,15 @@ func on_jailed(cell_pos: Vector3, cell_rot_y: float):
 	if pitch_pivot:
 		pitch_pivot.rotation.y = 0
 		pitch_pivot.rotation.z = 0
+		
+func handle_mobile_interact_press():
+	if not carried_artifact:
+		var target = get_closest_interactable()
+		if target and not target.has_method("on_captured"):
+			target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
+	else:
+		_try_drop()
 
-func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
-	var interact_btn = Button.new()
-	interact_btn.name = "InteractButton"
-	interact_btn.text = "INTERACT"
-	
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(1, 1, 1, 0.15)
-	style.set_corner_radius_all(100)
-	style.set_border_width_all(4)
-	style.border_color = Color(1, 1, 1, 0.4)
-	
-	interact_btn.add_theme_stylebox_override("normal", style)
-	interact_btn.add_theme_stylebox_override("hover", style)
-	interact_btn.add_theme_stylebox_override("pressed", style)
-	interact_btn.add_theme_font_size_override("font_size", 18 * ui_scale)
-	
-	var btn_size = 130 * ui_scale
-	interact_btn.custom_minimum_size = Vector2(btn_size, btn_size)
-	interact_btn.anchor_left = 1.0
-	interact_btn.anchor_top = 1.0
-	interact_btn.anchor_right = 1.0
-	interact_btn.anchor_bottom = 1.0
-	interact_btn.offset_left = -btn_size - (40 * ui_scale)
-	interact_btn.offset_top = -btn_size - (280 * ui_scale)
-	
-	mobile_ui.add_child(interact_btn)
-	
-	# Handle both Pickup (Single Press) and Rescue (Holding)
-	interact_btn.button_down.connect(func():
-		is_mobile_interact = true
-		# Trigger the "Single Press" logic for pickups
-		if not carried_artifact:
-			var target = get_closest_interactable()
-			if target and not target.has_method("on_captured"):
-				target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
-		else:
-			_try_drop()
-	)
-	interact_btn.button_up.connect(func():
-		is_mobile_interact = false
-	)
 
 
 # =========================================================
@@ -783,59 +771,16 @@ func _access_cameras():
 		return
 		
 	is_on_cameras = true
+	if ui_manager: ui_manager.toggle_camera_ui(true)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	# Hide joystick if on mobile
 	var canvas = get_node_or_null("PlayerCanvas")
 	if canvas:
-		# --- ADD CROSSHAIR ---
-		var crosshair = canvas.get_node_or_null("CamCrosshair")
-		if not crosshair:
-			crosshair = ColorRect.new()
-			crosshair.name = "CamCrosshair"
-			crosshair.color = Color(1.0, 1.0, 1.0, 0.7) # Semi-transparent white
-			crosshair.custom_minimum_size = Vector2(4, 4) # 4x4 pixel dot
-			crosshair.set_anchors_preset(Control.PRESET_CENTER)
-			# Center it perfectly
-			crosshair.offset_left = -2
-			crosshair.offset_right = 2
-			crosshair.offset_top = -2
-			crosshair.offset_bottom = 2
-			crosshair.mouse_filter = Control.MOUSE_FILTER_IGNORE
-			canvas.add_child(crosshair)
-		crosshair.visible = true
-		# ---------------------
-		
 		var touch_ui = canvas.get_node_or_null("TouchUI")
 		if touch_ui:
 			touch_ui.visible = false
-			
-		if is_mobile_device():
-			var left_btn = canvas.get_node_or_null("CamLeftBtn")
-			if not left_btn:
-				left_btn = Button.new()
-				left_btn.name = "CamLeftBtn"
-				left_btn.text = "<"
-				left_btn.set_anchors_preset(Control.PRESET_CENTER_LEFT)
-				left_btn.position = Vector2(20, -50)
-				left_btn.size = Vector2(100, 100)
-				left_btn.pressed.connect(func(): _cycle_camera(-1))
-				canvas.add_child(left_btn)
-				
-			var right_btn = canvas.get_node_or_null("CamRightBtn")
-			if not right_btn:
-				right_btn = Button.new()
-				right_btn.name = "CamRightBtn"
-				right_btn.text = ">"
-				right_btn.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
-				right_btn.position = Vector2(-120, -50)
-				right_btn.size = Vector2(100, 100)
-				right_btn.pressed.connect(func(): _cycle_camera(1))
-				canvas.add_child(right_btn)
-				
-			if left_btn: left_btn.visible = true
-			if right_btn: right_btn.visible = true
 	
 	current_cam_index = randi() % available_cameras.size()
 	_switch_to_camera(current_cam_index)
