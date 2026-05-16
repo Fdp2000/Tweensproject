@@ -11,7 +11,6 @@ var camo_meshes: Array[MeshInstance3D] = []
 var local_outline_mat: ShaderMaterial = null
 
 var stationary_time = 0.0
-const INVISIBLE_TIME = 2.0
 var current_alpha = 1.0
 var target_alpha = 1.0
 
@@ -33,12 +32,13 @@ func process_stealth(delta: float, speed: float, is_hypnotized: bool, is_jailed:
 		
 	if is_hypnotized or is_jailed:
 		target_alpha = 1.0
-	elif stationary_time >= INVISIBLE_TIME:
+	elif stationary_time >= Balance.thief_camo_activation_time:
 		target_alpha = 0.0
 	else:
 		target_alpha = 1.0
 		
-	current_alpha = lerp(current_alpha, target_alpha, 8.0 * delta)
+	# --- USE BALANCE TRANSITION SPEED ---
+	current_alpha = lerp(current_alpha, target_alpha, Balance.thief_camo_transition_speed * delta)
 	
 	if abs(current_alpha - _last_rendered_alpha) > 0.01 or is_highlighted != _last_rendered_highlight or is_hypnotized != _last_rendered_hypnotized:
 		_apply_visual_states(current_alpha, target_alpha, is_hypnotized, is_jailed, is_highlighted)

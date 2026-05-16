@@ -106,12 +106,8 @@ shadow_mesh = SubResource("ArrayMesh_jh0ii")
 [node name="Cop" unique_id=1223235874 instance=ExtResource("1_base")]
 collision_mask = 7
 script = ExtResource("2_cop")
-team_index = null
 
-[node name="MeshInstance3D" parent="." index="0" unique_id=1769027693]
-visible = false
-
-[node name="PitchPivot" parent="." index="2" unique_id=-1905862475]
+[node name="PitchPivot" parent="." index="1" unique_id=-1905862475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -0.12339991)
 
 [node name="SpringArm3D" parent="PitchPivot" index="0" unique_id=1865902027]
@@ -120,7 +116,7 @@ spring_length = 0.0
 [node name="Camera3D" parent="PitchPivot/SpringArm3D" index="0" unique_id=1092018305]
 cull_mask = 1048573
 
-[node name="Model" parent="." index="4" unique_id=1191846676 instance=ExtResource("3_model")]
+[node name="Model" parent="." index="3" unique_id=1191846676 instance=ExtResource("3_model")]
 transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 0, 0, 0)
 
 [node name="Head" parent="Model" index="0" unique_id=1764807772]

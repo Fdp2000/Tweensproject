@@ -3,15 +3,11 @@ extends "res://scripts/Player/player.gd"
 var is_charging = false
 var charge_time_left = 0.0
 var charge_cooldown_left = 0.0
-const CHARGE_DURATION = 0.4
-const CHARGE_SPEED = 20.0
-const CHARGE_COOLDOWN = 3.0
 var total_captures = 0
 var charge_direction = Vector3.ZERO
 var charge_ui_ref: Control
 var is_debuffed = false
 var debuff_timer = 0.0
-const DEBUFF_TIME = 2.0
 
 func _ready():
 	super._ready()
@@ -19,6 +15,8 @@ func _ready():
 		# Cop uses first-person camera
 		if spring_arm:
 			spring_arm.spring_length = 0.0
+		if camera:
+			camera.fov = Balance.cop_fov_angle
 		if has_node("MeshInstance3D"):
 			$MeshInstance3D.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
 			
@@ -64,29 +62,36 @@ func _custom_physics_process(delta, direction):
 			is_debuffed = false
 		
 	if charge_ui_ref:
-		if CHARGE_COOLDOWN > 0:
-			charge_ui_ref.progress = clamp(1.0 - (charge_cooldown_left / CHARGE_COOLDOWN), 0.0, 1.0)
+		# --- USE BALANCE COOLDOWN ---
+		if Balance.cop_charge_cooldown > 0:
+			charge_ui_ref.progress = clamp(1.0 - (charge_cooldown_left / Balance.cop_charge_cooldown), 0.0, 1.0)
 			
 	if is_charging:
 		charge_time_left -= delta
 		if charge_time_left <= 0:
 			is_charging = false
 			is_debuffed = true
-			debuff_timer = DEBUFF_TIME
+			# --- USE EXHAUSTION DURATION ---
+			debuff_timer = Balance.cop_charge_exhaustion_penalty
 		else:
-			velocity.x = charge_direction.x * CHARGE_SPEED
-			velocity.z = charge_direction.z * CHARGE_SPEED
+			# --- USE BASE SPEED * CHARGE BOOST ---
+			var current_charge_speed = Balance.cop_base_speed * Balance.cop_charge_speed_boost
+			velocity.x = charge_direction.x * current_charge_speed
+			velocity.z = charge_direction.z * current_charge_speed
+			
 			if is_on_wall():
 				is_charging = false
 				is_debuffed = true
-				debuff_timer = DEBUFF_TIME
+				debuff_timer = Balance.cop_charge_exhaustion_penalty
 			_detect_capture()
 			return
 
 	if (Input.is_physical_key_pressed(KEY_SHIFT) or Input.is_action_pressed("dash")) and charge_cooldown_left <= 0 and not is_debuffed:
 		is_charging = true
-		charge_time_left = CHARGE_DURATION
-		charge_cooldown_left = CHARGE_COOLDOWN
+		# --- USE BALANCE DURATION & COOLDOWN ---
+		charge_time_left = Balance.cop_charge_duration
+		charge_cooldown_left = Balance.cop_charge_cooldown
+		
 		if direction != Vector3.ZERO:
 			charge_direction = direction
 		else:
@@ -95,10 +100,18 @@ func _custom_physics_process(delta, direction):
 		charge_direction = charge_direction.normalized()
 			
 	if not is_charging:
-		var speed_mult = 0.5 if is_debuffed else 1.0
-		# Apply debuff to direction before passing to super
-		var mod_dir = direction * speed_mult
-		super._custom_physics_process(delta, mod_dir)
+		# --- APPLY MOVEMENT AND DEBUFFS USING BALANCE VARIABLES ---
+		var active_speed = Balance.cop_base_speed
+		if is_debuffed:
+			active_speed *= Balance.cop_charge_exhaustion_penalty
+			
+		if direction:
+			velocity.x = direction.x * active_speed
+			velocity.z = direction.z * active_speed
+		else:
+			velocity.x = move_toward(velocity.x, 0, Balance.cop_braking_friction)
+			velocity.z = move_toward(velocity.z, 0, Balance.cop_braking_friction)
+			
 		_detect_capture()
 
 func _detect_capture():
@@ -112,7 +125,8 @@ func _detect_capture():
 				if is_charging:
 					is_charging = false
 					is_debuffed = true
-					debuff_timer = DEBUFF_TIME
+					# --- USE BALANCE PENALTY ---
+					debuff_timer = Balance.cop_charge_exhaustion_penalty
 				return
 
 @rpc("any_peer", "call_local")

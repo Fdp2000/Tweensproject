@@ -31,8 +31,8 @@ func trigger_ping(pos: Vector3):
 	if ping_timer and ping_timer.timeout.is_connected(_hide_ping):
 		ping_timer.timeout.disconnect(_hide_ping)
 		
-	# Start the 5-second countdown again
-	ping_timer = thief.get_tree().create_timer(5.0)
+	# --- USE BALANCE MAP PING DURATION ---
+	ping_timer = thief.get_tree().create_timer(Balance.thief_map_ping_duration)
 	ping_timer.timeout.connect(_hide_ping)
 
 func _hide_ping():

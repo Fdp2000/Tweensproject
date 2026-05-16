@@ -130,7 +130,7 @@ func _build_main_menu():
 	menu.add_child(vbox)
 	
 	var title = Label.new()
-	title.text = "    PLUNGER    "
+	title.text = " NOT PLUNGER  "
 	title.add_theme_font_size_override("font_size", 64)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
@@ -223,7 +223,7 @@ func _build_main_menu():
 	controls_vbox.add_child(controls_title)
 	
 	var controls_list = Label.new()
-	controls_list.text = "WASD = Movement\nLeft Click = Shoot\nSpace = Jump\nShift = Dash\nAlt = Switch Camera Side\nTab = Scoreboard"
+	controls_list.text = "WASD = Movement\n(COPS)Shift = Dash\n(Thieves) E = Interact\n(Thieves) Alt = Switch Camera Side"
 	controls_list.add_theme_font_size_override("font_size", 18)
 	controls_list.modulate = Color(0.8, 0.8, 0.8) # Slightly grey
 	controls_vbox.add_child(controls_list)

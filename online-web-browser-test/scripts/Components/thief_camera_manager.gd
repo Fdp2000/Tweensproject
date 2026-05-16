@@ -9,7 +9,6 @@ var cam_yaw: float = 0.0
 var cam_pitch: float = 0.0
 
 var last_ping_msec: int = 0
-const PING_COOLDOWN_MS: int = 1000
 
 func setup(parent: Node3D):
 	thief = parent
@@ -99,7 +98,7 @@ func fire_camera_ping():
 	if not is_on_cameras or available_cameras.size() == 0: return
 	
 	var current_time = Time.get_ticks_msec()
-	if current_time - last_ping_msec < PING_COOLDOWN_MS: return
+	if current_time - last_ping_msec < Balance.cam_laser_ping_cooldown_ms: return
 	last_ping_msec = current_time
 	
 	var cam_root = available_cameras[current_cam_index]

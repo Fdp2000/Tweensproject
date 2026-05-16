@@ -17,7 +17,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Balance="*uid://y8uj2v2j2qol"
 GameManager="*res://scripts/managers/game_manager.gd"
+DevPanel="*uid://basgx885ow765"
 
 [display]
 

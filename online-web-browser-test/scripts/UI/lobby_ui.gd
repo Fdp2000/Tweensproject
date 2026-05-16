@@ -110,7 +110,9 @@ func update_ui():
 		player_list.add_child(lbl)
 			
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
-		start_button.disabled = false
+		start_button.show()
+		# Only enable the button if there are 2 or more players!
+		start_button.disabled = GameManager.players.size() < 2
 		
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 	if client_ui and client_ui.get("current_room_code") != null:

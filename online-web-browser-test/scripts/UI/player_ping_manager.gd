@@ -20,7 +20,8 @@ func trigger_ping():
 			ping_timer.timeout.disconnect(_hide_ping)
 		# ----------------------------
 			
-		ping_timer = player.get_tree().create_timer(5.0)
+		# --- USE BALANCE COP PING DURATION ---
+		ping_timer = player.get_tree().create_timer(Balance.cop_spot_ping_duration)
 		ping_timer.timeout.connect(_hide_ping)
 
 func _ready_ping_visual():

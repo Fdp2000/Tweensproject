@@ -81,17 +81,17 @@ func _ready():
 		synchronizer.replication_config = config
 		add_child(synchronizer)
 	
-	# Configure based on size
+	# Configure based on size using the Balance Autoload
 	match artifact_size:
 		Size.SMALL:
-			cash_value = 5000
-			weight_penalty = 0.9 # 10% slow
+			cash_value = Balance.cash_small
+			weight_penalty = Balance.weight_small
 		Size.MEDIUM:
-			cash_value = 10000
-			weight_penalty = 0.7 # 30% slow
+			cash_value = Balance.cash_medium
+			weight_penalty = Balance.weight_medium
 		Size.LARGE:
-			cash_value = 15000
-			weight_penalty = 0.4 # 60% slow
+			cash_value = Balance.cash_large
+			weight_penalty = Balance.weight_large
 	
 	# Add Particles
 	var particles_instance = ARTIFACT_PARTICLES.instantiate()

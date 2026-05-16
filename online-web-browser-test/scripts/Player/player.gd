@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-const SPEED = 6.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var mobile_input: Node = null
 var ping_manager: Node = null
@@ -57,7 +56,7 @@ func _ready():
 		_sync_name.rpc(player_name)
 	
 	var cam_shape = SphereShape3D.new()
-	cam_shape.radius = 0.5
+	cam_shape.radius = Balance.camera_wall_radius
 	spring_arm.shape = cam_shape
 	spring_arm.margin = 0.1
 	spring_arm.add_excluded_object(get_rid())
@@ -65,14 +64,9 @@ func _ready():
 	if is_multiplayer_authority():
 		camera.current = true
 		
-		# ONLY cull the head for COPS (Team 1)
-		if team_index == 1:
-			var head_parts = ["Head", "Nose", "Eyes"]
-			for part_name in head_parts:
-				var part = find_child(part_name, true, false)
-				if part and part is VisualInstance3D:
-					part.layers = 2
-			camera.cull_mask = ~(1 << 1) # Ignore Layer 2
+		# Tell the local camera to ALWAYS ignore Layer 10 (Bit value 512).
+		# We will put the Cop's head on this layer later!
+		camera.cull_mask = ~(1 << 9) 
 		
 		if not is_mobile_device():
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -81,12 +75,13 @@ func _ready():
 		canvas.name = "PlayerCanvas"
 		add_child(canvas)
 		
-		# Replace setup_mobile_ui() with:
 		mobile_input = MobileInputManager.new()
 		add_child(mobile_input)
 		mobile_input.setup(self)
 	else:
 		camera.current = false
+					
+					
 	# (Everyone needs to be able to render a ping)
 	ping_manager = PlayerPingManager.new()
 	add_child(ping_manager)
@@ -125,6 +120,20 @@ func _apply_team_colors():
 	mat.albedo_color = team_color
 	if has_node("MeshInstance3D"):
 		$MeshInstance3D.set_surface_override_material(0, mat)
+		
+	# --- THE FIX: HANDLE HEAD VISIBILITY HERE ---
+	if team_index == 1:
+		# We intentionally leave "Head2" alone so it keeps casting shadows!
+		var head_parts = ["Head", "Nose", "Eyes"] 
+		for part_name in head_parts:
+			var part = find_child(part_name, true, false)
+			if part and part is VisualInstance3D:
+				if is_multiplayer_authority():
+					# Local Cop: Move to Layer 10 (Camera ignores this)
+					part.layers = 512 
+				else:
+					# Remote Cop: Ensure it's on Layer 1 (Visible to everyone)
+					part.layers = 1
 
 @rpc("any_peer", "call_remote", "reliable")
 func request_team_color():
@@ -154,7 +163,11 @@ func _input(event):
 	
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not is_mobile_device() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			
+			# FIX: Only recapture the mouse if the DevPanel is NOT visible!
+			var dev_panel = get_node_or_null("/root/DevPanel")
+			if not (dev_panel and dev_panel.visible):
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var actual_sens = mouse_sensitivity * 0.001
@@ -209,7 +222,7 @@ func _process(delta):
 	# Camera shoulder toggle smoothing (Local Player Only)
 	else:
 		var current_angle = spring_arm.rotation.y
-		var target_angle = atan2(target_shoulder_x, 4.711)
+		var target_angle = atan2(target_shoulder_x, Balance.thief_spring_arm_length)
 		var new_angle = lerp_angle(current_angle, target_angle, 15.0 * delta)
 		spring_arm.rotation.y = new_angle
 		camera.rotation.y = -new_angle
@@ -245,12 +258,11 @@ func _physics_process(delta):
 
 func _custom_physics_process(_delta, direction):
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * 6.5 # Hardcoded fallback
+		velocity.z = direction.z * 6.5
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+		velocity.x = move_toward(velocity.x, 0, 6.5) # Hardcoded fallback
+		velocity.z = move_toward(velocity.z, 0, 6.5)
 
 # --- UPDATED RPC: EXPECTS 3 ARGUMENTS ---
 @rpc("any_peer", "call_remote", "unreliable")

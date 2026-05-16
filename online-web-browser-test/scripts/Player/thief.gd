@@ -39,7 +39,6 @@ var active_rescuer_id: int = -1
 var is_rescuing: bool = false
 var current_interact_target: Node3D = null
 var outline_mat: StandardMaterial3D = null
-const RESCUE_TIME_REQUIRED = 2.0
 
 var debug_path_mesh: MeshInstance3D
 var debug_label: Label3D
@@ -105,7 +104,7 @@ func _ready():
 		
 		var col = CollisionShape3D.new()
 		var sphere = SphereShape3D.new()
-		sphere.radius = 3.0
+		sphere.radius = Balance.interact_shape_size
 		col.shape = sphere
 		interaction_scanner.add_child(col)
 		
@@ -183,8 +182,8 @@ func _on_interactable_exited(node: Node3D):
 func get_closest_interactable() -> Node3D:
 	var closest_thief: Node3D = null
 	var closest_art: Node3D = null
-	var min_dist_thief: float = 3.0
-	var min_dist_art: float = 3.0
+	var min_dist_thief: float = Balance.interact_shape_size
+	var min_dist_art: float = Balance.interact_shape_size
 	
 	nearby_interactables = nearby_interactables.filter(func(n): return is_instance_valid(n))
 	
@@ -214,40 +213,36 @@ func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 
 func _custom_physics_process(delta, direction):
 	if is_jailed or (camera_manager and camera_manager.is_on_cameras):
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		# --- USE BRAKING FRICTION ---
+		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
+		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
 		return
 	
 	if is_hypnotized:
 		if is_multiplayer_authority():
 			if is_rescue_halted:
-				velocity.x = move_toward(velocity.x, 0, SPEED)
-				velocity.z = move_toward(velocity.z, 0, SPEED)
+				velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
+				velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
 			else:
 				var dist_to_target = global_position.distance_to(jail_walk_target)
 				
 				if dist_to_target < 1.0:
-					# --- PASS THE ROTATION IN THE RPC ---
 					rpc("on_jailed", jail_cell_target, jail_cell_rot_y)
 					velocity.x = 0
 					velocity.z = 0
 					if camera_manager: camera_manager.access_cameras()
 				elif nav_agent.is_navigation_finished():
-					# The path is finished, but we haven't reached the jail!
-					# This means the NavMesh is severed/broken and the jail is unreachable.
-					velocity.x = move_toward(velocity.x, 0, SPEED)
-					velocity.z = move_toward(velocity.z, 0, SPEED)
+					velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
+					velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
 					draw_debug_path()
 				else:
-					# --- CUSTOM 2D PATH FOLLOWER ---
-					var _ignore = nav_agent.get_next_path_position() # Keep agent internal state happy so it repaths if needed
+					var _ignore = nav_agent.get_next_path_position() 
 					draw_debug_path()
-					
 					var path = nav_agent.get_current_navigation_path()
 					
 					if path.size() == 0 or custom_path_index >= path.size():
-						velocity.x = move_toward(velocity.x, 0, SPEED)
-						velocity.z = move_toward(velocity.z, 0, SPEED)
+						velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
+						velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
 						if debug_label: debug_label.text = "STOPPED (End of Path)\nVel: 0"
 					else:
 						var flat_global = Vector3(global_position.x, 0, global_position.z)
@@ -255,7 +250,6 @@ func _custom_physics_process(delta, direction):
 						var flat_target = Vector3(target_pt.x, 0, target_pt.z)
 						var dist = flat_global.distance_to(flat_target)
 						
-						# Fast-forward through waypoints we are horizontally close to (Pure 2D check!)
 						while dist < 0.5 and custom_path_index < path.size():
 							custom_path_index += 1
 							if custom_path_index < path.size():
@@ -264,30 +258,28 @@ func _custom_physics_process(delta, direction):
 								dist = flat_global.distance_to(flat_target)
 								
 						if custom_path_index >= path.size():
-							# Reached the very end
-							velocity.x = move_toward(velocity.x, 0, SPEED)
-							velocity.z = move_toward(velocity.z, 0, SPEED)
+							velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
+							velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
 							if debug_label: debug_label.text = "STOPPED (Reached Target)\nVel: 0"
 						else:
-							# Move towards current target
 							var dir_to_next = flat_global.direction_to(flat_target)
-							velocity.x = dir_to_next.x * (SPEED * 0.4)
-							velocity.z = dir_to_next.z * (SPEED * 0.4)
+							# --- USE HYPNO SPEED ---
+							velocity.x = dir_to_next.x * Balance.hypno_thief_speed
+							velocity.z = dir_to_next.z * Balance.hypno_thief_speed
 							
 							if debug_label: debug_label.text = "MOVING to WP " + str(custom_path_index) + "\nDist: " + str(dist).pad_decimals(2)
 						
-						# --- CAMERA FIX: DECOUPLE FROM BODY ROTATION ---
 						if velocity.length_squared() > 0.01:
 							var old_cam_basis = pitch_pivot.global_basis
 							var target_transform = transform.looking_at(global_position + Vector3(velocity.x, 0, velocity.z).normalized(), Vector3.UP)
 							transform = transform.interpolate_with(target_transform, 5.0 * delta)
 							pitch_pivot.global_basis = old_cam_basis.orthonormalized()
-						# -----------------------------------------------
 						
 		if multiplayer.is_server():
 			if active_rescuer_id != -1:
 				var rescuer = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(active_rescuer_id))
-				if rescuer and rescuer.global_position.distance_to(global_position) <= 4.0:
+				# --- UNIFY RESCUE DISTANCE WITH INTERACT RADIUS ---
+				if rescuer and rescuer.global_position.distance_to(global_position) <= Balance.interact_shape_size:
 					if not is_rescue_halted:
 						is_rescue_halted = true
 						rpc("sync_rescue_halt", true)
@@ -295,18 +287,18 @@ func _custom_physics_process(delta, direction):
 					rescue_progress += delta
 					rpc("sync_rescue_progress", rescue_progress)
 					
-					if rescue_progress >= RESCUE_TIME_REQUIRED:
+					# --- USE BALANCE RESCUE TIME ---
+					if rescue_progress >= Balance.thief_rescue_time:
 						active_rescuer_id = -1
-						rpc("sync_active_rescuer", -1) # <-- ADD THIS
+						rpc("sync_active_rescuer", -1) 
 						rescue_progress = 0.0
 						rpc("sync_rescue_progress", 0.0)
 						rpc("sync_rescue_halt", false)
 						rpc("rescue_successful")
 				else:
 					active_rescuer_id = -1
-					rpc("sync_active_rescuer", -1) # <-- ADD THIS
-					
-					rescue_progress = 0.0 # <-- FIX: Reset progress if they walk away!
+					rpc("sync_active_rescuer", -1) 
+					rescue_progress = 0.0 
 					rpc("sync_rescue_progress", 0.0) 
 					
 					if is_rescue_halted:
@@ -319,20 +311,18 @@ func _custom_physics_process(delta, direction):
 		return
 		
 	if carried_artifact:
-		# Apply weight penalty instantly when holding an item
 		current_speed_mult = carried_artifact.weight_penalty
 	else:
-		# If NOT holding an item, smoothly recover back to 1.0 (normal speed)
-		# delta * 0.3 means it recovers 30% speed per second. 
-		# (e.g., A 60% slow from a Large artifact will take 2 seconds to wear off)
 		current_speed_mult = move_toward(current_speed_mult, 1.0, delta * 0.3)
 		
 	if direction:
-		velocity.x = direction.x * (SPEED * current_speed_mult)
-		velocity.z = direction.z * (SPEED * current_speed_mult)
+		# --- USE BASE THIEF SPEED ---
+		velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
+		velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED * current_speed_mult)
-		velocity.z = move_toward(velocity.z, 0, SPEED * current_speed_mult)
+		# --- USE BRAKING FRICTION ---
+		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction * current_speed_mult)
+		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction * current_speed_mult)
 	
 func _process(delta):
 		# --- ADD THIS LINE RIGHT HERE! ---
@@ -361,12 +351,12 @@ func _process(delta):
 		elif is_hypnotized:
 			# Feature: See your OWN rescue progress, but ONLY if someone is rescuing you!
 			if active_rescuer_id != -1:
-				ui_manager.update_rescue_ring(rescue_progress / RESCUE_TIME_REQUIRED, true)
+				ui_manager.update_rescue_ring(rescue_progress / Balance.thief_rescue_time, true)
 			else:
 				ui_manager.update_rescue_ring(0.0, false) # Hide if nobody is rescuing
 		elif is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
 			# Normal: See the progress of the person you are saving
-			ui_manager.update_rescue_ring(current_interact_target.rescue_progress / RESCUE_TIME_REQUIRED, true)
+			ui_manager.update_rescue_ring(current_interact_target.rescue_progress / Balance.thief_rescue_time, true)
 		else:
 			ui_manager.update_rescue_ring(0.0, false) # Default hide ring when empty
 			
@@ -410,7 +400,7 @@ func _process(delta):
 			current_interact_target = null
 			
 	if is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
-		if global_position.distance_to(current_interact_target.global_position) > 3.0 or not current_interact_target.get("is_hypnotized"):
+		if global_position.distance_to(current_interact_target.global_position) > Balance.interact_shape_size or not current_interact_target.get("is_hypnotized"):
 			rpc_id(1, "request_stop_rescue", int(str(current_interact_target.name)))
 			is_rescuing = false
 			current_interact_target = null
