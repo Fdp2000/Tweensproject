@@ -41,7 +41,7 @@ func spawn_smoke():
 	self.add_child(smoke_intance)
 	smoke_intance.emitting = true
 	smoke_intance.one_shot = true
-	get_tree().create_timer(2.0).timeout
+	await get_tree().create_timer(2.0).timeout
 	smoke_intance.queue_free()
 
 var rescue_progress: float = 0.0
