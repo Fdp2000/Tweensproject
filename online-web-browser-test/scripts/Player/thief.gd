@@ -1,5 +1,7 @@
 extends "res://scripts/Player/player.gd"
 
+const SMOKE_PARTICLES = preload("uid://bnktbuy2m80lu")
+
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
 var ui_manager: Node = null
@@ -33,6 +35,14 @@ func on_artifact_pickup(artifact: Node3D):
 
 func on_artifact_drop():
 	carried_artifact = null
+
+func spawn_smoke():
+	var smoke_intance = SMOKE_PARTICLES.instantiate()
+	self.add_child(smoke_intance)
+	smoke_intance.emitting = true
+	smoke_intance.one_shot = true
+	get_tree().create_timer(2.0).timeout
+	smoke_intance.queue_free()
 
 var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
@@ -421,6 +431,7 @@ func on_captured():
 	if is_hypnotized: return
 	is_hypnotized = true
 	disable_body_rotation = true 
+	spawn_smoke()
 	
 	# --- 1. FORCE GODOT TO SCRAMBLE ITS RANDOM NUMBERS ---
 	randomize() 
