@@ -26,5 +26,3 @@ shader_parameter/pattern_tiling = 32.0
 shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
-shader_parameter/highlight_blend = 0.0
-shader_parameter/highlight_color = Color(1, 1, 0, 1)
