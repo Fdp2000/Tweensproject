@@ -17,14 +17,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Balance="*uid://y8uj2v2j2qol"
 GameManager="*res://scripts/managers/game_manager.gd"
+Balance="*uid://y8uj2v2j2qol"
 DevPanel="*uid://basgx885ow765"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=720
+window/size/viewport_width=1980
+window/size/viewport_height=1080
 
 [input]
 
