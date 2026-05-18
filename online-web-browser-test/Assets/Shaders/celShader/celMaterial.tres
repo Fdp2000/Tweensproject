@@ -6,7 +6,7 @@
 render_priority = 0
 shader = ExtResource("1_se8bu")
 shader_parameter/stealth_fade = 0.0
-shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_color = Color(0.1980342, 0.18017343, 0.052492596, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0
@@ -26,5 +26,3 @@ shader_parameter/pattern_tiling = 32.0
 shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
-shader_parameter/highlight_blend = 0.0
-shader_parameter/highlight_color = Color(1, 1, 0, 1)
