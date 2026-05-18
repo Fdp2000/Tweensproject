@@ -7,6 +7,7 @@ extends Node3D
 @export var local_player: Node3D
 
 var target_camera: Camera3D
+var intro_running: bool = false
 
 
 func _ready():
@@ -19,7 +20,7 @@ func _ready():
 		push_error("Could not find GameManager.")
 
 
-#Temp løsning 
+# Temporary test input
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		start_intro()
@@ -31,19 +32,41 @@ func _on_game_started():
 
 func start_intro():
 
+	if intro_running:
+		return
+
+	intro_running = true
+
 	if local_player == null:
-		push_error("No local player assigned.")
+		local_player = find_local_player()
+
+	if local_player == null:
+		push_error("No local player found.")
+		intro_running = false
 		return
 
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(false)
 
 	intro_camera.current = true
-
 	animation_player.play("museum_pan")
 
 	if not animation_player.animation_finished.is_connected(_on_animation_finished):
 		animation_player.animation_finished.connect(_on_animation_finished)
+
+
+func find_local_player() -> Node3D:
+	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+
+	if spawned == null:
+		push_error("Could not find World/main/SpawnedObjects.")
+		return null
+
+	for player in spawned.get_children():
+		if player.get_multiplayer_authority() == multiplayer.get_unique_id():
+			return player
+
+	return null
 
 
 func _on_animation_finished(anim_name: StringName):
@@ -58,6 +81,7 @@ func start_fly_to_player():
 
 	if target_camera == null:
 		push_error("No target camera found.")
+		intro_running = false
 		return
 
 	await move_intro_camera_to_target(target_camera)
@@ -67,13 +91,24 @@ func start_fly_to_player():
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
 
+	intro_running = false
+
 
 func get_player_gameplay_camera(player: Node3D) -> Camera3D:
 
-	if player.team == "Guard":
+	var team_index = player.get("team_index")
+
+	if team_index == 1:
 		return player.get_node("Head/FirstPersonCamera")
 
-	if player.team == "Thief":
+	if team_index == 0:
+		return player.get_node("CameraPivot/ThirdPersonCamera")
+
+	# Fallback for your temporary test player
+	if player.get("team") == "Guard":
+		return player.get_node("Head/FirstPersonCamera")
+
+	if player.get("team") == "Thief":
 		return player.get_node("CameraPivot/ThirdPersonCamera")
 
 	return null

@@ -1,10 +1,10 @@
 extends CanvasLayer
 
-@onready var left_name_label: Label = $LeftName
-@onready var right_name_label: Label = $RightName
-
-@onready var left_spawn: Node3D = $SubViewportContainer/SubViewport/LeftSpawn
-@onready var right_spawn: Node3D = $SubViewportContainer/SubViewport/RightSpawn
+@onready var left_name_label: Label = $Root/Panel/LeftName
+@onready var right_name_label: Label = $Root/Panel/RightName
+@onready var vs_label: Label = $Root/Panel/VSLabel
+@onready var left_spawn: Node3D = $Root/SubViewportContainer/SubViewport/LeftSpawn
+@onready var right_spawn: Node3D = $Root/SubViewportContainer/SubViewport/RightSpawn
 
 var left_model: Node3D
 var right_model: Node3D
