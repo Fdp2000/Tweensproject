@@ -21,10 +21,16 @@ var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
 var sync_velocity: Vector3 = Vector3.ZERO # Velocity for Dead Reckoning
 var _spawn_relay_ready: bool = false 
+#cutscene extra
+var controls_enabled: bool = true
 
 @onready var pitch_pivot = $PitchPivot
 @onready var spring_arm = $PitchPivot/SpringArm3D
 @onready var camera = $PitchPivot/SpringArm3D/Camera3D
+
+#cutscene extra
+func enable_controls(value: bool):
+	controls_enabled = value
 
 func _enter_tree() -> void:
 	var id = str(name).to_int()
@@ -230,6 +236,12 @@ func _process(delta):
 
 # --- MOVEMENT REMAINS IN PHYSICS ---
 func _physics_process(delta):
+	#Cutscene Extra
+	if not controls_enabled:
+		velocity.x = 0
+		velocity.z = 0
+		move_and_slide()
+		return
 	# FIX: Send our position, rotation, AND VELOCITY to others!
 	if is_multiplayer_authority() and _spawn_relay_ready:
 		rpc("relay_position", global_position, rotation, velocity)
