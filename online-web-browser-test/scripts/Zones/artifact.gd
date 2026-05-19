@@ -186,7 +186,7 @@ func _process(delta):
 func _apply_visuals(node: Node, highlighted: bool):
 	if not outline_mat:
 		outline_mat = ShaderMaterial.new()
-		var shader = preload("res://Assets/Shaders/HighlightShader/cartoony_outline.gdshader")
+		var shader = preload("res://Assets/Shaders/HighlightShader/OutlineShader.tres")
 		if shader:
 			outline_mat.shader = shader
 			

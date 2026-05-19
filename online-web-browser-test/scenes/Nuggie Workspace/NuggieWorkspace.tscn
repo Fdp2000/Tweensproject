@@ -2,16 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://dcgfko1edbx8o" path="res://Assets/Models/Test Panda/cel_panda_test.tscn" id="1_u2syy"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="1_v7yhp"]
+[ext_resource type="Material" uid="uid://bjsmplyairhoj" path="res://Assets/Shaders/HighlightShader/OutlineMat.tres" id="1_wtu7a"]
 [ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="2_dpteq"]
 [ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="2_eb1sy"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="3_65afw"]
 [ext_resource type="PackedScene" uid="uid://cugxk5d3dxsan" path="res://Assets/Models/Test Panda/camo_panda_test.tscn" id="4_65afw"]
 [ext_resource type="PackedScene" uid="uid://uyed2qv4xkw6" path="res://Assets/Models/Test Panda/HypnoPanda.tscn" id="7_kcrnk"]
+[ext_resource type="PackedScene" uid="uid://ca2rq6epwa2ac" path="res://Assets/Models/Test Panda/OutlinePanda.tscn" id="9_av4ca"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qlyf"]
+next_pass = ExtResource("1_wtu7a")
+albedo_color = Color(0, 0, 0, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_v7yhp"]
+material = SubResource("StandardMaterial3D_3qlyf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dg571"]
 render_priority = 0
@@ -132,6 +139,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.512372, 2, 0)
 mesh = SubResource("SphereMesh_v7yhp")
 surface_material_override/0 = ExtResource("2_eb1sy")
 
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="." unique_id=2097968547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.446176, 2, 0)
+mesh = SubResource("SphereMesh_v7yhp")
+
 [node name="RedPanda_Character_materialer2" parent="." unique_id=2109461473 instance=ExtResource("1_u2syy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 
@@ -182,3 +193,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.888521, 0, -0.96090794)
 
 [node name="RedPanda_Character_materialer4" parent="." unique_id=328487600 instance=ExtResource("7_kcrnk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.577389, 0, -1.2023191)
+
+[node name="RedPanda_Character_materialer5" parent="." unique_id=2108348717 instance=ExtResource("9_av4ca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.00486, 0, -1.1121278)
