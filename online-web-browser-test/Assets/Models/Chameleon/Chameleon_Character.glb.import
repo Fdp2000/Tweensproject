@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bjq3ev0mrqrq4"
-path="res://.godot/imported/Import_chameleon.glb-3bdf79d44cf7c4c97a600934fc71565a.scn"
+uid="uid://qxe4dnmverhh"
+path="res://.godot/imported/Chameleon_Character.glb-8bd883223ec467bbe1dc3a00657e10e7.scn"
 
 [deps]
 
-source_file="res://Assets/Models/Chameleon/Import_chameleon.glb"
-dest_files=["res://.godot/imported/Import_chameleon.glb-3bdf79d44cf7c4c97a600934fc71565a.scn"]
+source_file="res://Assets/Models/Chameleon/Chameleon_Character.glb"
+dest_files=["res://.godot/imported/Chameleon_Character.glb-8bd883223ec467bbe1dc3a00657e10e7.scn"]
 
 [params]
 

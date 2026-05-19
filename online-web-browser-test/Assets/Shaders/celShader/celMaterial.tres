@@ -1,12 +1,14 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://doxbpf613nmo5"]
 
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="1_se8bu"]
+[ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="2_nfl8o"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_se8bu")
 shader_parameter/stealth_fade = 0.0
-shader_parameter/albedo_color = Color(0.1980342, 0.18017343, 0.052492596, 1)
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("2_nfl8o")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0
@@ -15,7 +17,7 @@ shader_parameter/shadow_tint_amount = 0.4
 shader_parameter/specular = 0.0
 shader_parameter/normal_strength = 0.0
 shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 0, 1)
+shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/rim_amount = 2.0
 shader_parameter/rim_smoothness = 0.2
 shader_parameter/rim_mask_shadow = 1.0
