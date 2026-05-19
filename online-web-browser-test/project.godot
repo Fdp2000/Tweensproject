@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 Balance="*uid://y8uj2v2j2qol"
 GameManager="*res://scripts/managers/game_manager.gd"
 DevPanel="*uid://basgx885ow765"
+FpsCounter="*uid://b4eervlimq8eq"
 
 [input]
 

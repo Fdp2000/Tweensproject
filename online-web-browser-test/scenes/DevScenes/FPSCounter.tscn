@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b4eervlimq8eq"]
+
+[ext_resource type="Script" uid="uid://dlg5o86maou3n" path="res://scenes/DevScenes/FPSCounter.gd" id="1_m4jep"]
+
+[node name="FpsCounter" type="CanvasLayer" unique_id=1681434241]
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1176075123]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=2014160251]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 0.19454312, 1)
+text = "FPS: 60"
+script = ExtResource("1_m4jep")

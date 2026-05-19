@@ -1,0 +1,36 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://du6mp400060kx"]
+
+[ext_resource type="Shader" uid="uid://cutcwuaheuxpw" path="res://Assets/Shaders/HypnoShader/hypnoShader_Solid.gdshader" id="1_40wnm"]
+
+[sub_resource type="Gradient" id="Gradient_sbkkb"]
+offsets = PackedFloat32Array(0, 0.09533074, 0.34435797, 0.55058366, 0.7840467, 1)
+colors = PackedColorArray(0, 0.19322586, 1, 1, 1, 0, 0, 1, 0.25168848, 1, 0, 1, 0.9393649, 0, 1, 1, 0.13220167, 0, 1, 1, 0.5234135, 0, 0.60522425, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7xool"]
+gradient = SubResource("Gradient_sbkkb")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vetl7"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6ux2f"]
+noise = SubResource("FastNoiseLite_vetl7")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_56ptr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nnpbx"]
+noise = SubResource("FastNoiseLite_56ptr")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oxpal"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7nb5n"]
+noise = SubResource("FastNoiseLite_oxpal")
+seamless = true
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_40wnm")
+shader_parameter/tex_vtx_2 = SubResource("NoiseTexture2D_7nb5n")
+shader_parameter/tex_frg_2 = SubResource("GradientTexture2D_7xool")
+shader_parameter/tex_frg_6 = SubResource("NoiseTexture2D_6ux2f")
+shader_parameter/tex_frg_8 = SubResource("NoiseTexture2D_nnpbx")

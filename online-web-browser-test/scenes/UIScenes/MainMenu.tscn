@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dx7d3w4iihhq3"]
+
+[ext_resource type="PackedScene" uid="uid://crc86ugpb3vmu" path="res://scenes/LevelScenes/PrototypeLevel.tscn" id="1_6fv8w"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_k6vhe"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MainMenu" type="Node3D" unique_id=1107313925]
+
+[node name="Level" parent="." unique_id=1441468162 instance=ExtResource("1_6fv8w")]
+
+[node name="MenuCamera" type="Camera3D" parent="." unique_id=12028222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3844347, 2.279678, 4.2187095)
+
+[node name="LobbyCamera" type="Camera3D" parent="MenuCamera" unique_id=1939024169]
+
+[node name="VanPlaceholder" type="CSGBox3D" parent="." unique_id=1025185287]
+transform = Transform3D(0.99580973, 0, -0.09144948, 0, 1, 0, 0.09144948, 0, 0.99580973, 1.3090733, 1.3746786, 0.1260845)
+size = Vector3(1.3338623, 1.2988281, 3.1363525)
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=7099881]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="Control" type="Control" parent="SubViewport" unique_id=1420405290]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JoinGame" type="Button" parent="SubViewport/Control" unique_id=872830879]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Button"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1207966752]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.958068, -2.2699862, 0)
+texture = SubResource("ViewportTexture_k6vhe")

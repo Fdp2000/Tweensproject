@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="4_lgnbw"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="5_8gl44"]
 [ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="5_lgnbw"]
+[ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="7_7jg2g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r1635"]
 resource_name = "LightOrange"
@@ -106,6 +107,7 @@ shadow_mesh = SubResource("ArrayMesh_1h3pi")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7jg2g"]
 render_priority = 0
 shader = ExtResource("5_8gl44")
+shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.72360146, 0.5235991, 0.5235991, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -315,7 +317,7 @@ camo_material = ExtResource("3_41i6f")
 hypno_material = ExtResource("4_lgnbw")
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=607525419]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.70124507, 0)
 
 [node name="PitchPivot" parent="." index="1" unique_id=-1905862475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -328,6 +330,7 @@ fov = 75.0
 
 [node name="Model" type="Node3D" parent="." index="3" unique_id=93794898]
 transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 0, -0.8, 0)
+visible = false
 
 [node name="Head" type="MeshInstance3D" parent="Model" index="0" unique_id=1956828641]
 mesh = SubResource("ArrayMesh_smmxd")
@@ -349,3 +352,6 @@ surface_material_override/0 = ExtResource("5_lgnbw")
 [node name="Eyes" type="MeshInstance3D" parent="Model" index="3" unique_id=589109342]
 mesh = SubResource("ArrayMesh_u3f2d")
 surface_material_override/0 = ExtResource("5_lgnbw")
+
+[node name="Chameleon_Character" parent="." index="4" unique_id=1423752438 instance=ExtResource("7_7jg2g")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
