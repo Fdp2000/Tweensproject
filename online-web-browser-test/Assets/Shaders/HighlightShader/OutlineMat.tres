@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bjsmplyairhoj"]
+
+[ext_resource type="Shader" uid="uid://djerdsjse7pob" path="res://Assets/Shaders/HighlightShader/OutlineShader.tres" id="1_6lvum"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_6lvum")
+shader_parameter/Outline_Size = 0.025
+shader_parameter/Base_Color = Color(1, 1, 1, 1)
+shader_parameter/Emission_Strength = 1.0

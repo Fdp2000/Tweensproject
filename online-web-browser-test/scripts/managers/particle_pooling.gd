@@ -12,7 +12,6 @@ func _ready() -> void:
 	# Add Particles Instance Node
 	self.get_node("instantiatedParticles").add_child(shine_instance)
 	self.get_node("instantiatedParticles").add_child(smoke_instance)
-	print("particles instantiated")
 	
 	# Emit Particles
 	shine_instance.emitting = true
@@ -22,4 +21,3 @@ func _ready() -> void:
 	# Wait For Timer, Then Delete Particles Again
 	await get_tree().create_timer(5.0).timeout
 	get_node("instantiatedParticles").queue_free()
-	print("particles deleted")
