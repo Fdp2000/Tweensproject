@@ -15,7 +15,7 @@ noise = SubResource("FastNoiseLite_7lbki")
 [resource]
 render_priority = 0
 shader = ExtResource("1_psu83")
-shader_parameter/transparency_colour = Color(0.8453288, 0.8453288, 0.84532875, 1)
+shader_parameter/transparency_colour = Color(1, 1, 1, 1)
 shader_parameter/AirIOR = 1.0
 shader_parameter/IOR = 1.5
 shader_parameter/specular_intensity = 0.0
