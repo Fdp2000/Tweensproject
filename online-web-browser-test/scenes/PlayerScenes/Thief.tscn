@@ -16,7 +16,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgnbw"]
 radius = 0.20996094
-height = 1.3232635
+height = 1.3122612
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7jg2g"]
 _data = {
@@ -38,7 +38,7 @@ camo_material = ExtResource("3_41i6f")
 hypno_material = ExtResource("4_lgnbw")
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=607525419]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6701431, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6756443, 0)
 shape = SubResource("CapsuleShape3D_lgnbw")
 
 [node name="PitchPivot" parent="." index="1" unique_id=-1905862475]

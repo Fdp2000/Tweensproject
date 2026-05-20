@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dnj1qlpx0weot"]
 
 [ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="1_fvmxw"]
+[ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="2_6luog"]
 [ext_resource type="Animation" uid="uid://boqq0afclyx02" path="res://Assets/Animations/Chameleon/Run1.res" id="2_8kfuf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqyss"]
@@ -429,16 +430,19 @@ bones/33/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_xib3l")
 skin = SubResource("Skin_6rlxd")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("2_6luog")
 
 [node name="Eye_L" type="MeshInstance3D" parent="Chameleon_Character/metarig/Skeleton3D" unique_id=970056815]
 mesh = SubResource("ArrayMesh_p1jj1")
 skin = SubResource("Skin_6rlxd")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("2_6luog")
 
 [node name="Eye_R" type="MeshInstance3D" parent="Chameleon_Character/metarig/Skeleton3D" unique_id=940823346]
 mesh = SubResource("ArrayMesh_i4j2w")
 skin = SubResource("Skin_6rlxd")
 skeleton = NodePath("..")
+surface_material_override/0 = ExtResource("2_6luog")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1955452292]
 root_node = NodePath("../Chameleon_Character")
