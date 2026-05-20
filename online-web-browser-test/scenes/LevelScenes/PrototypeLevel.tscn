@@ -44,7 +44,6 @@
 [ext_resource type="Texture2D" uid="uid://c7nd4mv7qn7bt" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeLeaf.png" id="42_p8w5a"]
 [ext_resource type="Texture2D" uid="uid://dr8d66b6lkxj6" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeTrunk.png" id="43_0t7hq"]
 [ext_resource type="ArrayMesh" uid="uid://boev4i360s4n5" path="res://Assets/Models/smolpine.tres" id="44_xwy5l"]
-[ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="45_ydp54"]
 [ext_resource type="ArrayMesh" uid="uid://d3rbwblcji7go" path="res://Assets/Models/binkstone.res" id="46_217hv"]
 [ext_resource type="ArrayMesh" uid="uid://b5xvphu3ri6cj" path="res://Assets/environments/Ultimate Nature Pack by Quaternius/OBJ/WoodLog.obj" id="47_w6te4"]
 [ext_resource type="ArrayMesh" uid="uid://nu5mmv0rfpjv" path="res://Assets/environments/Ultimate Nature Pack by Quaternius/OBJ/WoodLog_Moss.obj" id="48_fvyjn"]
@@ -1443,8 +1442,183 @@ shader_parameter/pattern_blend = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imnlu"]
 albedo_texture = ExtResource("43_0t7hq")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bf2ka"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/stealth_fade = 0.0
+shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3niol"]
 albedo_texture = ExtResource("43_0t7hq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gp0hk"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/stealth_fade = 0.0
+shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88xne"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/stealth_fade = 0.0
+shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0hqwr"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/stealth_fade = 0.0
+shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8qq2"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/stealth_fade = 0.0
+shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p8w5a"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/stealth_fade = 0.0
+shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0t7hq"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/stealth_fade = 0.0
+shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="Shader" id="Shader_6lfha"]
 code = "shader_type spatial;
@@ -6049,43 +6223,43 @@ surface_material_override/1 = SubResource("StandardMaterial3D_imnlu")
 [node name="Smolpine" type="MeshInstance3D" parent="." unique_id=360058578]
 transform = Transform3D(27.37, 0, 0, 0, -1.1963807e-06, 27.37, 0, -27.37, -1.1963807e-06, -30, 0.19999999, 3)
 mesh = ExtResource("44_xwy5l")
-surface_material_override/0 = ExtResource("45_ydp54")
+surface_material_override/0 = SubResource("ShaderMaterial_bf2ka")
 surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 
 [node name="Smolpine4" type="MeshInstance3D" parent="." unique_id=2049711822]
 transform = Transform3D(27.37, 0, 0, 0, -1.1963807e-06, 27.37, 0, -27.37, -1.1963807e-06, -34, 0.19999999, 4)
 mesh = ExtResource("44_xwy5l")
-surface_material_override/0 = ExtResource("45_ydp54")
+surface_material_override/0 = SubResource("ShaderMaterial_gp0hk")
 surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 
 [node name="Smolpine7" type="MeshInstance3D" parent="." unique_id=522265823]
 transform = Transform3D(27.37, 0, 0, 0, -1.1963807e-06, 27.37, 0, -27.37, -1.1963807e-06, -39.5, 0.19999999, 6.1000004)
 mesh = ExtResource("44_xwy5l")
-surface_material_override/0 = ExtResource("45_ydp54")
+surface_material_override/0 = SubResource("ShaderMaterial_88xne")
 surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 
 [node name="Smolpine5" type="MeshInstance3D" parent="." unique_id=2064735410]
 transform = Transform3D(27.37, 0, 0, 0, -1.1963807e-06, 27.37, 0, -27.37, -1.1963807e-06, -32, 0.19999999, 6)
 mesh = ExtResource("44_xwy5l")
-surface_material_override/0 = ExtResource("45_ydp54")
+surface_material_override/0 = SubResource("ShaderMaterial_0hqwr")
 surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 
 [node name="Smolpine6" type="MeshInstance3D" parent="." unique_id=1443968090]
 transform = Transform3D(27.37, 0, 0, 0, -1.1963807e-06, 27.37, 0, -27.37, -1.1963807e-06, -37, 0.19999999, -2)
 mesh = ExtResource("44_xwy5l")
-surface_material_override/0 = ExtResource("45_ydp54")
+surface_material_override/0 = SubResource("ShaderMaterial_c8qq2")
 surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 
 [node name="Smolpine3" type="MeshInstance3D" parent="." unique_id=1228795721]
 transform = Transform3D(27.37, 0, 0, 0, -1.1963807e-06, 27.37, 0, -27.37, -1.1963807e-06, -23, 0.19999999, 3)
 mesh = ExtResource("44_xwy5l")
-surface_material_override/0 = ExtResource("45_ydp54")
+surface_material_override/0 = SubResource("ShaderMaterial_p8w5a")
 surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 
 [node name="Smolpine2" type="MeshInstance3D" parent="." unique_id=1357046406]
 transform = Transform3D(27.37, 0, 0, 0, -1.1963807e-06, 27.37, 0, -27.37, -1.1963807e-06, -28, 0.19999999, -5)
 mesh = ExtResource("44_xwy5l")
-surface_material_override/0 = ExtResource("45_ydp54")
+surface_material_override/0 = SubResource("ShaderMaterial_0t7hq")
 surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 
 [node name="Binkstone" type="MeshInstance3D" parent="." unique_id=737131673]
