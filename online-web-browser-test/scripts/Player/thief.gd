@@ -4,6 +4,16 @@ const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
 
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
+
+@onready var anim_player = $Chameleon_Character/AnimationPlayer
+@onready var visual_mesh = $Chameleon_Character
+var favorite_runs = ["Run1", "Run3", "Run4", "Run5"] # <-- Put your favorite runs here
+var favorite_idles = ["Idle1", "Idle2", "Idle3"] # <-- Put your favorite idles here
+# We need this to remember what the character is doing, 
+# otherwise it will pick a new random animation 60 times a second!
+var is_currently_moving = false
+
+
 var ui_manager: Node = null
 var camera_manager: Node = null
 var stealth_manager: Node = null
@@ -61,6 +71,9 @@ func _ready():
 	# We use nav_agent ONLY to generate the path. We will handle following it manually to avoid 3D distance bugs!
 	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
+	
+	var random_idle = favorite_idles.pick_random()
+	anim_player.play(random_idle, 0.0)
 	
 	if is_multiplayer_authority():
 		# Setup Debug Path Visualizer
@@ -333,7 +346,56 @@ func _custom_physics_process(delta, direction):
 		# --- USE BRAKING FRICTION ---
 		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction * current_speed_mult)
 		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction * current_speed_mult)
-	
+	# ==========================================
+	# --- CHAMELEON ANIMATION STATE MACHINE ---
+	# ==========================================
+	if is_jailed:
+		anim_player.stop()
+		
+	elif is_hypnotized:
+		# We can just use a fast blend here too!
+		if velocity.length_squared() > 0.05:
+			anim_player.play("Run1", 0.2) # Hardcode a specific run for dragging if you want!
+		else:
+			anim_player.play("Idle1", 0.2)
+			
+	else:
+		var current_vel = velocity
+		if not is_multiplayer_authority():
+			current_vel = sync_velocity
+
+		var horizontal_speed_sq = Vector2(current_vel.x, current_vel.z).length_squared()
+		
+		# --- IF WE ARE MOVING ---
+		if horizontal_speed_sq > 0.05:
+			
+			# Did we JUST start moving this exact frame?
+			if not is_currently_moving:
+				is_currently_moving = true
+				
+				# Pick a random run cycle!
+				var random_run = favorite_runs.pick_random()
+				
+				# Play it, and smoothly blend the bones over 0.2 seconds
+				anim_player.play(random_run, 0.2) 
+			
+			# Keep rotating the mesh every frame
+			var target_angle = atan2(current_vel.x, current_vel.z) 
+			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
+			
+		# --- IF WE ARE STANDING STILL ---
+		else:
+			
+			# Did we JUST stop moving this exact frame?
+			if is_currently_moving:
+				is_currently_moving = false
+				
+				# Pick a random idle cycle!
+				var random_idle = favorite_idles.pick_random()
+				
+				# Play it, and smoothly blend into the idle over 0.3 seconds
+				anim_player.play(random_idle, 0.3)
+			
 func _process(delta):
 		# --- ADD THIS LINE RIGHT HERE! ---
 	# This tells Godot to run the network smoothing math from Player.gd!
