@@ -6,9 +6,10 @@
 [ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="2_dpteq"]
 [ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="2_eb1sy"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="3_65afw"]
-[ext_resource type="PackedScene" uid="uid://cugxk5d3dxsan" path="res://Assets/Models/Test Panda/camo_panda_test.tscn" id="4_65afw"]
+[ext_resource type="PackedScene" path="res://Assets/Models/Test Panda/camo_panda_test.tscn" id="4_65afw"]
 [ext_resource type="PackedScene" uid="uid://uyed2qv4xkw6" path="res://Assets/Models/Test Panda/HypnoPanda.tscn" id="7_kcrnk"]
 [ext_resource type="PackedScene" uid="uid://ca2rq6epwa2ac" path="res://Assets/Models/Test Panda/OutlinePanda.tscn" id="9_av4ca"]
+[ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="10_av4ca"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
@@ -196,3 +197,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.577389, 0, -1.2023191)
 
 [node name="RedPanda_Character_materialer5" parent="." unique_id=2108348717 instance=ExtResource("9_av4ca")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.00486, 0, -1.1121278)
+
+[node name="Chameleon_Character" parent="." unique_id=1670959465 instance=ExtResource("10_av4ca")]
+transform = Transform3D(2.61, 0, 0, 0, 2.61, 0, 0, 0, 2.61, 20.865583, 0, -0.7265959)
