@@ -57,6 +57,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ddhx0eewj7j3f" path="res://Assets/Models/skævpalme.res" id="56_7u4t4"]
 [ext_resource type="ArrayMesh" uid="uid://cuyfrnm8qpmpv" path="res://Assets/Models/palme2.res" id="57_fppg6"]
 [ext_resource type="ArrayMesh" uid="uid://dloq3sfc54a3u" path="res://Assets/Models/palme3.res" id="58_ol4g5"]
+[ext_resource type="ArrayMesh" uid="uid://dnoj6j6g53714" path="res://Assets/Models/LowPolyMuseumAssets/Picture6Image.res" id="59_gp0hk"]
 [ext_resource type="ArrayMesh" uid="uid://5akym5yt8bfp" path="res://Assets/Models/moai.res" id="59_nkopf"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_q60mh"]
@@ -6408,6 +6409,13 @@ surface_material_override/0 = SubResource("ShaderMaterial_fufty")
 transform = Transform3D(0.52, 0, 0, 0, -2.2729921e-08, 0.52, 0, -0.52, -2.2729921e-08, -19.416594, 1.8999999, -30.711826)
 mesh = ExtResource("59_nkopf")
 surface_material_override/0 = SubResource("ShaderMaterial_5i3ml")
+
+[node name="Picture6Image" type="MeshInstance3D" parent="." unique_id=396467276]
+transform = Transform3D(1.335, 0, 0, 0, 1.335, 0, 0, 0, 1.335, 1.2787957, 1.1926165, -2.4446402)
+mesh = ExtResource("59_gp0hk")
+script = ExtResource("6_artifact")
+artifact_size = 1
+artifact_category = 2
 
 [editable path="Pictures/SecCam1"]
 [editable path="Pictures/SecCam2"]

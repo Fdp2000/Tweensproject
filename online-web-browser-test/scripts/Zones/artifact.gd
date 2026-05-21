@@ -180,8 +180,13 @@ func _process(delta):
 					# 2. Apply your custom position offset (Relative to the hand's rotation)
 					translate_object_local(hand_position_offset)
 					
-					# 3. Apply your custom rotation offset
-					var rot_basis = Basis.from_euler(hand_rotation_offset)
+					# 3. Apply your custom rotation offset (Converted to standard degrees!)
+					var rot_rad = Vector3(
+						deg_to_rad(hand_rotation_offset.x), 
+						deg_to_rad(hand_rotation_offset.y), 
+						deg_to_rad(hand_rotation_offset.z)
+					)
+					var rot_basis = Basis.from_euler(rot_rad)
 					global_transform.basis = global_transform.basis * rot_basis
 					
 					# 4. Lock the scale so the bone animations don't warp the mesh
