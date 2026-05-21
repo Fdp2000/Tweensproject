@@ -13,7 +13,11 @@
 [ext_resource type="Animation" uid="uid://b24nc1krkg3qc" path="res://Assets/Animations/Chameleon/Idle3.res" id="8_b77bf"]
 [ext_resource type="Animation" uid="uid://c21j58ypdr2r0" path="res://Assets/Animations/Chameleon/Run3.res" id="8_ntepm"]
 [ext_resource type="Animation" uid="uid://hc84p7qhdihc" path="res://Assets/Animations/Chameleon/Run4.res" id="9_3n881"]
+[ext_resource type="Animation" uid="uid://dpg7r6fftn7ya" path="res://Assets/Animations/Carry/Jog Backwards.res" id="10_ns2dq"]
 [ext_resource type="Animation" uid="uid://morndqgp7rxd" path="res://Assets/Animations/Chameleon/Run5.res" id="10_pwsbx"]
+[ext_resource type="Animation" uid="uid://uskucuuqyynr" path="res://Assets/Animations/Carry/Jog Forward.res" id="11_b17lj"]
+[ext_resource type="Animation" uid="uid://bqyvm7t41n5rm" path="res://Assets/Animations/Carry/Jog Strafe Left.res" id="12_ptic4"]
+[ext_resource type="Animation" uid="uid://crfctbio3my7o" path="res://Assets/Animations/Carry/Jog Strafe Right.res" id="13_wj3y1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgnbw"]
 radius = 0.20996094
@@ -25,6 +29,10 @@ _data = {
 &"Idle1": ExtResource("6_pwsbx"),
 &"Idle2": ExtResource("7_1raaj"),
 &"Idle3": ExtResource("8_b77bf"),
+&"Jog Backwards": ExtResource("10_ns2dq"),
+&"Jog Forward": ExtResource("11_b17lj"),
+&"Jog Strafe Left": ExtResource("12_ptic4"),
+&"Jog Strafe Right": ExtResource("13_wj3y1"),
 &"Run1": ExtResource("6_8gl44"),
 &"Run2": ExtResource("7_j3oqh"),
 &"Run3": ExtResource("8_ntepm"),
@@ -55,7 +63,24 @@ fov = 75.0
 [node name="Chameleon_Character" parent="." index="3" unique_id=1423752438 instance=ExtResource("7_7jg2g")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
+[node name="Skeleton3D" parent="Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
+bones/0/scale = Vector3(0.99999994, 1, 1)
+bones/21/rotation = Quaternion(0.95323235, 0.19987626, -0.13364021, 0.1831333)
+bones/21/scale = Vector3(1, 0.99999964, 0.99999756)
+bones/22/rotation = Quaternion(0.4836471, 0.08125992, 0.05652075, 0.869648)
+bones/23/rotation = Quaternion(-0.7924582, -0.063937664, 0.07840999, 0.60147655)
+bones/24/rotation = Quaternion(0.9508102, -0.13284776, 0.09172118, 0.2643838)
+bones/25/rotation = Quaternion(0.5379087, -0.060596943, -0.0029953767, 0.84081703)
+bones/26/rotation = Quaternion(-0.7854469, 0.07800365, -0.12870939, 0.60035217)
+bones/27/scale = Vector3(0.9999999, 0.9999999, 0.9999998)
+bones/29/scale = Vector3(1, 1.0000001, 1.0000001)
+bones/30/scale = Vector3(1, 1.0000002, 1.0000001)
+bones/31/scale = Vector3(1, 1, 1.0000001)
+
 [node name="AnimationPlayer" parent="Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_7jg2g")
+
+[node name="AnimationTree" parent="Chameleon_Character" index="2" unique_id=1446614453]
+parameters/Holding_State/CarryMovement/blend_position = Vector2(0.13843346, -0.5202702)
 
 [editable path="Chameleon_Character"]
