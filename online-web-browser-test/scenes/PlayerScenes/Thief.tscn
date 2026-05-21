@@ -65,6 +65,8 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0
 
 [node name="Skeleton3D" parent="Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
 bones/0/scale = Vector3(0.99999994, 1, 1)
+bones/15/rotation = Quaternion(0.21851899, -0.13268656, 0.10570056, 0.9609741)
+bones/15/scale = Vector3(1.0000011, 1.0000014, 0.9999973)
 bones/21/rotation = Quaternion(0.95323235, 0.19987626, -0.13364021, 0.1831333)
 bones/21/scale = Vector3(1, 0.99999964, 0.99999756)
 bones/22/rotation = Quaternion(0.4836471, 0.08125992, 0.05652075, 0.869648)
@@ -77,10 +79,13 @@ bones/29/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/30/scale = Vector3(1, 1.0000002, 1.0000001)
 bones/31/scale = Vector3(1, 1, 1.0000001)
 
+[node name="ArtifactAttachment" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
+transform = Transform3D(-0.6121215, 0.106993854, 0.7834916, 0.7888908, 0.1507891, 0.59574604, -0.054400645, 0.98276293, -0.17671154, -0.2978213, 0.6563721, 0.22010873)
+
 [node name="AnimationPlayer" parent="Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_7jg2g")
 
 [node name="AnimationTree" parent="Chameleon_Character" index="2" unique_id=1446614453]
-parameters/Holding_State/CarryMovement/blend_position = Vector2(0.13843346, -0.5202702)
+parameters/Holding_State/CarryMovement/blend_position = Vector2(0.09653914, 0.28600407)
 
 [editable path="Chameleon_Character"]

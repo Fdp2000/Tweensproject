@@ -54,6 +54,9 @@ func on_artifact_pickup(artifact: Node3D):
 
 func on_artifact_drop():
 	carried_artifact = null
+	# --- ADD THIS FIX ---
+	# Wipe the memory so State B thinks we "just started" moving this exact frame!
+	is_currently_moving = false
 
 func spawn_smoke():
 	var smoke_intance = SMOKE_PARTICLES.instantiate()
@@ -365,14 +368,18 @@ func _custom_physics_process(delta, direction):
 		# STATE A: CARRYING AN ARTIFACT
 		# ----------------------------------------
 		
-		# FIX 1: Brutally kill the background AnimationPlayer so the Run cycle stops bleeding through!
-		if anim_player.is_playing():
-			anim_player.stop()
-			
+		# 1. Turn the tree on and travel to the holding setup
 		anim_tree.active = true
 		anim_tree.get("parameters/playback").travel("Holding_State")
 		
-		# 1. Lock rotation so the Chameleon's back points to the camera
+		# 2. Tell the switchboard which upper-body pose to use
+		if carried_artifact:
+			if carried_artifact.artifact_category == carried_artifact.Category.WALL_PROP:
+				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "wall_prop")
+			elif carried_artifact.artifact_category == carried_artifact.Category.FLOOR_PROP:
+				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "floor_prop")
+
+		# 3. Lock rotation so the Chameleon's back points to the camera
 		var target_rot = 0.0
 		if pitch_pivot:
 			target_rot = pitch_pivot.global_rotation.y + PI
@@ -383,33 +390,32 @@ func _custom_physics_process(delta, direction):
 		else:
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, sync_mesh_rot_y, 10.0 * delta)
 
+		# 4. Handle the lower-body leg movement
 		if horizontal_speed_sq > 0.05:
 			is_camo_posing = false
-			is_currently_moving = true # FIX 2: Keep the script's memory synced!
+			is_currently_moving = true 
 			
-			# Keep the arms locked in the placeholder pose! 
+			# Keep the arms locked in the 100% artifact pose
 			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
 			
-			# Un-rotate the velocity to correctly drive the strafing BlendSpace2D
+			# Un-rotate velocity and drive the legs on the grid
 			var local_velocity = current_vel.rotated(Vector3.UP, -pitch_pivot.global_rotation.y)
 			var grid_position = Vector2(local_velocity.x, -local_velocity.z).normalized()
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", grid_position)
 			
 		else:
-			is_currently_moving = false # FIX 2: Keep the script's memory synced!
+			is_currently_moving = false 
 			
-			# Stop the legs (Forces the grid to 0,0)
+			# Stop the legs (Forces grid perfectly to 0,0 -> Idle1)
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", Vector2.ZERO)
 			
+			# Keep the arms locked in the 100% artifact pose while standing
+			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
+			
+			# (Handle Camo Stealth Logic here if you want him to go invisible while holding!)
 			if stealth_manager and stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
 				if not is_camo_posing:
 					is_camo_posing = true
-				
-				# Keep arms in the hiding pose
-				anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
-			else:
-				# Keep arms in standard carrying position while just standing normally
-				anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
 	else:
 		# ----------------------------------------
 		# STATE B: NORMAL RUNNING (EMPTY HANDED)
