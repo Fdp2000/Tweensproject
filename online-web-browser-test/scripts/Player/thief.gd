@@ -364,14 +364,19 @@ func _custom_physics_process(delta, direction):
 		# ----------------------------------------
 		# STATE A: CARRYING AN ARTIFACT
 		# ----------------------------------------
+		
+		# FIX 1: Brutally kill the background AnimationPlayer so the Run cycle stops bleeding through!
+		if anim_player.is_playing():
+			anim_player.stop()
+			
 		anim_tree.active = true
 		anim_tree.get("parameters/playback").travel("Holding_State")
 		
-		# FIX 1: Add PI to the camera rotation so the Chameleon turns his back to you
+		# 1. Lock rotation so the Chameleon's back points to the camera
 		var target_rot = 0.0
 		if pitch_pivot:
 			target_rot = pitch_pivot.global_rotation.y + PI
-		
+			
 		if is_multiplayer_authority() and pitch_pivot:
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_rot, 10.0 * delta)
 			rpc("sync_mesh_rot", visual_mesh.global_rotation.y)
@@ -380,24 +385,31 @@ func _custom_physics_process(delta, direction):
 
 		if horizontal_speed_sq > 0.05:
 			is_camo_posing = false
+			is_currently_moving = true # FIX 2: Keep the script's memory synced!
 			
-			# FIX 2: Keep the Blend2 node at 1.0 so the arms stay locked in the pose while running!
+			# Keep the arms locked in the placeholder pose! 
 			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
 			
-			# FIX 3: Un-rotate the velocity using the Camera's angle, NOT the flipped mesh!
+			# Un-rotate the velocity to correctly drive the strafing BlendSpace2D
 			var local_velocity = current_vel.rotated(Vector3.UP, -pitch_pivot.global_rotation.y)
 			var grid_position = Vector2(local_velocity.x, -local_velocity.z).normalized()
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", grid_position)
-		else:
-			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", Vector2.ZERO)
 			
-			# Keep it at 1.0 when standing still too!
-			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
+		else:
+			is_currently_moving = false # FIX 2: Keep the script's memory synced!
+			
+			# Stop the legs (Forces the grid to 0,0)
+			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", Vector2.ZERO)
 			
 			if stealth_manager and stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
 				if not is_camo_posing:
 					is_camo_posing = true
-
+				
+				# Keep arms in the hiding pose
+				anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
+			else:
+				# Keep arms in standard carrying position while just standing normally
+				anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
 	else:
 		# ----------------------------------------
 		# STATE B: NORMAL RUNNING (EMPTY HANDED)
