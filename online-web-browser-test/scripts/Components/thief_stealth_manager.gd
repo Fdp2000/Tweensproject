@@ -30,7 +30,9 @@ func setup(parent: Node3D, camo: ShaderMaterial, hypno: ShaderMaterial):
 		_is_dual_mesh_setup = true
 
 func process_stealth(delta: float, speed: float, is_hypnotized: bool, is_jailed: bool, is_highlighted: bool):
-	if speed < 0.2:
+	# 1.5 is fast enough to ignore being shoved, but slow enough 
+	# that pressing WASD will still instantly break camo!
+	if speed < 1.5:
 		stationary_time += delta
 	else:
 		stationary_time = 0.0
@@ -107,6 +109,8 @@ func _setup_dual_meshes(node: Node):
 				var c_mat = camo_material.duplicate()
 				c_mat.render_priority = -1 
 				camo_mesh.set_surface_override_material(i, c_mat)
+				
+		camo_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		
 		camo_mesh.hide()
 		camo_meshes.append(camo_mesh)
