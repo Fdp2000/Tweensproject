@@ -8,7 +8,7 @@ const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
 @onready var anim_player = $Chameleon_Character/AnimationPlayer
 @onready var visual_mesh = $Chameleon_Character
 var favorite_runs = ["Run1", "Run3", "Run4", "Run5"] # <-- Put your favorite runs here
-var favorite_idles = ["Idle1", "Idle2", "Idle3"] # <-- Put your favorite idles here
+var favorite_idles = ["Idle1"] # <-- Put your favorite idles here
 # We need this to remember what the character is doing, 
 # otherwise it will pick a new random animation 60 times a second!
 var is_currently_moving = false
@@ -353,9 +353,8 @@ func _custom_physics_process(delta, direction):
 		anim_player.stop()
 		
 	elif is_hypnotized:
-		# We can just use a fast blend here too!
 		if velocity.length_squared() > 0.05:
-			anim_player.play("Run1", 0.2) # Hardcode a specific run for dragging if you want!
+			anim_player.play("Run1", 0.2) # Hardcode a specific run for dragging
 		else:
 			anim_player.play("Idle1", 0.2)
 			
@@ -372,29 +371,32 @@ func _custom_physics_process(delta, direction):
 			# Did we JUST start moving this exact frame?
 			if not is_currently_moving:
 				is_currently_moving = true
-				
-				# Pick a random run cycle!
 				var random_run = favorite_runs.pick_random()
-				
-				# Play it, and smoothly blend the bones over 0.2 seconds
 				anim_player.play(random_run, 0.2) 
 			
-			# Keep rotating the mesh every frame
 			var target_angle = atan2(current_vel.x, current_vel.z) 
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 			
 		# --- IF WE ARE STANDING STILL ---
 		else:
 			
-			# Did we JUST stop moving this exact frame?
+			# 1. Did we JUST stop moving this exact frame?
 			if is_currently_moving:
 				is_currently_moving = false
 				
-				# Pick a random idle cycle!
 				var random_idle = favorite_idles.pick_random()
+				anim_player.play(random_idle, 0.3) 
 				
-				# Play it, and smoothly blend into the idle over 0.3 seconds
-				anim_player.play(random_idle, 0.3)
+			# 2. Are we standing still long enough to trigger camo?
+			elif stealth_manager and stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
+				
+				# Check if we haven't already started the mime pose
+				if anim_player.current_animation != "Camo_Pose":
+					
+					# Play the mime pose! 
+					# Using the Balance fade duration ensures the hands lift at the 
+					# exact same speed that the Chameleon turns invisible!
+					anim_player.play("Camo_Pose", Balance.thief_camo_fade_duration_sec)
 			
 func _process(delta):
 		# --- ADD THIS LINE RIGHT HERE! ---
