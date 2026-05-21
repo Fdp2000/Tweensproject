@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode depth_draw_opaque, depth_prepass_alpha;
+render_mode depth_draw_always, cull_disabled;
 uniform float stealth_fade : hint_range(0.0, 1.0) = 0.0;
 
 group_uniforms Shader.Albedo;

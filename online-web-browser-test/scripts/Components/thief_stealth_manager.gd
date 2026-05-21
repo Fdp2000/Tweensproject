@@ -23,6 +23,11 @@ func setup(parent: Node3D, camo: ShaderMaterial, hypno: ShaderMaterial):
 	thief = parent
 	camo_material = camo
 	hypno_material = hypno
+	
+	# THE FIX: Build the dual meshes instantly when the thief spawns
+	if not _is_dual_mesh_setup:
+		_setup_dual_meshes(thief)
+		_is_dual_mesh_setup = true
 
 func process_stealth(delta: float, speed: float, is_hypnotized: bool, is_jailed: bool, is_highlighted: bool):
 	if speed < 0.2:
@@ -111,9 +116,6 @@ func _setup_dual_meshes(node: Node):
 			_setup_dual_meshes(child)
 
 func _apply_visual_states(alpha_val: float, t_alpha: float, is_hypnotized: bool, is_jailed: bool, is_highlighted: bool):
-	if not _is_dual_mesh_setup:
-		_setup_dual_meshes(thief)
-		_is_dual_mesh_setup = true
 		
 	if not local_outline_mat:
 		local_outline_mat = ShaderMaterial.new()

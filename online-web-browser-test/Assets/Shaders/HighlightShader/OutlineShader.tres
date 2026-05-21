@@ -1,0 +1,46 @@
+[gd_resource type="VisualShader" format=3 uid="uid://djerdsjse7pob"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_w7fx4"]
+parameter_name = "Base_Color"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_w7fx4"]
+parameter_name = "Emission_Strength"
+default_value_enabled = true
+default_value = 1.0
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_33qqf"]
+parameter_name = "Outline_Size"
+default_value_enabled = true
+default_value = 0.025
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_h6jq7"]
+input_name = "normal"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_md0hf"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_mjmt1"]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_silv8"]
+
+[resource]
+modes/cull = 1
+nodes/vertex/0/position = Vector2(620, 50)
+nodes/vertex/2/node = SubResource("VisualShaderNodeFloatParameter_33qqf")
+nodes/vertex/2/position = Vector2(-260, 130)
+nodes/vertex/3/node = SubResource("VisualShaderNodeInput_h6jq7")
+nodes/vertex/3/position = Vector2(-290, 20)
+nodes/vertex/4/node = SubResource("VisualShaderNodeVectorOp_md0hf")
+nodes/vertex/4/position = Vector2(80, 30)
+nodes/vertex/5/node = SubResource("VisualShaderNodeInput_mjmt1")
+nodes/vertex/5/position = Vector2(-170, 420)
+nodes/vertex/6/node = SubResource("VisualShaderNodeVectorOp_silv8")
+nodes/vertex/6/position = Vector2(320, 200)
+nodes/vertex/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 1, 4, 0, 6, 0, 5, 0, 6, 1, 6, 0, 0, 0)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_w7fx4")
+nodes/fragment/2/position = Vector2(10, 170)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_w7fx4")
+nodes/fragment/5/position = Vector2(-30, 410)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 5, 0, 0, 5)
