@@ -6,14 +6,14 @@
 [ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="4_lgnbw"]
 [ext_resource type="Animation" uid="uid://buixqxsh8dig" path="res://Assets/Animations/Chameleon/Camo_Pose.anim" id="6_1raaj"]
 [ext_resource type="Animation" uid="uid://boqq0afclyx02" path="res://Assets/Animations/Chameleon/Run1.res" id="6_8gl44"]
-[ext_resource type="Animation" uid="uid://dqdeyungsa74k" path="res://Assets/Animations/Chameleon/Idle1.res" id="6_pwsbx"]
-[ext_resource type="Animation" uid="uid://du2pekwb38iye" path="res://Assets/Animations/Chameleon/Idle2.res" id="7_1raaj"]
+[ext_resource type="Animation" uid="uid://do52qgm5077c0" path="res://Assets/Animations/Chameleon/Idle1.res" id="6_pwsbx"]
+[ext_resource type="Animation" uid="uid://c1mcnmaibxgy8" path="res://Assets/Animations/Chameleon/Idle2.res" id="7_1raaj"]
 [ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="7_7jg2g"]
 [ext_resource type="Animation" uid="uid://bqp1nobyaxhr8" path="res://Assets/Animations/Chameleon/Run2.res" id="7_j3oqh"]
-[ext_resource type="Animation" uid="uid://0hi8tj5ksp54" path="res://Assets/Animations/Chameleon/Idle3.res" id="8_b77bf"]
-[ext_resource type="Animation" uid="uid://e3uu24g8x5ne" path="res://Assets/Animations/Chameleon/Run3.res" id="8_ntepm"]
-[ext_resource type="Animation" uid="uid://buqx8el4lq53h" path="res://Assets/Animations/Chameleon/Run4.res" id="9_3n881"]
-[ext_resource type="Animation" uid="uid://dbbgk8nyf4iq0" path="res://Assets/Animations/Chameleon/Run5.res" id="10_pwsbx"]
+[ext_resource type="Animation" uid="uid://b24nc1krkg3qc" path="res://Assets/Animations/Chameleon/Idle3.res" id="8_b77bf"]
+[ext_resource type="Animation" uid="uid://c21j58ypdr2r0" path="res://Assets/Animations/Chameleon/Run3.res" id="8_ntepm"]
+[ext_resource type="Animation" uid="uid://hc84p7qhdihc" path="res://Assets/Animations/Chameleon/Run4.res" id="9_3n881"]
+[ext_resource type="Animation" uid="uid://morndqgp7rxd" path="res://Assets/Animations/Chameleon/Run5.res" id="10_pwsbx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgnbw"]
 radius = 0.20996094
@@ -54,26 +54,6 @@ fov = 75.0
 
 [node name="Chameleon_Character" parent="." index="3" unique_id=1423752438 instance=ExtResource("7_7jg2g")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="Skeleton3D" parent="Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
-bones/1/rotation = Quaternion(-0.0006536161, 0.012634613, 0.0045310366, 0.9999097)
-bones/2/rotation = Quaternion(-0.012667185, 0.0062435674, -0.0038691033, 0.9998929)
-bones/3/rotation = Quaternion(0.20823935, 0.0054066763, -0.0014094329, 0.9780619)
-bones/4/rotation = Quaternion(-0.1115797, 0.012021329, -0.030979972, 0.9931997)
-bones/5/rotation = Quaternion(-0.6507502, -0.46719533, -0.3150541, 0.5089141)
-bones/6/rotation = Quaternion(0.17066342, 0.4392875, -0.44691032, 0.7603759)
-bones/8/rotation = Quaternion(-0.036862623, -0.092343, 0.0032349299, 0.9950394)
-bones/9/rotation = Quaternion(0.36790785, 0.14163166, 0.34434336, 0.85206336)
-bones/12/rotation = Quaternion(-0.72070646, 0.53911674, 0.2610726, 0.348965)
-bones/13/rotation = Quaternion(0.16451654, -0.65050566, 0.42854026, 0.6050867)
-bones/14/rotation = Quaternion(0.31349325, -0.14915174, -0.17216723, 0.9218645)
-bones/15/rotation = Quaternion(0.020248039, 0.37982076, 0.0072832247, 0.92480993)
-bones/21/rotation = Quaternion(0.95323235, 0.19987626, -0.13364021, 0.1831333)
-bones/22/rotation = Quaternion(0.4836471, 0.08125992, 0.05652075, 0.869648)
-bones/23/rotation = Quaternion(-0.7924582, -0.063937664, 0.07840999, 0.60147655)
-bones/24/rotation = Quaternion(0.9508102, -0.13284776, 0.09172118, 0.2643838)
-bones/25/rotation = Quaternion(0.5379087, -0.060596943, -0.0029953767, 0.84081703)
-bones/26/rotation = Quaternion(-0.7854469, 0.07800365, -0.12870939, 0.60035217)
 
 [node name="AnimationPlayer" parent="Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_7jg2g")

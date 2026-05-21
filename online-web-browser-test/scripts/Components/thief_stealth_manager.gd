@@ -8,6 +8,7 @@ var hypno_material: ShaderMaterial
 var _is_dual_mesh_setup = false
 var base_meshes: Array[MeshInstance3D] = []
 var camo_meshes: Array[MeshInstance3D] = []
+var shadow_meshes: Array[MeshInstance3D] = [] 
 var local_outline_mat: ShaderMaterial = null
 
 var stationary_time = 0.0
@@ -24,14 +25,11 @@ func setup(parent: Node3D, camo: ShaderMaterial, hypno: ShaderMaterial):
 	camo_material = camo
 	hypno_material = hypno
 	
-	# THE FIX: Build the dual meshes instantly when the thief spawns
 	if not _is_dual_mesh_setup:
 		_setup_dual_meshes(thief)
 		_is_dual_mesh_setup = true
 
 func process_stealth(delta: float, speed: float, is_hypnotized: bool, is_jailed: bool, is_highlighted: bool):
-	# 1.5 is fast enough to ignore being shoved, but slow enough 
-	# that pressing WASD will still instantly break camo!
 	if speed < 1.5:
 		stationary_time += delta
 	else:
@@ -44,8 +42,6 @@ func process_stealth(delta: float, speed: float, is_hypnotized: bool, is_jailed:
 	else:
 		target_alpha = 1.0
 		
-	# --- USE BALANCE TRANSITION SPEED ---
-	# By dividing 1.0 by the duration, it fades exactly 100% over the specified seconds!
 	var fade_rate = 1.0 / Balance.thief_camo_fade_duration_sec
 	current_alpha = move_toward(current_alpha, target_alpha, fade_rate * delta)
 	
@@ -111,9 +107,29 @@ func _setup_dual_meshes(node: Node):
 				camo_mesh.set_surface_override_material(i, c_mat)
 				
 		camo_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		
 		camo_mesh.hide()
 		camo_meshes.append(camo_mesh)
+		
+		# --- BUILD THE SHADOW PROXY ---
+		var shadow_mesh = MeshInstance3D.new()
+		shadow_mesh.name = node.name + "_Shadow"
+		shadow_mesh.set_meta("is_camo", true) 
+		shadow_mesh.mesh = node.mesh
+		shadow_mesh.transform = node.transform
+		if node.skeleton: shadow_mesh.skeleton = node.skeleton
+		if node.skin: shadow_mesh.skin = node.skin
+		
+		var blank_mat = StandardMaterial3D.new()
+		for i in range(shadow_mesh.mesh.get_surface_count()):
+			shadow_mesh.set_surface_override_material(i, blank_mat)
+			
+		shadow_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
+		
+		node.get_parent().add_child.call_deferred(shadow_mesh)
+		shadow_meshes.append(shadow_mesh)
+		
+		# Permanently turn off the base mesh's shadow so they don't fight
+		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		
 	for child in node.get_children():
 		if child.name != "InteractionArea" and child.name != "InteractionScanner" and not child.has_meta("is_camo"):
@@ -139,16 +155,18 @@ func _apply_visual_states(alpha_val: float, t_alpha: float, is_hypnotized: bool,
 		else:
 			c_mesh.hide()
 			
+	# --- TOGGLE THE SHADOW PROXY ---
+	for s_mesh in shadow_meshes:
+		if t_alpha > 0.0:
+			s_mesh.show() # Turns the invisible shadow on
+		else:
+			s_mesh.hide() # Completely deletes the shadow from the floor_OFF
+			
 	for b_mesh in base_meshes:
 		if is_stealthed and stealth_amount >= 0.99:
 			b_mesh.hide()
 		else:
 			b_mesh.show()
-			
-		if t_alpha > 0.0:
-			b_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
-		else:
-			b_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 			
 		var orig_mats = b_mesh.get_meta("orig_mats")
 		for i in range(b_mesh.mesh.get_surface_count()):
