@@ -68,7 +68,12 @@ func _ready():
 	spring_arm.add_excluded_object(get_rid())
 	
 	if is_multiplayer_authority():
-		camera.current = true
+		var cutscene_manager = get_tree().get_root().find_child("CutsceneManager", true, false)
+
+		if cutscene_manager and cutscene_manager.get("intro_running"):
+			camera.current = false
+		else:
+			camera.current = true
 		
 		# Tell the local camera to ALWAYS ignore Layer 10 (Bit value 512).
 		# We will put the Cop's head on this layer later!

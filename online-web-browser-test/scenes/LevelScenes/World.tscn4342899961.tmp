@@ -81,20 +81,6 @@ _data = {
 &"museum_pan": SubResource("Animation_1ppgf")
 }
 
-[sub_resource type="Theme" id="Theme_frjgd"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofs5a"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_frjgd"]
-font_size = 168
-
-[sub_resource type="LabelSettings" id="LabelSettings_ofs5a"]
-font_size = 168
-
-[sub_resource type="LabelSettings" id="LabelSettings_w6qbi"]
-font_size = 180
-
 [node name="World" type="Node3D" unique_id=744758526]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1180068115]
@@ -133,106 +119,43 @@ cop_preview_scene = ExtResource("6_w6qbi")
 
 [node name="Root" type="Control" parent="VersusScreen" unique_id=773497216]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -1980.0
-offset_bottom = -1080.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="ColorRect" parent="VersusScreen/Root" unique_id=1545025356]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.5101233, 0.0008261162, 0.63087827, 1)
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VersusScreen/Root" unique_id=776434493]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -30.0
-offset_right = -30.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="VersusScreen/Root/SubViewportContainer" unique_id=1183056044]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
-
-[node name="Camera3D" type="Camera3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1374076761]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -91.21161, 0, 0)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1713966943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.50207, 2.409748, 4.3073635)
-
-[node name="LeftSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=43727269]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.404785, -0.24863054, -0.72367036)
-
-[node name="RightSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1673610662]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.08547, -0.51554143, -0.85583216)
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Panel" type="Panel" parent="VersusScreen/Root" unique_id=1910567873]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_frjgd")
-theme_override_styles/panel = SubResource("StyleBoxFlat_ofs5a")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="RobbersTitle" type="Label" parent="VersusScreen/Root/Panel" unique_id=1923577786]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.45
-anchor_bottom = 0.15
-text = "Robbers"
-label_settings = SubResource("LabelSettings_frjgd")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="LeftName" type="Label" parent="VersusScreen/Root/Panel" unique_id=1923577786]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="CopsTitle" type="Label" parent="VersusScreen/Root/Panel" unique_id=343700150]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.05
-anchor_right = 0.715
-anchor_bottom = 0.065
-text = "Cops"
-label_settings = SubResource("LabelSettings_ofs5a")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="RightName" type="Label" parent="VersusScreen/Root/Panel" unique_id=343700150]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="VSLabel" type="Label" parent="VersusScreen/Root/Panel" unique_id=282116148]
 layout_mode = 0
-offset_left = 877.0
-offset_top = 237.0
-offset_right = 1117.0
-offset_bottom = 483.0
-text = "VS"
-label_settings = SubResource("LabelSettings_w6qbi")
+offset_right = 40.0
+offset_bottom = 23.0
 
-[node name="RobbersList" type="VBoxContainer" parent="VersusScreen/Root/Panel" unique_id=1982826195]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.125
-anchor_top = 0.281
-anchor_right = 0.13
-anchor_bottom = 0.281
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VersusScreen/Root" unique_id=776434493]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="CopsList" type="VBoxContainer" parent="VersusScreen/Root/Panel" unique_id=1926124997]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.755
-anchor_top = 0.305
-anchor_right = 0.755
-anchor_bottom = 0.305
+[node name="SubViewport" type="SubViewport" parent="VersusScreen/Root/SubViewportContainer" unique_id=1183056044]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="Camera3D" type="Camera3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1374076761]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1713966943]
+
+[node name="LeftSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=43727269]
+
+[node name="RightSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1673610662]

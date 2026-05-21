@@ -2,7 +2,8 @@ extends Node3D
 
 @onready var intro_camera: Camera3D = $Node3D/IntroCamera
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
+@onready var versus_screen: CanvasLayer = $"../VersusScreen"
+@export var versus_duration: float = 6.0
 @export var fly_to_player_time: float = 2.0
 @export var local_player: Node3D
 
@@ -11,6 +12,7 @@ var intro_running: bool = false
 
 
 func _ready():
+	intro_camera.current = true
 	var game_manager = get_tree().get_root().find_child("GameManager", true, false)
 
 	if game_manager:
@@ -28,14 +30,57 @@ func _process(_delta):
 
 func _on_game_started():
 	await get_tree().create_timer(0.3).timeout
-	start_intro()
-
-
-func start_intro():
-	if intro_running:
-		return
 
 	intro_running = true
+	intro_camera.current = true
+
+	local_player = await wait_for_local_player()
+
+	if local_player == null:
+		push_error("No local player found before versus screen.")
+		intro_running = false
+		return
+
+	target_camera = get_player_gameplay_camera(local_player)
+	if target_camera:
+		target_camera.current = false
+
+	if local_player.has_method("enable_controls"):
+		local_player.enable_controls(false)
+
+	if versus_screen:
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		if spawned:
+			versus_screen.show_from_spawned(spawned)
+			await get_tree().create_timer(versus_duration).timeout
+			versus_screen.hide_matchup()
+
+	start_intro()
+
+func wait_for_local_player() -> Node3D:
+	var attempts := 0
+
+	while attempts < 60:
+		var player = find_local_player()
+
+		if player != null:
+			return player
+
+		attempts += 1
+		await get_tree().process_frame
+
+	return null
+
+func start_intro():
+# intro_running is already true from _on_game_started()
+
+	# Turn off lobby camera immediately
+	var lobby_camera = get_tree().get_root().find_child("LobbyCamera", true, false)
+	if lobby_camera:
+		lobby_camera.current = false
+
+	# Make intro camera active as early as possible
+	intro_camera.current = true
 
 	local_player = find_local_player()
 
@@ -44,15 +89,30 @@ func start_intro():
 		intro_running = false
 		return
 
+	# Disable player gameplay camera during intro
+	target_camera = get_player_gameplay_camera(local_player)
+	if target_camera:
+		target_camera.current = false
+
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(false)
 
-	intro_camera.current = true
 	animation_player.play("museum_pan")
 
 	if not animation_player.animation_finished.is_connected(_on_animation_finished):
 		animation_player.animation_finished.connect(_on_animation_finished)
 
+func find_enemy_player(my_player: Node3D) -> Node3D:
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+
+	if spawned == null or my_player == null:
+		return null
+
+	for player in spawned.get_children():
+		if player != my_player:
+			return player
+
+	return null
 
 func find_local_player() -> Node3D:
 	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
@@ -62,17 +122,11 @@ func find_local_player() -> Node3D:
 		return null
 
 	var my_id := multiplayer.get_unique_id()
-	print("=== Finding local player ===")
-	print("My peer id: ", my_id)
 
 	for player in spawned.get_children():
-		print("Checking player: ", player.name)
-
 		if str(player.name) == str(my_id):
-			print("Found local player by name: ", player.name)
 			return player
 
-	print("No local player found by name.")
 	return null
 
 

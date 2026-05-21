@@ -23,8 +23,9 @@ DevPanel="*uid://basgx885ow765"
 
 [display]
 
-window/size/viewport_width=1980
+window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
 
 [input]
 
