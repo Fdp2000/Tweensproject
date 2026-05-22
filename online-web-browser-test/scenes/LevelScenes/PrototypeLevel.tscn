@@ -3303,14 +3303,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4742165, -9.536743e-07, 2.
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("StandardMaterial3D_atqpw")
 script = ExtResource("6_artifact")
+artifact_category = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Columns/Column7" unique_id=30595905]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/Columns/Column7/StaticBody3D" unique_id=659054608]
 shape = SubResource("ConvexPolygonShape3D_imnlu")
+disabled = true
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/Columns/Column7/StaticBody3D" unique_id=1528564389]
 shape = SubResource("ConvexPolygonShape3D_3niol")
+disabled = true
 
 [node name="Column8" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Columns" unique_id=1062100688]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4742165, -9.536743e-07, 4.3636923)

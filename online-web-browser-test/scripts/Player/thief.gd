@@ -368,18 +368,17 @@ func _custom_physics_process(delta, direction):
 		# STATE A: CARRYING AN ARTIFACT
 		# ----------------------------------------
 		
-		# 1. Turn the tree on and travel to the holding setup
 		anim_tree.active = true
 		anim_tree.get("parameters/playback").travel("Holding_State")
 		
-		# 2. Tell the switchboard which upper-body pose to use
+		# Tell the switchboard which statue pose to use if we hide
 		if carried_artifact:
 			if carried_artifact.artifact_category == carried_artifact.Category.WALL_PROP:
 				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "wall_prop")
 			elif carried_artifact.artifact_category == carried_artifact.Category.FLOOR_PROP:
 				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "floor_prop")
 
-		# 3. Lock rotation so the Chameleon's back points to the camera
+		# Lock rotation
 		var target_rot = 0.0
 		if pitch_pivot:
 			target_rot = pitch_pivot.global_rotation.y + PI
@@ -390,15 +389,34 @@ func _custom_physics_process(delta, direction):
 		else:
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, sync_mesh_rot_y, 10.0 * delta)
 
-		# 4. Handle the lower-body leg movement
-		if horizontal_speed_sq > 0.05:
+		# ----------------------------------------
+		# MOVEMENT & CAMO LOGIC
+		# ----------------------------------------
+		
+		# 1. Determine if we should be moving based on network authority
+		var is_trying_to_move = false
+		
+		if is_multiplayer_authority():
+			# LOCAL PLAYER: Check actual keyboard input so physics bumps don't break camo!
+			# NOTE: If you named your custom inputs something else in Project Settings, change these strings!
+			var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+			is_trying_to_move = input_dir.length_squared() > 0.01
+		else:
+			# REMOTE PLAYERS: They don't have your keyboard, so they just watch the synced velocity
+			is_trying_to_move = horizontal_speed_sq > 0.05
+		
+		# 2. Execute the animation logic
+		if is_trying_to_move:
 			is_camo_posing = false
 			is_currently_moving = true 
 			
-			# Keep the arms locked in the 100% artifact pose
+			# Force the tree into the active carrying state
+			anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
+			
+			# Keep the Bone Filter fully active to blend the arms
 			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
 			
-			# Un-rotate velocity and drive the legs on the grid
+			# Drive the legs on the grid
 			var local_velocity = current_vel.rotated(Vector3.UP, -pitch_pivot.global_rotation.y)
 			var grid_position = Vector2(local_velocity.x, -local_velocity.z).normalized()
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", grid_position)
@@ -406,16 +424,18 @@ func _custom_physics_process(delta, direction):
 		else:
 			is_currently_moving = false 
 			
-			# Stop the legs (Forces grid perfectly to 0,0 -> Idle1)
+			# Stop the legs (Forces grid to Idle1)
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", Vector2.ZERO)
 			
-			# Keep the arms locked in the 100% artifact pose while standing
-			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
-			
-			# (Handle Camo Stealth Logic here if you want him to go invisible while holding!)
 			if stealth_manager and stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
 				if not is_camo_posing:
 					is_camo_posing = true
+				
+				# CAMO ACTIVATED: Morph into the full-body statue!
+				anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "hiding")
+			else:
+				# STANDING STILL, BUT NOT HIDDEN YET: Stay in the active carrying state
+				anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
 	else:
 		# ----------------------------------------
 		# STATE B: NORMAL RUNNING (EMPTY HANDED)
