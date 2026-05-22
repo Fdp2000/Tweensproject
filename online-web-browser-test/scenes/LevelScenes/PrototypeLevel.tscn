@@ -58,6 +58,7 @@
 [ext_resource type="ArrayMesh" uid="uid://ddhx0eewj7j3f" path="res://Assets/Models/skævpalme.res" id="56_7u4t4"]
 [ext_resource type="ArrayMesh" uid="uid://cuyfrnm8qpmpv" path="res://Assets/Models/palme2.res" id="57_fppg6"]
 [ext_resource type="ArrayMesh" uid="uid://dloq3sfc54a3u" path="res://Assets/Models/palme3.res" id="58_ol4g5"]
+[ext_resource type="ArrayMesh" uid="uid://dnoj6j6g53714" path="res://Assets/Models/LowPolyMuseumAssets/Picture6Image.res" id="59_gp0hk"]
 [ext_resource type="ArrayMesh" uid="uid://5akym5yt8bfp" path="res://Assets/Models/moai.res" id="59_nkopf"]
 [ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="61_217hv"]
 [ext_resource type="ArrayMesh" uid="uid://c8oomttniaaan" path="res://dome.res" id="62_dauag"]
