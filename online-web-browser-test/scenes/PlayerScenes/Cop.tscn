@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://8f4mshrrem6r" path="res://scenes/PlayerScenes/Player.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://bo3sxpvkjes8" path="res://scripts/Player/cop.gd" id="2_cop"]
 [ext_resource type="PackedScene" uid="uid://diovmaqigblbx" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer2.glb" id="3_model"]
+[ext_resource type="PackedScene" uid="uid://t7yg6aigcx3m" path="res://Assets/Models/Rhino/Næsehorn.glb" id="4_rfdt2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbcyl"]
 resource_name = "LightOrange"
@@ -118,6 +119,7 @@ cull_mask = 1048573
 
 [node name="Model" parent="." index="3" unique_id=1191846676 instance=ExtResource("3_model")]
 transform = Transform3D(-0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 0, 0, 0)
+visible = false
 
 [node name="Head" parent="Model" index="0" unique_id=1764807772]
 layers = 2
@@ -131,5 +133,8 @@ layers = 2
 
 [node name="Eyes" parent="Model" index="4" unique_id=1506179400]
 layers = 2
+
+[node name="Næsehorn" parent="." index="4" unique_id=182055430 instance=ExtResource("4_rfdt2")]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
 
 [editable path="Model"]
