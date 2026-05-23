@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="4_rfdt2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
-radius = 0.4
-height = 1.4113038
+radius = 0.4716797
+height = 2.017955
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_e80uo"]
 properties/0/path = NodePath("PitchPivot:rotation")
@@ -17,6 +17,12 @@ properties/1/replication_mode = 2
 properties/2/path = NodePath(":player_name")
 properties/2/spawn = true
 properties/2/replication_mode = 2
+properties/3/path = NodePath(".:is_charging")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:is_debuffed")
+properties/4/spawn = true
+properties/4/replication_mode = 2
 
 [node name="Cop" type="CharacterBody3D" unique_id=1223235874]
 collision_layer = 2
@@ -25,12 +31,12 @@ floor_max_angle = 1.3089969
 floor_snap_length = 0.5
 script = ExtResource("2_cop")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=607525419]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+[node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=607525419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0356514, 0)
 shape = SubResource("CapsuleShape3D_kne1u")
 
 [node name="PitchPivot" type="Node3D" parent="." unique_id=-1905862475]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8053852, -0.5257877)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8053852, -0.54953474)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="PitchPivot" unique_id=1865902027]
 spring_length = 0.0

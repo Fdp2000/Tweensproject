@@ -26,6 +26,7 @@ var thief_spring_arm_length: float = 4.711 # (Your current X distance)
 var cop_charge_speed_multiplier: float = 1.5 # 1.5x Base Speed
 var cop_charge_duration: float = 1.5
 var cop_charge_cooldown: float = 4.0
+var cop_exhaustion_duration: float = 3.0
 var cop_exhaustion_speed_multiplier: float = 0.6 # 0.6x Base Speed (40% slow)
 var thief_rescue_time: float = 2.0
 

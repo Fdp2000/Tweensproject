@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cjritkcdggc6r"
-path="res://.godot/imported/Standing Walk Left.fbx-492fff33498f372278565a644a651c8f.scn"
+uid="uid://dvp42b6f7avdc"
+path="res://.godot/imported/Strafe (1).fbx-4cd0f07f9f931aa7635631a321dfa10d.scn"
 
 [deps]
 
-source_file="res://Assets/Animations/Rhino/Standing Walk Left.fbx"
-dest_files=["res://.godot/imported/Standing Walk Left.fbx-492fff33498f372278565a644a651c8f.scn"]
+source_file="res://Assets/Animations/Rhino/Strafe (1).fbx"
+dest_files=["res://.godot/imported/Strafe (1).fbx-4cd0f07f9f931aa7635631a321dfa10d.scn"]
 
 [params]
 
@@ -41,9 +41,9 @@ _subresources={
 "animations": {
 "mixamo_com": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/Animations/Rhino/Strafe_Left.res",
-"save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "uid://dhxbtfimoosrj",
+"save_to_file/fallback_path": "res://Assets/Animations/Rhino/Strafe Left.res",
+"save_to_file/keep_custom_tracks": true,
+"save_to_file/path": "uid://svl5tnyfvvjs",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,

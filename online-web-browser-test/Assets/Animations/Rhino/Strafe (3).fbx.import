@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cxp03pduqpai5"
-path="res://.godot/imported/Standing Walk Right.fbx-3f3e3586ec8113e9c95330a030c46ff1.scn"
+uid="uid://b2v6euer27ine"
+path="res://.godot/imported/Strafe (3).fbx-97a04d0ae88fce04d73b058e527e795b.scn"
 
 [deps]
 
-source_file="res://Assets/Animations/Rhino/Standing Walk Right.fbx"
-dest_files=["res://.godot/imported/Standing Walk Right.fbx-3f3e3586ec8113e9c95330a030c46ff1.scn"]
+source_file="res://Assets/Animations/Rhino/Strafe (3).fbx"
+dest_files=["res://.godot/imported/Strafe (3).fbx-97a04d0ae88fce04d73b058e527e795b.scn"]
 
 [params]
 
@@ -41,9 +41,9 @@ _subresources={
 "animations": {
 "mixamo_com": {
 "save_to_file/enabled": true,
-"save_to_file/fallback_path": "res://Assets/Animations/Rhino/Strafe_Right.res",
+"save_to_file/fallback_path": "res://Assets/Animations/Rhino/Strafe Right.res",
 "save_to_file/keep_custom_tracks": "",
-"save_to_file/path": "uid://da3vje0bgwr6e",
+"save_to_file/path": "uid://c5mrxm1o0ug4v",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,
 "slice_1/loop_mode": 0,
