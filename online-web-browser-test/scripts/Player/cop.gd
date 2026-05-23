@@ -132,7 +132,6 @@ func _detect_capture():
 @rpc("any_peer", "call_local")
 func request_capture(thief_id: int):
 	if not multiplayer.is_server(): return
-	
 	# Host validates: check if the thief exists and is not already hypnotized
 	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
 	if not spawned: return

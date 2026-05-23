@@ -394,6 +394,7 @@ skin = SubResource("Skin_o0ds5")
 skeleton = NodePath("..")
 
 [node name="Rhino_Head" type="MeshInstance3D" parent="metarig/Skeleton3D" unique_id=1309253484]
+visible = false
 mesh = SubResource("ArrayMesh_fglie")
 skin = SubResource("Skin_o0ds5")
 skeleton = NodePath("..")

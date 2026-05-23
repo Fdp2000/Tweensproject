@@ -261,6 +261,33 @@ func drop():
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(1)
 
+	# ==========================================
+	# --- NEW: RAYCAST FLOOR SNAP ---
+	# ==========================================
+	var space_state = get_world_3d().direct_space_state
+	
+	# Shoot a laser 10 meters straight down from the artifact's current center
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + Vector3.DOWN * 10.0)
+	
+	# IMPORTANT: We only want to hit the Floor/Walls (Assuming your environment is on Collision Layer 1)
+	# This prevents the artifact from accidentally snapping to the top of the Thief's head!
+	query.collision_mask = 1 
+	
+	# Ignore the artifact's entire physics body so the laser doesn't hit itself
+	if col:
+		query.exclude = [col.get_parent().get_rid()]
+		
+	var result = space_state.intersect_ray(query)
+	
+	if result:
+		# We found the floor! Snap the position down.
+		global_position = result.position
+		
+		# Update the network sync targets so it doesn't try to lerp back up into the air
+		sync_target_position = result.position
+		initial_position = result.position
+		initial_rotation = rotation
+
 @rpc("any_peer", "call_local")
 func destroy_artifact():
 	if carrier_id != -1:
