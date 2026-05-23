@@ -17,8 +17,15 @@ func _ready():
 			spring_arm.spring_length = 0.0
 		if camera:
 			camera.fov = Balance.cop_fov_angle
-		if has_node("MeshInstance3D"):
-			$MeshInstance3D.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
+			
+		# ==========================================
+		# --- FIRST PERSON HEAD HIDING ---
+		# ==========================================
+		# Find the head mesh using the exact path from your Cop scene
+		var rhino_head = get_node_or_null("Næsehorn2/metarig/Skeleton3D/Rhino_Head")
+		if rhino_head:
+			# Hide the mesh from the camera, but keep casting a shadow!
+			rhino_head.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
 			
 		# Wait one frame for PlayerCanvas to be created by base class
 		await get_tree().process_frame

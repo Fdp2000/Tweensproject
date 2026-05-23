@@ -415,11 +415,11 @@ func _custom_physics_process(delta, direction):
 			var local_velocity = current_vel.rotated(Vector3.UP, -pitch_pivot.global_rotation.y)
 			var grid_position = Vector2(local_velocity.x, -local_velocity.z).normalized()
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", grid_position)
+			# AUTO-SYNC: Calculate exact speed based on actual velocity!
+			var actual_speed = Vector2(current_vel.x, current_vel.z).length()
+			var final_tree_speed = actual_speed / Balance.anim_native_speed
 			
-			# ==========================================
-			# ADD THIS: Scale the leg speed by the artifact penalty!
-			# ==========================================
-			anim_tree.set("parameters/Holding_State/TimeScale/scale", current_speed_mult)
+			anim_tree.set("parameters/Holding_State/TimeScale/scale", final_tree_speed)
 			
 		else:
 			is_currently_moving = false 
@@ -442,7 +442,11 @@ func _custom_physics_process(delta, direction):
 			if not is_currently_moving:
 				is_currently_moving = true
 				var random_run = favorite_runs.pick_random()
-				anim_player.play(random_run, 0.2) 
+				# AUTO-SYNC: Calculate exact speed based on actual velocity!
+				var actual_speed = Vector2(current_vel.x, current_vel.z).length()
+				var final_player_speed = actual_speed / Balance.anim_native_speed
+				
+				anim_player.play(random_run, 0.2, final_player_speed)
 			
 			var target_angle = atan2(current_vel.x, current_vel.z) 
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)

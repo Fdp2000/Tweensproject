@@ -4,6 +4,9 @@ extends Node
 # 1. MOVEMENT & CORE PHYSICS
 # ==========================================
 var base_thief_speed: float = 6.5
+# The speed the Mixamo animation was originally recorded at. 
+# (Most Mixamo jogs are around 4.0 m/s. Mixamo sprints are around 6.0 m/s).
+var anim_native_speed: float = 4.0
 var cop_base_speed: float = 7.0
 var hypno_thief_speed: float = 2.6
 var thief_braking_friction: float = 6.5
