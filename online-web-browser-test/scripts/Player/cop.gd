@@ -152,11 +152,32 @@ func _custom_physics_process(delta, direction):
 	if not is_multiplayer_authority():
 		current_vel = sync_velocity
 
-	var horizontal_speed_sq = Vector2(current_vel.x, current_vel.z).length_squared()
+	var horizontal_speed = Vector2(current_vel.x, current_vel.z).length()
+	var horizontal_speed_sq = horizontal_speed * horizontal_speed
 	
 	var anim_tree = get_node_or_null("Næsehorn2/AnimationTree")
 	if anim_tree:
 		anim_tree.active = true
+		
+		# --- THE GLOBAL TREADMILL (DUAL SPEED) ---
+		var speed_ratio = 1.0
+		
+		# TWEAK THESE INDEPENDENTLY:
+		var run_native_speed = 4.0   # The speed your normal run animation looks best at
+		var walk_native_speed = 2.0  # The speed your exhausted walk looks best at
+		
+		# Automatically switch the math based on what state we are in!
+		var current_native_speed = walk_native_speed if is_debuffed else run_native_speed
+		
+		if is_charging:
+			speed_ratio = 1.0 
+		elif horizontal_speed > 0.1:
+			speed_ratio = horizontal_speed / current_native_speed
+		else:
+			speed_ratio = 1.0 
+			
+		anim_tree.set("parameters/Treadmill/scale", speed_ratio)
+		# -----------------------------------------
 		
 		var current_max_speed = Balance.cop_base_speed
 		if is_debuffed:
@@ -168,7 +189,6 @@ func _custom_physics_process(delta, direction):
 		if horizontal_speed_sq < 0.1:
 			target_grid = Vector2.ZERO
 			
-		# --- EXACT PATHS (No spaces!) ---
 		var current_grid = anim_tree.get("parameters/AnimationNodeStateMachine/Normal_Movement/blend_position")
 		if current_grid == null:
 			current_grid = Vector2.ZERO 
@@ -200,12 +220,10 @@ func _custom_physics_process(delta, direction):
 		# --- THE HEAD TRACKING OVERRIDE ---
 		var pitch = pitch_pivot.rotation.x
 		
-		# Add a minus sign to invert the direction if it is backward!
-		var inverted_pitch = clamp(pitch, -1.0, 1.0)
+		# Removed the minus sign so it accurately matches your camera!
+		var clamped_pitch = clamp(pitch, -1.0, 1.0)
+		anim_tree.set("parameters/HeadAim/blend_position", clamped_pitch)
 		
-		# We send the pitch directly to the BlendSpace's position!
-		anim_tree.set("parameters/HeadAim/blend_position", inverted_pitch)
-
 func _detect_capture():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
