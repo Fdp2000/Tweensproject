@@ -60,7 +60,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dloq3sfc54a3u" path="res://Assets/Models/palme3.res" id="58_ol4g5"]
 [ext_resource type="ArrayMesh" uid="uid://5akym5yt8bfp" path="res://Assets/Models/moai.res" id="59_nkopf"]
 [ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="61_217hv"]
-[ext_resource type="ArrayMesh" path="res://dome.res" id="62_dauag"]
+[ext_resource type="ArrayMesh" uid="uid://c8oomttniaaan" path="res://dome.res" id="62_dauag"]
 [ext_resource type="PackedScene" uid="uid://3w1tvfaexj8a" path="res://Assets/Models/pterodactylus_antiquus_cast.glb" id="64_pmpka"]
 [ext_resource type="ArrayMesh" uid="uid://2flurelhyv2k" path="res://Assets/Textures/Aquaset/Marble Materials/boners.res" id="65_8208s"]
 [ext_resource type="Texture2D" uid="uid://clu6u1058fcxj" path="res://Assets/Models/carnotaurus_sastrei_skeleton_0.png" id="67_7u4t4"]
@@ -93,10 +93,10 @@ roughness_texture = ExtResource("1_hwn0u")
 uv1_scale = Vector3(15.74, 15.74, 15.74)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n7p0c"]
-size = Vector3(1.3099205, 4.501465, 1.1483612)
+size = Vector3(1.3711767, 4.501465, 1.1641464)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x5t0m"]
-size = Vector3(0.6267929, 4.501465, 0.6138611)
+size = Vector3(0.6958828, 4.501465, 0.6355438)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gabnk"]
 
@@ -2863,7 +2863,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nqnu6")
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch11" unique_id=99069509]
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch11/Collider" unique_id=2067901110]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4589007, 1.751, -0.8427582)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4547913, 1.7510002, -0.8535986)
 shape = SubResource("BoxShape3D_x5t0m")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch11/Collider" unique_id=723603269]
@@ -2875,11 +2875,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.459, 1.751, 0.843)
 shape = SubResource("BoxShape3D_x5t0m")
 
 [node name="CollisionShape3D6" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch11/Collider" unique_id=737620323]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.459, 1.751, 0.843)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4590001, 1.7510002, 0.8430004)
 shape = SubResource("BoxShape3D_x5t0m")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch11/Collider" unique_id=1157623586]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.361, 1.751, -0.001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3303709, 1.7510002, 0.0068969727)
 shape = SubResource("BoxShape3D_n7p0c")
 
 [node name="CollisionShape3D7" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch11/Collider" unique_id=271841418]

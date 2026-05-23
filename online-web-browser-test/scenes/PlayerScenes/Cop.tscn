@@ -1,11 +1,67 @@
 [gd_scene format=3 uid="uid://bi6e376akpo28"]
 
 [ext_resource type="Script" uid="uid://bo3sxpvkjes8" path="res://scripts/Player/cop.gd" id="2_cop"]
+[ext_resource type="PackedScene" uid="uid://bukcop75vlfjd" path="res://Assets/Particles/smoke_particles_Charge.tscn" id="3_ksubn"]
+[ext_resource type="Texture2D" uid="uid://carrvmj3fplpl" path="res://Assets/Textures/SmokeParticle.png" id="4_jvhmw"]
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="4_rfdt2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
-radius = 0.4716797
-height = 2.017955
+radius = 0.5239258
+height = 1.966966
+
+[sub_resource type="Animation" id="Animation_ksubn"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_hsi8p"]
+resource_name = "cam_charge"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, -0.4)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0.006109, 0, 0, 0.999981, 0.1, 1, -0.005236, 4.6e-05, 0.008726, 0.999948, 0.2, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_rfdt2"]
+resource_name = "cam_reset"
+length = 0.1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ksubn"]
+_data = {
+&"RESET": SubResource("Animation_ksubn"),
+&"cam_charge": SubResource("Animation_hsi8p"),
+&"cam_reset": SubResource("Animation_rfdt2")
+}
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_e80uo"]
 properties/0/path = NodePath("PitchPivot:rotation")
@@ -24,6 +80,18 @@ properties/4/path = NodePath(".:is_debuffed")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f34f1"]
+transparency = 1
+depth_draw_mode = 2
+no_depth_test = true
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_jvhmw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ksubn"]
+lightmap_size_hint = Vector2i(9, 9)
+material = SubResource("StandardMaterial3D_f34f1")
+size = Vector2(1.5, 1.5)
+
 [node name="Cop" type="CharacterBody3D" unique_id=1223235874]
 collision_layer = 2
 collision_mask = 7
@@ -32,21 +100,44 @@ floor_snap_length = 0.5
 script = ExtResource("2_cop")
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=607525419]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0356514, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.061146, 0)
 shape = SubResource("CapsuleShape3D_kne1u")
 
 [node name="PitchPivot" type="Node3D" parent="." unique_id=-1905862475]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8053852, -0.54953474)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8053852, -0.41646135)
 
 [node name="SpringArm3D" type="SpringArm3D" parent="PitchPivot" unique_id=1865902027]
 spring_length = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="PitchPivot/SpringArm3D" unique_id=1092018305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
 cull_mask = 1048573
 fov = 85.0
+near = 0.01
+
+[node name="CameraAnimator" type="AnimationPlayer" parent="PitchPivot/SpringArm3D/Camera3D" unique_id=2038695513]
+libraries/ = SubResource("AnimationLibrary_ksubn")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1310813326]
 replication_config = SubResource("SceneReplicationConfig_e80uo")
 
 [node name="Næsehorn2" parent="." unique_id=2043154851 instance=ExtResource("4_rfdt2")]
-transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0)
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0.13307339)
+
+[node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)
+amount = 35
+lifetime = 0.8
+explosiveness = 0.0
+mesh = SubResource("QuadMesh_ksubn")
+emission_sphere_radius = 0.4
+direction = Vector3(0, 0, 9999)
+spread = 12.94
+flatness = 1.0
+gravity = Vector3(0, 0.3, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+angular_velocity_min = 36.55
+angular_velocity_max = 104.5
+scale_amount_min = 0.1
+scale_amount_max = 0.4

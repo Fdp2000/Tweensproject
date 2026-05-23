@@ -51,7 +51,11 @@ func _ready():
 	if multiplayer.is_server():
 		_apply_team_colors()
 	else:
-		rpc_id(1, "request_team_color")
+		# Wait for the synchronizer to become visible before asking for color!
+		get_tree().create_timer(1.1).timeout.connect(func():
+			if is_inside_tree():
+				rpc_id(1, "request_team_color")
+		)
 	
 	if is_multiplayer_authority():
 		var client_ui = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI")
@@ -181,6 +185,13 @@ func _input(event):
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		
+		# --- THE NECK LOCK GATE (UPDATED) ---
+		if get("is_charging") == true:
+			# Kill the left/right rotation, but allow up/down!
+			event.relative.x = 0.0 
+		# ------------------------------------
+		
 		var actual_sens = mouse_sensitivity * 0.001
 		
 		if disable_body_rotation:

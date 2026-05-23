@@ -295,6 +295,8 @@ func _on_game_started() -> void:
 			pf.position = spawn_pos
 			spawned.add_child(pf, true)
 			
+			await get_tree().process_frame
+			
 			# RPC the spawn position to the owning client.
 			# This is necessary because:
 			# 1. MultiplayerSpawner doesn't transmit initial position
