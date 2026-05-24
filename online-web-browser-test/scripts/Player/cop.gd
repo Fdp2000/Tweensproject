@@ -225,17 +225,25 @@ func _custom_physics_process(delta, direction):
 		anim_tree.set("parameters/HeadAim/blend_position", clamped_pitch)
 		
 func _detect_capture():
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
+	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+	if not spawned: return
+	
+	for collider in spawned.get_children():
 		if collider is CharacterBody3D and collider.has_method("on_captured") and collider.get("team_index") != team_index:
 			if not collider.get("is_hypnotized") and not collider.get("is_jailed"):
-				rpc_id(1, "request_capture", int(str(collider.name)))
-				if is_charging:
-					is_charging = false
-					is_debuffed = true
-					debuff_timer = Balance.cop_exhaustion_duration
-				return
+				# Exact collision mimicking (Cylinder overlap)
+				# Cop Radius: 0.52, Thief Radius: 0.22. Touching distance = 0.74m
+				# We use 0.9m horizontal to account for network jitter, and 1.5m vertical.
+				var h_dist = Vector2(global_position.x, global_position.z).distance_to(Vector2(collider.global_position.x, collider.global_position.z))
+				var v_dist = abs(global_position.y - collider.global_position.y)
+				
+				if h_dist <= 0.9 and v_dist <= 1.5:
+					rpc_id(1, "request_capture", int(str(collider.name)))
+					if is_charging:
+						is_charging = false
+						is_debuffed = true
+						debuff_timer = Balance.cop_exhaustion_duration
+					return
 
 @rpc("any_peer", "call_local")
 func request_capture(thief_id: int):

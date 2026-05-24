@@ -1,5 +1,8 @@
 extends Node
 
+const SCOREBOARD_SCENE = preload("res://scenes/Zones/Scoreboard.tscn")
+const PING_SCENE = preload("res://scenes/MiscScenes/ping_marker.tscn")
+
 enum GameState {
 	LOBBY,
 	PLAYING
@@ -298,10 +301,8 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 		client_ui.current_hud.queue_free()
 		client_ui.current_hud = null
 		
-	var scoreboard_scene = load("res://scenes/Zones/Scoreboard.tscn")
-
-	if scoreboard_scene:
-		var scoreboard = scoreboard_scene.instantiate()
+	if SCOREBOARD_SCENE:
+		var scoreboard = SCOREBOARD_SCENE.instantiate()
 		get_tree().get_root().add_child(scoreboard)
 		scoreboard.populate(winner_text, cops_data, thieves_data)
 
@@ -392,9 +393,7 @@ func host_start_game():
 
 @rpc("any_peer", "call_local")
 func spawn_location_ping(pos: Vector3):
-	var ping_scene = load("res://scenes/MiscScenes/ping_marker.tscn")
-
-	if ping_scene:
-		var ping = ping_scene.instantiate()
+	if PING_SCENE:
+		var ping = PING_SCENE.instantiate()
 		add_child(ping)
 		ping.global_position = pos

@@ -9,10 +9,11 @@ func setup(parent: CharacterBody3D):
 	thief = parent
 	_ready_ping_visual()
 
+const PING_SCENE = preload("res://scenes/MiscScenes/thief_ping.tscn")
+
 func _ready_ping_visual():
-	var ping_scene = load("res://scenes/MiscScenes/thief_ping.tscn")
-	if ping_scene:
-		ping_visual = ping_scene.instantiate()
+	if PING_SCENE:
+		ping_visual = PING_SCENE.instantiate()
 		thief.add_child(ping_visual)
 		
 		# --- THE MAGIC SETTING ---
