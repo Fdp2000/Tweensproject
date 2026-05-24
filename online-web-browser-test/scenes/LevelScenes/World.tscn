@@ -120,6 +120,7 @@ current = true
 
 [node name="CutsceneManager" type="Node3D" parent="." unique_id=1301939455]
 script = ExtResource("3_p4cir")
+skip_cutscene = true
 
 [node name="Node3D" type="Node3D" parent="CutsceneManager" unique_id=496690261]
 
