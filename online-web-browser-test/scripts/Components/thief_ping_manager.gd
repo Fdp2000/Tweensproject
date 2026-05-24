@@ -24,6 +24,10 @@ func _ready_ping_visual():
 func trigger_ping(pos: Vector3):
 	if not ping_visual: return
 	
+	var local_id = thief.multiplayer.get_unique_id()
+	if GameManager.players.has(local_id) and GameManager.players[local_id].get("role") == GameManager.PlayerRole.COP:
+		return
+	
 	# Move the ping to the target location (slightly lifted so it doesn't clip the floor)
 	ping_visual.global_position = pos + Vector3(0, 0.5, 0)
 	ping_visual.visible = true

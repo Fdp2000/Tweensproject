@@ -77,7 +77,16 @@ func _ready():
 		if cutscene_manager and cutscene_manager.get("intro_running"):
 			camera.current = false
 		else:
+			if spring_arm:
+				camera.position.z = spring_arm.spring_length
 			camera.current = true
+			
+			# Hide visuals for 1 frame to prevent the chameleon closeup flash
+			visible = false
+			get_tree().process_frame.connect(func():
+				if is_inside_tree():
+					visible = true
+			, CONNECT_ONE_SHOT)
 		
 		# Tell the local camera to ALWAYS ignore Layer 10 (Bit value 512).
 		# We will put the Cop's head on this layer later!

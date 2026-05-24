@@ -9,6 +9,10 @@ func setup(parent_player: CharacterBody3D):
 	player = parent_player
 
 func trigger_ping():
+	var local_id = player.multiplayer.get_unique_id()
+	if GameManager.players.has(local_id) and GameManager.players[local_id].get("role") == GameManager.PlayerRole.COP:
+		return
+		
 	if not cop_ping_visual:
 		_ready_ping_visual()
 		

@@ -21,6 +21,7 @@ var cash_quota: int = 10000
 var round_timer: int = 300
 var active_thieves: int = 0
 
+signal player_joined(id: int)
 signal lobby_updated
 signal game_started
 signal game_ended
@@ -76,6 +77,8 @@ func add_player(id: int, p_name: String = ""):
 		
 		if multiplayer.is_server():
 			rpc("sync_full_lobby", players)
+			player_joined.emit(id)
+			lobby_updated.emit()
 		else:
 			lobby_updated.emit()
 
@@ -87,6 +90,7 @@ func remove_player(id: int):
 		
 		if multiplayer.is_server():
 			rpc("sync_full_lobby", players)
+			lobby_updated.emit()
 		else:
 			lobby_updated.emit()
 		
@@ -94,6 +98,13 @@ func remove_player(id: int):
 			if role == PlayerRole.THIEF:
 				thief_captured()
 			check_game_validity()
+			
+		if multiplayer.is_server():
+			var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+			if spawned:
+				var player_node = spawned.get_node_or_null(str(id))
+				if player_node:
+					player_node.queue_free()
 
 
 @rpc("any_peer", "call_local")
@@ -325,20 +336,44 @@ func client_return_to_lobby():
 
 		if spawned:
 			for child in spawned.get_children():
+				child.name += "_deleted"
+				spawned.remove_child(child)
 				child.queue_free()
 				
 		var artifacts = get_tree().get_nodes_in_group("artifact")
 
 		for art in artifacts:
-			art.rpc("reset_artifact")
+			if art.has_method("reset_artifact"):
+				art.rpc("reset_artifact")
 			
 		team_cash = 0
 		
-	for id in players.keys():
-		pass
+		# Respawn all players in the lobby!
+		for id in players.keys():
+			player_joined.emit(id)
 		
 	game_ended.emit()
 
+func full_teardown():
+	var scoreboard = get_tree().get_root().get_node_or_null("Scoreboard")
+	if scoreboard:
+		scoreboard.queue_free()
+		
+	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+	if spawned:
+		for child in spawned.get_children():
+			child.name += "_deleted"
+			spawned.remove_child(child)
+			child.queue_free()
+			
+	var artifacts = get_tree().get_nodes_in_group("artifact")
+	for art in artifacts:
+		if art.has_method("reset_artifact"):
+			art.reset_artifact()
+			
+	team_cash = 0
+	players.clear()
+	game_ended.emit()
 
 func host_start_game():
 	if not multiplayer.is_server(): return

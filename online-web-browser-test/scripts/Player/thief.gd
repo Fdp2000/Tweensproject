@@ -362,6 +362,10 @@ func _custom_physics_process(delta, direction):
 		anim_tree.active = false
 		if anim_player.current_animation != "Idle1":
 			anim_player.play("Idle1", 0.2)
+			
+		# When jailed, the parent body faces outward (-Z). Since the mesh's native forward is +Z, we add PI.
+		var target_angle = global_rotation.y + PI
+		visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 		
 	elif is_hypnotized:
 		anim_tree.active = false
@@ -374,6 +378,11 @@ func _custom_physics_process(delta, direction):
 			# NO RESCUER: Zombie walk to the cell!
 			if anim_player.current_animation != "Hypno_Walk":
 				anim_player.play("Hypno_Walk", 0.2)
+				
+		# FIX: Ensure the visual mesh still rotates to face the direction of movement, exactly like normal running!
+		if horizontal_speed_sq > 0.05:
+			var target_angle = atan2(current_vel.x, current_vel.z) 
+			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 			
 	elif carried_artifact != null:
 		# ----------------------------------------
