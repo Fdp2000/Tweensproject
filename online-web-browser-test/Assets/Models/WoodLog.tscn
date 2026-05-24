@@ -1,3 +1,18 @@
 [gd_scene format=3 uid="uid://c88l7rcfwowrr"]
 
+[ext_resource type="ArrayMesh" uid="uid://nu5mmv0rfpjv" path="res://Assets/environments/Ultimate Nature Pack by Quaternius/OBJ/WoodLog_Moss.obj" id="1_m5a4n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yiuyv"]
+size = Vector3(0.04071045, 0.18206933, 2.6642914)
+
 [node name="WoodLog" type="Node3D" unique_id=481040614]
+
+[node name="WoodLogMoss" type="MeshInstance3D" parent="." unique_id=1787502954]
+transform = Transform3D(5.27, 0, 0, 0, 5.27, 0, 0, 0, 3.689, 0, 0, 0)
+mesh = ExtResource("1_m5a4n")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WoodLogMoss" unique_id=1758601040]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WoodLogMoss/StaticBody3D" unique_id=14737519]
+transform = Transform3D(0.8662247, 0.49965167, 0, -0.49965167, 0.8662247, 0, 0, 0, 1, 0.20741859, 0.14848928, -0.16394864)
+shape = SubResource("BoxShape3D_yiuyv")
