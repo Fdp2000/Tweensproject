@@ -4406,7 +4406,7 @@ mesh = ExtResource("6_orgo4")
 shape = SubResource("ConvexPolygonShape3D_2yjpi")
 
 [node name="Floor24" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Floor" unique_id=749739028]
-transform = Transform3D(15.110905, 0, 0, 0, 0.36, 0, 0, 0, 4.903778, -24.118109, 18.93925, -33.85452)
+transform = Transform3D(15.110905, 0, 0, 0, 0.36, 0, 0, 0, 4.903778, -24.118, 4.074, -33.855)
 mesh = ExtResource("6_orgo4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Floor/Floor24" unique_id=2072085862]
