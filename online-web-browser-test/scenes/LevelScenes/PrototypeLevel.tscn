@@ -288,7 +288,10 @@ size = Vector3(1.0066562, 0.7378998, 1.0007677)
 points = PackedVector3Array(-0.75, 0, -0.75, -0.75, 0, 0.75, -0.75, 0.14737456, -0.75, 0.75, 0, -0.75, -0.75, 0.14737456, 0.75, 0.75, 0, 0.75, -0.50861394, 0.41957387, -0.50861394, 0.75, 0.14737456, -0.75, 0.75, 0.14737456, 0.75, -0.50861394, 0.41957387, 0.5084671, 0.5084671, 0.41957387, -0.50861394, 0.5084671, 0.41957387, 0.5084671)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_g3e8t"]
-size = Vector3(1.5009766, 0.76078606, 1.5067139)
+size = Vector3(1.5009766, 0.25123167, 1.5048523)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xwy5l"]
+size = Vector3(1.3404541, 0.52224004, 1.3415489)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vdvdf"]
 points = PackedVector3Array(0.21415265, 1.3610483, 0.21415265, -0.325, 0.02384588, -0.325, -0.35068017, -0.025680184, 0.36836433, 0.36836433, -0.025680184, 0.36836433, 0.36836433, -0.025680184, -0.35068017, -0.29929972, 1.3094668, -0.29929972, -0.35068017, 1.1040909, 0.36836433, 0.36836433, 1.1040909, -0.35068017, 0.36836433, 1.1040909, 0.36836433, -0.29929972, 1.3094668, 0.2655331, 0.2655331, 1.3094668, -0.29929972, -0.3198, 1.066607, -0.3198, -0.24791929, 1.3610483, -0.14522882, 0.2655331, 1.3610483, -0.09384839, -0.09384839, 1.3610483, 0.2655331, 0.1628426, 1.3610483, -0.24791929, 0.2655331, 1.3610483, 0.111462176, 0.111462176, 1.3610483, 0.2655331, -0.24791929, 1.3610483, 0.1628426, -0.14522882, 1.3610483, -0.24791929)
@@ -4597,8 +4600,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_srhcg")
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Pedestals/Pedestal6" unique_id=1923553156]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/Pedestals/Pedestal6/StaticBody3D" unique_id=1507324590]
-transform = Transform3D(0.999989, 1.6720696e-07, 4.2608008e-08, -1.8550827e-07, 0.99999034, -1.6763806e-07, -5.669426e-08, 1.6973354e-07, 0.99999964, -0.001461029, 0.27593607, 0.0014038086)
+transform = Transform3D(0.99999076, 2.0962034e-07, 5.8906153e-08, -2.2935592e-07, 0.9999919, -1.6996637e-07, -7.089693e-08, 1.5413389e-07, 0.99999964, -0.001455307, 0.021158546, 0.0023338795)
 shape = SubResource("BoxShape3D_g3e8t")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Arena 2/NavigationRegion3D/Pedestals/Pedestal6/StaticBody3D" unique_id=905578737]
+transform = Transform3D(0.99997514, 3.252262e-07, 7.986091e-08, -3.4255117e-07, 0.99997836, -1.5320256e-07, -1.0570511e-07, 1.5995465e-07, 0.99999964, -0.0010166168, 0.15666068, 3.0994415e-06)
+shape = SubResource("BoxShape3D_xwy5l")
 
 [node name="Columns" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=467429646]
 transform = Transform3D(1, 0, 0, 0, 1.05, 0, 0, 0, 1, 0, 0, 0)
@@ -10629,7 +10636,7 @@ hand_position_offset = Vector3(-0.262, -0.152, -0.787)
 hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 
 [node name="MediumDingus2" parent="Arena 2/Dinguses" unique_id=703677206 instance=ExtResource("3_ypmvb")]
-transform = Transform3D(-0.21416138, 0, 0.12897637, 0, 0.25, 0, -0.12897637, 0, -0.21416138, -17.627752, 0.4563892, 4.660842)
+transform = Transform3D(-0.21416138, 0, 0.12897637, 0, 0.25, 0, -0.12897637, 0, -0.21416138, -17.532948, 0.41974342, 4.5034223)
 script = ExtResource("6_artifact")
 artifact_size = 1
 artifact_category = 2
@@ -10653,7 +10660,7 @@ hand_position_offset = Vector3(-0.21, -0.095, -1.752)
 hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 
 [node name="Big Dingus3" parent="Arena 2/Dinguses" unique_id=497967933 instance=ExtResource("14_46wyf")]
-transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 33.070488, 0.6993227, 4.429481)
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 33.070488, 0.6993227, 4.202982)
 script = ExtResource("6_artifact")
 artifact_size = 2
 artifact_category = 2

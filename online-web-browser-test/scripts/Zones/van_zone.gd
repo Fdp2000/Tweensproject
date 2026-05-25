@@ -19,6 +19,7 @@ func _update_sizes():
 
 	var ring = get_node_or_null("VisualRing")
 	if ring and ring is CSGTorus3D:
+		ring.scale = Vector3.ONE # Reset any editor scaling so the radius perfectly matches
 		ring.outer_radius = Balance.delivery_zone_radius
 		ring.inner_radius = Balance.delivery_zone_radius - 0.1
 

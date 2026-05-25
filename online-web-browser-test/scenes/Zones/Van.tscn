@@ -15,6 +15,7 @@ emission = Color(1, 1, 1, 1)
 [node name="Van" type="Node3D" unique_id=1658847018]
 
 [node name="DeliveryZone" type="Area3D" parent="." unique_id=1495220169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2364895, 0, 0)
 collision_mask = 5
 script = ExtResource("1_script")
 
@@ -23,13 +24,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_van")
 
 [node name="VisualRing" type="CSGTorus3D" parent="DeliveryZone" unique_id=1383707949]
-transform = Transform3D(0.745, 0, 0, 0, 0.745, 0, 0, 0, 0.745, 0, 0.05, 0)
+transform = Transform3D(1.72, 0, 0, 0, 1.72, 0, 0, 0, 1.72, 0, 0.05, 0)
 inner_radius = 3.9
 outer_radius = 4.0
 sides = 32
 material = SubResource("StandardMaterial3D_ring")
 
-[node name="WhiteVan" parent="DeliveryZone" unique_id=628082721 instance=ExtResource("2_yy4fo")]
+[node name="WhiteVan" parent="." unique_id=628082721 instance=ExtResource("2_yy4fo")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [connection signal="body_entered" from="DeliveryZone" to="DeliveryZone" method="_on_body_entered"]

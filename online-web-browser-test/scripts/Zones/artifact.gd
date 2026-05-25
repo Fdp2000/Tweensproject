@@ -328,7 +328,10 @@ func destroy_artifact():
 	
 	is_highlighted = false # FIX: Force highlight off when destroyed
 	hide()
-	col.set_deferred("disabled", true)
+	var area = col.get_parent()
+	if area is Area3D:
+		area.collision_layer = 0
+		area.collision_mask = 0
 
 @rpc("any_peer", "call_local")
 func reset_artifact():
@@ -343,7 +346,10 @@ func reset_artifact():
 	
 	is_highlighted = false # FIX: Force highlight off for the next round
 	show()
-	col.set_deferred("disabled", false)
+	var area = col.get_parent()
+	if area is Area3D:
+		area.collision_layer = 8
+		area.collision_mask = 2
 	global_position = initial_position
 	rotation = initial_rotation
 	sync_target_position = initial_position
