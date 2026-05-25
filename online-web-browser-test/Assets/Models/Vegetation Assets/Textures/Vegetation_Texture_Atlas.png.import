@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dg03omgu6iytk"
-path.s3tc="res://.godot/imported/Vegetation_Texture_Atlas.png-7a5a7aa263b1b2f1518fd0f78f64e271.s3tc.ctex"
-path.etc2="res://.godot/imported/Vegetation_Texture_Atlas.png-7a5a7aa263b1b2f1518fd0f78f64e271.etc2.ctex"
+path.s3tc="res://.godot/imported/Vegetation_Texture_Atlas.png-9daf686a20026b7e6a40c66750c51363.s3tc.ctex"
+path.etc2="res://.godot/imported/Vegetation_Texture_Atlas.png-9daf686a20026b7e6a40c66750c51363.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Models/Vegetation Assets/textures/Vegetation_Texture_Atlas.png"
-dest_files=["res://.godot/imported/Vegetation_Texture_Atlas.png-7a5a7aa263b1b2f1518fd0f78f64e271.s3tc.ctex", "res://.godot/imported/Vegetation_Texture_Atlas.png-7a5a7aa263b1b2f1518fd0f78f64e271.etc2.ctex"]
+source_file="res://Assets/Models/Vegetation Assets/Textures/Vegetation_Texture_Atlas.png"
+dest_files=["res://.godot/imported/Vegetation_Texture_Atlas.png-9daf686a20026b7e6a40c66750c51363.s3tc.ctex", "res://.godot/imported/Vegetation_Texture_Atlas.png-9daf686a20026b7e6a40c66750c51363.etc2.ctex"]
 
 [params]
 

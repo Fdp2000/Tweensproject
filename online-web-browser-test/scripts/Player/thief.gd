@@ -81,7 +81,7 @@ func _ready():
 	add_child(nav_agent)
 	
 	cached_smoke_particles = SMOKE_PARTICLES.instantiate()
-	# PRE-WARMER: Force a single emission frame to cache the shader!
+	# PRE-WARMER: Force a single emission frame to cache the shader, which also adds a cool spawn-in effect!
 	cached_smoke_particles.emitting = true 
 	add_child(cached_smoke_particles)
 	

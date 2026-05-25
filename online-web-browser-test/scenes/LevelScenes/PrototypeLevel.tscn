@@ -1463,7 +1463,6 @@ points = PackedVector3Array(-0.015888, -0.012796624, -0.001869163, -0.0024088477
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bgblx"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.24819016, 0.23276958, 0.1989209, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1503,7 +1502,6 @@ points = PackedVector3Array(-0.20644854, 0.3667239, 0.9882418, 0.014150023, -0.3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e80ep"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4955091, 0.4955091, 0.4955091, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1558,7 +1556,6 @@ points = PackedVector3Array(-0.20644854, 0.3667239, 0.9882418, 0.014150023, -0.3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fufty"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.15322626, 0.108440496, 0.032206465, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1595,7 +1592,6 @@ points = PackedVector3Array(-0.20644854, 0.3667239, 0.9882418, 0.014150023, -0.3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wkjx1"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.7184213, 0.5286776, 0, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1653,7 +1649,6 @@ points = PackedVector3Array(-0.20644854, 0.3667239, 0.9882418, 0.014150023, -0.3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ag47p"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.33767557, 0.33767557, 0.33767557, 1)
 shader_parameter/albedo_texture = ExtResource("42_p8w5a")
 shader_parameter/use_stepped = true
@@ -1706,7 +1701,6 @@ points = PackedVector3Array(-0.014866042, -0.008607947, 0.01403426, 0.019124921,
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bf2ka"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1737,7 +1731,6 @@ points = PackedVector3Array(-0.023100875, 0.01405915, 0.015551504, 0.03255, -0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gp0hk"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1765,7 +1758,6 @@ points = PackedVector3Array(-0.023100875, 0.01405915, 0.015551504, 0.03255, -0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88xne"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1793,7 +1785,6 @@ points = PackedVector3Array(-0.023100875, 0.01405915, 0.015551504, 0.03255, -0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0hqwr"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1821,7 +1812,6 @@ points = PackedVector3Array(-0.023100875, 0.01405915, 0.015551504, 0.03255, -0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8qq2"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1849,7 +1839,6 @@ points = PackedVector3Array(-0.023100875, 0.01405915, 0.015551504, 0.03255, -0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p8w5a"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -1877,7 +1866,6 @@ points = PackedVector3Array(-0.023100875, 0.01405915, 0.015551504, 0.03255, -0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0t7hq"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.39085627, 0.19752398, 0.073692426, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -2058,7 +2046,6 @@ points = PackedVector3Array(-0.16470653, 0.07794966, 0.36632007, -0.06587676, 0.
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hdtnq"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2087,7 +2074,6 @@ points = PackedVector3Array(0.0028214282, -0.010626929, 0.0035541425, -0.0038976
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r7agv"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2116,7 +2102,6 @@ points = PackedVector3Array(0.0028214282, -0.010626929, 0.0035541425, -0.0038976
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xsvq8"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2145,7 +2130,6 @@ points = PackedVector3Array(0.0028214282, -0.010626929, 0.0035541425, -0.0038976
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2nf86"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2174,7 +2158,6 @@ points = PackedVector3Array(0.0028214282, -0.010626929, 0.0035541425, -0.0038976
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jrgyu"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2203,7 +2186,6 @@ points = PackedVector3Array(0.0028214282, -0.010626929, 0.0035541425, -0.0038976
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uvule"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2232,7 +2214,6 @@ points = PackedVector3Array(0.0028214282, -0.010626929, 0.0035541425, -0.0038976
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sus27"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2261,7 +2242,6 @@ points = PackedVector3Array(0.0028214282, -0.010626929, 0.0035541425, -0.0038976
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jd4a4"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.4996859, 0.4996859, 0.4996859, 1)
 shader_parameter/albedo_texture = ExtResource("55_om66w")
 shader_parameter/use_stepped = true
@@ -2674,7 +2654,6 @@ points = PackedVector3Array(0.002794984, -0.003259092, 0.031671014, 0.0060987747
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5i3ml"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.42941594, 0.42941606, 0.4294159, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -2699,7 +2678,6 @@ shader_parameter/pattern_blend = 0.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8jnui"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/albedo_texture = ExtResource("51_dauag")
 shader_parameter/use_stepped = true
@@ -2725,7 +2703,6 @@ shader_parameter/pattern_blend = 0.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e22mm"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/albedo_texture = ExtResource("51_dauag")
 shader_parameter/use_stepped = true
@@ -2879,7 +2856,6 @@ shadow_mesh = SubResource("ArrayMesh_efmy8")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fvyjn"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/albedo_texture = ExtResource("68_w6te4")
 shader_parameter/use_stepped = true
@@ -2905,7 +2881,6 @@ shader_parameter/pattern_blend = 0.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w6te4"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0.2024284, 0.2024284, 0.2024284, 1)
 shader_parameter/albedo_texture = ExtResource("66_217hv")
 shader_parameter/use_stepped = true
@@ -4087,7 +4062,7 @@ mesh = ExtResource("6_orgo4")
 shape = SubResource("ConvexPolygonShape3D_gloc0")
 
 [node name="Floor28" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Floor" unique_id=149976319]
-transform = Transform3D(-1.0585234e-07, 0, 12.3171835, 0, 0.35999998, 0, -2.4216194, 0, -5.3840125e-07, -0.11810875, 4.0743184, -8.854519)
+transform = Transform3D(-1.0029569e-07, 0, 12.024991, 0, 0.35999998, 0, -2.2944982, 0, -5.256291e-07, -0.11810875, 4.0743184, -8.854519)
 mesh = ExtResource("6_orgo4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Floor/Floor28" unique_id=892673671]
@@ -4114,7 +4089,7 @@ mesh = ExtResource("6_orgo4")
 shape = SubResource("ConvexPolygonShape3D_kj3xb")
 
 [node name="Floor31" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Floor" unique_id=676761101]
-transform = Transform3D(-2.4216194, 0, -7.752978e-07, 0, 0.35999998, 0, 2.1170467e-07, 0, -8.868373, 9.381891, 4.0743184, -2.9545188)
+transform = Transform3D(-2.4216194, 0, -7.333609e-07, 0, 0.35999998, 0, 2.1170467e-07, 0, -8.38867, 9.381891, 4.0743184, -2.9545188)
 mesh = ExtResource("6_orgo4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Floor/Floor31" unique_id=624916949]
@@ -10700,6 +10675,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_xwy5l")
 
 [node name="SecCam1" parent="SecCams" unique_id=220581430 groups=["SecurityCameras"] instance=ExtResource("38_oetox")]
 transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 11.835958, 3.9178646, -12.095759)
+
+[node name="pivotPoint" parent="SecCams/SecCam1" index="1" unique_id=1654055905]
+transform = Transform3D(0.052905124, -0.015217592, -0.05093598, 9.313226e-10, 0.07186147, -0.021469276, 0.053160593, 0.015144463, 0.050691195, 4.7683716e-07, 0.026323795, -0.19379234)
 
 [node name="SecCam2" parent="SecCams" unique_id=721374993 groups=["SecurityCameras"] instance=ExtResource("38_oetox")]
 transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 1.534379, 3.9178646, -12.095759)
