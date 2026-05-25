@@ -189,8 +189,7 @@ func _input(event):
 		if not is_mobile_device() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			
 			# FIX: Only recapture the mouse if the DevPanel is NOT visible!
-			var dev_panel = get_node_or_null("/root/DevPanel")
-			if not (dev_panel and dev_panel.visible):
+			if DevPanel and not DevPanel.visible:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

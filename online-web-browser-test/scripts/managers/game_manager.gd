@@ -30,7 +30,7 @@ signal time_updated(time_left: int)
 signal game_over(winner_team: int)
 
 var timer_node: Timer
-
+var cached_scoreboard: Control = null
 
 func _ready():
 	timer_node = Timer.new()
@@ -38,6 +38,17 @@ func _ready():
 	timer_node.autostart = false
 	timer_node.timeout.connect(_on_timer_tick)
 	add_child(timer_node)
+	
+	# PRE-CACHER: Instantiate the scoreboard on load so WebGL pre-renders the fonts!
+	if SCOREBOARD_SCENE:
+		cached_scoreboard = SCOREBOARD_SCENE.instantiate()
+		cached_scoreboard.visible = false
+		
+		# CanvasLayer forces it to the top so it doesn't get buried under other UI
+		var canvas_layer = CanvasLayer.new()
+		canvas_layer.layer = 100 
+		canvas_layer.add_child(cached_scoreboard)
+		add_child(canvas_layer)
 
 
 func _on_timer_tick():
@@ -312,10 +323,11 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 		client_ui.current_hud.queue_free()
 		client_ui.current_hud = null
 		
-	if SCOREBOARD_SCENE:
-		var scoreboard = SCOREBOARD_SCENE.instantiate()
-		get_tree().get_root().add_child(scoreboard)
-		scoreboard.populate(winner_text, cops_data, thieves_data)
+	if cached_scoreboard:
+		cached_scoreboard.populate(winner_text, cops_data, thieves_data)
+		cached_scoreboard.visible = true
+		cached_scoreboard.set_process(true)
+		cached_scoreboard.countdown = 5.0 # Reset timer
 
 
 @rpc("any_peer", "call_local")
@@ -326,10 +338,8 @@ func return_to_lobby():
 
 @rpc("any_peer", "call_local")
 func client_return_to_lobby():
-	var scoreboard = get_tree().get_root().get_node_or_null("Scoreboard")
-
-	if scoreboard:
-		scoreboard.queue_free()
+	if cached_scoreboard:
+		cached_scoreboard.visible = false
 		
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
