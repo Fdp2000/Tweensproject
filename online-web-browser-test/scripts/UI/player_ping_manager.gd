@@ -9,6 +9,10 @@ func setup(parent_player: CharacterBody3D):
 	player = parent_player
 
 func trigger_ping():
+	var local_id = player.multiplayer.get_unique_id()
+	if GameManager.players.has(local_id) and GameManager.players[local_id].get("role") == GameManager.PlayerRole.COP:
+		return
+		
 	if not cop_ping_visual:
 		_ready_ping_visual()
 		
@@ -24,10 +28,11 @@ func trigger_ping():
 		ping_timer = player.get_tree().create_timer(Balance.cop_spot_ping_duration)
 		ping_timer.timeout.connect(_hide_ping)
 
+const PING_SCENE = preload("res://scenes/MiscScenes/cop_ping.tscn")
+
 func _ready_ping_visual():
-	var ping_scene = load("res://scenes/MiscScenes/cop_ping.tscn")
-	if ping_scene:
-		cop_ping_visual = ping_scene.instantiate()
+	if PING_SCENE:
+		cop_ping_visual = PING_SCENE.instantiate()
 		player.add_child(cop_ping_visual)
 		cop_ping_visual.position = Vector3(0, 2.5, 0)
 		cop_ping_visual.visible = false

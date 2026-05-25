@@ -237,12 +237,16 @@ func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 		nav_agent.target_position = jail_walk_target
 
 func _custom_physics_process(delta, direction):
+	
+	# ==========================================
+	# 1. MOVEMENT STATE MACHINE
+	# ==========================================
 	if is_jailed or (camera_manager and camera_manager.is_on_cameras):
 		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
 		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
-		return
+		# (REMOVED 'return' HERE)
 	
-	if is_hypnotized:
+	elif is_hypnotized: # Changed 'if' to 'elif'
 		if is_multiplayer_authority():
 			if is_rescue_halted:
 				velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
@@ -329,22 +333,24 @@ func _custom_physics_process(delta, direction):
 				if is_rescue_halted:
 					is_rescue_halted = false
 					rpc("sync_rescue_halt", false)
-		return
+		# (REMOVED 'return' HERE)
 		
-	if carried_artifact:
-		current_speed_mult = carried_artifact.weight_penalty
-	else:
-		current_speed_mult = move_toward(current_speed_mult, 1.0, delta * 0.3)
-		
-	if direction:
-		velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
-		velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
-	else:
-		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction * current_speed_mult)
-		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction * current_speed_mult)
-		
+	else: # Changed 'if' to 'else'
+		if carried_artifact:
+			current_speed_mult = carried_artifact.weight_penalty
+		else:
+			current_speed_mult = move_toward(current_speed_mult, 1.0, delta * 0.3)
+			
+		if direction:
+			velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
+			velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
+		else:
+			velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction * current_speed_mult)
+			velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction * current_speed_mult)
+			
+
 	# ==========================================
-	# --- CHAMELEON ANIMATION STATE MACHINE ---
+	# 2. ANIMATION STATE MACHINE (NOW IT WILL RUN!)
 	# ==========================================
 	var current_vel = velocity
 	if not is_multiplayer_authority():
@@ -354,32 +360,44 @@ func _custom_physics_process(delta, direction):
 
 	if is_jailed:
 		anim_tree.active = false
-		anim_player.stop()
+		if anim_player.current_animation != "Idle1":
+			anim_player.play("Idle1", 0.2)
+			
+		# When jailed, the parent body faces outward (-Z). Since the mesh's native forward is +Z, we add PI.
+		var target_angle = global_rotation.y + PI
+		visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 		
 	elif is_hypnotized:
 		anim_tree.active = false
-		if velocity.length_squared() > 0.05:
-			anim_player.play("Run1", 0.2) 
+		
+		if is_rescue_halted:
+			# STAND STILL: A teammate is currently rescuing me!
+			if anim_player.current_animation != "Idle1":
+				anim_player.play("Idle1", 0.2)
 		else:
-			anim_player.play("Idle1", 0.2)
+			# NO RESCUER: Zombie walk to the cell!
+			if anim_player.current_animation != "Hypno_Walk":
+				anim_player.play("Hypno_Walk", 0.2)
+				
+		# FIX: Ensure the visual mesh still rotates to face the direction of movement, exactly like normal running!
+		if horizontal_speed_sq > 0.05:
+			var target_angle = atan2(current_vel.x, current_vel.z) 
+			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 			
 	elif carried_artifact != null:
 		# ----------------------------------------
 		# STATE A: CARRYING AN ARTIFACT
 		# ----------------------------------------
 		
-		# 1. Turn the tree on and travel to the holding setup
 		anim_tree.active = true
 		anim_tree.get("parameters/playback").travel("Holding_State")
 		
-		# 2. Tell the switchboard which upper-body pose to use
 		if carried_artifact:
 			if carried_artifact.artifact_category == carried_artifact.Category.WALL_PROP:
 				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "wall_prop")
 			elif carried_artifact.artifact_category == carried_artifact.Category.FLOOR_PROP:
 				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "floor_prop")
 
-		# 3. Lock rotation so the Chameleon's back points to the camera
 		var target_rot = 0.0
 		if pitch_pivot:
 			target_rot = pitch_pivot.global_rotation.y + PI
@@ -390,32 +408,39 @@ func _custom_physics_process(delta, direction):
 		else:
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, sync_mesh_rot_y, 10.0 * delta)
 
-		# 4. Handle the lower-body leg movement
-		if horizontal_speed_sq > 0.05:
+		var is_trying_to_move = false
+		if is_multiplayer_authority():
+			var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+			is_trying_to_move = input_dir.length_squared() > 0.01
+		else:
+			is_trying_to_move = horizontal_speed_sq > 0.05
+		
+		if is_trying_to_move:
 			is_camo_posing = false
 			is_currently_moving = true 
-			
-			# Keep the arms locked in the 100% artifact pose
+			anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
 			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
 			
-			# Un-rotate velocity and drive the legs on the grid
 			var local_velocity = current_vel.rotated(Vector3.UP, -pitch_pivot.global_rotation.y)
 			var grid_position = Vector2(local_velocity.x, -local_velocity.z).normalized()
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", grid_position)
+			# AUTO-SYNC: Calculate exact speed based on actual velocity!
+			var actual_speed = Vector2(current_vel.x, current_vel.z).length()
+			var final_tree_speed = actual_speed / Balance.anim_native_speed
+			
+			anim_tree.set("parameters/Holding_State/TimeScale/scale", final_tree_speed)
 			
 		else:
 			is_currently_moving = false 
-			
-			# Stop the legs (Forces grid perfectly to 0,0 -> Idle1)
 			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", Vector2.ZERO)
 			
-			# Keep the arms locked in the 100% artifact pose while standing
-			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
-			
-			# (Handle Camo Stealth Logic here if you want him to go invisible while holding!)
 			if stealth_manager and stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
 				if not is_camo_posing:
 					is_camo_posing = true
+				anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "hiding")
+			else:
+				anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
+				
 	else:
 		# ----------------------------------------
 		# STATE B: NORMAL RUNNING (EMPTY HANDED)
@@ -426,11 +451,14 @@ func _custom_physics_process(delta, direction):
 			if not is_currently_moving:
 				is_currently_moving = true
 				var random_run = favorite_runs.pick_random()
-				anim_player.play(random_run, 0.2) 
+				# AUTO-SYNC: Calculate exact speed based on actual velocity!
+				var actual_speed = Vector2(current_vel.x, current_vel.z).length()
+				var final_player_speed = actual_speed / Balance.anim_native_speed
+				
+				anim_player.play(random_run, 0.2, final_player_speed)
 			
 			var target_angle = atan2(current_vel.x, current_vel.z) 
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
-			
 		else:
 			if is_currently_moving:
 				is_currently_moving = false

@@ -24,11 +24,6 @@ func _ready():
 		push_error("Could not find GameManager.")
 
 
-# Temporary test input - remove later
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		start_intro()
-
 
 func _on_game_started():
 	await get_tree().create_timer(0.3).timeout

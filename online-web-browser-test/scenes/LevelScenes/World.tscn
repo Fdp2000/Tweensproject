@@ -4,8 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://crc86ugpb3vmu" path="res://scenes/LevelScenes/PrototypeLevel.tscn" id="2_proto"]
 [ext_resource type="Script" uid="uid://buorurrqe21ki" path="res://scripts/Cutscene/CutsceneManager.gd" id="3_p4cir"]
 [ext_resource type="Script" uid="uid://c5rie7oeh51t2" path="res://scripts/Cutscene/VersusScreen.gd" id="4_frjgd"]
+[ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="5_1ppgf"]
 [ext_resource type="PackedScene" uid="uid://diovmaqigblbx" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer2.glb" id="5_ofs5a"]
 [ext_resource type="PackedScene" uid="uid://c0au7i4fnki7o" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer.glb" id="6_w6qbi"]
+[ext_resource type="PackedScene" uid="uid://dyj1djxuy4iko" path="res://scenes/LevelScenes/PregameLobby.tscn" id="7_pregame"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -83,9 +85,6 @@ _data = {
 
 [sub_resource type="Theme" id="Theme_frjgd"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ofs5a"]
-bg_color = Color(0, 0, 0, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_frjgd"]
 font_size = 168
 
@@ -107,11 +106,14 @@ shadow_enabled = true
 
 [node name="main" parent="." unique_id=846917499 instance=ExtResource("1_kqs1s")]
 
+[node name="PregameLobby" parent="." unique_id=1234567891 instance=ExtResource("7_pregame")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
+
 [node name="PrototypeLevel" parent="." unique_id=1171028383 instance=ExtResource("2_proto")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.03201866, -9.536743e-07, 0.007331848)
 
 [node name="LobbyCamera" type="Camera3D" parent="." unique_id=999888777]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20, 25)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1020, 25)
 current = true
 
 [node name="CutsceneManager" type="Node3D" parent="." unique_id=1301939455]
@@ -129,15 +131,15 @@ libraries/ = SubResource("AnimationLibrary_frjgd")
 [node name="VersusScreen" type="CanvasLayer" parent="." unique_id=437919447]
 visible = false
 script = ExtResource("4_frjgd")
-thief_preview_scene = ExtResource("5_ofs5a")
-cop_preview_scene = ExtResource("6_w6qbi")
+thief_preview_scene = ExtResource("5_1ppgf")
+cop_preview_scene = ExtResource("5_1ppgf")
 
 [node name="Root" type="Control" parent="VersusScreen" unique_id=773497216]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1980.0
+offset_right = -1920.0
 offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -149,15 +151,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.5101233, 0.0008261162, 0.63087827, 1)
+scale = Vector2(1.1, 1.1)
+color = Color(0, 0, 0, 1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="VersusScreen/Root" unique_id=776434493]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -30.0
-offset_right = -30.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -172,13 +173,13 @@ render_target_update_mode = 0
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -91.21161, 0, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1713966943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -86.50207, 2.409748, 4.3073635)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.10741, -2.072019, 4.3073635)
 
 [node name="LeftSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=43727269]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -76.404785, -0.24863054, -0.72367036)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.0971, -0.24863054, -0.27658656)
 
 [node name="RightSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1673610662]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.08547, -0.51554143, -0.85583216)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.66386, -0.17456627, 0.16501635)
 
 [node name="Panel" type="Panel" parent="VersusScreen/Root" unique_id=1910567873]
 layout_mode = 1
@@ -188,52 +189,54 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_frjgd")
-theme_override_styles/panel = SubResource("StyleBoxFlat_ofs5a")
 
 [node name="RobbersTitle" type="Label" parent="VersusScreen/Root/Panel" unique_id=1923577786]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.45
-anchor_bottom = 0.15
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.25
+anchor_bottom = 0.12
 text = "Robbers"
 label_settings = SubResource("LabelSettings_frjgd")
-horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CopsTitle" type="Label" parent="VersusScreen/Root/Panel" unique_id=343700150]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.05
-anchor_right = 0.715
-anchor_bottom = 0.065
-text = "Cops"
+anchor_left = 0.55
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.12
+text = "Coppers"
 label_settings = SubResource("LabelSettings_ofs5a")
-horizontal_alignment = 1
+horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="VSLabel" type="Label" parent="VersusScreen/Root/Panel" unique_id=282116148]
-layout_mode = 0
-offset_left = 877.0
-offset_top = 237.0
-offset_right = 1117.0
-offset_bottom = 483.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.35
+anchor_right = 0.6
+anchor_bottom = 0.65
 text = "VS"
 label_settings = SubResource("LabelSettings_w6qbi")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="RobbersList" type="VBoxContainer" parent="VersusScreen/Root/Panel" unique_id=1982826195]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.125
-anchor_top = 0.281
-anchor_right = 0.13
-anchor_bottom = 0.281
+anchor_left = 0.02
+anchor_top = 0.4
+anchor_right = 0.25
+anchor_bottom = 0.6
 
 [node name="CopsList" type="VBoxContainer" parent="VersusScreen/Root/Panel" unique_id=1926124997]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.755
-anchor_top = 0.305
-anchor_right = 0.755
-anchor_bottom = 0.305
+anchor_left = 0.75
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 0.6

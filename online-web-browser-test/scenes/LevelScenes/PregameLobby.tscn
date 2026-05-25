@@ -1,12 +1,14 @@
 [gd_scene format=4 uid="uid://dyj1djxuy4iko"]
 
-[ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_p4tyv"]
+[ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
+[ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
+[ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwb7"]
 resource_name = "Material"
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.2229845, 0.2229845, 0.2229845, 1)
-albedo_texture = ExtResource("1_p4tyv")
+albedo_texture = ExtResource("1_nw2ok")
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
@@ -339,10 +341,14 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k8akl")
 
-[node name="Arena 1" type="Node3D" unique_id=1137537174]
+[sub_resource type="BoxShape3D" id="BoxShape3D_van"]
+size = Vector3(3, 2, 4)
+
+[node name="PregameLobby" type="Node3D" unique_id=1137537174]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1511617960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.440422, 0, 0)
+use_collision = true
 size = Vector3(14.684479, 0.42242432, 24.23883)
 
 [node name="Arch7" type="MeshInstance3D" parent="." unique_id=1951291620]
@@ -556,3 +562,40 @@ mesh = SubResource("ArrayMesh_pm873")
 [node name="ExhibitPanel3" type="MeshInstance3D" parent="." unique_id=928100789]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.106924, 0.17321277, -7.0087743)
 mesh = SubResource("ArrayMesh_pm873")
+
+[node name="Spawn1" type="Marker3D" parent="." unique_id=1045373592 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.203533, 0.27454066, 0)
+
+[node name="Spawn2" type="Marker3D" parent="." unique_id=1443280738 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.203533, 0.27454066, 2)
+
+[node name="Spawn3" type="Marker3D" parent="." unique_id=1679742405 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.203533, 0.27454066, 2)
+
+[node name="Spawn4" type="Marker3D" parent="." unique_id=527827319 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.203533, 0.27454066, 4)
+
+[node name="HostVan" type="Area3D" parent="." unique_id=747771727 groups=["artifact"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 0)
+collision_layer = 10
+collision_mask = 0
+script = ExtResource("2_van")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HostVan" unique_id=1399586928]
+shape = SubResource("BoxShape3D_van")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="HostVan" unique_id=2104880934]
+size = Vector3(3, 2, 4)
+
+[node name="LeaveDoor" type="Area3D" parent="." unique_id=747238585 groups=["artifact"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.328896, 1.5922744, 11.7146435)
+collision_layer = 10
+collision_mask = 0
+script = ExtResource("3_door")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeaveDoor" unique_id=434180412]
+shape = SubResource("BoxShape3D_van")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="LeaveDoor" unique_id=1547239914]
+material_override = SubResource("StandardMaterial3D_8gwb7")
+size = Vector3(2, 3, 0.5)

@@ -1,38 +1,38 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cjywmrukxi5d6"]
 
 [ext_resource type="Script" uid="uid://cpnxd6rp0q1n5" path="res://scripts/UI/hud.gd" id="1_script"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=1369908268]
 script = ExtResource("1_script")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1566712710]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 100.0
 grow_horizontal = 2
 theme_override_constants/margin_top = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=753119492]
 layout_mode = 2
 alignment = 1
 
-[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1169533579]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
 text = "05:00"
 horizontal_alignment = 1
 
-[node name="CashLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="CashLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1549852865]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 32
 text = "Stolen Cash: $0 / $10000"
 horizontal_alignment = 1
 
-[node name="GameOverPanel" type="ColorRect" parent="."]
+[node name="GameOverPanel" type="ColorRect" parent="." unique_id=678552370]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,7 +41,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.8)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOverPanel" unique_id=2059409454]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,10 +50,10 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="GameOverLabel" type="Label" parent="GameOverPanel/VBoxContainer"]
+[node name="GameOverLabel" type="Label" parent="GameOverPanel/VBoxContainer" unique_id=933119779]
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
+theme_override_font_sizes/font_size = 64
 text = "GAME OVER"
 horizontal_alignment = 1

@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://4xnr376si33e"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n5gp1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_n5gp1"]
+
+[node name="Node3D2" type="Node3D" unique_id=354039283]
+
+[node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=489370159]
+
+[node name="Root" type="Control" parent="MainMenuCanvas" unique_id=1924021199]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenuPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1660272269]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n5gp1")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuCanvas/Root/MainMenuPanel" unique_id=802465796]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer" unique_id=1181363896]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1596677310]
+layout_mode = 2
+text = "Robbers Vs Coppers"
+label_settings = SubResource("LabelSettings_n5gp1")
+horizontal_alignment = 1
+
+[node name="HostButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=430800768]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Host Game"
+
+[node name="JoinButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1453512271]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Join Game"
+
+[node name="TutorialButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1588659385]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Tutorial"
+
+[node name="QuitButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=512990143]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Quit Game"
+
+[node name="JoinPanel" type="PanelContainer" parent="MainMenuCanvas/Root" unique_id=322170867]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(500, 220)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -110.0
+offset_right = 250.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuCanvas/Root/JoinPanel" unique_id=656412684]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="NameInput" type="LineEdit" parent="MainMenuCanvas/Root/JoinPanel/VBoxContainer" unique_id=57425030]
+custom_minimum_size = Vector2(500, 45)
+layout_mode = 2
+placeholder_text = "Enter Name"
+alignment = 1
+
+[node name="JoinRow" type="HBoxContainer" parent="MainMenuCanvas/Root/JoinPanel/VBoxContainer" unique_id=833147800]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="RoomInput" type="LineEdit" parent="MainMenuCanvas/Root/JoinPanel/VBoxContainer/JoinRow" unique_id=589525345]
+custom_minimum_size = Vector2(360, 45)
+layout_mode = 2
+placeholder_text = "Paste Room Key here"
+
+[node name="JoinButton" type="Button" parent="MainMenuCanvas/Root/JoinPanel/VBoxContainer/JoinRow" unique_id=403451964]
+custom_minimum_size = Vector2(130, 45)
+layout_mode = 2
+text = "Join Game"
+
+[node name="BackButton" type="Button" parent="MainMenuCanvas/Root/JoinPanel/VBoxContainer" unique_id=565113511]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+text = "Back"
