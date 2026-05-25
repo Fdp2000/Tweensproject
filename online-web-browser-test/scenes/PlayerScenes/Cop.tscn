@@ -79,6 +79,15 @@ properties/3/replication_mode = 2
 properties/4/path = NodePath(".:is_debuffed")
 properties/4/spawn = true
 properties/4/replication_mode = 2
+properties/5/path = NodePath(".:sync_target_position")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:sync_target_rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:sync_velocity")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f34f1"]
 transparency = 1
@@ -119,6 +128,8 @@ near = 0.01
 libraries/ = SubResource("AnimationLibrary_ksubn")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1310813326]
+replication_interval = 0.033
+delta_interval = 0.033
 replication_config = SubResource("SceneReplicationConfig_e80uo")
 
 [node name="Næsehorn2" parent="." unique_id=2043154851 instance=ExtResource("4_rfdt2")]

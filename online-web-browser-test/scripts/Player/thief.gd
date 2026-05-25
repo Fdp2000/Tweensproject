@@ -81,8 +81,15 @@ func _ready():
 	add_child(nav_agent)
 	
 	cached_smoke_particles = SMOKE_PARTICLES.instantiate()
-	cached_smoke_particles.emitting = false
+	# PRE-WARMER: Force a single emission frame to cache the shader!
+	cached_smoke_particles.emitting = true 
 	add_child(cached_smoke_particles)
+	
+	# Turn it off instantly on the next frame and reset it
+	get_tree().create_timer(0.1).timeout.connect(func():
+		if cached_smoke_particles:
+			cached_smoke_particles.emitting = false
+	)
 	
 	var random_idle = favorite_idles.pick_random()
 	anim_player.play(random_idle, 0.0)
@@ -215,7 +222,9 @@ func get_closest_interactable() -> Node3D:
 	var min_dist_thief: float = Balance.interact_shape_size
 	var min_dist_art: float = Balance.interact_shape_size
 	
-	nearby_interactables = nearby_interactables.filter(func(n): return is_instance_valid(n))
+	for i in range(nearby_interactables.size() - 1, -1, -1):
+		if not is_instance_valid(nearby_interactables[i]):
+			nearby_interactables.remove_at(i)
 	
 	for target in nearby_interactables:
 		var dist = global_position.distance_to(target.global_position)

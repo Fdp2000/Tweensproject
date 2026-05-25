@@ -28,6 +28,7 @@ var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
 var initial_position: Vector3 = Vector3.ZERO
 var initial_rotation: Vector3 = Vector3.ZERO
+var cached_attachment: Node3D = null
 
 var _last_rendered_highlight: bool = false
 var _has_rendered_once: bool = false
@@ -81,7 +82,9 @@ func _ready():
 		var properties = [
 			":artifact_size",
 			":is_carried",
-			":carrier_id"
+			":carrier_id",
+			":sync_target_position",
+			":sync_target_rotation"
 		]
 		
 		for prop in properties:
@@ -161,6 +164,7 @@ func confirm_pickup(player_id: int):
 	var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
 	if carrier and carrier.has_method("on_artifact_pickup"):
 		carrier.on_artifact_pickup(self)
+		cached_attachment = carrier.get_node_or_null("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/ArtifactAttachment")
 
 var outline_mat: ShaderMaterial = null
 
@@ -168,32 +172,28 @@ func _process(delta):
 	if is_carried:
 		if is_multiplayer_authority():
 			# I am carrying it, so I control it
-			var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
-			if carrier:
-				# Look for the BoneAttachment3D we just made
-				var attachment = carrier.get_node_or_null("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/ArtifactAttachment")
+			if cached_attachment:
+				# 1. Snap perfectly to the Chameleon's hand bone
+				global_transform = cached_attachment.global_transform
 				
-				if attachment:
-					# 1. Snap perfectly to the Chameleon's hand bone
-					global_transform = attachment.global_transform
+				# 2. Apply your custom position offset (Relative to the hand's rotation)
+				translate_object_local(hand_position_offset)
 					
-					# 2. Apply your custom position offset (Relative to the hand's rotation)
-					translate_object_local(hand_position_offset)
-					
-					# 3. Apply your custom rotation offset (Converted to standard degrees!)
-					var rot_rad = Vector3(
-						deg_to_rad(hand_rotation_offset.x), 
-						deg_to_rad(hand_rotation_offset.y), 
-						deg_to_rad(hand_rotation_offset.z)
-					)
-					var rot_basis = Basis.from_euler(rot_rad)
-					global_transform.basis = global_transform.basis * rot_basis
-					
-					# 4. Lock the scale so the bone animations don't warp the mesh
-					scale = initial_scale 
+				# 3. Apply your custom rotation offset (Converted to standard degrees!)
+				var rot_rad = Vector3(
+					deg_to_rad(hand_rotation_offset.x), 
+					deg_to_rad(hand_rotation_offset.y), 
+					deg_to_rad(hand_rotation_offset.z)
+				)
+				var rot_basis = Basis.from_euler(rot_rad)
+				global_transform.basis = global_transform.basis * rot_basis
+				
+				# 4. Lock the scale so the bone animations don't warp the mesh
+				scale = initial_scale 
 			
-			# Relay position to others
-			rpc("relay_artifact_transform", global_position, rotation)
+			# Relay position to others by keeping sync targets updated
+			sync_target_position = global_position
+			sync_target_rotation = rotation
 		else:
 			# I am observing someone else carry it
 			global_position = global_position.lerp(sync_target_position, 15.0 * delta)
@@ -238,12 +238,6 @@ func _apply_visuals(node: Node, highlighted: bool):
 		if child.name == "InteractionArea": continue
 		_apply_visuals(child, highlighted)
 
-@rpc("any_peer", "unreliable", "call_local")
-func relay_artifact_transform(pos: Vector3, rot: Vector3):
-	if is_multiplayer_authority(): return
-	sync_target_position = pos
-	sync_target_rotation = rot
-
 @rpc("any_peer", "call_local")
 func drop():
 	if carrier_id != -1:
@@ -252,6 +246,7 @@ func drop():
 			carrier.on_artifact_drop()
 			
 	is_carried = false
+	cached_attachment = null
 	var particles = get_node("artifactParticles")
 	particles.emitting = true
 	carrier_id = -1
@@ -296,6 +291,7 @@ func destroy_artifact():
 			carrier.on_artifact_drop()
 			
 	is_carried = false
+	cached_attachment = null
 	carrier_id = -1
 	is_highlighted = false # FIX: Force highlight off when destroyed
 	hide()
@@ -304,6 +300,7 @@ func destroy_artifact():
 @rpc("any_peer", "call_local")
 func reset_artifact():
 	is_carried = false
+	cached_attachment = null
 	carrier_id = -1
 	is_highlighted = false # FIX: Force highlight off for the next round
 	show()
