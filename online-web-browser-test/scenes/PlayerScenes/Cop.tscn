@@ -79,6 +79,15 @@ properties/3/replication_mode = 2
 properties/4/path = NodePath(".:is_debuffed")
 properties/4/spawn = true
 properties/4/replication_mode = 2
+properties/5/path = NodePath(".:sync_target_position")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:sync_target_rotation")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:sync_velocity")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f34f1"]
 transparency = 1

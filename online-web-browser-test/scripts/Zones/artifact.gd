@@ -81,7 +81,9 @@ func _ready():
 		var properties = [
 			":artifact_size",
 			":is_carried",
-			":carrier_id"
+			":carrier_id",
+			":sync_target_position",
+			":sync_target_rotation"
 		]
 		
 		for prop in properties:
@@ -192,8 +194,9 @@ func _process(delta):
 					# 4. Lock the scale so the bone animations don't warp the mesh
 					scale = initial_scale 
 			
-			# Relay position to others
-			rpc("relay_artifact_transform", global_position, rotation)
+			# Relay position to others by keeping sync targets updated
+			sync_target_position = global_position
+			sync_target_rotation = rotation
 		else:
 			# I am observing someone else carry it
 			global_position = global_position.lerp(sync_target_position, 15.0 * delta)
@@ -237,12 +240,6 @@ func _apply_visuals(node: Node, highlighted: bool):
 	for child in node.get_children():
 		if child.name == "InteractionArea": continue
 		_apply_visuals(child, highlighted)
-
-@rpc("any_peer", "unreliable", "call_local")
-func relay_artifact_transform(pos: Vector3, rot: Vector3):
-	if is_multiplayer_authority(): return
-	sync_target_position = pos
-	sync_target_rotation = rot
 
 @rpc("any_peer", "call_local")
 func drop():

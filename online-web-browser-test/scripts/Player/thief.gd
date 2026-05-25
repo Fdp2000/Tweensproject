@@ -215,7 +215,9 @@ func get_closest_interactable() -> Node3D:
 	var min_dist_thief: float = Balance.interact_shape_size
 	var min_dist_art: float = Balance.interact_shape_size
 	
-	nearby_interactables = nearby_interactables.filter(func(n): return is_instance_valid(n))
+	for i in range(nearby_interactables.size() - 1, -1, -1):
+		if not is_instance_valid(nearby_interactables[i]):
+			nearby_interactables.remove_at(i)
 	
 	for target in nearby_interactables:
 		var dist = global_position.distance_to(target.global_position)

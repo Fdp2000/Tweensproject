@@ -2245,6 +2245,8 @@ bones/8/rotation = Quaternion(-0.062389847, -0.013839214, -0.12782967, 0.9897351
 bones/8/scale = Vector3(1.0000014, 1, 0.99999875)
 bones/9/rotation = Quaternion(0.365933, -0.018021869, 0.40842295, 0.8360377)
 bones/9/scale = Vector3(1.0000001, 1.0000006, 0.9999996)
+bones/10/rotation = Quaternion(-0.34116372, 0.1729027, 0.37822434, 0.84300554)
+bones/11/rotation = Quaternion(-0.058819488, -2.374573e-08, -0.50201935, 0.8628539)
 bones/12/rotation = Quaternion(-0.72367954, 0.36363643, 0.26819083, 0.521661)
 bones/12/scale = Vector3(1.0000019, 1.0000004, 1.0000015)
 bones/13/position = Vector3(-0.04770618, 0.13755617, -0.016438467)
@@ -2257,6 +2259,8 @@ bones/15/rotation = Quaternion(0.21851899, -0.13268656, 0.10570056, 0.9609741)
 bones/15/scale = Vector3(1.0000011, 1.0000014, 0.9999973)
 bones/16/rotation = Quaternion(0.17725414, -0.03252838, -0.425343, 0.88690835)
 bones/16/scale = Vector3(0.99999887, 1.0000001, 1.0000006)
+bones/17/rotation = Quaternion(-0.34116378, -0.17290266, -0.37822434, 0.84300554)
+bones/18/rotation = Quaternion(-0.058819383, -7.4475246e-08, 0.50201935, 0.8628539)
 bones/21/rotation = Quaternion(0.95323235, 0.19987626, -0.13364021, 0.1831333)
 bones/21/scale = Vector3(1, 0.99999964, 0.99999756)
 bones/22/rotation = Quaternion(0.4836471, 0.08125992, 0.05652075, 0.869648)
@@ -2269,8 +2273,17 @@ bones/29/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/30/scale = Vector3(1, 1.0000002, 1.0000001)
 bones/31/scale = Vector3(1, 1, 1.0000001)
 
+[node name="Chameleon" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1112566209]
+surface_material_override/0 = null
+
+[node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="1" unique_id=970056815]
+surface_material_override/0 = null
+
+[node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="2" unique_id=940823346]
+surface_material_override/0 = null
+
 [node name="ArtifactAttachment" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
-transform = Transform3D(-0.6121215, 0.106993854, 0.7834916, 0.7888908, 0.1507891, 0.59574604, -0.054400645, 0.98276293, -0.17671154, -0.2978213, 0.6563721, 0.22010873)
+transform = Transform3D(-0.6121216, 0.10699384, 0.7834918, 0.78889084, 0.15078905, 0.5957461, -0.054400794, 0.98276293, -0.17671153, -0.2999439, 0.6092857, 0.25728726)
 
 [node name="AnimationPlayer" parent="Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_7jg2g")

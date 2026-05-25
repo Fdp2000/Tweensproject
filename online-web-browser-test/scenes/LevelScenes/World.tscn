@@ -5,8 +5,7 @@
 [ext_resource type="Script" uid="uid://buorurrqe21ki" path="res://scripts/Cutscene/CutsceneManager.gd" id="3_p4cir"]
 [ext_resource type="Script" uid="uid://c5rie7oeh51t2" path="res://scripts/Cutscene/VersusScreen.gd" id="4_frjgd"]
 [ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="5_1ppgf"]
-[ext_resource type="PackedScene" uid="uid://diovmaqigblbx" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer2.glb" id="5_ofs5a"]
-[ext_resource type="PackedScene" uid="uid://c0au7i4fnki7o" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer.glb" id="6_w6qbi"]
+[ext_resource type="LightmapGIData" uid="uid://b2aicew7mmbg1" path="res://scenes/LevelScenes/World.lmbake" id="7_ofs5a"]
 [ext_resource type="PackedScene" uid="uid://dyj1djxuy4iko" path="res://scenes/LevelScenes/PregameLobby.tscn" id="7_pregame"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
@@ -102,6 +101,7 @@ environment = SubResource("Environment_2dftf")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1626076153]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 layers = 3
+light_bake_mode = 1
 shadow_enabled = true
 
 [node name="main" parent="." unique_id=846917499 instance=ExtResource("1_kqs1s")]
@@ -172,9 +172,6 @@ render_target_update_mode = 0
 [node name="Camera3D" type="Camera3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1374076761]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -91.21161, 0, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1713966943]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.10741, -2.072019, 4.3073635)
-
 [node name="LeftSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=43727269]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.0971, -0.24863054, -0.27658656)
 
@@ -240,3 +237,6 @@ anchor_left = 0.75
 anchor_top = 0.4
 anchor_right = 1.0
 anchor_bottom = 0.6
+
+[node name="LightmapGI" type="LightmapGI" parent="." unique_id=679457300]
+light_data = ExtResource("7_ofs5a")

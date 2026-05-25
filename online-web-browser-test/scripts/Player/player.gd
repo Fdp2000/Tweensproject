@@ -17,9 +17,9 @@ var deaths: int = 0
 var hits: int = 0
 
 # Network sync targets for smooth interpolation
-var sync_target_position: Vector3 = Vector3.ZERO
-var sync_target_rotation: Vector3 = Vector3.ZERO
-var sync_velocity: Vector3 = Vector3.ZERO # Velocity for Dead Reckoning
+@export var sync_target_position: Vector3 = Vector3.ZERO
+@export var sync_target_rotation: Vector3 = Vector3.ZERO
+@export var sync_velocity: Vector3 = Vector3.ZERO # Velocity for Dead Reckoning
 var _spawn_relay_ready: bool = false 
 #cutscene extra
 var controls_enabled: bool = true
@@ -267,9 +267,11 @@ func _physics_process(delta):
 		velocity.z = 0
 		move_and_slide()
 		return
-	# FIX: Send our position, rotation, AND VELOCITY to others!
+	# FIX: Keep sync variables updated so the MultiplayerSynchronizer can automatically broadcast them!
 	if is_multiplayer_authority() and _spawn_relay_ready:
-		rpc("relay_position", global_position, rotation, velocity)
+		sync_target_position = global_position
+		sync_target_rotation = rotation
+		sync_velocity = velocity
 		
 	if not is_multiplayer_authority():
 		# Initialize the sync target if it's zero
@@ -301,24 +303,6 @@ func _custom_physics_process(_delta, direction):
 		velocity.x = move_toward(velocity.x, 0, 6.5) # Hardcoded fallback
 		velocity.z = move_toward(velocity.z, 0, 6.5)
 
-# --- UPDATED RPC: EXPECTS 3 ARGUMENTS ---
-@rpc("any_peer", "call_remote", "unreliable")
-func relay_position(pos: Vector3, rot: Vector3, vel: Vector3):
-	if not is_inside_tree(): return
-	
-	# Server acts as a relay tower and forwards all 3 arguments
-	if multiplayer.is_server():
-		var sender_id = multiplayer.get_remote_sender_id()
-		for peer in multiplayer.get_peers():
-			if peer != sender_id:
-				rpc_id(peer, "relay_position", pos, rot, vel)
-				
-	if is_multiplayer_authority(): return
-	
-	# Apply the newly received real network data
-	sync_target_position = pos
-	sync_target_rotation = rot
-	sync_velocity = vel 
 # ----------------------------------------
 
 
