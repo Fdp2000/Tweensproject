@@ -232,8 +232,9 @@ func _custom_physics_process(delta, direction):
 		anim_tree.set("parameters/HeadAim/blend_position", clamped_pitch)
 		
 func _detect_capture():
-	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
-	if not spawned: return
+	# OPTIMIZATION: We are already a child of SpawnedObjects! No need to search the entire tree.
+	var spawned = get_parent()
+	if not spawned or spawned.name != "SpawnedObjects": return
 	
 	for collider in spawned.get_children():
 		if collider is CharacterBody3D and collider.has_method("on_captured") and collider.get("team_index") != team_index:

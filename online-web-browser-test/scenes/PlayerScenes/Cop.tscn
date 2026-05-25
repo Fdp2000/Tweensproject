@@ -128,6 +128,8 @@ near = 0.01
 libraries/ = SubResource("AnimationLibrary_ksubn")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1310813326]
+replication_interval = 0.033
+delta_interval = 0.033
 replication_config = SubResource("SceneReplicationConfig_e80uo")
 
 [node name="Næsehorn2" parent="." unique_id=2043154851 instance=ExtResource("4_rfdt2")]

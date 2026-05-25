@@ -81,8 +81,15 @@ func _ready():
 	add_child(nav_agent)
 	
 	cached_smoke_particles = SMOKE_PARTICLES.instantiate()
-	cached_smoke_particles.emitting = false
+	# PRE-WARMER: Force a single emission frame to cache the shader!
+	cached_smoke_particles.emitting = true 
 	add_child(cached_smoke_particles)
+	
+	# Turn it off instantly on the next frame and reset it
+	get_tree().create_timer(0.1).timeout.connect(func():
+		if cached_smoke_particles:
+			cached_smoke_particles.emitting = false
+	)
 	
 	var random_idle = favorite_idles.pick_random()
 	anim_player.play(random_idle, 0.0)

@@ -78,13 +78,14 @@ func _setup_dual_meshes(node: Node):
 			if not mat:
 				mat = node.mesh.surface_get_material(i)
 			
-			if mat and mat is ShaderMaterial:
+			if mat:
 				mat = mat.duplicate()
-				mat.next_pass = null 
+				if mat is ShaderMaterial:
+					mat.next_pass = null 
 				node.set_surface_override_material(i, mat)
 				node_mats.append(mat)
 			else:
-				node_mats.append(mat)
+				node_mats.append(null)
 				
 		node.set_meta("orig_mats", node_mats)
 		node.set_meta("mats_setup", true)
@@ -183,8 +184,29 @@ func _apply_visual_states(alpha_val: float, t_alpha: float, is_hypnotized: bool,
 					active_mat = h_mat
 			else:
 				active_mat = orig_mats[i] if i < orig_mats.size() else null
-				if active_mat and active_mat is ShaderMaterial:
-					active_mat.set_shader_parameter("stealth_fade", stealth_amount)
+				if active_mat:
+					if active_mat is ShaderMaterial:
+						if active_mat.shader and "celShading" in active_mat.shader.resource_path:
+							if is_stealthed:
+								active_mat.shader = preload("res://Assets/Shaders/celShader/celShading_Fade.gdshader")
+								active_mat.set_shader_parameter("stealth_fade", stealth_amount)
+							else:
+								active_mat.shader = preload("res://Assets/Shaders/celShader/celShading.gdshader")
+						else:
+							active_mat.set_shader_parameter("stealth_fade", stealth_amount)
+					elif "albedo_color" in active_mat:
+						if is_stealthed:
+							active_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+							active_mat.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+							active_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+						else:
+							active_mat.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+							active_mat.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_OPAQUE_ONLY
+							active_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+							
+						var clr = active_mat.albedo_color
+						clr.a = alpha_val
+						active_mat.albedo_color = clr
 					
 			if active_mat:
 				if is_highlighted:
