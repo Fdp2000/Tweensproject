@@ -21,6 +21,8 @@ var camera_manager: Node = null
 var stealth_manager: Node = null
 var world_ping_manager: Node = null
 
+var cached_smoke_particles = null
+
 var carried_artifact: Node3D = null
 var cash_contributed: int = 0
 var is_hypnotized: bool = false
@@ -59,12 +61,8 @@ func on_artifact_drop():
 	is_currently_moving = false
 
 func spawn_smoke():
-	var smoke_intance = SMOKE_PARTICLES.instantiate()
-	self.add_child(smoke_intance)
-	smoke_intance.emitting = true
-	smoke_intance.one_shot = true
-	await get_tree().create_timer(2.0).timeout
-	smoke_intance.queue_free()
+	if cached_smoke_particles:
+		cached_smoke_particles.emitting = true
 
 var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
@@ -81,6 +79,10 @@ func _ready():
 	nav_agent = NavigationAgent3D.new()
 	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
+	
+	cached_smoke_particles = SMOKE_PARTICLES.instantiate()
+	cached_smoke_particles.emitting = false
+	add_child(cached_smoke_particles)
 	
 	var random_idle = favorite_idles.pick_random()
 	anim_player.play(random_idle, 0.0)
@@ -148,6 +150,7 @@ func _ready():
 
 func _on_path_changed():
 	custom_path_index = 0
+	draw_debug_path()
 
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
@@ -262,10 +265,8 @@ func _custom_physics_process(delta, direction):
 				elif nav_agent.is_navigation_finished():
 					velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
 					velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
-					draw_debug_path()
 				else:
 					var _ignore = nav_agent.get_next_path_position() 
-					draw_debug_path()
 					var path = nav_agent.get_current_navigation_path()
 					
 					if path.size() == 0 or custom_path_index >= path.size():
