@@ -1,18 +1,41 @@
-extends Control
+extends Node
 
 @onready var client: Node = $Client
-@onready var host: LineEdit = $VBoxContainer/Connect/Host
-@onready var room: LineEdit = $VBoxContainer/Connect/RoomSecret
-@onready var mesh: CheckBox = $VBoxContainer/Connect/Mesh
+@onready var menu_root: Node = get_tree().get_root().find_child("MainMenuUI", true, false)
+
+@onready var main_menu_canvas: CanvasLayer = menu_root.get_node("MainMenuCanvas")
+@onready var main_menu_panel: Control = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel")
+
+@onready var play_panel: Control = menu_root.get_node("MainMenuCanvas/Root/PlayPanel")
+
+@onready var play_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton")
+@onready var tutorial_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/TutorialButton")
+@onready var quit_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/QuitButton")
+
+@onready var name_input: LineEdit = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/NameInput")
+@onready var room_input: LineEdit = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/RoomInput")
+@onready var join_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/JoinButton")
+@onready var host_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/HostButton")
+@onready var play_back_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/BackButton")
+
+@onready var tutorial_canvas: CanvasLayer = menu_root.get_node("Tutorial/TutorialCanvas")
+@onready var tutorial_cop_canvas: CanvasLayer = menu_root.get_node("TutorialCop/TutorialCopCanvas")
+@onready var tutorial_next_button: Button = menu_root.get_node("Tutorial/TutorialCanvas/Control/Panel/NextButton")
+@onready var cop_back_button: Button = menu_root.get_node("TutorialCop/TutorialCopCanvas/Control/Panel/BackButton")
+@onready var cop_next_button: Button = menu_root.get_node("TutorialCop/TutorialCopCanvas/Control/Panel/NextButton")
 
 const COP_SCENE = preload("res://scenes/PlayerScenes/Cop.tscn")
 const THIEF_SCENE = preload("res://scenes/PlayerScenes/Thief.tscn")
 const HUD_SCENE = preload("res://scenes/UIScenes/HUD.tscn")
 
+const SIGNALING_URL := "wss://online-web-browser-test.onrender.com"
+
 var local_player_name: String = ""
-var lobby_ui: Node
-var current_hud: Node = null
 var current_room_code: String = ""
+var current_hud: Node = null
+var lobby_ui: Node = null
+var first_time_tutorial := true
+var tutorial_intro_cancelled := false
 
 func _ready() -> void:
 	client.lobby_joined.connect(_lobby_joined)
@@ -25,435 +48,354 @@ func _ready() -> void:
 	multiplayer.server_disconnected.connect(_mp_server_disconnect)
 	multiplayer.peer_connected.connect(_mp_peer_connected)
 	multiplayer.peer_disconnected.connect(_mp_peer_disconnected)
-	host.text = "wss://online-web-browser-test.onrender.com"
-	
-	lobby_ui = preload("res://scripts/UI/lobby_ui.gd").new()
-	add_child(lobby_ui)
-	
+
 	GameManager.game_started.connect(_on_game_started)
 	GameManager.game_ended.connect(_on_game_ended)
-	GameManager.player_joined.connect(_on_player_joined)
-	
-	# Hide the old debug menu and header from main.tscn
 
-	# Hide the old debug menu and header from main.tscn
-	$VBoxContainer.hide()
-	var signaling_header = get_node_or_null("../../Signaling")
-	if signaling_header: signaling_header.hide()
-	
-	# Web Clipboard Workaround for Pasting (Bypasses iframe security)
-	if OS.has_feature("web"):
-		var js = """
-			window.godot_pasted_text = '';
-			document.addEventListener('paste', function(e) {
-				var text = (e.originalEvent || e).clipboardData.getData('text/plain');
-				if (text) {
-					window.godot_pasted_text = text;
-				}
-			});
-		"""
-		JavaScriptBridge.eval(js)
-		
-		# iOS Fullscreen Workaround: Inject CSS and viewport fixes
-		var ios_css = """
-			(function() {
-				// Fix viewport for iOS
-				var meta = document.querySelector('meta[name="viewport"]');
-				if (!meta) {
-					meta = document.createElement('meta');
-					meta.name = 'viewport';
-					meta.head.appendChild(meta);
-				}
-				meta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover';
-				
-				// Add apple-mobile-web-app meta tags
-				var awc = document.createElement('meta');
-				awc.name = 'apple-mobile-web-app-capable';
-				awc.content = 'yes';
-				document.head.appendChild(awc);
-				
-				var aws = document.createElement('meta');
-				aws.name = 'apple-mobile-web-app-status-bar-style';
-				aws.content = 'black-translucent';
-				document.head.appendChild(aws);
-				
-				// CSS to use full dynamic viewport height (iOS Safari)
-				var style = document.createElement('style');
-				style.textContent = `
-					html, body {
-						height: 100dvh !important;
-						width: 100dvw !important;
-						overflow: hidden !important;
-						margin: 0 !important;
-						padding: 0 !important;
-						touch-action: none;
-					}
-					canvas#canvas {
-						height: 100dvh !important;
-						width: 100dvw !important;
-					}
-				`;
-				document.head.appendChild(style);
-				
-				// Scroll to hide address bar
-				setTimeout(function() { window.scrollTo(0, 1); }, 100);
-			})();
-		"""
-		JavaScriptBridge.eval(ios_css)
-	
-	_build_main_menu()
+	if GameManager.has_signal("player_joined"):
+		GameManager.player_joined.connect(_on_player_joined)
 
-func _process(_delta: float) -> void:
-	if OS.has_feature("web"):
-		var pasted = JavaScriptBridge.eval("window.godot_pasted_text")
-		if typeof(pasted) == TYPE_STRING and pasted != "":
-			JavaScriptBridge.eval("window.godot_pasted_text = ''")
-			var join_input = get_node_or_null("MainMenuCanvas/MainMenu/VBoxContainer/HBoxContainer/LineEdit")
-			if join_input:
-				var code = pasted.strip_edges().to_upper()
-				join_input.text = code
-				client.start(host.text, code, true)
+	host_button.pressed.connect(_on_host_pressed)
+	join_button.pressed.connect(_on_join_pressed)
+	tutorial_button.pressed.connect(_on_tutorial_pressed)
+	quit_button.pressed.connect(_on_quit_pressed)
+	play_button.pressed.connect(_on_play_pressed)
+	play_back_button.pressed.connect(_on_play_back_pressed)
+	tutorial_next_button.pressed.connect(_on_tutorial_next_pressed)
+	cop_back_button.pressed.connect(_on_cop_back_pressed)
+	cop_next_button.pressed.connect(_on_cop_next_pressed)
 
-func _build_main_menu():
-	var canvas = CanvasLayer.new()
-	canvas.name = "MainMenuCanvas"
-	add_child(canvas)
-	
-	var menu = Control.new()
-	menu.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	menu.name = "MainMenu"
-	canvas.add_child(menu)
-	
-	var bg = ColorRect.new()
-	bg.color = Color(0.1, 0.1, 0.15, 1.0)
-	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	menu.add_child(bg)
-	
-	var vbox = VBoxContainer.new()
-	vbox.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-	vbox.add_theme_constant_override("separation", 20)
-	menu.add_child(vbox)
-	
-	var title = Label.new()
-	title.text = " NOT PLUNGER  "
-	title.add_theme_font_size_override("font_size", 64)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	vbox.add_child(title)
-	
-	var name_input = LineEdit.new()
-	name_input.placeholder_text = "Enter Name"
-	name_input.max_length = 16
-	name_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	name_input.add_theme_font_size_override("font_size", 24)
-	name_input.alignment = HORIZONTAL_ALIGNMENT_CENTER
-	if is_mobile_device() and OS.has_feature("web"):
-		# Use HTML prompt for iOS compatibility (bypasses WebKit keyboard restrictions)
-		name_input.editable = false
-		name_input.gui_input.connect(func(event):
-			if event is InputEventScreenTouch and event.pressed:
-				var result = JavaScriptBridge.eval("prompt('Enter your name:', '')")
-				if result != null and str(result).strip_edges() != "":
-					name_input.text = str(result).strip_edges().substr(0, 16)
-		)
-	else:
-		name_input.focus_entered.connect(func(): if is_mobile_device(): DisplayServer.virtual_keyboard_show(""))
-	vbox.add_child(name_input)
-	
-	var host_btn = Button.new()
-	host_btn.text = "Host Game"
-	host_btn.add_theme_font_size_override("font_size", 32)
-	host_btn.pressed.connect(func():
-		local_player_name = name_input.text.strip_edges()
-		current_room_code = ""
-		client.start(host.text, "", false)
-	)
-	vbox.add_child(host_btn)
-	
-	var join_hbox = HBoxContainer.new()
-	vbox.add_child(join_hbox)
-	
-	var join_input = LineEdit.new()
-	join_input.placeholder_text = "Paste Room Key Here"
-	join_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	join_input.add_theme_font_size_override("font_size", 24)
-	if is_mobile_device() and OS.has_feature("web"):
-		# Use HTML prompt for iOS compatibility (bypasses WebKit keyboard restrictions)
-		join_input.editable = false
-		join_input.gui_input.connect(func(event):
-			if event is InputEventScreenTouch and event.pressed:
-				var result = JavaScriptBridge.eval("prompt('Enter Room Code:', '')")
-				if result != null and str(result).strip_edges() != "":
-					var code = str(result).strip_edges().to_upper()
-					join_input.text = code
-		)
-	else:
-		join_input.virtual_keyboard_enabled = true
-	join_hbox.add_child(join_input)
-	
-	var join_btn = Button.new()
-	join_btn.text = "Join Game"
-	join_btn.add_theme_font_size_override("font_size", 24)
-	join_btn.pressed.connect(func():
-		local_player_name = name_input.text.strip_edges()
-		var code = join_input.text.strip_edges().to_upper()
-		if code != "":
-			current_room_code = code
-			client.start(host.text, code, false)
-	)
-	join_hbox.add_child(join_btn)
-	
-	# Mobile scaling adjust
-	if is_mobile_device():
-		vbox.scale = Vector2(1.4, 1.4)
-		vbox.pivot_offset = vbox.size / 2.0
-		# Scale the whole menu
-		menu.scale = Vector2(1.2, 1.2)
-		menu.pivot_offset = Vector2(DisplayServer.window_get_size()) / 2.0
-	
-	# Controls Info (Top Left)
-	var controls_vbox = VBoxContainer.new()
-	controls_vbox.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-	controls_vbox.position = Vector2(20, 20)
-	menu.add_child(controls_vbox)
-	
-	if is_mobile_device():
-		controls_vbox.scale = Vector2(1.2, 1.2)
-		controls_vbox.hide() 
-	else:
-		controls_vbox.show() 
+	show_main_menu()
+	animate_glow(tutorial_next_button)
+	animate_glow(cop_next_button)
+	_play_tutorial_intro()
 
-	var controls_title = Label.new()
-	controls_title.text = "Controls"
-	controls_title.add_theme_font_size_override("font_size", 24)
-	controls_vbox.add_child(controls_title)
-	
-	var controls_list = Label.new()
-	controls_list.text = "WASD = Movement\n(COPS)Shift = Dash\n(Thieves) E = Interact\n(Thieves) Alt = Switch Camera Side"
-	controls_list.add_theme_font_size_override("font_size", 18)
-	controls_list.modulate = Color(0.8, 0.8, 0.8) # Slightly grey
-	controls_vbox.add_child(controls_list)
+func show_main_menu() -> void:
+	main_menu_canvas.show()
+	main_menu_panel.show()
+	play_panel.hide()
+	tutorial_canvas.hide()
+	tutorial_cop_canvas.hide()
 
+	if lobby_ui:
+		lobby_ui.hide()
 
-@rpc("any_peer", "call_local")
-func ping(argument: float) -> void:
-	_log("[Multiplayer] Ping from peer %d: arg: %f" % [multiplayer.get_remote_sender_id(), argument])
-
-
-func _mp_server_connected() -> void:
-	var my_id = client.rtc_mp.get_unique_id()
-	_log("[Multiplayer] Server connected (I am %d)" % my_id)
-	if my_id != 1:
-		# Send my name to the host
-		GameManager.rpc_id(1, "sync_player_data", my_id, local_player_name)
-
-
-func _mp_server_disconnect() -> void:
-	_log("[Multiplayer] Server disconnected (I am %d)" % client.rtc_mp.get_unique_id())
-
-
-@export var player_scene: PackedScene
-
-func _mp_peer_connected(id: int) -> void:
-	# Handled completely by the server syncing the full lobby state
-	pass
-
-func _on_player_joined(id: int) -> void:
-	if multiplayer.is_server():
-		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
-		if not spawned: return
-		
-		# Allow short wait to ensure scene tree is ready if host joined instantly
-		await get_tree().process_frame
-		
-		var lobby_spawns = get_tree().get_nodes_in_group("lobby_spawn")
-		var spawn_pos = Vector3(0, 1000, 0)
-		if lobby_spawns.size() > 0:
-			spawn_pos = lobby_spawns[randi() % lobby_spawns.size()].global_position
-			
-		var pf = THIEF_SCENE.instantiate()
-		pf.name = str(id)
-		pf.team_index = GameManager.PlayerRole.THIEF
-		pf.position = spawn_pos
-		spawned.add_child(pf, true)
-		
-		await get_tree().process_frame
-		pf._set_spawn_position.rpc(spawn_pos)
-		pf.sync_team.rpc(GameManager.PlayerRole.THIEF)
-
-func _on_game_started() -> void:
-	if multiplayer.is_server():
-		var spawned = get_node("/root/World/main/SpawnedObjects")
-		
-		# Wait for physics to register collision shapes from the level
-		for i in 3:
-			await get_tree().physics_frame
-		
-		var cop_spawns = get_tree().get_nodes_in_group("cop_spawn")
-		var thief_spawns = get_tree().get_nodes_in_group("thief_spawn")
-		
-		print("[Spawn] Found ", cop_spawns.size(), " cop spawns, ", thief_spawns.size(), " thief spawns")
-		
-		# Shuffle so spawns are random each round
-		cop_spawns.shuffle()
-		thief_spawns.shuffle()
-		
-		for id in GameManager.players.keys():
-			var role = GameManager.players[id]["role"]
-			
-			var spawn_pos = Vector3(0, 3, 0)
-			
-			if role == GameManager.PlayerRole.COP:
-				if cop_spawns.size() > 0:
-					var sp = cop_spawns.pop_back()
-					spawn_pos = sp.global_position
-					print("[Spawn] Cop ", id, " -> ", spawn_pos)
-			else:
-				if thief_spawns.size() > 0:
-					var sp = thief_spawns.pop_back()
-					spawn_pos = sp.global_position
-					print("[Spawn] Thief ", id, " -> ", spawn_pos)
-				
-			var pf = spawned.get_node_or_null(str(id))
-			
-			if role == GameManager.PlayerRole.COP:
-				if pf:
-					pf.name = pf.name + "_deleted"
-					spawned.remove_child(pf)
-					pf.queue_free()
-				pf = COP_SCENE.instantiate()
-				pf.name = str(id)
-				pf.team_index = role
-				pf.position = spawn_pos
-				spawned.add_child(pf, true)
-			else:
-				if pf:
-					# Teleport existing lobby thief
-					pf.position = spawn_pos
-					pf.team_index = role
-				else:
-					# Fallback
-					pf = THIEF_SCENE.instantiate()
-					pf.name = str(id)
-					pf.team_index = role
-					pf.position = spawn_pos
-					spawned.add_child(pf, true)
-			
-			await get_tree().process_frame
-			
-			pf._set_spawn_position.rpc(spawn_pos)
-			pf.sync_team.rpc(role)
-			
-	# Capture mouse when game starts
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	
-	if current_hud:
-		current_hud.queue_free()
-	current_hud = HUD_SCENE.instantiate()
-	add_child(current_hud)
-
-func _on_game_ended() -> void:
-	if current_hud:
-		current_hud.queue_free()
-		current_hud = null
-		
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _mp_peer_disconnected(id: int) -> void:
-	_log("[Multiplayer] Peer %d disconnected" % id)
-	GameManager.remove_player(id)
+func _on_play_pressed() -> void:
+	tutorial_intro_cancelled = true
+	main_menu_panel.hide()
+	play_panel.show()
+
+
+func _on_play_back_pressed() -> void:
+	play_panel.hide()
+	main_menu_panel.show()
+
+
+func animate_glow(button: Button) -> void:
+	button.pivot_offset = button.size / 2.0
+
+	while is_inside_tree():
+		var glow := create_tween()
+		glow.set_parallel(true)
+
+		glow.tween_property(button, "scale", Vector2(1.08, 1.08), 0.8)
+		glow.tween_property(button, "modulate", Color(1.8, 1.35, 0.35, 1.0), 0.8)
+
+		await glow.finished
+
+		var normal := create_tween()
+		normal.set_parallel(true)
+
+		normal.tween_property(button, "scale", Vector2.ONE, 0.8)
+		normal.tween_property(button, "modulate", Color.WHITE, 0.8)
+
+		await normal.finished
+		
+func _play_tutorial_intro() -> void:
+	await get_tree().create_timer(0.8).timeout
+	if tutorial_intro_cancelled:
+		return
+
+	tutorial_button.pivot_offset = tutorial_button.size / 2.0
+	tutorial_button.text = "Tutorial"
+
+	for i in 3:
+		if tutorial_intro_cancelled:
+			return
+
+		var flash := create_tween()
+		flash.set_parallel(true)
+		flash.tween_property(tutorial_button, "scale", Vector2(1.12, 1.12), 0.45)
+		flash.tween_property(tutorial_button, "modulate", Color(2.0, 1.35, 0.25, 1.0), 0.45)
+		await flash.finished
+
+		if tutorial_intro_cancelled:
+			return
+
+		var unflash := create_tween()
+		unflash.set_parallel(true)
+		unflash.tween_property(tutorial_button, "scale", Vector2.ONE, 0.45)
+		unflash.tween_property(tutorial_button, "modulate", Color.WHITE, 0.45)
+		await unflash.finished
+
+	if tutorial_intro_cancelled:
+		return
+
+	await get_tree().create_timer(0.35).timeout
+	if tutorial_intro_cancelled:
+		return
+
+	var grow := create_tween()
+	grow.set_parallel(true)
+	grow.tween_property(tutorial_button, "scale", Vector2(24.0, 24.0), 1.6)
+	grow.tween_property(tutorial_button, "modulate", Color(2.0, 1.5, 0.5, 0.0), 1.6)
+	await grow.finished
+
+	if tutorial_intro_cancelled:
+		return
+
+	tutorial_button.scale = Vector2.ONE
+	tutorial_button.modulate = Color.WHITE
+	_on_tutorial_pressed()
+
+func show_lobby() -> void:
+	main_menu_canvas.hide()
+	tutorial_canvas.hide()
+	tutorial_cop_canvas.hide()
+
+	if lobby_ui == null:
+		lobby_ui = preload("res://scripts/UI/lobby_ui.gd").new()
+		add_child(lobby_ui)
+
+	lobby_ui.show_lobby()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+
+
+func _on_host_pressed() -> void:
+	tutorial_intro_cancelled = true
+	local_player_name = name_input.text.strip_edges()
+
+	if local_player_name == "":
+		local_player_name = "Player"
+
+	current_room_code = ""
+	client.start(SIGNALING_URL, "", false)
+
+
+func _on_join_pressed() -> void:
+	tutorial_intro_cancelled = true
+	local_player_name = name_input.text.strip_edges()
+	current_room_code = room_input.text.strip_edges().to_upper()
+
+	if local_player_name == "":
+		local_player_name = "Player"
+
+	if current_room_code == "":
+		print("No room code entered.")
+		return
+
+	client.start(SIGNALING_URL, current_room_code, false)
+
+
+func _on_tutorial_pressed() -> void:
+	tutorial_intro_cancelled = true
+	main_menu_canvas.hide()
+	tutorial_canvas.show()
+	tutorial_cop_canvas.hide()
+
+
+func _on_tutorial_next_pressed() -> void:
+	tutorial_canvas.hide()
+	tutorial_cop_canvas.show()
+
+
+func _on_cop_back_pressed() -> void:
+	tutorial_cop_canvas.hide()
+	tutorial_canvas.show()
+
+
+func _on_cop_next_pressed() -> void:
+	show_main_menu()
+
+
+func _on_quit_pressed() -> void:
+	tutorial_intro_cancelled = true
+	get_tree().quit()
 
 
 func _connected(id: int, _use_mesh: bool) -> void:
-	_log("[Signaling] Server connected with ID: %d. Enforced Client-Server Architecture (Mesh: %s)" % [id, client.mesh])
-	
-	# If I am the host (ID 1), add myself to the lobby
+	print("[Signaling] Connected with ID: ", id)
+
 	if id == 1:
 		GameManager.add_player(1, local_player_name)
 
 
 func _disconnected() -> void:
-	_log("[Signaling] Server disconnected: %d - %s" % [client.code, client.reason])
-	
-	# If the host leaves or server crashes, everyone cleans up and goes back to main menu
+	print("[Signaling] Disconnected")
+
 	GameManager.full_teardown()
-	
-	var main_menu = get_node_or_null("MainMenuCanvas")
-	if main_menu:
-		main_menu.show()
-		
+
 	if lobby_ui:
 		lobby_ui.hide()
 
+	show_main_menu()
+
+
 func _lobby_joined(lobby_id: String) -> void:
-	_log("[Signaling] Joined lobby %s" % lobby_id)
+	print("[Signaling] Joined lobby: ", lobby_id)
+
 	current_room_code = lobby_id
-	
-	# Automatically copy to clipboard!
 	DisplayServer.clipboard_set(lobby_id)
-	print("Room ID copied to clipboard: ", lobby_id)
-	
-	# Wait until we actually receive the player list before transitioning
+
 	if not GameManager.players.is_empty():
-		_transition_to_lobby()
+		show_lobby()
 	else:
-		if not GameManager.lobby_updated.is_connected(_transition_to_lobby):
-			GameManager.lobby_updated.connect(_transition_to_lobby, CONNECT_ONE_SHOT)
-
-func _transition_to_lobby() -> void:
-	if lobby_ui:
-		lobby_ui.show_lobby()
-		
-	# Wait until the local player node is actually instantiated by the MultiplayerSpawner
-	var local_id = multiplayer.get_unique_id()
-	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
-	if spawned:
-		while not spawned.has_node(str(local_id)):
-			await get_tree().process_frame
-			if not is_inside_tree() or not multiplayer.has_multiplayer_peer(): return
-			
-		# Wait 1 extra frame for the new camera and physics to fully stabilize
-		await get_tree().process_frame
-			
-	# Hides the entire connection UI so you can see the 3D world
-	var canvas = get_node_or_null("MainMenuCanvas")
-	if canvas: canvas.hide()
-	
-	var parent_ui = get_parent().get_parent()
-	if parent_ui and parent_ui.has_method("hide"):
-		parent_ui.hide()
-
+		if not GameManager.lobby_updated.is_connected(show_lobby):
+			GameManager.lobby_updated.connect(show_lobby, CONNECT_ONE_SHOT)
 
 
 func _lobby_sealed() -> void:
-	_log("[Signaling] Lobby has been sealed")
+	print("[Signaling] Lobby sealed")
 
 
-func _log(msg: String) -> void:
-	print(msg)
-	$VBoxContainer/TextEdit.text += str(msg) + "\n"
+func _mp_server_connected() -> void:
+	var my_id = client.rtc_mp.get_unique_id()
+	print("[Multiplayer] Connected. My ID: ", my_id)
+
+	if my_id != 1:
+		GameManager.rpc_id(1, "sync_player_data", my_id, local_player_name)
 
 
-func _on_peers_pressed() -> void:
-	_log(str(multiplayer.get_peers()))
+func _mp_server_disconnect() -> void:
+	print("[Multiplayer] Server disconnected")
 
 
-func _on_ping_pressed() -> void:
-	ping.rpc(randf())
-
-func _on_seal_pressed() -> void:
-	client.seal_lobby()
+func _mp_peer_connected(_id: int) -> void:
+	pass
 
 
-func _on_start_pressed() -> void:
-	client.start(host.text, room.text, mesh.button_pressed)
+func _mp_peer_disconnected(id: int) -> void:
+	print("[Multiplayer] Peer disconnected: ", id)
+	GameManager.remove_player(id)
 
 
-func is_mobile_device() -> bool:
-	if OS.has_feature("mobile"): return true
-	if OS.has_feature("web_android") or OS.has_feature("web_ios"): return true
-	if OS.has_feature("web") and DisplayServer.is_touchscreen_available():
-		var ua = JavaScriptBridge.eval("navigator.userAgent")
-		if ua:
-			for m in ["Android", "iPhone", "iPad", "iPod", "Mobile"]:
-				if m in ua: return true
-	return false
+func _on_player_joined(id: int) -> void:
+	if not multiplayer.is_server():
+		return
+
+	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	if not spawned:
+		return
+
+	await get_tree().process_frame
+
+	var lobby_spawns = get_tree().get_nodes_in_group("lobby_spawn")
+	var spawn_pos = Vector3(0, 1000, 0)
+
+	if lobby_spawns.size() > 0:
+		spawn_pos = lobby_spawns[randi() % lobby_spawns.size()].global_position
+
+	var pf = THIEF_SCENE.instantiate()
+	pf.name = str(id)
+	pf.team_index = GameManager.PlayerRole.THIEF
+	pf.position = spawn_pos
+	spawned.add_child(pf, true)
+
+	await get_tree().process_frame
+
+	if pf.has_method("_set_spawn_position"):
+		pf._set_spawn_position.rpc(spawn_pos)
+
+	if pf.has_method("sync_team"):
+		pf.sync_team.rpc(GameManager.PlayerRole.THIEF)
+
+
+func _on_game_started() -> void:
+	if multiplayer.is_server():
+		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+
+		if spawned:
+			for i in 3:
+				await get_tree().physics_frame
+
+			var cop_spawns = get_tree().get_nodes_in_group("cop_spawn")
+			var thief_spawns = get_tree().get_nodes_in_group("thief_spawn")
+
+			cop_spawns.shuffle()
+			thief_spawns.shuffle()
+
+			for id in GameManager.players.keys():
+				var role = GameManager.players[id]["role"]
+				var spawn_pos = Vector3(0, 3, 0)
+
+				if role == GameManager.PlayerRole.COP:
+					if cop_spawns.size() > 0:
+						spawn_pos = cop_spawns.pop_back().global_position
+				else:
+					if thief_spawns.size() > 0:
+						spawn_pos = thief_spawns.pop_back().global_position
+
+				var pf = spawned.get_node_or_null(str(id))
+
+				if role == GameManager.PlayerRole.COP:
+					if pf:
+						pf.name = pf.name + "_deleted"
+						spawned.remove_child(pf)
+						pf.queue_free()
+
+					pf = COP_SCENE.instantiate()
+					pf.name = str(id)
+					pf.team_index = role
+					pf.position = spawn_pos
+					spawned.add_child(pf, true)
+				else:
+					if pf:
+						pf.position = spawn_pos
+						pf.team_index = role
+					else:
+						pf = THIEF_SCENE.instantiate()
+						pf.name = str(id)
+						pf.team_index = role
+						pf.position = spawn_pos
+						spawned.add_child(pf, true)
+
+				await get_tree().process_frame
+
+				if pf.has_method("_set_spawn_position"):
+					pf._set_spawn_position.rpc(spawn_pos)
+
+				if pf.has_method("sync_team"):
+					pf.sync_team.rpc(role)
+
+	main_menu_canvas.hide()
+	tutorial_canvas.hide()
+	tutorial_cop_canvas.hide()
+
+	if lobby_ui:
+		lobby_ui.hide()
+
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+	if current_hud:
+		current_hud.queue_free()
+
+	current_hud = HUD_SCENE.instantiate()
+	add_child(current_hud)
+
+
+func _on_game_ended() -> void:
+	if current_hud:
+		current_hud.queue_free()
+		current_hud = null
+
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	show_lobby()
+
+
+@rpc("any_peer", "call_local")
+func ping(argument: float) -> void:
+	print("[Multiplayer] Ping from peer %d: arg: %f" % [multiplayer.get_remote_sender_id(), argument])
