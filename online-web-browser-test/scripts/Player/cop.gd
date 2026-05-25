@@ -146,8 +146,8 @@ func _custom_physics_process(delta, direction):
 			velocity.x = direction.x * active_speed
 			velocity.z = direction.z * active_speed
 		else:
-			velocity.x = move_toward(velocity.x, 0, Balance.cop_braking_friction)
-			velocity.z = move_toward(velocity.z, 0, Balance.cop_braking_friction)
+			velocity.x = move_toward(velocity.x, 0, (Balance.cop_braking_friction * 60.0 * delta))
+			velocity.z = move_toward(velocity.z, 0, (Balance.cop_braking_friction * 60.0 * delta))
 			
 		if is_multiplayer_authority():
 			_detect_capture()

@@ -299,8 +299,8 @@ func _custom_physics_process(_delta, direction):
 		velocity.x = direction.x * 6.5 # Hardcoded fallback
 		velocity.z = direction.z * 6.5
 	else:
-		velocity.x = move_toward(velocity.x, 0, 6.5) # Hardcoded fallback
-		velocity.z = move_toward(velocity.z, 0, 6.5)
+		velocity.x = move_toward(velocity.x, 0, 6.5 * 60.0 * _delta) # Hardcoded fallback
+		velocity.z = move_toward(velocity.z, 0, 6.5 * 60.0 * _delta)
 
 # ----------------------------------------
 

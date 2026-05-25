@@ -4,6 +4,7 @@ const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
 
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
+@export var debug_disable_camo: bool = false
 
 @onready var anim_player = $Chameleon_Character/AnimationPlayer
 @onready var anim_tree = $Chameleon_Character/AnimationTree # <--- ADDED ANIM TREE
@@ -62,6 +63,8 @@ func on_artifact_drop():
 
 func spawn_smoke():
 	if cached_smoke_particles:
+		cached_smoke_particles.position = Vector3(0, 1.0, 0) # Center on torso
+		cached_smoke_particles.emitting = false # Force restart for one_shot
 		cached_smoke_particles.emitting = true
 
 var rescue_progress: float = 0.0
@@ -76,6 +79,7 @@ var custom_path_index: int = 0
 
 func _ready():
 	super._ready()
+	last_pos = global_position
 	nav_agent = NavigationAgent3D.new()
 	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
@@ -83,14 +87,10 @@ func _ready():
 	cached_smoke_particles = SMOKE_PARTICLES.instantiate()
 	add_child(cached_smoke_particles)
 	
-	# PRE-WARMER: Force a single emission frame to cache the shader, which also adds a cool spawn-in effect!
-	cached_smoke_particles.emitting = true
-	
-	# Turn it off instantly on the next frame and reset it
-	get_tree().create_timer(0.1).timeout.connect(func():
-		if cached_smoke_particles:
-			cached_smoke_particles.emitting = false
-	)
+	# Trigger the initial spawn-in effect instantly, but deferred so the engine has time to add it to the scene tree!
+	if cached_smoke_particles:
+		cached_smoke_particles.position = Vector3(0, 1.0, 0)
+		cached_smoke_particles.set_deferred("emitting", true)
 	
 	var random_idle = favorite_idles.pick_random()
 	anim_player.play(random_idle, 0.0)
@@ -105,7 +105,13 @@ func _ready():
 		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 		mat.flags_no_depth_test = true
 		debug_path_mesh.material_override = mat
-		get_tree().root.call_deferred("add_child", debug_path_mesh)
+		var world = get_node_or_null("/root/World")
+		if world:
+			world.add_child(debug_path_mesh)
+	else:
+		# If we are a newly joining client, ask the SERVER how long this player has been standing still
+		if get_tree().get_multiplayer().has_multiplayer_peer() and not multiplayer.is_server():
+			rpc_id(1, "request_camo_state")
 		
 		# Setup Debug Text Label
 		debug_label = Label3D.new()
@@ -255,15 +261,15 @@ func _custom_physics_process(delta, direction):
 	# 1. MOVEMENT STATE MACHINE
 	# ==========================================
 	if is_jailed or (camera_manager and camera_manager.is_on_cameras):
-		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
-		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
+		velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta))
+		velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta))
 		# (REMOVED 'return' HERE)
 	
 	elif is_hypnotized: # Changed 'if' to 'elif'
 		if is_multiplayer_authority():
 			if is_rescue_halted:
-				velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
-				velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
+				velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta))
+				velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta))
 			else:
 				var dist_to_target = global_position.distance_to(jail_walk_target)
 				
@@ -273,15 +279,15 @@ func _custom_physics_process(delta, direction):
 					velocity.z = 0
 					if camera_manager: camera_manager.access_cameras()
 				elif nav_agent.is_navigation_finished():
-					velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
-					velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
+					velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta))
+					velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta))
 				else:
 					var _ignore = nav_agent.get_next_path_position() 
 					var path = nav_agent.get_current_navigation_path()
 					
 					if path.size() == 0 or custom_path_index >= path.size():
-						velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
-						velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
+						velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta))
+						velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta))
 						if debug_label: debug_label.text = "STOPPED (End of Path)\nVel: 0"
 					else:
 						var flat_global = Vector3(global_position.x, 0, global_position.z)
@@ -297,8 +303,8 @@ func _custom_physics_process(delta, direction):
 								dist = flat_global.distance_to(flat_target)
 								
 						if custom_path_index >= path.size():
-							velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
-							velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
+							velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta))
+							velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta))
 							if debug_label: debug_label.text = "STOPPED (Reached Target)\nVel: 0"
 						else:
 							var dir_to_next = flat_global.direction_to(flat_target)
@@ -356,8 +362,8 @@ func _custom_physics_process(delta, direction):
 			velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
 			velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
 		else:
-			velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction * current_speed_mult)
-			velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction * current_speed_mult)
+			velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
+			velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
 			
 
 	# ==========================================
@@ -489,7 +495,10 @@ func _process(delta):
 			speed = Vector3(velocity.x, 0, velocity.z).length()
 		else:
 			var dist = Vector3(global_position.x, 0, global_position.z).distance_to(Vector3(last_pos.x, 0, last_pos.z))
-			speed = dist / delta
+			if dist > 3.0:
+				speed = 0.0 # Teleport or network snap, ignore for camo calculations
+			else:
+				speed = dist / delta
 			last_pos = global_position
 			
 		stealth_manager.process_stealth(delta, speed, is_hypnotized, is_jailed, is_highlighted)
@@ -710,3 +719,18 @@ func handle_mobile_interact_press():
 			target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
 	else:
 		_try_drop()
+
+# --- CAMO STATE SYNC FOR LATE JOINERS ---
+@rpc("any_peer", "call_remote")
+func request_camo_state():
+	if multiplayer.is_server():
+		rpc_id(multiplayer.get_remote_sender_id(), "receive_camo_state", stealth_manager.stationary_time if stealth_manager else 0.0)
+
+@rpc("any_peer", "call_local")
+func receive_camo_state(auth_time: float):
+	if stealth_manager:
+		stealth_manager.stationary_time = auth_time
+		if auth_time >= Balance.thief_camo_activation_time:
+			stealth_manager.current_alpha = 0.0
+			is_camo_posing = true
+			anim_player.play("Camo_Pose", 0.0)
