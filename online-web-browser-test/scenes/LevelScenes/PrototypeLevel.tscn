@@ -9774,6 +9774,8 @@ shape = SubResource("ConvexPolygonShape3D_l7wxt")
 transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710674, 0, 0.07071065, -24.474056, 0.61403185, -36.737377)
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_wkjx1")
+script = ExtResource("6_artifact")
+artifact_category = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Stones/Jenssten17" unique_id=1723762728]
 
@@ -10559,9 +10561,12 @@ transform = Transform3D(3.6157123e-06, 0, -18.57, 0, 18.57, 0, 18.57, 0, 3.61571
 [node name="Island Misc" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=403201556]
 
 [node name="Moai" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Island Misc" unique_id=1999474401]
-transform = Transform3D(0.52, 0, 0, 0, -2.2729921e-08, 0.52, 0, -0.52, -2.2729921e-08, -19.416594, 1.8999999, -29.475801)
+transform = Transform3D(0.52, 0, 0, 0, -2.2729921e-08, 0.52, 0, -0.52, -2.2729921e-08, -19.416594, 1.2594907, -32.88217)
 mesh = ExtResource("59_nkopf")
 surface_material_override/0 = SubResource("ShaderMaterial_5i3ml")
+script = ExtResource("6_artifact")
+artifact_size = 2
+artifact_category = 1
 
 [node name="ForestMisc" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=1256453619]
 
@@ -10600,16 +10605,72 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ncsn1")
 [node name="SmallDingus" parent="Arena 2/Dinguses" unique_id=639891862 instance=ExtResource("3_ypmvb")]
 transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 8.198381, 0.90322566, -8.524543)
 script = ExtResource("6_artifact")
+artifact_category = 2
+hand_position_offset = Vector3(-0.316, -0.054, -0.22)
+hand_rotation_offset = Vector3(-118.272, 313.686, -169.488)
+
+[node name="SmallDingus2" parent="Arena 2/Dinguses" unique_id=367774179 instance=ExtResource("3_ypmvb")]
+transform = Transform3D(-0.13, 0, -1.13649605e-08, 0, 0.13, 0, 1.13649605e-08, 0, -0.13, 17.399107, 0.90322554, 4.7615175)
+script = ExtResource("6_artifact")
+artifact_category = 2
+hand_position_offset = Vector3(-0.316, -0.054, -0.22)
+hand_rotation_offset = Vector3(-118.272, 313.686, -169.488)
 
 [node name="MediumDingus" parent="Arena 2/Dinguses" unique_id=1457145423 instance=ExtResource("3_ypmvb")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -8.927105, 0.5793295, -8.763302)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 21.968632, 0.5793295, -4.8549595)
 script = ExtResource("6_artifact")
 artifact_size = 1
+artifact_category = 2
+hand_position_offset = Vector3(-0.262, -0.152, -0.787)
+hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 
-[node name="Big Dingus" parent="Arena 2/Dinguses" unique_id=367774179 instance=ExtResource("14_46wyf")]
+[node name="MediumDingus2" parent="Arena 2/Dinguses" unique_id=703677206 instance=ExtResource("3_ypmvb")]
+transform = Transform3D(-0.21416138, 0, 0.12897637, 0, 0.25, 0, -0.12897637, 0, -0.21416138, -17.627752, 0.5793297, 4.660842)
+script = ExtResource("6_artifact")
+artifact_size = 1
+artifact_category = 2
+hand_position_offset = Vector3(-0.262, -0.152, -0.787)
+hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
+
+[node name="MediumDingus3" parent="Arena 2/Dinguses" unique_id=1244116506 instance=ExtResource("3_ypmvb")]
+transform = Transform3D(-0.21416138, 0, 0.12897637, 0, 0.25, 0, -0.12897637, 0, -0.21416138, -38.718494, 0.6898906, 0.2973349)
+script = ExtResource("6_artifact")
+artifact_size = 1
+artifact_category = 2
+hand_position_offset = Vector3(-0.262, -0.152, -0.787)
+hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
+
+[node name="Big Dingus" parent="Arena 2/Dinguses" unique_id=887076830 instance=ExtResource("14_46wyf")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.2901404, 0.6993227, -0.047213078)
 script = ExtResource("6_artifact")
 artifact_size = 2
+artifact_category = 2
+hand_position_offset = Vector3(-0.21, -0.095, -1.752)
+hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
+
+[node name="Big Dingus3" parent="Arena 2/Dinguses" unique_id=497967933 instance=ExtResource("14_46wyf")]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 33.070488, 0.6993227, 4.429481)
+script = ExtResource("6_artifact")
+artifact_size = 2
+artifact_category = 2
+hand_position_offset = Vector3(-0.21, -0.095, -1.752)
+hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
+
+[node name="Big Dingus4" parent="Arena 2/Dinguses" unique_id=1792162982 instance=ExtResource("14_46wyf")]
+transform = Transform3D(0.25000006, 0, -0.43301266, 0, 0.5, 0, 0.43301266, 0, 0.25000006, 37.66163, 0.13199425, -36.808388)
+script = ExtResource("6_artifact")
+artifact_size = 2
+artifact_category = 2
+hand_position_offset = Vector3(-0.21, -0.095, -1.752)
+hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
+
+[node name="Big Dingus2" parent="Arena 2/Dinguses" unique_id=363943461 instance=ExtResource("14_46wyf")]
+transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 1.2055856, 0, 0.5, 0, -2.1855694e-08, 17.875172, -0.5078037, -21.009548)
+script = ExtResource("6_artifact")
+artifact_size = 2
+artifact_category = 2
+hand_position_offset = Vector3(-0.21, -0.095, -1.752)
+hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 
 [node name="Van" parent="." unique_id=1941149271 instance=ExtResource("6_q60mh")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.46578407, 0.11544132, 16.160692)

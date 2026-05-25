@@ -22,13 +22,19 @@ var cash_value: int = 100
 var weight_penalty: float = 1.0
 var is_carried: bool = false
 var carrier_id: int = -1
-var is_highlighted: bool = false
+var is_highlighted: bool = false:
+	set(value):
+		if is_highlighted != value:
+			is_highlighted = value
+			set_highlight(value)
 
 var sync_target_position: Vector3 = Vector3.ZERO
 var sync_target_rotation: Vector3 = Vector3.ZERO
 var initial_position: Vector3 = Vector3.ZERO
 var initial_rotation: Vector3 = Vector3.ZERO
 var cached_attachment: Node3D = null
+
+var debug_ui: CanvasLayer = null
 
 var _last_rendered_highlight: bool = false
 var _has_rendered_once: bool = false
@@ -160,13 +166,15 @@ func confirm_pickup(player_id: int):
 	carrier_id = player_id
 	is_highlighted = false # FIX: Force highlight off when picked up
 	set_multiplayer_authority(player_id)
+	if has_node("MultiplayerSynchronizer"):
+		$MultiplayerSynchronizer.set_multiplayer_authority(player_id)
 	
 	var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
 	if carrier and carrier.has_method("on_artifact_pickup"):
 		carrier.on_artifact_pickup(self)
 		cached_attachment = carrier.get_node_or_null("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/ArtifactAttachment")
 
-var outline_mat: ShaderMaterial = null
+var outline_mat: StandardMaterial3D = null
 
 func _process(delta):
 	if is_carried:
@@ -176,63 +184,98 @@ func _process(delta):
 				# 1. Snap perfectly to the Chameleon's hand bone
 				global_transform = cached_attachment.global_transform
 				
-				# 2. Apply your custom position offset (Relative to the hand's rotation)
-				translate_object_local(hand_position_offset)
+				# 2. Apply your custom position offset in the CARRIER'S local space!
+				# This perfectly fixes the issue where the bone's X/Y/Z axes are twisted.
+				# Now Y is ALWAYS up, Z is ALWAYS forward, and X is ALWAYS right relative to the player!
+				var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
+				if carrier:
+					global_position += carrier.global_transform.basis * hand_position_offset
 					
-				# 3. Apply your custom rotation offset (Converted to standard degrees!)
-				var rot_rad = Vector3(
-					deg_to_rad(hand_rotation_offset.x), 
-					deg_to_rad(hand_rotation_offset.y), 
-					deg_to_rad(hand_rotation_offset.z)
-				)
-				var rot_basis = Basis.from_euler(rot_rad)
-				global_transform.basis = global_transform.basis * rot_basis
+				# 3. Apply your custom rotation offset using intuitive local rotation
+				rotate_object_local(Vector3.RIGHT, deg_to_rad(hand_rotation_offset.x))
+				rotate_object_local(Vector3.UP, deg_to_rad(hand_rotation_offset.y))
+				rotate_object_local(Vector3.FORWARD, deg_to_rad(hand_rotation_offset.z))
 				
 				# 4. Lock the scale so the bone animations don't warp the mesh
 				scale = initial_scale 
+				
+				# 5. Developer In-Game Tuning Tool
+				# Keyboard Controls for live tuning!
+				if Input.is_key_pressed(KEY_PAGEUP): hand_position_offset.y += delta * 0.5
+				if Input.is_key_pressed(KEY_PAGEDOWN): hand_position_offset.y -= delta * 0.5
+				if Input.is_key_pressed(KEY_LEFT): hand_position_offset.x -= delta * 0.5
+				if Input.is_key_pressed(KEY_RIGHT): hand_position_offset.x += delta * 0.5
+				if Input.is_key_pressed(KEY_UP): hand_position_offset.z -= delta * 0.5
+				if Input.is_key_pressed(KEY_DOWN): hand_position_offset.z += delta * 0.5
+				
+				if Input.is_key_pressed(KEY_U): hand_rotation_offset.x += delta * 45.0
+				if Input.is_key_pressed(KEY_J): hand_rotation_offset.x -= delta * 45.0
+				if Input.is_key_pressed(KEY_I): hand_rotation_offset.y += delta * 45.0
+				if Input.is_key_pressed(KEY_K): hand_rotation_offset.y -= delta * 45.0
+				if Input.is_key_pressed(KEY_O): hand_rotation_offset.z += delta * 45.0
+				if Input.is_key_pressed(KEY_L): hand_rotation_offset.z -= delta * 45.0
+				if Input.is_action_just_pressed("ui_accept") or Input.is_key_pressed(KEY_P): 
+					print("--- ARTIFACT TUNED ---")
+					print("Pos Offset: ", hand_position_offset)
+					print("Rot Offset: ", hand_rotation_offset)
+				
+				if not debug_ui:
+					_create_debug_ui()
 			
 			# Relay position to others by keeping sync targets updated
 			sync_target_position = global_position
 			sync_target_rotation = rotation
 		else:
 			# I am observing someone else carry it
+			if debug_ui:
+				debug_ui.queue_free()
+				debug_ui = null
 			global_position = global_position.lerp(sync_target_position, 15.0 * delta)
 			var current_quat = transform.basis.get_rotation_quaternion()
-			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
+			var target_quat = Quaternion.from_euler(sync_target_rotation)
 			transform.basis = Basis(current_quat.slerp(target_quat, 15.0 * delta)).scaled(initial_scale)
+	else:
+		if debug_ui:
+			debug_ui.queue_free()
+			debug_ui = null
+		# It's not carried, so smoothly lerp to wherever the authority (usually server) says it should be
+		global_position = global_position.lerp(sync_target_position, 15.0 * delta)
+		
+		# Slerp the rotation for smoothness
+		var current_quat = transform.basis.get_rotation_quaternion()
+		var target_quat = Quaternion.from_euler(sync_target_rotation)
+		transform.basis = Basis(current_quat.slerp(target_quat, 15.0 * delta)).scaled(initial_scale)
+
+func set_highlight(highlighted: bool):
+	if highlighted and is_carried: return
 	
-	# Update visual highlights
-	if is_highlighted != _last_rendered_highlight or not _has_rendered_once:
-		_apply_visuals(self, is_highlighted)
-		_last_rendered_highlight = is_highlighted
-		_has_rendered_once = true
+	# Find the mesh and update materials
+	for child in get_children():
+		if child.name == "InteractionArea": continue
+		_apply_visuals(child, highlighted)
 
 func _apply_visuals(node: Node, highlighted: bool):
 	if not outline_mat:
-		outline_mat = ShaderMaterial.new()
-		var shader = preload("res://Assets/Shaders/HighlightShader/OutlineShader.tres")
-		if shader:
-			outline_mat.shader = shader
+		outline_mat = StandardMaterial3D.new()
+		outline_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		outline_mat.cull_mode = BaseMaterial3D.CULL_FRONT
+		outline_mat.albedo_color = Color.WHITE
+		outline_mat.grow = true
+		outline_mat.grow_amount = 0.08
 			
-	if node is MeshInstance3D:
-		for i in range(node.mesh.get_surface_count()):
-			var mat = node.get_surface_override_material(i)
-			if not mat:
-				mat = node.mesh.surface_get_material(i)
-				
-			if mat:
-				var unique_mat = null
-				if node.has_meta("unique_mat_" + str(i)):
-					unique_mat = node.get_meta("unique_mat_" + str(i))
-				else:
-					unique_mat = mat.duplicate()
-					node.set_meta("unique_mat_" + str(i), unique_mat)
-					node.set_surface_override_material(i, unique_mat)
-				
-				if highlighted:
-					unique_mat.next_pass = outline_mat
-				else:
-					unique_mat.next_pass = null
+	if node is MeshInstance3D and node.name != "HighlightMesh":
+		if highlighted:
+			if not node.has_node("HighlightMesh"):
+				var outline_mesh = MeshInstance3D.new()
+				outline_mesh.name = "HighlightMesh"
+				outline_mesh.mesh = node.mesh
+				outline_mesh.material_override = outline_mat
+				outline_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+				node.add_child(outline_mesh)
+		else:
+			var outline_mesh = node.get_node_or_null("HighlightMesh")
+			if outline_mesh:
+				outline_mesh.queue_free()
 					
 	for child in node.get_children():
 		if child.name == "InteractionArea": continue
@@ -255,33 +298,17 @@ func drop():
 	set_multiplayer_authority(1)
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(1)
-
-	# ==========================================
-	# --- NEW: RAYCAST FLOOR SNAP ---
-	# ==========================================
-	var space_state = get_world_3d().direct_space_state
-	
-	# Shoot a laser 10 meters straight down from the artifact's current center
-	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + Vector3.DOWN * 10.0)
-	
-	# IMPORTANT: We only want to hit the Floor/Walls (Assuming your environment is on Collision Layer 1)
-	# This prevents the artifact from accidentally snapping to the top of the Thief's head!
-	query.collision_mask = 1 
-	
-	# Ignore the artifact's entire physics body so the laser doesn't hit itself
-	if col:
-		query.exclude = [col.get_parent().get_rid()]
 		
+	is_highlighted = false # FIX: Force highlight off when dropped
+	
+	# Snap to the ground perfectly
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsRayQueryParameters3D.create(global_position + Vector3(0, 1, 0), global_position + Vector3(0, -10, 0))
+	query.collision_mask = 1 # Environment layer
 	var result = space_state.intersect_ray(query)
 	
 	if result:
-		# We found the floor! Snap the position down.
-		global_position = result.position
-		
-		# Update the network sync targets so it doesn't try to lerp back up into the air
 		sync_target_position = result.position
-		initial_position = result.position
-		initial_rotation = rotation
 
 @rpc("any_peer", "call_local")
 func destroy_artifact():
@@ -293,6 +320,12 @@ func destroy_artifact():
 	is_carried = false
 	cached_attachment = null
 	carrier_id = -1
+	
+	# All peers must agree the server has taken back control!
+	set_multiplayer_authority(1)
+	if has_node("MultiplayerSynchronizer"):
+		$MultiplayerSynchronizer.set_multiplayer_authority(1)
+	
 	is_highlighted = false # FIX: Force highlight off when destroyed
 	hide()
 	col.set_deferred("disabled", true)
@@ -302,6 +335,12 @@ func reset_artifact():
 	is_carried = false
 	cached_attachment = null
 	carrier_id = -1
+	
+	# All peers must agree the server has taken back control!
+	set_multiplayer_authority(1)
+	if has_node("MultiplayerSynchronizer"):
+		$MultiplayerSynchronizer.set_multiplayer_authority(1)
+	
 	is_highlighted = false # FIX: Force highlight off for the next round
 	show()
 	col.set_deferred("disabled", false)
@@ -313,3 +352,35 @@ func reset_artifact():
 func _exit_tree() -> void:
 	if synchronizer:
 		synchronizer.public_visibility = false
+
+func _create_debug_ui():
+	debug_ui = CanvasLayer.new()
+	debug_ui.layer = 100
+	
+	var panel = PanelContainer.new()
+	panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	panel.position = Vector2(800, 50)
+	debug_ui.add_child(panel)
+	
+	var vbox = VBoxContainer.new()
+	panel.add_child(vbox)
+	
+	var title = Label.new()
+	title.text = "--- ARTIFACT OFFSET TUNER ---"
+	vbox.add_child(title)
+	
+	var lbl = Label.new()
+	vbox.add_child(lbl)
+	
+	var update_lbl = func():
+		if is_instance_valid(lbl):
+			lbl.text = "Pos Offset: " + str(hand_position_offset) + "\nRot Offset: " + str(hand_rotation_offset) + "\n\nUse PageUp/PageDown (Y), Left/Right (X), Up/Down (Z) to move.\nUse U/J (X), I/K (Y), O/L (Z) to rotate.\nPress P to print to console."
+	update_lbl.call()
+	
+	var timer = Timer.new()
+	timer.wait_time = 0.1
+	timer.autostart = true
+	timer.timeout.connect(update_lbl)
+	debug_ui.add_child(timer)
+	
+	get_tree().root.add_child(debug_ui)

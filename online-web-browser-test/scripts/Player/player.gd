@@ -9,6 +9,7 @@ var target_shoulder_x = 1.0
 var disable_body_rotation: bool = false
 
 var player_name: String = ""
+var allow_arrow_keys: bool = false
 @export var team_index: int = 0
 var team_color: Color = Color.WHITE
 
@@ -283,7 +284,17 @@ func _physics_process(delta):
 	
 	if not is_on_floor(): velocity.y -= gravity * delta
 
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Vector2.ZERO
+	if allow_arrow_keys:
+		input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	else:
+		# Only allow WASD keys manually if arrow keys are disabled
+		var left = 1.0 if Input.is_physical_key_pressed(KEY_A) else 0.0
+		var right = 1.0 if Input.is_physical_key_pressed(KEY_D) else 0.0
+		var up = 1.0 if Input.is_physical_key_pressed(KEY_W) else 0.0
+		var down = 1.0 if Input.is_physical_key_pressed(KEY_S) else 0.0
+		input_dir = Vector2(right - left, down - up).normalized()
+		
 	if mobile_input and mobile_input.get_joystick_vector() != Vector2.ZERO:
 		input_dir = mobile_input.get_joystick_vector()
 		

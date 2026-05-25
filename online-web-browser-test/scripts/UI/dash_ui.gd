@@ -17,6 +17,9 @@ func _draw():
 	var center = size / 2.0
 	var radius = min(size.x, size.y) / 2.0 - 4.0 # Leave room for thickness
 	
+	if name == "DropCooldownUI":
+		pass
+	
 	# Draw background ring (dark transparent)
 	draw_arc(center, radius, 0, TAU, 32, Color(0, 0, 0, 0.4), 6.0, true)
 	

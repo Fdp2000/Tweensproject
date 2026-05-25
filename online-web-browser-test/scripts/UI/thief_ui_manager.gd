@@ -6,17 +6,24 @@ var canvas: CanvasLayer
 
 # UI References
 var rescue_ui: Control
+var drop_cooldown_ui: Control
 var cam_crosshair: ColorRect
 var cam_left_btn: Button
 var cam_right_btn: Button
 
 func setup(parent_thief: Node3D):
 	thief = parent_thief
-	await thief.get_tree().process_frame
-	canvas = thief.get_node_or_null("PlayerCanvas")
+	
+	# Wait until PlayerCanvas is created by player.gd (which also yields)
+	while not thief.has_node("PlayerCanvas"):
+		if not thief.is_inside_tree(): return
+		await thief.get_tree().process_frame
+		
+	canvas = thief.get_node("PlayerCanvas")
 	if not canvas: return
 
 	_build_rescue_ui()
+	_build_drop_cooldown_ui()
 	_build_camera_ui()
 	
 	if thief.has_method("is_mobile_device") and thief.is_mobile_device():
@@ -36,6 +43,22 @@ func _build_rescue_ui():
 	rescue_ui.set("hide_when_empty", true)
 	rescue_ui.name = "RescueUI"
 	canvas.add_child(rescue_ui)
+
+func _build_drop_cooldown_ui():
+	drop_cooldown_ui = Control.new()
+	drop_cooldown_ui.set_script(load("res://scripts/UI/dash_ui.gd"))
+	drop_cooldown_ui.set("ring_color", Color(1.0, 0.4, 0.2, 0.9)) # Orange/Red Cooldown
+	drop_cooldown_ui.set("ready_color", Color(1.0, 1.0, 1.0, 0.0))
+	drop_cooldown_ui.custom_minimum_size = Vector2(40, 40)
+	drop_cooldown_ui.set_anchors_preset(Control.PRESET_CENTER)
+	drop_cooldown_ui.offset_left = -60
+	drop_cooldown_ui.offset_right = -20
+	drop_cooldown_ui.offset_top = -40
+	drop_cooldown_ui.offset_bottom = 0
+	drop_cooldown_ui.size = Vector2(40, 40)
+	drop_cooldown_ui.set("hide_when_empty", true)
+	drop_cooldown_ui.name = "DropCooldownUI"
+	canvas.add_child(drop_cooldown_ui)
 
 func _build_camera_ui():
 	cam_crosshair = ColorRect.new()
@@ -115,12 +138,17 @@ func _build_mobile_ui():
 func update_rescue_ring(progress: float, is_visible: bool):
 	if rescue_ui:
 		rescue_ui.set("progress", progress)
-		rescue_ui.visible = is_visible
+		if rescue_ui.has_method("queue_redraw"): rescue_ui.queue_redraw()
+		if is_visible:
+			rescue_ui.show()
+		else:
+			rescue_ui.hide()
 
-func toggle_camera_ui(is_active: bool):
-	if cam_crosshair: cam_crosshair.visible = is_active
-	if cam_left_btn: cam_left_btn.visible = is_active
-	if cam_right_btn: cam_right_btn.visible = is_active
-	
-	var touch_ui = canvas.get_node_or_null("TouchUI")
-	if touch_ui: touch_ui.visible = not is_active
+func update_drop_cooldown_ring(progress: float, is_visible: bool):
+	if drop_cooldown_ui:
+		drop_cooldown_ui.set("progress", progress)
+		if drop_cooldown_ui.has_method("queue_redraw"): drop_cooldown_ui.queue_redraw()
+		if is_visible:
+			drop_cooldown_ui.show()
+		else:
+			drop_cooldown_ui.hide()

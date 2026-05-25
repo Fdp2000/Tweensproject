@@ -5,6 +5,7 @@ const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
 @export var debug_disable_camo: bool = false
+@export var debug_disable_movement: bool = false
 
 @onready var anim_player = $Chameleon_Character/AnimationPlayer
 @onready var anim_tree = $Chameleon_Character/AnimationTree # <--- ADDED ANIM TREE
@@ -25,6 +26,8 @@ var world_ping_manager: Node = null
 var cached_smoke_particles = null
 
 var carried_artifact: Node3D = null
+var drop_cooldown: float = 0.0
+
 var cash_contributed: int = 0
 var is_hypnotized: bool = false
 var is_rescue_halted: bool = false
@@ -60,6 +63,8 @@ func on_artifact_drop():
 	# --- ADD THIS FIX ---
 	# Wipe the memory so State B thinks we "just started" moving this exact frame!
 	is_currently_moving = false
+	
+	drop_cooldown = 1.5
 
 func spawn_smoke():
 	if cached_smoke_particles:
@@ -123,6 +128,7 @@ func _ready():
 		debug_label.no_depth_test = true
 		add_child(debug_label)
 		
+	if is_multiplayer_authority():
 		# Initialize UI Manager
 		ui_manager = ThiefUIManager.new()
 		add_child(ui_manager)
@@ -132,7 +138,7 @@ func _ready():
 		camera_manager = ThiefCameraManager.new()
 		add_child(camera_manager)
 		camera_manager.setup(self)
-
+		
 	stealth_manager = ThiefStealthManager.new()
 	add_child(stealth_manager)
 	stealth_manager.setup(self, camo_material, hypno_material)
@@ -241,7 +247,7 @@ func get_closest_interactable() -> Node3D:
 				closest_thief = target
 				min_dist_thief = dist
 				
-		elif target.is_in_group("artifact") and not target.get("is_carried"):
+		elif drop_cooldown <= 0.0 and target.is_in_group("artifact") and not target.get("is_carried"):
 			if dist < min_dist_art:
 				closest_art = target
 				min_dist_art = dist
@@ -256,6 +262,9 @@ func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 		nav_agent.target_position = jail_walk_target
 
 func _custom_physics_process(delta, direction):
+	
+	if debug_disable_movement:
+		direction = Vector3.ZERO
 	
 	# ==========================================
 	# 1. MOVEMENT STATE MACHINE
@@ -356,7 +365,7 @@ func _custom_physics_process(delta, direction):
 		if carried_artifact:
 			current_speed_mult = carried_artifact.weight_penalty
 		else:
-			current_speed_mult = move_toward(current_speed_mult, 1.0, delta * 0.3)
+			current_speed_mult = 1.0
 			
 		if direction:
 			velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
@@ -487,6 +496,11 @@ func _custom_physics_process(delta, direction):
 					anim_player.play("Camo_Pose", Balance.thief_camo_fade_duration_sec)
 			
 func _process(delta):
+	if drop_cooldown > 0.0:
+		drop_cooldown -= delta
+		if drop_cooldown < 0.0:
+			drop_cooldown = 0.0
+			
 	super._process(delta) 
 	
 	if stealth_manager:
@@ -501,11 +515,19 @@ func _process(delta):
 				speed = dist / delta
 			last_pos = global_position
 			
+		if debug_disable_camo:
+			speed = 999.0
+			
 		stealth_manager.process_stealth(delta, speed, is_hypnotized, is_jailed, is_highlighted)
 
 	if not is_multiplayer_authority(): return
 	
 	if ui_manager:
+		if drop_cooldown > 0.0:
+			ui_manager.update_drop_cooldown_ring(drop_cooldown / 1.5, true)
+		else:
+			ui_manager.update_drop_cooldown_ring(0.0, false)
+			
 		if is_jailed:
 			ui_manager.update_rescue_ring(0.0, false) 
 		elif is_hypnotized:
