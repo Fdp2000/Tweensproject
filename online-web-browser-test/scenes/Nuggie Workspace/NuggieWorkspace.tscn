@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ca2rq6epwa2ac" path="res://Assets/Models/Test Panda/OutlinePanda.tscn" id="9_av4ca"]
 [ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="10_av4ca"]
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="11_3qlyf"]
+[ext_resource type="PackedScene" uid="uid://hjeyxpsyjold" path="res://Assets/Models/Van/Van.tscn" id="12_pmc3y"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
@@ -190,6 +191,12 @@ spot_range = 32.005116
 spot_attenuation = -0.39
 spot_angle = 33.104214
 
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=513570938]
+transform = Transform3D(0.92602223, 0.028755449, 0.37637213, -0.377469, 0.07054402, 0.9233313, 2.9141871e-09, -0.9970941, 0.07617962, -8.570383, 16.560534, 2.2279816)
+spot_range = 32.005116
+spot_attenuation = -0.27
+spot_angle = 33.104214
+
 [node name="RedPanda_Character_materialer3" parent="." unique_id=427534513 instance=ExtResource("4_65afw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.888521, 0, -0.96090794)
 
@@ -204,3 +211,6 @@ transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 11.845292, 0, -0.828064
 
 [node name="Næsehorn" parent="." unique_id=2043154851 instance=ExtResource("11_3qlyf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.890285, 0, -0.6751852)
+
+[node name="WhiteVan" parent="." unique_id=628082721 instance=ExtResource("12_pmc3y")]
+transform = Transform3D(-0.12685685, 0, -0.991921, 0, 1, 0, 0.991921, 0, -0.12685685, -16.748495, 0, 3.4993238)
