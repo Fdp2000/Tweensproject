@@ -8,6 +8,7 @@ var charge_direction = Vector3.ZERO
 var charge_ui_ref: Control
 @export var is_debuffed = false
 var debuff_timer = 0.0
+var capture_cooldowns: Dictionary = {}
 
 @onready var camera_anim = $PitchPivot/SpringArm3D/Camera3D/CameraAnimator
 @onready var smoke_particles = $smokeParticles
@@ -69,6 +70,12 @@ func _custom_physics_process(delta, direction):
 	# 1. THE BRAIN (Only Local Player)
 	# ==========================================
 	if is_multiplayer_authority():
+		var keys = capture_cooldowns.keys()
+		for k in keys:
+			capture_cooldowns[k] -= delta
+			if capture_cooldowns[k] <= 0:
+				capture_cooldowns.erase(k)
+				
 		if charge_ui_ref and Balance.cop_charge_cooldown > 0:
 			charge_ui_ref.progress = clamp(1.0 - (charge_cooldown_left / Balance.cop_charge_cooldown), 0.0, 1.0)
 			
@@ -238,11 +245,14 @@ func _detect_capture():
 				var v_dist = abs(global_position.y - collider.global_position.y)
 				
 				if h_dist <= 0.9 and v_dist <= 1.5:
-					rpc_id(1, "request_capture", int(str(collider.name)))
-					if is_charging:
-						is_charging = false
-						is_debuffed = true
-						debuff_timer = Balance.cop_exhaustion_duration
+					var target_name = str(collider.name)
+					if not capture_cooldowns.has(target_name):
+						capture_cooldowns[target_name] = 2.0
+						rpc_id(1, "request_capture", int(target_name))
+						if is_charging:
+							is_charging = false
+							is_debuffed = true
+							debuff_timer = Balance.cop_exhaustion_duration
 					return
 
 @rpc("any_peer", "call_local")
