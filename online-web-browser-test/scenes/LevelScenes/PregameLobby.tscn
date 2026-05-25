@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://dyj1djxuy4iko"]
 
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
-[ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
-[ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
+[ext_resource type="Script" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
+[ext_resource type="Script" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwb7"]
 resource_name = "Material"
