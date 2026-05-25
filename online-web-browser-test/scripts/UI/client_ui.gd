@@ -5,6 +5,10 @@ extends Control
 @onready var room: LineEdit = $VBoxContainer/Connect/RoomSecret
 @onready var mesh: CheckBox = $VBoxContainer/Connect/Mesh
 
+const COP_SCENE = preload("res://scenes/PlayerScenes/Cop.tscn")
+const THIEF_SCENE = preload("res://scenes/PlayerScenes/Thief.tscn")
+const HUD_SCENE = preload("res://scenes/UIScenes/HUD.tscn")
+
 var local_player_name: String = ""
 var lobby_ui: Node
 var current_hud: Node = null
@@ -28,6 +32,7 @@ func _ready() -> void:
 	
 	GameManager.game_started.connect(_on_game_started)
 	GameManager.game_ended.connect(_on_game_ended)
+	GameManager.player_joined.connect(_on_player_joined)
 	
 	# Hide the old debug menu and header from main.tscn
 
@@ -252,6 +257,29 @@ func _mp_peer_connected(id: int) -> void:
 	# Handled completely by the server syncing the full lobby state
 	pass
 
+func _on_player_joined(id: int) -> void:
+	if multiplayer.is_server():
+		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+		if not spawned: return
+		
+		# Allow short wait to ensure scene tree is ready if host joined instantly
+		await get_tree().process_frame
+		
+		var lobby_spawns = get_tree().get_nodes_in_group("lobby_spawn")
+		var spawn_pos = Vector3(0, 1000, 0)
+		if lobby_spawns.size() > 0:
+			spawn_pos = lobby_spawns[randi() % lobby_spawns.size()].global_position
+			
+		var pf = THIEF_SCENE.instantiate()
+		pf.name = str(id)
+		pf.team_index = GameManager.PlayerRole.THIEF
+		pf.position = spawn_pos
+		spawned.add_child(pf, true)
+		
+		await get_tree().process_frame
+		pf._set_spawn_position.rpc(spawn_pos)
+		pf.sync_team.rpc(GameManager.PlayerRole.THIEF)
+
 func _on_game_started() -> void:
 	if multiplayer.is_server():
 		var spawned = get_node("/root/World/main/SpawnedObjects")
@@ -272,42 +300,55 @@ func _on_game_started() -> void:
 		for id in GameManager.players.keys():
 			var role = GameManager.players[id]["role"]
 			
-			var pf
 			var spawn_pos = Vector3(0, 3, 0)
 			
 			if role == GameManager.PlayerRole.COP:
-				pf = load("res://scenes/PlayerScenes/Cop.tscn").instantiate()
 				if cop_spawns.size() > 0:
 					var sp = cop_spawns.pop_back()
 					spawn_pos = sp.global_position
 					print("[Spawn] Cop ", id, " -> ", spawn_pos)
 			else:
-				pf = load("res://scenes/PlayerScenes/Thief.tscn").instantiate()
 				if thief_spawns.size() > 0:
 					var sp = thief_spawns.pop_back()
 					spawn_pos = sp.global_position
 					print("[Spawn] Thief ", id, " -> ", spawn_pos)
 				
-			pf.name = str(id)
-			pf.team_index = role
+			var pf = spawned.get_node_or_null(str(id))
 			
-			# Set position on the server's copy before adding to the tree
-			pf.position = spawn_pos
-			spawned.add_child(pf, true)
+			if role == GameManager.PlayerRole.COP:
+				if pf:
+					pf.name = pf.name + "_deleted"
+					spawned.remove_child(pf)
+					pf.queue_free()
+				pf = COP_SCENE.instantiate()
+				pf.name = str(id)
+				pf.team_index = role
+				pf.position = spawn_pos
+				spawned.add_child(pf, true)
+			else:
+				if pf:
+					# Teleport existing lobby thief
+					pf.position = spawn_pos
+					pf.team_index = role
+				else:
+					# Fallback
+					pf = THIEF_SCENE.instantiate()
+					pf.name = str(id)
+					pf.team_index = role
+					pf.position = spawn_pos
+					spawned.add_child(pf, true)
 			
-			# RPC the spawn position to the owning client.
-			# This is necessary because:
-			# 1. MultiplayerSpawner doesn't transmit initial position
-			# 2. relay_position is rejected by the authority player (line: if is_multiplayer_authority(): return)
-			# So without this, every non-host client's local player starts at (0,0,0).
+			await get_tree().process_frame
+			
 			pf._set_spawn_position.rpc(spawn_pos)
+			pf.sync_team.rpc(role)
 			
 	# Capture mouse when game starts
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
 	if current_hud:
 		current_hud.queue_free()
-	current_hud = load("res://scenes/UIScenes/HUD.tscn").instantiate()
+	current_hud = HUD_SCENE.instantiate()
 	add_child(current_hud)
 
 func _on_game_ended() -> void:
@@ -334,8 +375,7 @@ func _disconnected() -> void:
 	_log("[Signaling] Server disconnected: %d - %s" % [client.code, client.reason])
 	
 	# If the host leaves or server crashes, everyone cleans up and goes back to main menu
-	GameManager.client_return_to_lobby()
-	GameManager.players.clear()
+	GameManager.full_teardown()
 	
 	var main_menu = get_node_or_null("MainMenuCanvas")
 	if main_menu:
@@ -360,16 +400,27 @@ func _lobby_joined(lobby_id: String) -> void:
 			GameManager.lobby_updated.connect(_transition_to_lobby, CONNECT_ONE_SHOT)
 
 func _transition_to_lobby() -> void:
+	if lobby_ui:
+		lobby_ui.show_lobby()
+		
+	# Wait until the local player node is actually instantiated by the MultiplayerSpawner
+	var local_id = multiplayer.get_unique_id()
+	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+	if spawned:
+		while not spawned.has_node(str(local_id)):
+			await get_tree().process_frame
+			if not is_inside_tree() or not multiplayer.has_multiplayer_peer(): return
+			
+		# Wait 1 extra frame for the new camera and physics to fully stabilize
+		await get_tree().process_frame
+			
 	# Hides the entire connection UI so you can see the 3D world
 	var canvas = get_node_or_null("MainMenuCanvas")
 	if canvas: canvas.hide()
 	
 	var parent_ui = get_parent().get_parent()
 	if parent_ui and parent_ui.has_method("hide"):
-		parent_ui.hide() 
-	
-	if lobby_ui:
-		lobby_ui.show_lobby()
+		parent_ui.hide()
 
 
 

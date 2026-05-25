@@ -7,6 +7,17 @@ const ARTIFACT_PARTICLES = preload("uid://b4hha0q7y1chb")
 enum Size { SMALL, MEDIUM, LARGE }
 @export var artifact_size: Size = Size.SMALL
 
+# --- NEW: ARTIFACT CATEGORIZATION ---
+enum Category { SMALL_PROP, FLOOR_PROP, WALL_PROP }
+@export var artifact_category: Category = Category.SMALL_PROP
+
+# --- NEW: CUSTOM HAND OFFSETS ---
+# Tweak these in the editor so large paintings don't clip through the head!
+@export var hand_position_offset: Vector3 = Vector3.ZERO
+@export var hand_rotation_offset: Vector3 = Vector3.ZERO 
+
+var initial_scale: Vector3 = Vector3.ONE # We need this to prevent the bone from stretching the artifact
+
 var cash_value: int = 100
 var weight_penalty: float = 1.0
 var is_carried: bool = false
@@ -102,6 +113,7 @@ func _ready():
 	initial_rotation = rotation
 	sync_target_position = global_position
 	sync_target_rotation = rotation
+	initial_scale = scale
 
 func _calculate_meshes_aabb(node: Node) -> AABB:
 	var total_aabb = AABB()
@@ -158,15 +170,27 @@ func _process(delta):
 			# I am carrying it, so I control it
 			var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
 			if carrier:
-				var cam = carrier.get_node_or_null("PitchPivot/SpringArm3D/Camera3D")
-				if cam:
-					# Position it at the chest of the Thief
-					var chest_pos = carrier.global_position + Vector3(0, 0.6, 0) # Lowered from 1.0 to 0.6
-					# Push it slightly forward relative to the Thief's body so it stays in their hands
-					global_position = chest_pos + (-carrier.global_transform.basis.z * 0.4)					# Keep the rotation anchored to the camera
-					var target_basis = cam.global_transform.basis
-					# PRESERVE SCALE
-					global_transform.basis = target_basis.scaled(global_transform.basis.get_scale())
+				# Look for the BoneAttachment3D we just made
+				var attachment = carrier.get_node_or_null("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/ArtifactAttachment")
+				
+				if attachment:
+					# 1. Snap perfectly to the Chameleon's hand bone
+					global_transform = attachment.global_transform
+					
+					# 2. Apply your custom position offset (Relative to the hand's rotation)
+					translate_object_local(hand_position_offset)
+					
+					# 3. Apply your custom rotation offset (Converted to standard degrees!)
+					var rot_rad = Vector3(
+						deg_to_rad(hand_rotation_offset.x), 
+						deg_to_rad(hand_rotation_offset.y), 
+						deg_to_rad(hand_rotation_offset.z)
+					)
+					var rot_basis = Basis.from_euler(rot_rad)
+					global_transform.basis = global_transform.basis * rot_basis
+					
+					# 4. Lock the scale so the bone animations don't warp the mesh
+					scale = initial_scale 
 			
 			# Relay position to others
 			rpc("relay_artifact_transform", global_position, rotation)
@@ -175,7 +199,7 @@ func _process(delta):
 			global_position = global_position.lerp(sync_target_position, 15.0 * delta)
 			var current_quat = transform.basis.get_rotation_quaternion()
 			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
-			transform.basis = Basis(current_quat.slerp(target_quat, 15.0 * delta)).scaled(transform.basis.get_scale())
+			transform.basis = Basis(current_quat.slerp(target_quat, 15.0 * delta)).scaled(initial_scale)
 	
 	# Update visual highlights
 	if is_highlighted != _last_rendered_highlight or not _has_rendered_once:
@@ -236,6 +260,33 @@ func drop():
 	set_multiplayer_authority(1)
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(1)
+
+	# ==========================================
+	# --- NEW: RAYCAST FLOOR SNAP ---
+	# ==========================================
+	var space_state = get_world_3d().direct_space_state
+	
+	# Shoot a laser 10 meters straight down from the artifact's current center
+	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + Vector3.DOWN * 10.0)
+	
+	# IMPORTANT: We only want to hit the Floor/Walls (Assuming your environment is on Collision Layer 1)
+	# This prevents the artifact from accidentally snapping to the top of the Thief's head!
+	query.collision_mask = 1 
+	
+	# Ignore the artifact's entire physics body so the laser doesn't hit itself
+	if col:
+		query.exclude = [col.get_parent().get_rid()]
+		
+	var result = space_state.intersect_ray(query)
+	
+	if result:
+		# We found the floor! Snap the position down.
+		global_position = result.position
+		
+		# Update the network sync targets so it doesn't try to lerp back up into the air
+		sync_target_position = result.position
+		initial_position = result.position
+		initial_rotation = rotation
 
 @rpc("any_peer", "call_local")
 func destroy_artifact():
