@@ -8,7 +8,6 @@ load_path = "res://.godot/imported/Chameleon_Character_Chameleon_Texture_Big_Eye
 [resource]
 render_priority = 0
 shader = ExtResource("1_se8bu")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/albedo_texture = SubResource("CompressedTexture2D_cp31n")
 shader_parameter/use_stepped = true
