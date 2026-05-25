@@ -5,6 +5,9 @@
 [ext_resource type="Script" uid="uid://buorurrqe21ki" path="res://scripts/Cutscene/CutsceneManager.gd" id="3_p4cir"]
 [ext_resource type="Script" uid="uid://c5rie7oeh51t2" path="res://scripts/Cutscene/VersusScreen.gd" id="4_frjgd"]
 [ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="5_1ppgf"]
+[ext_resource type="PackedScene" uid="uid://diovmaqigblbx" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer2.glb" id="5_ofs5a"]
+[ext_resource type="PackedScene" uid="uid://c0au7i4fnki7o" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer.glb" id="6_w6qbi"]
+[ext_resource type="PackedScene" uid="uid://dyj1djxuy4iko" path="res://scenes/LevelScenes/PregameLobby.tscn" id="7_pregame"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -103,15 +106,19 @@ shadow_enabled = true
 
 [node name="main" parent="." unique_id=846917499 instance=ExtResource("1_kqs1s")]
 
+[node name="PregameLobby" parent="." unique_id=1234567891 instance=ExtResource("7_pregame")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
+
 [node name="PrototypeLevel" parent="." unique_id=1171028383 instance=ExtResource("2_proto")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.03201866, -9.536743e-07, 0.007331848)
 
 [node name="LobbyCamera" type="Camera3D" parent="." unique_id=999888777]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 20, 25)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1020, 25)
 current = true
 
 [node name="CutsceneManager" type="Node3D" parent="." unique_id=1301939455]
 script = ExtResource("3_p4cir")
+skip_cutscene = true
 
 [node name="Node3D" type="Node3D" parent="CutsceneManager" unique_id=496690261]
 

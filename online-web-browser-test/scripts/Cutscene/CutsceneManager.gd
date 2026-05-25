@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var skip_cutscene: bool = false # <-- ADDED: Toggle this in the editor!
+
 @onready var intro_camera: Camera3D = $Node3D/IntroCamera
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var versus_screen: CanvasLayer = $"../VersusScreen"
@@ -22,17 +24,9 @@ func _ready():
 		push_error("Could not find GameManager.")
 
 
-# Temporary test input - remove later
-func _process(_delta):
-	if Input.is_action_just_pressed("ui_accept"):
-		start_intro()
-
 
 func _on_game_started():
 	await get_tree().create_timer(0.3).timeout
-
-	intro_running = true
-	intro_camera.current = true
 
 	local_player = await wait_for_local_player()
 
@@ -40,6 +34,32 @@ func _on_game_started():
 		push_error("No local player found before versus screen.")
 		intro_running = false
 		return
+
+	# ==========================================
+	# --- SKIP CUTSCENE LOGIC ---
+	# ==========================================
+	if skip_cutscene:
+		print("[DEV] Skipping intro cutscene...")
+		
+		# Turn off lobby camera
+		var lobby_camera = get_tree().get_root().find_child("LobbyCamera", true, false)
+		if lobby_camera:
+			lobby_camera.current = false
+			
+		# Give player immediate control and camera
+		target_camera = get_player_gameplay_camera(local_player)
+		if target_camera:
+			target_camera.current = true
+			
+		if local_player.has_method("enable_controls"):
+			local_player.enable_controls(true)
+			
+		intro_running = false
+		return
+	# ==========================================
+
+	intro_running = true
+	intro_camera.current = true
 
 	target_camera = get_player_gameplay_camera(local_player)
 	if target_camera:
@@ -72,7 +92,7 @@ func wait_for_local_player() -> Node3D:
 	return null
 
 func start_intro():
-# intro_running is already true from _on_game_started()
+	# intro_running is already true from _on_game_started()
 
 	# Turn off lobby camera immediately
 	var lobby_camera = get_tree().get_root().find_child("LobbyCamera", true, false)

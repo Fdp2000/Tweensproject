@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://uyed2qv4xkw6" path="res://Assets/Models/Test Panda/HypnoPanda.tscn" id="7_kcrnk"]
 [ext_resource type="PackedScene" uid="uid://ca2rq6epwa2ac" path="res://Assets/Models/Test Panda/OutlinePanda.tscn" id="9_av4ca"]
 [ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="10_av4ca"]
+[ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="11_3qlyf"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
@@ -200,3 +201,6 @@ transform = Transform3D(2.61, 0, 0, 0, 2.61, 0, 0, 0, 2.61, 20.865583, 0, -0.726
 
 [node name="Chameleon_Character2" parent="." unique_id=1423752438 instance=ExtResource("7_kcrnk")]
 transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 11.845292, 0, -0.8280649)
+
+[node name="Næsehorn" parent="." unique_id=2043154851 instance=ExtResource("11_3qlyf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.890285, 0, -0.6751852)

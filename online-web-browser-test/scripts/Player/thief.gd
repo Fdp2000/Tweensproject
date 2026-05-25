@@ -6,13 +6,15 @@ const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
 @export var hypno_material: ShaderMaterial
 
 @onready var anim_player = $Chameleon_Character/AnimationPlayer
+@onready var anim_tree = $Chameleon_Character/AnimationTree # <--- ADDED ANIM TREE
 @onready var visual_mesh = $Chameleon_Character
-var favorite_runs = ["Run1", "Run3", "Run4", "Run5"] # <-- Put your favorite runs here
-var favorite_idles = ["Idle1", "Idle2", "Idle3"] # <-- Put your favorite idles here
-# We need this to remember what the character is doing, 
-# otherwise it will pick a new random animation 60 times a second!
-var is_currently_moving = false
 
+var favorite_runs = ["Run1", "Run3", "Run4", "Run5"]
+var favorite_idles = ["Idle1"] 
+
+var is_currently_moving = false
+var is_camo_posing = false # <--- ADDED FOR STEALTH TOGGLE
+var sync_mesh_rot_y: float = 0.0 # <--- ADDED FOR MULTIPLAYER CAMERA SYNC
 
 var ui_manager: Node = null
 var camera_manager: Node = null
@@ -24,9 +26,9 @@ var cash_contributed: int = 0
 var is_hypnotized: bool = false
 var is_rescue_halted: bool = false
 var is_jailed: bool = false
-var jail_walk_target: Vector3 = Vector3.ZERO   # Where the thief walks to (outside jail door)
-var jail_cell_target: Vector3 = Vector3.ZERO   # Where the thief gets teleported (inside cell)
-var jail_cell_rot_y: float = 0.0 # <--- ADD THIS
+var jail_walk_target: Vector3 = Vector3.ZERO   
+var jail_cell_target: Vector3 = Vector3.ZERO   
+var jail_cell_rot_y: float = 0.0 
 
 var is_highlighted: bool = false
 var is_mobile_interact: bool = false
@@ -37,6 +39,13 @@ var current_speed_mult: float = 1.0
 var nearby_interactables: Array[Node3D] = []
 var interaction_scanner: Area3D
 
+# ==========================================
+# --- MULTIPLAYER CAMERA SYNC ---
+# ==========================================
+@rpc("any_peer", "call_local", "unreliable")
+func sync_mesh_rot(rot_y: float):
+	sync_mesh_rot_y = rot_y
+
 func get_carried_artifact():
 	return carried_artifact
 
@@ -45,6 +54,9 @@ func on_artifact_pickup(artifact: Node3D):
 
 func on_artifact_drop():
 	carried_artifact = null
+	# --- ADD THIS FIX ---
+	# Wipe the memory so State B thinks we "just started" moving this exact frame!
+	is_currently_moving = false
 
 func spawn_smoke():
 	var smoke_intance = SMOKE_PARTICLES.instantiate()
@@ -62,13 +74,11 @@ var outline_mat: StandardMaterial3D = null
 
 var debug_path_mesh: MeshInstance3D
 var debug_label: Label3D
-
 var custom_path_index: int = 0
 
 func _ready():
 	super._ready()
 	nav_agent = NavigationAgent3D.new()
-	# We use nav_agent ONLY to generate the path. We will handle following it manually to avoid 3D distance bugs!
 	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
 	
@@ -101,14 +111,12 @@ func _ready():
 		ui_manager = ThiefUIManager.new()
 		add_child(ui_manager)
 		ui_manager.setup(self)
+		
 		# Initialize Camera Manager
 		camera_manager = ThiefCameraManager.new()
 		add_child(camera_manager)
 		camera_manager.setup(self)
-# =====================================================================
-	# --- MOVE THESE OUTSIDE! (Everyone needs to see visuals and pings) ---
-	# =====================================================================
-	
+
 	stealth_manager = ThiefStealthManager.new()
 	add_child(stealth_manager)
 	stealth_manager.setup(self, camo_material, hypno_material)
@@ -117,12 +125,11 @@ func _ready():
 	add_child(world_ping_manager)
 	world_ping_manager.setup(self)
 
-	
 	if is_multiplayer_authority():
 		interaction_scanner = Area3D.new()
 		interaction_scanner.name = "InteractionScanner"
 		interaction_scanner.collision_layer = 0
-		interaction_scanner.collision_mask = 10 # Layer 2 (Players) + Layer 4 (Artifacts)
+		interaction_scanner.collision_mask = 10 
 		add_child(interaction_scanner)
 		
 		var col = CollisionShape3D.new()
@@ -145,21 +152,19 @@ func _on_path_changed():
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	
-	# --- DEV TOOL: Toggle Hypnotized ---
 	if event is InputEventKey and event.physical_keycode == KEY_H and event.pressed and not event.echo:
 		rpc("dev_toggle_hypnotize")
 		return
 		
 	super._unhandled_input(event)
 	
-	# Interact/Pickup/Drop/Rescue
 	var is_interact = (event is InputEventKey and event.physical_keycode == KEY_E and event.pressed and not event.echo) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
 	if is_interact:
 		if carried_artifact: 
 			_try_drop()
 		else:
 			var target = get_closest_interactable()
-			if target and not target.has_method("on_captured"): # Artifact
+			if target and not target.has_method("on_captured"): 
 				target.rpc_id(1, "request_pickup", multiplayer.get_unique_id())
 
 func _input(event):
@@ -174,7 +179,6 @@ func _input(event):
 			get_viewport().set_input_as_handled()
 			return
 			
-	# --- LET THE MANAGER HANDLE CAMERA INPUTS ---
 	if camera_manager and camera_manager.handle_input(event):
 		get_viewport().set_input_as_handled()
 		return
@@ -226,8 +230,6 @@ func get_closest_interactable() -> Node3D:
 	if closest_thief: return closest_thief
 	return closest_art
 
-
-
 func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 	jail_walk_target = walk_pos
 	jail_cell_target = cell_pos
@@ -235,13 +237,16 @@ func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 		nav_agent.target_position = jail_walk_target
 
 func _custom_physics_process(delta, direction):
+	
+	# ==========================================
+	# 1. MOVEMENT STATE MACHINE
+	# ==========================================
 	if is_jailed or (camera_manager and camera_manager.is_on_cameras):
-		# --- USE BRAKING FRICTION ---
 		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
 		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction)
-		return
+		# (REMOVED 'return' HERE)
 	
-	if is_hypnotized:
+	elif is_hypnotized: # Changed 'if' to 'elif'
 		if is_multiplayer_authority():
 			if is_rescue_halted:
 				velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction)
@@ -286,7 +291,6 @@ func _custom_physics_process(delta, direction):
 							if debug_label: debug_label.text = "STOPPED (Reached Target)\nVel: 0"
 						else:
 							var dir_to_next = flat_global.direction_to(flat_target)
-							# --- USE HYPNO SPEED ---
 							velocity.x = dir_to_next.x * Balance.hypno_thief_speed
 							velocity.z = dir_to_next.z * Balance.hypno_thief_speed
 							
@@ -301,7 +305,6 @@ func _custom_physics_process(delta, direction):
 		if multiplayer.is_server():
 			if active_rescuer_id != -1:
 				var rescuer = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(active_rescuer_id))
-				# --- UNIFY RESCUE DISTANCE WITH INTERACT RADIUS ---
 				if rescuer and rescuer.global_position.distance_to(global_position) <= Balance.interact_shape_size:
 					if not is_rescue_halted:
 						is_rescue_halted = true
@@ -310,7 +313,6 @@ func _custom_physics_process(delta, direction):
 					rescue_progress += delta
 					rpc("sync_rescue_progress", rescue_progress)
 					
-					# --- USE BALANCE RESCUE TIME ---
 					if rescue_progress >= Balance.thief_rescue_time:
 						active_rescuer_id = -1
 						rpc("sync_active_rescuer", -1) 
@@ -331,77 +333,145 @@ func _custom_physics_process(delta, direction):
 				if is_rescue_halted:
 					is_rescue_halted = false
 					rpc("sync_rescue_halt", false)
-		return
+		# (REMOVED 'return' HERE)
 		
-	if carried_artifact:
-		current_speed_mult = carried_artifact.weight_penalty
-	else:
-		current_speed_mult = move_toward(current_speed_mult, 1.0, delta * 0.3)
-		
-	if direction:
-		# --- USE BASE THIEF SPEED ---
-		velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
-		velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
-	else:
-		# --- USE BRAKING FRICTION ---
-		velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction * current_speed_mult)
-		velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction * current_speed_mult)
-	# ==========================================
-	# --- CHAMELEON ANIMATION STATE MACHINE ---
-	# ==========================================
-	if is_jailed:
-		anim_player.stop()
-		
-	elif is_hypnotized:
-		# We can just use a fast blend here too!
-		if velocity.length_squared() > 0.05:
-			anim_player.play("Run1", 0.2) # Hardcode a specific run for dragging if you want!
+	else: # Changed 'if' to 'else'
+		if carried_artifact:
+			current_speed_mult = carried_artifact.weight_penalty
 		else:
+			current_speed_mult = move_toward(current_speed_mult, 1.0, delta * 0.3)
+			
+		if direction:
+			velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
+			velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
+		else:
+			velocity.x = move_toward(velocity.x, 0, Balance.thief_braking_friction * current_speed_mult)
+			velocity.z = move_toward(velocity.z, 0, Balance.thief_braking_friction * current_speed_mult)
+			
+
+	# ==========================================
+	# 2. ANIMATION STATE MACHINE (NOW IT WILL RUN!)
+	# ==========================================
+	var current_vel = velocity
+	if not is_multiplayer_authority():
+		current_vel = sync_velocity
+
+	var horizontal_speed_sq = Vector2(current_vel.x, current_vel.z).length_squared()
+
+	if is_jailed:
+		anim_tree.active = false
+		if anim_player.current_animation != "Idle1":
 			anim_player.play("Idle1", 0.2)
 			
-	else:
-		var current_vel = velocity
-		if not is_multiplayer_authority():
-			current_vel = sync_velocity
-
-		var horizontal_speed_sq = Vector2(current_vel.x, current_vel.z).length_squared()
+		# When jailed, the parent body faces outward (-Z). Since the mesh's native forward is +Z, we add PI.
+		var target_angle = global_rotation.y + PI
+		visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 		
-		# --- IF WE ARE MOVING ---
+	elif is_hypnotized:
+		anim_tree.active = false
+		
+		if is_rescue_halted:
+			# STAND STILL: A teammate is currently rescuing me!
+			if anim_player.current_animation != "Idle1":
+				anim_player.play("Idle1", 0.2)
+		else:
+			# NO RESCUER: Zombie walk to the cell!
+			if anim_player.current_animation != "Hypno_Walk":
+				anim_player.play("Hypno_Walk", 0.2)
+				
+		# FIX: Ensure the visual mesh still rotates to face the direction of movement, exactly like normal running!
 		if horizontal_speed_sq > 0.05:
-			
-			# Did we JUST start moving this exact frame?
-			if not is_currently_moving:
-				is_currently_moving = true
-				
-				# Pick a random run cycle!
-				var random_run = favorite_runs.pick_random()
-				
-				# Play it, and smoothly blend the bones over 0.2 seconds
-				anim_player.play(random_run, 0.2) 
-			
-			# Keep rotating the mesh every frame
 			var target_angle = atan2(current_vel.x, current_vel.z) 
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 			
-		# --- IF WE ARE STANDING STILL ---
-		else:
+	elif carried_artifact != null:
+		# ----------------------------------------
+		# STATE A: CARRYING AN ARTIFACT
+		# ----------------------------------------
+		
+		anim_tree.active = true
+		anim_tree.get("parameters/playback").travel("Holding_State")
+		
+		if carried_artifact:
+			if carried_artifact.artifact_category == carried_artifact.Category.WALL_PROP:
+				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "wall_prop")
+			elif carried_artifact.artifact_category == carried_artifact.Category.FLOOR_PROP:
+				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "floor_prop")
+
+		var target_rot = 0.0
+		if pitch_pivot:
+			target_rot = pitch_pivot.global_rotation.y + PI
 			
-			# Did we JUST stop moving this exact frame?
+		if is_multiplayer_authority() and pitch_pivot:
+			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_rot, 10.0 * delta)
+			rpc("sync_mesh_rot", visual_mesh.global_rotation.y)
+		else:
+			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, sync_mesh_rot_y, 10.0 * delta)
+
+		var is_trying_to_move = false
+		if is_multiplayer_authority():
+			var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+			is_trying_to_move = input_dir.length_squared() > 0.01
+		else:
+			is_trying_to_move = horizontal_speed_sq > 0.05
+		
+		if is_trying_to_move:
+			is_camo_posing = false
+			is_currently_moving = true 
+			anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
+			anim_tree.set("parameters/Holding_State/Blend2/blend_amount", 1.0)
+			
+			var local_velocity = current_vel.rotated(Vector3.UP, -pitch_pivot.global_rotation.y)
+			var grid_position = Vector2(local_velocity.x, -local_velocity.z).normalized()
+			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", grid_position)
+			# AUTO-SYNC: Calculate exact speed based on actual velocity!
+			var actual_speed = Vector2(current_vel.x, current_vel.z).length()
+			var final_tree_speed = actual_speed / Balance.anim_native_speed
+			
+			anim_tree.set("parameters/Holding_State/TimeScale/scale", final_tree_speed)
+			
+		else:
+			is_currently_moving = false 
+			anim_tree.set("parameters/Holding_State/CarryMovement/blend_position", Vector2.ZERO)
+			
+			if stealth_manager and stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
+				if not is_camo_posing:
+					is_camo_posing = true
+				anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "hiding")
+			else:
+				anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
+				
+	else:
+		# ----------------------------------------
+		# STATE B: NORMAL RUNNING (EMPTY HANDED)
+		# ----------------------------------------
+		anim_tree.active = false
+		
+		if horizontal_speed_sq > 0.05:
+			if not is_currently_moving:
+				is_currently_moving = true
+				var random_run = favorite_runs.pick_random()
+				# AUTO-SYNC: Calculate exact speed based on actual velocity!
+				var actual_speed = Vector2(current_vel.x, current_vel.z).length()
+				var final_player_speed = actual_speed / Balance.anim_native_speed
+				
+				anim_player.play(random_run, 0.2, final_player_speed)
+			
+			var target_angle = atan2(current_vel.x, current_vel.z) 
+			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
+		else:
 			if is_currently_moving:
 				is_currently_moving = false
-				
-				# Pick a random idle cycle!
 				var random_idle = favorite_idles.pick_random()
+				anim_player.play(random_idle, 0.3) 
 				
-				# Play it, and smoothly blend into the idle over 0.3 seconds
-				anim_player.play(random_idle, 0.3)
+			elif stealth_manager and stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
+				if anim_player.current_animation != "Camo_Pose":
+					anim_player.play("Camo_Pose", Balance.thief_camo_fade_duration_sec)
 			
 func _process(delta):
-		# --- ADD THIS LINE RIGHT HERE! ---
-	# This tells Godot to run the network smoothing math from Player.gd!
 	super._process(delta) 
-	# ---------------------------------
-	# --- STEALTH & VISUALS ---
+	
 	if stealth_manager:
 		var speed = 0.0
 		if is_multiplayer_authority():
@@ -413,27 +483,21 @@ func _process(delta):
 			
 		stealth_manager.process_stealth(delta, speed, is_hypnotized, is_jailed, is_highlighted)
 
-	# HIGHLIGHT & INTERACTION LOGIC (Runs ONLY for the local player)
 	if not is_multiplayer_authority(): return
 	
-	## ---  RESCUE UI LOGIC ---
 	if ui_manager:
 		if is_jailed:
-			ui_manager.update_rescue_ring(0.0, false) # Hide in jail
+			ui_manager.update_rescue_ring(0.0, false) 
 		elif is_hypnotized:
-			# Feature: See your OWN rescue progress, but ONLY if someone is rescuing you!
 			if active_rescuer_id != -1:
 				ui_manager.update_rescue_ring(rescue_progress / Balance.thief_rescue_time, true)
 			else:
-				ui_manager.update_rescue_ring(0.0, false) # Hide if nobody is rescuing
+				ui_manager.update_rescue_ring(0.0, false) 
 		elif is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
-			# Normal: See the progress of the person you are saving
 			ui_manager.update_rescue_ring(current_interact_target.rescue_progress / Balance.thief_rescue_time, true)
 		else:
-			ui_manager.update_rescue_ring(0.0, false) # Default hide ring when empty
+			ui_manager.update_rescue_ring(0.0, false) 
 			
-	
-	# FIX: If hypnotized or jailed, immediately clear highlights and stop rescuing!
 	if is_hypnotized or is_jailed:
 		if stealth_manager: stealth_manager.update_outlines(null)
 		if is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
@@ -442,7 +506,6 @@ func _process(delta):
 			current_interact_target = null
 		return
 
-	# Scan for targets
 	var target = null
 	if is_rescuing and current_interact_target and is_instance_valid(current_interact_target):
 		target = current_interact_target
@@ -451,7 +514,6 @@ func _process(delta):
 		
 	if stealth_manager: stealth_manager.update_outlines(target)
 	
-
 	if camera_manager and camera_manager.is_on_cameras:
 		if is_mobile_interact:
 			is_mobile_interact = false
@@ -477,7 +539,6 @@ func _process(delta):
 			is_rescuing = false
 			current_interact_target = null
 
-
 @rpc("any_peer", "call_local")
 func on_captured():
 	if is_hypnotized: return
@@ -485,11 +546,7 @@ func on_captured():
 	disable_body_rotation = true 
 	spawn_smoke()
 	
-	# --- 1. FORCE GODOT TO SCRAMBLE ITS RANDOM NUMBERS ---
 	randomize() 
-	# -----------------------------------------------------
-	
-
 		
 	collision_layer = 8 
 	collision_mask = 5  
@@ -503,7 +560,6 @@ func on_captured():
 	if jails.size() > 0:
 		var jail = jails.pick_random() 
 		
-		# --- 2. FOOLPROOF EXPLICIT ARRAY ---
 		var possible_cells = [
 			jail.get_node_or_null("CellTarget"),
 			jail.get_node_or_null("CellTarget2"),
@@ -511,11 +567,8 @@ func on_captured():
 			jail.get_node_or_null("CellTarget4")
 		]
 		
-		# Filter out any nulls (just in case you ever delete one of the cells in the editor!)
 		possible_cells = possible_cells.filter(func(node): return node != null)
-		
 		var cell_target = possible_cells.pick_random()
-		# -----------------------------------
 		
 		var walk_pos = jail.get_node("WalkTarget").global_position
 		var cell_pos = cell_target.global_position
@@ -548,7 +601,6 @@ func dev_toggle_hypnotize():
 		collision_layer = 2
 		collision_mask = 3
 		
-		# Reset camera to look forward again
 		pitch_pivot.rotation = Vector3.ZERO
 		
 		print("[DEV] Thief UN-hypnotized via hotkey")
@@ -567,7 +619,6 @@ func draw_debug_path():
 	var im_mesh = ImmediateMesh.new()
 	im_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
 	for i in range(path.size() - 1):
-		# Draw a bright line 0.5m above the ground
 		im_mesh.surface_add_vertex(path[i] + Vector3(0, 0.5, 0))
 		im_mesh.surface_add_vertex(path[i+1] + Vector3(0, 0.5, 0))
 	im_mesh.surface_end()
@@ -579,7 +630,7 @@ func request_start_rescue(target_id: int):
 	var target = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(target_id))
 	if target and target.get("is_hypnotized"):
 		target.active_rescuer_id = multiplayer.get_remote_sender_id()
-		target.rpc("sync_active_rescuer", target.active_rescuer_id) # <-- ADD THIS
+		target.rpc("sync_active_rescuer", target.active_rescuer_id) 
 
 @rpc("any_peer", "call_local")
 func request_stop_rescue(target_id: int):
@@ -587,7 +638,7 @@ func request_stop_rescue(target_id: int):
 	var target = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects/" + str(target_id))
 	if target and target.active_rescuer_id == multiplayer.get_remote_sender_id():
 		target.active_rescuer_id = -1
-		target.rpc("sync_active_rescuer", -1) # <-- ADD THIS
+		target.rpc("sync_active_rescuer", -1) 
 
 @rpc("any_peer", "call_local", "unreliable")
 func sync_rescue_progress(prog: float):
@@ -611,20 +662,19 @@ func rescue_successful():
 	if not is_hypnotized: return
 	
 	is_hypnotized = false
-	disable_body_rotation = false # Turn off free-look
+	disable_body_rotation = false 
 	
 	collision_layer = 4 
 	collision_mask = 15 
 	
 	is_rescue_halted = false
 	if pitch_pivot:
-		pitch_pivot.rotation.y = 0 # Snap camera back to body's forward direction
-		pitch_pivot.rotation.z = 0 # Fix any dutch-angle tilt introduced by the global_basis override
+		pitch_pivot.rotation.y = 0 
+		pitch_pivot.rotation.z = 0 
 		
 	if multiplayer.is_server():
 		GameManager.rpc("thief_rescued")
 
-# --- ADD cell_rot_y TO THE ARGUMENTS ---
 @rpc("any_peer", "call_local")
 func on_jailed(cell_pos: Vector3, cell_rot_y: float):
 	is_hypnotized = false
@@ -635,10 +685,8 @@ func on_jailed(cell_pos: Vector3, cell_rot_y: float):
 	collision_mask = 15 
 	is_rescue_halted = false
 	
-	# --- ADD '+ PI' TO FLIP THEM 180 DEGREES ---
 	global_position = cell_pos
 	rotation.y = cell_rot_y + PI
-	# -------------------------------------------
 	
 	if pitch_pivot:
 		pitch_pivot.rotation.y = 0
