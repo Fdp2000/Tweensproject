@@ -1,0 +1,262 @@
+[gd_scene format=3 uid="uid://boq6oww22vrxp"]
+
+[ext_resource type="Texture2D" uid="uid://d3t7qejypgtxb" path="res://Assets/Textures/rightPhoto.png" id="1_rva5a"]
+[ext_resource type="Texture2D" uid="uid://umfokr7m3c36" path="res://icon.svg" id="2_6orfi"]
+[ext_resource type="Texture2D" uid="uid://dl75yj34ys2iq" path="res://Assets/Models/Prototype Models/Dingus the cat_Maxwell.jpg" id="3_qpiog"]
+[ext_resource type="Texture2D" uid="uid://bjktwtfip5vv2" path="res://Assets/UI/computer-mouse-solid.png" id="4_vp1kd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eogs7"]
+font_size = 88
+
+[sub_resource type="LabelSettings" id="LabelSettings_y1tor"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ldys"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_rgnoe"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_s2pjy"]
+
+[node name="Node3D" type="Node3D" unique_id=364404085]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1557885354]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=1933635025]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control" unique_id=1092082549]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Panel" unique_id=1309253513]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer" unique_id=562997465]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer" unique_id=2002167194]
+layout_mode = 2
+text = "COP"
+label_settings = SubResource("LabelSettings_eogs7")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer" unique_id=1134283891]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 85
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1775280324]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 90
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1367099810]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1544466010]
+layout_mode = 2
+text = "1. CATCH"
+label_settings = SubResource("LabelSettings_y1tor")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1732178380]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_rva5a")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=47890557]
+layout_mode = 2
+text = "Steal Artifacts in the museum "
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1280484258]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=176743347]
+layout_mode = 2
+text = "2. DEFEND"
+label_settings = SubResource("LabelSettings_7ldys")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=2046683228]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("2_6orfi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1355319575]
+layout_mode = 2
+text = "Rescue your friends that have been caught by 
+the guards! "
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1783059842]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1601922234]
+layout_mode = 2
+text = "3. CHARGE"
+label_settings = SubResource("LabelSettings_rgnoe")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=2075955107]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("3_qpiog")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1042017003]
+layout_mode = 2
+text = "Avoid the guards by hiding! You can even
+turn invisible if you stand still for a couple
+of seconds!"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1469234567]
+layout_mode = 2
+
+[node name="ControlsPanel" type="PanelContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=729545228]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel" unique_id=839201915]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ControlsTitle" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer" unique_id=703322722]
+layout_mode = 2
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="MovementTitle" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer" unique_id=874748985]
+layout_mode = 2
+text = "MOVEMENT"
+horizontal_alignment = 1
+
+[node name="MovementRow" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer" unique_id=208182757]
+layout_mode = 2
+
+[node name="Keys" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow" unique_id=1518760829]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TopRow" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=518537626]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="WKey" type="PanelContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/TopRow" unique_id=1150845023]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/TopRow/WKey" unique_id=1250330893]
+layout_mode = 2
+text = "W"
+horizontal_alignment = 1
+
+[node name="BottomRow" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=342895053]
+layout_mode = 2
+
+[node name="AKey" type="PanelContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=1403672110]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/AKey" unique_id=1737834864]
+layout_mode = 2
+text = "A"
+horizontal_alignment = 1
+
+[node name="SKey" type="PanelContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=1861801174]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/SKey" unique_id=1594820003]
+layout_mode = 2
+text = "S"
+horizontal_alignment = 1
+
+[node name="DKey" type="PanelContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=1233063025]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/DKey" unique_id=2025696326]
+layout_mode = 2
+text = "D"
+horizontal_alignment = 1
+
+[node name="OtherKeys" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=763768099]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="InteractKey" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys" unique_id=1997681992]
+layout_mode = 2
+
+[node name="InteractKey" type="PanelContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/InteractKey" unique_id=2119848284]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/InteractKey/InteractKey" unique_id=89307770]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+text = "E"
+label_settings = SubResource("LabelSettings_s2pjy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/InteractKey" unique_id=1622454675]
+layout_mode = 2
+text = "Interact"
+
+[node name="AltKey" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys" unique_id=1121330681]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="AltKey" type="PanelContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/AltKey" unique_id=2121212459]
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/AltKey/AltKey" unique_id=1754610734]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+text = "SHIFT"
+label_settings = SubResource("LabelSettings_s2pjy")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/AltKey" unique_id=1802371090]
+layout_mode = 2
+text = "Charge"
+
+[node name="Mouse" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys" unique_id=1207057694]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/Mouse" unique_id=1218040863]
+custom_minimum_size = Vector2(45, 45)
+layout_mode = 2
+texture = ExtResource("4_vp1kd")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/Mouse" unique_id=812127730]
+layout_mode = 2
+text = "CAMERA"

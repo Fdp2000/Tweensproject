@@ -92,6 +92,11 @@ func _on_leave_pressed():
 		client_ui._disconnected()
 
 func _on_start_pressed():
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
+
+	if client_ui and client_ui.get("local_player_name") != null:
+		GameManager.sync_player_data(multiplayer.get_unique_id(), client_ui.local_player_name)
+
 	GameManager.host_start_game()
 
 func update_ui():

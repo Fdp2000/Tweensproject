@@ -10,9 +10,6 @@ extends CanvasLayer
 @export var thief_preview_scene: PackedScene
 @export var cop_preview_scene: PackedScene
 
-var left_model: Node3D
-var right_model: Node3D
-
 func _ready():
 	root_control.set_anchors_preset(Control.PRESET_FULL_RECT)
 	root_control.size = get_viewport().get_visible_rect().size
@@ -29,8 +26,8 @@ func show_from_spawned(spawned: Node):
 	clear_models()
 	clear_name_lists()
 
-	var robber_index := 0
-	var cop_index := 0
+	var robbers := []
+	var cops := []
 
 	for player in spawned.get_children():
 		var player_name := get_display_name(player)
@@ -38,24 +35,26 @@ func show_from_spawned(spawned: Node):
 
 		if team_index == 1:
 			add_name_to_list(cops_list, player_name)
-
-			if cop_index == 0 and cop_preview_scene:
-				right_model = cop_preview_scene.instantiate()
-				right_spawn.add_child(right_model)
-				play_emote(right_model)
-
-			cop_index += 1
-
+			cops.append(player)
 		else:
 			add_name_to_list(robbers_list, player_name)
+			robbers.append(player)
 
-			if robber_index == 0 and thief_preview_scene:
-				left_model = thief_preview_scene.instantiate()
-				left_spawn.add_child(left_model)
-				play_emote(left_model)
+	for i in range(robbers.size()):
+		if thief_preview_scene:
+			var model = thief_preview_scene.instantiate()
+			left_spawn.add_child(model)
 
-			robber_index += 1
+			apply_lineup_transform(model, i, robbers.size(), false)
+			play_emote(model)
 
+	for i in range(cops.size()):
+		if cop_preview_scene:
+			var model = cop_preview_scene.instantiate()
+			right_spawn.add_child(model)
+
+			apply_lineup_transform(model, i, cops.size(), true)
+			play_emote(model)
 
 func add_name_to_list(list: VBoxContainer, player_name: String):
 	var label := Label.new()
@@ -89,8 +88,55 @@ func play_emote(model: Node3D):
 	if anim:
 		if anim.has_animation("emote"):
 			anim.play("emote")
-		elif anim.has_animation("idle"):
-			anim.play("idle")
+		elif anim.has_animation("Idle1"):
+			anim.play("Idle1")
+
+func apply_lineup_transform(model: Node3D, index: int, total: int, is_cop: bool):
+
+	var side := 1.0 if is_cop else -1.0
+	var scale := 1.0
+	var x := 0.0
+	var z := 0.0
+
+	match total:
+
+		1:
+			scale = 1.8
+			x = side * 2.5
+			z = 0.0
+
+		2:
+			scale = 1.4
+			x = side * (2.0 + index * 1.2)
+			z = 0.0
+
+		3:
+			scale = 1.1
+			x = side * (1.8 + index * 0.8)
+			z = 0.0
+
+		4:
+			scale = 1.0
+			x = side * (1.6 + index * 0.7)
+			z = 0.0
+
+		_:
+			scale = 0.85
+
+			var row := int(index / 3)
+			var col := index % 3
+
+			x = side * (1.5 + col * 0.7)
+			z = row * -0.9
+
+	model.position = Vector3(x, 0, z)
+
+	model.scale = Vector3.ONE * scale
+
+	if is_cop:
+		model.rotation.y = deg_to_rad(-20)
+	else:
+		model.rotation.y = deg_to_rad(20)
 
 
 func clear_models():
