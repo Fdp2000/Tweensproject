@@ -36,6 +36,7 @@ var current_hud: Node = null
 var lobby_ui: Node = null
 var first_time_tutorial := true
 var tutorial_intro_cancelled := false
+var has_requested_lobby := false
 
 func _ready() -> void:
 	client.lobby_joined.connect(_lobby_joined)
@@ -161,6 +162,8 @@ func _play_tutorial_intro() -> void:
 	_on_tutorial_pressed()
 
 func show_lobby() -> void:
+	if not has_requested_lobby:
+		return
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
@@ -176,6 +179,7 @@ func show_lobby() -> void:
 
 
 func _on_host_pressed() -> void:
+	has_requested_lobby = true
 	tutorial_intro_cancelled = true
 	local_player_name = name_input.text.strip_edges()
 
@@ -187,6 +191,7 @@ func _on_host_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
+	has_requested_lobby = true
 	tutorial_intro_cancelled = true
 	local_player_name = name_input.text.strip_edges()
 	current_room_code = room_input.text.strip_edges().to_upper()
@@ -246,6 +251,9 @@ func _disconnected() -> void:
 
 
 func _lobby_joined(lobby_id: String) -> void:
+	if not has_requested_lobby:
+		return
+
 	print("[Signaling] Joined lobby: ", lobby_id)
 
 	current_room_code = lobby_id
