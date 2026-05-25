@@ -45,11 +45,11 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -117.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer" unique_id=1221809872]
-layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -61,9 +61,9 @@ horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer" unique_id=226928151]
 layout_mode = 2
-theme_override_constants/margin_left = 200
-theme_override_constants/margin_top = 85
-theme_override_constants/margin_right = 200
+theme_override_constants/margin_left = 27
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 27
 theme_override_constants/margin_bottom = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1176970383]
@@ -80,7 +80,7 @@ text = "1. STEAL"
 label_settings = SubResource("LabelSettings_j2xlo")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1845960203]
-custom_minimum_size = Vector2(450, 450)
+custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("1_0ih8x")
@@ -100,7 +100,7 @@ text = "2. RESCUE"
 label_settings = SubResource("LabelSettings_7xyp7")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=656038580]
-custom_minimum_size = Vector2(450, 450)
+custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("2_ovaji")
@@ -109,8 +109,8 @@ stretch_mode = 5
 
 [node name="Label2" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1585388957]
 layout_mode = 2
-text = "Rescue your friends that have been caught by 
-the guards! "
+text = "Rescue your friends that have 
+been caught by the guards! "
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=787886748]
 layout_mode = 2
@@ -121,7 +121,7 @@ text = "3. STEALTH"
 label_settings = SubResource("LabelSettings_606lv")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=404725368]
-custom_minimum_size = Vector2(450, 450)
+custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("3_j2xlo")
@@ -130,8 +130,9 @@ stretch_mode = 5
 
 [node name="Label2" type="Label" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=13586514]
 layout_mode = 2
-text = "Avoid the guards by hiding! You can even
-turn invisible if you stand still for a couple
+text = "Avoid the guards by hiding!
+You can even turn invisible
+ if you stand still for a couple
 of seconds!"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1370134492]
