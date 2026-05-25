@@ -49,6 +49,9 @@ func _ready():
 		canvas_layer.layer = 100 
 		canvas_layer.add_child(cached_scoreboard)
 		add_child(canvas_layer)
+		
+		cached_scoreboard.set_process(false) # CRITICAL: Call this AFTER adding to tree!
+		cached_scoreboard.process_mode = Node.PROCESS_MODE_DISABLED # Double tap!
 
 
 func _on_timer_tick():
@@ -326,6 +329,7 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 	if cached_scoreboard:
 		cached_scoreboard.populate(winner_text, cops_data, thieves_data)
 		cached_scoreboard.visible = true
+		cached_scoreboard.process_mode = Node.PROCESS_MODE_INHERIT
 		cached_scoreboard.set_process(true)
 		cached_scoreboard.countdown = 5.0 # Reset timer
 
@@ -340,6 +344,7 @@ func return_to_lobby():
 func client_return_to_lobby():
 	if cached_scoreboard:
 		cached_scoreboard.visible = false
+		cached_scoreboard.process_mode = Node.PROCESS_MODE_DISABLED
 		
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
