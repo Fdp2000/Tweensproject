@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dnj1qlpx0weot"]
 
 [ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="1_fvmxw"]
-[ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="2_6luog"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_6luog"]
 [ext_resource type="AnimationLibrary" uid="uid://dxd455nu0metc" path="res://Assets/Animations/Chameleon/Camo_Pose.res" id="3_6luog"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rqyss"]
@@ -135,6 +135,34 @@ bind/33/name = &"neutral_bone"
 bind/33/bone = -1
 bind/33/pose = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cp31n"]
+load_path = "res://.godot/imported/Chameleon_Character_Chameleon_Texture_Big_Eyes.png-247ab34f3678461fc9055b7089d80f10.s3tc.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eomr5"]
+render_priority = 0
+shader = ExtResource("2_6luog")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = SubResource("CompressedTexture2D_cp31n")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_p1jj1"]
 resource_name = "Chameleon_Character_Cube_002"
 _surfaces = [{
@@ -155,6 +183,31 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bl0h2"]
+render_priority = 0
+shader = ExtResource("2_6luog")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = SubResource("CompressedTexture2D_cp31n")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_i4j2w"]
 resource_name = "Chameleon_Character_Cube_001"
 _surfaces = [{
@@ -174,6 +227,31 @@ _surfaces = [{
 "vertex_data": PackedByteArray("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")
 }]
 blend_shape_mode = 0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yu3g8"]
+render_priority = 0
+shader = ExtResource("2_6luog")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = SubResource("CompressedTexture2D_cp31n")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6luog"]
 animation = &"CarryReal"
@@ -519,19 +597,19 @@ bones/33/scale = Vector3(1, 1, 1)
 mesh = SubResource("ArrayMesh_xib3l")
 skin = SubResource("Skin_6rlxd")
 skeleton = NodePath("..")
-surface_material_override/0 = ExtResource("2_6luog")
+surface_material_override/0 = SubResource("ShaderMaterial_eomr5")
 
 [node name="Eye_L" type="MeshInstance3D" parent="Chameleon_Character/metarig/Skeleton3D" unique_id=970056815]
 mesh = SubResource("ArrayMesh_p1jj1")
 skin = SubResource("Skin_6rlxd")
 skeleton = NodePath("..")
-surface_material_override/0 = ExtResource("2_6luog")
+surface_material_override/0 = SubResource("ShaderMaterial_bl0h2")
 
 [node name="Eye_R" type="MeshInstance3D" parent="Chameleon_Character/metarig/Skeleton3D" unique_id=940823346]
 mesh = SubResource("ArrayMesh_i4j2w")
 skin = SubResource("Skin_6rlxd")
 skeleton = NodePath("..")
-surface_material_override/0 = ExtResource("2_6luog")
+surface_material_override/0 = SubResource("ShaderMaterial_yu3g8")
 
 [node name="ArtifactAttachment" type="BoneAttachment3D" parent="Chameleon_Character/metarig/Skeleton3D" unique_id=1382092179]
 transform = Transform3D(-0.6121215, 0.106993854, 0.7834916, 0.7888908, 0.1507891, 0.59574604, -0.054400645, 0.98276293, -0.17671154, -0.2978213, 0.6563721, 0.22010873)
