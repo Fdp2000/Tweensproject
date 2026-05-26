@@ -311,15 +311,8 @@ func _on_player_joined(id: int) -> void:
 	pf.name = str(id)
 	pf.team_index = GameManager.PlayerRole.THIEF
 	pf.position = spawn_pos
+	pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 	spawned.add_child(pf, true)
-
-	await get_tree().process_frame
-
-	if pf.has_method("_set_spawn_position"):
-		pf._set_spawn_position.rpc(spawn_pos)
-
-	if pf.has_method("sync_team"):
-		pf.sync_team.rpc(GameManager.PlayerRole.THIEF)
 
 
 func _on_game_started() -> void:
@@ -359,25 +352,23 @@ func _on_game_started() -> void:
 					pf.name = str(id)
 					pf.team_index = role
 					pf.position = spawn_pos
+					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 					spawned.add_child(pf, true)
 				else:
 					if pf:
 						pf.position = spawn_pos
 						pf.team_index = role
+						pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
+						pf.rpc("_set_spawn_position", spawn_pos)
+						pf.rpc("sync_team", role)
+						pf.rpc("_sync_name", pf.player_name)
 					else:
 						pf = THIEF_SCENE.instantiate()
 						pf.name = str(id)
 						pf.team_index = role
 						pf.position = spawn_pos
+						pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 						spawned.add_child(pf, true)
-
-				await get_tree().process_frame
-
-				if pf.has_method("_set_spawn_position"):
-					pf._set_spawn_position.rpc(spawn_pos)
-
-				if pf.has_method("sync_team"):
-					pf.sync_team.rpc(role)
 
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()

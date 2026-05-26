@@ -25,7 +25,7 @@ func _update_sizes():
 
 func _physics_process(delta):
 	# FIX: Make sure the multiplayer peer actually exists before checking is_server()
-	if not multiplayer.has_multiplayer_peer() or not multiplayer.is_server(): 
+	if not multiplayer.has_multiplayer_peer() or multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED or not multiplayer.is_server(): 
 		return
 	
 	# Continuously scan for any body currently standing inside the van zone

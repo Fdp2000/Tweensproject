@@ -44,27 +44,13 @@ func _exit_tree() -> void:
 		get_node("MultiplayerSynchronizer").public_visibility = false
 
 func _ready():
-	await get_tree().process_frame
-	
 	if not is_inside_tree() or multiplayer == null:
 		return
 	
 	if multiplayer.is_server():
 		_apply_team_colors()
 	else:
-		# Wait for the synchronizer to become visible before asking for color!
-		get_tree().create_timer(1.1).timeout.connect(func():
-			if is_inside_tree():
-				rpc_id(1, "request_team_color")
-		)
-	
-	if is_multiplayer_authority():
-		var client_ui = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI")
-		if client_ui and client_ui.local_player_name != "":
-			player_name = client_ui.local_player_name
-		else:
-			player_name = "Player " + str(get_index() + 1)
-		_sync_name.rpc(player_name)
+		rpc_id(1, "request_initial_sync")
 	
 	var cam_shape = SphereShape3D.new()
 	cam_shape.radius = Balance.camera_wall_radius
@@ -114,20 +100,9 @@ func _ready():
 
 	if has_node("MultiplayerSynchronizer"):
 		var sync_node = get_node("MultiplayerSynchronizer")
-		if multiplayer.is_server():
-			sync_node.public_visibility = false
-			get_tree().create_timer(1.0).timeout.connect(func():
-				if is_inside_tree():
-					sync_node.public_visibility = true
-			)
-		else:
-			sync_node.public_visibility = true
+		sync_node.public_visibility = true
 			
-	# Activate the relay flag for BOTH server and clients
-	get_tree().create_timer(1.0).timeout.connect(func():
-		if is_inside_tree():
-			_spawn_relay_ready = true
-	)
+	_spawn_relay_ready = true
 
 func _set_layer_recursive(node: Node, layer: int):
 	if node is VisualInstance3D:
@@ -161,10 +136,12 @@ func _apply_team_colors():
 					part.layers = 1
 
 @rpc("any_peer", "call_remote", "reliable")
-func request_team_color():
-	if multiplayer.is_server():
-		var requester = multiplayer.get_remote_sender_id()
-		rpc_id(requester, "sync_team", team_index)
+func request_initial_sync():
+	if not multiplayer.is_server(): return
+	var sender = multiplayer.get_remote_sender_id()
+	rpc_id(sender, "_set_spawn_position", global_position)
+	rpc_id(sender, "sync_team", team_index)
+	rpc_id(sender, "_sync_name", player_name)
 
 @rpc("any_peer", "call_local", "reliable")
 func sync_team(assigned_team: int):

@@ -7,14 +7,11 @@ const ARTIFACT_PARTICLES = preload("uid://b4hha0q7y1chb")
 enum Size { SMALL, MEDIUM, LARGE }
 @export var artifact_size: Size = Size.SMALL
 
-# --- NEW: ARTIFACT CATEGORIZATION ---
-enum Category { SMALL_PROP, FLOOR_PROP, WALL_PROP }
-@export var artifact_category: Category = Category.SMALL_PROP
-
 # --- NEW: CUSTOM HAND OFFSETS ---
 # Tweak these in the editor so large paintings don't clip through the head!
 @export var hand_position_offset: Vector3 = Vector3.ZERO
-@export var hand_rotation_offset: Vector3 = Vector3.ZERO 
+@export var hand_rotation_offset: Vector3 = Vector3.ZERO
+@export var pose_transition_duration: float = 0.5 # Tune this to perfectly match the AnimationTree transition time! 
 
 var initial_scale: Vector3 = Vector3.ONE # We need this to prevent the bone from stretching the artifact
 
@@ -33,6 +30,9 @@ var sync_target_rotation: Vector3 = Vector3.ZERO
 var initial_position: Vector3 = Vector3.ZERO
 var initial_rotation: Vector3 = Vector3.ZERO
 var cached_attachment: Node3D = null
+var camo_blend: float = 0.0
+var locked_camo_basis_local: Basis = Basis()
+var was_camo: bool = false
 
 var debug_ui: CanvasLayer = null
 
@@ -181,20 +181,78 @@ func _process(delta):
 		if is_multiplayer_authority():
 			# I am carrying it, so I control it
 			if cached_attachment:
-				# 1. Snap perfectly to the Chameleon's hand bone
-				global_transform = cached_attachment.global_transform
-				
-				# 2. Apply your custom position offset in the CARRIER'S local space!
-				# This perfectly fixes the issue where the bone's X/Y/Z axes are twisted.
-				# Now Y is ALWAYS up, Z is ALWAYS forward, and X is ALWAYS right relative to the player!
 				var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
+				
+				# --- CAMO BLEND CALCULATION ---
+				var is_camo = false
+				if carrier and carrier.get("stealth_manager"):
+					if carrier.stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
+						is_camo = true
+						
+				var visual_base: Node3D = carrier
 				if carrier:
-					global_position += carrier.global_transform.basis * hand_position_offset
+					if carrier.get("visual_mesh"):
+						visual_base = carrier.visual_mesh
+					elif carrier.has_node("Chameleon_Character"):
+						visual_base = carrier.get_node("Chameleon_Character")
+						
+				if is_camo and not was_camo:
+					if carrier:
+						locked_camo_basis_local = (visual_base.global_transform.basis.inverse() * global_transform.basis).orthonormalized()
+					else:
+						locked_camo_basis_local = global_transform.basis.orthonormalized()
+				was_camo = is_camo
+						
+				if is_camo:
+					camo_blend = move_toward(camo_blend, 1.0, delta / pose_transition_duration)
+				else:
+					camo_blend = move_toward(camo_blend, 0.0, delta / pose_transition_duration)
+				
+				# --- 1. HAND TRANSFORM (Normal Carry) ---
+				var hand_transform = cached_attachment.global_transform
+				if carrier:
+					hand_transform.origin += carrier.global_transform.basis * hand_position_offset
 					
-				# 3. Apply your custom rotation offset using intuitive local rotation
-				rotate_object_local(Vector3.RIGHT, deg_to_rad(hand_rotation_offset.x))
-				rotate_object_local(Vector3.UP, deg_to_rad(hand_rotation_offset.y))
-				rotate_object_local(Vector3.FORWARD, deg_to_rad(hand_rotation_offset.z))
+				# Apply local rotation offsets
+				var hand_basis = hand_transform.basis
+				hand_basis = hand_basis.rotated(hand_basis.x.normalized(), deg_to_rad(hand_rotation_offset.x))
+				hand_basis = hand_basis.rotated(hand_basis.y.normalized(), deg_to_rad(hand_rotation_offset.y))
+				hand_basis = hand_basis.rotated(hand_basis.z.normalized(), deg_to_rad(hand_rotation_offset.z))
+				hand_transform.basis = hand_basis
+				
+				# --- 2. FLOOR TRANSFORM (Camo Pose Dropped) ---
+				var floor_transform = Transform3D()
+				if carrier:
+					# Raycast straight down from the hand, exactly like drop()
+					var drop_origin = hand_transform.origin
+					var space_state = get_world_3d().direct_space_state
+					var query = PhysicsRayQueryParameters3D.create(drop_origin + Vector3(0, 1, 0), drop_origin + Vector3(0, -10, 0))
+					query.collision_mask = 1
+					var result = space_state.intersect_ray(query)
+					
+					if result:
+						floor_transform.origin = result.position
+					else:
+						floor_transform.origin = drop_origin
+				else:
+					floor_transform = hand_transform
+					
+				# --- 3. BLEND AND APPLY ---
+				global_position = hand_transform.origin.lerp(floor_transform.origin, camo_blend)
+				
+				if is_camo:
+					# Lock rotation immediately to prevent bone twisting during the camo transition
+					if carrier:
+						global_transform.basis = visual_base.global_transform.basis * locked_camo_basis_local
+					else:
+						global_transform.basis = locked_camo_basis_local
+				else:
+					# Blend back to the hand bone if camo breaks while blending
+					if camo_blend > 0.0 and carrier:
+						var locked_basis = (visual_base.global_transform.basis * locked_camo_basis_local).orthonormalized()
+						global_transform.basis = hand_transform.basis.orthonormalized().slerp(locked_basis, camo_blend)
+					else:
+						global_transform.basis = hand_transform.basis
 				
 				# 4. Lock the scale so the bone animations don't warp the mesh
 				scale = initial_scale 

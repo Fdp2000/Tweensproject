@@ -419,10 +419,7 @@ func _custom_physics_process(delta, direction):
 		anim_tree.get("parameters/playback").travel("Holding_State")
 		
 		if carried_artifact:
-			if carried_artifact.artifact_category == carried_artifact.Category.WALL_PROP:
-				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "wall_prop")
-			elif carried_artifact.artifact_category == carried_artifact.Category.FLOOR_PROP:
-				anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "floor_prop")
+			anim_tree.set("parameters/Holding_State/Pose_Selector/transition_request", "floor_prop")
 
 		var target_rot = 0.0
 		if pitch_pivot:
