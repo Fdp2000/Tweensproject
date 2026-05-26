@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbse8l82pq4di"
+path="res://.godot/imported/ESM_Out_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav-7c2675e59c15fe552a44bc338a81773a.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Out_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav"
+dest_files=["res://.godot/imported/ESM_Out_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav-7c2675e59c15fe552a44bc338a81773a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

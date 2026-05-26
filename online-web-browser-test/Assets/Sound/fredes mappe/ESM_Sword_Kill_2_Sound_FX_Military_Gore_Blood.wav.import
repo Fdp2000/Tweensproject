@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://r655ukmj0kef"
+path="res://.godot/imported/ESM_Sword_Kill_2_Sound_FX_Military_Gore_Blood.wav-d283266f16014589c163fea84a3fff14.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Sword_Kill_2_Sound_FX_Military_Gore_Blood.wav"
+dest_files=["res://.godot/imported/ESM_Sword_Kill_2_Sound_FX_Military_Gore_Blood.wav-d283266f16014589c163fea84a3fff14.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

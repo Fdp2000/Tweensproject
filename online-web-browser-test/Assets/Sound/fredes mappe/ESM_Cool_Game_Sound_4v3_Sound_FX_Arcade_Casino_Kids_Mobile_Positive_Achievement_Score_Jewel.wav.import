@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dh77ecgi5rf5b"
+path="res://.godot/imported/ESM_Cool_Game_Sound_4v3_Sound_FX_Arcade_Casino_Kids_Mobile_Positive_Achievement_Score_Jewel.wav-bc3c3081d9504c84f15f17bb489bc4be.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Cool_Game_Sound_4v3_Sound_FX_Arcade_Casino_Kids_Mobile_Positive_Achievement_Score_Jewel.wav"
+dest_files=["res://.godot/imported/ESM_Cool_Game_Sound_4v3_Sound_FX_Arcade_Casino_Kids_Mobile_Positive_Achievement_Score_Jewel.wav-bc3c3081d9504c84f15f17bb489bc4be.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dyl73d767tpvs"
+path="res://.godot/imported/ESM_Jump_4_Classic_Retro_8_Bit_.wav-b18eef68d8eddcff3334ad7285086052.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Jump_4_Classic_Retro_8_Bit_.wav"
+dest_files=["res://.godot/imported/ESM_Jump_4_Classic_Retro_8_Bit_.wav-b18eef68d8eddcff3334ad7285086052.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

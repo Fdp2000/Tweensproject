@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ujjo0jlp43vm"
+path="res://.godot/imported/ESM_Zombie_Smash_1_Wet_Smash_Liquid_Bash_Knife_Organic_Splat_Gore_Horror_Explosion.wav-1b3b26924734db58983e80e73d886793.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Zombie_Smash_1_Wet_Smash_Liquid_Bash_Knife_Organic_Splat_Gore_Horror_Explosion.wav"
+dest_files=["res://.godot/imported/ESM_Zombie_Smash_1_Wet_Smash_Liquid_Bash_Knife_Organic_Splat_Gore_Horror_Explosion.wav-1b3b26924734db58983e80e73d886793.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

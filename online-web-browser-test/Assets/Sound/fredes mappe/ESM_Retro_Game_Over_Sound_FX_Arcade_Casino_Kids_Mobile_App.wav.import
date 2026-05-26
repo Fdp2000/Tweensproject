@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://o1x4d10q1ek6"
+path="res://.godot/imported/ESM_Retro_Game_Over_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav-0fa2360ef42380d80349f4d9faaa309f.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Retro_Game_Over_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav"
+dest_files=["res://.godot/imported/ESM_Retro_Game_Over_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav-0fa2360ef42380d80349f4d9faaa309f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

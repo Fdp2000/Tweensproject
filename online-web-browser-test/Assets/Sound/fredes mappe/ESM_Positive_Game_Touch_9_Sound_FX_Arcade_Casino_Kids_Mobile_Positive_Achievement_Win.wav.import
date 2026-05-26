@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2y2byhy6kh4l"
+path="res://.godot/imported/ESM_Positive_Game_Touch_9_Sound_FX_Arcade_Casino_Kids_Mobile_Positive_Achievement_Win.wav-a45a723a91d7e079cd1a2dc611395181.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Positive_Game_Touch_9_Sound_FX_Arcade_Casino_Kids_Mobile_Positive_Achievement_Win.wav"
+dest_files=["res://.godot/imported/ESM_Positive_Game_Touch_9_Sound_FX_Arcade_Casino_Kids_Mobile_Positive_Achievement_Win.wav-a45a723a91d7e079cd1a2dc611395181.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://my2eobyjr616"
+path="res://.godot/imported/ESM_Bones_and_Body_Parts_1_Wet_Smash_Goo_Liquid_Bash_Sword_Knife_Organic_Splat_Gore_Horror.wav-4cd9944264f1a78fa0f71d7d971e0d60.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Bones_and_Body_Parts_1_Wet_Smash_Goo_Liquid_Bash_Sword_Knife_Organic_Splat_Gore_Horror.wav"
+dest_files=["res://.godot/imported/ESM_Bones_and_Body_Parts_1_Wet_Smash_Goo_Liquid_Bash_Sword_Knife_Organic_Splat_Gore_Horror.wav-4cd9944264f1a78fa0f71d7d971e0d60.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

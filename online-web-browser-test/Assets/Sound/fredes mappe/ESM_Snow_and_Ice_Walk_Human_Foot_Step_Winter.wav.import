@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://sv8v24ubrtla"
+path="res://.godot/imported/ESM_Snow_and_Ice_Walk_Human_Foot_Step_Winter.wav-659ea2b3c5f844ca57a0c1c82e3407ca.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Snow_and_Ice_Walk_Human_Foot_Step_Winter.wav"
+dest_files=["res://.godot/imported/ESM_Snow_and_Ice_Walk_Human_Foot_Step_Winter.wav-659ea2b3c5f844ca57a0c1c82e3407ca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

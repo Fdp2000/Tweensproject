@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://plve73fxyfaa"
+path="res://.godot/imported/ESM_Magnum_Pistol_Cock_1_Sound_FX_Military_Mechanism.wav-058783104fa790cc346e166e3a5aa78f.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Magnum_Pistol_Cock_1_Sound_FX_Military_Mechanism.wav"
+dest_files=["res://.godot/imported/ESM_Magnum_Pistol_Cock_1_Sound_FX_Military_Mechanism.wav-058783104fa790cc346e166e3a5aa78f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

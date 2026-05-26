@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bbxhn1y8r0xs8"
+path="res://.godot/imported/ESM_Air_Explode_Bonus_4_Bomb_Boom_Blast_Cannon_Retro_Old_School_Classic_Cartoon.wav-51b9467286c953f8c94ebe1a4e1be32c.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Air_Explode_Bonus_4_Bomb_Boom_Blast_Cannon_Retro_Old_School_Classic_Cartoon.wav"
+dest_files=["res://.godot/imported/ESM_Air_Explode_Bonus_4_Bomb_Boom_Blast_Cannon_Retro_Old_School_Classic_Cartoon.wav-51b9467286c953f8c94ebe1a4e1be32c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

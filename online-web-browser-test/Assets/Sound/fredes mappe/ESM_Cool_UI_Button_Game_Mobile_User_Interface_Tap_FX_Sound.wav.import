@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dsjt5oq2dijku"
+path="res://.godot/imported/ESM_Cool_UI_Button_Game_Mobile_User_Interface_Tap_FX_Sound.wav-ca8b131ddd30d3c321288398b2339768.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Cool_UI_Button_Game_Mobile_User_Interface_Tap_FX_Sound.wav"
+dest_files=["res://.godot/imported/ESM_Cool_UI_Button_Game_Mobile_User_Interface_Tap_FX_Sound.wav-ca8b131ddd30d3c321288398b2339768.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
