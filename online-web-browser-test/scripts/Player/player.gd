@@ -9,6 +9,7 @@ var target_shoulder_x = 1.0
 var disable_body_rotation: bool = false
 
 var player_name: String = ""
+var allow_arrow_keys: bool = false
 @export var team_index: int = 0
 var team_color: Color = Color.WHITE
 
@@ -43,27 +44,13 @@ func _exit_tree() -> void:
 		get_node("MultiplayerSynchronizer").public_visibility = false
 
 func _ready():
-	await get_tree().process_frame
-	
 	if not is_inside_tree() or multiplayer == null:
 		return
 	
 	if multiplayer.is_server():
 		_apply_team_colors()
 	else:
-		# Wait for the synchronizer to become visible before asking for color!
-		get_tree().create_timer(1.1).timeout.connect(func():
-			if is_inside_tree():
-				rpc_id(1, "request_team_color")
-		)
-	
-	if is_multiplayer_authority():
-		var client_ui = get_tree().root.get_node_or_null("World/main/VBoxContainer/Clients/ClientUI")
-		if client_ui and client_ui.local_player_name != "":
-			player_name = client_ui.local_player_name
-		else:
-			player_name = "Player " + str(get_index() + 1)
-		_sync_name.rpc(player_name)
+		rpc_id(1, "request_initial_sync")
 	
 	var cam_shape = SphereShape3D.new()
 	cam_shape.radius = Balance.camera_wall_radius
@@ -113,20 +100,9 @@ func _ready():
 
 	if has_node("MultiplayerSynchronizer"):
 		var sync_node = get_node("MultiplayerSynchronizer")
-		if multiplayer.is_server():
-			sync_node.public_visibility = false
-			get_tree().create_timer(1.0).timeout.connect(func():
-				if is_inside_tree():
-					sync_node.public_visibility = true
-			)
-		else:
-			sync_node.public_visibility = true
+		sync_node.public_visibility = true
 			
-	# Activate the relay flag for BOTH server and clients
-	get_tree().create_timer(1.0).timeout.connect(func():
-		if is_inside_tree():
-			_spawn_relay_ready = true
-	)
+	_spawn_relay_ready = true
 
 func _set_layer_recursive(node: Node, layer: int):
 	if node is VisualInstance3D:
@@ -160,10 +136,12 @@ func _apply_team_colors():
 					part.layers = 1
 
 @rpc("any_peer", "call_remote", "reliable")
-func request_team_color():
-	if multiplayer.is_server():
-		var requester = multiplayer.get_remote_sender_id()
-		rpc_id(requester, "sync_team", team_index)
+func request_initial_sync():
+	if not multiplayer.is_server(): return
+	var sender = multiplayer.get_remote_sender_id()
+	rpc_id(sender, "_set_spawn_position", global_position)
+	rpc_id(sender, "sync_team", team_index)
+	rpc_id(sender, "_sync_name", player_name)
 
 @rpc("any_peer", "call_local", "reliable")
 func sync_team(assigned_team: int):
@@ -283,7 +261,17 @@ func _physics_process(delta):
 	
 	if not is_on_floor(): velocity.y -= gravity * delta
 
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir = Vector2.ZERO
+	if allow_arrow_keys:
+		input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	else:
+		# Only allow WASD keys manually if arrow keys are disabled
+		var left = 1.0 if Input.is_physical_key_pressed(KEY_A) else 0.0
+		var right = 1.0 if Input.is_physical_key_pressed(KEY_D) else 0.0
+		var up = 1.0 if Input.is_physical_key_pressed(KEY_W) else 0.0
+		var down = 1.0 if Input.is_physical_key_pressed(KEY_S) else 0.0
+		input_dir = Vector2(right - left, down - up).normalized()
+		
 	if mobile_input and mobile_input.get_joystick_vector() != Vector2.ZERO:
 		input_dir = mobile_input.get_joystick_vector()
 		
@@ -299,8 +287,8 @@ func _custom_physics_process(_delta, direction):
 		velocity.x = direction.x * 6.5 # Hardcoded fallback
 		velocity.z = direction.z * 6.5
 	else:
-		velocity.x = move_toward(velocity.x, 0, 6.5) # Hardcoded fallback
-		velocity.z = move_toward(velocity.z, 0, 6.5)
+		velocity.x = move_toward(velocity.x, 0, 6.5 * 60.0 * _delta) # Hardcoded fallback
+		velocity.z = move_toward(velocity.z, 0, 6.5 * 60.0 * _delta)
 
 # ----------------------------------------
 

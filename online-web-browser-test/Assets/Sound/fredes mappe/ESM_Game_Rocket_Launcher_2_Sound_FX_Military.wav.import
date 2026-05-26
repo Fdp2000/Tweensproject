@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bcc8k7qy5h26q"
+path="res://.godot/imported/ESM_Game_Rocket_Launcher_2_Sound_FX_Military.wav-f2dd34c209a51a806acde6c4a5872a8d.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Game_Rocket_Launcher_2_Sound_FX_Military.wav"
+dest_files=["res://.godot/imported/ESM_Game_Rocket_Launcher_2_Sound_FX_Military.wav-f2dd34c209a51a806acde6c4a5872a8d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

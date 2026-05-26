@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ne1q1b67wbs2"
+path="res://.godot/imported/ESM_Airy_Gas_Unlock_Bonus_1_Game_Mobile_User_Interface_Tap_FX_Sound.wav-638c29fa5f751a865fe9e30d1a63eee3.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Airy_Gas_Unlock_Bonus_1_Game_Mobile_User_Interface_Tap_FX_Sound.wav"
+dest_files=["res://.godot/imported/ESM_Airy_Gas_Unlock_Bonus_1_Game_Mobile_User_Interface_Tap_FX_Sound.wav-638c29fa5f751a865fe9e30d1a63eee3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

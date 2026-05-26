@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://qfcphb51y02k"
+path="res://.godot/imported/ESM_Wrong_Answer_Game_Over_4_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav-78d4fde5756c70c46457749c147dc4c8.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Wrong_Answer_Game_Over_4_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav"
+dest_files=["res://.godot/imported/ESM_Wrong_Answer_Game_Over_4_Sound_FX_Arcade_Casino_Kids_Mobile_App.wav-78d4fde5756c70c46457749c147dc4c8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

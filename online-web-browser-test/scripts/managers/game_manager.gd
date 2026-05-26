@@ -21,6 +21,10 @@ var cash_quota: int = 10000
 var round_timer: int = 300
 var active_thieves: int = 0
 
+var last_heartbeat_times: Dictionary = {}
+var last_server_pong_time: float = 0.0
+var heartbeat_timer: Timer
+
 signal player_joined(id: int)
 signal lobby_updated
 signal game_started
@@ -33,6 +37,12 @@ var timer_node: Timer
 var cached_scoreboard: Control = null
 
 func _ready():
+	heartbeat_timer = Timer.new()
+	heartbeat_timer.wait_time = 5.0
+	heartbeat_timer.autostart = true
+	heartbeat_timer.timeout.connect(_on_heartbeat_tick)
+	add_child(heartbeat_timer)
+
 	timer_node = Timer.new()
 	timer_node.wait_time = 1.0
 	timer_node.autostart = false
@@ -49,6 +59,9 @@ func _ready():
 		canvas_layer.layer = 100 
 		canvas_layer.add_child(cached_scoreboard)
 		add_child(canvas_layer)
+		
+		cached_scoreboard.set_process(false) # CRITICAL: Call this AFTER adding to tree!
+		cached_scoreboard.process_mode = Node.PROCESS_MODE_DISABLED # Double tap!
 
 
 func _on_timer_tick():
@@ -67,7 +80,7 @@ func set_player_force_role(peer_id: int, role_string: String):
 		forced_teams[peer_id] = role_string
 
 
-@rpc("any_peer", "call_local", "unreliable")
+@rpc("any_peer", "call_local", "reliable")
 func sync_time(time_left: int):
 	round_timer = time_left
 	time_updated.emit(round_timer)
@@ -87,6 +100,7 @@ func add_player(id: int, p_name: String = ""):
 		}
 		
 		if multiplayer.is_server():
+			last_heartbeat_times[id] = Time.get_ticks_msec()
 			rpc("sync_full_lobby", players)
 			player_joined.emit(id)
 			lobby_updated.emit()
@@ -96,6 +110,7 @@ func add_player(id: int, p_name: String = ""):
 
 func remove_player(id: int):
 	if players.has(id):
+		last_heartbeat_times.erase(id)
 		var role = players[id].get("role", PlayerRole.THIEF)
 		players.erase(id)
 		
@@ -199,47 +214,10 @@ func start_game(role_assignments: Dictionary):
 		timer_node.start()
 		rpc("sync_time", round_timer)
 
-	var intro_data := {}
-
-	for id in players.keys():
-		var id_str := str(id)
-		var role = players[id]["role"]
-
-		intro_data[id_str] = {
-			"name": players[id].get("name", "Player " + id_str),
-			"team_index": 1 if role == PlayerRole.COP else 0
-		}
-
 	if multiplayer.is_server():
 		print("SERVER PLAYERS DICTIONARY: ", players)
-		print("SERVER INTRO DATA: ", intro_data)
-		rpc("sync_spawned_player_intro_data", intro_data)
-
-	await get_tree().process_frame
-	await get_tree().process_frame
 
 	game_started.emit()
-
-
-@rpc("any_peer", "call_local")
-func sync_spawned_player_intro_data(intro_data: Dictionary):
-	print("INTRO DATA RECEIVED ON PEER ", multiplayer.get_unique_id(), ": ", intro_data)
-
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
-
-	if spawned == null:
-		print("No SpawnedObjects found on peer ", multiplayer.get_unique_id())
-		return
-
-	for id_str in intro_data.keys():
-		var player_node = spawned.get_node_or_null(id_str)
-
-		if player_node:
-			player_node.player_name = intro_data[id_str]["name"]
-			player_node.team_index = intro_data[id_str]["team_index"]
-			print("Updated player ", id_str, " name to ", player_node.player_name)
-		else:
-			print("Could not find spawned player node: ", id_str)
 
 
 @rpc("any_peer", "call_local")
@@ -326,6 +304,7 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 	if cached_scoreboard:
 		cached_scoreboard.populate(winner_text, cops_data, thieves_data)
 		cached_scoreboard.visible = true
+		cached_scoreboard.process_mode = Node.PROCESS_MODE_INHERIT
 		cached_scoreboard.set_process(true)
 		cached_scoreboard.countdown = 5.0 # Reset timer
 
@@ -340,6 +319,7 @@ func return_to_lobby():
 func client_return_to_lobby():
 	if cached_scoreboard:
 		cached_scoreboard.visible = false
+		cached_scoreboard.process_mode = Node.PROCESS_MODE_DISABLED
 		
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
@@ -383,6 +363,8 @@ func full_teardown():
 			
 	team_cash = 0
 	players.clear()
+	last_heartbeat_times.clear()
+	last_server_pong_time = 0.0
 	game_ended.emit()
 
 func host_start_game():
@@ -442,3 +424,40 @@ func spawn_location_ping(pos: Vector3):
 		var ping = PING_SCENE.instantiate()
 		add_child(ping)
 		ping.global_position = pos
+
+
+func _on_heartbeat_tick():
+	if multiplayer and multiplayer.has_multiplayer_peer():
+		if multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
+			return
+			
+		if multiplayer.is_server():
+			var current_time = Time.get_ticks_msec()
+			for peer_id in last_heartbeat_times.keys():
+				if peer_id == 1: continue
+				if (current_time - last_heartbeat_times[peer_id]) / 1000.0 > 10.0:
+					print("[Heartbeat] Client %d timed out. Disconnecting." % peer_id)
+					multiplayer.multiplayer_peer.disconnect_peer(peer_id)
+		else:
+			var current_time = Time.get_ticks_msec()
+			if last_server_pong_time == 0.0:
+				last_server_pong_time = current_time
+				
+			if (current_time - last_server_pong_time) / 1000.0 > 10.0:
+				print("[Heartbeat] Server timed out. Disconnecting.")
+				multiplayer.multiplayer_peer.close()
+				multiplayer.server_disconnected.emit()
+				return
+				
+			rpc_id(1, "client_ping")
+
+@rpc("any_peer", "call_remote", "reliable")
+func client_ping():
+	if multiplayer.is_server():
+		var sender_id = multiplayer.get_remote_sender_id()
+		last_heartbeat_times[sender_id] = Time.get_ticks_msec()
+		rpc_id(sender_id, "server_pong")
+
+@rpc("authority", "call_remote", "reliable")
+func server_pong():
+	last_server_pong_time = Time.get_ticks_msec()

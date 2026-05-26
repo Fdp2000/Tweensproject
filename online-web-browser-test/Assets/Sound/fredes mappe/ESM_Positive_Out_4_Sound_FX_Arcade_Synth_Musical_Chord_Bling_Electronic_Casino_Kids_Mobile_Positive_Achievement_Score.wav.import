@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7dbdpouus58g"
+path="res://.godot/imported/ESM_Positive_Out_4_Sound_FX_Arcade_Synth_Musical_Chord_Bling_Electronic_Casino_Kids_Mobile_Positive_Achievement_Score.wav-e280a1bb4a0d5a1cbc5694ee48778a94.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Positive_Out_4_Sound_FX_Arcade_Synth_Musical_Chord_Bling_Electronic_Casino_Kids_Mobile_Positive_Achievement_Score.wav"
+dest_files=["res://.godot/imported/ESM_Positive_Out_4_Sound_FX_Arcade_Synth_Musical_Chord_Bling_Electronic_Casino_Kids_Mobile_Positive_Achievement_Score.wav-e280a1bb4a0d5a1cbc5694ee48778a94.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

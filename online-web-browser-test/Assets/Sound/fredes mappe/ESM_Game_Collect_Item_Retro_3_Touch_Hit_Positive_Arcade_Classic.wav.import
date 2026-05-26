@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dk5spfrti0rqv"
+path="res://.godot/imported/ESM_Game_Collect_Item_Retro_3_Touch_Hit_Positive_Arcade_Classic.wav-839c702e7a028218e3038ffe7e45e655.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Game_Collect_Item_Retro_3_Touch_Hit_Positive_Arcade_Classic.wav"
+dest_files=["res://.godot/imported/ESM_Game_Collect_Item_Retro_3_Touch_Hit_Positive_Arcade_Classic.wav-839c702e7a028218e3038ffe7e45e655.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

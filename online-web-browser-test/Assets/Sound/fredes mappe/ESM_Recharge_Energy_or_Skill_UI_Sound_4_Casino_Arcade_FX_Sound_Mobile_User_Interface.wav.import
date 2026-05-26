@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3l3oso0x1vhw"
+path="res://.godot/imported/ESM_Recharge_Energy_or_Skill_UI_Sound_4_Casino_Arcade_FX_Sound_Mobile_User_Interface.wav-6c67d7f0f1bdf8b5906e55b4518b09a8.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Recharge_Energy_or_Skill_UI_Sound_4_Casino_Arcade_FX_Sound_Mobile_User_Interface.wav"
+dest_files=["res://.godot/imported/ESM_Recharge_Energy_or_Skill_UI_Sound_4_Casino_Arcade_FX_Sound_Mobile_User_Interface.wav-6c67d7f0f1bdf8b5906e55b4518b09a8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

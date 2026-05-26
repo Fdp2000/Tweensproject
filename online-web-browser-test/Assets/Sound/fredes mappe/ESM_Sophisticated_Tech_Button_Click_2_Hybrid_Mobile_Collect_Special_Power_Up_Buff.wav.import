@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://oiiiqo5pbrwv"
+path="res://.godot/imported/ESM_Sophisticated_Tech_Button_Click_2_Hybrid_Mobile_Collect_Special_Power_Up_Buff.wav-d7a2f51d244d15a4ac9d1708b1719641.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Sophisticated_Tech_Button_Click_2_Hybrid_Mobile_Collect_Special_Power_Up_Buff.wav"
+dest_files=["res://.godot/imported/ESM_Sophisticated_Tech_Button_Click_2_Hybrid_Mobile_Collect_Special_Power_Up_Buff.wav-d7a2f51d244d15a4ac9d1708b1719641.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

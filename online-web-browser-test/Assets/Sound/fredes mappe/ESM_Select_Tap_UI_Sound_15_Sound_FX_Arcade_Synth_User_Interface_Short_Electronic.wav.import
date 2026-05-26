@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://7ko4x2xb52am"
+path="res://.godot/imported/ESM_Select_Tap_UI_Sound_15_Sound_FX_Arcade_Synth_User_Interface_Short_Electronic.wav-75618ff94703d5459cbb30f1008fa741.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Select_Tap_UI_Sound_15_Sound_FX_Arcade_Synth_User_Interface_Short_Electronic.wav"
+dest_files=["res://.godot/imported/ESM_Select_Tap_UI_Sound_15_Sound_FX_Arcade_Synth_User_Interface_Short_Electronic.wav-75618ff94703d5459cbb30f1008fa741.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

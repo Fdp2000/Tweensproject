@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2bhee5il3xsc"
+path="res://.godot/imported/ESM_Shotgun_Pump_8_Sound_FX_Military_Cock.wav-04409452368e826370e7ab06577125b7.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Shotgun_Pump_8_Sound_FX_Military_Cock.wav"
+dest_files=["res://.godot/imported/ESM_Shotgun_Pump_8_Sound_FX_Military_Cock.wav-04409452368e826370e7ab06577125b7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

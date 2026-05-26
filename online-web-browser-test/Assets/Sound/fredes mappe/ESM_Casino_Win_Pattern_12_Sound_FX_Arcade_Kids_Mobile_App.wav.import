@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://daq2bvouk2y4s"
+path="res://.godot/imported/ESM_Casino_Win_Pattern_12_Sound_FX_Arcade_Kids_Mobile_App.wav-ca2200de4dc287e66379f5cd94276b2c.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Casino_Win_Pattern_12_Sound_FX_Arcade_Kids_Mobile_App.wav"
+dest_files=["res://.godot/imported/ESM_Casino_Win_Pattern_12_Sound_FX_Arcade_Kids_Mobile_App.wav-ca2200de4dc287e66379f5cd94276b2c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -1,5 +1,7 @@
 extends Node
 
+signal balance_updated
+
 # ==========================================
 # 1. MOVEMENT & CORE PHYSICS
 # ==========================================
@@ -160,3 +162,4 @@ func _apply_dict_to_state(data: Dictionary):
 	for key in data.keys():
 		if key in self: # Safe check to ensure variable exists
 			set(key, data[key])
+	balance_updated.emit()

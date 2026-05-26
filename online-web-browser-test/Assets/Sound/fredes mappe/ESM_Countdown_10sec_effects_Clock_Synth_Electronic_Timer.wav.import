@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://32we0x1srt2f"
+path="res://.godot/imported/ESM_Countdown_10sec_effects_Clock_Synth_Electronic_Timer.wav-eb4e06e1598bd601fd77c0fc06324555.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Countdown_10sec_effects_Clock_Synth_Electronic_Timer.wav"
+dest_files=["res://.godot/imported/ESM_Countdown_10sec_effects_Clock_Synth_Electronic_Timer.wav-eb4e06e1598bd601fd77c0fc06324555.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

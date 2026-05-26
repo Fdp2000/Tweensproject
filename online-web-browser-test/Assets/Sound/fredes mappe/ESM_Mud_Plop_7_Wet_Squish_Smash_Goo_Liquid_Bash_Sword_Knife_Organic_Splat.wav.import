@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ihs2jrjid52a"
+path="res://.godot/imported/ESM_Mud_Plop_7_Wet_Squish_Smash_Goo_Liquid_Bash_Sword_Knife_Organic_Splat.wav-7e06fe21d6f50c034cf6a0f1d94dfb37.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/fredes mappe/ESM_Mud_Plop_7_Wet_Squish_Smash_Goo_Liquid_Bash_Sword_Knife_Organic_Splat.wav"
+dest_files=["res://.godot/imported/ESM_Mud_Plop_7_Wet_Squish_Smash_Goo_Liquid_Bash_Sword_Knife_Organic_Splat.wav-7e06fe21d6f50c034cf6a0f1d94dfb37.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
