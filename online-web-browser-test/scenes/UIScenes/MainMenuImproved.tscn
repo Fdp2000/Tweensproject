@@ -31,7 +31,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[node name="MainMenuUI" type="Node3D" unique_id=354039283]
+[node name="MainMenuUi" type="Node3D" unique_id=354039283]
 
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=489370159]
 
@@ -44,6 +44,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainMenuPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1660272269]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,6 +102,7 @@ theme_override_font_sizes/font_size = 36
 text = "Quit"
 
 [node name="PlayPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1119582336]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -160,3 +162,57 @@ text = "Join"
 [node name="BackButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=2053387462]
 layout_mode = 2
 text = "Back"
+
+[node name="SkinsPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1485494093]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=519792314]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=1534710073]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=257552327]
+
+[node name="PreviousBtton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=2043417476]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=229907666]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="RhinoPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=1526376200]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=2108810433]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=535220147]
+
+[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=227015707]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=2090941298]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="BackButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=811892826]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
