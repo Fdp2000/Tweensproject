@@ -89,7 +89,7 @@ func sync_time(time_left: int):
 	time_updated.emit(round_timer)
 
 
-func add_player(id: int, p_name: String = ""):
+func add_player(id: int, p_name: String = "", chameleon_skin: int = 0, rhino_skin: int = 0):
 	if players.size() >= 10 and not players.has(id):
 		if multiplayer.is_server() and id != 1:
 			multiplayer.multiplayer_peer.disconnect_peer(id)
@@ -99,7 +99,9 @@ func add_player(id: int, p_name: String = ""):
 		var default_name = "Player " + str(players.size() + 1)
 		players[id] = {
 			"name": p_name if p_name != "" else default_name,
-			"role": PlayerRole.THIEF
+			"role": PlayerRole.THIEF,
+			"chameleon_skin": chameleon_skin,
+			"rhino_skin": rhino_skin
 		}
 		
 		if multiplayer.is_server():
@@ -137,15 +139,20 @@ func remove_player(id: int):
 
 
 @rpc("any_peer", "call_local")
-func sync_player_data(id: int, p_name: String):
-	if not multiplayer.is_server(): return
+func sync_player_data(id: int, p_name: String, chameleon_skin: int = 0, rhino_skin: int = 0):
+	if not multiplayer.is_server(): 
+		return
 	
 	if not players.has(id):
-		add_player(id, p_name)
+		add_player(id, p_name, chameleon_skin, rhino_skin)
 	else:
 		if p_name != "":
 			players[id]["name"] = p_name
-		rpc("sync_full_lobby", players)
+
+		players[id]["chameleon_skin"] = chameleon_skin
+		players[id]["rhino_skin"] = rhino_skin
+
+	rpc("sync_full_lobby", players)
 
 
 @rpc("authority", "call_local")
