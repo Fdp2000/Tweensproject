@@ -148,9 +148,9 @@ func _on_play_back_pressed() -> void:
 
 
 func _on_skins_pressed() -> void:
-	set_skin_viewports_active(true)
 	tutorial_intro_cancelled = true
 	reset_tutorial_button()
+	set_skin_viewports_active(true)
 
 
 	main_menu_panel.hide()
