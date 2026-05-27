@@ -36,6 +36,9 @@ signal game_over(winner_team: int)
 var timer_node: Timer
 var cached_scoreboard: Control = null
 
+var selected_chameleon_skin: int = 0
+var selected_rhino_skin: int = 0
+
 func _ready():
 	heartbeat_timer = Timer.new()
 	heartbeat_timer.wait_time = 5.0

@@ -31,6 +31,38 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xa0ng"]
+bg_color = Color(0.22091639, 0.24780053, 0.29337206, 0)
+border_color = Color(0.8001019, 0.8001019, 0.8001019, 0.85)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuebs"]
+bg_color = Color(0.29337206, 0.3133042, 0.3491902, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_agky4"]
+font_size = 34
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6j5t"]
+bg_color = Color(0.29337206, 0.3133042, 0.3491902, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_ba607"]
+font_size = 34
+
 [node name="MainMenuUi" type="Node3D" unique_id=354039283]
 
 [node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=489370159]
@@ -164,55 +196,185 @@ layout_mode = 2
 text = "Back"
 
 [node name="SkinsPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1485494093]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xa0ng")
 
-[node name="Panel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=519792314]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=1516884474]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
 
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=1534710073]
-layout_mode = 0
-offset_right = 40.0
+[node name="ChameleonSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=519792314]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kuebs")
+
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=1534710073]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -44.0
+offset_right = 44.0
 offset_bottom = 23.0
+grow_horizontal = 2
+text = "Chameleon"
+label_settings = SubResource("LabelSettings_agky4")
+horizontal_alignment = 1
 
-[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=257552327]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=1769352185]
+custom_minimum_size = Vector2(380, 360)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -180.0
+offset_right = 190.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
-[node name="PreviousBtton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=2043417476]
-layout_mode = 0
+[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer" unique_id=257552327]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(380, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=2006095770]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 100, 1.5, 4)
+fov = 40.0
+
+[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=564513877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0)
+
+[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=229907666]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=2043417476]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
 offset_right = 8.0
-offset_bottom = 8.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "<"
 
-[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/Panel" unique_id=229907666]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="RhinoSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=1526376200]
+custom_minimum_size = Vector2(400, 500)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h6j5t")
 
-[node name="RhinoPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=1526376200]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=2108810433]
-layout_mode = 0
-offset_right = 40.0
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=2108810433]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -22.5
+offset_right = 22.5
 offset_bottom = 23.0
+grow_horizontal = 2
+text = "Rhino"
+label_settings = SubResource("LabelSettings_ba607")
+horizontal_alignment = 1
 
-[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=535220147]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=1174571718]
+custom_minimum_size = Vector2(380, 360)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -180.0
+offset_right = 190.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
 
-[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=227015707]
-layout_mode = 0
+[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer" unique_id=535220147]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(380, 360)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=744609899]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 200, 1.5, 4)
+fov = 40.0
+
+[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=1783558948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
+
+[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=227015707]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
 offset_right = 8.0
-offset_bottom = 8.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "<"
 
-[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/RhinoPanel" unique_id=2090941298]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=2090941298]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = ">"
 
 [node name="BackButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=811892826]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+custom_minimum_size = Vector2(70, 55)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 45.0
+grow_vertical = 0
+text = "Back"

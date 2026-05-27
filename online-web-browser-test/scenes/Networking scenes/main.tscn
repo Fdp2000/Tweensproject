@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://drqhtg0onjeuf" path="res://scripts/Networking/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bvlpyq23crr3g" path="res://scenes/MiscScenes/Plunger.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://d0xak1rv4tda0" path="res://scenes/Networking scenes/client_ui.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cgct3pqmsjtdy" path="res://Assets/Models/bear_standing.glb" id="4_u615w"]
+[ext_resource type="PackedScene" uid="uid://d3r4u5v3otke8" path="res://Assets/Models/Van/Imported/WhiteVan.glb" id="6_iq1fi"]
 
 [node name="Control" type="Control" unique_id=846917499]
 layout_mode = 3
@@ -60,6 +62,8 @@ columns = 2
 [node name="ClientUI" parent="VBoxContainer/Clients" unique_id=1326961882 instance=ExtResource("2_sugp2")]
 visible = false
 layout_mode = 2
+chameleon_skins = Array[PackedScene]([ExtResource("4_u615w")])
+rhino_skins = Array[PackedScene]([ExtResource("6_iq1fi")])
 
 [node name="SpawnedObjects" type="Node3D" parent="." unique_id=1234567890]
 
