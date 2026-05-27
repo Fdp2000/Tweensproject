@@ -4,8 +4,11 @@ extends Node3D
 
 @export var thief_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
 @export var thief_rotation_offset_degrees: float = -90.0
+@export var thief_versus_anim: String = "Camo_Pose"
+
 @export var cop_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
 @export var cop_rotation_offset_degrees: float = -90.0
+@export var cop_versus_anim: String = "Idle"
 @export var versus_duration: float = 6.0
 @export var fly_to_player_time: float = 1.5
 
@@ -102,11 +105,6 @@ func run_cinematic_flow():
 	# 5. Fade to black to transition to Museum Pans
 	await cutscene_ui.fade_to_black(1.0)
 	
-	# Cleanup dummies
-	for dummy in spawned_dummy_models:
-		dummy.queue_free()
-	spawned_dummy_models.clear()
-	
 	# 6. Play 3 Cinematic Clips
 	await play_cinematic_clip($CutsceneMarkers/Clip1Start, $CutsceneMarkers/Clip1End, 3.0)
 	await play_cinematic_clip($CutsceneMarkers/Clip2Start, $CutsceneMarkers/Clip2End, 3.0)
@@ -139,6 +137,13 @@ func run_cinematic_flow():
 # ---------------------------------------------------------
 # VERSUS LINEUP LOGIC
 # ---------------------------------------------------------
+func get_dummies(parent_node: Node3D) -> Array:
+	var dummies = []
+	for child in parent_node.find_children("*", "Node3D", true, false):
+		if child.has_node("NameTag"):
+			dummies.append(child)
+	return dummies
+
 func setup_versus_lineup():
 	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if spawned == null: return
@@ -153,47 +158,29 @@ func setup_versus_lineup():
 		else:
 			robbers.append(player)
 			
-	var spawned_thieves = []
-	var spawned_cops = []
+	var preplaced_thieves = get_dummies(right_spawn)
+	var preplaced_cops = get_dummies(left_spawn)
 			
-	for i in range(robbers.size()):
-		var model = thief_preview_scene.instantiate()
-		right_spawn.add_child(model) # Thieves on Right
-		spawned_dummy_models.append(model)
-		spawned_thieves.append(model)
-		apply_lineup_transform(model, i, robbers.size(), false)
-		play_emote(model)
-		add_name_tag_to_model(model, get_display_name(robbers[i]))
-		
-	for i in range(cops.size()):
-		var model = cop_preview_scene.instantiate()
-		left_spawn.add_child(model) # Cops on Left
-		spawned_dummy_models.append(model)
-		spawned_cops.append(model)
-		apply_lineup_transform(model, i, cops.size(), true)
-		play_emote(model)
-		add_name_tag_to_model(model, get_display_name(cops[i]))
-
-	# Apply manual rotation offsets (no look_at logic)
-	for t_model in spawned_thieves:
-		t_model.rotation.y = deg_to_rad(thief_rotation_offset_degrees)
-		t_model.rotation.x = 0
-		t_model.rotation.z = 0
+	for i in range(preplaced_thieves.size()):
+		var model = preplaced_thieves[i]
+		if i < robbers.size():
+			model.show()
+			play_emote(model, thief_versus_anim)
+			add_name_tag_to_model(model, get_display_name(robbers[i]))
+		else:
+			model.hide()
 			
-	for c_model in spawned_cops:
-		c_model.rotation.y = deg_to_rad(cop_rotation_offset_degrees)
-		c_model.rotation.x = 0
-		c_model.rotation.z = 0
+	for i in range(preplaced_cops.size()):
+		var model = preplaced_cops[i]
+		if i < cops.size():
+			model.show()
+			play_emote(model, cop_versus_anim)
+			add_name_tag_to_model(model, get_display_name(cops[i]))
+		else:
+			model.hide()
 
-func get_closest_node(source: Node3D, targets: Array) -> Node3D:
-	var closest = null
-	var min_dist = 999999.0
-	for t in targets:
-		var dist = source.global_position.distance_to(t.global_position)
-		if dist < min_dist:
-			min_dist = dist
-			closest = t
-	return closest
+	# We no longer apply manual rotation offsets here because the user
+	# sets the rotations natively in the editor using the Dummy scenes!
 
 func add_name_tag_to_model(model: Node3D, text: String):
 	# The Label3D is now built directly into the Thief/Cop scenes so the user can preview and edit it visually!
@@ -201,43 +188,19 @@ func add_name_tag_to_model(model: Node3D, text: String):
 	if label and label is Label3D:
 		label.text = text
 
-func play_emote(model: Node3D):
+func play_emote(model: Node3D, anim_name: String):
 	var anim = model.find_child("AnimationPlayer", true, false)
 	if anim:
-		if anim.has_animation("emote"):
-			anim.play("emote")
+		if anim.has_animation(anim_name):
+			anim.play(anim_name)
+		elif anim.has_animation("Emote"):
+			anim.play("Emote")
 		elif anim.has_animation("Idle1"):
 			anim.play("Idle1")
+		elif anim.has_animation("Idle"):
+			anim.play("Idle")
 
-func apply_lineup_transform(model: Node3D, index: int, total: int, is_cop: bool):
-	var parent = left_spawn if is_cop else right_spawn
-	
-	# Try to find a manual WYSIWYG marker in World.tscn first!
-	var marker_name = ("CopPreviewPos" if is_cop else "ThiefPreviewPos") + str(index)
-	var manual_marker = parent.get_node_or_null(marker_name)
-	
-	if manual_marker and manual_marker is Marker3D:
-		model.position = manual_marker.position
-		return
-		
-	# Fallback math if the user deletes a marker
-	var side := -1.0 if is_cop else 1.0
-	var x := 0.0
-	var z := 0.0
 
-	match total:
-		1: x = side * 1.5
-		2: x = side * (1.0 + index * 1.5)
-		3: x = side * (0.8 + index * 1.2)
-		4: x = side * (0.6 + index * 1.0)
-		_:
-			# 5+ models (e.g. 7 thieves) arranged in a spacious 2-row grid
-			var row := int(index / 4) # Max 4 per row
-			var col := index % 4
-			x = side * (0.8 + col * 1.2)
-			z = row * -1.5
-
-	model.position = Vector3(x, 0, z)
 	# We intentionally leave model.scale at Vector3.ONE so we don't mess up perfectly scaled player scenes!
 
 # ---------------------------------------------------------

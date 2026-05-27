@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dummycop123"]
+
+[ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="1_dummy"]
+
+[node name="DummyCop" type="Node3D" unique_id=535254931]
+
+[node name="Næsehorn2" parent="." unique_id=146192529 instance=ExtResource("1_dummy")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
+
+[node name="NameTag" type="Label3D" parent="." unique_id=1391553469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+pixel_size = 0.003
+billboard = 1
+text = "Player123456"
+font_size = 72
