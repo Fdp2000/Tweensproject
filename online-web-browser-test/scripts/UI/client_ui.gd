@@ -138,6 +138,7 @@ func show_main_menu() -> void:
 
 func _on_play_pressed() -> void:
 	tutorial_intro_cancelled = true
+	reset_tutorial_button()
 	main_menu_panel.hide()
 	play_panel.show()
 
