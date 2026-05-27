@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://bi6e376akpo28"]
 
 [ext_resource type="Script" uid="uid://bo3sxpvkjes8" path="res://scripts/Player/cop.gd" id="2_cop"]
+[ext_resource type="Material" uid="uid://dodph65auegcl" path="res://Assets/Shaders/celShader/museumCel.tres" id="2_w24q3"]
+[ext_resource type="Material" uid="uid://2g4x24i7rhhw" path="res://Assets/Shaders/HypnoShader/SolidhypnoMat.tres" id="3_bw8rt"]
 [ext_resource type="PackedScene" uid="uid://bukcop75vlfjd" path="res://Assets/Particles/smoke_particles_Charge.tscn" id="3_ksubn"]
 [ext_resource type="Texture2D" uid="uid://carrvmj3fplpl" path="res://Assets/Textures/SmokeParticle.png" id="4_jvhmw"]
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="4_rfdt2"]
+[ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="4_xgjd2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w24q3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
 radius = 0.5239258
@@ -107,6 +112,8 @@ collision_mask = 7
 floor_max_angle = 1.3089969
 floor_snap_length = 0.5
 script = ExtResource("2_cop")
+skin_materials = Array[Material]([SubResource("StandardMaterial3D_w24q3"), ExtResource("2_w24q3"), ExtResource("3_bw8rt"), ExtResource("4_xgjd2")])
+skin_mesh_paths = Array[NodePath]([NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Body"), NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Head")])
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=607525419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.061146, 0)
@@ -135,6 +142,29 @@ replication_config = SubResource("SceneReplicationConfig_e80uo")
 [node name="Næsehorn2" parent="." unique_id=2043154851 instance=ExtResource("4_rfdt2")]
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0.13307339)
 
+[node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.05781442, 0.004804656, -0.0024757523, 0.9983127)
+bones/2/rotation = Quaternion(0.03749651, 0.012544329, -0.013522848, 0.99912655)
+bones/3/rotation = Quaternion(-0.017052958, 0.013975662, -0.01109316, 0.9996954)
+bones/5/rotation = Quaternion(-0.54661435, -0.42492753, -0.5307844, 0.48879164)
+bones/6/rotation = Quaternion(-0.17442167, 0.6163288, -0.45597836, 0.6178995)
+bones/7/rotation = Quaternion(0.5662054, -0.14800136, -0.028308257, 0.8103739)
+bones/8/rotation = Quaternion(-0.035369698, 0.047457807, -0.092168495, 0.99398285)
+bones/9/rotation = Quaternion(-0.050825205, -0.03001981, -0.589106, 0.8058969)
+bones/10/rotation = Quaternion(0.050722033, 0.029480508, -0.6137793, 0.7872948)
+bones/11/rotation = Quaternion(0.18789335, 0.16434504, -0.46750137, 0.848015)
+bones/13/rotation = Quaternion(-0.59767646, 0.26926854, 0.4983458, 0.5673878)
+bones/14/rotation = Quaternion(-0.045052566, -0.70565045, 0.41772902, 0.5705525)
+bones/15/rotation = Quaternion(0.50520396, 0.119557254, 0.03697693, 0.85387814)
+bones/16/rotation = Quaternion(0.06470338, -0.027695462, -0.02294338, 0.99725634)
+bones/17/rotation = Quaternion(-0.05040917, 0.030306753, 0.5855812, 0.80847704)
+bones/18/rotation = Quaternion(0.05124882, -0.029117702, 0.608468, 0.7913864)
+bones/19/rotation = Quaternion(0.18777414, -0.16417333, 0.46394777, 0.8500238)
+bones/23/rotation = Quaternion(0.98344415, 0.16847925, -0.035667185, 0.05639299)
+bones/24/rotation = Quaternion(0.48124638, 0.007976814, -0.06980259, 0.87376535)
+bones/25/rotation = Quaternion(0.82457274, -0.18471256, 0.12185357, 0.52068496)
+bones/26/rotation = Quaternion(0.30985662, -0.04813322, -0.04558941, 0.9484692)
+
 [node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)
 amount = 35
@@ -152,3 +182,5 @@ angular_velocity_min = 36.55
 angular_velocity_max = 104.5
 scale_amount_min = 0.1
 scale_amount_max = 0.4
+
+[editable path="Næsehorn2"]
