@@ -117,7 +117,18 @@ func _ready() -> void:
 	show_main_menu()
 	animate_glow(tutorial_next_button)
 	animate_glow(cop_next_button)
-	_play_tutorial_intro()
+	
+	# Load or create settings to check if the user has seen the tutorial
+	var config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	var has_seen_tutorial = false
+	if err == OK:
+		has_seen_tutorial = config.get_value("tutorial", "has_seen", false)
+		
+	if not has_seen_tutorial:
+		config.set_value("tutorial", "has_seen", true)
+		config.save("user://settings.cfg")
+		_play_tutorial_intro()
 
 
 func show_main_menu() -> void:
@@ -576,13 +587,23 @@ func _on_game_started() -> void:
 
 
 func set_skin_viewports_active(active: bool) -> void:
-	var mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
+	# Enable/Disable processing of viewports to save performance when not visible
+	var chameleon_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport")
+	var rhino_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
+	
+	if chameleon_vp:
+		chameleon_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
+	if rhino_vp:
+		rhino_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
 
-	var cham_viewport: SubViewport = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport")
-	var rhino_viewport: SubViewport = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
-
-	cham_viewport.render_target_update_mode = mode
-	rhino_viewport.render_target_update_mode = mode
+func _unhandled_input(event: InputEvent) -> void:
+	# Secret Developer Tool: Press 'T' on the main menu to instantly wipe the tutorial save!
+	if event is InputEventKey and event.pressed and event.keycode == KEY_T:
+		if main_menu_canvas.visible:
+			var config = ConfigFile.new()
+			config.set_value("tutorial", "has_seen", false)
+			config.save("user://settings.cfg")
+			print("DEV TOOL: Tutorial save reset! The tutorial intro will play on the next launch.")
 
 func _on_game_ended() -> void:
 	if current_hud:

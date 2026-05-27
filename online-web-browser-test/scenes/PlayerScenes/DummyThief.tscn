@@ -1,17 +1,59 @@
-[gd_scene format=3 uid="uid://dummythief123"]
+[gd_scene format=3 uid="uid://dfcub4m2b5i2f"]
 
-[ext_resource type="PackedScene" uid="uid://c6f2p4q8p6x2t" path="res://Assets/Models/Chameleon/chameleon.tscn" id="1_dummy"]
+[ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="1_dummy"]
 
-[node name="DummyThief" type="Node3D"]
+[node name="DummyThief" type="Node3D" unique_id=931726666]
 
-[node name="Chameleon_Character" parent="." instance=ExtResource("1_dummy")]
+[node name="Chameleon_Character" parent="." unique_id=995910019 instance=ExtResource("1_dummy")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
-[node name="NameTag" type="Label3D" parent="."]
+[node name="Skeleton3D" parent="Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(995910019, 1406805165) index="0" unique_id=671893237]
+bones/1/rotation = Quaternion(-0.04145947, 0.010715408, 0.010817416, 0.99902415)
+bones/2/rotation = Quaternion(-0.037039276, 0.021405553, 0.014217977, 0.9989834)
+bones/2/scale = Vector3(1, 0.99999994, 0.99999994)
+bones/3/rotation = Quaternion(0.007102306, 0.020772237, 0.015128164, 0.99964464)
+bones/4/rotation = Quaternion(0.015096873, 0.063719295, -0.04412583, 0.9968776)
+bones/5/position = Vector3(0.008790207, 0.10931611, 0.037826773)
+bones/5/rotation = Quaternion(-0.6101393, -0.35085213, -0.33547178, 0.6261721)
+bones/5/scale = Vector3(0.99999994, 0.9999999, 0.99999994)
+bones/6/rotation = Quaternion(-0.41733, 0.7425875, -0.44703794, 0.27305052)
+bones/6/scale = Vector3(0.99999994, 1, 1)
+bones/7/rotation = Quaternion(0.34896195, -0.10116959, 0.0059333947, 0.9316411)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(-0.2387405, -0.78798974, -0.21794257, 0.5240004)
+bones/8/scale = Vector3(1.0000001, 0.99999994, 1)
+bones/9/rotation = Quaternion(4.0513164e-08, -0.09495568, -1.8626456e-09, 0.99548155)
+bones/9/scale = Vector3(0.9999999, 0.9999999, 1)
+bones/10/rotation = Quaternion(0.0001405584, 0.20092002, 1.6093254e-06, 0.9796077)
+bones/11/rotation = Quaternion(-0.17322819, 0.10999253, -0.21781796, 0.9541746)
+bones/12/rotation = Quaternion(-0.56465906, 0.38636824, 0.51492894, 0.51645714)
+bones/12/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
+bones/13/position = Vector3(-0.042187367, 0.14566936, -0.024297334)
+bones/13/rotation = Quaternion(-0.39832595, -0.6343791, 0.39872676, 0.5290714)
+bones/13/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
+bones/14/position = Vector3(9.639189e-08, 0.15597431, -7.450581e-09)
+bones/14/rotation = Quaternion(0.21465565, 0.10544076, -0.0036497193, 0.97097474)
+bones/14/scale = Vector3(1.0000001, 1, 1.0000001)
+bones/15/rotation = Quaternion(-0.065542355, 0.58949333, 0.095179215, 0.79946405)
+bones/15/scale = Vector3(1.0000001, 0.99999994, 0.99999994)
+bones/16/rotation = Quaternion(0.22472738, 0.08437086, -0.4000196, 0.88451314)
+bones/16/scale = Vector3(1, 0.9999998, 0.9999999)
+bones/21/rotation = Quaternion(0.9679155, 0.0127676735, -0.09338927, 0.23292737)
+bones/21/scale = Vector3(1, 0.99999994, 0.9999979)
+bones/22/rotation = Quaternion(0.35900608, -0.0010963384, 0.014668821, 0.9332193)
+bones/23/rotation = Quaternion(-0.77221876, -0.03267523, 0.041028466, 0.63318807)
+bones/24/rotation = Quaternion(0.92849755, -0.22243933, 0.10763929, 0.2771766)
+bones/25/rotation = Quaternion(0.4166827, -0.04651424, 0.007642328, 0.9078291)
+bones/26/rotation = Quaternion(-0.76612335, 0.10201952, -0.14508137, 0.6177365)
+
+[node name="ArtifactAttachment" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
+transform = Transform3D(-0.18790033, 0.098926745, -0.97719324, -0.26923427, -0.9619935, -0.045618005, -0.9445671, 0.2545224, 0.20739333, -0.19114545, 0.45168474, 0.052292768)
+
+[node name="NameTag" type="Label3D" parent="." unique_id=1633224945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 pixel_size = 0.003
 billboard = 1
 text = "Player123456"
 font_size = 72
-outline_size = 12
-outline_modulate = Color(0, 0, 0, 1)
+
+[editable path="Chameleon_Character"]

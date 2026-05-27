@@ -7,9 +7,34 @@
 [node name="Næsehorn2" parent="." unique_id=146192529 instance=ExtResource("1_dummy")]
 transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
 
+[node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(146192529, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.021083368, 0.016922435, 0.0020951647, 0.99963236)
+bones/2/rotation = Quaternion(-0.02802322, 0.03444006, 0.0069982777, 0.99898934)
+bones/3/rotation = Quaternion(-0.08247811, 0.031687547, 0.012841771, 0.9960062)
+bones/5/rotation = Quaternion(-0.59535575, -0.39461526, -0.4586653, 0.5286365)
+bones/6/rotation = Quaternion(-0.34934887, 0.6508109, -0.43995816, 0.5107225)
+bones/7/rotation = Quaternion(0.16815497, -0.039666988, -0.0032333706, 0.9849569)
+bones/8/rotation = Quaternion(-0.14376129, 0.0451618, -0.08492084, 0.98492724)
+bones/9/rotation = Quaternion(0.13717684, 0.051446263, -0.25195912, 0.9565838)
+bones/10/rotation = Quaternion(0.15083304, 0.049679622, -0.23152399, 0.9597803)
+bones/11/rotation = Quaternion(0.1811876, 0.030193057, -0.08237668, 0.9795272)
+bones/13/rotation = Quaternion(-0.5847641, 0.4082509, 0.4593741, 0.52948797)
+bones/14/rotation = Quaternion(-0.28285256, -0.689564, 0.46706143, 0.47576225)
+bones/15/rotation = Quaternion(0.16099575, 0.08826675, -0.009683313, 0.9829526)
+bones/16/rotation = Quaternion(-0.1145892, -0.01596177, -0.019702509, 0.9930894)
+bones/17/rotation = Quaternion(0.13805163, -0.047409687, 0.22456624, 0.96346474)
+bones/18/rotation = Quaternion(0.15178098, -0.043584395, 0.190163, 0.9689691)
+bones/19/rotation = Quaternion(0.18125117, -0.025904693, 0.058151625, 0.9813743)
+bones/23/rotation = Quaternion(0.9452757, 0.11072253, -0.12801725, 0.2789372)
+bones/24/rotation = Quaternion(0.33255804, -0.028173674, -0.020197617, 0.9424456)
+bones/25/rotation = Quaternion(0.9714536, -0.066782676, 0.08174069, 0.21245345)
+bones/26/rotation = Quaternion(0.30405825, 0.038212974, 0.020895166, 0.9516575)
+
 [node name="NameTag" type="Label3D" parent="." unique_id=1391553469]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
 pixel_size = 0.003
 billboard = 1
 text = "Player123456"
 font_size = 72
+
+[editable path="Næsehorn2"]

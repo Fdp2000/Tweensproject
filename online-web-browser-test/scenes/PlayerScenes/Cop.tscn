@@ -112,7 +112,7 @@ collision_mask = 7
 floor_max_angle = 1.3089969
 floor_snap_length = 0.5
 script = ExtResource("2_cop")
-skin_materials = Array[Material]([SubResource("StandardMaterial3D_w24q3"), ExtResource("2_w24q3"), ExtResource("3_bw8rt"), ExtResource("4_xgjd2")])
+skin_materials = Array[Material]([ExtResource("2_w24q3"), ExtResource("3_bw8rt"), ExtResource("4_xgjd2")])
 skin_mesh_paths = Array[NodePath]([NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Body"), NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Head")])
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=607525419]
@@ -143,27 +143,27 @@ replication_config = SubResource("SceneReplicationConfig_e80uo")
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0.13307339)
 
 [node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.023417933, 0.017654568, 0.0021893512, 0.99956757)
-bones/2/rotation = Quaternion(-0.027494034, 0.036249004, 0.008419904, 0.9989291)
-bones/3/rotation = Quaternion(-0.07998097, 0.030232951, 0.011929691, 0.9962664)
-bones/5/rotation = Quaternion(-0.5917401, -0.39848354, -0.46434304, 0.5248239)
-bones/6/rotation = Quaternion(-0.30793735, 0.6280041, -0.5024662, 0.50824535)
-bones/7/rotation = Quaternion(0.13481297, -0.07653024, 0.0015254482, 0.9879101)
-bones/8/rotation = Quaternion(-0.1618, 0.03791086, -0.056407683, 0.98448044)
-bones/9/rotation = Quaternion(0.13909121, 0.043056276, -0.1951217, 0.96991104)
-bones/10/rotation = Quaternion(0.15296493, 0.035912283, -0.14012016, 0.9775881)
-bones/11/rotation = Quaternion(0.18136662, 0.019425822, -0.022926712, 0.98295635)
-bones/13/rotation = Quaternion(-0.59197974, 0.39795423, 0.45983726, 0.5289065)
-bones/14/rotation = Quaternion(-0.30156094, -0.695702, 0.44619107, 0.4753665)
-bones/15/rotation = Quaternion(0.16789784, 0.06445129, -0.0029160008, 0.983691)
-bones/16/rotation = Quaternion(-0.16621332, -0.035336033, -0.012962075, 0.9853713)
-bones/17/rotation = Quaternion(0.13849247, -0.045247015, 0.20996754, 0.9667917)
-bones/18/rotation = Quaternion(0.15225941, -0.039733823, 0.16573276, 0.97353536)
-bones/19/rotation = Quaternion(0.18125443, -0.022612892, 0.04042825, 0.9823447)
-bones/23/rotation = Quaternion(0.9460583, 0.10569812, -0.12563224, 0.27931744)
-bones/24/rotation = Quaternion(0.32949334, -0.028396737, -0.022941614, 0.9434519)
-bones/25/rotation = Quaternion(0.9703263, -0.07113509, 0.08372469, 0.21539946)
-bones/26/rotation = Quaternion(0.31353816, 0.037930176, 0.019729014, 0.9486127)
+bones/1/rotation = Quaternion(0.0076217935, 0.018204628, 0.0026640026, 0.99980175)
+bones/2/rotation = Quaternion(-0.039349075, 0.0367776, 0.009108799, 0.998507)
+bones/3/rotation = Quaternion(-0.0928867, 0.03273254, 0.014357014, 0.99503493)
+bones/5/rotation = Quaternion(-0.60012597, -0.386581, -0.45848075, 0.5293387)
+bones/6/rotation = Quaternion(-0.35284033, 0.6399622, -0.4676559, 0.4972425)
+bones/7/rotation = Quaternion(0.14550346, -0.037344255, 0.0007891579, 0.98865247)
+bones/8/rotation = Quaternion(-0.16431724, 0.026934536, -0.044156864, 0.98505056)
+bones/9/rotation = Quaternion(0.13802391, 0.04791459, -0.2281208, 0.9626082)
+bones/10/rotation = Quaternion(0.1518919, 0.043960605, -0.19319439, 0.9683348)
+bones/11/rotation = Quaternion(0.18132283, 0.02569841, -0.057424486, 0.98140925)
+bones/13/rotation = Quaternion(-0.5970392, 0.38926682, 0.4528531, 0.5356675)
+bones/14/rotation = Quaternion(-0.3428148, -0.69905937, 0.39408574, 0.488355)
+bones/15/rotation = Quaternion(0.20875634, 0.039101243, -0.013281218, 0.9770955)
+bones/16/rotation = Quaternion(-0.16364081, -0.03911626, 0.014482792, 0.9856378)
+bones/17/rotation = Quaternion(0.13784584, -0.0483664, 0.23101331, 0.9619211)
+bones/18/rotation = Quaternion(0.15147564, -0.045219004, 0.20209205, 0.9665243)
+bones/19/rotation = Quaternion(0.18127325, -0.027410865, 0.06633455, 0.98081017)
+bones/23/rotation = Quaternion(0.95406854, 0.10474207, -0.13018306, 0.24866608)
+bones/24/rotation = Quaternion(0.29167518, -0.027494557, -0.021215133, 0.95588684)
+bones/25/rotation = Quaternion(0.9774411, -0.070906304, 0.0869939, 0.17892255)
+bones/26/rotation = Quaternion(0.26544395, 0.040391188, 0.012871074, 0.9631939)
 
 [node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)
@@ -182,12 +182,5 @@ angular_velocity_min = 36.55
 angular_velocity_max = 104.5
 scale_amount_min = 0.1
 scale_amount_max = 0.4
-
-[node name="NameTag" type="Label3D" parent="." unique_id=999999992]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
-pixel_size = 0.003
-billboard = 1
-text = "Player123456"
-font_size = 72
 
 [editable path="Næsehorn2"]

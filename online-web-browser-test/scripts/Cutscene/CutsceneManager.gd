@@ -4,12 +4,20 @@ extends Node3D
 
 @export var thief_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
 @export var thief_rotation_offset_degrees: float = -90.0
-@export var thief_versus_anim: String = "Camo_Pose"
+@export var thief_versus_anims: Array[String] = [
+	"Dismissing Gesture",
+	"Pointing Gesture",
+	"Taunt",
+	"Waving Gesture"
+]
 
 @export var cop_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
 @export var cop_rotation_offset_degrees: float = -90.0
-@export var cop_versus_anim: String = "Idle"
-@export var versus_duration: float = 6.0
+@export var cop_versus_anims: Array[String] = [
+	"Standing Taunt Chest Thump",
+	"Standing Taunt Battlecry"
+]
+@export var versus_duration: float = 3.0
 @export var fly_to_player_time: float = 1.5
 
 @onready var intro_camera: Camera3D = $Node3D/IntroCamera
@@ -40,6 +48,9 @@ func _on_game_started():
 	
 	if local_player == null:
 		return
+		
+	if local_player.get("charge_ui_ref"):
+		local_player.charge_ui_ref.modulate.a = 0.0
 		
 	# Skip logic
 	if skip_cutscene:
@@ -94,16 +105,36 @@ func run_cinematic_flow():
 	# 2. Setup Versus Scene in the 3D world
 	var lineup_cam_pos = $CutsceneMarkers/VersusPos/LineupCameraPos if $CutsceneMarkers/VersusPos.has_node("LineupCameraPos") else versus_pos
 	intro_camera.global_transform = lineup_cam_pos.global_transform
+	
+	# If the user placed a preview Camera3D under LineupCameraPos, use its FOV!
+	var preview_cam = lineup_cam_pos.find_child("Camera3D", true, false)
+	if preview_cam:
+		intro_camera.fov = preview_cam.fov
+	else:
+		intro_camera.fov = 35.0
 	setup_versus_lineup()
 	
 	# 3. Fade into Versus Screen
 	await cutscene_ui.fade_in(1.0)
+	
+	await get_tree().create_timer(0.10).timeout
+	
+	# Trigger the randomized taunts now that the screen is visible!
+	play_versus_taunts()
 	
 	# 4. Wait for versus duration
 	await get_tree().create_timer(versus_duration).timeout
 	
 	# 5. Fade to black to transition to Museum Pans
 	await cutscene_ui.fade_to_black(1.0)
+	
+	# Free the dummies from memory entirely so they don't photobomb the background!
+	for model in get_dummies(right_spawn): model.queue_free()
+	for model in get_dummies(left_spawn): model.queue_free()
+	
+	var vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
+	if vs_label:
+		vs_label.hide()
 	
 	# 6. Play 3 Cinematic Clips
 	await play_cinematic_clip($CutsceneMarkers/Clip1Start, $CutsceneMarkers/Clip1End, 3.0)
@@ -124,12 +155,22 @@ func run_cinematic_flow():
 	# 8. Delay 1 second
 	await get_tree().create_timer(1.0).timeout
 	
-	# 9. Play Countdown
+	# 9. Play Countdown and fade in UI
+	var hud = get_tree().get_root().find_child("HUD", true, false)
+	if hud and hud.has_method("fade_in"):
+		hud.fade_in(1.5)
+		
+	if local_player.get("charge_ui_ref"):
+		var fade_tween = create_tween()
+		fade_tween.tween_property(local_player.charge_ui_ref, "modulate:a", 1.0, 3.0)
+		
 	await cutscene_ui.play_countdown()
 	
-	# 10. Enable controls and cleanup!
+	# 10. Enable controls and start game clock!
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
+		
+	GameManager.start_game_clock()
 		
 	queue_free()
 	cutscene_ui.queue_free()
@@ -142,6 +183,11 @@ func get_dummies(parent_node: Node3D) -> Array:
 	for child in parent_node.find_children("*", "Node3D", true, false):
 		if child.has_node("NameTag"):
 			dummies.append(child)
+			
+	# Sort dummies alphabetically by their parent marker's name
+	# This allows the user to rename the markers (e.g. ThiefPreviewPos0) to reorder the players!
+	dummies.sort_custom(func(a, b): return str(a.get_parent().name) < str(b.get_parent().name))
+	
 	return dummies
 
 func setup_versus_lineup():
@@ -165,7 +211,7 @@ func setup_versus_lineup():
 		var model = preplaced_thieves[i]
 		if i < robbers.size():
 			model.show()
-			play_emote(model, thief_versus_anim)
+			play_emote(model, "Idle1") # Start in idle during the fade-in!
 			add_name_tag_to_model(model, get_display_name(robbers[i]))
 		else:
 			model.hide()
@@ -174,10 +220,33 @@ func setup_versus_lineup():
 		var model = preplaced_cops[i]
 		if i < cops.size():
 			model.show()
-			play_emote(model, cop_versus_anim)
+			play_emote(model, "Idle") # Start in idle during the fade-in!
 			add_name_tag_to_model(model, get_display_name(cops[i]))
 		else:
 			model.hide()
+
+func play_versus_taunts():
+	var preplaced_thieves = get_dummies(right_spawn)
+	for model in preplaced_thieves:
+		if model.visible:
+			var anim = thief_versus_anims.pick_random() if thief_versus_anims.size() > 0 else ""
+			if anim != "":
+				play_emote_with_return(model, anim, "Idle1")
+				
+	var preplaced_cops = get_dummies(left_spawn)
+	for model in preplaced_cops:
+		if model.visible:
+			var anim = cop_versus_anims.pick_random() if cop_versus_anims.size() > 0 else ""
+			if anim != "":
+				play_emote_with_return(model, anim, "Idle")
+
+func play_emote_with_return(model: Node3D, anim_name: String, return_anim: String):
+	var anim: AnimationPlayer = model.find_child("AnimationPlayer", true, false)
+	if anim:
+		if anim.has_animation(anim_name):
+			anim.play(anim_name, 0.2)
+			# Once the taunt finishes, smoothly crossfade back into the idle animation!
+			anim.animation_finished.connect(func(finished_anim_name): anim.play(return_anim, 0.5), CONNECT_ONE_SHOT)
 
 	# We no longer apply manual rotation offsets here because the user
 	# sets the rotations natively in the editor using the Dummy scenes!
@@ -239,5 +308,11 @@ func finish_cutscene_immediately():
 		target_cam.current = true
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
+		
+	GameManager.start_game_clock()
+	var hud = get_tree().get_root().find_child("HUD", true, false)
+	if hud and hud.has_method("fade_in"):
+		hud.fade_in(0.0)
+		
 	queue_free()
 	cutscene_ui.queue_free()

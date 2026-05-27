@@ -71,6 +71,9 @@ func _on_timer_tick():
 	if not multiplayer.is_server(): return
 	if current_state != GameState.PLAYING: return
 	
+	if round_timer < 0:
+		return # Infinite time!
+	
 	round_timer -= 1
 	rpc("sync_time", round_timer)
 	
@@ -189,6 +192,9 @@ func start_game(role_assignments: Dictionary):
 	var total_players = players.size()
 	
 	match total_players:
+		1:
+			cash_quota = Balance.quota_2p # Default to 2p quota for testing
+			round_timer = -1 # Infinite time flag
 		2:
 			cash_quota = Balance.quota_2p
 			round_timer = Balance.timer_2p
@@ -221,7 +227,6 @@ func start_game(role_assignments: Dictionary):
 			round_timer = Balance.timer_10p if total_players > 10 else Balance.timer_2p
 	
 	if multiplayer.is_server():
-		timer_node.start()
 		rpc("sync_time", round_timer)
 
 	if multiplayer.is_server():
@@ -319,6 +324,11 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 		cached_scoreboard.countdown = 5.0 # Reset timer
 
 
+func start_game_clock():
+	if multiplayer.is_server():
+		timer_node.start()
+
+
 @rpc("any_peer", "call_local")
 func return_to_lobby():
 	if not multiplayer.is_server(): return
@@ -380,7 +390,7 @@ func full_teardown():
 func host_start_game():
 	if not multiplayer.is_server(): return
 	
-	if players.size() < 2:
+	if players.size() < 1:
 		print("Cannot start game: Not enough players!")
 		return
 	
@@ -409,6 +419,8 @@ func host_start_game():
 		target_cops = 3
 	elif total_players >= Balance.min_players_for_2_cops:
 		target_cops = 2
+	elif total_players == 1:
+		target_cops = 0
 	
 	var cops_needed = target_cops - forced_cops.size()
 	
