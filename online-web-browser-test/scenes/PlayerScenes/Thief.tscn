@@ -12,7 +12,9 @@
 [ext_resource type="Animation" uid="uid://c1mcnmaibxgy8" path="res://Assets/Animations/Chameleon/Idle2.res" id="7_1raaj"]
 [ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="7_7jg2g"]
 [ext_resource type="Animation" uid="uid://ce26fke58nnvf" path="res://Assets/Animations/Carry/Carrying.res" id="7_b17lj"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="7_iuwyu"]
 [ext_resource type="Animation" uid="uid://bqp1nobyaxhr8" path="res://Assets/Animations/Chameleon/Run2.res" id="7_j3oqh"]
+[ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="8_1vv2c"]
 [ext_resource type="Animation" uid="uid://b24nc1krkg3qc" path="res://Assets/Animations/Chameleon/Idle3.res" id="8_b77bf"]
 [ext_resource type="Animation" uid="uid://c21j58ypdr2r0" path="res://Assets/Animations/Chameleon/Run3.res" id="8_ntepm"]
 [ext_resource type="Animation" uid="uid://caddp1wk5u0nt" path="res://Assets/Animations/Chameleon/Hypno_Walk.res" id="8_ptic4"]
@@ -22,6 +24,31 @@
 [ext_resource type="Animation" uid="uid://uskucuuqyynr" path="res://Assets/Animations/Carry/Jog Forward.res" id="11_b17lj"]
 [ext_resource type="Animation" uid="uid://bqyvm7t41n5rm" path="res://Assets/Animations/Carry/Jog Strafe Left.res" id="12_ptic4"]
 [ext_resource type="Animation" uid="uid://crfctbio3my7o" path="res://Assets/Animations/Carry/Jog Strafe Right.res" id="13_wj3y1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oure2"]
+render_priority = 0
+shader = ExtResource("7_iuwyu")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("8_1vv2c")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgnbw"]
 radius = 0.22167969
@@ -2218,7 +2245,7 @@ team_index = null
 sync_target_position = null
 sync_target_rotation = null
 sync_velocity = null
-skin_materials = Array[Material]([ExtResource("5_wj3y1"), ExtResource("6_w2drt"), ExtResource("4_lgnbw")])
+skin_materials = Array[Material]([SubResource("ShaderMaterial_oure2"), ExtResource("5_wj3y1"), ExtResource("6_w2drt"), ExtResource("4_lgnbw")])
 skin_mesh_paths = Array[NodePath]([NodePath("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/Chameleon")])
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=607525419]

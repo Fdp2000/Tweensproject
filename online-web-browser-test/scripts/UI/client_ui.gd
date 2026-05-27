@@ -218,7 +218,7 @@ func _rotate_camera_to_skins() -> void:
 		return
 
 	var target_rotation := menu_camera_start_rotation
-	target_rotation.y += 180.0
+	target_rotation.y += 90.0
 
 	var tween := create_tween()
 	tween.tween_property(

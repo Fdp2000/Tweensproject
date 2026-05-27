@@ -2273,7 +2273,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainMenuPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1660272269]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2284,15 +2283,9 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_n5gp1")
 
 [node name="MarginContainer" type="MarginContainer" parent="MainMenuCanvas/Root/MainMenuPanel" unique_id=802465796]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -309.0
-offset_top = -221.0
-offset_right = 309.0
-offset_bottom = 221.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 60
@@ -2305,28 +2298,38 @@ layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1596677310]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+size_flags_vertical = 1
 text = "Chamillion Heist"
 label_settings = SubResource("LabelSettings_n5gp1")
 horizontal_alignment = 1
 
 [node name="PlayButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1505386144]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
 text = "Play"
 
 [node name="TutorialButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1588659385]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
 text = "Tutorial"
 
 [node name="SkinsButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1188589368]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
 text = "Skins"
 
 [node name="QuitButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=512990143]
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
 text = "Quit"
 
@@ -2393,6 +2396,7 @@ layout_mode = 2
 text = "Back"
 
 [node name="SkinsPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1485494093]
+visible = false
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 1
 anchors_preset = 8
@@ -2458,7 +2462,7 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(380, 360)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=2006095770]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 100, 1.5, 4)
@@ -2468,21 +2472,67 @@ fov = 40.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.06988, 1.418527, 2.5919046)
 
 [node name="Chameleon_Character" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=1423752438 instance=ExtResource("1_cxert")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -1.0704265, 0)
+transform = Transform3D(0.82609826, 0, 0.5635261, 0, 1, 0, -0.5635261, 0, 0.82609826, 0, -1.0704265, 0)
 
-[node name="Chameleon" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" parent_id_path=PackedInt32Array(1423752438, 671893237) index="0" unique_id=1112566209]
+[node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/rotation = Quaternion(-0.04475693, 1.3313587e-07, -1.6992058e-08, 0.9989979)
+bones/2/rotation = Quaternion(-0.043643385, -5.7902227e-08, -1.9856166e-08, 0.99904716)
+bones/2/scale = Vector3(1, 0.99999994, 0.99999994)
+bones/3/rotation = Quaternion(0.0005071397, -5.87454e-08, 1.7154432e-10, 0.9999999)
+bones/4/rotation = Quaternion(0.028370686, -4.4803944e-08, 6.6584214e-09, 0.9995975)
+bones/5/position = Vector3(0.008790207, 0.10931611, 0.037826773)
+bones/5/rotation = Quaternion(-0.5776488, -0.39579502, -0.40374523, 0.5887766)
+bones/5/scale = Vector3(0.99999994, 0.9999999, 0.99999994)
+bones/6/rotation = Quaternion(0.0903878, 0.74012536, -0.026138559, 0.6658538)
+bones/6/scale = Vector3(0.99999994, 1, 1)
+bones/7/rotation = Quaternion(0.18524294, -0.105992354, -0.042121552, 0.97605145)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(-0.0379357, 0.011217055, -0.018552618, 0.99904495)
+bones/8/scale = Vector3(1.0000001, 0.99999994, 1)
+bones/9/rotation = Quaternion(0.22472736, -0.084370784, 0.4000195, 0.88451314)
+bones/9/scale = Vector3(0.9999999, 0.9999999, 1)
+bones/12/rotation = Quaternion(-0.5776489, 0.39579487, 0.40374517, 0.58877677)
+bones/12/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
+bones/13/position = Vector3(-0.042187367, 0.14566936, -0.024297334)
+bones/13/rotation = Quaternion(0.09038778, -0.7401253, 0.026138509, 0.6658539)
+bones/13/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
+bones/14/position = Vector3(9.639189e-08, 0.15597431, -7.450581e-09)
+bones/14/rotation = Quaternion(0.18524294, 0.10599225, 0.042121544, 0.97605145)
+bones/14/scale = Vector3(1.0000001, 1, 1.0000001)
+bones/15/rotation = Quaternion(-0.037935678, -0.011217062, 0.018552624, 0.99904495)
+bones/15/scale = Vector3(1.0000001, 0.99999994, 0.99999994)
+bones/16/rotation = Quaternion(0.22472738, 0.08437086, -0.4000196, 0.88451314)
+bones/16/scale = Vector3(1, 0.9999998, 0.9999999)
+bones/21/rotation = Quaternion(0.9857274, 2.0114882e-08, 3.2109787e-07, 0.1683491)
+bones/21/scale = Vector3(1, 0.99999994, 0.9999979)
+bones/22/rotation = Quaternion(0.19363664, -1.7044326e-07, 5.152104e-08, 0.9810733)
+bones/23/rotation = Quaternion(-0.6772311, 1.9446729e-07, -2.1779653e-07, 0.7357704)
+bones/24/rotation = Quaternion(0.9857274, -4.1905906e-08, -4.2050228e-08, 0.16834915)
+bones/25/rotation = Quaternion(0.19363676, 1.3578281e-07, -3.0711924e-08, 0.9810733)
+bones/26/rotation = Quaternion(-0.67723113, -1.951576e-07, 2.1704643e-07, 0.73577034)
+bones/27/scale = Vector3(1, 1, 1)
+bones/29/scale = Vector3(1, 0.99999994, 1)
+bones/30/scale = Vector3(1, 1, 1)
+bones/31/scale = Vector3(1, 1.0000001, 1.0000001)
+
+[node name="Chameleon" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1112566209]
 surface_material_override/0 = null
 
-[node name="Eye_L" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" parent_id_path=PackedInt32Array(1423752438, 671893237) index="1" unique_id=970056815]
+[node name="Eye_L" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="1" unique_id=970056815]
 surface_material_override/0 = null
 
-[node name="Eye_R" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" parent_id_path=PackedInt32Array(1423752438, 671893237) index="2" unique_id=940823346]
+[node name="Eye_R" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="2" unique_id=940823346]
 surface_material_override/0 = null
+
+[node name="ArtifactAttachment" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
+transform = Transform3D(-0.057652477, -0.99367493, 0.09636299, 0.99653053, -0.051475212, 0.065407, -0.060033005, 0.09979934, 0.9931948, -0.41507587, 0.7584202, 0.00068953633)
 
 [node name="AnimationPlayer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_r3qpx")
 
 [node name="AnimationTree" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character" index="2" unique_id=1446614453]
+active = true
 parameters/Holding_State/CarryMovement/blend_position = Vector2(0.09653914, 0.28600407)
 
 [node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=229907666]
@@ -2549,7 +2599,7 @@ stretch = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(380, 360)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Camera3D" type="Camera3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=744609899]
 transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 200, 1.5, 4)
@@ -2562,27 +2612,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1524457, 1.6060051)
 
 [node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.041175194, -0.022754198, 0.009610379, 0.99884665)
-bones/2/rotation = Quaternion(0.0073321643, -0.03725743, 0.015564286, 0.99915767)
-bones/3/rotation = Quaternion(-0.047078278, -0.0394178, 0.010691511, 0.998056)
-bones/5/rotation = Quaternion(-0.5653124, -0.4009025, -0.53156507, 0.48696786)
-bones/6/rotation = Quaternion(-0.19956079, 0.6010387, -0.41858092, 0.6509363)
-bones/7/rotation = Quaternion(0.69850165, -0.1063351, 0.07132845, 0.70406014)
-bones/8/rotation = Quaternion(-0.028891142, 0.04394993, -0.086834274, 0.9948334)
-bones/9/rotation = Quaternion(-0.050675575, -0.030114967, -0.5878971, 0.8067851)
-bones/10/rotation = Quaternion(0.05091707, 0.029366117, -0.6118968, 0.7887505)
-bones/11/rotation = Quaternion(0.18785354, 0.16428162, -0.4661679, 0.8487698)
-bones/13/rotation = Quaternion(-0.5953266, 0.2788726, 0.4812823, 0.5798136)
-bones/14/rotation = Quaternion(-0.14075634, -0.75910777, 0.38408864, 0.5063784)
-bones/15/rotation = Quaternion(0.36327022, 0.064916596, 0.03774099, 0.9286529)
-bones/16/rotation = Quaternion(0.064010926, -0.029839803, -0.016551893, 0.9973657)
-bones/17/rotation = Quaternion(-0.05066211, 0.030134672, 0.58769965, 0.80692893)
-bones/18/rotation = Quaternion(0.050884005, -0.029350396, 0.6120765, 0.7886138)
-bones/19/rotation = Quaternion(0.18785912, -0.1643182, 0.46671173, 0.8484625)
-bones/23/rotation = Quaternion(0.9200961, -0.04393525, 0.03331137, 0.387793)
-bones/24/rotation = Quaternion(0.57137054, 0.053767167, -0.019648423, 0.81869334)
-bones/25/rotation = Quaternion(0.94572216, -0.010463946, 0.15351915, 0.28623784)
-bones/26/rotation = Quaternion(0.677944, -0.04407456, -0.04165988, 0.73260754)
+bones/1/rotation = Quaternion(0.058791287, 0.0043281517, 0.00070691755, 0.99826074)
+bones/2/rotation = Quaternion(0.03880236, 0.0027972811, 0.011406025, 0.99917793)
+bones/3/rotation = Quaternion(-0.015755614, 0.0010053477, 0.012172771, 0.99980134)
+bones/5/rotation = Quaternion(-0.56605864, -0.40457168, -0.5174924, 0.49809745)
+bones/6/rotation = Quaternion(-0.3131271, 0.65264887, -0.4127569, 0.55284053)
+bones/7/rotation = Quaternion(0.60147804, -0.18201958, -0.0107002035, 0.77780366)
+bones/8/rotation = Quaternion(-0.041683663, 0.046155658, -0.08188782, 0.9946993)
+bones/9/rotation = Quaternion(-0.050498534, -0.030233018, -0.5864292, 0.8078594)
+bones/10/rotation = Quaternion(0.0511542, 0.0292099, -0.60961103, 0.7905089)
+bones/11/rotation = Quaternion(0.18780607, 0.1641875, -0.46455255, 0.84968376)
+bones/13/rotation = Quaternion(-0.5867401, 0.29439968, 0.49045452, 0.5731661)
+bones/14/rotation = Quaternion(0.004017553, -0.6553952, 0.4837931, 0.57998735)
+bones/15/rotation = Quaternion(0.50129485, 0.09207978, 0.023111422, 0.86005276)
+bones/16/rotation = Quaternion(0.067175314, -0.027068064, -0.03655457, 0.99670386)
+bones/17/rotation = Quaternion(-0.050136235, 0.030491319, 0.58326596, 0.8101589)
+bones/18/rotation = Quaternion(0.05164402, -0.028853571, 0.6045891, 0.7943377)
+bones/19/rotation = Quaternion(0.1876832, -0.16402295, 0.46094823, 0.85170317)
+bones/23/rotation = Quaternion(0.83735114, -0.037348267, 0.02409792, 0.5448554)
+bones/24/rotation = Quaternion(0.44938204, 0.008938027, 0.03152927, 0.8927384)
+bones/25/rotation = Quaternion(0.96919423, 0.031947255, 0.18653467, 0.15762906)
+bones/26/rotation = Quaternion(0.53761804, -0.011781138, -0.06916878, 0.8402642)
 
 [node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=227015707]
 layout_mode = 1

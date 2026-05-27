@@ -243,11 +243,61 @@ light_data = ExtResource("7_ofs5a")
 
 [node name="MainMenuUI" parent="." unique_id=354039283 instance=ExtResource("8_7aqpd")]
 
+[node name="SkinsPanel" parent="MainMenuUI/MainMenuCanvas/Root" parent_id_path=PackedInt32Array(354039283, 1924021199) index="2" unique_id=1485494093]
+visible = false
+
+[node name="SubViewport" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer" parent_id_path=PackedInt32Array(354039283, 1769352185) index="0" unique_id=257552327]
+render_target_update_mode = 0
+
+[node name="PreviewSpawn" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport" index="1" unique_id=564513877]
+transform = Transform3D(-0.9322354, 0, -0.3618524, 0, 1, 0, 0.3618524, 0, -0.9322354, -10.014863, 1.4894214, 5.2635226)
+
+[node name="Chameleon_Character" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" index="0" unique_id=1423752438]
+transform = Transform3D(-0.13372679, 0, -0.99101835, 0, 1, 0, 0.99101835, 0, -0.13372679, 0, -1.0704265, 0)
+
+[node name="SubViewport" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer" parent_id_path=PackedInt32Array(354039283, 1174571718) index="0" unique_id=535220147]
+render_target_update_mode = 0
+
+[node name="PreviewSpawn" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" index="1" unique_id=1783558948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5630302, 0, 7.107502)
+
+[node name="Næsehorn" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" index="0" unique_id=2043154851]
+transform = Transform3D(-0.08778182, 0, 0.99613976, 0, 1, 0, -0.99613976, 0, -0.08778182, -3.0750027, -0.0328027, -9.374175)
+
+[node name="Skeleton3D" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/metarig" parent_id_path=PackedInt32Array(354039283, 2043154851, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.042335533, 0.02881339, -0.0072312606, 0.9986617)
+bones/2/rotation = Quaternion(0.008655564, 0.057304394, -0.013557483, 0.99822724)
+bones/3/rotation = Quaternion(-0.04580058, 0.058348197, -0.0048973546, 0.99723315)
+bones/5/rotation = Quaternion(-0.5748807, -0.3977421, -0.5022078, 0.5090193)
+bones/6/rotation = Quaternion(-0.35369608, 0.73335415, -0.38171002, 0.43747956)
+bones/7/rotation = Quaternion(0.46969074, -0.13340932, -0.04010994, 0.87177056)
+bones/8/rotation = Quaternion(-0.022458585, 0.04668796, -0.098749325, 0.99376285)
+bones/9/rotation = Quaternion(-0.05089992, -0.029983716, -0.58965784, 0.8054898)
+bones/10/rotation = Quaternion(0.05061531, 0.029533587, -0.6146476, 0.78662205)
+bones/11/rotation = Quaternion(0.18790415, 0.164367, -0.46809548, 0.8476805)
+bones/13/rotation = Quaternion(-0.5901826, 0.28727403, 0.48960307, 0.5739748)
+bones/14/rotation = Quaternion(-0.0033867224, -0.6555962, 0.4536082, 0.6036736)
+bones/15/rotation = Quaternion(0.67959505, 0.1292002, -0.022633411, 0.7217656)
+bones/16/rotation = Quaternion(0.075280756, -0.032198533, -0.016247567, 0.99650997)
+bones/17/rotation = Quaternion(-0.050776366, 0.030078309, 0.5885544, 0.8063007)
+bones/18/rotation = Quaternion(0.050701987, -0.02944162, 0.6136219, 0.7874204)
+bones/19/rotation = Quaternion(0.18788056, -0.1643694, 0.46780384, 0.8478462)
+bones/23/rotation = Quaternion(0.84626955, -0.08941625, 0.054720093, 0.5223392)
+bones/24/rotation = Quaternion(0.2431938, 0.04453846, 0.043905564, 0.9679594)
+bones/25/rotation = Quaternion(0.98452914, 0.058588315, 0.16444229, 0.015118401)
+bones/26/rotation = Quaternion(0.4498296, -0.015787525, -0.061492022, 0.8908551)
+
 [node name="Tutorial" parent="MainMenuUI" unique_id=1108260321 instance=ExtResource("9_2qs0d")]
+visible = false
 
 [node name="TutorialCop" parent="MainMenuUI" unique_id=364404085 instance=ExtResource("10_27ueq")]
+visible = false
 
 [node name="LobbyCamera" type="Camera3D" parent="MainMenuUI" unique_id=2115145552 groups=["menu_camera"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.788024, 2.2062557, 7.27776)
+transform = Transform3D(0.84056664, -0.18527511, -0.50903916, 0, 0.9396927, -0.34202012, 0.5417082, 0.28749073, 0.78987426, -5.294627, 1.2074707, 5.681832)
 current = true
 script = ExtResource("11_2qs0d")
+
+[editable path="MainMenuUI"]
+[editable path="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character"]
+[editable path="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn"]
