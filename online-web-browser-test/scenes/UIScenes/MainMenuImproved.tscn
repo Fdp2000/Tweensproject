@@ -2373,6 +2373,7 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_3etf2")
 placeholder_text = "Enter Name"
 alignment = 1
+max_length = 12
 
 [node name="HostButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=359355649]
 layout_mode = 2

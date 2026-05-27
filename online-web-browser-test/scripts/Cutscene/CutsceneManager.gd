@@ -3,7 +3,9 @@ extends Node3D
 @export var skip_cutscene: bool = false
 
 @export var thief_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
+@export var thief_rotation_offset_degrees: float = -90.0
 @export var cop_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
+@export var cop_rotation_offset_degrees: float = -90.0
 @export var versus_duration: float = 6.0
 @export var fly_to_player_time: float = 1.5
 
@@ -156,7 +158,7 @@ func setup_versus_lineup():
 			
 	for i in range(robbers.size()):
 		var model = thief_preview_scene.instantiate()
-		right_spawn.add_child(model) # Swapped to Right
+		right_spawn.add_child(model) # Thieves on Right
 		spawned_dummy_models.append(model)
 		spawned_thieves.append(model)
 		apply_lineup_transform(model, i, robbers.size(), false)
@@ -165,30 +167,23 @@ func setup_versus_lineup():
 		
 	for i in range(cops.size()):
 		var model = cop_preview_scene.instantiate()
-		left_spawn.add_child(model) # Swapped to Left
+		left_spawn.add_child(model) # Cops on Left
 		spawned_dummy_models.append(model)
 		spawned_cops.append(model)
 		apply_lineup_transform(model, i, cops.size(), true)
 		play_emote(model)
 		add_name_tag_to_model(model, get_display_name(cops[i]))
 
-	# Make everyone look at the closest enemy
+	# Apply manual rotation offsets (no look_at logic)
 	for t_model in spawned_thieves:
-		var closest_cop = get_closest_node(t_model, spawned_cops)
-		if closest_cop:
-			t_model.look_at(closest_cop.global_position, Vector3.UP)
-			# Chameleon model might be exported backwards, so we add a 180 deg offset if needed
-			t_model.rotate_object_local(Vector3.UP, PI) 
-			t_model.rotation.x = 0
-			t_model.rotation.z = 0
+		t_model.rotation.y = deg_to_rad(thief_rotation_offset_degrees)
+		t_model.rotation.x = 0
+		t_model.rotation.z = 0
 			
 	for c_model in spawned_cops:
-		var closest_thief = get_closest_node(c_model, spawned_thieves)
-		if closest_thief:
-			c_model.look_at(closest_thief.global_position, Vector3.UP)
-			c_model.rotate_object_local(Vector3.UP, PI)
-			c_model.rotation.x = 0
-			c_model.rotation.z = 0
+		c_model.rotation.y = deg_to_rad(cop_rotation_offset_degrees)
+		c_model.rotation.x = 0
+		c_model.rotation.z = 0
 
 func get_closest_node(source: Node3D, targets: Array) -> Node3D:
 	var closest = null
@@ -201,15 +196,10 @@ func get_closest_node(source: Node3D, targets: Array) -> Node3D:
 	return closest
 
 func add_name_tag_to_model(model: Node3D, text: String):
-	var label = Label3D.new()
-	label.text = text
-	label.pixel_size = 0.003
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 1.8, 0) # Adjust height above head
-	label.font_size = 72
-	label.outline_size = 12
-	label.outline_modulate = Color.BLACK
-	model.add_child(label)
+	# The Label3D is now built directly into the Thief/Cop scenes so the user can preview and edit it visually!
+	var label = model.get_node_or_null("NameTag")
+	if label and label is Label3D:
+		label.text = text
 
 func play_emote(model: Node3D):
 	var anim = model.find_child("AnimationPlayer", true, false)
@@ -220,28 +210,35 @@ func play_emote(model: Node3D):
 			anim.play("Idle1")
 
 func apply_lineup_transform(model: Node3D, index: int, total: int, is_cop: bool):
-	var side := 1.0 if is_cop else -1.0
-	var scale := 1.0
+	var parent = left_spawn if is_cop else right_spawn
+	
+	# Try to find a manual WYSIWYG marker in World.tscn first!
+	var marker_name = ("CopPreviewPos" if is_cop else "ThiefPreviewPos") + str(index)
+	var manual_marker = parent.get_node_or_null(marker_name)
+	
+	if manual_marker and manual_marker is Marker3D:
+		model.position = manual_marker.position
+		return
+		
+	# Fallback math if the user deletes a marker
+	var side := -1.0 if is_cop else 1.0
 	var x := 0.0
 	var z := 0.0
 
-	# Base scale reduction because the chameleon model is massive in-game
-	var base_scale = 0.4 
-
 	match total:
-		1: scale = 1.8; x = side * 1.5
-		2: scale = 1.4; x = side * (1.2 + index * 0.8)
-		3: scale = 1.1; x = side * (1.0 + index * 0.6)
-		4: scale = 1.0; x = side * (0.8 + index * 0.5)
+		1: x = side * 1.5
+		2: x = side * (1.0 + index * 1.5)
+		3: x = side * (0.8 + index * 1.2)
+		4: x = side * (0.6 + index * 1.0)
 		_:
-			scale = 0.85
-			var row := int(index / 3)
-			var col := index % 3
-			x = side * (0.8 + col * 0.5)
-			z = row * -0.6
+			# 5+ models (e.g. 7 thieves) arranged in a spacious 2-row grid
+			var row := int(index / 4) # Max 4 per row
+			var col := index % 4
+			x = side * (0.8 + col * 1.2)
+			z = row * -1.5
 
 	model.position = Vector3(x, 0, z)
-	model.scale = Vector3.ONE * (scale * base_scale)
+	# We intentionally leave model.scale at Vector3.ONE so we don't mess up perfectly scaled player scenes!
 
 # ---------------------------------------------------------
 # CAMERA TWEENS

@@ -2279,4 +2279,13 @@ libraries/ = SubResource("AnimationLibrary_7jg2g")
 [node name="AnimationTree" parent="Chameleon_Character" index="2" unique_id=1446614453]
 parameters/Holding_State/CarryMovement/blend_position = Vector2(0.09653914, 0.28600407)
 
+[node name="NameTag" type="Label3D" parent="." unique_id=999999991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+pixel_size = 0.003
+billboard = 1
+text = "Player123456"
+font_size = 72
+outline_size = 12
+outline_modulate = Color(0, 0, 0, 1)
+
 [editable path="Chameleon_Character"]

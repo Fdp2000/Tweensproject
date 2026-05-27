@@ -249,10 +249,12 @@ func _process(delta):
 				global_position = global_position.lerp(sync_target_position, 15.0 * delta)
 			
 			# Slerp Rotation smoothly
-			var current_quat = Quaternion(transform.basis)
-			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
+			var current_scale = scale
+			var current_quat = Quaternion(transform.basis.orthonormalized())
+			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation).orthonormalized())
 			var new_quat = current_quat.slerp(target_quat, 15.0 * delta)
 			transform.basis = Basis(new_quat)
+			scale = current_scale
 			
 	# Camera shoulder toggle smoothing (Local Player Only)
 	else:
