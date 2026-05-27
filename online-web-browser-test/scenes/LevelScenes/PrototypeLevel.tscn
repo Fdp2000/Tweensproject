@@ -1,6 +1,5 @@
 [gd_scene format=4 uid="uid://crc86ugpb3vmu"]
 
-[ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_hwn0u"]
 [ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://Assets/Models/Prototype Models/Dingus the cat.glb" id="3_ypmvb"]
 [ext_resource type="ArrayMesh" uid="uid://g8sgle1up8mo" path="res://Assets/Models/LowPolyMuseumAssets/Arch7.res" id="4_hlvdx"]
 [ext_resource type="Texture2D" uid="uid://b732erh5onxqs" path="res://Assets/Textures/Aquaset/Marble Materials/Default_marble_tile_1.png" id="4_w6te4"]
@@ -83,28 +82,6 @@ size = Vector3(1.3711767, 4.501465, 1.1641464)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x5t0m"]
 size = Vector3(0.6958828, 4.501465, 0.6355438)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gabnk"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ydyp"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_08156"]
-load_path = "res://.godot/imported/ColorPaletteMuseum.png-006c654209f3879b6db7f47e99c36893.s3tc.ctex"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nqnu6"]
-albedo_color = Color(0.7058824, 0.6784314, 0.6313726, 1)
-albedo_texture = ExtResource("4_w6te4")
-metallic = 1.0
-metallic_specular = 0.0
-metallic_texture = SubResource("CompressedTexture2D_08156")
-roughness_texture = ExtResource("1_hwn0u")
-uv1_scale = Vector3(15.74, 15.74, 15.74)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srhcg"]
-albedo_color = Color(0.5420689, 0.38169387, 0.118171014, 1)
-metallic = 1.0
-roughness = 0.27
-normal_enabled = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q60mh"]
 size = Vector3(0.80526733, 4.501465, 0.8600464)
@@ -200,6 +177,12 @@ uv1_scale = Vector3(60, 60, 60)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ydp54"]
 points = PackedVector3Array(-1, -0.2, -1, -1, 0, -1, 1, -0.2, -1, -1, -0.2, 1, -1, 0, 1, 1, 0, -1, 1, -0.2, 1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srhcg"]
+albedo_color = Color(0.5420689, 0.38169387, 0.118171014, 1)
+metallic = 1.0
+roughness = 0.27
+normal_enabled = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_w6te4"]
 points = PackedVector3Array(-1, -0.2, -1, -1, 0, -1, 1, -0.2, -1, -1, -0.2, 1, -1, 0, 1, 1, 0, -1, 1, -0.2, 1, 1, 0, 1)
@@ -3036,7 +3019,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch15" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=1985586797]
 transform = Transform3D(1.74636, 0, 0, 0, 1, 0, 0, 0, 1, 32.951954, -9.536743e-07, -28.923647)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("StandardMaterial3D_gabnk")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch15" unique_id=741618602]
 
@@ -3067,7 +3049,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch16" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=1520701668]
 transform = Transform3D(-7.633581e-08, 0, 0.99999994, 0, 0.99999994, 0, -1.7463598, 0, -4.3711385e-08, 8.951954, -9.536743e-07, -33.923645)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("StandardMaterial3D_8ydyp")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch16" unique_id=2013582002]
 
@@ -3128,7 +3109,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch17" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=895005354]
 transform = Transform3D(-1.26, 0, -8.742278e-08, 0, 1, 0, 1.101527e-07, 0, -1, -34.148045, -9.536743e-07, -7.223648)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("StandardMaterial3D_nqnu6")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch17" unique_id=1302234459]
 
@@ -3159,7 +3139,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch18" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=836595224]
 transform = Transform3D(-1.26, 0, -8.742278e-08, 0, 1, 0, 1.101527e-07, 0, -1, -34.148045, -9.536743e-07, -29.023647)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("StandardMaterial3D_nqnu6")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch18" unique_id=1253359561]
 
@@ -3190,7 +3169,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch19" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=1855145289]
 transform = Transform3D(-5.507635e-08, 0, 1, 0, 1, 0, -1.26, 0, -4.371139e-08, -9.148045, -9.536743e-07, -34.223648)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("StandardMaterial3D_nqnu6")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch19" unique_id=472016805]
 
@@ -3221,7 +3199,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch24" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=186429655]
 transform = Transform3D(1.6379999, 0, 0, 0, 1, 0, 0, 0, 1, -0.14804459, -9.536743e-07, -39.223648)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("StandardMaterial3D_nqnu6")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch24" unique_id=983399301]
 
@@ -3462,7 +3439,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch5" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=187466290]
 transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1, 33, 0, -7)
 mesh = ExtResource("18_5p3k1")
-surface_material_override/0 = SubResource("StandardMaterial3D_srhcg")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch5" unique_id=1459998064]
 
@@ -3497,7 +3473,6 @@ shape = SubResource("BoxShape3D_n7p0c")
 [node name="Arch6" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ArchType2" unique_id=937350531]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, 0.4)
 mesh = ExtResource("18_5p3k1")
-surface_material_override/0 = SubResource("StandardMaterial3D_srhcg")
 
 [node name="Collider" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/ArchType2/Arch6" unique_id=1237970657]
 
@@ -4535,7 +4510,6 @@ shape = SubResource("BoxShape3D_jjl2b")
 [node name="Pedestal7" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Pedestals" unique_id=1729753783]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.352777, 0.1761468, 4.7612715)
 mesh = ExtResource("7_3gp6a")
-surface_material_override/0 = SubResource("StandardMaterial3D_srhcg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Pedestals/Pedestal7" unique_id=1916685107]
 
@@ -4574,7 +4548,6 @@ shape = SubResource("ConvexPolygonShape3D_atqpw")
 [node name="Pedestal8" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Pedestals" unique_id=1363197694]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.975258, 0.1707505, -4.9467287)
 mesh = ExtResource("8_qjt3t")
-surface_material_override/0 = SubResource("StandardMaterial3D_srhcg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Pedestals/Pedestal8" unique_id=2097713983]
 transform = Transform3D(1, 0, 0, 0, 1.5161844, 0, 0, 0, 1, 0, -0.22615874, 0)
@@ -4595,7 +4568,6 @@ shape = SubResource("BoxShape3D_g3e8t")
 [node name="Pedestal6" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Pedestals" unique_id=1553508633]
 transform = Transform3D(1.5999708, -0.008707313, 0.005524258, 0.0072862054, 1.9156976, -0.008330165, -0.003827934, 0.0069800513, 2.2931316, 33.059464, 0.012395263, 4.736316)
 mesh = ExtResource("8_qjt3t")
-surface_material_override/0 = SubResource("StandardMaterial3D_srhcg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Pedestals/Pedestal6" unique_id=1923553156]
 
@@ -4686,7 +4658,6 @@ shape = SubResource("ConvexPolygonShape3D_ag47p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4742165, -9.536743e-07, 2.079999)
 mesh = ExtResource("9_xm6hp")
 script = ExtResource("6_artifact")
-artifact_category = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Columns/Column7" unique_id=30595905]
 
@@ -8177,7 +8148,6 @@ mesh = ExtResource("15_46wyf")
 [node name="Bench1" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Benches" unique_id=321023672]
 transform = Transform3D(-1.2676303e-07, 0, -0.99999994, 0, 1, 0, 2.9, 0, -4.3711385e-08, 28.8, 0.099999964, 4.4)
 mesh = ExtResource("22_xm6hp")
-surface_material_override/0 = SubResource("StandardMaterial3D_5p3k1")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Benches/Bench1" unique_id=1013612836]
 
@@ -9770,7 +9740,6 @@ transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_wkjx1")
 script = ExtResource("6_artifact")
-artifact_category = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Stones/Jenssten17" unique_id=1723762728]
 
@@ -10551,7 +10520,6 @@ transform = Transform3D(0.06250001, 9.4372385e-09, -0.10825317, 1.8874475e-08, -
 mesh = ExtResource("65_8208s")
 script = ExtResource("6_artifact")
 artifact_size = 2
-artifact_category = 1
 
 [node name="Sketchfab_Scene3" parent="Arena 2/NavigationRegion3D/DinoMisc" unique_id=713878847 instance=ExtResource("64_pmpka")]
 transform = Transform3D(3.6157123e-06, 0, -18.57, 0, 18.57, 0, 18.57, 0, 3.6157123e-06, -6.964614, 0.99999994, -15)
@@ -10564,7 +10532,6 @@ mesh = ExtResource("59_nkopf")
 surface_material_override/0 = SubResource("ShaderMaterial_5i3ml")
 script = ExtResource("6_artifact")
 artifact_size = 2
-artifact_category = 1
 
 [node name="ForestMisc" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=1256453619]
 
@@ -10574,14 +10541,12 @@ mesh = ExtResource("50_4873o")
 surface_material_override/0 = SubResource("ShaderMaterial_8jnui")
 script = ExtResource("6_artifact")
 artifact_size = 2
-artifact_category = 1
 
 [node name="Piksvin" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ForestMisc" unique_id=150454570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.943497, 0.6160576, -4.168951)
 mesh = ExtResource("52_yy4tg")
 surface_material_override/0 = SubResource("ShaderMaterial_e22mm")
 script = ExtResource("6_artifact")
-artifact_category = 2
 
 [node name="10449RectangularBoxHedgeV1Iterations10" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/ForestMisc" unique_id=417180243]
 transform = Transform3D(-0.055552747, -1.3947761e-09, 3.0703517e-12, 4.8380957e-09, -0.01589679, 2.3283064e-10, 4.2327883e-10, 2.3283064e-10, 0.015571908, -18.199997, -0.39545876, -0.6999998)
@@ -10608,14 +10573,12 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ncsn1")
 [node name="SmallDingus" parent="Arena 2/Dinguses" unique_id=639891862 instance=ExtResource("3_ypmvb")]
 transform = Transform3D(0.13, 0, 0, 0, 0.13, 0, 0, 0, 0.13, 8.198381, 0.90322566, -8.524543)
 script = ExtResource("6_artifact")
-artifact_category = 2
 hand_position_offset = Vector3(-0.316, -0.054, -0.22)
 hand_rotation_offset = Vector3(-118.272, 313.686, -169.488)
 
 [node name="SmallDingus2" parent="Arena 2/Dinguses" unique_id=367774179 instance=ExtResource("3_ypmvb")]
 transform = Transform3D(-0.13, 0, -1.13649605e-08, 0, 0.13, 0, 1.13649605e-08, 0, -0.13, 17.399107, 0.90322554, 4.7615175)
 script = ExtResource("6_artifact")
-artifact_category = 2
 hand_position_offset = Vector3(-0.316, -0.054, -0.22)
 hand_rotation_offset = Vector3(-118.272, 313.686, -169.488)
 
@@ -10623,7 +10586,6 @@ hand_rotation_offset = Vector3(-118.272, 313.686, -169.488)
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 21.968632, 0.5793295, -4.8549595)
 script = ExtResource("6_artifact")
 artifact_size = 1
-artifact_category = 2
 hand_position_offset = Vector3(-0.262, -0.152, -0.787)
 hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 
@@ -10631,7 +10593,6 @@ hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -8.979997, 0.5793295, -8.770637)
 script = ExtResource("6_artifact")
 artifact_size = 1
-artifact_category = 2
 hand_position_offset = Vector3(-0.262, -0.152, -0.787)
 hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 
@@ -10639,7 +10600,6 @@ hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 transform = Transform3D(-0.21416138, 0, 0.12897637, 0, 0.25, 0, -0.12897637, 0, -0.21416138, -17.532948, 0.41974342, 4.5034223)
 script = ExtResource("6_artifact")
 artifact_size = 1
-artifact_category = 2
 hand_position_offset = Vector3(-0.262, -0.152, -0.787)
 hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 
@@ -10647,7 +10607,6 @@ hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 transform = Transform3D(-0.21416138, 0, 0.12897637, 0, 0.25, 0, -0.12897637, 0, -0.21416138, -38.718494, 0.6898906, 0.2973349)
 script = ExtResource("6_artifact")
 artifact_size = 1
-artifact_category = 2
 hand_position_offset = Vector3(-0.262, -0.152, -0.787)
 hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 
@@ -10655,7 +10614,6 @@ hand_rotation_offset = Vector3(75.318, 149.133, 25.6)
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.2901404, 0.6993227, -0.047213078)
 script = ExtResource("6_artifact")
 artifact_size = 2
-artifact_category = 2
 hand_position_offset = Vector3(-0.21, -0.095, -1.752)
 hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 
@@ -10663,7 +10621,6 @@ hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 33.070488, 0.6993227, 4.202982)
 script = ExtResource("6_artifact")
 artifact_size = 2
-artifact_category = 2
 hand_position_offset = Vector3(-0.21, -0.095, -1.752)
 hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 
@@ -10671,7 +10628,6 @@ hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 transform = Transform3D(0.25000006, 0, -0.43301266, 0, 0.5, 0, 0.43301266, 0, 0.25000006, 37.66163, 0.13199425, -36.808388)
 script = ExtResource("6_artifact")
 artifact_size = 2
-artifact_category = 2
 hand_position_offset = Vector3(-0.21, -0.095, -1.752)
 hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 
@@ -10679,7 +10635,6 @@ hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 transform = Transform3D(-2.1855694e-08, 0, -0.5, 0, 1.2055856, 0, 0.5, 0, -2.1855694e-08, 17.875172, -0.5078037, -21.009548)
 script = ExtResource("6_artifact")
 artifact_size = 2
-artifact_category = 2
 hand_position_offset = Vector3(-0.21, -0.095, -1.752)
 hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 
