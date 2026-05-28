@@ -284,9 +284,21 @@ func play_cinematic_clip(start_marker: Marker3D, end_marker: Marker3D, duration:
 	var tween = create_tween()
 	tween.tween_property(intro_camera, "global_transform", end_marker.global_transform, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
-	# Subtle FOV dolly zoom
-	intro_camera.fov = 75.0
-	tween.parallel().tween_property(intro_camera, "fov", 85.0, duration).set_trans(Tween.TRANS_SINE)
+	var start_fov = 75.0
+	var end_fov = 85.0
+	
+	var start_cam = start_marker.find_child("Camera3D", true, false)
+	if start_cam:
+		start_fov = start_cam.fov
+		
+	var end_cam = end_marker.find_child("Camera3D", true, false)
+	if end_cam:
+		end_fov = end_cam.fov
+	elif start_cam:
+		end_fov = start_cam.fov # If only start cam exists, don't zoom
+	
+	intro_camera.fov = start_fov
+	tween.parallel().tween_property(intro_camera, "fov", end_fov, duration).set_trans(Tween.TRANS_SINE)
 	
 	await tween.finished
 

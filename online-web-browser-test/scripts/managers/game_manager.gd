@@ -21,6 +21,9 @@ var cash_quota: int = 10000
 var round_timer: int = 300
 var active_thieves: int = 0
 
+var all_vents: Array[Node] = []
+var current_vent: Node = null
+
 var last_heartbeat_times: Dictionary = {}
 var last_server_pong_time: float = 0.0
 var heartbeat_timer: Timer
@@ -327,6 +330,37 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 func start_game_clock():
 	if multiplayer.is_server():
 		timer_node.start()
+		open_random_vent()
+
+# --- VENT SYSTEM LOGIC ---
+
+func register_vent(vent: Node):
+	if multiplayer.is_server():
+		if not all_vents.has(vent):
+			all_vents.append(vent)
+
+func open_random_vent():
+	if not multiplayer.is_server() or all_vents.is_empty(): return
+	
+	# Close current vent if one is open
+	if current_vent:
+		current_vent.rpc("close_vent")
+	
+	# Pick a random vent
+	var options = all_vents.duplicate()
+	if current_vent and options.size() > 1:
+		options.erase(current_vent)
+	
+	var new_vent = options.pick_random()
+	if new_vent:
+		current_vent = new_vent
+		current_vent.rpc("open_vent")
+
+func cycle_vent(old_vent_name: String):
+	if multiplayer.is_server():
+		open_random_vent()
+
+# -------------------------
 
 
 @rpc("any_peer", "call_local")
@@ -357,6 +391,8 @@ func client_return_to_lobby():
 				art.rpc("reset_artifact")
 			
 		team_cash = 0
+		all_vents.clear()
+		current_vent = null
 		
 		# Respawn all players in the lobby!
 		for id in players.keys():
@@ -382,6 +418,8 @@ func full_teardown():
 			art.reset_artifact()
 			
 	team_cash = 0
+	all_vents.clear()
+	current_vent = null
 	players.clear()
 	last_heartbeat_times.clear()
 	last_server_pong_time = 0.0

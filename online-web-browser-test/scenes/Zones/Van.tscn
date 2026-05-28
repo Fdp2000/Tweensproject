@@ -2,15 +2,26 @@
 
 [ext_resource type="Script" uid="uid://b7u0rejv3qc0" path="res://scripts/Zones/van_zone.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://hjeyxpsyjold" path="res://Assets/Models/Van/Van.tscn" id="2_yy4fo"]
+[ext_resource type="Script" uid="uid://dotted_ring_uid_123" path="res://scripts/Zones/dotted_ring.gd" id="dotted_ring_script"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_van"]
 radius = 4.0
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_van_holo"]
+top_radius = 4.0
+bottom_radius = 4.0
+height = 4.0
+cap_top = false
+cap_bottom = false
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ring"]
 transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
 albedo_color = Color(1, 1, 1, 0.5)
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
+proximity_fade_enabled = true
+proximity_fade_distance = 0.5
 
 [node name="Van" type="Node3D" unique_id=1658847018]
 
@@ -23,14 +34,13 @@ script = ExtResource("1_script")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_van")
 
-[node name="VisualRing" type="CSGTorus3D" parent="DeliveryZone" unique_id=1383707949]
-transform = Transform3D(1.72, 0, 0, 0, 1.72, 0, 0, 0, 1.72, 0, 0.05, 0)
-inner_radius = 3.9
-outer_radius = 4.0
-sides = 32
-material = SubResource("StandardMaterial3D_ring")
+[node name="VisualRing" type="Node3D" parent="DeliveryZone" unique_id=1383707949]
+script = ExtResource("dotted_ring_script")
+radius = 4.0
+dot_count = 64
+dot_color = Color(1, 1, 1, 0.5)
 
 [node name="WhiteVan" parent="." unique_id=628082721 instance=ExtResource("2_yy4fo")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 
 [connection signal="body_entered" from="DeliveryZone" to="DeliveryZone" method="_on_body_entered"]

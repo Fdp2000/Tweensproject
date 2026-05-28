@@ -22,6 +22,8 @@ func _update_sizes():
 		ring.scale = Vector3.ONE # Reset any editor scaling so the radius perfectly matches
 		ring.outer_radius = Balance.delivery_zone_radius
 		ring.inner_radius = Balance.delivery_zone_radius - 0.1
+	elif ring is DottedRing:
+		ring.radius = Balance.delivery_zone_radius
 
 func _physics_process(delta):
 	# FIX: Make sure the multiplayer peer actually exists before checking is_server()

@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://bf05ftf00cgpm"]
+
+[ext_resource type="Script" uid="uid://d1ynwxu585s6e" path="res://scripts/Zones/vent.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cb4pyowhdg0vx" path="res://Assets/Models/Vent/Vent.tscn" id="2_l71he"]
+[ext_resource type="Script" uid="uid://gn603rlr4k10" path="res://scripts/Zones/dotted_ring.gd" id="dotted_ring_script"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vent"]
+radius = 1.5
+
+[sub_resource type="Animation" id="Animation_close"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRing:dot_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRing:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, -0.922538, 0, 0, 0.385906, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_open"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRing:dot_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRing:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0.9226492, 0, 0, -0.38564032)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vent"]
+_data = {
+&"close": SubResource("Animation_close"),
+&"open": SubResource("Animation_open")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10rif"]
+albedo_color = Color(0.19090384, 0.19090384, 0.19090384, 1)
+
+[node name="Vent" type="Area3D" unique_id=581943021 groups=["Vents"]]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+collision_mask = 5
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=741029318]
+transform = Transform3D(0.725, 0, 0, 0, 0.725, 0, 0, 0, 0.725, 0, 1, 0)
+shape = SubResource("CylinderShape3D_vent")
+
+[node name="VisualRing" type="Node3D" parent="." unique_id=184920184]
+script = ExtResource("dotted_ring_script")
+radius = 1.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=194820194]
+libraries/ = SubResource("AnimationLibrary_vent")
+
+[node name="PivotPoint" type="Node3D" parent="." unique_id=1521833555]
+transform = Transform3D(1, 0, 0, 0, -0.702153, 0.71202606, 0, -0.71202606, -0.702153, 0, 1.5910103, -1.0867177)
+
+[node name="Sketchfab_Scene" parent="PivotPoint" unique_id=1711548117 instance=ExtResource("2_l71he")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.5737087, 0.019129157)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=115086990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0037460327, 0.9865674, -2.2341237)
+size = Vector3(1.1609955, 1.1360779, 2.3424072)
+material = SubResource("StandardMaterial3D_10rif")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D" unique_id=2050138761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0029830933, 0.020477295, 0.10493469)
+operation = 2
+size = Vector3(0.9669037, 0.96795654, 2.4659119)
+material = SubResource("StandardMaterial3D_10rif")
