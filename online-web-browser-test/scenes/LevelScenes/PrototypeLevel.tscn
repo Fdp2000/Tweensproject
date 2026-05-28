@@ -2829,26 +2829,26 @@ transform = Transform3D(7.5497894e-08, 0, 1, 0, 0.81235856, 0, -1, 0, 7.5497894e
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017673565, 0, -3.6000085)
 
 [node name="CellTarget" parent="Jail" index="1" unique_id=18595314]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -8.66311e-08, 0.5, -0.9869442)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.66311e-08, 0.5, -0.9869442)
 
 [node name="CellTarget2" parent="Jail" index="2" unique_id=18595315]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 1.5, 0.5, 0.004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 0.004)
 
 [node name="CellTarget3" parent="Jail" index="3" unique_id=18595316]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -1.5, 0.5, 0.004)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, 0.004)
 
 [node name="CellTarget4" parent="Jail" index="4" unique_id=18595317]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 0, 0.5, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 1.5)
 
 [node name="SpawnPoints" type="Node3D" parent="." unique_id=794798467]
 
 [node name="CopSpawns" type="Node3D" parent="SpawnPoints" unique_id=1341046285]
 
 [node name="Marker1" type="Marker3D" parent="SpawnPoints/CopSpawns" unique_id=1671116148 groups=["cop_spawn"]]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.9861798, 0.3, -51.34335)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2.9861798, 0.3, -51.34335)
 
 [node name="Marker2" type="Marker3D" parent="SpawnPoints/CopSpawns" unique_id=665470597 groups=["cop_spawn"]]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -0.116353035, 0.3, -50.7157)
+transform = Transform3D(-0.9836439, 0, -0.18012404, 0, 1, 0, 0.18012404, 0, -0.9836439, -0.116353035, 0.3, -50.7157)
 
 [node name="Marker3" type="Marker3D" parent="SpawnPoints/CopSpawns" unique_id=1186512430 groups=["cop_spawn"]]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.2347503, 0.3, -52.935688)
@@ -2856,7 +2856,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 1.23
 [node name="ThiefSpawns" type="Node3D" parent="SpawnPoints" unique_id=1571552243]
 
 [node name="Marker1" type="Marker3D" parent="SpawnPoints/ThiefSpawns" unique_id=1170719254 groups=["thief_spawn"]]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -6.1588726, 0.3, -9.833542)
+transform = Transform3D(-0.69245803, 0, 0.7214582, 0, 1, 0, -0.7214582, 0, -0.69245803, -6.1588726, 0.3, -9.833542)
 
 [node name="Marker2" type="Marker3D" parent="SpawnPoints/ThiefSpawns" unique_id=1079906831 groups=["thief_spawn"]]
 transform = Transform3D(0.68623745, 0, -0.7273776, 0, 1, 0, 0.7273776, 0, 0.68623745, -9.439, 0.3, 10.094)

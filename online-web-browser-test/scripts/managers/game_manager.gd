@@ -314,7 +314,6 @@ func end_game_with_winner(winner_team: int):
 
 @rpc("any_peer", "call_local")
 func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array):
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 

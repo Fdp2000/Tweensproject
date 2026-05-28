@@ -38,7 +38,6 @@ func _on_cash_updated():
 
 func _on_game_over(winner_team: int):
 	game_over_panel.show()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if winner_team == GameManager.PlayerRole.THIEF:
 		game_over_label.text = "THIEVES ESCAPED!"
