@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://3w1tvfaexj8a"
-path="res://.godot/imported/pterodactylus_antiquus_cast.glb-b517ac8a1a96dd48f25e1265baa717e5.scn"
+uid="uid://luuvjiwopxmb"
+path="res://.godot/imported/Penguin.glb-ea3961da2ca9f2a00d50485a7444ebdb.scn"
 
 [deps]
 
-source_file="res://Assets/Models/pterodactylus_antiquus_cast.glb"
-dest_files=["res://.godot/imported/pterodactylus_antiquus_cast.glb-b517ac8a1a96dd48f25e1265baa717e5.scn"]
+source_file="res://Assets/Models/Penguin.glb"
+dest_files=["res://.godot/imported/Penguin.glb-ea3961da2ca9f2a00d50485a7444ebdb.scn"]
 
 [params]
 
