@@ -39,9 +39,6 @@ signal game_over(winner_team: int)
 var timer_node: Timer
 var cached_scoreboard: Control = null
 
-var selected_chameleon_skin: int = 0
-var selected_rhino_skin: int = 0
-
 func _ready():
 	heartbeat_timer = Timer.new()
 	heartbeat_timer.wait_time = 5.0
@@ -74,9 +71,6 @@ func _on_timer_tick():
 	if not multiplayer.is_server(): return
 	if current_state != GameState.PLAYING: return
 	
-	if round_timer < 0:
-		return # Infinite time!
-	
 	round_timer -= 1
 	rpc("sync_time", round_timer)
 	
@@ -95,7 +89,7 @@ func sync_time(time_left: int):
 	time_updated.emit(round_timer)
 
 
-func add_player(id: int, p_name: String = "", chameleon_skin: int = 0, rhino_skin: int = 0):
+func add_player(id: int, p_name: String = ""):
 	if players.size() >= 10 and not players.has(id):
 		if multiplayer.is_server() and id != 1:
 			multiplayer.multiplayer_peer.disconnect_peer(id)
@@ -105,9 +99,7 @@ func add_player(id: int, p_name: String = "", chameleon_skin: int = 0, rhino_ski
 		var default_name = "Player " + str(players.size() + 1)
 		players[id] = {
 			"name": p_name if p_name != "" else default_name,
-			"role": PlayerRole.THIEF,
-			"chameleon_skin": chameleon_skin,
-			"rhino_skin": rhino_skin
+			"role": PlayerRole.THIEF
 		}
 		
 		if multiplayer.is_server():
@@ -145,20 +137,15 @@ func remove_player(id: int):
 
 
 @rpc("any_peer", "call_local")
-func sync_player_data(id: int, p_name: String, chameleon_skin: int = 0, rhino_skin: int = 0):
-	if not multiplayer.is_server(): 
-		return
+func sync_player_data(id: int, p_name: String):
+	if not multiplayer.is_server(): return
 	
 	if not players.has(id):
-		add_player(id, p_name, chameleon_skin, rhino_skin)
+		add_player(id, p_name)
 	else:
 		if p_name != "":
 			players[id]["name"] = p_name
-
-		players[id]["chameleon_skin"] = chameleon_skin
-		players[id]["rhino_skin"] = rhino_skin
-
-	rpc("sync_full_lobby", players)
+		rpc("sync_full_lobby", players)
 
 
 @rpc("authority", "call_local")
@@ -195,9 +182,6 @@ func start_game(role_assignments: Dictionary):
 	var total_players = players.size()
 	
 	match total_players:
-		1:
-			cash_quota = Balance.quota_2p # Default to 2p quota for testing
-			round_timer = -1 # Infinite time flag
 		2:
 			cash_quota = Balance.quota_2p
 			round_timer = Balance.timer_2p
@@ -230,6 +214,7 @@ func start_game(role_assignments: Dictionary):
 			round_timer = Balance.timer_10p if total_players > 10 else Balance.timer_2p
 	
 	if multiplayer.is_server():
+		timer_node.start()
 		rpc("sync_time", round_timer)
 
 	if multiplayer.is_server():
@@ -428,7 +413,7 @@ func full_teardown():
 func host_start_game():
 	if not multiplayer.is_server(): return
 	
-	if players.size() < 1:
+	if players.size() < 2:
 		print("Cannot start game: Not enough players!")
 		return
 	
@@ -457,8 +442,6 @@ func host_start_game():
 		target_cops = 3
 	elif total_players >= Balance.min_players_for_2_cops:
 		target_cops = 2
-	elif total_players == 1:
-		target_cops = 0
 	
 	var cops_needed = target_cops - forced_cops.size()
 	

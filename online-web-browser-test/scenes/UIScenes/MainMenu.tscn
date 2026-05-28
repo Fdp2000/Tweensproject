@@ -6,6 +6,15 @@
 
 [node name="MainMenu" type="Node3D" unique_id=1107313925]
 
+[node name="MenuCamera" type="Camera3D" parent="." unique_id=12028222]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3844347, 2.279678, 4.2187095)
+
+[node name="LobbyCamera" type="Camera3D" parent="MenuCamera" unique_id=1939024169]
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1355934596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.035053, 0)
+
 [node name="MainMenuUI" parent="." unique_id=354039283 instance=ExtResource("2_6fv8w")]
 
 [node name="Tutorial" parent="MainMenuUI" unique_id=1108260321 instance=ExtResource("2_tsbww")]
