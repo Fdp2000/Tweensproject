@@ -350,6 +350,9 @@ func show_lobby() -> void:
 
 	lobby_ui.show_lobby()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	if menu_camera and not menu_camera.current:
+		menu_camera.make_current()
 
 
 func _on_host_pressed() -> void:
@@ -494,7 +497,20 @@ func _on_player_joined(id: int) -> void:
 	var spawn_pos = Vector3(0, 1000, 0)
 
 	if lobby_spawns.size() > 0:
-		spawn_pos = lobby_spawns[randi() % lobby_spawns.size()].global_position
+		var available_spawns = []
+		for spawn_marker in lobby_spawns:
+			var is_occupied = false
+			for child in spawned.get_children():
+				if child.global_position.distance_to(spawn_marker.global_position) < 1.0:
+					is_occupied = true
+					break
+			if not is_occupied:
+				available_spawns.append(spawn_marker)
+				
+		if available_spawns.size() > 0:
+			spawn_pos = available_spawns.pick_random().global_position
+		else:
+			spawn_pos = lobby_spawns.pick_random().global_position
 
 	var pf = THIEF_SCENE.instantiate()
 	pf.name = str(id)
@@ -544,6 +560,9 @@ func _on_game_started() -> void:
 					pf.position = spawn_pos
 					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 					spawned.add_child(pf, true)
+					pf.rpc("_set_spawn_position", spawn_pos)
+					pf.rpc("sync_team", role)
+					pf.rpc("_sync_name", pf.player_name)
 					var skin_index = GameManager.players[id].get("rhino_skin", 0)
 					pf.rpc("apply_skin", skin_index)
 				else:

@@ -152,3 +152,11 @@ func update_drop_cooldown_ring(progress: float, is_visible: bool):
 			drop_cooldown_ui.show()
 		else:
 			drop_cooldown_ui.hide()
+
+func toggle_camera_ui(is_visible: bool):
+	if cam_crosshair:
+		cam_crosshair.visible = is_visible
+	if cam_left_btn:
+		cam_left_btn.visible = is_visible
+	if cam_right_btn:
+		cam_right_btn.visible = is_visible

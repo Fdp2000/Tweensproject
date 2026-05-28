@@ -28,8 +28,11 @@ var last_heartbeat_times: Dictionary = {}
 var last_server_pong_time: float = 0.0
 var heartbeat_timer: Timer
 
+@export var pre_game_fade_delay: float = 1.0
+
 signal player_joined(id: int)
 signal lobby_updated
+signal pre_game_started(assignments: Dictionary)
 signal game_started
 signal game_ended
 signal cash_updated
@@ -475,9 +478,17 @@ func host_start_game():
 		else:
 			assignments[str(id)] = PlayerRole.THIEF
 			
-	rpc("start_game", assignments)
+	rpc("trigger_pre_game_start", assignments)
 
-
+@rpc("any_peer", "call_local")
+func trigger_pre_game_start(assignments: Dictionary):
+	pre_game_started.emit(assignments)
+	
+	# Give the clients enough time to fade to black before doing the heavy teleportation & spawning logic
+	await get_tree().create_timer(pre_game_fade_delay).timeout
+	
+	if multiplayer.is_server():
+		rpc("start_game", assignments)
 @rpc("any_peer", "call_local")
 func spawn_location_ping(pos: Vector3):
 	if PING_SCENE:

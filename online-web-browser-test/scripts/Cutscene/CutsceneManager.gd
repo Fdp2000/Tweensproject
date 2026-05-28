@@ -20,6 +20,15 @@ extends Node3D
 @export var versus_duration: float = 3.0
 @export var fly_to_player_time: float = 1.5
 
+@export_group("Transition & Blend Timings")
+@export var pre_game_fade_to_black_time: float = 1.0
+@export var versus_fade_in_time: float = 1.0
+@export var versus_fade_out_time: float = 1.0
+@export var museum_fade_in_time: float = 0.5
+@export var cop_head_hide_threshold: float = 0.85
+@export var anim_blend_in_time: float = 0.2
+@export var anim_blend_out_time: float = 0.5
+
 @onready var intro_camera: Camera3D = $Node3D/IntroCamera
 @onready var cutscene_ui: CutsceneUI = $"../VersusScreen"
 @onready var cutscene_markers: Node3D = $CutsceneMarkers
@@ -29,19 +38,23 @@ extends Node3D
 @onready var left_spawn: Marker3D = $CutsceneMarkers/VersusPos/LeftSpawn
 @onready var right_spawn: Marker3D = $CutsceneMarkers/VersusPos/RightSpawn
 
+var default_intro_cull_mask: int
 var local_player: Node3D
 var spawned_dummy_models: Array[Node] = []
 
 func _ready():
+	default_intro_cull_mask = intro_camera.cull_mask
 	var game_manager = get_tree().get_root().find_child("GameManager", true, false)
 	if game_manager:
+		game_manager.pre_game_started.connect(_on_pre_game_started)
 		game_manager.game_started.connect(_on_game_started)
 
-func _on_game_started():
+func _on_pre_game_started(_assignments):
 	cutscene_ui.background.modulate.a = 0.0
 	cutscene_ui.visible = true
-	await cutscene_ui.fade_to_black(1.0)
-	
+	await cutscene_ui.fade_to_black(pre_game_fade_to_black_time)
+
+func _on_game_started():
 	await get_tree().create_timer(0.3).timeout
 	local_player = await wait_for_local_player()
 	
@@ -84,9 +97,13 @@ func find_local_player() -> Node3D:
 	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if spawned == null: return null
 	var my_id := multiplayer.get_unique_id()
+	
 	for player in spawned.get_children():
 		if str(player.name) == str(my_id):
-			return player
+			# Ensure we are grabbing the NEW game player, not the old lobby player
+			var my_role = GameManager.players.get(my_id, {}).get("role")
+			if my_role != null and player.get("team_index") == my_role:
+				return player
 	return null
 
 func get_display_name(player: Node3D) -> String:
@@ -99,6 +116,9 @@ func get_display_name(player: Node3D) -> String:
 # THE CINEMATIC FLOW
 # ---------------------------------------------------------
 func run_cinematic_flow():
+	# Reset camera mask in case it was modified in a previous match
+	intro_camera.cull_mask = default_intro_cull_mask
+	
 	# 1. Ensure screen is black (already done in _on_game_started)
 	
 	# 2. Setup Versus Scene in the 3D world
@@ -118,7 +138,7 @@ func run_cinematic_flow():
 	if vs_label:
 		vs_label.show()
 		
-	await cutscene_ui.fade_in(1.0)
+	await cutscene_ui.fade_in(versus_fade_in_time)
 	
 	await get_tree().create_timer(0.10).timeout
 	
@@ -129,11 +149,11 @@ func run_cinematic_flow():
 	await get_tree().create_timer(versus_duration).timeout
 	
 	# 5. Fade to black to transition to Museum Pans
-	await cutscene_ui.fade_to_black(1.0)
+	await cutscene_ui.fade_to_black(versus_fade_out_time)
 	
-	# Free the dummies from memory entirely so they don't photobomb the background!
-	for model in get_dummies(right_spawn): model.queue_free()
-	for model in get_dummies(left_spawn): model.queue_free()
+	# Hide the dummies from view entirely so they don't photobomb the background!
+	for model in get_dummies(right_spawn): model.hide()
+	for model in get_dummies(left_spawn): model.hide()
 	
 	vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
 	if vs_label:
@@ -169,16 +189,13 @@ func run_cinematic_flow():
 		var fade_tween = create_tween()
 		fade_tween.tween_property(local_player.charge_ui_ref, "modulate:a", 1.0, 3.0)
 		
-	await cutscene_ui.play_countdown()
-	
-	# 10. Enable controls and start game clock!
+	# 10. Enable controls before the countdown starts!
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
 		
+	await cutscene_ui.play_countdown()
+	
 	GameManager.start_game_clock()
-		
-	queue_free()
-	cutscene_ui.queue_free()
 
 # ---------------------------------------------------------
 # VERSUS LINEUP LOGIC
@@ -249,9 +266,9 @@ func play_emote_with_return(model: Node3D, anim_name: String, return_anim: Strin
 	var anim: AnimationPlayer = model.find_child("AnimationPlayer", true, false)
 	if anim:
 		if anim.has_animation(anim_name):
-			anim.play(anim_name, 0.2)
+			anim.play(anim_name, anim_blend_in_time)
 			# Once the taunt finishes, smoothly crossfade back into the idle animation!
-			anim.animation_finished.connect(func(finished_anim_name): anim.play(return_anim, 0.5), CONNECT_ONE_SHOT)
+			anim.animation_finished.connect(func(finished_anim_name): anim.play(return_anim, anim_blend_out_time), CONNECT_ONE_SHOT)
 
 	# We no longer apply manual rotation offsets here because the user
 	# sets the rotations natively in the editor using the Dummy scenes!
@@ -284,7 +301,7 @@ func play_cinematic_clip(start_marker: Marker3D, end_marker: Marker3D, duration:
 	intro_camera.global_transform = start_marker.global_transform
 	
 	# Fade in at start of clip
-	cutscene_ui.fade_in(0.5)
+	cutscene_ui.fade_in(museum_fade_in_time)
 	
 	var tween = create_tween()
 	tween.tween_property(intro_camera, "global_transform", end_marker.global_transform, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
@@ -316,7 +333,7 @@ func fly_camera_to_target(target_cam: Camera3D):
 	
 	# To prevent clipping into the inside of the Cop's head (which has an outline shader),
 	# we sync the intro_camera's cull_mask to the player's camera right before it reaches the head.
-	get_tree().create_timer(fly_to_player_time * 0.85).timeout.connect(func():
+	get_tree().create_timer(fly_to_player_time * cop_head_hide_threshold).timeout.connect(func():
 		if is_instance_valid(intro_camera) and is_instance_valid(target_cam):
 			intro_camera.cull_mask = target_cam.cull_mask
 	)
@@ -340,5 +357,4 @@ func finish_cutscene_immediately():
 		
 	get_tree().call_group("dotted_rings", "show_immediately")
 		
-	queue_free()
-	cutscene_ui.queue_free()
+	cutscene_ui.visible = false

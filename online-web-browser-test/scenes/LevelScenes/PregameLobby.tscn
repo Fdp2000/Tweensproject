@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://dyj1djxuy4iko"]
 
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
+[ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
+[ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwb7"]
 resource_name = "Material"
@@ -570,10 +570,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.203533, 0.27454066, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.203533, 0.27454066, 2)
 
 [node name="Spawn3" type="Marker3D" parent="." unique_id=1679742405 groups=["lobby_spawn"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.203533, 0.27454066, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.79906, 0.27454066, 2.0896778)
 
 [node name="Spawn4" type="Marker3D" parent="." unique_id=527827319 groups=["lobby_spawn"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.203533, 0.27454066, 4)
+
+[node name="Spawn5" type="Marker3D" parent="." unique_id=1947547630 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.256207, 0.27454066, 4)
+
+[node name="Spawn6" type="Marker3D" parent="." unique_id=233943556 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0389, 0.27454066, 4)
+
+[node name="Spawn7" type="Marker3D" parent="." unique_id=677207505 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.0389, 0.27454066, -1.2139621)
+
+[node name="Spawn8" type="Marker3D" parent="." unique_id=133317379 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.461233, 0.2745402, -2.6567535)
+
+[node name="Spawn9" type="Marker3D" parent="." unique_id=1396112665 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.599674, 0.2745402, 1.6460214)
+
+[node name="Spawn10" type="Marker3D" parent="." unique_id=96702651 groups=["lobby_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.464191, 0.2745402, 5.347574)
 
 [node name="HostVan" type="Area3D" parent="." unique_id=747771727 groups=["artifact"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 0)
