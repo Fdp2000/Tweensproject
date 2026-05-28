@@ -5,11 +5,17 @@ class_name CutsceneUI
 @onready var countdown_label: Label = $Root/CountdownLabel
 
 func _ready():
+	layer = 128 # Ensure this renders ON TOP of LobbyUI (which is layer 100)
+	
 	$Root.set_anchors_preset(Control.PRESET_FULL_RECT)
 	$Root.size = get_viewport().get_visible_rect().size
 	background.modulate.a = 0.0
 	countdown_label.text = ""
 	visible = false
+	
+	var vs_label = $Root.get_node_or_null("VSLabel")
+	if vs_label:
+		vs_label.hide()
 
 func _notification(what):
 	if what == Control.NOTIFICATION_RESIZED:

@@ -1,14 +1,114 @@
 [gd_scene format=3 uid="uid://bi6e376akpo28"]
 
 [ext_resource type="Script" uid="uid://bo3sxpvkjes8" path="res://scripts/Player/cop.gd" id="2_cop"]
-[ext_resource type="Material" uid="uid://dodph65auegcl" path="res://Assets/Shaders/celShader/museumCel.tres" id="2_w24q3"]
-[ext_resource type="Material" uid="uid://2g4x24i7rhhw" path="res://Assets/Shaders/HypnoShader/SolidhypnoMat.tres" id="3_bw8rt"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_xgjd2"]
 [ext_resource type="PackedScene" uid="uid://bukcop75vlfjd" path="res://Assets/Particles/smoke_particles_Charge.tscn" id="3_ksubn"]
+[ext_resource type="Texture2D" uid="uid://cuwagjiejkhdd" path="res://Assets/Models/Rhino/Næsehorn_Næsrehorn_Texture.png" id="3_ppjyx"]
+[ext_resource type="Texture2D" uid="uid://bbwtwbwchgqqx" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_1.png" id="4_ijnu8"]
 [ext_resource type="Texture2D" uid="uid://carrvmj3fplpl" path="res://Assets/Textures/SmokeParticle.png" id="4_jvhmw"]
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="4_rfdt2"]
-[ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="4_xgjd2"]
+[ext_resource type="Texture2D" uid="uid://bvumt2f5v76wg" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_3.png" id="5_voawg"]
+[ext_resource type="Texture2D" uid="uid://b8hy5qu3gtxn" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_2.png" id="6_6osiw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w24q3"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5rqf"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("3_ppjyx")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6ngg"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("4_ijnu8")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sscd4"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("5_voawg")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_po44e"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("6_6osiw")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
 radius = 0.5239258
@@ -112,7 +212,8 @@ collision_mask = 7
 floor_max_angle = 1.3089969
 floor_snap_length = 0.5
 script = ExtResource("2_cop")
-skin_materials = Array[Material]([ExtResource("2_w24q3"), ExtResource("3_bw8rt"), ExtResource("4_xgjd2")])
+capture_distance_buffer = 0.75
+skin_materials = Array[Material]([SubResource("ShaderMaterial_o5rqf"), SubResource("ShaderMaterial_g6ngg"), SubResource("ShaderMaterial_sscd4"), SubResource("ShaderMaterial_po44e")])
 skin_mesh_paths = Array[NodePath]([NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Body"), NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Head")])
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=607525419]
@@ -143,27 +244,27 @@ replication_config = SubResource("SceneReplicationConfig_e80uo")
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0.13307339)
 
 [node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.0076217935, 0.018204628, 0.0026640026, 0.99980175)
-bones/2/rotation = Quaternion(-0.039349075, 0.0367776, 0.009108799, 0.998507)
-bones/3/rotation = Quaternion(-0.0928867, 0.03273254, 0.014357014, 0.99503493)
-bones/5/rotation = Quaternion(-0.60012597, -0.386581, -0.45848075, 0.5293387)
-bones/6/rotation = Quaternion(-0.35284033, 0.6399622, -0.4676559, 0.4972425)
-bones/7/rotation = Quaternion(0.14550346, -0.037344255, 0.0007891579, 0.98865247)
-bones/8/rotation = Quaternion(-0.16431724, 0.026934536, -0.044156864, 0.98505056)
-bones/9/rotation = Quaternion(0.13802391, 0.04791459, -0.2281208, 0.9626082)
-bones/10/rotation = Quaternion(0.1518919, 0.043960605, -0.19319439, 0.9683348)
-bones/11/rotation = Quaternion(0.18132283, 0.02569841, -0.057424486, 0.98140925)
-bones/13/rotation = Quaternion(-0.5970392, 0.38926682, 0.4528531, 0.5356675)
-bones/14/rotation = Quaternion(-0.3428148, -0.69905937, 0.39408574, 0.488355)
-bones/15/rotation = Quaternion(0.20875634, 0.039101243, -0.013281218, 0.9770955)
-bones/16/rotation = Quaternion(-0.16364081, -0.03911626, 0.014482792, 0.9856378)
-bones/17/rotation = Quaternion(0.13784584, -0.0483664, 0.23101331, 0.9619211)
-bones/18/rotation = Quaternion(0.15147564, -0.045219004, 0.20209205, 0.9665243)
-bones/19/rotation = Quaternion(0.18127325, -0.027410865, 0.06633455, 0.98081017)
-bones/23/rotation = Quaternion(0.95406854, 0.10474207, -0.13018306, 0.24866608)
-bones/24/rotation = Quaternion(0.29167518, -0.027494557, -0.021215133, 0.95588684)
-bones/25/rotation = Quaternion(0.9774411, -0.070906304, 0.0869939, 0.17892255)
-bones/26/rotation = Quaternion(0.26544395, 0.040391188, 0.012871074, 0.9631939)
+bones/1/rotation = Quaternion(0.003488218, 0.01826717, 0.002634793, 0.99982363)
+bones/2/rotation = Quaternion(-0.04107898, 0.036825586, 0.009119271, 0.9984355)
+bones/3/rotation = Quaternion(-0.09537884, 0.03391458, 0.014836288, 0.9947526)
+bones/5/rotation = Quaternion(-0.6029012, -0.3831919, -0.45530355, 0.5313876)
+bones/6/rotation = Quaternion(-0.37009713, 0.64646924, -0.44850177, 0.49391478)
+bones/7/rotation = Quaternion(0.15782908, -0.025981179, -0.0016689937, 0.98712325)
+bones/8/rotation = Quaternion(-0.16334073, 0.027919725, -0.040365413, 0.9853481)
+bones/9/rotation = Quaternion(0.13765599, 0.0495715, -0.239284, 0.9598629)
+bones/10/rotation = Quaternion(0.15147139, 0.046683773, -0.21111262, 0.96452504)
+bones/11/rotation = Quaternion(0.18132837, 0.027830059, -0.06913607, 0.9805946)
+bones/13/rotation = Quaternion(-0.5954998, 0.39162517, 0.45141435, 0.53687507)
+bones/14/rotation = Quaternion(-0.33961576, -0.696641, 0.38978797, 0.49741116)
+bones/15/rotation = Quaternion(0.19798416, 0.024745988, 0.0025653958, 0.9798895)
+bones/16/rotation = Quaternion(-0.14437252, -0.028370988, 0.01221272, 0.9890412)
+bones/17/rotation = Quaternion(0.13765796, -0.049164902, 0.23640704, 0.96059614)
+bones/18/rotation = Quaternion(0.15123768, -0.046557173, 0.2111352, 0.964563)
+bones/19/rotation = Quaternion(0.18126574, -0.028629621, 0.07290278, 0.9803103)
+bones/23/rotation = Quaternion(0.9554475, 0.105291754, -0.1314101, 0.2424156)
+bones/24/rotation = Quaternion(0.28474844, -0.029349798, -0.021319855, 0.95791566)
+bones/25/rotation = Quaternion(0.9789544, -0.06948697, 0.08575353, 0.17165749)
+bones/26/rotation = Quaternion(0.25162292, 0.04025385, 0.012192777, 0.966911)
 
 [node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)

@@ -21,12 +21,18 @@ var cash_quota: int = 10000
 var round_timer: int = 300
 var active_thieves: int = 0
 
+var all_vents: Array[Node] = []
+var current_vent: Node = null
+
 var last_heartbeat_times: Dictionary = {}
 var last_server_pong_time: float = 0.0
 var heartbeat_timer: Timer
 
+@export var pre_game_fade_delay: float = 1.0
+
 signal player_joined(id: int)
 signal lobby_updated
+signal pre_game_started(assignments: Dictionary)
 signal game_started
 signal game_ended
 signal cash_updated
@@ -290,7 +296,7 @@ func end_game_with_winner(winner_team: int):
 		var cops_data = []
 		var thieves_data = []
 		
-		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 
 		if spawned:
 			for player in spawned.get_children():
@@ -327,6 +333,37 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 func start_game_clock():
 	if multiplayer.is_server():
 		timer_node.start()
+		open_random_vent()
+
+# --- VENT SYSTEM LOGIC ---
+
+func register_vent(vent: Node):
+	if multiplayer.is_server():
+		if not all_vents.has(vent):
+			all_vents.append(vent)
+
+func open_random_vent():
+	if not multiplayer.is_server() or all_vents.is_empty(): return
+	
+	# Close current vent if one is open
+	if current_vent:
+		current_vent.rpc("close_vent")
+	
+	# Pick a random vent
+	var options = all_vents.duplicate()
+	if current_vent and options.size() > 1:
+		options.erase(current_vent)
+	
+	var new_vent = options.pick_random()
+	if new_vent:
+		current_vent = new_vent
+		current_vent.rpc("open_vent")
+
+func cycle_vent(old_vent_name: String):
+	if multiplayer.is_server():
+		open_random_vent()
+
+# -------------------------
 
 
 @rpc("any_peer", "call_local")
@@ -342,7 +379,7 @@ func client_return_to_lobby():
 		cached_scoreboard.process_mode = Node.PROCESS_MODE_DISABLED
 		
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
-		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 
 		if spawned:
 			for child in spawned.get_children():
@@ -357,6 +394,8 @@ func client_return_to_lobby():
 				art.rpc("reset_artifact")
 			
 		team_cash = 0
+		all_vents.clear()
+		current_vent = null
 		
 		# Respawn all players in the lobby!
 		for id in players.keys():
@@ -369,7 +408,7 @@ func full_teardown():
 	if scoreboard:
 		scoreboard.queue_free()
 		
-	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if spawned:
 		for child in spawned.get_children():
 			child.name += "_deleted"
@@ -382,6 +421,8 @@ func full_teardown():
 			art.reset_artifact()
 			
 	team_cash = 0
+	all_vents.clear()
+	current_vent = null
 	players.clear()
 	last_heartbeat_times.clear()
 	last_server_pong_time = 0.0
@@ -437,9 +478,17 @@ func host_start_game():
 		else:
 			assignments[str(id)] = PlayerRole.THIEF
 			
-	rpc("start_game", assignments)
+	rpc("trigger_pre_game_start", assignments)
 
-
+@rpc("any_peer", "call_local")
+func trigger_pre_game_start(assignments: Dictionary):
+	pre_game_started.emit(assignments)
+	
+	# Give the clients enough time to fade to black before doing the heavy teleportation & spawning logic
+	await get_tree().create_timer(pre_game_fade_delay).timeout
+	
+	if multiplayer.is_server():
+		rpc("start_game", assignments)
 @rpc("any_peer", "call_local")
 func spawn_location_ping(pos: Vector3):
 	if PING_SCENE:

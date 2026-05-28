@@ -7,6 +7,7 @@ var total_captures = 0
 var charge_direction = Vector3.ZERO
 var charge_ui_ref: Control
 @export var is_debuffed = false
+@export var capture_distance_buffer: float = 1.0
 var debuff_timer = 0.0
 var capture_cooldowns: Dictionary = {}
 
@@ -32,7 +33,7 @@ func _ready():
 			
 		var rhino_head = get_node_or_null("Næsehorn2/metarig/Skeleton3D/Rhino_Head")
 		if rhino_head:
-			rhino_head.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
+			rhino_head.layers = 512
 			
 		await get_tree().process_frame
 		var canvas = get_node_or_null("PlayerCanvas")
@@ -42,6 +43,7 @@ func _ready():
 			charge_ui.ring_color = Color(0.2, 0.4, 1.0, 0.9)
 			charge_ui.ready_color = Color(0.2, 0.4, 1.0, 0.9)
 			charge_ui.custom_minimum_size = Vector2(40, 40)
+			charge_ui.size = Vector2(40, 40)
 			charge_ui.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 			charge_ui.position.x -= 60
 			charge_ui.position.y -= 80
@@ -232,20 +234,34 @@ func _custom_physics_process(delta, direction):
 		anim_tree.set("parameters/HeadAim/blend_position", clamped_pitch)
 		
 func _detect_capture():
-	# OPTIMIZATION: We are already a child of SpawnedObjects! No need to search the entire tree.
+	# We are already a child of SpawnedObjects!
 	var spawned = get_parent()
 	if not spawned or spawned.name != "SpawnedObjects": return
 	
 	for collider in spawned.get_children():
 		if collider is CharacterBody3D and collider.has_method("on_captured") and collider.get("team_index") != team_index:
 			if not collider.get("is_hypnotized") and not collider.get("is_jailed"):
-				# Exact collision mimicking (Cylinder overlap)
-				# Cop Radius: 0.52, Thief Radius: 0.22. Touching distance = 0.74m
-				# We use 0.9m horizontal to account for network jitter, and 1.5m vertical.
+				
+				# 1. Dynamically find the exact radius of the Cop and the Thief
+				var my_radius = 0.52 
+				var target_radius = 0.22 
+				
+				var my_col = get_node_or_null("CollisionShape3D")
+				if my_col and my_col.shape and "radius" in my_col.shape:
+					my_radius = my_col.shape.radius
+					
+				var target_col = collider.get_node_or_null("CollisionShape3D")
+				if target_col and target_col.shape and "radius" in target_col.shape:
+					target_radius = target_col.shape.radius
+					
+				# 2. Emulate a perfect collision check, plus a generous network/physics buffer
+				# This extra padding is crucial because character models often extend past their actual capsule colliders!
+				var capture_distance = my_radius + target_radius + capture_distance_buffer
+				
 				var h_dist = Vector2(global_position.x, global_position.z).distance_to(Vector2(collider.global_position.x, collider.global_position.z))
 				var v_dist = abs(global_position.y - collider.global_position.y)
 				
-				if h_dist <= 0.9 and v_dist <= 1.5:
+				if h_dist <= capture_distance and v_dist <= 1.5:
 					var target_name = str(collider.name)
 					if not capture_cooldowns.has(target_name):
 						capture_cooldowns[target_name] = 2.0
@@ -259,7 +275,7 @@ func _detect_capture():
 @rpc("any_peer", "call_local")
 func request_capture(thief_id: int):
 	if not multiplayer.is_server(): return
-	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if not spawned: return
 	
 	var thief = spawned.get_node_or_null(str(thief_id))

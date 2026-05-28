@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://dodph65auegcl"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://wfem3gmpye7n"]
 
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="1_w8taq"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="2_d0o7k"]
