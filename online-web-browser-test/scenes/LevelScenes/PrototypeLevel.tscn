@@ -10938,7 +10938,7 @@ transform = Transform3D(1.47, 0, 1.02797586e-07, 0, 1.47, 0, -9.345237e-08, 0, 1
 transform = Transform3D(-4.371139e-08, 0, 1, 0.08715574, 0.9961947, 3.8096983e-09, -0.9961947, 0.08715574, -4.3545054e-08, -34.24906, -0.25935072, -25.080133)
 
 [node name="Gong Asia" parent="." unique_id=2018350589 instance=ExtResource("72_5v6qp")]
-transform = Transform3D(0.96592575, 0, -0.25881916, 0, 1, 0, 0.25881916, 0, 0.96592575, -21.3, -0.6, -18.7)
+transform = Transform3D(0.96592575, 0, -0.25881916, 0, 1, 0, 0.25881916, 0, 0.96592575, -21.3, -0.6255969, -18.7)
 
 [node name="BuildingWall_6_1  Asia" parent="." unique_id=739631630 instance=ExtResource("73_vdvdf")]
 transform = Transform3D(-5.507635e-08, 0, -1, 0, 1.5, 0, 1.26, 0, -4.371139e-08, -29.159458, 0.99999994, -25.619589)
