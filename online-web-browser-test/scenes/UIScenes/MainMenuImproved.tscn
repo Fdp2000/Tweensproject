@@ -23,31 +23,271 @@
 [sub_resource type="LabelSettings" id="LabelSettings_n5gp1"]
 font_size = 80
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n5gp1"]
-content_margin_left = 30.0
-content_margin_top = 30.0
-content_margin_right = 30.0
-content_margin_bottom = 30.0
-bg_color = Color(0.24780053, 0.29337206, 0.3491902, 0.82000005)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.6651851, 1, 0.58383155, 0.8)
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv1oc"]
+bg_color = Color(0, 0.5019608, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_en882"]
+bg_color = Color(0, 0.31228623, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufndw"]
+bg_color = Color(2.0936877e-06, 0.6012054, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vedx"]
+bg_color = Color(0.9019608, 0.6627451, 0.23529412, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxbh3"]
+bg_color = Color(0.7777824, 0.5608209, 0.15615332, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7kfu"]
+bg_color = Color(0.94744676, 0.7123532, 0.3103075, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxnex"]
+bg_color = Color(1, 0.30980393, 0.84705883, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfxki"]
+bg_color = Color(0.78466666, 0.00010608017, 0.65272796, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33nbu"]
+bg_color = Color(1, 0.44885468, 0.8625478, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoji6"]
+bg_color = Color(1, 0.41960785, 0.41960785, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tq8xy"]
+bg_color = Color(0.9273209, 0, 0.19651514, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o57w0"]
+bg_color = Color(1, 0.54305315, 0.52867025, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c4gm7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3etf2"]
+bg_color = Color(0, 0, 0, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+border_color = Color(0.7723217, 0.89579606, 3.85046e-07, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y4wo8"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.77254903, 0.89411765, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apaj1"]
+bg_color = Color(0.83137256, 0.6666667, 0.015686275, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hino7"]
+bg_color = Color(0.83116233, 0.83060086, 0.012920001, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3d4q7"]
+bg_color = Color(0.83116233, 0.827222, 0.432765, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3na13"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.77254903, 0.89411765, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy723"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.77254903, 0.89411765, 0, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r3qpx"]
+bg_color = Color(0, 0, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rib5t"]
+bg_color = Color(1.6845763e-06, 0, 0.6274631, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4148076, 0.87033874, 0.9977321, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_87v0x"]
+bg_color = Color(0.10043866, 0.3377082, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uv38g"]
+bg_color = Color(0.9999946, 0.12681887, 0.24170706, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iplbr"]
+bg_color = Color(0.58186644, 0, 0.10956585, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_adc3p"]
+bg_color = Color(0.9999998, 0.23053539, 0.28928638, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xa0ng"]
 bg_color = Color(0.22091639, 0.24780053, 0.29337206, 0)
@@ -66,6 +306,8 @@ corner_radius_bottom_left = 18
 
 [sub_resource type="LabelSettings" id="LabelSettings_agky4"]
 font_size = 34
+font_color = Color(0, 0.5019608, 0, 1)
+outline_size = 12
 
 [sub_resource type="Animation" id="Animation_b17lj"]
 resource_name = "CarryReal"
@@ -2246,6 +2488,28 @@ _data = {
 &"Run5": ExtResource("16_3na13")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4gm7"]
+bg_color = Color(0, 0.5019608, 0, 1)
+corner_radius_bottom_right = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l0428"]
+bg_color = Color(4.6927482e-07, 0.3823747, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt2cq"]
+bg_color = Color(0.53333336, 0.90588236, 0.53333336, 1)
+corner_radius_bottom_right = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w30gc"]
+bg_color = Color(0, 0.5019608, 0, 1)
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_31b6e"]
+bg_color = Color(0, 0.38431373, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jw0i5"]
+bg_color = Color(0.53333336, 0.90588236, 0.53333336, 1)
+corner_radius_bottom_left = 16
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6j5t"]
 bg_color = Color(0.29337206, 0.3133042, 0.3491902, 0)
 border_width_left = 2
@@ -2257,8 +2521,67 @@ corner_radius_top_right = 18
 corner_radius_bottom_right = 18
 corner_radius_bottom_left = 18
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w30gc"]
+
 [sub_resource type="LabelSettings" id="LabelSettings_ba607"]
 font_size = 34
+font_color = Color(0, 0, 1, 1)
+outline_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eynkw"]
+bg_color = Color(0, 0, 1, 1)
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gdxcs"]
+bg_color = Color(2.2140146e-06, 0, 0.6662291, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcaly"]
+bg_color = Color(0.5647059, 0.8352941, 1, 1)
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjern"]
+bg_color = Color(0, 0, 1, 1)
+corner_radius_bottom_right = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xq778"]
+bg_color = Color(0, 0, 0.6666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4mk5"]
+bg_color = Color(0.5647059, 0.8352941, 1, 1)
+corner_radius_bottom_right = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w5vgx"]
+bg_color = Color(1, 0.41960785, 0.41960785, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tgkks"]
+bg_color = Color(0.976443, 0, 0.20909375, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxfkr"]
+bg_color = Color(1, 0.5118939, 0.49989468, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="MainMenuUi" type="Node3D" unique_id=354039283]
 
@@ -2310,6 +2633,9 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_yv1oc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_en882")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ufndw")
 text = "Play"
 
 [node name="TutorialButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1588659385]
@@ -2317,6 +2643,9 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_1vedx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oxbh3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_w7kfu")
 text = "Tutorial"
 
 [node name="SkinsButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1188589368]
@@ -2324,6 +2653,9 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_fxnex")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tfxki")
+theme_override_styles/hover = SubResource("StyleBoxFlat_33nbu")
 text = "Skins"
 
 [node name="QuitButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=512990143]
@@ -2331,10 +2663,12 @@ custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 36
+theme_override_styles/normal = SubResource("StyleBoxFlat_aoji6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tq8xy")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o57w0")
 text = "Quit"
 
 [node name="PlayPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1119582336]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2347,7 +2681,7 @@ offset_right = 210.0
 offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_n5gp1")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_c4gm7")
 
 [node name="MarginContainer" type="MarginContainer" parent="MainMenuCanvas/Root/PlayPanel" unique_id=287929225]
 layout_mode = 1
@@ -2370,13 +2704,19 @@ theme_override_constants/separation = 22
 [node name="NameInput" type="LineEdit" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=1941708653]
 custom_minimum_size = Vector2(100, 52)
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_3etf2")
+theme_override_styles/focus = SubResource("StyleBoxFlat_y4wo8")
 placeholder_text = "Enter Name"
 alignment = 1
-max_length = 12
+max_length = 16
 
 [node name="HostButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=359355649]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_apaj1")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hino7")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3d4q7")
 text = "Host"
 
 [node name="JoinRow" type="HBoxContainer" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=1970956856]
@@ -2384,17 +2724,46 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
 [node name="RoomInput" type="LineEdit" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow" unique_id=846124850]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
-placeholder_text = "Paste Room Key Here"
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_3na13")
+theme_override_styles/focus = SubResource("StyleBoxFlat_oy723")
+placeholder_text = "Enter Room Key"
+alignment = 1
 
 [node name="JoinButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow" unique_id=579092210]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_r3qpx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rib5t")
+theme_override_styles/hover = SubResource("StyleBoxFlat_87v0x")
 text = "Join"
 
 [node name="BackButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=2053387462]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_uv38g")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_iplbr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_adc3p")
 text = "Back"
+
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/PlayPanel" unique_id=852455375]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.124
+anchor_right = 0.5
+anchor_bottom = 0.171
+offset_left = -53.0
+offset_right = 53.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.81754667, 0.8972473, 1.540184e-06, 1)
+theme_override_font_sizes/font_size = 50
+text = "Join The Heist!"
+horizontal_alignment = 1
 
 [node name="SkinsPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1485494093]
 visible = false
@@ -2423,14 +2792,23 @@ grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="ChameleonSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=519792314]
-custom_minimum_size = Vector2(400, 500)
+[node name="MarginContainer2" type="MarginContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=420295641]
 layout_mode = 2
 size_flags_horizontal = 2
-size_flags_vertical = 0
+size_flags_vertical = 4
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 65
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="ChameleonSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2" unique_id=519792314]
+custom_minimum_size = Vector2(350, 400)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_kuebs")
 
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=1534710073]
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=1534710073]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2443,7 +2821,7 @@ text = "Chameleon"
 label_settings = SubResource("LabelSettings_agky4")
 horizontal_alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=1769352185]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=1769352185]
 custom_minimum_size = Vector2(380, 360)
 layout_mode = 1
 anchors_preset = 8
@@ -2459,54 +2837,36 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer" unique_id=257552327]
+[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer" unique_id=257552327]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(380, 360)
 render_target_update_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=2006095770]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 100, 1.5, 4)
-fov = 40.0
-
-[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=564513877]
+[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=564513877]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.06988, 1.418527, 2.5919046)
 
-[node name="Chameleon_Character" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=1423752438 instance=ExtResource("1_cxert")]
+[node name="Chameleon_Character" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=1423752438 instance=ExtResource("1_cxert")]
 transform = Transform3D(0.82609826, 0, 0.5635261, 0, 1, 0, -0.5635261, 0, 0.82609826, 0, -1.0704265, 0)
 
-[node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
+[node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/rotation = Quaternion(-0.04475693, 1.3313587e-07, -1.6992058e-08, 0.9989979)
 bones/2/rotation = Quaternion(-0.043643385, -5.7902227e-08, -1.9856166e-08, 0.99904716)
-bones/2/scale = Vector3(1, 0.99999994, 0.99999994)
 bones/3/rotation = Quaternion(0.0005071397, -5.87454e-08, 1.7154432e-10, 0.9999999)
 bones/4/rotation = Quaternion(0.028370686, -4.4803944e-08, 6.6584214e-09, 0.9995975)
-bones/5/position = Vector3(0.008790207, 0.10931611, 0.037826773)
 bones/5/rotation = Quaternion(-0.5776488, -0.39579502, -0.40374523, 0.5887766)
-bones/5/scale = Vector3(0.99999994, 0.9999999, 0.99999994)
 bones/6/rotation = Quaternion(0.0903878, 0.74012536, -0.026138559, 0.6658538)
-bones/6/scale = Vector3(0.99999994, 1, 1)
 bones/7/rotation = Quaternion(0.18524294, -0.105992354, -0.042121552, 0.97605145)
-bones/7/scale = Vector3(1, 1, 1)
 bones/8/rotation = Quaternion(-0.0379357, 0.011217055, -0.018552618, 0.99904495)
-bones/8/scale = Vector3(1.0000001, 0.99999994, 1)
 bones/9/rotation = Quaternion(0.22472736, -0.084370784, 0.4000195, 0.88451314)
-bones/9/scale = Vector3(0.9999999, 0.9999999, 1)
+bones/10/rotation = Quaternion(-0.34116372, 0.1729027, 0.37822434, 0.84300554)
+bones/11/rotation = Quaternion(-0.058819488, -2.374573e-08, -0.50201935, 0.8628539)
 bones/12/rotation = Quaternion(-0.5776489, 0.39579487, 0.40374517, 0.58877677)
-bones/12/scale = Vector3(0.99999994, 0.99999994, 0.99999994)
-bones/13/position = Vector3(-0.042187367, 0.14566936, -0.024297334)
 bones/13/rotation = Quaternion(0.09038778, -0.7401253, 0.026138509, 0.6658539)
-bones/13/scale = Vector3(0.99999994, 0.99999976, 0.99999994)
-bones/14/position = Vector3(9.639189e-08, 0.15597431, -7.450581e-09)
 bones/14/rotation = Quaternion(0.18524294, 0.10599225, 0.042121544, 0.97605145)
-bones/14/scale = Vector3(1.0000001, 1, 1.0000001)
 bones/15/rotation = Quaternion(-0.037935678, -0.011217062, 0.018552624, 0.99904495)
-bones/15/scale = Vector3(1.0000001, 0.99999994, 0.99999994)
-bones/16/rotation = Quaternion(0.22472738, 0.08437086, -0.4000196, 0.88451314)
-bones/16/scale = Vector3(1, 0.9999998, 0.9999999)
 bones/21/rotation = Quaternion(0.9857274, 2.0114882e-08, 3.2109787e-07, 0.1683491)
-bones/21/scale = Vector3(1, 0.99999994, 0.9999979)
 bones/22/rotation = Quaternion(0.19363664, -1.7044326e-07, 5.152104e-08, 0.9810733)
 bones/23/rotation = Quaternion(-0.6772311, 1.9446729e-07, -2.1779653e-07, 0.7357704)
 bones/24/rotation = Quaternion(0.9857274, -4.1905906e-08, -4.2050228e-08, 0.16834915)
@@ -2517,57 +2877,76 @@ bones/29/scale = Vector3(1, 0.99999994, 1)
 bones/30/scale = Vector3(1, 1, 1)
 bones/31/scale = Vector3(1, 1.0000001, 1.0000001)
 
-[node name="Chameleon" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1112566209]
+[node name="Chameleon" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1112566209]
 surface_material_override/0 = null
 
-[node name="Eye_L" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="1" unique_id=970056815]
+[node name="Eye_L" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="1" unique_id=970056815]
 surface_material_override/0 = null
 
-[node name="Eye_R" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="2" unique_id=940823346]
+[node name="Eye_R" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="2" unique_id=940823346]
 surface_material_override/0 = null
 
-[node name="ArtifactAttachment" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
+[node name="ArtifactAttachment" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
 transform = Transform3D(-0.057652477, -0.99367493, 0.09636299, 0.99653053, -0.051475212, 0.065407, -0.060033005, 0.09979934, 0.9931948, -0.41507587, 0.7584202, 0.00068953633)
 
-[node name="AnimationPlayer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character" index="1" unique_id=1955452292]
+[node name="AnimationPlayer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_r3qpx")
 
-[node name="AnimationTree" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character" index="2" unique_id=1446614453]
+[node name="AnimationTree" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character" index="2" unique_id=1446614453]
 active = true
 parameters/Holding_State/CarryMovement/blend_position = Vector2(0.09653914, 0.28600407)
 
-[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=229907666]
+[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=229907666]
+custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
+anchors_preset = -1
+anchor_left = 0.929
+anchor_top = 0.982
+anchor_right = 0.995
+anchor_bottom = 0.994
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_c4gm7")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_l0428")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qt2cq")
 text = ">"
 
-[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel" unique_id=2043417476]
+[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=2043417476]
+custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -8.0
-offset_right = 8.0
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.95
+anchor_right = 0.04
+anchor_bottom = 0.98
+offset_top = -49.0
+offset_right = 32.75
+offset_bottom = 6.0
 grow_vertical = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_w30gc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_31b6e")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jw0i5")
 text = "<"
 
-[node name="RhinoSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=1526376200]
-custom_minimum_size = Vector2(400, 500)
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=106660259]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 65
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 35
+
+[node name="RhinoSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer" unique_id=1526376200]
+custom_minimum_size = Vector2(350, 400)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_h6j5t")
 
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=2108810433]
+[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=2108810433]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -2576,11 +2955,12 @@ offset_left = -22.5
 offset_right = 22.5
 offset_bottom = 23.0
 grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w30gc")
 text = "Rhino"
 label_settings = SubResource("LabelSettings_ba607")
 horizontal_alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=1174571718]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=1174571718]
 custom_minimum_size = Vector2(380, 360)
 layout_mode = 1
 anchors_preset = 8
@@ -2596,80 +2976,94 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer" unique_id=535220147]
+[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer" unique_id=535220147]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(380, 360)
 render_target_update_mode = 0
 
-[node name="Camera3D" type="Camera3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=744609899]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 200, 1.5, 4)
-fov = 40.0
-
-[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=1783558948]
+[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=1783558948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 
-[node name="Næsehorn" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=2043154851 instance=ExtResource("17_w30gc")]
+[node name="Næsehorn" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=2043154851 instance=ExtResource("17_w30gc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1524457, 1.6060051)
 
-[node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.058791287, 0.0043281517, 0.00070691755, 0.99826074)
-bones/2/rotation = Quaternion(0.03880236, 0.0027972811, 0.011406025, 0.99917793)
-bones/3/rotation = Quaternion(-0.015755614, 0.0010053477, 0.012172771, 0.99980134)
-bones/5/rotation = Quaternion(-0.56605864, -0.40457168, -0.5174924, 0.49809745)
-bones/6/rotation = Quaternion(-0.3131271, 0.65264887, -0.4127569, 0.55284053)
-bones/7/rotation = Quaternion(0.60147804, -0.18201958, -0.0107002035, 0.77780366)
-bones/8/rotation = Quaternion(-0.041683663, 0.046155658, -0.08188782, 0.9946993)
-bones/9/rotation = Quaternion(-0.050498534, -0.030233018, -0.5864292, 0.8078594)
-bones/10/rotation = Quaternion(0.0511542, 0.0292099, -0.60961103, 0.7905089)
-bones/11/rotation = Quaternion(0.18780607, 0.1641875, -0.46455255, 0.84968376)
-bones/13/rotation = Quaternion(-0.5867401, 0.29439968, 0.49045452, 0.5731661)
-bones/14/rotation = Quaternion(0.004017553, -0.6553952, 0.4837931, 0.57998735)
-bones/15/rotation = Quaternion(0.50129485, 0.09207978, 0.023111422, 0.86005276)
-bones/16/rotation = Quaternion(0.067175314, -0.027068064, -0.03655457, 0.99670386)
-bones/17/rotation = Quaternion(-0.050136235, 0.030491319, 0.58326596, 0.8101589)
-bones/18/rotation = Quaternion(0.05164402, -0.028853571, 0.6045891, 0.7943377)
-bones/19/rotation = Quaternion(0.1876832, -0.16402295, 0.46094823, 0.85170317)
-bones/23/rotation = Quaternion(0.83735114, -0.037348267, 0.02409792, 0.5448554)
-bones/24/rotation = Quaternion(0.44938204, 0.008938027, 0.03152927, 0.8927384)
-bones/25/rotation = Quaternion(0.96919423, 0.031947255, 0.18653467, 0.15762906)
-bones/26/rotation = Quaternion(0.53761804, -0.011781138, -0.06916878, 0.8402642)
+[node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.0030615972, 0.018078703, 0.0026442271, 0.9998284)
+bones/2/rotation = Quaternion(-0.040709067, 0.03645933, 0.009161688, 0.9984636)
+bones/3/rotation = Quaternion(-0.09541411, 0.033914458, 0.015036498, 0.9947462)
+bones/5/rotation = Quaternion(-0.60453033, -0.3811057, -0.45300764, 0.532997)
+bones/6/rotation = Quaternion(-0.3799801, 0.647949, -0.4358085, 0.49583098)
+bones/7/rotation = Quaternion(0.15818243, -0.021125825, -0.0023660157, 0.98718107)
+bones/8/rotation = Quaternion(-0.15831937, 0.032117333, -0.045803875, 0.98580205)
+bones/9/rotation = Quaternion(0.13744307, 0.05049883, -0.24551919, 0.9582692)
+bones/10/rotation = Quaternion(0.15119514, 0.04811958, -0.22114256, 0.96224767)
+bones/11/rotation = Quaternion(0.18129587, 0.029011995, -0.07569205, 0.9800821)
+bones/13/rotation = Quaternion(-0.5922967, 0.3963351, 0.4510266, 0.53728783)
+bones/14/rotation = Quaternion(-0.33334744, -0.6952081, 0.39379036, 0.50049424)
+bones/15/rotation = Quaternion(0.18777817, 0.023793962, 0.016902128, 0.9817778)
+bones/16/rotation = Quaternion(-0.1258219, -0.030859694, 0.009334335, 0.9915289)
+bones/17/rotation = Quaternion(0.13746493, -0.049735006, 0.24035196, 0.959615)
+bones/18/rotation = Quaternion(0.15098728, -0.047551848, 0.21772923, 0.96308655)
+bones/19/rotation = Quaternion(0.18119197, -0.029516432, 0.07771139, 0.9799282)
+bones/23/rotation = Quaternion(0.95569825, 0.105757825, -0.13151734, 0.24116297)
+bones/24/rotation = Quaternion(0.28354806, -0.02872263, -0.021270216, 0.95829177)
+bones/25/rotation = Quaternion(0.97953355, -0.0686722, 0.08583657, 0.16861288)
+bones/26/rotation = Quaternion(0.2474517, 0.040846083, 0.012347619, 0.9679602)
 
-[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=227015707]
+[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=227015707]
+custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.006
+anchor_top = 0.944
+anchor_right = 0.006
+anchor_bottom = 0.995
 offset_top = -8.0
 offset_right = 8.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_eynkw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gdxcs")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pcaly")
 text = "<"
 
-[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel" unique_id=2090941298]
+[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=2090941298]
+custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -8.0
+anchors_preset = -1
+anchor_left = 0.95
+anchor_top = 0.994
+anchor_right = 0.995
+anchor_bottom = 0.994
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_hjern")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xq778")
+theme_override_styles/hover = SubResource("StyleBoxFlat_d4mk5")
 text = ">"
 
 [node name="BackButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=811892826]
 custom_minimum_size = Vector2(70, 55)
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -31.0
-offset_right = 45.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -55.5
+offset_top = -58.0
+offset_right = 55.5
+grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/icon_max_width = 16
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_w5vgx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tgkks")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lxfkr")
 text = "Back"
+icon_alignment = 2
 
-[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character"]
-[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn"]
+[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character"]
+[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn"]
