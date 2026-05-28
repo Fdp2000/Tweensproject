@@ -335,16 +335,6 @@ func _set_spawn_position(pos: Vector3):
 				visible = true
 		, CONNECT_ONE_SHOT)
 
-@rpc("any_peer", "call_local")
-func _set_spawn_position(pos: Vector3):
-	global_position = pos
-	
-	if is_multiplayer_authority() and is_inside_tree():
-		visible = false
-		get_tree().process_frame.connect(func():
-			if is_inside_tree():
-				visible = true
-		, CONNECT_ONE_SHOT)
 
 @rpc("any_peer", "call_local")
 func _sync_name(n: String):
