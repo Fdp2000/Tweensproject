@@ -109,11 +109,11 @@ func update_ui() -> void:
 
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		start_button.show()
-		start_button.disabled = GameManager.players.size() < 2
+		start_button.disabled = GameManager.players.size() < 1
 	else:
 		start_button.hide()
 
-	var client_ui = get_tree().get_root().find_child("MainMenuUI", true, false)
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 
 	if client_ui and client_ui.get("current_room_code") != null:
 		if client_ui.current_room_code != "":
@@ -123,7 +123,7 @@ func update_ui() -> void:
 
 
 func _on_leave_pressed() -> void:
-	var client_ui = get_tree().get_root().find_child("MainMenuUI", true, false)
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 
 	if client_ui:
 		if client_ui.client.rtc_mp:
@@ -134,7 +134,7 @@ func _on_leave_pressed() -> void:
 
 
 func _on_start_pressed() -> void:
-	var client_ui = get_tree().get_root().find_child("MainMenuUI", true, false)
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 
 	if client_ui and client_ui.get("local_player_name") != null:
 		GameManager.sync_player_data(multiplayer.get_unique_id(), client_ui.local_player_name)

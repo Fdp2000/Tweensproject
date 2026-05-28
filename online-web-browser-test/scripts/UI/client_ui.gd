@@ -5,11 +5,12 @@ extends Node
 
 @onready var main_menu_canvas: CanvasLayer = menu_root.get_node("MainMenuCanvas")
 @onready var main_menu_panel: Control = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel")
-
 @onready var play_panel: Control = menu_root.get_node("MainMenuCanvas/Root/PlayPanel")
+@onready var skins_panel: Control = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel")
 
 @onready var play_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton")
 @onready var tutorial_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/TutorialButton")
+@onready var skins_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/SkinsButton")
 @onready var quit_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/QuitButton")
 
 @onready var name_input: LineEdit = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/NameInput")
@@ -18,11 +19,27 @@ extends Node
 @onready var host_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/HostButton")
 @onready var play_back_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/BackButton")
 
+@onready var skins_back_button: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/BackButton")
+
 @onready var tutorial_canvas: CanvasLayer = menu_root.get_node("Tutorial/TutorialCanvas")
 @onready var tutorial_cop_canvas: CanvasLayer = menu_root.get_node("TutorialCop/TutorialCopCanvas")
 @onready var tutorial_next_button: Button = menu_root.get_node("Tutorial/TutorialCanvas/Control/Panel/NextButton")
 @onready var cop_back_button: Button = menu_root.get_node("TutorialCop/TutorialCopCanvas/Control/Panel/BackButton")
 @onready var cop_next_button: Button = menu_root.get_node("TutorialCop/TutorialCopCanvas/Control/Panel/NextButton")
+
+@export var chameleon_skin_materials: Array[Material]
+@export var rhino_skin_materials: Array[Material]
+
+@onready var chameleon_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
+@onready var rhino_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
+
+@onready var chameleon_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/PreviousButton")
+@onready var chameleon_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/NextButton")
+@onready var rhino_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/PreviousButton")
+@onready var rhino_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/NextButton")
+
+
+var menu_camera: Camera3D
 
 const COP_SCENE = preload("res://scenes/PlayerScenes/Cop.tscn")
 const THIEF_SCENE = preload("res://scenes/PlayerScenes/Thief.tscn")
@@ -34,11 +51,28 @@ var local_player_name: String = ""
 var current_room_code: String = ""
 var current_hud: Node = null
 var lobby_ui: Node = null
-var first_time_tutorial := true
 var tutorial_intro_cancelled := false
 var has_requested_lobby := false
+var tutorial_intro_tweens: Array[Tween] = []
+var menu_camera_start_rotation: Vector3
+var camera_is_on_skins := false
+
+var selected_chameleon_skin := 0
+var selected_rhino_skin := 0
+var chameleon_preview: Node3D
+var rhino_preview: Node3D
 
 func _ready() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+
+	menu_camera = get_tree().get_first_node_in_group("menu_camera") as Camera3D
+
+	if menu_camera:
+		menu_camera.make_current()
+		menu_camera_start_rotation = menu_camera.rotation_degrees
+		print("Found camera: ", menu_camera.get_path())
+	
 	client.lobby_joined.connect(_lobby_joined)
 	client.lobby_sealed.connect(_lobby_sealed)
 	client.connected.connect(_connected)
@@ -60,21 +94,50 @@ func _ready() -> void:
 	join_button.pressed.connect(_on_join_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+
 	play_button.pressed.connect(_on_play_pressed)
 	play_back_button.pressed.connect(_on_play_back_pressed)
+
+	skins_button.pressed.connect(_on_skins_pressed)
+	skins_back_button.pressed.connect(_on_skins_back_pressed)
+
 	tutorial_next_button.pressed.connect(_on_tutorial_next_pressed)
 	cop_back_button.pressed.connect(_on_cop_back_pressed)
 	cop_next_button.pressed.connect(_on_cop_next_pressed)
 
+	chameleon_prev.pressed.connect(_on_chameleon_prev)
+	chameleon_next.pressed.connect(_on_chameleon_next)
+	rhino_prev.pressed.connect(_on_rhino_prev)
+	rhino_next.pressed.connect(_on_rhino_next)
+
+	_update_chameleon_preview()
+	_update_rhino_preview()
+
+
 	show_main_menu()
 	animate_glow(tutorial_next_button)
 	animate_glow(cop_next_button)
-	_play_tutorial_intro()
+	
+	# Load or create settings to check if the user has seen the tutorial
+	var config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	var has_seen_tutorial = false
+	if err == OK:
+		has_seen_tutorial = config.get_value("tutorial", "has_seen", false)
+		
+	if not has_seen_tutorial:
+		config.set_value("tutorial", "has_seen", true)
+		config.save("user://settings.cfg")
+		_play_tutorial_intro()
+
 
 func show_main_menu() -> void:
+	reset_tutorial_button()
+
 	main_menu_canvas.show()
 	main_menu_panel.show()
 	play_panel.hide()
+	skins_panel.hide()
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 
@@ -83,8 +146,10 @@ func show_main_menu() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
+
 func _on_play_pressed() -> void:
-	tutorial_intro_cancelled = true
+	cancel_tutorial_intro()
+
 	main_menu_panel.hide()
 	play_panel.show()
 
@@ -92,6 +157,102 @@ func _on_play_pressed() -> void:
 func _on_play_back_pressed() -> void:
 	play_panel.hide()
 	main_menu_panel.show()
+
+func cancel_tutorial_intro() -> void:
+	tutorial_intro_cancelled = true
+
+	for tween in tutorial_intro_tweens:
+		if tween and tween.is_valid():
+			tween.kill()
+
+	tutorial_intro_tweens.clear()
+	reset_tutorial_button()
+
+func _on_skins_pressed() -> void:
+	cancel_tutorial_intro()
+	set_skin_viewports_active(true)
+
+	main_menu_panel.hide()
+	play_panel.hide()
+
+	skins_panel.modulate.a = 0.0
+	skins_panel.position.x += 80
+	skins_panel.show()
+
+	_rotate_camera_to_skins()
+	_animate_skins_panel_in()
+
+
+func _on_skins_back_pressed() -> void:
+	set_skin_viewports_active(false)
+	var tween := create_tween()
+
+	tween.set_parallel(true)
+
+	tween.tween_property(
+		skins_panel,
+		"modulate:a",
+		0.0,
+		0.5
+	)
+
+	tween.tween_property(
+		menu_camera,
+		"rotation_degrees",
+		menu_camera_start_rotation,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await tween.finished
+
+	skins_panel.hide()
+	skins_panel.modulate.a = 1.0
+
+	main_menu_panel.show()
+
+func _animate_skins_panel_in() -> void:
+	await get_tree().create_timer(0.35).timeout
+
+	var original_pos := skins_panel.position
+
+	var tween := create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(skins_panel, "modulate:a", 1.0, 0.9)
+	tween.tween_property(skins_panel, "position", original_pos - Vector2(80, 0), 0.9)
+
+func _rotate_camera_to_skins() -> void:
+	print("Skins button pressed, rotating camera")
+
+	if menu_camera == null:
+		print("MenuCamera not found!")
+		return
+
+	var target_rotation := menu_camera_start_rotation
+	target_rotation.y += 90.0
+
+	var tween := create_tween()
+	tween.tween_property(
+		menu_camera,
+		"rotation_degrees",
+		target_rotation,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func _rotate_camera_to_menu() -> void:
+	if menu_camera == null:
+		print("MenuCamera not found!")
+		return
+
+	var tween := create_tween()
+
+	tween.tween_property(
+		menu_camera,
+		"rotation_degrees",
+		menu_camera_start_rotation,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 
 func animate_glow(button: Button) -> void:
@@ -113,7 +274,8 @@ func animate_glow(button: Button) -> void:
 		normal.tween_property(button, "modulate", Color.WHITE, 0.8)
 
 		await normal.finished
-		
+
+
 func _play_tutorial_intro() -> void:
 	await get_tree().create_timer(0.8).timeout
 	if tutorial_intro_cancelled:
@@ -127,6 +289,7 @@ func _play_tutorial_intro() -> void:
 			return
 
 		var flash := create_tween()
+		tutorial_intro_tweens.append(flash)
 		flash.set_parallel(true)
 		flash.tween_property(tutorial_button, "scale", Vector2(1.12, 1.12), 0.45)
 		flash.tween_property(tutorial_button, "modulate", Color(2.0, 1.35, 0.25, 1.0), 0.45)
@@ -136,6 +299,7 @@ func _play_tutorial_intro() -> void:
 			return
 
 		var unflash := create_tween()
+		tutorial_intro_tweens.append(unflash)
 		unflash.set_parallel(true)
 		unflash.tween_property(tutorial_button, "scale", Vector2.ONE, 0.45)
 		unflash.tween_property(tutorial_button, "modulate", Color.WHITE, 0.45)
@@ -149,6 +313,7 @@ func _play_tutorial_intro() -> void:
 		return
 
 	var grow := create_tween()
+	tutorial_intro_tweens.append(grow)
 	grow.set_parallel(true)
 	grow.tween_property(tutorial_button, "scale", Vector2(24.0, 24.0), 1.6)
 	grow.tween_property(tutorial_button, "modulate", Color(2.0, 1.5, 0.5, 0.0), 1.6)
@@ -157,16 +322,25 @@ func _play_tutorial_intro() -> void:
 	if tutorial_intro_cancelled:
 		return
 
+	tutorial_intro_tweens.clear()
+	reset_tutorial_button()
+	_on_tutorial_pressed()
+
+
+func reset_tutorial_button() -> void:
 	tutorial_button.scale = Vector2.ONE
 	tutorial_button.modulate = Color.WHITE
-	_on_tutorial_pressed()
+	tutorial_button.text = "Tutorial"
+
 
 func show_lobby() -> void:
 	if not has_requested_lobby:
 		return
+
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
+	skins_panel.hide()
 
 	if lobby_ui == null:
 		lobby_ui = preload("res://scripts/UI/lobby_ui.gd").new()
@@ -176,13 +350,13 @@ func show_lobby() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
-
-
 func _on_host_pressed() -> void:
-	has_requested_lobby = true
-	tutorial_intro_cancelled = true
-	local_player_name = name_input.text.strip_edges()
+	cancel_tutorial_intro()
+	save_selected_skins()
 
+	has_requested_lobby = true
+
+	local_player_name = name_input.text.strip_edges()
 	if local_player_name == "":
 		local_player_name = "Player"
 
@@ -191,8 +365,11 @@ func _on_host_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
+	cancel_tutorial_intro()
+	save_selected_skins()
+
 	has_requested_lobby = true
-	tutorial_intro_cancelled = true
+
 	local_player_name = name_input.text.strip_edges()
 	current_room_code = room_input.text.strip_edges().to_upper()
 
@@ -201,16 +378,18 @@ func _on_join_pressed() -> void:
 
 	if current_room_code == "":
 		print("No room code entered.")
-		return
+		return	
 
 	client.start(SIGNALING_URL, current_room_code, false)
 
 
 func _on_tutorial_pressed() -> void:
-	tutorial_intro_cancelled = true
+	cancel_tutorial_intro()
+
 	main_menu_canvas.hide()
 	tutorial_canvas.show()
 	tutorial_cop_canvas.hide()
+	skins_panel.hide()
 
 
 func _on_tutorial_next_pressed() -> void:
@@ -236,13 +415,19 @@ func _connected(id: int, _use_mesh: bool) -> void:
 	print("[Signaling] Connected with ID: ", id)
 
 	if id == 1:
-		GameManager.add_player(1, local_player_name)
+		GameManager.add_player(
+			1,
+			local_player_name,
+			selected_chameleon_skin,
+			selected_rhino_skin
+		)
 
 
 func _disconnected() -> void:
 	print("[Signaling] Disconnected")
 
 	GameManager.full_teardown()
+	has_requested_lobby = false
 
 	if lobby_ui:
 		lobby_ui.hide()
@@ -275,7 +460,14 @@ func _mp_server_connected() -> void:
 	print("[Multiplayer] Connected. My ID: ", my_id)
 
 	if my_id != 1:
-		GameManager.rpc_id(1, "sync_player_data", my_id, local_player_name)
+		GameManager.rpc_id(
+			1,
+			"sync_player_data",
+			my_id,
+			local_player_name,
+			selected_chameleon_skin,
+			selected_rhino_skin
+		)
 
 
 func _mp_server_disconnect() -> void:
@@ -313,7 +505,8 @@ func _on_player_joined(id: int) -> void:
 	pf.position = spawn_pos
 	pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 	spawned.add_child(pf, true)
-
+	var skin_index = GameManager.players[id].get("chameleon_skin", 0)
+	pf.rpc("apply_skin", skin_index)
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
@@ -354,6 +547,8 @@ func _on_game_started() -> void:
 					pf.position = spawn_pos
 					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 					spawned.add_child(pf, true)
+					var skin_index = GameManager.players[id].get("rhino_skin", 0)
+					pf.rpc("apply_skin", skin_index)
 				else:
 					if pf:
 						pf.position = spawn_pos
@@ -362,6 +557,8 @@ func _on_game_started() -> void:
 						pf.rpc("_set_spawn_position", spawn_pos)
 						pf.rpc("sync_team", role)
 						pf.rpc("_sync_name", pf.player_name)
+						var skin_index = GameManager.players[id].get("chameleon_skin", 0)
+						pf.rpc("apply_skin", skin_index)
 					else:
 						pf = THIEF_SCENE.instantiate()
 						pf.name = str(id)
@@ -369,10 +566,13 @@ func _on_game_started() -> void:
 						pf.position = spawn_pos
 						pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 						spawned.add_child(pf, true)
+						var skin_index = GameManager.players[id].get("chameleon_skin", 0)
+						pf.rpc("apply_skin", skin_index)
 
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
+	skins_panel.hide()
 
 	if lobby_ui:
 		lobby_ui.hide()
@@ -386,6 +586,25 @@ func _on_game_started() -> void:
 	add_child(current_hud)
 
 
+func set_skin_viewports_active(active: bool) -> void:
+	# Enable/Disable processing of viewports to save performance when not visible
+	var chameleon_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport")
+	var rhino_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
+	
+	if chameleon_vp:
+		chameleon_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
+	if rhino_vp:
+		rhino_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Secret Developer Tool: Press 'T' on the main menu to instantly wipe the tutorial save!
+	if event is InputEventKey and event.pressed and event.keycode == KEY_T:
+		if main_menu_canvas.visible:
+			var config = ConfigFile.new()
+			config.set_value("tutorial", "has_seen", false)
+			config.save("user://settings.cfg")
+			print("DEV TOOL: Tutorial save reset! The tutorial intro will play on the next launch.")
+
 func _on_game_ended() -> void:
 	if current_hud:
 		current_hud.queue_free()
@@ -393,6 +612,75 @@ func _on_game_ended() -> void:
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	show_lobby()
+
+func _update_chameleon_preview() -> void:
+	if chameleon_skin_materials.is_empty():
+		print("No chameleon materials assigned.")
+		return
+
+	var mesh := chameleon_spawn.find_child("Chameleon", true, false) as MeshInstance3D
+	if mesh:
+		mesh.set_surface_override_material(0, chameleon_skin_materials[selected_chameleon_skin])
+
+
+func _update_rhino_preview() -> void:
+	if rhino_skin_materials.is_empty():
+		print("No rhino materials assigned.")
+		return
+
+	var body := rhino_spawn.find_child("Rhino_Body", true, false) as MeshInstance3D
+	var head := rhino_spawn.find_child("Rhino_Head", true, false) as MeshInstance3D
+
+	if body:
+		body.set_surface_override_material(
+			0,
+			rhino_skin_materials[selected_rhino_skin]
+		)
+
+	if head:
+		head.set_surface_override_material(
+			0,
+			rhino_skin_materials[selected_rhino_skin]
+		)
+
+func _on_chameleon_next() -> void:
+	if chameleon_skin_materials.is_empty():
+		return
+
+	selected_chameleon_skin = wrapi(selected_chameleon_skin + 1, 0, chameleon_skin_materials.size())
+	_update_chameleon_preview()
+
+
+func _on_chameleon_prev() -> void:
+	if chameleon_skin_materials.is_empty():
+		return
+
+	selected_chameleon_skin = wrapi(selected_chameleon_skin - 1, 0, chameleon_skin_materials.size())
+	_update_chameleon_preview()
+
+
+func _on_rhino_next() -> void:
+	print("Rhino next pressed")
+
+	if rhino_skin_materials.is_empty():
+		print("Rhino materials empty")
+		return
+
+	selected_rhino_skin = wrapi(selected_rhino_skin + 1, 0, rhino_skin_materials.size())
+	print("Rhino skin index: ", selected_rhino_skin)
+	_update_rhino_preview()
+
+
+func _on_rhino_prev() -> void:
+	if rhino_skin_materials.is_empty():
+		return
+
+	selected_rhino_skin = wrapi(selected_rhino_skin - 1, 0, rhino_skin_materials.size())
+	_update_rhino_preview()
+
+func save_selected_skins() -> void:
+	GameManager.selected_chameleon_skin = selected_chameleon_skin
+	GameManager.selected_rhino_skin = selected_rhino_skin
 
 
 @rpc("any_peer", "call_local")

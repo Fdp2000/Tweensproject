@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://bi6e376akpo28"]
 
 [ext_resource type="Script" uid="uid://bo3sxpvkjes8" path="res://scripts/Player/cop.gd" id="2_cop"]
+[ext_resource type="Material" uid="uid://dodph65auegcl" path="res://Assets/Shaders/celShader/museumCel.tres" id="2_w24q3"]
+[ext_resource type="Material" uid="uid://2g4x24i7rhhw" path="res://Assets/Shaders/HypnoShader/SolidhypnoMat.tres" id="3_bw8rt"]
 [ext_resource type="PackedScene" uid="uid://bukcop75vlfjd" path="res://Assets/Particles/smoke_particles_Charge.tscn" id="3_ksubn"]
 [ext_resource type="Texture2D" uid="uid://carrvmj3fplpl" path="res://Assets/Textures/SmokeParticle.png" id="4_jvhmw"]
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="4_rfdt2"]
+[ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="4_xgjd2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w24q3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
 radius = 0.5239258
@@ -107,6 +112,8 @@ collision_mask = 7
 floor_max_angle = 1.3089969
 floor_snap_length = 0.5
 script = ExtResource("2_cop")
+skin_materials = Array[Material]([ExtResource("2_w24q3"), ExtResource("3_bw8rt"), ExtResource("4_xgjd2")])
+skin_mesh_paths = Array[NodePath]([NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Body"), NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Head")])
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=607525419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.061146, 0)
@@ -135,6 +142,29 @@ replication_config = SubResource("SceneReplicationConfig_e80uo")
 [node name="Næsehorn2" parent="." unique_id=2043154851 instance=ExtResource("4_rfdt2")]
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0.13307339)
 
+[node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.0076217935, 0.018204628, 0.0026640026, 0.99980175)
+bones/2/rotation = Quaternion(-0.039349075, 0.0367776, 0.009108799, 0.998507)
+bones/3/rotation = Quaternion(-0.0928867, 0.03273254, 0.014357014, 0.99503493)
+bones/5/rotation = Quaternion(-0.60012597, -0.386581, -0.45848075, 0.5293387)
+bones/6/rotation = Quaternion(-0.35284033, 0.6399622, -0.4676559, 0.4972425)
+bones/7/rotation = Quaternion(0.14550346, -0.037344255, 0.0007891579, 0.98865247)
+bones/8/rotation = Quaternion(-0.16431724, 0.026934536, -0.044156864, 0.98505056)
+bones/9/rotation = Quaternion(0.13802391, 0.04791459, -0.2281208, 0.9626082)
+bones/10/rotation = Quaternion(0.1518919, 0.043960605, -0.19319439, 0.9683348)
+bones/11/rotation = Quaternion(0.18132283, 0.02569841, -0.057424486, 0.98140925)
+bones/13/rotation = Quaternion(-0.5970392, 0.38926682, 0.4528531, 0.5356675)
+bones/14/rotation = Quaternion(-0.3428148, -0.69905937, 0.39408574, 0.488355)
+bones/15/rotation = Quaternion(0.20875634, 0.039101243, -0.013281218, 0.9770955)
+bones/16/rotation = Quaternion(-0.16364081, -0.03911626, 0.014482792, 0.9856378)
+bones/17/rotation = Quaternion(0.13784584, -0.0483664, 0.23101331, 0.9619211)
+bones/18/rotation = Quaternion(0.15147564, -0.045219004, 0.20209205, 0.9665243)
+bones/19/rotation = Quaternion(0.18127325, -0.027410865, 0.06633455, 0.98081017)
+bones/23/rotation = Quaternion(0.95406854, 0.10474207, -0.13018306, 0.24866608)
+bones/24/rotation = Quaternion(0.29167518, -0.027494557, -0.021215133, 0.95588684)
+bones/25/rotation = Quaternion(0.9774411, -0.070906304, 0.0869939, 0.17892255)
+bones/26/rotation = Quaternion(0.26544395, 0.040391188, 0.012871074, 0.9631939)
+
 [node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)
 amount = 35
@@ -152,3 +182,5 @@ angular_velocity_min = 36.55
 angular_velocity_max = 104.5
 scale_amount_min = 0.1
 scale_amount_max = 0.4
+
+[editable path="Næsehorn2"]

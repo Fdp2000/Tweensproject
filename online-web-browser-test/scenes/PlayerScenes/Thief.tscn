@@ -4,13 +4,17 @@
 [ext_resource type="Script" uid="uid://bwhf4pdxb8euc" path="res://scripts/Player/thief.gd" id="2_thief"]
 [ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="3_41i6f"]
 [ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="4_lgnbw"]
+[ext_resource type="Material" uid="uid://dodph65auegcl" path="res://Assets/Shaders/celShader/museumCel.tres" id="5_wj3y1"]
 [ext_resource type="Animation" uid="uid://buixqxsh8dig" path="res://Assets/Animations/Chameleon/Camo_Pose.anim" id="6_1raaj"]
 [ext_resource type="Animation" uid="uid://boqq0afclyx02" path="res://Assets/Animations/Chameleon/Run1.res" id="6_8gl44"]
 [ext_resource type="Animation" uid="uid://do52qgm5077c0" path="res://Assets/Animations/Chameleon/Idle1.res" id="6_pwsbx"]
+[ext_resource type="Material" uid="uid://2g4x24i7rhhw" path="res://Assets/Shaders/HypnoShader/SolidhypnoMat.tres" id="6_w2drt"]
 [ext_resource type="Animation" uid="uid://c1mcnmaibxgy8" path="res://Assets/Animations/Chameleon/Idle2.res" id="7_1raaj"]
 [ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="7_7jg2g"]
 [ext_resource type="Animation" uid="uid://ce26fke58nnvf" path="res://Assets/Animations/Carry/Carrying.res" id="7_b17lj"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="7_iuwyu"]
 [ext_resource type="Animation" uid="uid://bqp1nobyaxhr8" path="res://Assets/Animations/Chameleon/Run2.res" id="7_j3oqh"]
+[ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="8_1vv2c"]
 [ext_resource type="Animation" uid="uid://b24nc1krkg3qc" path="res://Assets/Animations/Chameleon/Idle3.res" id="8_b77bf"]
 [ext_resource type="Animation" uid="uid://c21j58ypdr2r0" path="res://Assets/Animations/Chameleon/Run3.res" id="8_ntepm"]
 [ext_resource type="Animation" uid="uid://caddp1wk5u0nt" path="res://Assets/Animations/Chameleon/Hypno_Walk.res" id="8_ptic4"]
@@ -20,6 +24,31 @@
 [ext_resource type="Animation" uid="uid://uskucuuqyynr" path="res://Assets/Animations/Carry/Jog Forward.res" id="11_b17lj"]
 [ext_resource type="Animation" uid="uid://bqyvm7t41n5rm" path="res://Assets/Animations/Carry/Jog Strafe Left.res" id="12_ptic4"]
 [ext_resource type="Animation" uid="uid://crfctbio3my7o" path="res://Assets/Animations/Carry/Jog Strafe Right.res" id="13_wj3y1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oure2"]
+render_priority = 0
+shader = ExtResource("7_iuwyu")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("8_1vv2c")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lgnbw"]
 radius = 0.22167969
@@ -2210,8 +2239,14 @@ collision_mask = 15
 script = ExtResource("2_thief")
 camo_material = ExtResource("3_41i6f")
 hypno_material = ExtResource("4_lgnbw")
-debug_disable_camo = false
-debug_disable_movement = false
+debug_disable_camo = null
+debug_disable_movement = null
+team_index = null
+sync_target_position = null
+sync_target_rotation = null
+sync_velocity = null
+skin_materials = Array[Material]([SubResource("ShaderMaterial_oure2"), ExtResource("5_wj3y1"), ExtResource("6_w2drt"), ExtResource("4_lgnbw")])
+skin_mesh_paths = Array[NodePath]([NodePath("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/Chameleon")])
 
 [node name="CollisionShape3D" parent="." index="0" unique_id=607525419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6756443, 0)
@@ -2229,63 +2264,14 @@ fov = 75.0
 [node name="Chameleon_Character" parent="." index="3" unique_id=1423752438 instance=ExtResource("7_7jg2g")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="Skeleton3D" parent="Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
-bones/0/scale = Vector3(0.99999994, 1, 1)
-bones/1/rotation = Quaternion(-0.0006536161, 0.012634613, 0.0045310366, 0.9999097)
-bones/2/rotation = Quaternion(-0.017392835, 0.005865114, -0.00080790184, 0.9998313)
-bones/2/scale = Vector3(0.9999994, 0.99999994, 0.9999997)
-bones/3/rotation = Quaternion(0.20823935, 0.0054066763, -0.0014094329, 0.9780619)
-bones/4/rotation = Quaternion(-0.1115797, 0.012021329, -0.030979972, 0.9931997)
-bones/5/position = Vector3(0.028318133, 0.10592836, 0.027719382)
-bones/5/rotation = Quaternion(-0.6123423, -0.27372202, -0.4450348, 0.5933442)
-bones/5/scale = Vector3(1.0000011, 1.0000007, 1.0000002)
-bones/6/rotation = Quaternion(0.2096986, 0.34305242, -0.2888375, 0.8688582)
-bones/6/scale = Vector3(0.9999981, 1.0000011, 0.9999997)
-bones/7/rotation = Quaternion(0.58469754, -0.13087948, 0.10198602, 0.7941022)
-bones/7/scale = Vector3(0.99999934, 1.0000011, 0.99999875)
-bones/8/rotation = Quaternion(-0.062389847, -0.013839214, -0.12782967, 0.9897351)
-bones/8/scale = Vector3(1.0000014, 1, 0.99999875)
-bones/9/rotation = Quaternion(0.365933, -0.018021869, 0.40842295, 0.8360377)
-bones/9/scale = Vector3(1.0000001, 1.0000006, 0.9999996)
-bones/10/rotation = Quaternion(-0.34116372, 0.1729027, 0.37822434, 0.84300554)
-bones/11/rotation = Quaternion(-0.058819488, -2.374573e-08, -0.50201935, 0.8628539)
-bones/12/rotation = Quaternion(-0.72367954, 0.36363643, 0.26819083, 0.521661)
-bones/12/scale = Vector3(1.0000019, 1.0000004, 1.0000015)
-bones/13/position = Vector3(-0.04770618, 0.13755617, -0.016438467)
-bones/13/rotation = Quaternion(0.29110667, -0.60911644, 0.5111735, 0.53191704)
-bones/13/scale = Vector3(0.99999803, 1.000002, 1.0000002)
-bones/14/position = Vector3(-0.0054808883, 0.13947982, -0.017703135)
-bones/14/rotation = Quaternion(0.36184546, 0.39988795, -0.06188807, 0.83983773)
-bones/14/scale = Vector3(0.99999994, 1.0000019, 0.99999887)
-bones/15/rotation = Quaternion(0.21851899, -0.13268656, 0.10570056, 0.9609741)
-bones/15/scale = Vector3(1.0000011, 1.0000014, 0.9999973)
-bones/16/rotation = Quaternion(0.17725414, -0.03252838, -0.425343, 0.88690835)
-bones/16/scale = Vector3(0.99999887, 1.0000001, 1.0000006)
-bones/17/rotation = Quaternion(-0.34116378, -0.17290266, -0.37822434, 0.84300554)
-bones/18/rotation = Quaternion(-0.058819383, -7.4475246e-08, 0.50201935, 0.8628539)
-bones/21/rotation = Quaternion(0.95323235, 0.19987626, -0.13364021, 0.1831333)
-bones/21/scale = Vector3(1, 0.99999964, 0.99999756)
-bones/22/rotation = Quaternion(0.4836471, 0.08125992, 0.05652075, 0.869648)
-bones/23/rotation = Quaternion(-0.7924582, -0.063937664, 0.07840999, 0.60147655)
-bones/24/rotation = Quaternion(0.9508102, -0.13284776, 0.09172118, 0.2643838)
-bones/25/rotation = Quaternion(0.5379087, -0.060596943, -0.0029953767, 0.84081703)
-bones/26/rotation = Quaternion(-0.7854469, 0.07800365, -0.12870939, 0.60035217)
-bones/27/scale = Vector3(0.9999999, 0.9999999, 0.9999998)
-bones/29/scale = Vector3(1, 1.0000001, 1.0000001)
-bones/30/scale = Vector3(1, 1.0000002, 1.0000001)
-bones/31/scale = Vector3(1, 1, 1.0000001)
-
-[node name="Chameleon" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1112566209]
+[node name="Chameleon" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" parent_id_path=PackedInt32Array(1423752438, 671893237) index="0" unique_id=1112566209]
 surface_material_override/0 = null
 
-[node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="1" unique_id=970056815]
+[node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" parent_id_path=PackedInt32Array(1423752438, 671893237) index="1" unique_id=970056815]
 surface_material_override/0 = null
 
-[node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="2" unique_id=940823346]
+[node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" parent_id_path=PackedInt32Array(1423752438, 671893237) index="2" unique_id=940823346]
 surface_material_override/0 = null
-
-[node name="ArtifactAttachment" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
-transform = Transform3D(-0.6121216, 0.10699384, 0.7834918, 0.78889084, 0.15078905, 0.5957461, -0.054400794, 0.98276293, -0.17671153, -0.2999439, 0.6092857, 0.25728726)
 
 [node name="AnimationPlayer" parent="Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_7jg2g")
