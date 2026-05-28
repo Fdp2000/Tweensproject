@@ -22,6 +22,7 @@ font_size = 40
 [node name="Tutorial" type="Node3D" unique_id=1108260321]
 
 [node name="TutorialCanvas" type="CanvasLayer" parent="." unique_id=267317684]
+visible = false
 
 [node name="Control" type="Control" parent="TutorialCanvas" unique_id=373467567]
 layout_mode = 3

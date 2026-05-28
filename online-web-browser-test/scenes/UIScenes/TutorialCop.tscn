@@ -22,6 +22,7 @@ font_size = 40
 [node name="TutorialCop" type="Node3D" unique_id=364404085]
 
 [node name="TutorialCopCanvas" type="CanvasLayer" parent="." unique_id=1304183105]
+visible = false
 
 [node name="Control" type="Control" parent="TutorialCopCanvas" unique_id=1041721303]
 layout_mode = 3

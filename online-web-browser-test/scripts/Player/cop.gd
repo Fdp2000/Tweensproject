@@ -32,7 +32,7 @@ func _ready():
 			
 		var rhino_head = get_node_or_null("Næsehorn2/metarig/Skeleton3D/Rhino_Head")
 		if rhino_head:
-			rhino_head.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
+			rhino_head.layers = 512
 			
 		await get_tree().process_frame
 		var canvas = get_node_or_null("PlayerCanvas")
@@ -42,6 +42,7 @@ func _ready():
 			charge_ui.ring_color = Color(0.2, 0.4, 1.0, 0.9)
 			charge_ui.ready_color = Color(0.2, 0.4, 1.0, 0.9)
 			charge_ui.custom_minimum_size = Vector2(40, 40)
+			charge_ui.size = Vector2(40, 40)
 			charge_ui.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
 			charge_ui.position.x -= 60
 			charge_ui.position.y -= 80
@@ -259,7 +260,7 @@ func _detect_capture():
 @rpc("any_peer", "call_local")
 func request_capture(thief_id: int):
 	if not multiplayer.is_server(): return
-	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if not spawned: return
 	
 	var thief = spawned.get_node_or_null(str(thief_id))

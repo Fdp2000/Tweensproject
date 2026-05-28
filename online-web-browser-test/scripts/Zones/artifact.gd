@@ -169,10 +169,12 @@ func confirm_pickup(player_id: int):
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(player_id)
 	
-	var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
-	if carrier and carrier.has_method("on_artifact_pickup"):
-		carrier.on_artifact_pickup(self)
-		cached_attachment = carrier.get_node_or_null("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/ArtifactAttachment")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	if spawned:
+		var carrier = spawned.get_node_or_null(str(carrier_id))
+		if carrier and carrier.has_method("on_artifact_pickup"):
+			carrier.on_artifact_pickup(self)
+			cached_attachment = carrier.get_node_or_null("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/ArtifactAttachment")
 
 var outline_mat: StandardMaterial3D = null
 
@@ -181,7 +183,8 @@ func _process(delta):
 		if is_multiplayer_authority():
 			# I am carrying it, so I control it
 			if cached_attachment:
-				var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
+				var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+				var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null
 				
 				# --- CAMO BLEND CALCULATION ---
 				var is_camo = false
@@ -342,7 +345,8 @@ func _apply_visuals(node: Node, highlighted: bool):
 @rpc("any_peer", "call_local")
 func drop():
 	if carrier_id != -1:
-		var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null
 		if carrier and carrier.has_method("on_artifact_drop"):
 			carrier.on_artifact_drop()
 			
@@ -371,7 +375,8 @@ func drop():
 @rpc("any_peer", "call_local")
 func destroy_artifact():
 	if carrier_id != -1:
-		var carrier = get_node_or_null("/root/World/main/SpawnedObjects/" + str(carrier_id))
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null
 		if carrier and carrier.has_method("on_artifact_drop"):
 			carrier.on_artifact_drop()
 			

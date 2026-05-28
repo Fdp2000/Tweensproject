@@ -293,7 +293,7 @@ func end_game_with_winner(winner_team: int):
 		var cops_data = []
 		var thieves_data = []
 		
-		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 
 		if spawned:
 			for player in spawned.get_children():
@@ -376,7 +376,7 @@ func client_return_to_lobby():
 		cached_scoreboard.process_mode = Node.PROCESS_MODE_DISABLED
 		
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
-		var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 
 		if spawned:
 			for child in spawned.get_children():
@@ -405,7 +405,7 @@ func full_teardown():
 	if scoreboard:
 		scoreboard.queue_free()
 		
-	var spawned = get_tree().get_root().get_node_or_null("World/main/SpawnedObjects")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if spawned:
 		for child in spawned.get_children():
 			child.name += "_deleted"

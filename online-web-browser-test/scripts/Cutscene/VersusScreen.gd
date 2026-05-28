@@ -10,6 +10,10 @@ func _ready():
 	background.modulate.a = 0.0
 	countdown_label.text = ""
 	visible = false
+	
+	var vs_label = $Root.get_node_or_null("VSLabel")
+	if vs_label:
+		vs_label.hide()
 
 func _notification(what):
 	if what == Control.NOTIFICATION_RESIZED:

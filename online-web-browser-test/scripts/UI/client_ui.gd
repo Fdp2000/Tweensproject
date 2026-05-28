@@ -69,7 +69,6 @@ func _ready() -> void:
 	menu_camera = get_tree().get_first_node_in_group("menu_camera") as Camera3D
 
 	if menu_camera:
-		menu_camera.make_current()
 		menu_camera_start_rotation = menu_camera.rotation_degrees
 		print("Found camera: ", menu_camera.get_path())
 	
@@ -143,6 +142,9 @@ func show_main_menu() -> void:
 
 	if lobby_ui:
 		lobby_ui.hide()
+
+	if menu_camera and not menu_camera.current:
+		menu_camera.make_current()
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
@@ -357,8 +359,6 @@ func _on_host_pressed() -> void:
 	has_requested_lobby = true
 
 	local_player_name = name_input.text.strip_edges()
-	if local_player_name == "":
-		local_player_name = "Player"
 
 	current_room_code = ""
 	client.start(SIGNALING_URL, "", false)
@@ -372,9 +372,6 @@ func _on_join_pressed() -> void:
 
 	local_player_name = name_input.text.strip_edges()
 	current_room_code = room_input.text.strip_edges().to_upper()
-
-	if local_player_name == "":
-		local_player_name = "Player"
 
 	if current_room_code == "":
 		print("No room code entered.")
@@ -487,7 +484,7 @@ func _on_player_joined(id: int) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if not spawned:
 		return
 
@@ -510,7 +507,7 @@ func _on_player_joined(id: int) -> void:
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
-		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 
 		if spawned:
 			for i in 3:

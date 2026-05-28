@@ -33,15 +33,14 @@ var local_player: Node3D
 var spawned_dummy_models: Array[Node] = []
 
 func _ready():
-	intro_camera.current = true
 	var game_manager = get_tree().get_root().find_child("GameManager", true, false)
 	if game_manager:
 		game_manager.game_started.connect(_on_game_started)
 
 func _on_game_started():
-	# INSTANTLY black out the screen to prevent frame lag of the player camera
-	cutscene_ui.background.modulate.a = 1.0
+	cutscene_ui.background.modulate.a = 0.0
 	cutscene_ui.visible = true
+	await cutscene_ui.fade_to_black(1.0)
 	
 	await get_tree().create_timer(0.3).timeout
 	local_player = await wait_for_local_player()
@@ -62,7 +61,7 @@ func _on_game_started():
 		local_player.enable_controls(false)
 		
 	# Turn off lobby camera
-	var lobby_camera = get_tree().get_root().find_child("LobbyCamera", true, false)
+	var lobby_camera = get_tree().get_first_node_in_group("menu_camera") as Camera3D
 	if lobby_camera:
 		lobby_camera.current = false
 		
@@ -115,6 +114,10 @@ func run_cinematic_flow():
 	setup_versus_lineup()
 	
 	# 3. Fade into Versus Screen
+	var vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
+	if vs_label:
+		vs_label.show()
+		
 	await cutscene_ui.fade_in(1.0)
 	
 	await get_tree().create_timer(0.10).timeout
@@ -132,7 +135,7 @@ func run_cinematic_flow():
 	for model in get_dummies(right_spawn): model.queue_free()
 	for model in get_dummies(left_spawn): model.queue_free()
 	
-	var vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
+	vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
 	if vs_label:
 		vs_label.hide()
 	
@@ -310,6 +313,13 @@ func fly_camera_to_target(target_cam: Camera3D):
 	var tween = create_tween()
 	tween.tween_property(intro_camera, "global_transform", target_cam.global_transform, fly_to_player_time).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	tween.parallel().tween_property(intro_camera, "fov", target_cam.fov, fly_to_player_time).set_trans(Tween.TRANS_CUBIC)
+	
+	# To prevent clipping into the inside of the Cop's head (which has an outline shader),
+	# we sync the intro_camera's cull_mask to the player's camera right before it reaches the head.
+	get_tree().create_timer(fly_to_player_time * 0.85).timeout.connect(func():
+		if is_instance_valid(intro_camera) and is_instance_valid(target_cam):
+			intro_camera.cull_mask = target_cam.cull_mask
+	)
 	
 	await tween.finished
 
