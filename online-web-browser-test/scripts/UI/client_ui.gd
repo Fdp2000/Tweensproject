@@ -30,16 +30,18 @@ extends Node
 @export var chameleon_skin_materials: Array[Material]
 @export var rhino_skin_materials: Array[Material]
 
-@onready var chameleon_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
-@onready var rhino_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
+@onready var chameleon_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
+@onready var rhino_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
 
-@onready var chameleon_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/PreviousButton")
-@onready var chameleon_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/NextButton")
-@onready var rhino_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/PreviousButton")
-@onready var rhino_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/NextButton")
+@onready var chameleon_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviousButton")
+@onready var chameleon_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/NextButton")
+@onready var rhino_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviousButton")
+@onready var rhino_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/NextButton")
 
 
 var menu_camera: Camera3D
+var menu_camera_spot: Marker3D
+var skins_camera_spot: Marker3D
 
 const COP_SCENE = preload("res://scenes/PlayerScenes/Cop.tscn")
 const THIEF_SCENE = preload("res://scenes/PlayerScenes/Thief.tscn")
@@ -54,7 +56,6 @@ var lobby_ui: Node = null
 var tutorial_intro_cancelled := false
 var has_requested_lobby := false
 var tutorial_intro_tweens: Array[Tween] = []
-var menu_camera_start_rotation: Vector3
 var camera_is_on_skins := false
 
 var selected_chameleon_skin := 0
@@ -67,9 +68,14 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	menu_camera = get_tree().get_first_node_in_group("menu_camera") as Camera3D
+	menu_camera_spot = menu_root.get_node_or_null("MenuCameraSpot") as Marker3D
+	skins_camera_spot = menu_root.get_node_or_null("SkinsCameraSpot") as Marker3D
 
+	if menu_camera and menu_camera_spot:
+		menu_camera.global_position = menu_camera_spot.global_position
+		menu_camera.global_rotation = menu_camera_spot.global_rotation
 	if menu_camera:
-		menu_camera_start_rotation = menu_camera.rotation_degrees
+		menu_camera.make_current()
 		print("Found camera: ", menu_camera.get_path())
 	
 	client.lobby_joined.connect(_lobby_joined)
@@ -143,9 +149,6 @@ func show_main_menu() -> void:
 	if lobby_ui:
 		lobby_ui.hide()
 
-	if menu_camera and not menu_camera.current:
-		menu_camera.make_current()
-
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
@@ -187,10 +190,8 @@ func _on_skins_pressed() -> void:
 
 func _on_skins_back_pressed() -> void:
 	set_skin_viewports_active(false)
+
 	var tween := create_tween()
-
-	tween.set_parallel(true)
-
 	tween.tween_property(
 		skins_panel,
 		"modulate:a",
@@ -198,22 +199,17 @@ func _on_skins_back_pressed() -> void:
 		0.5
 	)
 
-	tween.tween_property(
-		menu_camera,
-		"rotation_degrees",
-		menu_camera_start_rotation,
-		1.2
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_rotate_camera_to_menu()
 
 	await tween.finished
+	await get_tree().create_timer(0.7).timeout
 
 	skins_panel.hide()
 	skins_panel.modulate.a = 1.0
-
 	main_menu_panel.show()
 
 func _animate_skins_panel_in() -> void:
-	await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(0.7).timeout
 
 	var original_pos := skins_panel.position
 
@@ -224,20 +220,30 @@ func _animate_skins_panel_in() -> void:
 	tween.tween_property(skins_panel, "position", original_pos - Vector2(80, 0), 0.9)
 
 func _rotate_camera_to_skins() -> void:
-	print("Skins button pressed, rotating camera")
+	print("Skins button pressed, moving camera")
 
 	if menu_camera == null:
 		print("MenuCamera not found!")
 		return
 
-	var target_rotation := menu_camera_start_rotation
-	target_rotation.y += 90.0
+	if skins_camera_spot == null:
+		print("SkinsCameraSpot not found!")
+		return
 
 	var tween := create_tween()
+	tween.set_parallel(true)
+
 	tween.tween_property(
 		menu_camera,
-		"rotation_degrees",
-		target_rotation,
+		"global_position",
+		skins_camera_spot.global_position,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_property(
+		menu_camera,
+		"global_rotation",
+		skins_camera_spot.global_rotation,
 		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
@@ -247,12 +253,24 @@ func _rotate_camera_to_menu() -> void:
 		print("MenuCamera not found!")
 		return
 
+	if menu_camera_spot == null:
+		print("MenuCameraSpot not found!")
+		return
+
 	var tween := create_tween()
+	tween.set_parallel(true)
 
 	tween.tween_property(
 		menu_camera,
-		"rotation_degrees",
-		menu_camera_start_rotation,
+		"global_position",
+		menu_camera_spot.global_position,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_property(
+		menu_camera,
+		"global_rotation",
+		menu_camera_spot.global_rotation,
 		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
@@ -350,9 +368,6 @@ func show_lobby() -> void:
 
 	lobby_ui.show_lobby()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
-	if menu_camera and not menu_camera.current:
-		menu_camera.make_current()
 
 
 func _on_host_pressed() -> void:
@@ -362,6 +377,8 @@ func _on_host_pressed() -> void:
 	has_requested_lobby = true
 
 	local_player_name = name_input.text.strip_edges()
+	if local_player_name == "":
+		local_player_name = "Player"
 
 	current_room_code = ""
 	client.start(SIGNALING_URL, "", false)
@@ -375,6 +392,9 @@ func _on_join_pressed() -> void:
 
 	local_player_name = name_input.text.strip_edges()
 	current_room_code = room_input.text.strip_edges().to_upper()
+
+	if local_player_name == "":
+		local_player_name = "Player"
 
 	if current_room_code == "":
 		print("No room code entered.")
@@ -509,18 +529,22 @@ func _on_player_joined(id: int) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
 	if not spawned:
 		return
 
 	await get_tree().process_frame
 
-	var spawn_trans = get_unoccupied_spawn("lobby_spawn", Vector3(0, 1000, 0))
+	var lobby_spawns = get_tree().get_nodes_in_group("lobby_spawn")
+	var spawn_pos = Vector3(0, 1000, 0)
+
+	if lobby_spawns.size() > 0:
+		spawn_pos = lobby_spawns[randi() % lobby_spawns.size()].global_position
 
 	var pf = THIEF_SCENE.instantiate()
 	pf.name = str(id)
 	pf.team_index = GameManager.PlayerRole.THIEF
-	pf.global_transform = spawn_trans
+	pf.position = spawn_pos
 	pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 	spawned.add_child(pf, true)
 	var skin_index = GameManager.players[id].get("chameleon_skin", 0)
@@ -528,23 +552,29 @@ func _on_player_joined(id: int) -> void:
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
 
 		if spawned:
 			for i in 3:
 				await get_tree().physics_frame
 
-			var assigned_spawns = {}
+			var cop_spawns = get_tree().get_nodes_in_group("cop_spawn")
+			var thief_spawns = get_tree().get_nodes_in_group("thief_spawn")
+
+			cop_spawns.shuffle()
+			thief_spawns.shuffle()
+
 			for id in GameManager.players.keys():
 				var role = GameManager.players[id]["role"]
-				var spawn_trans = Transform3D()
+				var spawn_pos = Vector3(0, 3, 0)
 
 				if role == GameManager.PlayerRole.COP:
-					spawn_trans = get_unoccupied_spawn("cop_spawn", Vector3(0, 3, 0))
+					if cop_spawns.size() > 0:
+						spawn_pos = cop_spawns.pop_back().global_position
 				else:
-					spawn_trans = get_unoccupied_spawn("thief_spawn", Vector3(0, 3, 0))
+					if thief_spawns.size() > 0:
+						spawn_pos = thief_spawns.pop_back().global_position
 
-				assigned_spawns[id] = spawn_trans
 				var pf = spawned.get_node_or_null(str(id))
 
 				if role == GameManager.PlayerRole.COP:
@@ -556,40 +586,30 @@ func _on_game_started() -> void:
 					pf = COP_SCENE.instantiate()
 					pf.name = str(id)
 					pf.team_index = role
-					pf.global_transform = spawn_trans
+					pf.position = spawn_pos
+					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 					spawned.add_child(pf, true)
+					var skin_index = GameManager.players[id].get("rhino_skin", 0)
+					pf.rpc("apply_skin", skin_index)
 				else:
 					if pf:
-						pf.global_transform = spawn_trans
+						pf.position = spawn_pos
 						pf.team_index = role
+						pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
+						pf.rpc("_set_spawn_position", spawn_pos)
+						pf.rpc("sync_team", role)
+						pf.rpc("_sync_name", pf.player_name)
+						var skin_index = GameManager.players[id].get("chameleon_skin", 0)
+						pf.rpc("apply_skin", skin_index)
 					else:
 						pf = THIEF_SCENE.instantiate()
 						pf.name = str(id)
 						pf.team_index = role
-						pf.global_transform = spawn_trans
+						pf.position = spawn_pos
+						pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 						spawned.add_child(pf, true)
-						
-			# FIX: Wait a fraction of a second to ensure MultiplayerSpawner has fully
-			# replicated the new nodes to all clients before we fire the configuration RPCs!
-			await get_tree().create_timer(0.25).timeout
-			
-			for id in GameManager.players.keys():
-				var pf = spawned.get_node_or_null(str(id))
-				if pf:
-					var role = GameManager.players[id]["role"]
-					var spawn_trans = assigned_spawns.get(id, pf.global_transform)
-					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
-					
-					pf.rpc("_set_spawn_transform", spawn_trans)
-					pf.rpc("sync_team", role)
-					pf.rpc("_sync_name", pf.player_name)
-					
-					var skin_index = 0
-					if role == GameManager.PlayerRole.COP:
-						skin_index = GameManager.players[id].get("rhino_skin", 0)
-					else:
-						skin_index = GameManager.players[id].get("chameleon_skin", 0)
-					pf.rpc("apply_skin", skin_index)
+						var skin_index = GameManager.players[id].get("chameleon_skin", 0)
+						pf.rpc("apply_skin", skin_index)
 
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
@@ -610,8 +630,8 @@ func _on_game_started() -> void:
 
 func set_skin_viewports_active(active: bool) -> void:
 	# Enable/Disable processing of viewports to save performance when not visible
-	var chameleon_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport")
-	var rhino_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
+	var chameleon_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport")
+	var rhino_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
 	
 	if chameleon_vp:
 		chameleon_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
@@ -627,39 +647,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			config.save("user://settings.cfg")
 			print("DEV TOOL: Tutorial save reset! The tutorial intro will play on the next launch.")
 
-var lobby_fade_canvas: CanvasLayer
-var lobby_fade_rect: ColorRect
-
-func play_lobby_fade_out():
-	if not lobby_fade_canvas:
-		lobby_fade_rect = ColorRect.new()
-		lobby_fade_rect.color = Color.BLACK
-		lobby_fade_rect.modulate.a = 0.0
-		lobby_fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		lobby_fade_canvas = CanvasLayer.new()
-		lobby_fade_canvas.layer = 128
-		lobby_fade_canvas.add_child(lobby_fade_rect)
-		add_child(lobby_fade_canvas)
-		
-	var fade_out = create_tween()
-	fade_out.tween_property(lobby_fade_rect, "modulate:a", 1.0, 1.0)
-
 func _on_game_ended() -> void:
 	if current_hud:
 		current_hud.queue_free()
 		current_hud = null
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
 	show_lobby()
-	
-	if lobby_fade_rect:
-		var fade_in = create_tween()
-		fade_in.tween_property(lobby_fade_rect, "modulate:a", 0.0, 0.5)
-		await fade_in.finished
-		lobby_fade_canvas.queue_free()
-		lobby_fade_canvas = null
-		lobby_fade_rect = null
 
 func _update_chameleon_preview() -> void:
 	if chameleon_skin_materials.is_empty():

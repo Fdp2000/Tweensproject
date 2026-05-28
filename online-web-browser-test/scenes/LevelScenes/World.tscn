@@ -4,14 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://crc86ugpb3vmu" path="res://scenes/LevelScenes/PrototypeLevel.tscn" id="2_proto"]
 [ext_resource type="Script" uid="uid://buorurrqe21ki" path="res://scripts/Cutscene/CutsceneManager.gd" id="3_p4cir"]
 [ext_resource type="Script" uid="uid://c5rie7oeh51t2" path="res://scripts/Cutscene/VersusScreen.gd" id="4_frjgd"]
-[ext_resource type="PackedScene" path="res://scenes/PlayerScenes/DummyCop.tscn" id="5_2qs0d"]
+[ext_resource type="PackedScene" uid="uid://dummycop123" path="res://scenes/PlayerScenes/DummyCop.tscn" id="5_2qs0d"]
 [ext_resource type="PackedScene" uid="uid://dfcub4m2b5i2f" path="res://scenes/PlayerScenes/DummyThief.tscn" id="6_27ueq"]
 [ext_resource type="LightmapGIData" uid="uid://b2aicew7mmbg1" path="res://scenes/LevelScenes/World.lmbake" id="7_ofs5a"]
 [ext_resource type="PackedScene" uid="uid://dyj1djxuy4iko" path="res://scenes/LevelScenes/PregameLobby.tscn" id="7_pregame"]
 [ext_resource type="PackedScene" uid="uid://4xnr376si33e" path="res://scenes/UIScenes/MainMenuImproved.tscn" id="8_7aqpd"]
 [ext_resource type="PackedScene" uid="uid://d16n72gkvedkt" path="res://scenes/UIScenes/Tutorial.tscn" id="9_2qs0d"]
 [ext_resource type="PackedScene" uid="uid://boq6oww22vrxp" path="res://scenes/UIScenes/TutorialCop.tscn" id="10_27ueq"]
-[ext_resource type="Script" path="res://scripts/UI/Camera.gd" id="11_2qs0d"]
+[ext_resource type="Script" uid="uid://cwh78nxwse0c4" path="res://scripts/UI/Camera.gd" id="11_2qs0d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -92,7 +92,7 @@ font_size = 90
 outline_size = 30
 outline_color = Color(0, 0, 0, 1)
 
-[node name="LobbyCamera" type="Node3D" unique_id=744758526]
+[node name="World" type="Node3D" unique_id=744758526]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1180068115]
 environment = SubResource("Environment_2dftf")
@@ -109,18 +109,11 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
 
 [node name="PrototypeLevel" parent="." unique_id=1171028383 instance=ExtResource("2_proto")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.03201866, -9.536743e-07, 0.007331848)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.084916115, 0.16434455, -0.05591297)
 
 [node name="CutsceneManager" type="Node3D" parent="." unique_id=1301939455]
 script = ExtResource("3_p4cir")
 cop_preview_scene = ExtResource("5_2qs0d")
-pre_game_fade_to_black_time = 0.7
-versus_fade_in_time = 0.6
-versus_fade_out_time = 0.6
-museum_fade_in_time = 0.6
-cop_head_hide_threshold = 0.69
-anim_blend_in_time = 0.4
-anim_blend_out_time = 1.0
 
 [node name="Node3D" type="Node3D" parent="CutsceneManager" unique_id=496690261]
 
@@ -317,10 +310,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
 [node name="Clip3CopStart" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123464]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38963032, 4, -54.61739)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0)
 
 [node name="Clip3CopEnd" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=1901513984]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38963032, 4, -70.623665)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0)
 
 [node name="Clip3ThiefStart" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)
@@ -451,6 +444,14 @@ visible = false
 transform = Transform3D(0.84056664, -0.18527511, -0.50903916, 0, 0.9396927, -0.34202012, 0.5417082, 0.28749073, 0.78987426, -5.294627, 1.2074707, 5.681832)
 current = true
 script = ExtResource("11_2qs0d")
+
+[node name="MenuCameraSpot" type="Marker3D" parent="MainMenuUI" unique_id=1919051982]
+transform = Transform3D(0.8053139, -0.10136718, -0.58411837, 0.017260706, 0.98886526, -0.1478094, 0.59259737, 0.10895067, 0.7980966, -3.912, 1.093, 3.669)
+
+[node name="SkinsCameraSpot" type="Marker3D" parent="MainMenuUI" unique_id=398680786]
+transform = Transform3D(-0.054940686, -0.21506651, 0.9750528, -0.011932006, 0.9765994, 0.21473533, -0.99841833, 0.00016337074, -0.056221217, -6.82, 2.319, 0.41)
+
+[node name="Camera3D" type="Camera3D" parent="MainMenuUI/SkinsCameraSpot" unique_id=2105280098]
 
 [editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop"]
 [editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop/Næsehorn2"]
