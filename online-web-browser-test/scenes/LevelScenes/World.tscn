@@ -4,12 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://crc86ugpb3vmu" path="res://scenes/LevelScenes/PrototypeLevel.tscn" id="2_proto"]
 [ext_resource type="Script" uid="uid://buorurrqe21ki" path="res://scripts/Cutscene/CutsceneManager.gd" id="3_p4cir"]
 [ext_resource type="Script" uid="uid://c5rie7oeh51t2" path="res://scripts/Cutscene/VersusScreen.gd" id="4_frjgd"]
-[ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="5_1ppgf"]
-[ext_resource type="LightmapGIData" path="res://scenes/LevelScenes/World.lmbake" id="7_ofs5a"]
+[ext_resource type="PackedScene" path="res://scenes/PlayerScenes/DummyCop.tscn" id="5_2qs0d"]
+[ext_resource type="PackedScene" uid="uid://dfcub4m2b5i2f" path="res://scenes/PlayerScenes/DummyThief.tscn" id="6_27ueq"]
+[ext_resource type="LightmapGIData" uid="uid://b2aicew7mmbg1" path="res://scenes/LevelScenes/World.lmbake" id="7_ofs5a"]
 [ext_resource type="PackedScene" uid="uid://dyj1djxuy4iko" path="res://scenes/LevelScenes/PregameLobby.tscn" id="7_pregame"]
 [ext_resource type="PackedScene" uid="uid://4xnr376si33e" path="res://scenes/UIScenes/MainMenuImproved.tscn" id="8_7aqpd"]
 [ext_resource type="PackedScene" uid="uid://d16n72gkvedkt" path="res://scenes/UIScenes/Tutorial.tscn" id="9_2qs0d"]
 [ext_resource type="PackedScene" uid="uid://boq6oww22vrxp" path="res://scenes/UIScenes/TutorialCop.tscn" id="10_27ueq"]
+[ext_resource type="Script" path="res://scripts/UI/Camera.gd" id="11_2qs0d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -85,16 +87,10 @@ _data = {
 &"museum_pan": SubResource("Animation_1ppgf")
 }
 
-[sub_resource type="Theme" id="Theme_frjgd"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_frjgd"]
-font_size = 130
-
-[sub_resource type="LabelSettings" id="LabelSettings_ofs5a"]
-font_size = 130
-
 [sub_resource type="LabelSettings" id="LabelSettings_w6qbi"]
-font_size = 180
+font_size = 90
+outline_size = 30
+outline_color = Color(0, 0, 0, 1)
 
 [node name="World" type="Node3D" unique_id=744758526]
 
@@ -102,7 +98,7 @@ font_size = 180
 environment = SubResource("Environment_2dftf")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1626076153]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.7516252, -0.2505818, 0.61013794, 0.10865098, 0.8653527, 0.48924407, -0.6505801, 0.43402028, -0.6231949, -23.354465, 80.65172, 40.451115)
 layers = 3
 light_bake_mode = 1
 shadow_enabled = true
@@ -115,13 +111,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1000, 0)
 [node name="PrototypeLevel" parent="." unique_id=1171028383 instance=ExtResource("2_proto")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.03201866, -9.536743e-07, 0.007331848)
 
-[node name="LobbyCamera" type="Camera3D" parent="." unique_id=999888777]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1020, 25)
-current = true
-
 [node name="CutsceneManager" type="Node3D" parent="." unique_id=1301939455]
 script = ExtResource("3_p4cir")
 skip_cutscene = true
+cop_preview_scene = ExtResource("5_2qs0d")
 
 [node name="Node3D" type="Node3D" parent="CutsceneManager" unique_id=496690261]
 
@@ -131,11 +124,202 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7119503, 7.073414)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CutsceneManager" unique_id=1267529803]
 libraries/ = SubResource("AnimationLibrary_frjgd")
 
+[node name="CutsceneMarkers" type="Node3D" parent="CutsceneManager" unique_id=888123456]
+
+[node name="VersusPos" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123457]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3.4187974e-07, 0.97953874, -36.74265)
+
+[node name="LineupCameraPos" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos" unique_id=888123470]
+transform = Transform3D(1, 0, 0, 0, 0.993961, 0.10973431, 0, -0.10973431, 0.993961, 0, 2.048, 10)
+
+[node name="Camera3D" type="Camera3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/LineupCameraPos" unique_id=834694157]
+fov = 35.0
+
+[node name="LeftSpawn" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos" unique_id=888123458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.195, -0.698, 0.268)
+
+[node name="CopPreviewPos1" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn" unique_id=410078631]
+transform = Transform3D(-0.4539906, 0, -0.89100647, 0, 1, 0, 0.89100647, 0, -0.4539906, -0.37, 0, -1.483)
+
+[node name="DummyCop" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1" unique_id=535254931 instance=ExtResource("5_2qs0d")]
+
+[node name="Skeleton3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop/Næsehorn2/metarig" parent_id_path=PackedInt32Array(535254931, 146192529, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.002751932, 0.018273208, 0.0026285956, 0.99982584)
+bones/2/rotation = Quaternion(-0.04097841, 0.036726013, 0.009130803, 0.99844307)
+bones/3/rotation = Quaternion(-0.09583281, 0.034109473, 0.014928685, 0.99470085)
+bones/5/rotation = Quaternion(-0.60333604, -0.38256985, -0.45469216, 0.53186566)
+bones/6/rotation = Quaternion(-0.373758, 0.647408, -0.44438174, 0.49365243)
+bones/7/rotation = Quaternion(0.15975995, -0.023285167, -0.0016735016, 0.9868799)
+bones/8/rotation = Quaternion(-0.16246547, 0.027853353, -0.04103644, 0.9854671)
+bones/9/rotation = Quaternion(0.13758843, 0.049869467, -0.24128802, 0.95935535)
+bones/10/rotation = Quaternion(0.15138668, 0.04716402, -0.21432927, 0.96380526)
+bones/11/rotation = Quaternion(0.1813316, 0.028211514, -0.071241885, 0.9804324)
+bones/13/rotation = Quaternion(-0.59477127, 0.39263055, 0.45117748, 0.53714746)
+bones/14/rotation = Quaternion(-0.33804256, -0.69606453, 0.38995895, 0.4991529)
+bones/15/rotation = Quaternion(0.19493598, 0.024022136, 0.0076061212, 0.98049235)
+bones/16/rotation = Quaternion(-0.1391598, -0.029032936, 0.010937252, 0.9897839)
+bones/17/rotation = Quaternion(0.13760214, -0.049331255, 0.23755784, 0.96031165)
+bones/18/rotation = Quaternion(0.15116893, -0.0468326, 0.2130649, 0.964136)
+bones/19/rotation = Quaternion(0.1812465, -0.028888993, 0.0743079, 0.9802008)
+bones/23/rotation = Quaternion(0.95564276, 0.10543368, -0.13168007, 0.24143553)
+bones/24/rotation = Quaternion(0.28363103, -0.02935556, -0.021274004, 0.958248)
+bones/25/rotation = Quaternion(0.97919744, -0.06914486, 0.085642226, 0.17046091)
+bones/26/rotation = Quaternion(0.24944684, 0.040264014, 0.012277739, 0.96747327)
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop" index="1" unique_id=1391553469]
+offset = Vector2(124.24, 71.825)
+
+[node name="CopPreviewPos2" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn" unique_id=622836878]
+transform = Transform3D(-0.20791174, 0, -0.97814757, 0, 1, 0, 0.97814757, 0, -0.20791174, -1.049, 0, 0)
+
+[node name="DummyCop" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos2" unique_id=1575387936 instance=ExtResource("5_2qs0d")]
+
+[node name="Skeleton3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos2/DummyCop/Næsehorn2/metarig" parent_id_path=PackedInt32Array(1575387936, 146192529, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.002751932, 0.018273208, 0.0026285956, 0.99982584)
+bones/2/rotation = Quaternion(-0.04097841, 0.036726013, 0.009130803, 0.99844307)
+bones/3/rotation = Quaternion(-0.09583281, 0.034109473, 0.014928685, 0.99470085)
+bones/5/rotation = Quaternion(-0.60333604, -0.38256985, -0.45469216, 0.53186566)
+bones/6/rotation = Quaternion(-0.373758, 0.647408, -0.44438174, 0.49365243)
+bones/7/rotation = Quaternion(0.15975995, -0.023285167, -0.0016735016, 0.9868799)
+bones/8/rotation = Quaternion(-0.16246547, 0.027853353, -0.04103644, 0.9854671)
+bones/9/rotation = Quaternion(0.13758843, 0.049869467, -0.24128802, 0.95935535)
+bones/10/rotation = Quaternion(0.15138668, 0.04716402, -0.21432927, 0.96380526)
+bones/11/rotation = Quaternion(0.1813316, 0.028211514, -0.071241885, 0.9804324)
+bones/13/rotation = Quaternion(-0.59477127, 0.39263055, 0.45117748, 0.53714746)
+bones/14/rotation = Quaternion(-0.33804256, -0.69606453, 0.38995895, 0.4991529)
+bones/15/rotation = Quaternion(0.19493598, 0.024022136, 0.0076061212, 0.98049235)
+bones/16/rotation = Quaternion(-0.1391598, -0.029032936, 0.010937252, 0.9897839)
+bones/17/rotation = Quaternion(0.13760214, -0.049331255, 0.23755784, 0.96031165)
+bones/18/rotation = Quaternion(0.15116893, -0.0468326, 0.2130649, 0.964136)
+bones/19/rotation = Quaternion(0.1812465, -0.028888993, 0.0743079, 0.9802008)
+bones/23/rotation = Quaternion(0.95564276, 0.10543368, -0.13168007, 0.24143553)
+bones/24/rotation = Quaternion(0.28363103, -0.02935556, -0.021274004, 0.958248)
+bones/25/rotation = Quaternion(0.97919744, -0.06914486, 0.085642226, 0.17046091)
+bones/26/rotation = Quaternion(0.24944684, 0.040264014, 0.012277739, 0.96747327)
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos2/DummyCop" index="1" unique_id=1391553469]
+offset = Vector2(103.695, 18.245)
+
+[node name="CopPreviewPos0" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn" unique_id=552991139]
+transform = Transform3D(-0.4539906, 0, -0.89100647, 0, 1, 0, 0.89100647, 0, -0.4539906, 0.8, 0, 0.31197357)
+
+[node name="DummyCop" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos0" unique_id=741382325 instance=ExtResource("5_2qs0d")]
+
+[node name="Næsehorn2" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos0/DummyCop" index="0" unique_id=146192529]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -0.29964066, 0, 4.524448e-08)
+
+[node name="Skeleton3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos0/DummyCop/Næsehorn2/metarig" parent_id_path=PackedInt32Array(741382325, 146192529, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.002751932, 0.018273208, 0.0026285956, 0.99982584)
+bones/2/rotation = Quaternion(-0.04097841, 0.036726013, 0.009130803, 0.99844307)
+bones/3/rotation = Quaternion(-0.09583281, 0.034109473, 0.014928685, 0.99470085)
+bones/5/rotation = Quaternion(-0.60333604, -0.38256985, -0.45469216, 0.53186566)
+bones/6/rotation = Quaternion(-0.373758, 0.647408, -0.44438174, 0.49365243)
+bones/7/rotation = Quaternion(0.15975995, -0.023285167, -0.0016735016, 0.9868799)
+bones/8/rotation = Quaternion(-0.16246547, 0.027853353, -0.04103644, 0.9854671)
+bones/9/rotation = Quaternion(0.13758843, 0.049869467, -0.24128802, 0.95935535)
+bones/10/rotation = Quaternion(0.15138668, 0.04716402, -0.21432927, 0.96380526)
+bones/11/rotation = Quaternion(0.1813316, 0.028211514, -0.071241885, 0.9804324)
+bones/13/rotation = Quaternion(-0.59477127, 0.39263055, 0.45117748, 0.53714746)
+bones/14/rotation = Quaternion(-0.33804256, -0.69606453, 0.38995895, 0.4991529)
+bones/15/rotation = Quaternion(0.19493598, 0.024022136, 0.0076061212, 0.98049235)
+bones/16/rotation = Quaternion(-0.1391598, -0.029032936, 0.010937252, 0.9897839)
+bones/17/rotation = Quaternion(0.13760214, -0.049331255, 0.23755784, 0.96031165)
+bones/18/rotation = Quaternion(0.15116893, -0.0468326, 0.2130649, 0.964136)
+bones/19/rotation = Quaternion(0.1812465, -0.028888993, 0.0743079, 0.9802008)
+bones/23/rotation = Quaternion(0.95564276, 0.10543368, -0.13168007, 0.24143553)
+bones/24/rotation = Quaternion(0.28363103, -0.02935556, -0.021274004, 0.958248)
+bones/25/rotation = Quaternion(0.97919744, -0.06914486, 0.085642226, 0.17046091)
+bones/26/rotation = Quaternion(0.24944684, 0.040264014, 0.012277739, 0.96747327)
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos0/DummyCop" index="1" unique_id=1391553469]
+offset = Vector2(123.115, 25.885)
+
+[node name="RightSpawn" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos" unique_id=888123459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.82, -0.698, 0.135)
+
+[node name="ThiefPreviewPos0" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn" unique_id=538082324]
+transform = Transform3D(-0.17880227, 0, 0.98388505, 0, 1, 0, -0.98388505, 0, -0.17880227, -1.5, 0, 0.5)
+
+[node name="DummyThief" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos0" unique_id=323793767 instance=ExtResource("6_27ueq")]
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos0/DummyThief" index="1" unique_id=1633224945]
+offset = Vector2(-37.33, -74.32)
+
+[node name="ThiefPreviewPos1" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn" unique_id=171483666]
+transform = Transform3D(-0.34693566, 0, 0.9378889, 0, 1, 0, -0.9378889, 0, -0.34693566, -0.5, 0, 0.5)
+
+[node name="DummyThief" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos1" unique_id=1917565975 instance=ExtResource("6_27ueq")]
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos1/DummyThief" index="1" unique_id=1633224945]
+offset = Vector2(-26.175, -0.06)
+
+[node name="ThiefPreviewPos4" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn" unique_id=1639239592]
+transform = Transform3D(-0.29237175, 0, 0.9563047, 0, 1, 0, -0.9563047, 0, -0.29237175, 0.5, 0, 0.5)
+
+[node name="DummyThief" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos4" unique_id=751005089 instance=ExtResource("6_27ueq")]
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos4/DummyThief" index="1" unique_id=1633224945]
+offset = Vector2(-33.16, -78.505)
+
+[node name="ThiefPreviewPos6" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn" unique_id=1044849618]
+transform = Transform3D(-0.4539906, 0, 0.89100647, 0, 1, 0, -0.89100647, 0, -0.4539906, 1.5, 0, 0.5)
+
+[node name="DummyThief" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos6" unique_id=1390675537 instance=ExtResource("6_27ueq")]
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos6/DummyThief" index="1" unique_id=1633224945]
+offset = Vector2(-44.88, -6.525)
+
+[node name="ThiefPreviewPos2" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn" unique_id=656193110]
+transform = Transform3D(-0.06453227, 0, 0.9979156, 0, 1, 0, -0.9979156, 0, -0.06453227, -0.745, 0, -1)
+
+[node name="DummyThief" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos2" unique_id=729173647 instance=ExtResource("6_27ueq")]
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos2/DummyThief" index="1" unique_id=1633224945]
+offset = Vector2(-57.14, 51.09)
+
+[node name="ThiefPreviewPos3" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn" unique_id=1120339309]
+transform = Transform3D(-0.29237175, 0, 0.9563047, 0, 1, 0, -0.9563047, 0, -0.29237175, 0.375, 0, -1)
+
+[node name="DummyThief" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos3" unique_id=1284374591 instance=ExtResource("6_27ueq")]
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos3/DummyThief" index="1" unique_id=1633224945]
+offset = Vector2(-36.5, 133.765)
+
+[node name="ThiefPreviewPos5" type="Marker3D" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn" unique_id=869940744]
+transform = Transform3D(-0.4539906, 0, 0.89100647, 0, 1, 0, -0.89100647, 0, -0.4539906, 1.515, 0, -1)
+
+[node name="DummyThief" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos5" unique_id=1242120241 instance=ExtResource("6_27ueq")]
+
+[node name="NameTag" parent="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos5/DummyThief" index="1" unique_id=1633224945]
+offset = Vector2(-43.77, 59.5)
+
+[node name="Clip1Start" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 10)
+
+[node name="Clip1End" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 5)
+
+[node name="Clip2Start" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0)
+
+[node name="Clip2End" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123463]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+
+[node name="Clip3CopStart" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0)
+
+[node name="Clip3CopEnd" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=1901513984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 4, 0)
+
+[node name="Clip3ThiefStart" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)
+
+[node name="Clip3ThiefEnd" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=1628914548]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)
+
 [node name="VersusScreen" type="CanvasLayer" parent="." unique_id=437919447]
 visible = false
 script = ExtResource("4_frjgd")
-thief_preview_scene = ExtResource("5_1ppgf")
-cop_preview_scene = ExtResource("5_1ppgf")
 
 [node name="Root" type="Control" parent="VersusScreen" unique_id=773497216]
 layout_mode = 3
@@ -147,6 +331,28 @@ offset_bottom = -648.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="VSLabel" type="RichTextLabel" parent="VersusScreen/Root" unique_id=999888777]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/normal_font_size = 90
+bbcode_enabled = true
+text = "[center][color=blue]V[/color][color=red]S[/color][/center]"
+scroll_active = false
+shortcut_keys_enabled = false
+
 [node name="Background" type="ColorRect" parent="VersusScreen/Root" unique_id=1545025356]
 layout_mode = 1
 anchors_preset = 15
@@ -157,95 +363,88 @@ grow_vertical = 2
 scale = Vector2(1.1, 1.1)
 color = Color(0, 0, 0, 1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VersusScreen/Root" unique_id=776434493]
+[node name="CountdownLabel" type="Label" parent="VersusScreen/Root" unique_id=987654321]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="VersusScreen/Root/SubViewportContainer" unique_id=1183056044]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(2, 2)
-render_target_update_mode = 0
-
-[node name="Camera3D" type="Camera3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1374076761]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -91.21161, 0, 0)
-
-[node name="LeftSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=43727269]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.0971, -0.24863054, -0.27658656)
-
-[node name="RightSpawn" type="Node3D" parent="VersusScreen/Root/SubViewportContainer/SubViewport" unique_id=1673610662]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -92.66386, -0.17456627, 0.16501635)
-
-[node name="Panel" type="Panel" parent="VersusScreen/Root" unique_id=1910567873]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_frjgd")
-
-[node name="RobbersTitle" type="Label" parent="VersusScreen/Root/Panel" unique_id=1923577786]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.02
-anchor_top = 0.02
-anchor_right = 0.25
-anchor_bottom = 0.12
-text = "Robbers"
-label_settings = SubResource("LabelSettings_frjgd")
-vertical_alignment = 1
-
-[node name="CopsTitle" type="Label" parent="VersusScreen/Root/Panel" unique_id=343700150]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.55
-anchor_top = 0.02
-anchor_right = 0.98
-anchor_bottom = 0.12
-text = "Coppers"
-label_settings = SubResource("LabelSettings_ofs5a")
-horizontal_alignment = 2
-vertical_alignment = 1
-
-[node name="VSLabel" type="Label" parent="VersusScreen/Root/Panel" unique_id=282116148]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.4
-anchor_top = 0.35
-anchor_right = 0.6
-anchor_bottom = 0.65
-text = "VS"
 label_settings = SubResource("LabelSettings_w6qbi")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="RobbersList" type="VBoxContainer" parent="VersusScreen/Root/Panel" unique_id=1982826195]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.02
-anchor_top = 0.4
-anchor_right = 0.25
-anchor_bottom = 0.6
-
-[node name="CopsList" type="VBoxContainer" parent="VersusScreen/Root/Panel" unique_id=1926124997]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.75
-anchor_top = 0.4
-anchor_right = 1.0
-anchor_bottom = 0.6
 
 [node name="LightmapGI" type="LightmapGI" parent="." unique_id=679457300]
 light_data = ExtResource("7_ofs5a")
 
 [node name="MainMenuUI" parent="." unique_id=354039283 instance=ExtResource("8_7aqpd")]
 
+[node name="PreviewSpawn" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(354039283, 257552327) index="1" unique_id=564513877]
+transform = Transform3D(-0.9322354, 0, -0.3618524, 0, 1, 0, 0.3618524, 0, -0.9322354, -10.014863, 1.4894214, 5.2635226)
+
+[node name="Chameleon_Character" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" index="0" unique_id=1423752438]
+transform = Transform3D(-0.13372679, 0, -0.99101835, 0, 1, 0, 0.99101835, 0, -0.13372679, 0, -1.0704265, 0)
+
+[node name="PreviewSpawn" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" parent_id_path=PackedInt32Array(354039283, 535220147) index="1" unique_id=1783558948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5630302, 0, 7.107502)
+
+[node name="Næsehorn" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" index="0" unique_id=2043154851]
+transform = Transform3D(-0.08778182, 0, 0.99613976, 0, 1, 0, -0.99613976, 0, -0.08778182, -3.0750027, -0.0328027, -9.374175)
+
+[node name="Skeleton3D" parent="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/metarig" parent_id_path=PackedInt32Array(354039283, 2043154851, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.002751932, 0.018273208, 0.0026285956, 0.99982584)
+bones/2/rotation = Quaternion(-0.04097841, 0.036726013, 0.009130803, 0.99844307)
+bones/3/rotation = Quaternion(-0.09583281, 0.034109473, 0.014928685, 0.99470085)
+bones/5/rotation = Quaternion(-0.60333604, -0.38256985, -0.45469216, 0.53186566)
+bones/6/rotation = Quaternion(-0.373758, 0.647408, -0.44438174, 0.49365243)
+bones/7/rotation = Quaternion(0.15975995, -0.023285167, -0.0016735016, 0.9868799)
+bones/8/rotation = Quaternion(-0.16246547, 0.027853353, -0.04103644, 0.9854671)
+bones/9/rotation = Quaternion(0.13758843, 0.049869467, -0.24128802, 0.95935535)
+bones/10/rotation = Quaternion(0.15138668, 0.04716402, -0.21432927, 0.96380526)
+bones/11/rotation = Quaternion(0.1813316, 0.028211514, -0.071241885, 0.9804324)
+bones/13/rotation = Quaternion(-0.59477127, 0.39263055, 0.45117748, 0.53714746)
+bones/14/rotation = Quaternion(-0.33804256, -0.69606453, 0.38995895, 0.4991529)
+bones/15/rotation = Quaternion(0.19493598, 0.024022136, 0.0076061212, 0.98049235)
+bones/16/rotation = Quaternion(-0.1391598, -0.029032936, 0.010937252, 0.9897839)
+bones/17/rotation = Quaternion(0.13760214, -0.049331255, 0.23755784, 0.96031165)
+bones/18/rotation = Quaternion(0.15116893, -0.0468326, 0.2130649, 0.964136)
+bones/19/rotation = Quaternion(0.1812465, -0.028888993, 0.0743079, 0.9802008)
+bones/23/rotation = Quaternion(0.95564276, 0.10543368, -0.13168007, 0.24143553)
+bones/24/rotation = Quaternion(0.28363103, -0.02935556, -0.021274004, 0.958248)
+bones/25/rotation = Quaternion(0.97919744, -0.06914486, 0.085642226, 0.17046091)
+bones/26/rotation = Quaternion(0.24944684, 0.040264014, 0.012277739, 0.96747327)
+
 [node name="Tutorial" parent="MainMenuUI" unique_id=1108260321 instance=ExtResource("9_2qs0d")]
+visible = false
 
 [node name="TutorialCop" parent="MainMenuUI" unique_id=364404085 instance=ExtResource("10_27ueq")]
+visible = false
+
+[node name="LobbyCamera" type="Camera3D" parent="MainMenuUI" unique_id=2115145552 groups=["menu_camera"]]
+transform = Transform3D(0.84056664, -0.18527511, -0.50903916, 0, 0.9396927, -0.34202012, 0.5417082, 0.28749073, 0.78987426, -5.294627, 1.2074707, 5.681832)
+current = true
+script = ExtResource("11_2qs0d")
+
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop/Næsehorn2"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos2/DummyCop"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos2/DummyCop/Næsehorn2"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos0/DummyCop"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos0/DummyCop/Næsehorn2"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos0/DummyThief"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos0/DummyThief/Chameleon_Character"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos1/DummyThief"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos1/DummyThief/Chameleon_Character"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos4/DummyThief"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos4/DummyThief/Chameleon_Character"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos6/DummyThief"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos6/DummyThief/Chameleon_Character"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos2/DummyThief"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos2/DummyThief/Chameleon_Character"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos3/DummyThief"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos3/DummyThief/Chameleon_Character"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos5/DummyThief"]
+[editable path="CutsceneManager/CutsceneMarkers/VersusPos/RightSpawn/ThiefPreviewPos5/DummyThief/Chameleon_Character"]
+[editable path="MainMenuUI"]
+[editable path="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character"]
+[editable path="MainMenuUI/MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn"]

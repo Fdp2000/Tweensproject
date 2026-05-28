@@ -1,9 +1,114 @@
 [gd_scene format=3 uid="uid://bi6e376akpo28"]
 
 [ext_resource type="Script" uid="uid://bo3sxpvkjes8" path="res://scripts/Player/cop.gd" id="2_cop"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_xgjd2"]
 [ext_resource type="PackedScene" uid="uid://bukcop75vlfjd" path="res://Assets/Particles/smoke_particles_Charge.tscn" id="3_ksubn"]
+[ext_resource type="Texture2D" uid="uid://cuwagjiejkhdd" path="res://Assets/Models/Rhino/Næsehorn_Næsrehorn_Texture.png" id="3_ppjyx"]
+[ext_resource type="Texture2D" uid="uid://bbwtwbwchgqqx" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_1.png" id="4_ijnu8"]
 [ext_resource type="Texture2D" uid="uid://carrvmj3fplpl" path="res://Assets/Textures/SmokeParticle.png" id="4_jvhmw"]
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="4_rfdt2"]
+[ext_resource type="Texture2D" uid="uid://bvumt2f5v76wg" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_3.png" id="5_voawg"]
+[ext_resource type="Texture2D" uid="uid://b8hy5qu3gtxn" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_2.png" id="6_6osiw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o5rqf"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("3_ppjyx")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g6ngg"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("4_ijnu8")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sscd4"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("5_voawg")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_po44e"]
+render_priority = 0
+shader = ExtResource("2_xgjd2")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("6_6osiw")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kne1u"]
 radius = 0.5239258
@@ -107,6 +212,8 @@ collision_mask = 7
 floor_max_angle = 1.3089969
 floor_snap_length = 0.5
 script = ExtResource("2_cop")
+skin_materials = Array[Material]([SubResource("ShaderMaterial_o5rqf"), SubResource("ShaderMaterial_g6ngg"), SubResource("ShaderMaterial_sscd4"), SubResource("ShaderMaterial_po44e")])
+skin_mesh_paths = Array[NodePath]([NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Body"), NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Head")])
 
 [node name="WorldCollider" type="CollisionShape3D" parent="." unique_id=607525419]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.061146, 0)
@@ -135,6 +242,29 @@ replication_config = SubResource("SceneReplicationConfig_e80uo")
 [node name="Næsehorn2" parent="." unique_id=2043154851 instance=ExtResource("4_rfdt2")]
 transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, 0, 0.13307339)
 
+[node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.027837735, 0.017167207, 0.0022695, 0.9994625)
+bones/2/rotation = Quaternion(-0.022989932, 0.035100352, 0.0069078095, 0.9990955)
+bones/3/rotation = Quaternion(-0.07744866, 0.03225436, 0.012402532, 0.9963973)
+bones/5/rotation = Quaternion(-0.5918382, -0.39866415, -0.46398312, 0.5248943)
+bones/6/rotation = Quaternion(-0.30590847, 0.64175946, -0.48900837, 0.50540644)
+bones/7/rotation = Quaternion(0.15103613, -0.07615274, -0.0008491921, 0.98559034)
+bones/8/rotation = Quaternion(-0.14776966, 0.03515873, -0.035231538, 0.9877686)
+bones/9/rotation = Quaternion(0.13855346, 0.045349967, -0.21080264, 0.9665964)
+bones/10/rotation = Quaternion(0.15247269, 0.039771985, -0.16534176, 0.97356695)
+bones/11/rotation = Quaternion(0.18130498, 0.02226253, -0.039316133, 0.98238856)
+bones/13/rotation = Quaternion(-0.59061813, 0.40056142, 0.46381024, 0.5249771)
+bones/14/rotation = Quaternion(-0.27599367, -0.6918991, 0.466906, 0.47655213)
+bones/15/rotation = Quaternion(0.15645969, 0.084889606, 2.7642598e-05, 0.98402965)
+bones/16/rotation = Quaternion(-0.1503826, -0.026774136, -0.02792105, 0.98787075)
+bones/17/rotation = Quaternion(0.13898864, -0.04301558, 0.19476014, 0.9700002)
+bones/18/rotation = Quaternion(0.15286668, -0.035834104, 0.13868861, 0.97781044)
+bones/19/rotation = Quaternion(0.18132286, -0.019242797, 0.021521576, 0.98299974)
+bones/23/rotation = Quaternion(0.9422877, 0.10835441, -0.12589617, 0.29069483)
+bones/24/rotation = Quaternion(0.345606, -0.032636583, -0.023582557, 0.93751544)
+bones/25/rotation = Quaternion(0.96693486, -0.06849895, 0.07877059, 0.23268044)
+bones/26/rotation = Quaternion(0.32678154, 0.03558832, 0.023740169, 0.94413126)
+
 [node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)
 amount = 35
@@ -152,3 +282,5 @@ angular_velocity_min = 36.55
 angular_velocity_max = 104.5
 scale_amount_min = 0.1
 scale_amount_max = 0.4
+
+[editable path="Næsehorn2"]

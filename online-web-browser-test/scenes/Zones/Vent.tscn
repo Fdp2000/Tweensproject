@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://bf05ftf00cgpm"]
+
+[ext_resource type="Script" uid="uid://d1ynwxu585s6e" path="res://scripts/Zones/vent.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cb4pyowhdg0vx" path="res://Assets/Models/Vent/Vent.tscn" id="2_l71he"]
+[ext_resource type="Script" uid="uid://gn603rlr4k10" path="res://scripts/Zones/dotted_ring.gd" id="dotted_ring_script"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vent"]
+radius = 1.5
+
+[sub_resource type="Animation" id="Animation_close"]
+resource_name = "close"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRing:dot_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.5), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRing:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, -0.922538, 0, 0, 0.385906, 0.5, 1, 0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_open"]
+resource_name = "open"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VisualRing:dot_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.2509804)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VisualRing:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PivotPoint")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.5, 1, 0.9226492, 0, 0, -0.38564032)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vent"]
+_data = {
+&"close": SubResource("Animation_close"),
+&"open": SubResource("Animation_open")
+}
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o0mwm"]
+points = PackedVector3Array(14.740185, 14.739927, 0.54612577, 14.740185, 14.739927, -0.9539817, -14.740185, 14.739927, 0.54612577, 14.264044, 14.263794, 1.0265692, 14.264044, 12.587229, 1.0233039, 14.740185, -0.8685827, 0.51564896, 14.740185, 13.005648, -0.95746475, -14.740185, 14.739927, -0.9539817, -14.740185, -0.8685827, 0.51564896, -14.266929, 12.587229, 1.0233039, -14.266929, 14.263794, 1.0265692, 13.539732, 10.353731, 1.2124773, 14.264044, -14.26668, 0.97084045, 14.740185, -13.008534, 0.4919207, 14.740185, 0.86569595, -0.98119307, -14.740185, 13.005648, -0.95746475, -14.740185, -13.008534, 0.4919207, -14.266929, -14.26668, 0.97084045, -13.542617, 10.353731, 1.2124773, 13.539732, -5.5779715, 1.1813475, 14.740185, -14.739927, 0.48843765, 13.539732, -11.949499, 1.1687216, 14.740185, -13.008534, -1.0081867, -14.740185, 0.86569595, -0.98119307, -14.740185, -14.739927, 0.48843765, -13.542617, -11.949499, 1.1687216, -13.542617, -5.5779715, 1.1813475, 14.740185, -14.739927, -1.0114521, -14.740185, -13.008534, -1.0081867, -14.740185, -14.739927, -1.0114521)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0mwm"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="Vent" type="Area3D" unique_id=581943021 groups=["Vents"]]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+collision_mask = 5
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=741029318]
+transform = Transform3D(0.725, 0, 0, 0, 0.725, 0, 0, 0, 0.725, 0, 1, 0)
+shape = SubResource("CylinderShape3D_vent")
+
+[node name="VisualRing" type="Node3D" parent="." unique_id=184920184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.688961, 0)
+visible = false
+script = ExtResource("dotted_ring_script")
+radius = 1.5
+sync_with_balance = false
+fade_in_on_start = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=194820194]
+libraries/ = SubResource("AnimationLibrary_vent")
+
+[node name="PivotPoint" type="Node3D" parent="." unique_id=1521833555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5910103, -1.0867177)
+
+[node name="Sketchfab_Scene" parent="PivotPoint" unique_id=1711548117 instance=ExtResource("2_l71he")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.5737087, 0.019129157)
+
+[node name="300x300x20mm-vent_001_vent-grilles_0" parent="PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(1711548117, 1812499697) index="0" unique_id=496260524]
+layers = 2
+
+[node name="StaticBody3D" type="StaticBody3D" parent="PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001/300x300x20mm-vent_001_vent-grilles_0" index="0" unique_id=971211732]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001/300x300x20mm-vent_001_vent-grilles_0/StaticBody3D" unique_id=181684666]
+shape = SubResource("ConvexPolygonShape3D_o0mwm")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=115086990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00046730042, 1.0000792, -1.0816351)
+size = Vector3(1.1335106, 1.1090546, 0.03742981)
+material = SubResource("StandardMaterial3D_o0mwm")
+
+[editable path="PivotPoint/Sketchfab_Scene"]
