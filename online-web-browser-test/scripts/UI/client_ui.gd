@@ -483,6 +483,28 @@ func _mp_peer_disconnected(id: int) -> void:
 	GameManager.remove_player(id)
 
 
+func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0, 1000, 0)) -> Vector3:
+	var spawns = get_tree().get_nodes_in_group(group_name)
+	if spawns.size() == 0: return fallback_pos
+	
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	if not spawned: return spawns.pick_random().global_position
+	
+	var available_spawns = []
+	for spawn_marker in spawns:
+		var is_occupied = false
+		for child in spawned.get_children():
+			if child.global_position.distance_to(spawn_marker.global_position) < 1.0:
+				is_occupied = true
+				break
+		if not is_occupied:
+			available_spawns.append(spawn_marker)
+			
+	if available_spawns.size() > 0:
+		return available_spawns.pick_random().global_position
+	else:
+		return spawns.pick_random().global_position
+
 func _on_player_joined(id: int) -> void:
 	if not multiplayer.is_server():
 		return
@@ -493,24 +515,7 @@ func _on_player_joined(id: int) -> void:
 
 	await get_tree().process_frame
 
-	var lobby_spawns = get_tree().get_nodes_in_group("lobby_spawn")
-	var spawn_pos = Vector3(0, 1000, 0)
-
-	if lobby_spawns.size() > 0:
-		var available_spawns = []
-		for spawn_marker in lobby_spawns:
-			var is_occupied = false
-			for child in spawned.get_children():
-				if child.global_position.distance_to(spawn_marker.global_position) < 1.0:
-					is_occupied = true
-					break
-			if not is_occupied:
-				available_spawns.append(spawn_marker)
-				
-		if available_spawns.size() > 0:
-			spawn_pos = available_spawns.pick_random().global_position
-		else:
-			spawn_pos = lobby_spawns.pick_random().global_position
+	var spawn_pos = get_unoccupied_spawn("lobby_spawn", Vector3(0, 1000, 0))
 
 	var pf = THIEF_SCENE.instantiate()
 	pf.name = str(id)
@@ -529,23 +534,17 @@ func _on_game_started() -> void:
 			for i in 3:
 				await get_tree().physics_frame
 
-			var cop_spawns = get_tree().get_nodes_in_group("cop_spawn")
-			var thief_spawns = get_tree().get_nodes_in_group("thief_spawn")
-
-			cop_spawns.shuffle()
-			thief_spawns.shuffle()
-
+			var assigned_spawns = {}
 			for id in GameManager.players.keys():
 				var role = GameManager.players[id]["role"]
 				var spawn_pos = Vector3(0, 3, 0)
 
 				if role == GameManager.PlayerRole.COP:
-					if cop_spawns.size() > 0:
-						spawn_pos = cop_spawns.pop_back().global_position
+					spawn_pos = get_unoccupied_spawn("cop_spawn", Vector3(0, 3, 0))
 				else:
-					if thief_spawns.size() > 0:
-						spawn_pos = thief_spawns.pop_back().global_position
+					spawn_pos = get_unoccupied_spawn("thief_spawn", Vector3(0, 3, 0))
 
+				assigned_spawns[id] = spawn_pos
 				var pf = spawned.get_node_or_null(str(id))
 
 				if role == GameManager.PlayerRole.COP:
@@ -558,32 +557,39 @@ func _on_game_started() -> void:
 					pf.name = str(id)
 					pf.team_index = role
 					pf.position = spawn_pos
-					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 					spawned.add_child(pf, true)
-					pf.rpc("_set_spawn_position", spawn_pos)
-					pf.rpc("sync_team", role)
-					pf.rpc("_sync_name", pf.player_name)
-					var skin_index = GameManager.players[id].get("rhino_skin", 0)
-					pf.rpc("apply_skin", skin_index)
 				else:
 					if pf:
 						pf.position = spawn_pos
 						pf.team_index = role
-						pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
-						pf.rpc("_set_spawn_position", spawn_pos)
-						pf.rpc("sync_team", role)
-						pf.rpc("_sync_name", pf.player_name)
-						var skin_index = GameManager.players[id].get("chameleon_skin", 0)
-						pf.rpc("apply_skin", skin_index)
 					else:
 						pf = THIEF_SCENE.instantiate()
 						pf.name = str(id)
 						pf.team_index = role
 						pf.position = spawn_pos
-						pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 						spawned.add_child(pf, true)
-						var skin_index = GameManager.players[id].get("chameleon_skin", 0)
-						pf.rpc("apply_skin", skin_index)
+						
+			# FIX: Wait a fraction of a second to ensure MultiplayerSpawner has fully
+			# replicated the new nodes to all clients before we fire the configuration RPCs!
+			await get_tree().create_timer(0.25).timeout
+			
+			for id in GameManager.players.keys():
+				var pf = spawned.get_node_or_null(str(id))
+				if pf:
+					var role = GameManager.players[id]["role"]
+					var spawn_pos = assigned_spawns.get(id, pf.position)
+					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
+					
+					pf.rpc("_set_spawn_position", spawn_pos)
+					pf.rpc("sync_team", role)
+					pf.rpc("_sync_name", pf.player_name)
+					
+					var skin_index = 0
+					if role == GameManager.PlayerRole.COP:
+						skin_index = GameManager.players[id].get("rhino_skin", 0)
+					else:
+						skin_index = GameManager.players[id].get("chameleon_skin", 0)
+					pf.rpc("apply_skin", skin_index)
 
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
@@ -621,13 +627,39 @@ func _unhandled_input(event: InputEvent) -> void:
 			config.save("user://settings.cfg")
 			print("DEV TOOL: Tutorial save reset! The tutorial intro will play on the next launch.")
 
+var lobby_fade_canvas: CanvasLayer
+var lobby_fade_rect: ColorRect
+
+func play_lobby_fade_out():
+	if not lobby_fade_canvas:
+		lobby_fade_rect = ColorRect.new()
+		lobby_fade_rect.color = Color.BLACK
+		lobby_fade_rect.modulate.a = 0.0
+		lobby_fade_rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		lobby_fade_canvas = CanvasLayer.new()
+		lobby_fade_canvas.layer = 128
+		lobby_fade_canvas.add_child(lobby_fade_rect)
+		add_child(lobby_fade_canvas)
+		
+	var fade_out = create_tween()
+	fade_out.tween_property(lobby_fade_rect, "modulate:a", 1.0, 1.0)
+
 func _on_game_ended() -> void:
 	if current_hud:
 		current_hud.queue_free()
 		current_hud = null
 
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
 	show_lobby()
+	
+	if lobby_fade_rect:
+		var fade_in = create_tween()
+		fade_in.tween_property(lobby_fade_rect, "modulate:a", 0.0, 0.5)
+		await fade_in.finished
+		lobby_fade_canvas.queue_free()
+		lobby_fade_canvas = null
+		lobby_fade_rect = null
 
 func _update_chameleon_preview() -> void:
 	if chameleon_skin_materials.is_empty():

@@ -173,7 +173,6 @@ func _input(event):
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		if not controls_enabled: return
 		
 		# --- THE NECK LOCK GATE (UPDATED) ---
 		if get("is_charging") == true:
@@ -193,7 +192,6 @@ func _input(event):
 		
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
-	if not controls_enabled: return
 	if event.is_action_pressed("secondary_action"):
 		toggle_camera()
 

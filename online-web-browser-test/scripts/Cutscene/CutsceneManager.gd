@@ -189,12 +189,11 @@ func run_cinematic_flow():
 		var fade_tween = create_tween()
 		fade_tween.tween_property(local_player.charge_ui_ref, "modulate:a", 1.0, 3.0)
 		
-	# 10. Enable controls before the countdown starts!
+	await cutscene_ui.play_countdown()
+	
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
 		
-	await cutscene_ui.play_countdown()
-	
 	GameManager.start_game_clock()
 
 # ---------------------------------------------------------
