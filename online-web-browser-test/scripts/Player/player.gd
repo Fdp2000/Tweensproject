@@ -24,6 +24,7 @@ var hits: int = 0
 var _spawn_relay_ready: bool = false 
 #cutscene extra
 var controls_enabled: bool = true
+var camera_locked: bool = false
 
 @onready var pitch_pivot = $PitchPivot
 @onready var spring_arm = $PitchPivot/SpringArm3D
@@ -32,6 +33,13 @@ var controls_enabled: bool = true
 #cutscene extra
 func enable_controls(value: bool):
 	controls_enabled = value
+	if not value:
+		camera_locked = true
+	else:
+		camera_locked = false
+
+func unlock_camera():
+	camera_locked = false
 
 func _enter_tree() -> void:
 	var id = str(name).to_int()
@@ -139,7 +147,7 @@ func _apply_team_colors():
 func request_initial_sync():
 	if not multiplayer.is_server(): return
 	var sender = multiplayer.get_remote_sender_id()
-	rpc_id(sender, "_set_spawn_position", global_position)
+	rpc_id(sender, "_set_spawn_transform", global_transform)
 	rpc_id(sender, "sync_team", team_index)
 	rpc_id(sender, "_sync_name", player_name)
 
@@ -173,6 +181,9 @@ func _input(event):
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		
+		if camera_locked:
+			return
 		
 		# --- THE NECK LOCK GATE (UPDATED) ---
 		if get("is_charging") == true:
@@ -323,8 +334,8 @@ func _custom_physics_process(_delta, direction):
 
 
 @rpc("any_peer", "call_local")
-func _set_spawn_position(pos: Vector3):
-	global_position = pos
+func _set_spawn_transform(trans: Transform3D):
+	global_transform = trans
 	
 	# FIX: Hide the player for 1 frame when teleporting to prevent the camera from colliding 
 	# with the old environment and flashing a closeup of the chameleon's face!

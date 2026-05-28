@@ -483,12 +483,12 @@ func _mp_peer_disconnected(id: int) -> void:
 	GameManager.remove_player(id)
 
 
-func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0, 1000, 0)) -> Vector3:
+func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0, 1000, 0)) -> Transform3D:
 	var spawns = get_tree().get_nodes_in_group(group_name)
-	if spawns.size() == 0: return fallback_pos
+	if spawns.size() == 0: return Transform3D(Basis(), fallback_pos)
 	
 	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
-	if not spawned: return spawns.pick_random().global_position
+	if not spawned: return spawns.pick_random().global_transform
 	
 	var available_spawns = []
 	for spawn_marker in spawns:
@@ -501,9 +501,9 @@ func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0,
 			available_spawns.append(spawn_marker)
 			
 	if available_spawns.size() > 0:
-		return available_spawns.pick_random().global_position
+		return available_spawns.pick_random().global_transform
 	else:
-		return spawns.pick_random().global_position
+		return spawns.pick_random().global_transform
 
 func _on_player_joined(id: int) -> void:
 	if not multiplayer.is_server():
@@ -515,12 +515,12 @@ func _on_player_joined(id: int) -> void:
 
 	await get_tree().process_frame
 
-	var spawn_pos = get_unoccupied_spawn("lobby_spawn", Vector3(0, 1000, 0))
+	var spawn_trans = get_unoccupied_spawn("lobby_spawn", Vector3(0, 1000, 0))
 
 	var pf = THIEF_SCENE.instantiate()
 	pf.name = str(id)
 	pf.team_index = GameManager.PlayerRole.THIEF
-	pf.position = spawn_pos
+	pf.global_transform = spawn_trans
 	pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 	spawned.add_child(pf, true)
 	var skin_index = GameManager.players[id].get("chameleon_skin", 0)
@@ -537,14 +537,14 @@ func _on_game_started() -> void:
 			var assigned_spawns = {}
 			for id in GameManager.players.keys():
 				var role = GameManager.players[id]["role"]
-				var spawn_pos = Vector3(0, 3, 0)
+				var spawn_trans = Transform3D()
 
 				if role == GameManager.PlayerRole.COP:
-					spawn_pos = get_unoccupied_spawn("cop_spawn", Vector3(0, 3, 0))
+					spawn_trans = get_unoccupied_spawn("cop_spawn", Vector3(0, 3, 0))
 				else:
-					spawn_pos = get_unoccupied_spawn("thief_spawn", Vector3(0, 3, 0))
+					spawn_trans = get_unoccupied_spawn("thief_spawn", Vector3(0, 3, 0))
 
-				assigned_spawns[id] = spawn_pos
+				assigned_spawns[id] = spawn_trans
 				var pf = spawned.get_node_or_null(str(id))
 
 				if role == GameManager.PlayerRole.COP:
@@ -556,17 +556,17 @@ func _on_game_started() -> void:
 					pf = COP_SCENE.instantiate()
 					pf.name = str(id)
 					pf.team_index = role
-					pf.position = spawn_pos
+					pf.global_transform = spawn_trans
 					spawned.add_child(pf, true)
 				else:
 					if pf:
-						pf.position = spawn_pos
+						pf.global_transform = spawn_trans
 						pf.team_index = role
 					else:
 						pf = THIEF_SCENE.instantiate()
 						pf.name = str(id)
 						pf.team_index = role
-						pf.position = spawn_pos
+						pf.global_transform = spawn_trans
 						spawned.add_child(pf, true)
 						
 			# FIX: Wait a fraction of a second to ensure MultiplayerSpawner has fully
@@ -577,10 +577,10 @@ func _on_game_started() -> void:
 				var pf = spawned.get_node_or_null(str(id))
 				if pf:
 					var role = GameManager.players[id]["role"]
-					var spawn_pos = assigned_spawns.get(id, pf.position)
+					var spawn_trans = assigned_spawns.get(id, pf.global_transform)
 					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 					
-					pf.rpc("_set_spawn_position", spawn_pos)
+					pf.rpc("_set_spawn_transform", spawn_trans)
 					pf.rpc("sync_team", role)
 					pf.rpc("_sync_name", pf.player_name)
 					

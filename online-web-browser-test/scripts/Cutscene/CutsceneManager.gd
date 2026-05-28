@@ -189,6 +189,9 @@ func run_cinematic_flow():
 		var fade_tween = create_tween()
 		fade_tween.tween_property(local_player.charge_ui_ref, "modulate:a", 1.0, 3.0)
 		
+	if local_player.has_method("unlock_camera"):
+		local_player.unlock_camera()
+		
 	await cutscene_ui.play_countdown()
 	
 	if local_player.has_method("enable_controls"):
