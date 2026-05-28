@@ -1,194 +1,176 @@
 extends Node3D
 
-@export var skip_cutscene: bool = false
-
-@export var thief_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
-@export var thief_rotation_offset_degrees: float = -90.0
-@export var thief_versus_anims: Array[String] = [
-	"Dismissing Gesture",
-	"Pointing Gesture",
-	"Taunt",
-	"Waving Gesture"
-]
-
-@export var cop_preview_scene: PackedScene = preload("res://Assets/Models/Chameleon/chameleon.tscn")
-@export var cop_rotation_offset_degrees: float = -90.0
-@export var cop_versus_anims: Array[String] = [
-	"Standing Taunt Chest Thump",
-	"Standing Taunt Battlecry"
-]
-@export var versus_duration: float = 3.0
-@export var fly_to_player_time: float = 1.5
+@export var skip_cutscene: bool = false # <-- ADDED: Toggle this in the editor!
 
 @onready var intro_camera: Camera3D = $Node3D/IntroCamera
-@onready var cutscene_ui: CutsceneUI = $"../VersusScreen"
-@onready var cutscene_markers: Node3D = $CutsceneMarkers
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var versus_screen: CanvasLayer = $"../VersusScreen"
+@export var versus_duration: float = 6.0
+@export var fly_to_player_time: float = 2.0
+@export var local_player: Node3D
 
-# Markers
-@onready var versus_pos: Marker3D = $CutsceneMarkers/VersusPos
-@onready var left_spawn: Marker3D = $CutsceneMarkers/VersusPos/LeftSpawn
-@onready var right_spawn: Marker3D = $CutsceneMarkers/VersusPos/RightSpawn
+var target_camera: Camera3D
+var intro_running: bool = false
 
-var local_player: Node3D
-var spawned_dummy_models: Array[Node] = []
 
 func _ready():
 	intro_camera.current = true
 	var game_manager = get_tree().get_root().find_child("GameManager", true, false)
+
 	if game_manager:
 		game_manager.game_started.connect(_on_game_started)
+		print("CutsceneManager connected to GameManager.")
+	else:
+		push_error("Could not find GameManager.")
+
+
 
 func _on_game_started():
-	# INSTANTLY black out the screen to prevent frame lag of the player camera
-	cutscene_ui.background.modulate.a = 1.0
-	cutscene_ui.visible = true
-	
 	await get_tree().create_timer(0.3).timeout
+
 	local_player = await wait_for_local_player()
-	
+
 	if local_player == null:
-		return
-		
-	if local_player.get("charge_ui_ref"):
-		local_player.charge_ui_ref.modulate.a = 0.0
-		
-	# Skip logic
-	if skip_cutscene:
-		finish_cutscene_immediately()
+		push_error("No local player found before versus screen.")
+		intro_running = false
 		return
 
-	# Disable player controls early
+	# ==========================================
+	# --- SKIP CUTSCENE LOGIC ---
+	# ==========================================
+	if skip_cutscene:
+		print("[DEV] Skipping intro cutscene...")
+		
+		# Turn off lobby camera
+		var lobby_camera = get_tree().get_root().find_child("LobbyCamera", true, false)
+		if lobby_camera:
+			lobby_camera.current = false
+			
+		# Give player immediate control and camera
+		target_camera = get_player_gameplay_camera(local_player)
+		if target_camera:
+			target_camera.current = true
+			
+		if local_player.has_method("enable_controls"):
+			local_player.enable_controls(true)
+			
+		intro_running = false
+		return
+	# ==========================================
+
+	intro_running = true
+	intro_camera.current = true
+
+	target_camera = get_player_gameplay_camera(local_player)
+	if target_camera:
+		target_camera.current = false
+
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(false)
-		
-	# Turn off lobby camera
-	var lobby_camera = get_tree().get_root().find_child("LobbyCamera", true, false)
-	if lobby_camera:
-		lobby_camera.current = false
-		
-	intro_camera.current = true
-	
-	# Start orchestrating the cutscene
-	await run_cinematic_flow()
+
+	if versus_screen:
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		if spawned:
+			versus_screen.show_from_spawned(spawned)
+			await get_tree().create_timer(versus_duration).timeout
+			versus_screen.hide_matchup()
+
+	start_intro()
 
 func wait_for_local_player() -> Node3D:
 	var attempts := 0
+
 	while attempts < 60:
 		var player = find_local_player()
+
 		if player != null:
 			return player
+
 		attempts += 1
 		await get_tree().process_frame
+
+	return null
+
+func start_intro():
+	# intro_running is already true from _on_game_started()
+
+	# Turn off lobby camera immediately
+	var lobby_camera = get_tree().get_root().find_child("LobbyCamera", true, false)
+	if lobby_camera:
+		lobby_camera.current = false
+
+	# Make intro camera active as early as possible
+	intro_camera.current = true
+
+	local_player = find_local_player()
+
+	if local_player == null:
+		push_error("No local player found.")
+		intro_running = false
+		return
+
+	# Disable player gameplay camera during intro
+	target_camera = get_player_gameplay_camera(local_player)
+	if target_camera:
+		target_camera.current = false
+
+	if local_player.has_method("enable_controls"):
+		local_player.enable_controls(false)
+
+	animation_player.play("museum_pan")
+
+	if not animation_player.animation_finished.is_connected(_on_animation_finished):
+		animation_player.animation_finished.connect(_on_animation_finished)
+
+func find_enemy_player(my_player: Node3D) -> Node3D:
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+
+	if spawned == null or my_player == null:
+		return null
+
+	for player in spawned.get_children():
+		if player != my_player:
+			return player
+
 	return null
 
 func find_local_player() -> Node3D:
 	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
-	if spawned == null: return null
+
+	if spawned == null:
+		push_error("Could not find SpawnedObjects.")
+		return null
+
 	var my_id := multiplayer.get_unique_id()
+
 	for player in spawned.get_children():
 		if str(player.name) == str(my_id):
 			return player
+
 	return null
 
-func get_display_name(player: Node3D) -> String:
-	var n = player.get("player_name")
-	if n != null and str(n) != "":
-		return str(n)
-	return "Player " + str(player.name)
 
-# ---------------------------------------------------------
-# THE CINEMATIC FLOW
-# ---------------------------------------------------------
-func run_cinematic_flow():
-	# 1. Ensure screen is black (already done in _on_game_started)
-	
-	# 2. Setup Versus Scene in the 3D world
-	var lineup_cam_pos = $CutsceneMarkers/VersusPos/LineupCameraPos if $CutsceneMarkers/VersusPos.has_node("LineupCameraPos") else versus_pos
-	intro_camera.global_transform = lineup_cam_pos.global_transform
-	
-	# If the user placed a preview Camera3D under LineupCameraPos, use its FOV!
-	var preview_cam = lineup_cam_pos.find_child("Camera3D", true, false)
-	if preview_cam:
-		intro_camera.fov = preview_cam.fov
-	else:
-		intro_camera.fov = 35.0
-	setup_versus_lineup()
-	
-	# 3. Fade into Versus Screen
-	await cutscene_ui.fade_in(1.0)
-	
-	await get_tree().create_timer(0.10).timeout
-	
-	# Trigger the randomized taunts now that the screen is visible!
-	play_versus_taunts()
-	
-	# 4. Wait for versus duration
-	await get_tree().create_timer(versus_duration).timeout
-	
-	# 5. Fade to black to transition to Museum Pans
-	await cutscene_ui.fade_to_black(1.0)
-	
-	# Free the dummies from memory entirely so they don't photobomb the background!
-	for model in get_dummies(right_spawn): model.queue_free()
-	for model in get_dummies(left_spawn): model.queue_free()
-	
-	var vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
-	if vs_label:
-		vs_label.hide()
-	
-	# 6. Play 3 Cinematic Clips
-	await play_cinematic_clip($CutsceneMarkers/Clip1Start, $CutsceneMarkers/Clip1End, 3.0)
-	await play_cinematic_clip($CutsceneMarkers/Clip2Start, $CutsceneMarkers/Clip2End, 3.0)
-	
-	var is_cop = local_player.get("team_index") == 1
-	var clip3_start = $CutsceneMarkers/Clip3CopStart if is_cop else $CutsceneMarkers/Clip3ThiefStart
-	var clip3_end = $CutsceneMarkers/Clip3CopEnd if is_cop else $CutsceneMarkers/Clip3ThiefEnd
-	await play_cinematic_clip(clip3_start, clip3_end, 3.0)
-	
-	# 7. Smooth fly to the actual player camera
-	var target_cam = get_player_gameplay_camera(local_player)
-	await fly_camera_to_target(target_cam)
-	
-	# Switch to real player camera
-	target_cam.current = true
-	
-	# 8. Delay 1 second
-	await get_tree().create_timer(1.0).timeout
-	
-	# 9. Play Countdown and fade in UI
-	var hud = get_tree().get_root().find_child("HUD", true, false)
-	if hud and hud.has_method("fade_in"):
-		hud.fade_in(1.5)
-		
-	if local_player.get("charge_ui_ref"):
-		var fade_tween = create_tween()
-		fade_tween.tween_property(local_player.charge_ui_ref, "modulate:a", 1.0, 3.0)
-		
-	await cutscene_ui.play_countdown()
-	
-	# 10. Enable controls and start game clock!
+func _on_animation_finished(anim_name: StringName):
+	if anim_name == "museum_pan":
+		start_fly_to_player()
+
+
+func start_fly_to_player():
+	target_camera = get_player_gameplay_camera(local_player)
+
+	if target_camera == null:
+		push_error("No target camera found.")
+		intro_running = false
+		return
+
+	await move_intro_camera_to_target(target_camera)
+
+	target_camera.current = true
+
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
-		
-	GameManager.start_game_clock()
-		
-	queue_free()
-	cutscene_ui.queue_free()
 
-# ---------------------------------------------------------
-# VERSUS LINEUP LOGIC
-# ---------------------------------------------------------
-func get_dummies(parent_node: Node3D) -> Array:
-	var dummies = []
-	for child in parent_node.find_children("*", "Node3D", true, false):
-		if child.has_node("NameTag"):
-			dummies.append(child)
-			
-	# Sort dummies alphabetically by their parent marker's name
-	# This allows the user to rename the markers (e.g. ThiefPreviewPos0) to reorder the players!
-	dummies.sort_custom(func(a, b): return str(a.get_parent().name) < str(b.get_parent().name))
-	
-	return dummies
+	intro_running = false
 
 func setup_versus_lineup():
 	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
@@ -314,17 +296,22 @@ func fly_camera_to_target(target_cam: Camera3D):
 func get_player_gameplay_camera(player: Node3D) -> Camera3D:
 	return player.get_node("PitchPivot/SpringArm3D/Camera3D")
 
-func finish_cutscene_immediately():
-	var target_cam = get_player_gameplay_camera(local_player)
-	if target_cam:
-		target_cam.current = true
-	if local_player.has_method("enable_controls"):
-		local_player.enable_controls(true)
-		
-	GameManager.start_game_clock()
-	var hud = get_tree().get_root().find_child("HUD", true, false)
-	if hud and hud.has_method("fade_in"):
-		hud.fade_in(0.0)
-		
-	queue_free()
-	cutscene_ui.queue_free()
+
+func move_intro_camera_to_target(cam: Camera3D):
+	var start_transform := intro_camera.global_transform
+	var end_transform := cam.global_transform
+
+	var timer := 0.0
+
+	while timer < fly_to_player_time:
+		timer += get_process_delta_time()
+
+		var t := timer / fly_to_player_time
+		t = clamp(t, 0.0, 1.0)
+		t = t * t * (3.0 - 2.0 * t)
+
+		intro_camera.global_transform = start_transform.interpolate_with(end_transform, t)
+
+		await get_tree().process_frame
+
+	intro_camera.global_transform = end_transform
