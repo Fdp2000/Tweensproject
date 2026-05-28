@@ -6,7 +6,7 @@ class_name DottedRing
 		radius = val
 		if is_inside_tree(): _update_dots()
 
-@export var dot_count: int = 32:
+@export var dot_count: int = 64:
 	set(val):
 		dot_count = val
 		if is_inside_tree(): _update_dots()
@@ -17,7 +17,7 @@ class_name DottedRing
 		if _material:
 			_material.albedo_color = dot_color
 
-@export var dot_size: float = 0.15:
+@export var dot_size: float = 0.075:
 	set(val):
 		dot_size = val
 		if is_inside_tree(): _update_dots()
@@ -27,6 +27,12 @@ var _material: StandardMaterial3D
 var _current_rotation: float = 0.0
 
 func _ready():
+	# Hide the ring in the main menu
+	var scene_name = get_tree().current_scene.name
+	if scene_name == "MainMenu" or scene_name == "MainMenuImproved":
+		hide()
+		return
+		
 	multimesh_instance = MultiMeshInstance3D.new()
 	add_child(multimesh_instance)
 	
