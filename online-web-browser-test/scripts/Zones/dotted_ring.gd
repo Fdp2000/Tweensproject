@@ -18,6 +18,7 @@ class_name DottedRing
 
 @export var sync_with_balance: bool = true
 @export var fade_in_on_start: bool = true
+@export var align_with_collision_shape: bool = true
 
 @export_group("Raycast Settings")
 @export var raycast_height: float = 2.0
@@ -106,23 +107,49 @@ func _update_dots():
 	multimesh_instance.multimesh.instance_count = actual_dot_count
 	var space_state = get_world_3d().direct_space_state
 	
+	var center_pos = global_position
+	if align_with_collision_shape:
+		var parent = get_parent()
+		if parent:
+			for child in parent.get_children():
+				if child is CollisionShape3D:
+					center_pos = child.global_position
+					break
+	
+	var raw_positions = []
+	var y_values = []
+	
 	for i in range(actual_dot_count):
 		var angle = (float(i) / actual_dot_count) * TAU
 		var offset = Vector3(cos(angle) * radius, 0, sin(angle) * radius)
 		
 		# Start raycast slightly above the center point to avoid hitting the ceiling
-		var start_pos = global_position + offset + Vector3(0, raycast_height, 0)
-		var end_pos = global_position + offset - Vector3(0, raycast_depth, 0)
+		var start_pos = center_pos + offset + Vector3(0, raycast_height, 0)
+		var end_pos = center_pos + offset - Vector3(0, raycast_depth, 0)
 		
 		var query = PhysicsRayQueryParameters3D.create(start_pos, end_pos)
 		query.collision_mask = 1 # Only hit world geometry (Layer 1)
 		
 		var result = space_state.intersect_ray(query)
 		
-		var final_pos = global_position + offset
+		var final_pos = center_pos + offset
 		if result:
 			# Place slightly above the hit point along the normal
 			final_pos = result.position + result.normal * 0.05
+			
+		raw_positions.append(final_pos)
+		y_values.append(final_pos.y)
+		
+	# Find the median Y height to represent the true "floor"
+	y_values.sort()
+	var median_y = y_values[y_values.size() / 2]
+	
+	for i in range(actual_dot_count):
+		var final_pos = raw_positions[i]
+		
+		# If this dot is significantly higher or lower than the median floor (e.g. hit a wall, pillar, or van door)
+		if abs(final_pos.y - median_y) > 0.2:
+			final_pos.y = median_y
 			
 		# Convert to local position for the multimesh
 		var local_pos = to_local(final_pos)

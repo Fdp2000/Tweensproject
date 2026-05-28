@@ -15,16 +15,16 @@ collision_mask = 5
 script = ExtResource("1_script")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DeliveryZone" unique_id=763458350]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6455848, 1, 0)
 shape = SubResource("CylinderShape3D_van")
+
+[node name="Node3D" type="Node3D" parent="DeliveryZone/CollisionShape3D" unique_id=584511752]
+script = ExtResource("dotted_ring_script")
+custom_dot_count = 80
 
 [node name="VisualRing" type="Node3D" parent="DeliveryZone" unique_id=1383707949]
 
 [node name="WhiteVan" parent="." unique_id=628082721 instance=ExtResource("2_yy4fo")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
-
-[node name="Node3D" type="Node3D" parent="." unique_id=584511752]
-script = ExtResource("dotted_ring_script")
-custom_dot_count = 80
 
 [connection signal="body_entered" from="DeliveryZone" to="DeliveryZone" method="_on_body_entered"]

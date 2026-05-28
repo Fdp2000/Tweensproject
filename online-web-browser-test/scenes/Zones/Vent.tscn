@@ -83,8 +83,12 @@ _data = {
 &"open": SubResource("Animation_open")
 }
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10rif"]
-albedo_color = Color(0.19090384, 0.19090384, 0.19090384, 1)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o0mwm"]
+points = PackedVector3Array(14.740185, 14.739927, 0.54612577, 14.740185, 14.739927, -0.9539817, -14.740185, 14.739927, 0.54612577, 14.264044, 14.263794, 1.0265692, 14.264044, 12.587229, 1.0233039, 14.740185, -0.8685827, 0.51564896, 14.740185, 13.005648, -0.95746475, -14.740185, 14.739927, -0.9539817, -14.740185, -0.8685827, 0.51564896, -14.266929, 12.587229, 1.0233039, -14.266929, 14.263794, 1.0265692, 13.539732, 10.353731, 1.2124773, 14.264044, -14.26668, 0.97084045, 14.740185, -13.008534, 0.4919207, 14.740185, 0.86569595, -0.98119307, -14.740185, 13.005648, -0.95746475, -14.740185, -13.008534, 0.4919207, -14.266929, -14.26668, 0.97084045, -13.542617, 10.353731, 1.2124773, 13.539732, -5.5779715, 1.1813475, 14.740185, -14.739927, 0.48843765, 13.539732, -11.949499, 1.1687216, 14.740185, -13.008534, -1.0081867, -14.740185, 0.86569595, -0.98119307, -14.740185, -14.739927, 0.48843765, -13.542617, -11.949499, 1.1687216, -13.542617, -5.5779715, 1.1813475, 14.740185, -14.739927, -1.0114521, -14.740185, -13.008534, -1.0081867, -14.740185, -14.739927, -1.0114521)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0mwm"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="Vent" type="Area3D" unique_id=581943021 groups=["Vents"]]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
@@ -102,7 +106,6 @@ script = ExtResource("dotted_ring_script")
 radius = 1.5
 sync_with_balance = false
 fade_in_on_start = false
-debug_test_dots = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=194820194]
 libraries/ = SubResource("AnimationLibrary_vent")
@@ -113,13 +116,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5910103, -1.0867177)
 [node name="Sketchfab_Scene" parent="PivotPoint" unique_id=1711548117 instance=ExtResource("2_l71he")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.5737087, 0.019129157)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=115086990]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0037460327, 0.9865674, -2.2341237)
-size = Vector3(1.1609955, 1.1360779, 2.3424072)
-material = SubResource("StandardMaterial3D_10rif")
+[node name="300x300x20mm-vent_001_vent-grilles_0" parent="PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(1711548117, 1812499697) index="0" unique_id=496260524]
+layers = 2
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGBox3D" unique_id=2050138761]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0029830933, 0.020477295, 0.10493469)
-operation = 2
-size = Vector3(0.9669037, 0.96795654, 2.4659119)
-material = SubResource("StandardMaterial3D_10rif")
+[node name="StaticBody3D" type="StaticBody3D" parent="PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001/300x300x20mm-vent_001_vent-grilles_0" index="0" unique_id=971211732]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001/300x300x20mm-vent_001_vent-grilles_0/StaticBody3D" unique_id=181684666]
+shape = SubResource("ConvexPolygonShape3D_o0mwm")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=115086990]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00046730042, 1.0000792, -1.0816351)
+size = Vector3(1.1335106, 1.1090546, 0.03742981)
+material = SubResource("StandardMaterial3D_o0mwm")
+
+[editable path="PivotPoint/Sketchfab_Scene"]
