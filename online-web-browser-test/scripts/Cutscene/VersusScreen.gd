@@ -4,6 +4,10 @@ class_name CutsceneUI
 @onready var background: ColorRect = $Root/Background
 @onready var countdown_label: Label = $Root/CountdownLabel
 
+@export var countdown_tick_duration: float = 0.5
+@export var vs_font_size: int = 81
+@export var vs_is_italic: bool = true
+
 func _ready():
 	layer = 128 # Ensure this renders ON TOP of LobbyUI (which is layer 100)
 	
@@ -16,6 +20,19 @@ func _ready():
 	var vs_label = $Root.get_node_or_null("VSLabel")
 	if vs_label:
 		vs_label.hide()
+		# Apply custom font size and italics
+		if vs_label is RichTextLabel:
+			vs_label.add_theme_font_size_override("normal_font_size", vs_font_size)
+			vs_label.add_theme_font_size_override("italics_font_size", vs_font_size)
+			
+			var base_text = "[color=blue]V[/color][color=red]S[/color]"
+			if vs_is_italic:
+				vs_label.text = "[center][i]" + base_text + "[/i][/center]"
+			else:
+				vs_label.text = "[center]" + base_text + "[/center]"
+				
+		elif vs_label is Label:
+			vs_label.add_theme_font_size_override("font_size", vs_font_size)
 
 func _notification(what):
 	if what == Control.NOTIFICATION_RESIZED:
@@ -45,9 +62,9 @@ func play_countdown():
 		# Pulse animation
 		countdown_label.scale = Vector2.ONE * 1.5
 		var tween = create_tween()
-		tween.tween_property(countdown_label, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(countdown_label, "scale", Vector2.ONE, countdown_tick_duration * 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(countdown_tick_duration).timeout
 		
 	countdown_label.text = "GO!"
 	countdown_label.scale = Vector2.ONE * 2.0

@@ -254,11 +254,11 @@ func _on_game_started() -> void:
 			if role == GameManager.PlayerRole.COP:
 				pf = load("res://scenes/PlayerScenes/Cop.tscn").instantiate()
 				if cop_spawns.size() > 0:
-					spawn_trans = cop_spawns.pop_back().global_transform
+					spawn_trans = cop_spawns.pop_back().global_transform.orthonormalized()
 			else:
 				pf = load("res://scenes/PlayerScenes/Thief.tscn").instantiate()
 				if thief_spawns.size() > 0:
-					spawn_trans = thief_spawns.pop_back().global_transform
+					spawn_trans = thief_spawns.pop_back().global_transform.orthonormalized()
 
 			pf.name = str(id)
 			pf.team_index = role

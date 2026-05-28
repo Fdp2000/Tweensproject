@@ -2825,6 +2825,21 @@ script = ExtResource("7_collision")
 [node name="Jail" parent="." unique_id=300588336 instance=ExtResource("5_jail")]
 transform = Transform3D(7.5497894e-08, 0, 1, 0, 0.81235856, 0, -1, 0, 7.5497894e-08, 7.5516105, 0.07941294, -52.95801)
 
+[node name="WalkTarget" parent="Jail" index="0" unique_id=1903043954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017673565, 0, -3.6000085)
+
+[node name="CellTarget" parent="Jail" index="1" unique_id=18595314]
+transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -8.66311e-08, 0.5, -0.9869442)
+
+[node name="CellTarget2" parent="Jail" index="2" unique_id=18595315]
+transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 1.5, 0.5, 0.004)
+
+[node name="CellTarget3" parent="Jail" index="3" unique_id=18595316]
+transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -1.5, 0.5, 0.004)
+
+[node name="CellTarget4" parent="Jail" index="4" unique_id=18595317]
+transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 0, 0.5, 1.5)
+
 [node name="SpawnPoints" type="Node3D" parent="." unique_id=794798467]
 
 [node name="CopSpawns" type="Node3D" parent="SpawnPoints" unique_id=1341046285]
@@ -10994,6 +11009,7 @@ transform = Transform3D(0.51777804, 0, 4.8398965e-09, -2.3805107e-16, 0.8438329,
 [node name="Clif_2  Asia4" parent="." unique_id=934030330 instance=ExtResource("112_e30a0")]
 transform = Transform3D(0.93200046, 0, 4.839897e-09, 0, 0.7265778, -0.12850916, 0, 0.6096713, 0.15315127, 23.58294, 1.3740036, -40.35517)
 
+[editable path="Jail"]
 [editable path="Arena 2/NavigationRegion3D/Van"]
 [editable path="SecCams/SecCam1"]
 [editable path="SecCams/SecCam2"]

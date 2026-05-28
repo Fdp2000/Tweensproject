@@ -394,8 +394,11 @@ func client_return_to_lobby():
 				art.rpc("reset_artifact")
 			
 		team_cash = 0
-		all_vents.clear()
-		current_vent = null
+		
+		# Reset the vents properly without clearing the array (since the map isn't destroyed)
+		if current_vent:
+			current_vent.rpc("close_vent")
+			current_vent = null
 		
 		# Respawn all players in the lobby!
 		for id in players.keys():
