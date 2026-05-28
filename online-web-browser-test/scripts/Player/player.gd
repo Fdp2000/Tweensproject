@@ -143,6 +143,8 @@ func request_initial_sync():
 	rpc_id(sender, "sync_team", team_index)
 	rpc_id(sender, "_sync_name", player_name)
 
+
+
 @rpc("any_peer", "call_local", "reliable")
 func sync_team(assigned_team: int):
 	team_index = assigned_team
@@ -199,7 +201,32 @@ func toggle_camera():
 	else:
 		target_shoulder_x = 1.0
 
+@export var skin_materials: Array[Material]
+@export var skin_mesh_paths: Array[NodePath]
 
+@rpc("any_peer", "call_local", "reliable")
+func apply_skin(skin_index: int) -> void:
+	print("apply_skin called on: ", name, " index: ", skin_index)
+
+	if skin_materials.is_empty():
+		print("No skin materials assigned on ", name)
+		return
+
+	skin_index = clampi(skin_index, 0, skin_materials.size() - 1)
+	var selected_material := skin_materials[skin_index]
+
+	for path in skin_mesh_paths:
+		var mesh := get_node_or_null(path) as MeshInstance3D
+
+		if mesh:
+			mesh.material_override = null
+
+			for i in mesh.mesh.get_surface_count():
+				mesh.set_surface_override_material(i, selected_material)
+
+			print("Applied skin to: ", mesh.name)
+		else:
+			print("Skin mesh path missing on ", name, ": ", path)
 # --- SMOOTH INTERPOLATION (Visual frames) ---
 func _process(delta):
 	# Visual smoothing for remote network players
@@ -222,10 +249,12 @@ func _process(delta):
 				global_position = global_position.lerp(sync_target_position, 15.0 * delta)
 			
 			# Slerp Rotation smoothly
-			var current_quat = Quaternion(transform.basis)
-			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation))
+			var current_scale = scale
+			var current_quat = Quaternion(transform.basis.orthonormalized())
+			var target_quat = Quaternion(Basis.from_euler(sync_target_rotation).orthonormalized())
 			var new_quat = current_quat.slerp(target_quat, 15.0 * delta)
 			transform.basis = Basis(new_quat)
+			scale = current_scale
 			
 	# Camera shoulder toggle smoothing (Local Player Only)
 	else:
