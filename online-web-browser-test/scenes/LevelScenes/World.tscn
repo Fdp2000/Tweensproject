@@ -4,14 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://crc86ugpb3vmu" path="res://scenes/LevelScenes/PrototypeLevel.tscn" id="2_proto"]
 [ext_resource type="Script" uid="uid://buorurrqe21ki" path="res://scripts/Cutscene/CutsceneManager.gd" id="3_p4cir"]
 [ext_resource type="Script" uid="uid://c5rie7oeh51t2" path="res://scripts/Cutscene/VersusScreen.gd" id="4_frjgd"]
-[ext_resource type="PackedScene" uid="uid://dummycop123" path="res://scenes/PlayerScenes/DummyCop.tscn" id="5_2qs0d"]
+[ext_resource type="PackedScene" path="res://scenes/PlayerScenes/DummyCop.tscn" id="5_2qs0d"]
 [ext_resource type="PackedScene" uid="uid://dfcub4m2b5i2f" path="res://scenes/PlayerScenes/DummyThief.tscn" id="6_27ueq"]
 [ext_resource type="LightmapGIData" uid="uid://b2aicew7mmbg1" path="res://scenes/LevelScenes/World.lmbake" id="7_ofs5a"]
 [ext_resource type="PackedScene" uid="uid://dyj1djxuy4iko" path="res://scenes/LevelScenes/PregameLobby.tscn" id="7_pregame"]
 [ext_resource type="PackedScene" uid="uid://4xnr376si33e" path="res://scenes/UIScenes/MainMenuImproved.tscn" id="8_7aqpd"]
 [ext_resource type="PackedScene" uid="uid://d16n72gkvedkt" path="res://scenes/UIScenes/Tutorial.tscn" id="9_2qs0d"]
 [ext_resource type="PackedScene" uid="uid://boq6oww22vrxp" path="res://scenes/UIScenes/TutorialCop.tscn" id="10_27ueq"]
-[ext_resource type="Script" uid="uid://cwh78nxwse0c4" path="res://scripts/UI/Camera.gd" id="11_2qs0d"]
+[ext_resource type="Script" path="res://scripts/UI/Camera.gd" id="11_2qs0d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cmany"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

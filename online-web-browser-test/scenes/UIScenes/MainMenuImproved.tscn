@@ -2,6 +2,21 @@
 
 [ext_resource type="PackedScene" uid="uid://dfcub4m2b5i2f" path="res://scenes/PlayerScenes/DummyThief.tscn" id="1_xa0ng"]
 [ext_resource type="PackedScene" path="res://scenes/PlayerScenes/DummyCop.tscn" id="2_kuebs"]
+[ext_resource type="Animation" uid="uid://buixqxsh8dig" path="res://Assets/Animations/Chameleon/Camo_Pose.anim" id="2_w30gc"]
+[ext_resource type="Animation" uid="uid://ce26fke58nnvf" path="res://Assets/Animations/Carry/Carrying.res" id="3_c4gm7"]
+[ext_resource type="Animation" uid="uid://caddp1wk5u0nt" path="res://Assets/Animations/Chameleon/Hypno_Walk.res" id="4_eynkw"]
+[ext_resource type="Animation" uid="uid://do52qgm5077c0" path="res://Assets/Animations/Chameleon/Idle1.res" id="5_hjern"]
+[ext_resource type="Animation" uid="uid://c1mcnmaibxgy8" path="res://Assets/Animations/Chameleon/Idle2.res" id="6_d4mk5"]
+[ext_resource type="Animation" uid="uid://b24nc1krkg3qc" path="res://Assets/Animations/Chameleon/Idle3.res" id="7_pcaly"]
+[ext_resource type="Animation" uid="uid://dpg7r6fftn7ya" path="res://Assets/Animations/Carry/Jog Backwards.res" id="8_qt2cq"]
+[ext_resource type="Animation" uid="uid://uskucuuqyynr" path="res://Assets/Animations/Carry/Jog Forward.res" id="9_jw0i5"]
+[ext_resource type="Animation" uid="uid://bqyvm7t41n5rm" path="res://Assets/Animations/Carry/Jog Strafe Left.res" id="10_w5vgx"]
+[ext_resource type="Animation" uid="uid://crfctbio3my7o" path="res://Assets/Animations/Carry/Jog Strafe Right.res" id="11_yv1oc"]
+[ext_resource type="Animation" uid="uid://boqq0afclyx02" path="res://Assets/Animations/Chameleon/Run1.res" id="12_1vedx"]
+[ext_resource type="Animation" uid="uid://bqp1nobyaxhr8" path="res://Assets/Animations/Chameleon/Run2.res" id="13_fxnex"]
+[ext_resource type="Animation" uid="uid://c21j58ypdr2r0" path="res://Assets/Animations/Chameleon/Run3.res" id="14_aoji6"]
+[ext_resource type="Animation" uid="uid://hc84p7qhdihc" path="res://Assets/Animations/Chameleon/Run4.res" id="15_apaj1"]
+[ext_resource type="Animation" uid="uid://morndqgp7rxd" path="res://Assets/Animations/Chameleon/Run5.res" id="16_3na13"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n5gp1"]
 
@@ -2831,7 +2846,7 @@ render_target_update_mode = 0
 [node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=564513877]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.06988, 1.418527, 2.5919046)
 
-[node name="Chameleon_Character" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=1423752438 instance=ExtResource("1_cxert")]
+[node name="Chameleon_Character" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=1423752438 instance=ExtResource("1_xa0ng")]
 transform = Transform3D(0.82609826, 0, 0.5635261, 0, 1, 0, -0.5635261, 0, 0.82609826, 0, -1.0704265, 0)
 
 [node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
@@ -2970,7 +2985,7 @@ render_target_update_mode = 0
 [node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=1783558948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 
-[node name="Næsehorn" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=2043154851 instance=ExtResource("17_w30gc")]
+[node name="Næsehorn" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=2043154851 instance=ExtResource("2_kuebs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1524457, 1.6060051)
 
 [node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
