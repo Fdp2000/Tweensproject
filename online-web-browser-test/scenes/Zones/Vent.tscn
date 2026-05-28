@@ -55,7 +55,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.2509804)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -96,14 +96,19 @@ transform = Transform3D(0.725, 0, 0, 0, 0.725, 0, 0, 0, 0.725, 0, 1, 0)
 shape = SubResource("CylinderShape3D_vent")
 
 [node name="VisualRing" type="Node3D" parent="." unique_id=184920184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.688961, 0)
+visible = false
 script = ExtResource("dotted_ring_script")
 radius = 1.5
+sync_with_balance = false
+fade_in_on_start = false
+debug_test_dots = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=194820194]
 libraries/ = SubResource("AnimationLibrary_vent")
 
 [node name="PivotPoint" type="Node3D" parent="." unique_id=1521833555]
-transform = Transform3D(1, 0, 0, 0, -0.702153, 0.71202606, 0, -0.71202606, -0.702153, 0, 1.5910103, -1.0867177)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5910103, -1.0867177)
 
 [node name="Sketchfab_Scene" parent="PivotPoint" unique_id=1711548117 instance=ExtResource("2_l71he")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.5737087, 0.019129157)

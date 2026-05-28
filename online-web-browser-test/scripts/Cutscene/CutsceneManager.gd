@@ -160,6 +160,8 @@ func run_cinematic_flow():
 	if hud and hud.has_method("fade_in"):
 		hud.fade_in(1.5)
 		
+	get_tree().call_group("dotted_rings", "fade_in", 3.0)
+		
 	if local_player.get("charge_ui_ref"):
 		var fade_tween = create_tween()
 		fade_tween.tween_property(local_player.charge_ui_ref, "modulate:a", 1.0, 3.0)
@@ -325,6 +327,8 @@ func finish_cutscene_immediately():
 	var hud = get_tree().get_root().find_child("HUD", true, false)
 	if hud and hud.has_method("fade_in"):
 		hud.fade_in(0.0)
+		
+	get_tree().call_group("dotted_rings", "show_immediately")
 		
 	queue_free()
 	cutscene_ui.queue_free()

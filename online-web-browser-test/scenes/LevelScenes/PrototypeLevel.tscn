@@ -67,7 +67,6 @@
 [ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="61_217hv"]
 [ext_resource type="ArrayMesh" uid="uid://c8oomttniaaan" path="res://dome.res" id="62_dauag"]
 [ext_resource type="PackedScene" uid="uid://do0ts3h3tjyjv" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Tower_1 Asia.fbx" id="65_pmpka"]
-[ext_resource type="PackedScene" uid="uid://bf05ftf00cgpm" path="res://scenes/Zones/Vent.tscn" id="65_xwy5l"]
 [ext_resource type="ArrayMesh" uid="uid://cspvrdluyca22" path="res://Assets/environments/GrassBink.res" id="65_ydp54"]
 [ext_resource type="Texture2D" uid="uid://dg03omgu6iytk" path="res://Assets/Models/Vegetation Assets/Textures/Vegetation_Texture_Atlas.png" id="66_217hv"]
 [ext_resource type="ArrayMesh" uid="uid://f26ltpsyvk7a" path="res://Assets/Models/LowPolyMuseumAssets/Picture2Image.res" id="67_w6te4"]
@@ -10660,7 +10659,6 @@ transform = Transform3D(0.258819, 0, 0.9659259, 0, 1, 0, -0.9659259, 0, 0.258819
 
 [node name="VisualRing" parent="Arena 2/NavigationRegion3D/Van/DeliveryZone" parent_id_path=PackedInt32Array(1941149271, 1495220169) index="1" unique_id=1383707949]
 transform = Transform3D(1, 0, 0, 0, 0.125, 0, 0, 0, 1, 0, 0.15267849, 0)
-script = null
 
 [node name="Dinguses" type="Node3D" parent="Arena 2" unique_id=632446231]
 
@@ -10920,23 +10918,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_w6te4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.201141, 0.14375621, 3.3474317)
 mesh = ExtResource("65_ydp54")
 surface_material_override/0 = SubResource("ShaderMaterial_w6te4")
-
-[node name="Vent" parent="." unique_id=581943021 instance=ExtResource("65_xwy5l")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 3.074873, 0.79618615, -10.490069)
-
-[node name="Vent2" parent="." unique_id=1806374479 instance=ExtResource("65_xwy5l")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 5.931386, 0.17363065, -10.490069)
-
-[node name="VisualRing" parent="Vent2" index="1" unique_id=184920184]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-visible = false
-script = null
-
-[node name="Vent3" parent="." unique_id=1884752475 instance=ExtResource("65_xwy5l")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 7.6126966, 0.17363065, -10.490069)
-
-[node name="Vent4" parent="." unique_id=274005720 instance=ExtResource("65_xwy5l")]
-transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 9.303184, 0.17363065, -10.490069)
 
 [node name="GardenWall_5 Asia" parent="." unique_id=900888875 instance=ExtResource("68_7u4t4")]
 transform = Transform3D(-5.507635e-08, 0, -1.4, 0, 1.3, 0, 1.26, 0, -6.119594e-08, -28.052471, -0.9334154, -21.408237)
@@ -11212,4 +11193,3 @@ mesh = ExtResource("7_3gp6a")
 [editable path="SecCams/SecCam1"]
 [editable path="SecCams/SecCam2"]
 [editable path="SecCams/SecCam3"]
-[editable path="Vent2"]

@@ -22,7 +22,7 @@ func _setup_visuals():
 	if visual_ring:
 		if visual_ring is DottedRing:
 			visual_ring.radius = vent_radius
-			visual_ring.dot_color.a = 0.0 if not is_open else 0.5
+			visual_ring.set_alpha(0.0 if not is_open else 0.5)
 		elif visual_ring is MeshInstance3D:
 			var mesh = visual_ring.mesh as CylinderMesh
 			if mesh:
@@ -46,12 +46,16 @@ func open_vent():
 	is_open = true
 	if visual_ring:
 		visual_ring.visible = true
+		if visual_ring is DottedRing:
+			visual_ring.fade_in(0.5)
 	if animation_player.has_animation("open"):
 		animation_player.play("open")
 
 @rpc("call_local", "reliable")
 func close_vent():
 	is_open = false
+	if visual_ring and visual_ring is DottedRing:
+		visual_ring.set_alpha(0.0)
 	if animation_player.has_animation("close"):
 		animation_player.play("close")
 	# visual_ring visibility will be toggled off at the end of the close animation

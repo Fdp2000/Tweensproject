@@ -3,11 +3,17 @@
 [ext_resource type="Script" uid="uid://drqhtg0onjeuf" path="res://scripts/Networking/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://bvlpyq23crr3g" path="res://scenes/MiscScenes/Plunger.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://d0xak1rv4tda0" path="res://scenes/Networking scenes/client_ui.tscn" id="2_sugp2"]
-[ext_resource type="Material" uid="uid://dodph65auegcl" path="res://Assets/Shaders/celShader/museumCel.tres" id="4_u615w"]
-[ext_resource type="Material" uid="uid://2g4x24i7rhhw" path="res://Assets/Shaders/HypnoShader/SolidhypnoMat.tres" id="5_iq1fi"]
-[ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="6_w1ydj"]
+[ext_resource type="Texture2D" uid="uid://ly1a6ntk3kyu" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_2.png" id="6_1ohs5"]
+[ext_resource type="Texture2D" uid="uid://0rexf1tft0m6" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_1.png" id="7_boacf"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="7_ieqx8"]
+[ext_resource type="Texture2D" uid="uid://cr6e0yrtncxvf" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_5.png" id="8_05p8r"]
 [ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="8_fvdw7"]
+[ext_resource type="Texture2D" uid="uid://c42oa8d056afb" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_4.png" id="9_tjhj3"]
+[ext_resource type="Texture2D" uid="uid://5ojmto5ivnsw" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_3.png" id="10_ephps"]
+[ext_resource type="Texture2D" uid="uid://cuwagjiejkhdd" path="res://Assets/Models/Rhino/Næsehorn_Næsrehorn_Texture.png" id="11_3avms"]
+[ext_resource type="Texture2D" uid="uid://bbwtwbwchgqqx" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_1.png" id="12_gl1ce"]
+[ext_resource type="Texture2D" uid="uid://bvumt2f5v76wg" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_3.png" id="13_y1lsk"]
+[ext_resource type="Texture2D" uid="uid://b8hy5qu3gtxn" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_2.png" id="14_ftbs0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tths7"]
 render_priority = 0
@@ -34,7 +40,230 @@ shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iq1fi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a1q1p"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("6_1ohs5")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_khfbm"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("7_boacf")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gjk15"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("8_05p8r")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lm348"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("9_tjhj3")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x6mu0"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("10_ephps")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cclui"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("11_3avms")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bdukp"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("12_gl1ce")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mh7vs"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("13_y1lsk")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5wyqs"]
+render_priority = 0
+shader = ExtResource("7_ieqx8")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("14_ftbs0")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [node name="Control" type="Control" unique_id=846917499]
 layout_mode = 3
@@ -92,8 +321,8 @@ columns = 2
 [node name="ClientUI" parent="VBoxContainer/Clients" unique_id=1326961882 instance=ExtResource("2_sugp2")]
 visible = false
 layout_mode = 2
-chameleon_skin_materials = Array[Material]([SubResource("ShaderMaterial_tths7"), ExtResource("4_u615w"), ExtResource("5_iq1fi"), ExtResource("6_w1ydj")])
-rhino_skin_materials = Array[Material]([SubResource("StandardMaterial3D_iq1fi"), ExtResource("4_u615w"), ExtResource("5_iq1fi"), ExtResource("6_w1ydj")])
+chameleon_skin_materials = Array[Material]([SubResource("ShaderMaterial_tths7"), SubResource("ShaderMaterial_a1q1p"), SubResource("ShaderMaterial_khfbm"), SubResource("ShaderMaterial_gjk15"), SubResource("ShaderMaterial_lm348"), SubResource("ShaderMaterial_x6mu0")])
+rhino_skin_materials = Array[Material]([SubResource("ShaderMaterial_cclui"), SubResource("ShaderMaterial_bdukp"), SubResource("ShaderMaterial_mh7vs"), SubResource("ShaderMaterial_5wyqs")])
 
 [node name="SpawnedObjects" type="Node3D" parent="." unique_id=1234567890]
 
