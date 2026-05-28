@@ -249,23 +249,23 @@ func _on_game_started() -> void:
 			var role = GameManager.players[id]["role"]
 
 			var pf
-			var spawn_trans = Transform3D(Basis(), Vector3(0, 3, 0))
+			var spawn_pos = Vector3(0, 3, 0)
 
 			if role == GameManager.PlayerRole.COP:
 				pf = load("res://scenes/PlayerScenes/Cop.tscn").instantiate()
 				if cop_spawns.size() > 0:
-					spawn_trans = cop_spawns.pop_back().global_transform.orthonormalized()
+					spawn_pos = cop_spawns.pop_back().global_position
 			else:
 				pf = load("res://scenes/PlayerScenes/Thief.tscn").instantiate()
 				if thief_spawns.size() > 0:
-					spawn_trans = thief_spawns.pop_back().global_transform.orthonormalized()
+					spawn_pos = thief_spawns.pop_back().global_position
 
 			pf.name = str(id)
 			pf.team_index = role
-			pf.global_transform = spawn_trans
+			pf.position = spawn_pos
 
 			spawned.add_child(pf, true)
-			pf._set_spawn_transform.rpc(spawn_trans)
+			pf._set_spawn_position.rpc(spawn_pos)
 
 	main_menu_canvas.hide()
 	lobby_canvas.hide()

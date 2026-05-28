@@ -8,4 +8,4 @@ func _on_body_entered(body: Node3D):
 	if body is CharacterBody3D and body.get("team_index") == 0:
 		if body.get("is_hypnotized") and not body.get("is_jailed"):
 			# Lock them up!
-			body.rpc("on_jailed", cell_center.global_position, cell_center.global_rotation.y)
+			body.rpc("on_jailed", cell_center.global_position)
