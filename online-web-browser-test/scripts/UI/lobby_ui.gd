@@ -134,7 +134,6 @@ func _on_leave_pressed() -> void:
 
 
 func _on_start_pressed() -> void:
-	start_button.disabled = true
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 
 	if client_ui and client_ui.get("local_player_name") != null:
