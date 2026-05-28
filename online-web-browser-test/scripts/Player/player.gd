@@ -334,8 +334,8 @@ func _custom_physics_process(_delta, direction):
 
 
 @rpc("any_peer", "call_local")
-func _set_spawn_transform(trans: Transform3D):
-	global_transform = trans
+func _set_spawn_position(pos: Vector3):
+	global_position = pos
 	
 	# FIX: Hide the player for 1 frame when teleporting to prevent the camera from colliding 
 	# with the old environment and flashing a closeup of the chameleon's face!
