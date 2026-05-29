@@ -4,7 +4,7 @@ class_name CutsceneUI
 @onready var background: ColorRect = $Root/Background
 @onready var countdown_label: Label = $Root/CountdownLabel
 
-@export var countdown_tick_duration: float = 0.5
+@export var total_countdown_time: float = 3.0
 @export var vs_font_size: int = 81
 @export var vs_is_italic: bool = true
 
@@ -55,6 +55,8 @@ func play_countdown():
 	visible = true
 	background.modulate.a = 0.0
 	countdown_label.modulate.a = 1.0
+	
+	var countdown_tick_duration = total_countdown_time / 3.0
 	
 	for i in range(3, 0, -1):
 		countdown_label.text = str(i)

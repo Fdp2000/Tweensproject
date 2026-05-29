@@ -5,6 +5,8 @@ var thief: Node3D
 var camo_material: ShaderMaterial
 var hypno_material: ShaderMaterial
 
+@export_range(0.0, 1.0) var eye_fade_in_threshold: float = 0.3
+
 var _is_dual_mesh_setup = false
 var base_meshes: Array[MeshInstance3D] = []
 var camo_meshes: Array[MeshInstance3D] = []
@@ -13,6 +15,7 @@ var local_outline_mat: ShaderMaterial = null
 
 var stationary_time = 0.0
 var current_alpha = 1.0
+var current_eye_alpha = 1.0
 var target_alpha = 1.0
 
 var _last_rendered_alpha: float = -1.0
@@ -45,8 +48,14 @@ func process_stealth(delta: float, speed: float, is_hypnotized: bool, is_jailed:
 	var fade_rate = 1.0 / Balance.thief_camo_fade_duration_sec
 	current_alpha = move_toward(current_alpha, target_alpha, fade_rate * delta)
 	
-	if abs(current_alpha - _last_rendered_alpha) > 0.01 or is_highlighted != _last_rendered_highlight or is_hypnotized != _last_rendered_hypnotized:
-		_apply_visual_states(current_alpha, target_alpha, is_hypnotized, is_jailed, is_highlighted)
+	if target_alpha == 0.0:
+		current_eye_alpha = move_toward(current_eye_alpha, target_alpha, fade_rate * 2.0 * delta)
+	else:
+		if current_alpha >= eye_fade_in_threshold:
+			current_eye_alpha = move_toward(current_eye_alpha, target_alpha, fade_rate * 5.0 * delta)
+	
+	if abs(current_alpha - _last_rendered_alpha) > 0.01 or abs(current_eye_alpha - _last_rendered_alpha) > 0.01 or is_highlighted != _last_rendered_highlight or is_hypnotized != _last_rendered_hypnotized:
+		_apply_visual_states(current_alpha, current_eye_alpha, target_alpha, is_hypnotized, is_jailed, is_highlighted)
 		_last_rendered_alpha = current_alpha
 		_last_rendered_highlight = is_highlighted
 		_last_rendered_hypnotized = is_hypnotized
@@ -95,7 +104,7 @@ func _setup_dual_meshes(node: Node):
 		camo_mesh.set_meta("is_camo", true)
 		camo_mesh.mesh = node.mesh
 		camo_mesh.transform = node.transform
-		camo_mesh.scale = Vector3(0.99, 0.99, 0.99)
+		camo_mesh.scale = node.scale * 0.99
 		if node.skeleton: camo_mesh.skeleton = node.skeleton
 		if node.skin: camo_mesh.skin = node.skin
 		
@@ -104,7 +113,10 @@ func _setup_dual_meshes(node: Node):
 		for i in range(camo_mesh.mesh.get_surface_count()):
 			if camo_material:
 				var c_mat = camo_material.duplicate()
-				c_mat.render_priority = -1 
+				if "Eye" in node.name:
+					c_mat.render_priority = -2
+				else:
+					c_mat.render_priority = -1
 				camo_mesh.set_surface_override_material(i, c_mat)
 				
 		camo_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -136,7 +148,7 @@ func _setup_dual_meshes(node: Node):
 		if child.name != "InteractionArea" and child.name != "InteractionScanner" and not child.has_meta("is_camo"):
 			_setup_dual_meshes(child)
 
-func _apply_visual_states(alpha_val: float, t_alpha: float, is_hypnotized: bool, is_jailed: bool, is_highlighted: bool):
+func _apply_visual_states(alpha_val: float, eye_alpha_val: float, t_alpha: float, is_hypnotized: bool, is_jailed: bool, is_highlighted: bool):
 		
 	if not local_outline_mat:
 		local_outline_mat = ShaderMaterial.new()
@@ -164,7 +176,11 @@ func _apply_visual_states(alpha_val: float, t_alpha: float, is_hypnotized: bool,
 			s_mesh.hide() # Completely deletes the shadow from the floor_OFF
 			
 	for b_mesh in base_meshes:
-		if is_stealthed and stealth_amount >= 0.99:
+		var is_eye = "Eye" in b_mesh.name
+		var mesh_alpha_val = eye_alpha_val if is_eye else alpha_val
+		var mesh_stealth_amount = 1.0 - mesh_alpha_val
+		
+		if is_stealthed and mesh_stealth_amount >= 0.99:
 			b_mesh.hide()
 		else:
 			b_mesh.show()
@@ -189,11 +205,11 @@ func _apply_visual_states(alpha_val: float, t_alpha: float, is_hypnotized: bool,
 						if active_mat.shader and "celShading" in active_mat.shader.resource_path:
 							if is_stealthed:
 								active_mat.shader = preload("res://Assets/Shaders/celShader/celShading_Fade.gdshader")
-								active_mat.set_shader_parameter("stealth_fade", stealth_amount)
+								active_mat.set_shader_parameter("stealth_fade", mesh_stealth_amount)
 							else:
 								active_mat.shader = preload("res://Assets/Shaders/celShader/celShading.gdshader")
 						else:
-							active_mat.set_shader_parameter("stealth_fade", stealth_amount)
+							active_mat.set_shader_parameter("stealth_fade", mesh_stealth_amount)
 					elif "albedo_color" in active_mat:
 						if is_stealthed:
 							active_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -205,7 +221,7 @@ func _apply_visual_states(alpha_val: float, t_alpha: float, is_hypnotized: bool,
 							active_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 							
 						var clr = active_mat.albedo_color
-						clr.a = alpha_val
+						clr.a = mesh_alpha_val
 						active_mat.albedo_color = clr
 					
 			if active_mat:
