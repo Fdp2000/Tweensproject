@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cka16p1v4da2s"]
+
+[ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="1_7o1xc"]
+
+[node name="WantedPosterGreen" type="Node2D" unique_id=1363482710]
+
+[node name="Chameleon_Character" parent="." unique_id=508333357 instance=ExtResource("1_7o1xc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.19368017, 0, 2.232366)
+
+[node name="Skeleton3D" parent="Chameleon_Character/metarig" parent_id_path=PackedInt32Array(508333357, 1773344528) index="0" unique_id=537901438]
+bones/8/position = Vector3(-0.01, 0.104, 0)
+
+[editable path="Chameleon_Character"]
