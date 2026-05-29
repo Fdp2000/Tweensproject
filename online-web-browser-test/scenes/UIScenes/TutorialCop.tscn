@@ -19,6 +19,15 @@ font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_eogs7"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rva5a"]
+bg_color = Color(1, 0.41960785, 0.41960785, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qpiog"]
+bg_color = Color(0.8509804, 0.29803923, 0.29803923, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6orfi"]
+bg_color = Color(1, 0.5411765, 0.5411765, 1)
+
 [node name="TutorialCop" type="Node3D" unique_id=364404085]
 
 [node name="TutorialCopCanvas" type="CanvasLayer" parent="." unique_id=1304183105]
@@ -292,4 +301,7 @@ offset_top = -63.0
 offset_right = 100.0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_rva5a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qpiog")
+theme_override_styles/hover = SubResource("StyleBoxFlat_6orfi")
 text = "BACK"

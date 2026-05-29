@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://2g4x24i7rhhw"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/HypnoShader/hypnoShader_Solid.gdshader" id="1_40wnm"]
+[ext_resource type="Shader" uid="uid://cutcwuaheuxpw" path="res://Assets/Shaders/HypnoShader/hypnoShader_Solid.gdshader" id="1_40wnm"]
 
 [sub_resource type="Gradient" id="Gradient_rbyrp"]
 interpolation_mode = 2

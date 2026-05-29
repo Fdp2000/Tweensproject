@@ -78,7 +78,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1501668829]
 layout_mode = 2
-text = "1. GUARD"
+text = "1. STEAL"
 label_settings = SubResource("LabelSettings_j2xlo")
 
 [node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=612516244]

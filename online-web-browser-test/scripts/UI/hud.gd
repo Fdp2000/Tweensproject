@@ -11,9 +11,21 @@ func _ready():
 	GameManager.game_over.connect(_on_game_over)
 	
 	_on_cash_updated() # Initialize text
+	_on_time_updated(GameManager.round_timer) # Initialize time instantly!
+	
+	$MarginContainer.modulate.a = 0.0 # Hide initially
 	game_over_panel.hide()
 
+func fade_in(duration: float = 1.5):
+	var tween = create_tween()
+	tween.tween_property($MarginContainer, "modulate:a", 1.0, duration)
+
 func _on_time_updated(time_left: int):
+	if time_left < 0:
+		time_label.text = "∞:∞"
+		time_label.add_theme_color_override("font_color", Color.WHITE)
+		return
+		
 	var minutes = time_left / 60
 	var seconds = time_left % 60
 	time_label.text = "%02d:%02d" % [minutes, seconds]
@@ -26,7 +38,6 @@ func _on_cash_updated():
 
 func _on_game_over(winner_team: int):
 	game_over_panel.show()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	if winner_team == GameManager.PlayerRole.THIEF:
 		game_over_label.text = "THIEVES ESCAPED!"

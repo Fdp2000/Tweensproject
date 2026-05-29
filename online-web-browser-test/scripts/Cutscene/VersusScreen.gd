@@ -39,9 +39,9 @@ func play_countdown():
 		# Pulse animation
 		countdown_label.scale = Vector2.ONE * 1.5
 		var tween = create_tween()
-		tween.tween_property(countdown_label, "scale", Vector2.ONE, 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(countdown_label, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 		
-		await get_tree().create_timer(1.0).timeout
+		await get_tree().create_timer(0.5).timeout
 		
 	countdown_label.text = "GO!"
 	countdown_label.scale = Vector2.ONE * 2.0
