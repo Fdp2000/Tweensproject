@@ -30,13 +30,13 @@ extends Node
 @export var chameleon_skin_materials: Array[Material]
 @export var rhino_skin_materials: Array[Material]
 
-@onready var chameleon_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
-@onready var rhino_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
+@onready var chameleon_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
+@onready var rhino_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
 
-@onready var chameleon_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/PreviousButton")
-@onready var chameleon_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/NextButton")
-@onready var rhino_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/PreviousButton")
-@onready var rhino_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/NextButton")
+@onready var chameleon_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviousButton")
+@onready var chameleon_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/NextButton")
+@onready var rhino_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviousButton")
+@onready var rhino_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/NextButton")
 
 
 var menu_camera: Camera3D
@@ -362,6 +362,8 @@ func _on_host_pressed() -> void:
 	has_requested_lobby = true
 
 	local_player_name = name_input.text.strip_edges()
+	if local_player_name == "":
+		local_player_name = "Player"
 
 	current_room_code = ""
 	client.start(SIGNALING_URL, "", false)
@@ -375,6 +377,9 @@ func _on_join_pressed() -> void:
 
 	local_player_name = name_input.text.strip_edges()
 	current_room_code = room_input.text.strip_edges().to_upper()
+
+	if local_player_name == "":
+		local_player_name = "Player"
 
 	if current_room_code == "":
 		print("No room code entered.")
@@ -610,8 +615,8 @@ func _on_game_started() -> void:
 
 func set_skin_viewports_active(active: bool) -> void:
 	# Enable/Disable processing of viewports to save performance when not visible
-	var chameleon_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/ChameleonSkinPanel/SubViewportContainer/SubViewport")
-	var rhino_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
+	var chameleon_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport")
+	var rhino_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
 	
 	if chameleon_vp:
 		chameleon_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED

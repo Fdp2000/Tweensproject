@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://wgfb8vvpxkha" path="res://scripts/UI/client_ui.gd" id="1"]
 [ext_resource type="Script" uid="uid://dd8irriksq2si" path="res://client/multiplayer_client.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://8f4mshrrem6r" path="res://scenes/PlayerScenes/Player.tscn" id="2_g8uup"]
 
 [node name="ClientUI" type="Control" unique_id=1968491779]
 layout_mode = 3
@@ -12,7 +11,6 @@ offset_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1")
-player_scene = ExtResource("2_g8uup")
 
 [node name="Client" type="Node" parent="." unique_id=1003102609]
 script = ExtResource("2")
