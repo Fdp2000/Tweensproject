@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://5ojmto5ivnsw" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_3.png" id="11_wiat2"]
 [ext_resource type="Animation" uid="uid://c8ye5gg8t412a" path="res://Assets/Animations/Carry/Jog Strafe Left.res" id="12_ptic4"]
 [ext_resource type="Animation" uid="uid://dcppafks2v4vu" path="res://Assets/Animations/Carry/Jog Strafe Right.res" id="13_wj3y1"]
+[ext_resource type="PackedScene" uid="uid://8iaw24ps07vh" path="res://Assets/Particles/smoke_particles.tscn" id="28_5ggap"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oure2"]
 render_priority = 0
@@ -2458,5 +2459,8 @@ libraries/ = SubResource("AnimationLibrary_7jg2g")
 
 [node name="AnimationTree" parent="Chameleon_Character" index="2" unique_id=1446614453]
 parameters/Holding_State/CarryMovement/blend_position = Vector2(0.09653914, 0.28600407)
+
+[node name="smokeParticles" parent="Chameleon_Character" index="4" unique_id=685362775 instance=ExtResource("28_5ggap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [editable path="Chameleon_Character"]

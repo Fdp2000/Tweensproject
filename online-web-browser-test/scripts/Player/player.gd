@@ -22,6 +22,8 @@ var hits: int = 0
 @export var sync_target_rotation: Vector3 = Vector3.ZERO
 @export var sync_velocity: Vector3 = Vector3.ZERO # Velocity for Dead Reckoning
 var _spawn_relay_ready: bool = false 
+var time_alive: float = 0.0
+
 #cutscene extra
 var controls_enabled: bool = true
 var camera_locked: bool = false
@@ -147,7 +149,11 @@ func _apply_team_colors():
 func request_initial_sync():
 	if not multiplayer.is_server(): return
 	var sender = multiplayer.get_remote_sender_id()
-	rpc_id(sender, "_set_spawn_transform", global_transform)
+	
+	var is_new = time_alive < 2.0
+	
+	# Send the correct transform, team, and name to the client who just loaded this player!
+	rpc_id(sender, "_set_spawn_transform", global_transform, is_new)
 	rpc_id(sender, "sync_team", team_index)
 	rpc_id(sender, "_sync_name", player_name)
 
@@ -240,7 +246,9 @@ func apply_skin(skin_index: int) -> void:
 			print("Skin mesh path missing on ", name, ": ", path)
 # --- SMOOTH INTERPOLATION (Visual frames) ---
 func _process(delta):
-	# Visual smoothing for remote network players
+	time_alive += delta
+	
+	# Cutscene handling for remote network players
 	if not is_multiplayer_authority():
 		if sync_target_position != Vector3.ZERO:
 			
@@ -334,8 +342,11 @@ func _custom_physics_process(_delta, direction):
 
 
 @rpc("any_peer", "call_local")
-func _set_spawn_transform(trans: Transform3D):
+func _set_spawn_transform(trans: Transform3D, play_smoke: bool = false):
 	global_transform = trans
+	
+	if play_smoke and has_method("play_lobby_smoke"):
+		call("play_lobby_smoke")
 	
 	# FIX: Hide the player for 1 frame when teleporting to prevent the camera from colliding 
 	# with the old environment and flashing a closeup of the chameleon's face!

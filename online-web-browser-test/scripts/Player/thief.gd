@@ -68,9 +68,22 @@ func on_artifact_drop():
 	
 	drop_cooldown = 1.5
 
+var has_played_lobby_smoke = false
+
+func play_lobby_smoke():
+	if has_played_lobby_smoke: return
+	has_played_lobby_smoke = true
+	
+	if cached_lobby_smoke:
+		cached_lobby_smoke.position = Vector3(0, 0.5, 0)
+		get_tree().process_frame.connect(func():
+			if is_instance_valid(cached_lobby_smoke):
+				cached_lobby_smoke.emitting = true
+		, CONNECT_ONE_SHOT)
+
 func spawn_smoke():
 	if cached_captured_smoke:
-		cached_captured_smoke.position = Vector3(0, 1.0, 0) # Center on torso
+		cached_captured_smoke.position = Vector3(0, 0.5, 0) # Center on torso
 		cached_captured_smoke.emitting = false # Force restart for one_shot
 		cached_captured_smoke.emitting = true
 
@@ -97,10 +110,8 @@ func _ready():
 	cached_captured_smoke = CAPTURED_SMOKE.instantiate()
 	add_child(cached_captured_smoke)
 	
-	# Trigger the initial spawn-in effect instantly, but deferred so the engine has time to add it to the scene tree!
-	if cached_lobby_smoke:
-		cached_lobby_smoke.position = Vector3(0, 1.0, 0)
-		cached_lobby_smoke.set_deferred("emitting", true)
+	if multiplayer.is_server():
+		play_lobby_smoke()
 	
 	var random_idle = favorite_idles.pick_random()
 	anim_player.play(random_idle, 0.0)
