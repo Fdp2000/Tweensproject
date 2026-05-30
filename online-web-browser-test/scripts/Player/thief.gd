@@ -1,6 +1,7 @@
 extends "res://scripts/Player/player.gd"
 
-const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
+const LOBBY_JOIN_SMOKE = preload("res://Assets/Particles/smoke_particles.tscn")
+const CAPTURED_SMOKE = preload("res://Assets/Particles/smoke_particles_captured.tscn")
 
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
@@ -23,7 +24,8 @@ var camera_manager: Node = null
 var stealth_manager: Node = null
 var world_ping_manager: Node = null
 
-var cached_smoke_particles = null
+var cached_lobby_smoke = null
+var cached_captured_smoke = null
 
 var carried_artifact: Node3D = null
 var drop_cooldown: float = 0.0
@@ -67,10 +69,10 @@ func on_artifact_drop():
 	drop_cooldown = 1.5
 
 func spawn_smoke():
-	if cached_smoke_particles:
-		cached_smoke_particles.position = Vector3(0, 1.0, 0) # Center on torso
-		cached_smoke_particles.emitting = false # Force restart for one_shot
-		cached_smoke_particles.emitting = true
+	if cached_captured_smoke:
+		cached_captured_smoke.position = Vector3(0, 1.0, 0) # Center on torso
+		cached_captured_smoke.emitting = false # Force restart for one_shot
+		cached_captured_smoke.emitting = true
 
 var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
@@ -89,13 +91,16 @@ func _ready():
 	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
 	
-	cached_smoke_particles = SMOKE_PARTICLES.instantiate()
-	add_child(cached_smoke_particles)
+	cached_lobby_smoke = LOBBY_JOIN_SMOKE.instantiate()
+	add_child(cached_lobby_smoke)
+	
+	cached_captured_smoke = CAPTURED_SMOKE.instantiate()
+	add_child(cached_captured_smoke)
 	
 	# Trigger the initial spawn-in effect instantly, but deferred so the engine has time to add it to the scene tree!
-	if cached_smoke_particles:
-		cached_smoke_particles.position = Vector3(0, 1.0, 0)
-		cached_smoke_particles.set_deferred("emitting", true)
+	if cached_lobby_smoke:
+		cached_lobby_smoke.position = Vector3(0, 1.0, 0)
+		cached_lobby_smoke.set_deferred("emitting", true)
 	
 	var random_idle = favorite_idles.pick_random()
 	anim_player.play(random_idle, 0.0)

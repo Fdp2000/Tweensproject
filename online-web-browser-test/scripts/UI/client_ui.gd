@@ -528,7 +528,7 @@ func _on_player_joined(id: int) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if not spawned:
 		return
 
@@ -547,7 +547,7 @@ func _on_player_joined(id: int) -> void:
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
-		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 
 		if spawned:
 			for i in 3:
@@ -566,26 +566,32 @@ func _on_game_started() -> void:
 				assigned_spawns[id] = spawn_trans
 				var pf = spawned.get_node_or_null(str(id))
 
+				var target_scene_path = ""
 				if role == GameManager.PlayerRole.COP:
-					if pf:
-						pf.global_transform = spawn_trans
-						pf.team_index = role
-					else:
-						pf = COP_SCENE.instantiate()
-						pf.name = str(id)
-						pf.team_index = role
-						pf.global_transform = spawn_trans
-						spawned.add_child(pf, true)
+					target_scene_path = COP_SCENE.resource_path
 				else:
+					target_scene_path = THIEF_SCENE.resource_path
+
+				if pf and pf.scene_file_path == target_scene_path:
+					# Smart Teleport: Re-use the existing node for performance
+					pf.team_index = role
+					pf.global_transform = spawn_trans
+				else:
+					# Role changed (e.g. Thief -> Cop). We MUST instantiate to get the correct scripts/abilities!
 					if pf:
-						pf.global_transform = spawn_trans
-						pf.team_index = role
+						spawned.remove_child(pf)
+						pf.queue_free()
+
+					var new_pf
+					if role == GameManager.PlayerRole.COP:
+						new_pf = COP_SCENE.instantiate()
 					else:
-						pf = THIEF_SCENE.instantiate()
-						pf.name = str(id)
-						pf.team_index = role
-						pf.global_transform = spawn_trans
-						spawned.add_child(pf, true)
+						new_pf = THIEF_SCENE.instantiate()
+						
+					new_pf.name = str(id)
+					new_pf.team_index = role
+					new_pf.global_transform = spawn_trans
+					spawned.add_child(new_pf, true)
 						
 			# FIX: Wait a fraction of a second to ensure MultiplayerSpawner has fully
 			# replicated the new nodes to all clients before we fire the configuration RPCs!

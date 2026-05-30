@@ -53,6 +53,9 @@ func _ready() -> void:
 	GameManager.game_started.connect(_on_game_started)
 	GameManager.game_ended.connect(_on_game_ended)
 
+	if GameManager.has_signal("player_joined"):
+		GameManager.player_joined.connect(_on_player_joined)
+
 	host_button.pressed.connect(_on_host_pressed)
 	join_button.pressed.connect(_on_join_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_pressed)
@@ -247,25 +250,30 @@ func _on_game_started() -> void:
 
 		for id in GameManager.players.keys():
 			var role = GameManager.players[id]["role"]
+			var pf = spawned.get_node_or_null(str(id))
+			
+			if pf:
+				pf.name += "_deleted"
+				pf.queue_free()
 
-			var pf
+			var new_pf
 			var spawn_trans = Transform3D(Basis(), Vector3(0, 3, 0))
 
 			if role == GameManager.PlayerRole.COP:
-				pf = load("res://scenes/PlayerScenes/Cop.tscn").instantiate()
+				new_pf = load("res://scenes/PlayerScenes/Cop.tscn").instantiate()
 				if cop_spawns.size() > 0:
 					spawn_trans = cop_spawns.pop_back().global_transform.orthonormalized()
 			else:
-				pf = load("res://scenes/PlayerScenes/Thief.tscn").instantiate()
+				new_pf = load("res://scenes/PlayerScenes/Thief.tscn").instantiate()
 				if thief_spawns.size() > 0:
 					spawn_trans = thief_spawns.pop_back().global_transform.orthonormalized()
 
-			pf.name = str(id)
-			pf.team_index = role
-			pf.global_transform = spawn_trans
+			new_pf.name = str(id)
+			new_pf.team_index = role
+			new_pf.global_transform = spawn_trans
 
-			spawned.add_child(pf, true)
-			pf._set_spawn_transform.rpc(spawn_trans)
+			spawned.add_child(new_pf, true)
+			new_pf._set_spawn_transform.rpc(spawn_trans)
 
 	main_menu_canvas.hide()
 	lobby_canvas.hide()
@@ -291,3 +299,47 @@ func _on_game_ended() -> void:
 @rpc("any_peer", "call_local")
 func ping(argument: float) -> void:
 	print("[Multiplayer] Ping from peer %d: arg: %f" % [multiplayer.get_remote_sender_id(), argument])
+
+func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0, 1000, 0)) -> Transform3D:
+	var spawns = get_tree().get_nodes_in_group(group_name)
+	if spawns.size() == 0: return Transform3D(Basis(), fallback_pos)
+	
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	if not spawned: return spawns.pick_random().global_transform.orthonormalized()
+	
+	var available_spawns = []
+	for spawn_marker in spawns:
+		var is_occupied = false
+		for child in spawned.get_children():
+			if child.global_position.distance_to(spawn_marker.global_position) < 1.0:
+				is_occupied = true
+				break
+		if not is_occupied:
+			available_spawns.append(spawn_marker)
+			
+	if available_spawns.size() > 0:
+		return available_spawns.pick_random().global_transform.orthonormalized()
+	else:
+		return spawns.pick_random().global_transform.orthonormalized()
+
+func _on_player_joined(id: int) -> void:
+	if not multiplayer.is_server():
+		return
+
+	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	if not spawned:
+		return
+
+	await get_tree().process_frame
+
+	var spawn_trans = get_unoccupied_spawn("lobby_spawn", Vector3(0, 1000, 0))
+
+	var pf = load("res://scenes/PlayerScenes/Thief.tscn").instantiate()
+	pf.name = str(id)
+	pf.team_index = GameManager.PlayerRole.THIEF
+	pf.global_transform = spawn_trans
+	pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
+	spawned.add_child(pf, true)
+	var skin_index = GameManager.players[id].get("chameleon_skin", 0)
+	if pf.has_method("apply_skin"):
+		pf.rpc("apply_skin", skin_index)

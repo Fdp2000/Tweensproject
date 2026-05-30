@@ -24,9 +24,8 @@ FpsCounter="*uid://b4eervlimq8eq"
 
 [display]
 
-window/size/mode=3
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/stretch/aspect="ignore"
 
 [input]
 

@@ -2829,16 +2829,16 @@ transform = Transform3D(7.5497894e-08, 0, 1, 0, 0.81235856, 0, -1, 0, 7.5497894e
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017673565, 0, -3.6000085)
 
 [node name="CellTarget" parent="Jail" index="1" unique_id=18595314]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -8.66311e-08, 0.5, -0.9869442)
+transform = Transform3D(-0.9999202, 0, 0.012635848, 0, 1, 0, -0.012635848, 0, -0.9999202, 0, 0.5, -0.9869442)
 
 [node name="CellTarget2" parent="Jail" index="2" unique_id=18595315]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 1.5, 0.5, 0.004)
+transform = Transform3D(-0.9846802, 0, -0.17437002, 0, 1, 0, 0.17437002, 0, -0.9846802, 1.5, 0.5, 0.004)
 
 [node name="CellTarget3" parent="Jail" index="3" unique_id=18595316]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -1.5, 0.5, 0.004)
+transform = Transform3D(-0.9982615, 0, 0.058940522, 0, 1, 0, -0.058940522, 0, -0.9982615, -1.5, 0.5, 0.004)
 
 [node name="CellTarget4" parent="Jail" index="4" unique_id=18595317]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 0, 0.5, 1.5)
+transform = Transform3D(-0.99834985, 0, -0.057424683, 0, 1, 0, 0.057424683, 0, -0.99834985, 0, 0.5, 1.5)
 
 [node name="SpawnPoints" type="Node3D" parent="." unique_id=794798467]
 
@@ -2865,7 +2865,7 @@ transform = Transform3D(0.68623745, 0, -0.7273776, 0, 1, 0, 0.7273776, 0, 0.6862
 transform = Transform3D(-0.82579327, 0, 0.5639729, 0, 1, 0, -0.5639729, 0, -0.82579327, 10.376217, 0.3, -9.566141)
 
 [node name="Marker4" type="Marker3D" parent="SpawnPoints/ThiefSpawns" unique_id=1078462269 groups=["thief_spawn"]]
-transform = Transform3D(0.77938163, 0, 0.6265495, 0, 1, 0, -0.6265495, 0, 0.77938163, 8.16329, 0.3, 7.8353806)
+transform = Transform3D(0.6201487, 0, 0.78448427, 0, 1, 0, -0.78448427, 0, 0.6201487, 8.16329, 0.3, 7.8353806)
 
 [node name="Marker5" type="Marker3D" parent="SpawnPoints/ThiefSpawns" unique_id=373504556 groups=["thief_spawn"]]
 transform = Transform3D(-0.45195204, 0, 0.8920422, 0, 1, 0, -0.8920422, 0, -0.45195204, 8.716258, 0.3, -1.8625231)

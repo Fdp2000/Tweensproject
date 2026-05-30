@@ -2367,12 +2367,8 @@ collision_mask = 15
 script = ExtResource("2_thief")
 camo_material = ExtResource("3_41i6f")
 hypno_material = ExtResource("4_lgnbw")
-debug_disable_camo = null
-debug_disable_movement = null
-team_index = null
-sync_target_position = null
-sync_target_rotation = null
-sync_velocity = null
+debug_disable_camo = false
+debug_disable_movement = false
 skin_materials = Array[Material]([SubResource("ShaderMaterial_oure2"), SubResource("ShaderMaterial_ed7xr"), SubResource("ShaderMaterial_pykgt"), SubResource("ShaderMaterial_jk1me"), SubResource("ShaderMaterial_l2fm1"), SubResource("ShaderMaterial_b42vq")])
 skin_mesh_paths = Array[NodePath]([NodePath("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/Chameleon")])
 
