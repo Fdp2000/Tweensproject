@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c3mj02kwrck6d"]
+
+[ext_resource type="PackedScene" uid="uid://cdv3ij2wxp3op" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Stairs_2 Asia.fbx" id="1_vfldg"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_2bxka"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rkr61"]
+render_priority = 0
+shader = ExtResource("2_2bxka")
+shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1fct"]
+render_priority = 0
+shader = ExtResource("2_2bxka")
+shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[node name="Stairs_2 Asia" unique_id=1526316893 instance=ExtResource("1_vfldg")]
+
+[node name="Stairs_2" parent="." index="0" unique_id=675086942]
+surface_material_override/0 = SubResource("ShaderMaterial_rkr61")
+surface_material_override/1 = SubResource("ShaderMaterial_q1fct")
