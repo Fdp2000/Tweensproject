@@ -35,7 +35,6 @@
 [ext_resource type="ArrayMesh" uid="uid://de8vjbrnt64xx" path="res://Assets/Models/LowPolyMuseumAssets/Picture1Image.res" id="23_4r0pn"]
 [ext_resource type="ArrayMesh" uid="uid://na574yivw7li" path="res://Assets/Models/LowPolyMuseumAssets/Picture5Image.res" id="24_08156"]
 [ext_resource type="Texture2D" uid="uid://dtg7p0xjatwvb" path="res://Assets/Textures/leftPhoto.png" id="25_4r0pn"]
-[ext_resource type="Texture2D" uid="uid://cfgkdurh2muj5" path="res://Assets/Textures/panorama-great-nile-near-aswan-pyramids_219717-6797.jpg" id="26_08156"]
 [ext_resource type="ArrayMesh" uid="uid://bpo1q3kvmctxv" path="res://Assets/Models/LowPolyMuseumAssets/StoneSlab.res" id="27_08156"]
 [ext_resource type="Texture2D" uid="uid://c1weba8yk4325" path="res://Assets/environments/uninhabited-desert-landscape-blazing-sun-blue-sky-vector-cartoon-illustration-rocky-canyon-cliffs-sa/2304.w026.n002.3511B.p1.3511.jpg" id="27_atqpw"]
 [ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="28_0k1pn"]
@@ -84,6 +83,7 @@
 [ext_resource type="PackedScene" uid="uid://di7ed08mgdyh4" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/GardenWall_Gate_1 Asia.fbx" id="69_fppg6"]
 [ext_resource type="PackedScene" uid="uid://cdv3ij2wxp3op" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Stairs_2 Asia.fbx" id="70_ol4g5"]
 [ext_resource type="PackedScene" uid="uid://bru4vl6kld8l" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/FootBridge_1_1 Asia.fbx" id="71_nkopf"]
+[ext_resource type="Texture2D" uid="uid://1a08w2kek02w" path="res://Assets/Textures/Dessert_Background PNG.png" id="72_0k1pn"]
 [ext_resource type="PackedScene" uid="uid://bw2pbwpprgunp" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Gong Asia.fbx" id="72_5v6qp"]
 [ext_resource type="PackedScene" uid="uid://b2l8kpsel471n" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/BuildingWall_6_1  Asia.fbx" id="73_vdvdf"]
 [ext_resource type="Shader" uid="uid://bhuh8brxkxoy5" path="res://Assets/Shaders/CamoShader/finalCamo.gdshader" id="76_eslt8"]
@@ -2611,14 +2611,14 @@ uv1_scale = Vector3(2.657, 2.872, 1)
 texture_filter = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hblu4"]
-albedo_texture = ExtResource("26_08156")
+albedo_texture = ExtResource("72_0k1pn")
 uv1_scale = Vector3(0.675, 2.84, 1.09)
 uv1_offset = Vector3(1.746, 0.018, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b7pw1"]
-albedo_texture = ExtResource("26_08156")
-uv1_scale = Vector3(1.378, 2.87, 1)
-uv1_offset = Vector3(0.27, 0, 0)
+albedo_texture = ExtResource("72_0k1pn")
+uv1_scale = Vector3(3.04, 7.421, 2.8)
+uv1_offset = Vector3(-0.15, -1.41, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwy5l"]
 albedo_texture = ExtResource("37_oetox")
