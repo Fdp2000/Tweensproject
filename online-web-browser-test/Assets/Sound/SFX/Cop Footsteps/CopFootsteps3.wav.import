@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nqovgd8ryyl5"
+path="res://.godot/imported/CopFootsteps3.wav-519f5b5c93e270c9abc7da4b0c19f1db.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/SFX/Cop Footsteps/CopFootsteps3.wav"
+dest_files=["res://.godot/imported/CopFootsteps3.wav-519f5b5c93e270c9abc7da4b0c19f1db.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

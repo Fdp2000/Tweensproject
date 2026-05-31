@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2b0qfgno6pmq"
+path="res://.godot/imported/Breath1.wav-c5b372699acba4dd182d2c05b3c7151f.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/SFX/Cops Breath/Breath1.wav"
+dest_files=["res://.godot/imported/Breath1.wav-c5b372699acba4dd182d2c05b3c7151f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
