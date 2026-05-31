@@ -62,6 +62,7 @@ func play_countdown():
 	
 	for i in range(3, 0, -1):
 		countdown_label.text = str(i)
+		AudioManager.play_2d_sfx("countdown_tick")
 		
 		# Continuous cinematic push-in
 		countdown_label.scale = Vector2.ONE * 0.5
@@ -79,6 +80,7 @@ func play_countdown():
 		await get_tree().create_timer(countdown_tick_duration).timeout
 		
 	countdown_label.text = "GO!"
+	AudioManager.play_2d_sfx("countdown_go")
 	countdown_label.scale = Vector2.ZERO
 	countdown_label.modulate.a = 1.0
 	

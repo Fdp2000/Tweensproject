@@ -15,12 +15,17 @@ run/main_scene="uid://viakckuqn6jp"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://default_bus_layout.tres"
+
 [autoload]
 
 Balance="*uid://y8uj2v2j2qol"
 GameManager="*res://scripts/managers/game_manager.gd"
 DevPanel="*uid://basgx885ow765"
 FpsCounter="*uid://b4eervlimq8eq"
+AudioManager="*res://scripts/managers/AudioManager.gd"
 
 [display]
 
