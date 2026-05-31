@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://had73j7kdxbs"
+path="res://.godot/imported/Criminal Chameleons Lobby.mp3-8b25f1ca38f260b035e8b446d78e2e48.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby.mp3"
+dest_files=["res://.godot/imported/Criminal Chameleons Lobby.mp3-8b25f1ca38f260b035e8b446d78e2e48.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
