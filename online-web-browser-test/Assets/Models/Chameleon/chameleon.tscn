@@ -297,6 +297,7 @@ blend_point_3/node = SubResource("AnimationNodeAnimation_vshsj")
 blend_point_3/pos = Vector2(1, 0)
 blend_point_4/node = SubResource("AnimationNodeAnimation_eomr5")
 blend_point_4/pos = Vector2(0, 0)
+sync = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bl0h2"]
 animation = &"Pose_FloorProp"
@@ -317,7 +318,7 @@ animation = &"Pose_WallProp"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6luog"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tkfh4"]
-graph_offset = Vector2(-115.2023, 42.50522)
+graph_offset = Vector2(20.338745, -27.38269)
 nodes/output/position = Vector2(980, 100)
 nodes/CarryMovement/node = SubResource("AnimationNodeBlendSpace2D_snxbm")
 nodes/CarryMovement/position = Vector2(120, 40)

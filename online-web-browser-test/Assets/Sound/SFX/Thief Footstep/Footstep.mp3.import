@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyr4ucbfoeyp"
+path="res://.godot/imported/Footstep.mp3-bbd08f55f1508929361623559bffb06f.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/SFX/Thief Footstep/Footstep.mp3"
+dest_files=["res://.godot/imported/Footstep.mp3-bbd08f55f1508929361623559bffb06f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

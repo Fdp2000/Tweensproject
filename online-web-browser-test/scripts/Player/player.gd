@@ -7,6 +7,7 @@ var ping_manager: Node = null
 var mouse_sensitivity: float = 2.0 
 var target_shoulder_x = 1.0
 var disable_body_rotation: bool = false
+var has_movement_input: bool = false
 
 var player_name: String = ""
 var allow_arrow_keys: bool = false
@@ -70,13 +71,17 @@ func _ready():
 	
 	if is_multiplayer_authority():
 		var cutscene_manager = get_tree().get_root().find_child("CutsceneManager", true, false)
+		
+		var listener = find_child("AudioListener3D", true, false)
 
 		if cutscene_manager and cutscene_manager.get("intro_running"):
 			camera.current = false
+			if listener: listener.clear_current()
 		else:
 			if spring_arm:
 				camera.position.z = spring_arm.spring_length
 			camera.current = true
+			if listener: listener.make_current()
 			
 			# Hide visuals for 1 frame to prevent the chameleon closeup flash
 			visible = false
@@ -290,6 +295,8 @@ func _physics_process(delta):
 	if not controls_enabled:
 		velocity.x = 0
 		velocity.z = 0
+		has_movement_input = false
+		_custom_physics_process(delta, Vector3.ZERO)
 		move_and_slide()
 		return
 	# FIX: Keep sync variables updated so the MultiplayerSynchronizer can automatically broadcast them!
@@ -322,6 +329,8 @@ func _physics_process(delta):
 		
 	if mobile_input and mobile_input.get_joystick_vector() != Vector2.ZERO:
 		input_dir = mobile_input.get_joystick_vector()
+		
+	has_movement_input = input_dir.length_squared() > 0.01
 		
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	

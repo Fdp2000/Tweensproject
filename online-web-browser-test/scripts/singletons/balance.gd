@@ -25,7 +25,7 @@ var thief_spring_arm_length: float = 4.711 # (Your current X distance)
 # ==========================================
 # 3. ABILITIES & INTERACTION TIMERS
 # ==========================================
-var cop_charge_speed_multiplier: float = 1.5 # 1.5x Base Speed
+var cop_charge_speed_multiplier: float = 1.6 # 1.5x Base Speed
 var cop_charge_duration: float = 1.2
 var cop_charge_cooldown: float = 4.2
 var cop_exhaustion_duration: float = 3

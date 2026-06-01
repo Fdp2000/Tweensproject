@@ -432,7 +432,10 @@ func _custom_physics_process(delta, direction):
 		# STATE A: CARRYING AN ARTIFACT
 		# ----------------------------------------
 		
-		anim_tree.active = true
+		if not anim_tree.active:
+			anim_player.stop() # Force-kill the normal run animation so its tracks stop firing!
+			anim_tree.active = true
+			
 		anim_tree.get("parameters/playback").travel("Holding_State")
 		
 		if carried_artifact:
@@ -485,7 +488,9 @@ func _custom_physics_process(delta, direction):
 		# ----------------------------------------
 		# STATE B: NORMAL RUNNING (EMPTY HANDED)
 		# ----------------------------------------
-		anim_tree.active = false
+		if anim_tree.active:
+			anim_tree.active = false
+			anim_player.stop() # Force-kill the tree's ghost tracks!
 		
 		if horizontal_speed_sq > 0.05:
 			if not is_currently_moving:
@@ -772,3 +777,20 @@ func receive_camo_state(auth_time: float):
 			stealth_manager.current_alpha = 0.0
 			is_camo_posing = true
 			anim_player.play("Camo_Pose", 0.0)
+
+# --- FOOTSTEP AUDIO ---
+var last_footstep_time: int = 0
+
+func play_footstep_sound():
+	# For the local player, check input to allow moonwalking. For networked players, check their network velocity!
+	var is_moving = has_movement_input if is_multiplayer_authority() else (sync_velocity.length_squared() > 0.1)
+	var grounded = is_on_floor() if is_multiplayer_authority() else true
+	
+	if not grounded or not is_moving:
+		return
+		
+	var current_time = Time.get_ticks_msec()
+	# 120ms debounce: Short enough to catch fast footsteps, long enough to kill most transition doubles.
+	if current_time - last_footstep_time > 120: 
+		AudioManager.play_3d_sfx("footstep_thief", global_position)
+		last_footstep_time = current_time

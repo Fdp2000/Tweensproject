@@ -287,3 +287,27 @@ func request_capture(thief_id: int):
 # Add this to the very bottom of cop.gd
 func toggle_camera():
 	pass
+
+# --- FOOTSTEP AUDIO ---
+var last_footstep_time: int = 0
+
+func play_footstep_sound():
+	# For the local player, check input to allow moonwalking. For networked players, check their network velocity!
+	var is_moving = has_movement_input if is_multiplayer_authority() else (sync_velocity.length_squared() > 0.1)
+	var grounded = is_on_floor() if is_multiplayer_authority() else true
+	
+	if not grounded or not is_moving:
+		return
+		
+	var current_time = Time.get_ticks_msec()
+	var debounce_time = 50 if is_charging else 120
+	
+	if current_time - last_footstep_time > debounce_time: 
+		if is_charging:
+			AudioManager.play_3d_sfx("footstep_cop_charge", global_position)
+		elif is_debuffed:
+			AudioManager.play_3d_sfx("footstep_cop_debuff", global_position)
+		else:
+			AudioManager.play_3d_sfx("footstep_cop", global_position)
+			
+		last_footstep_time = current_time

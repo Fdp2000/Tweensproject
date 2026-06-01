@@ -74,6 +74,11 @@ func switch_to_camera(index: int):
 	if new_cam3d:
 		new_cam3d.current = true
 		
+		# Clear the Thief's listener so we can hear through the Security Camera!
+		var listener = thief.find_child("AudioListener3D", true, false)
+		if listener:
+			listener.clear_current()
+		
 	cam_yaw = 0.0
 	cam_pitch = 0.0
 	update_camera_rotation()
@@ -125,3 +130,8 @@ func release_cameras():
 			
 	if thief.get("camera"):
 		thief.camera.current = true
+		
+		# Return the listener to the Thief's body!
+		var listener = thief.find_child("AudioListener3D", true, false)
+		if listener:
+			listener.make_current()
