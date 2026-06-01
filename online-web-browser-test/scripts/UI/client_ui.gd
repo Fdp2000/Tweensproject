@@ -356,7 +356,7 @@ func reset_tutorial_button() -> void:
 func show_lobby() -> void:
 	if not has_requested_lobby:
 		return
-
+	set_skin_viewports_active(false)
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
@@ -633,14 +633,25 @@ func _on_game_started() -> void:
 
 
 func set_skin_viewports_active(active: bool) -> void:
-	# Enable/Disable processing of viewports to save performance when not visible
-	var chameleon_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport")
-	var rhino_vp = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport")
-	
+	var chameleon_vp = menu_root.get_node(
+		"MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport"
+	)
+
+	var rhino_vp = menu_root.get_node(
+		"MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport"
+	)
+
 	if chameleon_vp:
 		chameleon_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
+
 	if rhino_vp:
 		rhino_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
+
+	if chameleon_spawn:
+		chameleon_spawn.visible = active
+
+	if rhino_spawn:
+		rhino_spawn.visible = active
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Secret Developer Tool: Press 'T' on the main menu to instantly wipe the tutorial save!

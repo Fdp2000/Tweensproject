@@ -1,6 +1,100 @@
 [gd_scene format=3 uid="uid://cka16p1v4da2s"]
 
 [ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="1_7o1xc"]
+[ext_resource type="AnimationLibrary" uid="uid://dxd455nu0metc" path="res://Assets/Animations/Chameleon/Camo_Pose.res" id="2_rrrt5"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6luog"]
+animation = &"CarryReal"
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_eomr5"]
+filter_enabled = true
+filters = ["metarig/Skeleton3D:Head", "metarig/Skeleton3D:forearm.L", "metarig/Skeleton3D:forearm.R", "metarig/Skeleton3D:hand.L", "metarig/Skeleton3D:hand.L.001", "metarig/Skeleton3D:hand.L.002", "metarig/Skeleton3D:hand.L.003", "metarig/Skeleton3D:hand.R", "metarig/Skeleton3D:hand.R.001", "metarig/Skeleton3D:hand.R.002", "metarig/Skeleton3D:hand.R.003", "metarig/Skeleton3D:shoulder.L", "metarig/Skeleton3D:shoulder.R", "metarig/Skeleton3D:spine.001", "metarig/Skeleton3D:spine.002", "metarig/Skeleton3D:spine.003", "metarig/Skeleton3D:upper_arm.L", "metarig/Skeleton3D:upper_arm.R"]
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_6luog"]
+xfade_time = 0.5
+input_0/name = "carrying"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "hiding"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_agum1"]
+animation = &"Jog Forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8pr8w"]
+animation = &"Jog Backwards"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fl7lw"]
+animation = &"Jog Strafe Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wypft"]
+animation = &"Jog Strafe Right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lc5rj"]
+animation = &"Idle3"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_snxbm"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_agum1")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_8pr8w")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_fl7lw")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_wypft")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_lc5rj")
+blend_point_4/pos = Vector2(0, 0)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bl0h2"]
+animation = &"Pose_FloorProp"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_yu3g8"]
+input_0/name = "wall_prop"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "floor_prop"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_snxbm"]
+animation = &"Pose_WallProp"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_6luog"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tkfh4"]
+graph_offset = Vector2(-115.2023, 42.50522)
+nodes/output/position = Vector2(980, 100)
+nodes/CarryMovement/node = SubResource("AnimationNodeBlendSpace2D_snxbm")
+nodes/CarryMovement/position = Vector2(120, 40)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_6luog")
+nodes/Animation/position = Vector2(260, 340)
+nodes/Blend2/node = SubResource("AnimationNodeBlend2_eomr5")
+nodes/Blend2/position = Vector2(580, 40)
+nodes/Camo_Transition/node = SubResource("AnimationNodeTransition_6luog")
+nodes/Camo_Transition/position = Vector2(780, 300)
+nodes/Pose_Selector/node = SubResource("AnimationNodeTransition_yu3g8")
+nodes/Pose_Selector/position = Vector2(580, 400)
+nodes/Pose_WallProp/node = SubResource("AnimationNodeAnimation_snxbm")
+nodes/Pose_WallProp/position = Vector2(120, 500)
+nodes/Pose_FloorProp/node = SubResource("AnimationNodeAnimation_bl0h2")
+nodes/Pose_FloorProp/position = Vector2(320, 640)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_6luog")
+nodes/TimeScale/position = Vector2(320, 60)
+node_connections = [&"output", 0, &"Camo_Transition", &"Blend2", 0, &"TimeScale", &"Blend2", 1, &"Animation", &"Camo_Transition", 0, &"Blend2", &"Camo_Transition", 1, &"Pose_Selector", &"Pose_Selector", 0, &"Pose_WallProp", &"Pose_Selector", 1, &"Pose_FloorProp", &"TimeScale", 0, &"CarryMovement"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wu8ox"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_q7d5m"]
+states/Holding_State/node = SubResource("AnimationNodeBlendTree_tkfh4")
+states/Holding_State/position = Vector2(459.5, 109.5)
+states/Start/position = Vector2(216, 100)
+transitions = ["Start", "Holding_State", SubResource("AnimationNodeStateMachineTransition_wu8ox")]
 
 [node name="WantedPosterGreen" type="Node2D" unique_id=1363482710]
 
@@ -49,6 +143,23 @@ bones/27/scale = Vector3(0.9999999, 0.9999999, 0.9999998)
 bones/29/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/30/scale = Vector3(1, 1.0000002, 1.0000001)
 bones/31/scale = Vector3(1, 1, 1.0000001)
+
+[node name="AnimationTree2" type="AnimationTree" parent="Chameleon_Character" unique_id=1303043194]
+active = false
+tree_root = SubResource("AnimationNodeStateMachine_q7d5m")
+anim_player = NodePath("../AnimationPlayer2")
+parameters/Holding_State/CarryMovement/blend_position = Vector2(0, 0)
+parameters/Holding_State/Blend2/blend_amount = 1.0
+parameters/Holding_State/Camo_Transition/current_state = ""
+parameters/Holding_State/Camo_Transition/transition_request = ""
+parameters/Holding_State/Camo_Transition/current_index = -1
+parameters/Holding_State/Pose_Selector/current_state = ""
+parameters/Holding_State/Pose_Selector/transition_request = "wall_prop"
+parameters/Holding_State/Pose_Selector/current_index = -1
+parameters/Holding_State/TimeScale/scale = 1.0
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Chameleon_Character" unique_id=1730700045]
+libraries/ = ExtResource("2_rrrt5")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1786036850]
 transform = Transform3D(0.9999983, -0.0018505134, 9.646553e-05, 0.0018505355, 0.9999983, -0.00023198078, -9.6039825e-05, 0.00023215736, 0.99999994, 0.18273991, 1.1225652, 3.4521103)
