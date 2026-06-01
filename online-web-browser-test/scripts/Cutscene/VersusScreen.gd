@@ -58,21 +58,41 @@ func play_countdown():
 	
 	var countdown_tick_duration = total_countdown_time / 3.0
 	
+	countdown_label.pivot_offset = countdown_label.size / 2.0
+	
 	for i in range(3, 0, -1):
 		countdown_label.text = str(i)
+		AudioManager.play_2d_sfx("countdown_tick")
 		
-		# Pulse animation
-		countdown_label.scale = Vector2.ONE * 1.5
+		# Continuous cinematic push-in
+		countdown_label.scale = Vector2.ONE * 0.5
+		countdown_label.modulate.a = 0.0
+		
 		var tween = create_tween()
-		tween.tween_property(countdown_label, "scale", Vector2.ONE, countdown_tick_duration * 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+		tween.set_parallel(true)
+		# Fade in quickly
+		tween.tween_property(countdown_label, "modulate:a", 1.0, countdown_tick_duration * 0.2)
+		# Fade out near the end
+		tween.tween_property(countdown_label, "modulate:a", 0.0, countdown_tick_duration * 0.3).set_delay(countdown_tick_duration * 0.7)
+		# Scale continuously and linearly through the entire duration
+		tween.tween_property(countdown_label, "scale", Vector2.ONE * 1.5, countdown_tick_duration).set_trans(Tween.TRANS_LINEAR)
 		
 		await get_tree().create_timer(countdown_tick_duration).timeout
 		
 	countdown_label.text = "GO!"
-	countdown_label.scale = Vector2.ONE * 2.0
+	AudioManager.play_2d_sfx("countdown_go")
+	countdown_label.scale = Vector2.ZERO
+	countdown_label.modulate.a = 1.0
+	
 	var tween_go = create_tween()
-	tween_go.tween_property(countdown_label, "scale", Vector2.ONE, 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween_go.parallel().tween_property(countdown_label, "modulate:a", 0.0, 1.0)
+	# Burst outwards to a massive size using the bouncy elastic effect
+	tween_go.tween_property(countdown_label, "scale", Vector2.ONE * 1.25, 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	
+	# Wait and hold it on screen
+	tween_go.tween_interval(0.6)
+	
+	# Fade out smoothly
+	tween_go.tween_property(countdown_label, "modulate:a", 0.0, 0.5)
 	
 	await tween_go.finished
 	visible = false

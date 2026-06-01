@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cf4qiveh50olf"
+path="res://.godot/imported/CopWALKFootsteps.wav-66cef4475db6b012a230f6f1e8bece38.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/SFX/Cop Footsteps/CopWALKFootsteps.wav"
+dest_files=["res://.godot/imported/CopWALKFootsteps.wav-66cef4475db6b012a230f6f1e8bece38.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

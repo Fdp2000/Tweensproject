@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://goci1guteymu"]
+
+[ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="1_lsdnm"]
+
+[node name="Chameleon_Character" unique_id=1423752438 instance=ExtResource("1_lsdnm")]

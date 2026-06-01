@@ -144,12 +144,18 @@ func _custom_physics_process(delta, direction):
 		if is_debuffed:
 			active_speed *= Balance.cop_exhaustion_speed_multiplier
 			
-		if direction:
-			velocity.x = direction.x * active_speed
-			velocity.z = direction.z * active_speed
+		if is_on_floor():
+			if direction:
+				velocity.x = direction.x * active_speed
+				velocity.z = direction.z * active_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, (Balance.cop_braking_friction * 60.0 * delta))
+				velocity.z = move_toward(velocity.z, 0, (Balance.cop_braking_friction * 60.0 * delta))
 		else:
-			velocity.x = move_toward(velocity.x, 0, (Balance.cop_braking_friction * 60.0 * delta))
-			velocity.z = move_toward(velocity.z, 0, (Balance.cop_braking_friction * 60.0 * delta))
+			# IN THE AIR: 20% Air Control. Hard to steer mid-air, but allows some minor adjustments.
+			if direction:
+				velocity.x = lerp(velocity.x, direction.x * active_speed, 1.2 * delta)
+				velocity.z = lerp(velocity.z, direction.z * active_speed, 1.2 * delta)
 			
 		if is_multiplayer_authority():
 			_detect_capture()
@@ -207,9 +213,17 @@ func _custom_physics_process(delta, direction):
 		anim_tree.set("parameters/AnimationNodeStateMachine/Normal_Movement/blend_position", smoothed_grid)
 		anim_tree.set("parameters/AnimationNodeStateMachine/Debuff_Movement/blend_position", smoothed_grid)
 			
+		var grounded = true
+		if is_multiplayer_authority():
+			grounded = is_on_floor()
+		else:
+			grounded = abs(sync_velocity.y) < 1.0
+			
 		var playback = anim_tree.get("parameters/AnimationNodeStateMachine/playback")
 		if playback:
-			if is_charging:
+			if not grounded:
+				playback.travel("Fall")
+			elif is_charging:
 				playback.travel("Charge")
 				smoke_particles.emitting = true 
 				if is_multiplayer_authority() and camera_anim and camera_anim.current_animation != "cam_charge":
@@ -287,3 +301,27 @@ func request_capture(thief_id: int):
 # Add this to the very bottom of cop.gd
 func toggle_camera():
 	pass
+
+# --- FOOTSTEP AUDIO ---
+var last_footstep_time: int = 0
+
+func play_footstep_sound():
+	# For the local player, check input to allow moonwalking. For networked players, check their network velocity!
+	var is_moving = has_movement_input if is_multiplayer_authority() else (sync_velocity.length_squared() > 0.1)
+	var grounded = is_on_floor() if is_multiplayer_authority() else true
+	
+	if not grounded or not is_moving:
+		return
+		
+	var current_time = Time.get_ticks_msec()
+	var debounce_time = 50 if is_charging else 120
+	
+	if current_time - last_footstep_time > debounce_time: 
+		if is_charging:
+			AudioManager.play_3d_sfx("footstep_cop_charge", global_position)
+		elif is_debuffed:
+			AudioManager.play_3d_sfx("footstep_cop_debuff", global_position)
+		else:
+			AudioManager.play_3d_sfx("footstep_cop", global_position)
+			
+		last_footstep_time = current_time

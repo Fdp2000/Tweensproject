@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bm3popdgtp0dj"
+path="res://.godot/imported/Final Theif footsteps2.wav-218a25ccaf816231b2c9b65cd1e52568.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/SFX/Thief Footstep/Final Theif footsteps2.wav"
+dest_files=["res://.godot/imported/Final Theif footsteps2.wav-218a25ccaf816231b2c9b65cd1e52568.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

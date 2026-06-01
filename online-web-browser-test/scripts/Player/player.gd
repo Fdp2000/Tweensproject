@@ -7,6 +7,7 @@ var ping_manager: Node = null
 var mouse_sensitivity: float = 2.0 
 var target_shoulder_x = 1.0
 var disable_body_rotation: bool = false
+var has_movement_input: bool = false
 
 var player_name: String = ""
 var allow_arrow_keys: bool = false
@@ -22,6 +23,8 @@ var hits: int = 0
 @export var sync_target_rotation: Vector3 = Vector3.ZERO
 @export var sync_velocity: Vector3 = Vector3.ZERO # Velocity for Dead Reckoning
 var _spawn_relay_ready: bool = false 
+var time_alive: float = 0.0
+
 #cutscene extra
 var controls_enabled: bool = true
 var camera_locked: bool = false
@@ -68,13 +71,17 @@ func _ready():
 	
 	if is_multiplayer_authority():
 		var cutscene_manager = get_tree().get_root().find_child("CutsceneManager", true, false)
+		
+		var listener = find_child("AudioListener3D", true, false)
 
 		if cutscene_manager and cutscene_manager.get("intro_running"):
 			camera.current = false
+			if listener: listener.clear_current()
 		else:
 			if spring_arm:
 				camera.position.z = spring_arm.spring_length
 			camera.current = true
+			if listener: listener.make_current()
 			
 			# Hide visuals for 1 frame to prevent the chameleon closeup flash
 			visible = false
@@ -147,7 +154,11 @@ func _apply_team_colors():
 func request_initial_sync():
 	if not multiplayer.is_server(): return
 	var sender = multiplayer.get_remote_sender_id()
-	rpc_id(sender, "_set_spawn_transform", global_transform)
+	
+	var is_new = time_alive < 2.0
+	
+	# Send the correct transform, team, and name to the client who just loaded this player!
+	rpc_id(sender, "_set_spawn_transform", global_transform, is_new)
 	rpc_id(sender, "sync_team", team_index)
 	rpc_id(sender, "_sync_name", player_name)
 
@@ -240,7 +251,9 @@ func apply_skin(skin_index: int) -> void:
 			print("Skin mesh path missing on ", name, ": ", path)
 # --- SMOOTH INTERPOLATION (Visual frames) ---
 func _process(delta):
-	# Visual smoothing for remote network players
+	time_alive += delta
+	
+	# Cutscene handling for remote network players
 	if not is_multiplayer_authority():
 		if sync_target_position != Vector3.ZERO:
 			
@@ -282,6 +295,8 @@ func _physics_process(delta):
 	if not controls_enabled:
 		velocity.x = 0
 		velocity.z = 0
+		has_movement_input = false
+		_custom_physics_process(delta, Vector3.ZERO)
 		move_and_slide()
 		return
 	# FIX: Keep sync variables updated so the MultiplayerSynchronizer can automatically broadcast them!
@@ -315,6 +330,8 @@ func _physics_process(delta):
 	if mobile_input and mobile_input.get_joystick_vector() != Vector2.ZERO:
 		input_dir = mobile_input.get_joystick_vector()
 		
+	has_movement_input = input_dir.length_squared() > 0.01
+		
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	_custom_physics_process(delta, direction)
@@ -334,8 +351,11 @@ func _custom_physics_process(_delta, direction):
 
 
 @rpc("any_peer", "call_local")
-func _set_spawn_transform(trans: Transform3D):
+func _set_spawn_transform(trans: Transform3D, play_smoke: bool = false):
 	global_transform = trans
+	
+	if play_smoke and has_method("play_lobby_smoke"):
+		call("play_lobby_smoke")
 	
 	# FIX: Hide the player for 1 frame when teleporting to prevent the camera from colliding 
 	# with the old environment and flashing a closeup of the chameleon's face!

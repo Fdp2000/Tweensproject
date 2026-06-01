@@ -1,6 +1,7 @@
 extends "res://scripts/Player/player.gd"
 
-const SMOKE_PARTICLES = preload("res://Assets/Particles/smoke_particles.tscn")
+const LOBBY_JOIN_SMOKE = preload("res://Assets/Particles/smoke_particles.tscn")
+const CAPTURED_SMOKE = preload("res://Assets/Particles/smoke_particles_captured.tscn")
 
 @export var camo_material: ShaderMaterial
 @export var hypno_material: ShaderMaterial
@@ -23,7 +24,8 @@ var camera_manager: Node = null
 var stealth_manager: Node = null
 var world_ping_manager: Node = null
 
-var cached_smoke_particles = null
+var cached_lobby_smoke = null
+var cached_captured_smoke = null
 
 var carried_artifact: Node3D = null
 var drop_cooldown: float = 0.0
@@ -66,11 +68,24 @@ func on_artifact_drop():
 	
 	drop_cooldown = 1.5
 
+var has_played_lobby_smoke = false
+
+func play_lobby_smoke():
+	if has_played_lobby_smoke: return
+	has_played_lobby_smoke = true
+	
+	if cached_lobby_smoke:
+		cached_lobby_smoke.position = Vector3(0, 0.5, 0)
+		get_tree().process_frame.connect(func():
+			if is_instance_valid(cached_lobby_smoke):
+				cached_lobby_smoke.emitting = true
+		, CONNECT_ONE_SHOT)
+
 func spawn_smoke():
-	if cached_smoke_particles:
-		cached_smoke_particles.position = Vector3(0, 1.0, 0) # Center on torso
-		cached_smoke_particles.emitting = false # Force restart for one_shot
-		cached_smoke_particles.emitting = true
+	if cached_captured_smoke:
+		cached_captured_smoke.position = Vector3(0, 0.5, 0) # Center on torso
+		cached_captured_smoke.emitting = false # Force restart for one_shot
+		cached_captured_smoke.emitting = true
 
 var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
@@ -89,13 +104,14 @@ func _ready():
 	nav_agent.path_changed.connect(_on_path_changed)
 	add_child(nav_agent)
 	
-	cached_smoke_particles = SMOKE_PARTICLES.instantiate()
-	add_child(cached_smoke_particles)
+	cached_lobby_smoke = LOBBY_JOIN_SMOKE.instantiate()
+	add_child(cached_lobby_smoke)
 	
-	# Trigger the initial spawn-in effect instantly, but deferred so the engine has time to add it to the scene tree!
-	if cached_smoke_particles:
-		cached_smoke_particles.position = Vector3(0, 1.0, 0)
-		cached_smoke_particles.set_deferred("emitting", true)
+	cached_captured_smoke = CAPTURED_SMOKE.instantiate()
+	add_child(cached_captured_smoke)
+	
+	if multiplayer.is_server():
+		play_lobby_smoke()
 	
 	var random_idle = favorite_idles.pick_random()
 	anim_player.play(random_idle, 0.0)
@@ -368,20 +384,33 @@ func _custom_physics_process(delta, direction):
 		else:
 			current_speed_mult = 1.0
 			
-		if direction:
-			velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
-			velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
+		var target_speed = Balance.base_thief_speed * current_speed_mult
+		
+		if is_on_floor():
+			if direction:
+				velocity.x = direction.x * target_speed
+				velocity.z = direction.z * target_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
+				velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
 		else:
-			velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
-			velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
+			# IN THE AIR: 75% Air Control (Agile Thief). Use lerp to gently steer momentum instead of snapping!
+			if direction:
+				velocity.x = lerp(velocity.x, direction.x * target_speed, 3.5 * delta)
+				velocity.z = lerp(velocity.z, direction.z * target_speed, 3.5 * delta)
 			
 
 	# ==========================================
 	# 2. ANIMATION STATE MACHINE (NOW IT WILL RUN!)
 	# ==========================================
 	var current_vel = velocity
+	var grounded = true
+	
 	if not is_multiplayer_authority():
 		current_vel = sync_velocity
+		grounded = abs(sync_velocity.y) < 1.0
+	else:
+		grounded = is_on_floor()
 
 	var horizontal_speed_sq = Vector2(current_vel.x, current_vel.z).length_squared()
 
@@ -416,7 +445,10 @@ func _custom_physics_process(delta, direction):
 		# STATE A: CARRYING AN ARTIFACT
 		# ----------------------------------------
 		
-		anim_tree.active = true
+		if not anim_tree.active:
+			anim_player.stop() # Force-kill the normal run animation so its tracks stop firing!
+			anim_tree.active = true
+			
 		anim_tree.get("parameters/playback").travel("Holding_State")
 		
 		if carried_artifact:
@@ -439,7 +471,10 @@ func _custom_physics_process(delta, direction):
 		else:
 			is_trying_to_move = horizontal_speed_sq > 0.05
 		
-		if is_trying_to_move:
+		if not grounded:
+			is_currently_moving = false
+			anim_tree.get("parameters/playback").travel("Fall")
+		elif is_trying_to_move:
 			is_camo_posing = false
 			is_currently_moving = true 
 			anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
@@ -469,10 +504,16 @@ func _custom_physics_process(delta, direction):
 		# ----------------------------------------
 		# STATE B: NORMAL RUNNING (EMPTY HANDED)
 		# ----------------------------------------
-		anim_tree.active = false
+		if anim_tree.active:
+			anim_tree.active = false
+			anim_player.stop() # Force-kill the tree's ghost tracks!
 		
-		if horizontal_speed_sq > 0.05:
-			if not is_currently_moving:
+		if not grounded:
+			is_currently_moving = false
+			if anim_player.current_animation != "Fall":
+				anim_player.play("Fall", 0.2)
+		elif horizontal_speed_sq > 0.05:
+			if not is_currently_moving or anim_player.current_animation == "Fall":
 				is_currently_moving = true
 				var random_run = favorite_runs.pick_random()
 				# AUTO-SYNC: Calculate exact speed based on actual velocity!
@@ -484,7 +525,7 @@ func _custom_physics_process(delta, direction):
 			var target_angle = atan2(current_vel.x, current_vel.z) 
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 		else:
-			if is_currently_moving:
+			if is_currently_moving or anim_player.current_animation == "Fall":
 				is_currently_moving = false
 				var random_idle = favorite_idles.pick_random()
 				anim_player.play(random_idle, 0.3) 
@@ -756,3 +797,20 @@ func receive_camo_state(auth_time: float):
 			stealth_manager.current_alpha = 0.0
 			is_camo_posing = true
 			anim_player.play("Camo_Pose", 0.0)
+
+# --- FOOTSTEP AUDIO ---
+var last_footstep_time: int = 0
+
+func play_footstep_sound():
+	# For the local player, check input to allow moonwalking. For networked players, check their network velocity!
+	var is_moving = has_movement_input if is_multiplayer_authority() else (sync_velocity.length_squared() > 0.1)
+	var grounded = is_on_floor() if is_multiplayer_authority() else true
+	
+	if not grounded or not is_moving:
+		return
+		
+	var current_time = Time.get_ticks_msec()
+	# 120ms debounce: Short enough to catch fast footsteps, long enough to kill most transition doubles.
+	if current_time - last_footstep_time > 120: 
+		AudioManager.play_3d_sfx("footstep_thief", global_position)
+		last_footstep_time = current_time
