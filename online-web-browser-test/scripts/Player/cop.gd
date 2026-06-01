@@ -94,7 +94,12 @@ func _custom_physics_process(delta, direction):
 	if is_debuffed and not was_debuffed:
 		breath_player.stream = breath_streams.pick_random()
 		breath_player.pitch_scale = randf_range(0.9, 1.05)
-		breath_player.volume_db = 0.0
+		
+		var config_vol = 0.0
+		if AudioManager.SFX_CONFIG.has("cop_exhausted_breath"):
+			config_vol = AudioManager.SFX_CONFIG["cop_exhausted_breath"].get("volume", 0.0)
+		breath_player.volume_db = config_vol
+		
 		breath_player.play()
 	elif not is_debuffed and was_debuffed:
 		if breath_player.playing:
@@ -346,7 +351,7 @@ var last_footstep_time: int = 0
 
 func play_footstep_sound():
 	# For the local player, check input to allow moonwalking. For networked players, check their network velocity!
-	var is_moving = has_movement_input if is_multiplayer_authority() else (sync_velocity.length_squared() > 0.1)
+	var is_moving = (has_movement_input or is_charging) if is_multiplayer_authority() else (sync_velocity.length_squared() > 0.1)
 	var grounded = is_on_floor() if is_multiplayer_authority() else true
 	
 	if not grounded or not is_moving:

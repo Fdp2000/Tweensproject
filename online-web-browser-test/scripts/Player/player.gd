@@ -187,8 +187,9 @@ func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if not is_mobile_device() and Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			
-			# FIX: Only recapture the mouse if the DevPanel is NOT visible!
-			if DevPanel and not DevPanel.visible:
+			# FIX: Only recapture the mouse if the DevPanel AND AudioDevTool are NOT visible!
+			var audio_dev_tool = get_tree().get_root().get_node_or_null("AudioDevTool")
+			if (not DevPanel or not DevPanel.visible) and not audio_dev_tool:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 			
 	if event is InputEventMouseMotion and not is_mobile_device() and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

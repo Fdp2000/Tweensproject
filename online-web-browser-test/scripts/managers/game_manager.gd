@@ -28,7 +28,7 @@ var last_heartbeat_times: Dictionary = {}
 var last_server_pong_time: float = 0.0
 var heartbeat_timer: Timer
 
-@export var pre_game_fade_delay: float = 1.0
+@export var pre_game_fade_delay: float = 1.5
 
 signal player_joined(id: int)
 signal lobby_updated
@@ -46,6 +46,7 @@ var selected_chameleon_skin: int = 0
 var selected_rhino_skin: int = 0
 
 func _ready():
+	print("GameManager is ready.")
 	heartbeat_timer = Timer.new()
 	heartbeat_timer.wait_time = 5.0
 	heartbeat_timer.autostart = true
@@ -266,6 +267,18 @@ func thief_rescued():
 	if not multiplayer.is_server(): return
 	active_thieves += 1
 
+
+func _unhandled_input(event):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F10:
+		# Check if it already exists
+		var existing = get_tree().get_root().get_node_or_null("AudioDevTool")
+		if not existing:
+			var devtool_script = load("res://scripts/UI/AudioDevTool.gd")
+			var devtool = devtool_script.new()
+			devtool.name = "AudioDevTool"
+			get_tree().get_root().add_child(devtool)
+		else:
+			existing.queue_free()
 
 func check_game_validity():
 	if not multiplayer.is_server(): return

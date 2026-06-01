@@ -3,7 +3,7 @@ extends Node
 # THE MASTER AUDIO CONFIGURATION
 # Keys are the sound names you will call in code.
 # The paths assume you have placed your files in res://Assets/Sound/SFX/
-const MUSIC_CONFIG = {
+var MUSIC_CONFIG = {
 	"main_menu":    {"path": "res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby.mp3", "volume": -5.0, "bus": "Music"},
 	"match_start":  {"path": "res://Assets/Sound/Music/Intro Cutscene/Brassfall Surge.ogg", "volume": 0.0, "bus": "Music"},
 	"base_tension": {"path": "res://Assets/Sound/Music/BaseMap Song/Stealth Drum Loop.ogg", "volume": -8.0, "bus": "Music"},
@@ -14,7 +14,7 @@ const MUSIC_CONFIG = {
 	"biome_asia":   {"path": "res://Assets/Sound/Music/Biome_Asia.ogg", "volume": -8.0, "bus": "Music"}
 }
 
-const SFX_CONFIG = {
+var SFX_CONFIG = {
 	# --- 2D / UI SOUNDS ---
 	"ui_click":       {"path": "res://Assets/Sound/SFX/UI Click/click1.wav",       "volume": -5.0, "bus": "UI"},
 	"countdown_tick": {"path": "res://Assets/Sound/SFX/Countdown/Beep.wav", "volume": -8.0, "bus": "UI"},
@@ -43,6 +43,14 @@ const SFX_CONFIG = {
 		"path": "res://Assets/Sound/SFX/Cop Footsteps/CopWALKFootsteps.wav", 
 		"volume": -12.0, "bus": "Quiet SFX", "random_pitch": [0.8, 0.95],
 		"max_distance": 15.0 # Exhausted dragging feet
+	},
+	"cop_exhausted_breath": {
+		"paths": [
+			"res://Assets/Sound/SFX/Cops Breath/Breath1.wav",
+			"res://Assets/Sound/SFX/Cops Breath/Breath2.wav",
+			"res://Assets/Sound/SFX/Cops Breath/Breath3.wav"
+		],
+		"volume": 0.0, "bus": "SFX", "max_distance": 20.0
 	},
 	"cop_vocals_grunt": {"path": "res://Assets/Sound/SFX/RhinoCharge.mp3", "volume": 0.0, "bus": "Loud SFX", "max_distance": 60.0},
 	"charge_wall_impact": {"path": "res://Assets/Sound/SFX/RhinoImpact.mp3", "volume": 5.0, "bus": "Loud SFX", "max_distance": 80.0},
@@ -131,7 +139,9 @@ func play_2d_sfx(sound_name: String):
 		return
 		
 	var config = SFX_CONFIG[sound_name]
-	# Pass "path" or "paths"
+	if config.get("disabled", false):
+		return
+		
 	var path_data = config.get("paths", config.get("path", ""))
 	var stream = _get_stream(path_data)
 	
@@ -145,7 +155,9 @@ func play_2d_sfx(sound_name: String):
 			player.volume_db = config.get("volume", 0.0)
 			player.bus = config.get("bus", "Master")
 			
-			if config.has("random_pitch"):
+			if config.has("pitch_override"):
+				player.pitch_scale = config["pitch_override"]
+			elif config.has("random_pitch"):
 				player.pitch_scale = randf_range(config["random_pitch"][0], config["random_pitch"][1])
 			else:
 				player.pitch_scale = 1.0
@@ -165,6 +177,9 @@ func play_3d_sfx(sound_name: String, global_pos: Vector3):
 		return
 		
 	var config = SFX_CONFIG[sound_name]
+	if config.get("disabled", false):
+		return
+		
 	var path_data = config.get("paths", config.get("path", ""))
 	var stream = _get_stream(path_data)
 	
@@ -178,9 +193,13 @@ func play_3d_sfx(sound_name: String, global_pos: Vector3):
 			player.volume_db = config.get("volume", 0.0)
 			player.bus = config.get("bus", "Master")
 			player.max_distance = config.get("max_distance", 30.0) 
+			player.unit_size = config.get("unit_size", 1.0)
+			player.attenuation_model = config.get("attenuation_model", AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC)
 			
 			# Apply random pitch if configured
-			if config.has("random_pitch"):
+			if config.has("pitch_override"):
+				player.pitch_scale = config["pitch_override"]
+			elif config.has("random_pitch"):
 				player.pitch_scale = randf_range(config["random_pitch"][0], config["random_pitch"][1])
 			else:
 				player.pitch_scale = 1.0
