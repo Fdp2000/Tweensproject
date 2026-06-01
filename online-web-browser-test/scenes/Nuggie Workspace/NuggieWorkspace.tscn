@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="10_av4ca"]
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="11_3qlyf"]
 [ext_resource type="PackedScene" uid="uid://hjeyxpsyjold" path="res://Assets/Models/Van/Van.tscn" id="12_pmc3y"]
+[ext_resource type="PackedScene" uid="uid://c4hqr2luw7xlf" path="res://Assets/Models/Elephant/elephant_smith.tscn" id="13_fb0o2"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
@@ -26,7 +27,6 @@ material = SubResource("StandardMaterial3D_3qlyf")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dg571"]
 render_priority = 0
 shader = ExtResource("1_v7yhp")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(0, 1, 1, 1)
 shader_parameter/use_stepped = true
 shader_parameter/steps = 3.0
@@ -93,7 +93,6 @@ shadow_mesh = SubResource("ArrayMesh_hykh3")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_65afw"]
 render_priority = 0
 shader = ExtResource("1_v7yhp")
-shader_parameter/stealth_fade = 0.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/albedo_texture = ExtResource("3_65afw")
 shader_parameter/use_stepped = true
@@ -214,3 +213,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.890285, 0, -0.6751852)
 
 [node name="WhiteVan" parent="." unique_id=628082721 instance=ExtResource("12_pmc3y")]
 transform = Transform3D(-0.12685685, 0, -0.991921, 0, 1, 0, 0.991921, 0, -0.12685685, -16.748495, 0, 3.4993238)
+
+[node name="ElephantSmith" parent="." unique_id=134688640 instance=ExtResource("13_fb0o2")]
+transform = Transform3D(-0.22923432, 0, -0.97337127, 0, 1, 0, 0.97337127, 0, -0.22923432, -26.351492, 0, 3.8421307)
