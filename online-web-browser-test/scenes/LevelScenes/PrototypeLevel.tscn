@@ -34,18 +34,15 @@
 [ext_resource type="ArrayMesh" uid="uid://qv4wgr0qt1yt" path="res://Assets/Models/LowPolyMuseumAssets/Railing.res" id="31_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://dnv58nobc7b7j" path="res://Assets/Models/LowPolyMuseumAssets/WallBigOuter.res" id="34_oc075"]
 [ext_resource type="Texture2D" uid="uid://d0etc28un66rp" path="res://Assets/Textures/pexels-photo-6555895.jpeg" id="36_r7r08"]
-[ext_resource type="PackedScene" uid="uid://c8wgihwxib64e" path="res://rock_1icy.res" id="37_bgrk7"]
 [ext_resource type="PackedScene" uid="uid://bvwgdm21faobm" path="res://Assets/Models/Security Cams/SecCam.tscn" id="38_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://6khnohw17drg" path="res://Assets/Models/new_array_mesh.res" id="39_88xne"]
 [ext_resource type="PackedScene" uid="uid://djq8usr0n1wxf" path="res://icycliff1.res" id="39_bva6v"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="40_0hqwr"]
 [ext_resource type="ArrayMesh" uid="uid://bhxw5640dfg4r" path="res://Assets/Models/mediumpine.tres" id="41_c8qq2"]
-[ext_resource type="PackedScene" uid="uid://cg8j4jqfcc0ia" path="res://rock_4_icy.res" id="41_jeskk"]
 [ext_resource type="Texture2D" uid="uid://c7nd4mv7qn7bt" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeLeaf.png" id="42_p8w5a"]
 [ext_resource type="Texture2D" uid="uid://dr8d66b6lkxj6" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeTrunk.png" id="43_0t7hq"]
 [ext_resource type="PackedScene" uid="uid://ct6cicuc4et7s" path="res://rock_3_icy.res" id="43_ipwqt"]
 [ext_resource type="ArrayMesh" uid="uid://boev4i360s4n5" path="res://Assets/Models/smolpine.tres" id="44_xwy5l"]
-[ext_resource type="PackedScene" uid="uid://bwykgu7qwxkdw" path="res://rock_2_icy.res" id="45_8oxyp"]
 [ext_resource type="ArrayMesh" uid="uid://d3rbwblcji7go" path="res://Assets/Models/binkstone.res" id="46_217hv"]
 [ext_resource type="ArrayMesh" uid="uid://b5xvphu3ri6cj" path="res://Assets/environments/Ultimate Nature Pack by Quaternius/OBJ/WoodLog.obj" id="47_w6te4"]
 [ext_resource type="ArrayMesh" uid="uid://2e2socd2besa" path="res://Assets/environments/Ultimate Nature Pack by Quaternius/OBJ/TreeStump.obj" id="49_xo0rd"]
@@ -8872,7 +8869,7 @@ mesh = ExtResource("15_46wyf")
 
 [node name="IceMisc" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=1342205140]
 
-[node name="Rock_1 Asia" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=765852360 instance=ExtResource("37_bgrk7")]
+[node name="Rock_1 Asia" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=765852360]
 transform = Transform3D(-3.059797e-08, 0, 1, 0, 0.6, 0, -0.7, 0, -4.371139e-08, 12.5046215, 0.10842365, -37.004566)
 
 [node name="Clif_1  Asia3" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=873864 instance=ExtResource("39_bva6v")]
@@ -8884,7 +8881,7 @@ transform = Transform3D(0.44538325, 0.06255651, -0.15759781, -0.050775424, 0.449
 [node name="Clif_1  Asia4" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=1993611465 instance=ExtResource("39_bva6v")]
 transform = Transform3D(0.1, 0, 0.34641013, 0, 0.19999999, 0, -0.17320506, 0, 0.2, 19.7, 0.16441244, -36.4)
 
-[node name="Rock_4 Asia2" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=797113276 instance=ExtResource("41_jeskk")]
+[node name="Rock_4 Asia2" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=797113276]
 transform = Transform3D(1.6, 0, 0, 0, 2.3000002, 0, 0, 0, 1, 17.699999, 0.19999999, -30)
 
 [node name="Rock_3 Asia2" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=65057842 instance=ExtResource("43_ipwqt")]
@@ -8893,10 +8890,10 @@ transform = Transform3D(1, 0, 0, 0, 1.2, 0, 0, 0, 1, 30, 0.19999999, -30.2)
 [node name="Rock_2 Asia" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=908190074 instance=ExtResource("90_0k1pn")]
 transform = Transform3D(-2.9802322e-08, 0, -1.1035274, 0, 1.0639998, 0, 0.6136295, 0, 8.940697e-08, 38.300003, 0.19999999, -30.2)
 
-[node name="Rock_2 Asia" parent="Arena 2/NavigationRegion3D/IceMisc/Rock_2 Asia" unique_id=225091132 instance=ExtResource("45_8oxyp")]
+[node name="Rock_2 Asia" parent="Arena 2/NavigationRegion3D/IceMisc/Rock_2 Asia" unique_id=225091132]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, -1.7763568e-15, 0, 0.99999994, -0.97779083, 0, 0.5437088)
 
-[node name="Rock_2 Asia3" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=824880232 instance=ExtResource("45_8oxyp")]
+[node name="Rock_2 Asia3" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=824880232]
 transform = Transform3D(-2.9802322e-08, 0, -1.1035274, 0, 1.0639998, 0, 0.6136295, 0, 8.940697e-08, 37.4, 0.19999999, -38.4)
 
 [node name="EgyptMisc" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=1288077728]
