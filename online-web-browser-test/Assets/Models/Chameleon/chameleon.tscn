@@ -346,11 +346,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o8kdd"]
 xfade_time = 0.1
-advance_mode = 2
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c7tis"]
 xfade_time = 0.3
-advance_mode = 2
+advance_mode = 0
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_c7tis"]
 states/Fall/node = SubResource("AnimationNodeAnimation_yu3g8")

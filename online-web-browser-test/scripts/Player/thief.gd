@@ -394,18 +394,23 @@ func _custom_physics_process(delta, direction):
 				velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
 				velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
 		else:
-			# IN THE AIR: 50% Air Control (Agile Thief). Use lerp to gently steer momentum instead of snapping!
+			# IN THE AIR: 75% Air Control (Agile Thief). Use lerp to gently steer momentum instead of snapping!
 			if direction:
-				velocity.x = lerp(velocity.x, direction.x * target_speed, 2.0 * delta)
-				velocity.z = lerp(velocity.z, direction.z * target_speed, 2.0 * delta)
+				velocity.x = lerp(velocity.x, direction.x * target_speed, 3.5 * delta)
+				velocity.z = lerp(velocity.z, direction.z * target_speed, 3.5 * delta)
 			
 
 	# ==========================================
 	# 2. ANIMATION STATE MACHINE (NOW IT WILL RUN!)
 	# ==========================================
 	var current_vel = velocity
+	var grounded = true
+	
 	if not is_multiplayer_authority():
 		current_vel = sync_velocity
+		grounded = abs(sync_velocity.y) < 1.0
+	else:
+		grounded = is_on_floor()
 
 	var horizontal_speed_sq = Vector2(current_vel.x, current_vel.z).length_squared()
 
@@ -466,7 +471,7 @@ func _custom_physics_process(delta, direction):
 		else:
 			is_trying_to_move = horizontal_speed_sq > 0.05
 		
-		if not is_on_floor():
+		if not grounded:
 			is_currently_moving = false
 			anim_tree.get("parameters/playback").travel("Fall")
 		elif is_trying_to_move:
@@ -503,7 +508,7 @@ func _custom_physics_process(delta, direction):
 			anim_tree.active = false
 			anim_player.stop() # Force-kill the tree's ghost tracks!
 		
-		if not is_on_floor():
+		if not grounded:
 			is_currently_moving = false
 			if anim_player.current_animation != "Fall":
 				anim_player.play("Fall", 0.2)

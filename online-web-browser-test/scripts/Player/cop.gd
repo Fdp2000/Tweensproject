@@ -152,10 +152,10 @@ func _custom_physics_process(delta, direction):
 				velocity.x = move_toward(velocity.x, 0, (Balance.cop_braking_friction * 60.0 * delta))
 				velocity.z = move_toward(velocity.z, 0, (Balance.cop_braking_friction * 60.0 * delta))
 		else:
-			# IN THE AIR: 5% Air Control (Heavy Rhino). Extremely hard to steer mid-air!
+			# IN THE AIR: 20% Air Control. Hard to steer mid-air, but allows some minor adjustments.
 			if direction:
-				velocity.x = lerp(velocity.x, direction.x * active_speed, 0.5 * delta)
-				velocity.z = lerp(velocity.z, direction.z * active_speed, 0.5 * delta)
+				velocity.x = lerp(velocity.x, direction.x * active_speed, 1.2 * delta)
+				velocity.z = lerp(velocity.z, direction.z * active_speed, 1.2 * delta)
 			
 		if is_multiplayer_authority():
 			_detect_capture()
@@ -213,9 +213,15 @@ func _custom_physics_process(delta, direction):
 		anim_tree.set("parameters/AnimationNodeStateMachine/Normal_Movement/blend_position", smoothed_grid)
 		anim_tree.set("parameters/AnimationNodeStateMachine/Debuff_Movement/blend_position", smoothed_grid)
 			
+		var grounded = true
+		if is_multiplayer_authority():
+			grounded = is_on_floor()
+		else:
+			grounded = abs(sync_velocity.y) < 1.0
+			
 		var playback = anim_tree.get("parameters/AnimationNodeStateMachine/playback")
 		if playback:
-			if not is_on_floor():
+			if not grounded:
 				playback.travel("Fall")
 			elif is_charging:
 				playback.travel("Charge")
