@@ -137,6 +137,7 @@ func _ready() -> void:
 
 
 func show_main_menu() -> void:
+	AudioManager.play_music("main_menu", 1.0, 0.0)
 	reset_tutorial_button()
 
 	main_menu_canvas.show()
@@ -153,6 +154,7 @@ func show_main_menu() -> void:
 
 
 func _on_play_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 
 	main_menu_panel.hide()
@@ -160,6 +162,7 @@ func _on_play_pressed() -> void:
 
 
 func _on_play_back_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	play_panel.hide()
 	main_menu_panel.show()
 
@@ -174,6 +177,7 @@ func cancel_tutorial_intro() -> void:
 	reset_tutorial_button()
 
 func _on_skins_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 	set_skin_viewports_active(true)
 
@@ -189,6 +193,7 @@ func _on_skins_pressed() -> void:
 
 
 func _on_skins_back_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	set_skin_viewports_active(false)
 
 	var tween := create_tween()
@@ -356,6 +361,8 @@ func reset_tutorial_button() -> void:
 func show_lobby() -> void:
 	if not has_requested_lobby:
 		return
+	# Duck the volume slightly (-4 decibels) so players can chat in the lobby!
+	AudioManager.play_music("main_menu", 1.0, -5.0)
 	set_skin_viewports_active(false)
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
@@ -371,6 +378,7 @@ func show_lobby() -> void:
 
 
 func _on_host_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 	save_selected_skins()
 
@@ -385,6 +393,7 @@ func _on_host_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 	save_selected_skins()
 
@@ -404,6 +413,7 @@ func _on_join_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 
 	main_menu_canvas.hide()
@@ -413,20 +423,24 @@ func _on_tutorial_pressed() -> void:
 
 
 func _on_tutorial_next_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.show()
 
 
 func _on_cop_back_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	tutorial_cop_canvas.hide()
 	tutorial_canvas.show()
 
 
 func _on_cop_next_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	show_main_menu()
 
 
 func _on_quit_pressed() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	tutorial_intro_cancelled = true
 	get_tree().quit()
 
@@ -525,6 +539,7 @@ func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0,
 		return spawns.pick_random().global_transform.orthonormalized()
 
 func _on_player_joined(id: int) -> void:
+	AudioManager.play_2d_sfx("join_lobby")
 	if not multiplayer.is_server():
 		return
 

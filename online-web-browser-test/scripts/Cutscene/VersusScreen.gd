@@ -94,5 +94,4 @@ func play_countdown():
 	# Fade out smoothly
 	tween_go.tween_property(countdown_label, "modulate:a", 0.0, 0.5)
 	
-	await tween_go.finished
-	visible = false
+	tween_go.tween_callback(func(): visible = false)

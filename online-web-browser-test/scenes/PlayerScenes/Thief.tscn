@@ -10,7 +10,7 @@
 [ext_resource type="Animation" uid="uid://cnkahutmf48ot" path="res://Assets/Animations/Chameleon/Idle2.res" id="7_1raaj"]
 [ext_resource type="PackedScene" uid="uid://dnj1qlpx0weot" path="res://Assets/Models/Chameleon/chameleon.tscn" id="7_7jg2g"]
 [ext_resource type="Texture2D" uid="uid://ly1a6ntk3kyu" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_2.png" id="7_8gtex"]
-[ext_resource type="Animation" uid="uid://mh6wtxh2auyg" path="res://Assets/Animations/Carry/Carrying.res" id="7_b17lj"]
+[ext_resource type="Animation" uid="uid://ce26fke58nnvf" path="res://Assets/Animations/Carry/Carrying.res" id="7_b17lj"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="7_iuwyu"]
 [ext_resource type="Animation" uid="uid://bqp1nobyaxhr8" path="res://Assets/Animations/Chameleon/Run2.res" id="7_j3oqh"]
 [ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="8_1vv2c"]

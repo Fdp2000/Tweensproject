@@ -623,6 +623,14 @@ func _process(delta):
 @rpc("any_peer", "call_local")
 func on_captured():
 	if is_hypnotized: return
+	
+	# Play the global 3D capture bonk for everyone
+	AudioManager.play_3d_sfx("capture", global_position)
+	
+	# If I am the one who just got captured, blast the devastating jail sound in my ears
+	if multiplayer.get_unique_id() == str(name).to_int():
+		AudioManager.play_2d_sfx("jailed")
+	
 	is_hypnotized = true
 	disable_body_rotation = true 
 	spawn_smoke()

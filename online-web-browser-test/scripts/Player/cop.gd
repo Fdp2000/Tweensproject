@@ -93,7 +93,10 @@ func _custom_physics_process(delta, direction):
 			charge_time_left -= delta
 			# IF THE CHARGE ENDS (Time out or hit a wall)
 			if charge_time_left <= 0 or is_on_wall():
+				if is_on_wall():
+					AudioManager.play_3d_sfx("charge_wall_impact", global_position)
 				is_charging = false
+				charge_time_left = 0.0
 				is_debuffed = true
 				debuff_timer = Balance.cop_exhaustion_duration
 				
@@ -109,6 +112,8 @@ func _custom_physics_process(delta, direction):
 			is_charging = true
 			charge_time_left = Balance.cop_charge_duration
 			charge_cooldown_left = Balance.cop_charge_cooldown
+			
+			AudioManager.play_3d_sfx("cop_vocals_grunt", global_position)
 			
 			if direction != Vector3.ZERO:
 				charge_direction = direction

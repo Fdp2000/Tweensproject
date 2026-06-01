@@ -160,6 +160,7 @@ func request_pickup(player_id: int):
 
 @rpc("any_peer", "call_local")
 func confirm_pickup(player_id: int):
+	AudioManager.play_3d_sfx("artifact_pickup", global_position)
 	var particles = get_node("artifactParticles")
 	particles.emitting = false
 	is_carried = true
@@ -344,6 +345,7 @@ func _apply_visuals(node: Node, highlighted: bool):
 
 @rpc("any_peer", "call_local")
 func drop():
+	AudioManager.play_3d_sfx("artifact_drop", global_position)
 	if carrier_id != -1:
 		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 		var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null
@@ -374,6 +376,7 @@ func drop():
 
 @rpc("any_peer", "call_local")
 func destroy_artifact():
+	AudioManager.play_3d_sfx("artifact_delivery", global_position)
 	if carrier_id != -1:
 		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 		var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null

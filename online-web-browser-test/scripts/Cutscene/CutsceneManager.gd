@@ -52,6 +52,7 @@ func _ready():
 func _on_pre_game_started(_assignments):
 	cutscene_ui.background.modulate.a = 0.0
 	cutscene_ui.visible = true
+	AudioManager.stop_music(pre_game_fade_to_black_time)
 	await cutscene_ui.fade_to_black(pre_game_fade_to_black_time)
 
 func _on_game_started():
@@ -138,6 +139,7 @@ func run_cinematic_flow():
 	if vs_label:
 		vs_label.show()
 		
+	AudioManager.play_music("match_start", 0.0)
 	await cutscene_ui.fade_in(versus_fade_in_time)
 	
 	await get_tree().create_timer(0.10).timeout
@@ -197,6 +199,7 @@ func run_cinematic_flow():
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
 		
+	AudioManager.play_music("base_tension", 0.1)
 	GameManager.start_game_clock()
 
 # ---------------------------------------------------------
@@ -352,6 +355,7 @@ func finish_cutscene_immediately():
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
 		
+	AudioManager.play_music("base_tension", 0.1)
 	GameManager.start_game_clock()
 	var hud = get_tree().get_root().find_child("HUD", true, false)
 	if hud and hud.has_method("fade_in"):
