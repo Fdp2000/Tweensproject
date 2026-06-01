@@ -89,6 +89,7 @@ func spawn_smoke():
 
 var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
+var rescue_audio_player: AudioStreamPlayer
 var is_rescuing: bool = false
 var current_interact_target: Node3D = null
 var outline_mat: StandardMaterial3D = null
@@ -99,6 +100,12 @@ var custom_path_index: int = 0
 
 func _ready():
 	super._ready()
+	
+	rescue_audio_player = AudioStreamPlayer.new()
+	rescue_audio_player.stream = preload("res://Assets/Sound/SFX/Rescue Progress/Rescue Progress.wav")
+	rescue_audio_player.bus = "SFX"
+	add_child(rescue_audio_player)
+	
 	last_pos = global_position
 	nav_agent = NavigationAgent3D.new()
 	nav_agent.path_changed.connect(_on_path_changed)
@@ -278,7 +285,16 @@ func update_jail_targets(walk_pos: Vector3, cell_pos: Vector3):
 		nav_agent.target_position = jail_walk_target
 
 func _custom_physics_process(delta, direction):
-	
+	# --- RESCUE AUDIO SYNC ---
+	if active_rescuer_id != -1 and (multiplayer.get_unique_id() == active_rescuer_id or multiplayer.get_unique_id() == str(name).to_int()):
+		if not rescue_audio_player.playing:
+			rescue_audio_player.play()
+		rescue_audio_player.stream_paused = is_rescue_halted
+		rescue_audio_player.pitch_scale = 1.0 + (rescue_progress / Balance.thief_rescue_time) * 1.5
+	else:
+		if rescue_audio_player.playing:
+			rescue_audio_player.stop()
+
 	if debug_disable_movement:
 		direction = Vector3.ZERO
 	
@@ -366,8 +382,6 @@ func _custom_physics_process(delta, direction):
 				else:
 					active_rescuer_id = -1
 					rpc("sync_active_rescuer", -1) 
-					rescue_progress = 0.0 
-					rpc("sync_rescue_progress", 0.0) 
 					
 					if is_rescue_halted:
 						is_rescue_halted = false

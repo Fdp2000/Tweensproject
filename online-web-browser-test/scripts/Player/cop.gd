@@ -7,6 +7,7 @@ var total_captures = 0
 var charge_direction = Vector3.ZERO
 var charge_ui_ref: Control
 @export var is_debuffed = false
+var was_debuffed = false
 @export var capture_distance_buffer: float = 1.0
 var debuff_timer = 0.0
 var capture_cooldowns: Dictionary = {}
@@ -18,8 +19,29 @@ var capture_cooldowns: Dictionary = {}
 # ADDED: The Tween variable for the smooth camera FOV
 var fov_tween: Tween 
 
+var grunt_player: AudioStreamPlayer3D
+var breath_player: AudioStreamPlayer3D
+var breath_streams = [
+	preload("res://Assets/Sound/SFX/Cops Breath/Breath1.wav"),
+	preload("res://Assets/Sound/SFX/Cops Breath/Breath2.wav"),
+	preload("res://Assets/Sound/SFX/Cops Breath/Breath3.wav")
+]
+
 func _ready():
 	super._ready()
+	
+	# Programmatically create the dynamic 3D audio followers
+	grunt_player = AudioStreamPlayer3D.new()
+	grunt_player.stream = preload("res://Assets/Sound/SFX/RhinoCharge.mp3")
+	grunt_player.bus = "Loud SFX"
+	grunt_player.max_distance = 60.0
+	add_child(grunt_player)
+	
+	breath_player = AudioStreamPlayer3D.new()
+	breath_player.bus = "SFX"
+	breath_player.max_distance = 20.0
+	add_child(breath_player)
+	
 	if is_multiplayer_authority():
 		if spring_arm:
 			spring_arm.spring_length = 0.0
@@ -68,6 +90,18 @@ func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
 		charge_ui_ref.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 func _custom_physics_process(delta, direction):
+	# --- BREATH AUDIO SYNC ---
+	if is_debuffed and not was_debuffed:
+		breath_player.stream = breath_streams.pick_random()
+		breath_player.pitch_scale = randf_range(0.9, 1.05)
+		breath_player.volume_db = 0.0
+		breath_player.play()
+	elif not is_debuffed and was_debuffed:
+		if breath_player.playing:
+			var t = create_tween()
+			t.tween_property(breath_player, "volume_db", -40.0, 0.5)
+			t.tween_callback(breath_player.stop)
+	was_debuffed = is_debuffed
 	# ==========================================
 	# 1. THE BRAIN (Only Local Player)
 	# ==========================================
@@ -319,7 +353,7 @@ func play_footstep_sound():
 		return
 		
 	var current_time = Time.get_ticks_msec()
-	var debounce_time = 50 if is_charging else 120
+	var debounce_time = 40 if is_charging else 120
 	
 	if current_time - last_footstep_time > debounce_time: 
 		if is_charging:
@@ -332,7 +366,8 @@ func play_footstep_sound():
 
 @rpc("any_peer", "call_local")
 func play_grunt_rpc():
-	AudioManager.play_3d_sfx("cop_vocals_grunt", global_position)
+	if grunt_player:
+		grunt_player.play()
 
 @rpc("any_peer", "call_local")
 func play_wall_impact_rpc():

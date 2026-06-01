@@ -17,7 +17,6 @@ const MUSIC_CONFIG = {
 const SFX_CONFIG = {
 	# --- 2D / UI SOUNDS ---
 	"ui_click":       {"path": "res://Assets/Sound/SFX/UI Click/click1.wav",       "volume": -5.0, "bus": "UI"},
-	"cop_ping":       {"path": "res://Assets/Sound/SFX/Cop_Ping.wav",       "volume": -3.0, "bus": "UI"},
 	"countdown_tick": {"path": "res://Assets/Sound/SFX/Countdown/Beep.wav", "volume": -8.0, "bus": "UI"},
 	"countdown_go":   {"path": "res://Assets/Sound/SFX/Countdown/GO!.wav",  "volume": -5.0, "bus": "UI"},
 	"jailed":         {"path": "res://Assets/Sound/SFX/Jail Capture/Jail.wav", "volume":  0.0, "bus": "UI"},
@@ -54,7 +53,8 @@ const SFX_CONFIG = {
 	"capture":          {"path": "res://Assets/Sound/SFX/Capture/bonk_BEtiM8g.wav", "volume": -2.0,  "bus": "Loud SFX", "max_distance": 50.0},
 	"artifact_pickup":  {"path": "res://Assets/Sound/SFX/Aritfact Pick/ArtifactPickup.wav", "volume": 0.0, "bus": "SFX", "max_distance": 20.0},
 	"artifact_drop":    {"path": "res://Assets/Sound/SFX/Aritfact Pick/Artifact Drop.wav",  "volume": 0.0, "bus": "SFX", "max_distance": 20.0},
-	"artifact_delivery":{"path": "res://Assets/Sound/SFX/Artifact Delivery/ArtifactDelivery.wav", "volume": 5.0, "bus": "Loud SFX", "max_distance": 150.0}
+	"artifact_delivery":{"path": "res://Assets/Sound/SFX/Artifact Delivery/ArtifactDelivery.wav", "volume": 5.0, "bus": "Loud SFX", "max_distance": 150.0},
+	"cop_ping":         {"path": "res://Assets/Sound/SFX/Cop Ping/freesound_community-sonar-ping-95840.wav", "volume": 2.0, "bus": "SFX", "max_distance": 200.0}
 }
 
 # POOL CONFIGURATION
