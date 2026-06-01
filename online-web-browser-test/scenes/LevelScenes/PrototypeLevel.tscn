@@ -12840,6 +12840,20 @@ light_energy = 1.999
 spot_attenuation = 0.0
 spot_angle = 59.26556
 
+[node name="IslandLight" type="SpotLight3D" parent="Lights" unique_id=60640782]
+transform = Transform3D(-0.9207298, -0.3046523, -0.24381071, 0, -0.6248339, 0.7807577, -0.39020085, 0.7188669, 0.5753032, -25.56166, 4.240704, -34.155617)
+light_energy = 1.999
+spot_range = 7.534
+spot_attenuation = 0.0
+spot_angle = 16.17
+
+[node name="IslandLight2" type="SpotLight3D" parent="Lights" unique_id=426415803]
+transform = Transform3D(0.9924758, -0.09559685, -0.076505356, 0, -0.6248338, 0.7807578, -0.12244112, -0.77488315, -0.6201325, -19.56166, 4.240704, -35.155617)
+light_energy = 1.999
+spot_range = 7.534
+spot_attenuation = 0.0
+spot_angle = 32.65
+
 [node name="ForrestLight3" type="SpotLight3D" parent="Lights" unique_id=1002135067]
 transform = Transform3D(0.9262476, 0.04530023, -0.37418365, 0.30607826, -0.6697442, 0.67657864, -0.2199581, -0.7412088, -0.6342142, -26.71627, 4.4909034, 1.3682775)
 light_energy = 1.661
