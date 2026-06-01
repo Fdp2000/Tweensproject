@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://5ojmto5ivnsw" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_3.png" id="11_wiat2"]
 [ext_resource type="Animation" uid="uid://c8ye5gg8t412a" path="res://Assets/Animations/Carry/Jog Strafe Left.res" id="12_ptic4"]
 [ext_resource type="Animation" uid="uid://dcppafks2v4vu" path="res://Assets/Animations/Carry/Jog Strafe Right.res" id="13_wj3y1"]
+[ext_resource type="Animation" uid="uid://boublwl8we2re" path="res://Assets/Animations/Chameleon/Fall.res" id="15_85lpe"]
 [ext_resource type="PackedScene" uid="uid://8iaw24ps07vh" path="res://Assets/Particles/smoke_particles.tscn" id="28_5ggap"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oure2"]
@@ -2345,6 +2346,7 @@ _data = {
 &"Camo_Pose": ExtResource("6_1raaj"),
 &"CarryReal": SubResource("Animation_b17lj"),
 &"Carrying": ExtResource("7_b17lj"),
+&"Fall": ExtResource("15_85lpe"),
 &"Hypno_Walk": ExtResource("8_ptic4"),
 &"Idle1": ExtResource("6_pwsbx"),
 &"Idle2": ExtResource("7_1raaj"),
@@ -2392,30 +2394,33 @@ fov = 75.0
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -0.0049859285)
 
 [node name="Skeleton3D" parent="Chameleon_Character/Chameleon_Character/metarig" parent_id_path=PackedInt32Array(1423752438, 1406805165) index="0" unique_id=671893237]
-bones/1/rotation = Quaternion(0.012772217, -0.029834151, 0.0480688, 0.99831676)
-bones/2/rotation = Quaternion(-0.03458597, -0.044539176, 0.015257002, 0.99829227)
-bones/3/rotation = Quaternion(0.009259262, -0.03572813, 0.013263267, 0.9992307)
-bones/4/rotation = Quaternion(0.01532682, 0.06853326, -0.018559474, 0.9973585)
-bones/5/rotation = Quaternion(-0.5832823, -0.36254585, -0.47852418, 0.5471353)
-bones/6/rotation = Quaternion(0.1556718, 0.81128883, -0.5040489, 0.25201482)
-bones/7/rotation = Quaternion(0.6934253, -0.07777658, 0.011790117, 0.71622145)
-bones/8/rotation = Quaternion(0.18440679, -0.7150472, -0.033684302, 0.67347383)
-bones/9/rotation = Quaternion(-0.07318551, -0.09568595, 0.04128252, 0.99185884)
-bones/10/rotation = Quaternion(-0.12334484, 0.19747648, 0.016728204, 0.972373)
-bones/11/rotation = Quaternion(-0.13310657, 0.11954883, -0.16269498, 0.97032017)
-bones/12/rotation = Quaternion(-0.6215738, 0.29301962, 0.42179894, 0.5914992)
-bones/13/rotation = Quaternion(-0.15093048, -0.7698171, 0.35625175, 0.507628)
-bones/14/rotation = Quaternion(0.5009735, 0.09342923, -0.008518054, 0.86036277)
-bones/15/rotation = Quaternion(0.18141226, 0.8215097, 0.003409002, 0.54055506)
-bones/16/rotation = Quaternion(-0.1696687, 0.09650079, -0.06293775, 0.97874355)
-bones/17/rotation = Quaternion(-0.28130084, -0.1877673, -0.004917279, 0.9410575)
-bones/18/rotation = Quaternion(-0.16420604, -0.101090394, 0.23033775, 0.95381427)
-bones/21/rotation = Quaternion(0.99003404, -0.06330328, -0.109236166, -0.062392805)
-bones/22/rotation = Quaternion(0.23749578, -0.028558854, 0.033067495, 0.97040546)
-bones/23/rotation = Quaternion(-0.8061858, -0.24589503, -0.086889446, 0.53108424)
-bones/24/rotation = Quaternion(0.7999191, 0.031273548, -0.006399488, 0.59925824)
-bones/25/rotation = Quaternion(0.5752742, 0.0007004393, 0.04349677, 0.81680304)
-bones/26/rotation = Quaternion(-0.55201674, 0.009040564, 0.106809124, 0.82691455)
+bones/1/rotation = Quaternion(0.08460635, -0.0052660354, -0.03652388, 0.99573094)
+bones/2/rotation = Quaternion(-0.017392835, 0.005865114, -0.00080790184, 0.9998313)
+bones/2/scale = Vector3(0.9999994, 0.99999994, 0.9999997)
+bones/3/rotation = Quaternion(0.20823935, 0.0054066763, -0.0014094329, 0.9780619)
+bones/4/rotation = Quaternion(0.042883668, 0.0338934, -0.043330964, 0.9975644)
+bones/5/rotation = Quaternion(-0.59028167, -0.4197625, -0.36389405, 0.5856178)
+bones/6/rotation = Quaternion(0.1146058, 0.55485135, 0.022778485, 0.823703)
+bones/7/rotation = Quaternion(0.11089151, -0.21130717, -0.06979202, 0.96859777)
+bones/8/rotation = Quaternion(0.28431493, -0.7263041, 0.13532531, 0.6110109)
+bones/9/rotation = Quaternion(0.365933, -0.018021869, 0.40842295, 0.8360377)
+bones/9/scale = Vector3(1.0000001, 1.0000006, 0.9999996)
+bones/10/rotation = Quaternion(-0.34116372, 0.1729027, 0.37822434, 0.84300554)
+bones/11/rotation = Quaternion(-0.058819488, -2.374573e-08, -0.50201935, 0.8628539)
+bones/12/rotation = Quaternion(-0.6286503, 0.36688414, 0.29366258, 0.61964285)
+bones/13/rotation = Quaternion(0.07018594, -0.5970641, -0.05566345, 0.7971763)
+bones/14/rotation = Quaternion(0.22574227, 0.19444959, 0.014767356, 0.95446944)
+bones/15/rotation = Quaternion(0.20091932, 0.7547084, -0.22177431, 0.58383465)
+bones/16/rotation = Quaternion(0.17725414, -0.03252838, -0.425343, 0.88690835)
+bones/16/scale = Vector3(0.99999887, 1.0000001, 1.0000006)
+bones/17/rotation = Quaternion(-0.34116378, -0.17290266, -0.37822434, 0.84300554)
+bones/18/rotation = Quaternion(-0.058819383, -7.4475246e-08, 0.50201935, 0.8628539)
+bones/21/rotation = Quaternion(0.85668325, 0.14363948, -0.11212798, 0.4825856)
+bones/22/rotation = Quaternion(0.96604204, 0.03081011, 0.15389478, 0.20525597)
+bones/23/rotation = Quaternion(-0.89042807, -0.042883497, 0.070584714, 0.44756758)
+bones/24/rotation = Quaternion(0.93860763, -0.16908857, 0.17852524, 0.24197842)
+bones/25/rotation = Quaternion(0.9485769, -0.060442086, -0.22424763, 0.21508501)
+bones/26/rotation = Quaternion(-0.8470922, -0.059809834, 0.042956304, 0.5263198)
 
 [node name="Chameleon" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1112566209]
 surface_material_override/0 = null
@@ -2427,7 +2432,7 @@ surface_material_override/0 = null
 surface_material_override/0 = null
 
 [node name="ArtifactAttachment" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
-transform = Transform3D(0.12528469, -0.66702425, -0.73442626, -0.8469777, -0.457405, 0.2709424, -0.5166557, 0.58809775, -0.62226033, -0.28147766, 0.4967643, -0.02786266)
+transform = Transform3D(-0.26387295, -0.44071817, 0.85798407, -0.060149476, 0.8952985, 0.44138664, -0.96268, 0.064863205, -0.26275402, -0.33817548, 0.87788886, 0.096173234)
 
 [node name="AnimationPlayer" parent="Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_7jg2g")

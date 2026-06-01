@@ -144,12 +144,18 @@ func _custom_physics_process(delta, direction):
 		if is_debuffed:
 			active_speed *= Balance.cop_exhaustion_speed_multiplier
 			
-		if direction:
-			velocity.x = direction.x * active_speed
-			velocity.z = direction.z * active_speed
+		if is_on_floor():
+			if direction:
+				velocity.x = direction.x * active_speed
+				velocity.z = direction.z * active_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, (Balance.cop_braking_friction * 60.0 * delta))
+				velocity.z = move_toward(velocity.z, 0, (Balance.cop_braking_friction * 60.0 * delta))
 		else:
-			velocity.x = move_toward(velocity.x, 0, (Balance.cop_braking_friction * 60.0 * delta))
-			velocity.z = move_toward(velocity.z, 0, (Balance.cop_braking_friction * 60.0 * delta))
+			# IN THE AIR: 5% Air Control (Heavy Rhino). Extremely hard to steer mid-air!
+			if direction:
+				velocity.x = lerp(velocity.x, direction.x * active_speed, 0.5 * delta)
+				velocity.z = lerp(velocity.z, direction.z * active_speed, 0.5 * delta)
 			
 		if is_multiplayer_authority():
 			_detect_capture()
@@ -209,7 +215,9 @@ func _custom_physics_process(delta, direction):
 			
 		var playback = anim_tree.get("parameters/AnimationNodeStateMachine/playback")
 		if playback:
-			if is_charging:
+			if not is_on_floor():
+				playback.travel("Fall")
+			elif is_charging:
 				playback.travel("Charge")
 				smoke_particles.emitting = true 
 				if is_multiplayer_authority() and camera_anim and camera_anim.current_animation != "cam_charge":

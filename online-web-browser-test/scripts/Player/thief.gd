@@ -384,12 +384,20 @@ func _custom_physics_process(delta, direction):
 		else:
 			current_speed_mult = 1.0
 			
-		if direction:
-			velocity.x = direction.x * (Balance.base_thief_speed * current_speed_mult)
-			velocity.z = direction.z * (Balance.base_thief_speed * current_speed_mult)
+		var target_speed = Balance.base_thief_speed * current_speed_mult
+		
+		if is_on_floor():
+			if direction:
+				velocity.x = direction.x * target_speed
+				velocity.z = direction.z * target_speed
+			else:
+				velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
+				velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
 		else:
-			velocity.x = move_toward(velocity.x, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
-			velocity.z = move_toward(velocity.z, 0, (Balance.thief_braking_friction * 60.0 * delta) * current_speed_mult)
+			# IN THE AIR: 50% Air Control (Agile Thief). Use lerp to gently steer momentum instead of snapping!
+			if direction:
+				velocity.x = lerp(velocity.x, direction.x * target_speed, 2.0 * delta)
+				velocity.z = lerp(velocity.z, direction.z * target_speed, 2.0 * delta)
 			
 
 	# ==========================================
@@ -458,7 +466,10 @@ func _custom_physics_process(delta, direction):
 		else:
 			is_trying_to_move = horizontal_speed_sq > 0.05
 		
-		if is_trying_to_move:
+		if not is_on_floor():
+			is_currently_moving = false
+			anim_tree.get("parameters/playback").travel("Fall")
+		elif is_trying_to_move:
 			is_camo_posing = false
 			is_currently_moving = true 
 			anim_tree.set("parameters/Holding_State/Camo_Transition/transition_request", "carrying")
@@ -492,8 +503,12 @@ func _custom_physics_process(delta, direction):
 			anim_tree.active = false
 			anim_player.stop() # Force-kill the tree's ghost tracks!
 		
-		if horizontal_speed_sq > 0.05:
-			if not is_currently_moving:
+		if not is_on_floor():
+			is_currently_moving = false
+			if anim_player.current_animation != "Fall":
+				anim_player.play("Fall", 0.2)
+		elif horizontal_speed_sq > 0.05:
+			if not is_currently_moving or anim_player.current_animation == "Fall":
 				is_currently_moving = true
 				var random_run = favorite_runs.pick_random()
 				# AUTO-SYNC: Calculate exact speed based on actual velocity!
@@ -505,7 +520,7 @@ func _custom_physics_process(delta, direction):
 			var target_angle = atan2(current_vel.x, current_vel.z) 
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_angle, 10.0 * delta)
 		else:
-			if is_currently_moving:
+			if is_currently_moving or anim_player.current_animation == "Fall":
 				is_currently_moving = false
 				var random_idle = favorite_idles.pick_random()
 				anim_player.play(random_idle, 0.3) 

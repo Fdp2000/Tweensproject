@@ -2813,6 +2813,9 @@ shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_tmse1"]
+size = Vector3(1.695344, 1, 1.1946259)
+
 [node name="PrototypeLevel" type="Node3D" unique_id=1441468162]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
 script = ExtResource("7_collision")
@@ -10710,6 +10713,12 @@ transform = Transform3D(1.47, 0, 1.1873121e-07, 0, 1.47, 0, -9.345237e-08, 0, 1.
 
 [node name="Stairs_2 Asia5" parent="." unique_id=1884821653 instance=ExtResource("70_ol4g5")]
 transform = Transform3D(-1.47, 0, 4.4542617e-08, 0, 1.47, 0, -3.5059102e-08, 0, -1.867635, 9.489604, -0.92599964, -19.53792)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stairs_2 Asia5" unique_id=1418847160]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs_2 Asia5/StaticBody3D" unique_id=1588685819]
+transform = Transform3D(0.9343662, -0.35631406, 2.7853275e-12, 0.35631406, 0.9343662, -3.204112e-10, 1.1161916e-10, 3.0034597e-10, 1, 0.14514017, -0.07497215, 0.011159897)
+shape = SubResource("BoxShape3D_tmse1")
 
 [node name="FootBridge_1_1 Asia" parent="." unique_id=1653724722 instance=ExtResource("71_nkopf")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0.08715574, 0.9961947, 3.8096983e-09, -0.9961947, 0.08715574, -4.3545054e-08, -34.24906, -0.25935072, -25.080133)
