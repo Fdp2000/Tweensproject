@@ -24,6 +24,16 @@ func _ready_ping_visual():
 func trigger_ping(pos: Vector3):
 	if not ping_visual: return
 	
+	if multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		if spawned:
+			var local_player = spawned.get_node_or_null(str(multiplayer.get_unique_id()))
+			if local_player and local_player.get("team_index") == 0: # 0 is Thief team
+				AudioManager.play_3d_sfx("cop_ping", pos)
+
+	# Optional map ping (the old 2d one)
+	# EventBus.emit_signal("map_ping", pos)
+	
 	var local_id = thief.multiplayer.get_unique_id()
 	if GameManager.players.has(local_id) and GameManager.players[local_id].get("role") == GameManager.PlayerRole.COP:
 		return

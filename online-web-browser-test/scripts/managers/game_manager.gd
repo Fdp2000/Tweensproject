@@ -116,6 +116,7 @@ func add_player(id: int, p_name: String = "", chameleon_skin: int = 0, rhino_ski
 		if multiplayer.is_server():
 			last_heartbeat_times[id] = Time.get_ticks_msec()
 			rpc("sync_full_lobby", players)
+			rpc("play_join_sound_rpc")
 			player_joined.emit(id)
 			lobby_updated.emit()
 		else:
@@ -533,3 +534,7 @@ func client_ping():
 @rpc("authority", "call_remote", "reliable")
 func server_pong():
 	last_server_pong_time = Time.get_ticks_msec()
+
+@rpc("any_peer", "call_local")
+func play_join_sound_rpc():
+	AudioManager.play_2d_sfx("join_lobby")

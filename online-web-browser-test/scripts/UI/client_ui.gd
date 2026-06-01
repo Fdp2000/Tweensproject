@@ -539,7 +539,6 @@ func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0,
 		return spawns.pick_random().global_transform.orthonormalized()
 
 func _on_player_joined(id: int) -> void:
-	AudioManager.play_2d_sfx("join_lobby")
 	if not multiplayer.is_server():
 		return
 
