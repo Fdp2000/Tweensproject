@@ -1,20 +1,24 @@
 [gd_scene format=3 uid="uid://c3h07rge7d4n5"]
 
 [ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="1_q8sah"]
+[ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="2_q8sah"]
 
 [node name="WantedPosterPink" type="Node2D" unique_id=776497277]
 
 [node name="Chameleon_Character" parent="." unique_id=508333357 instance=ExtResource("1_q8sah")]
-transform = Transform3D(-0.37724274, 0, 0.92611444, 0, 1, 0, -0.92611444, 0, -0.37724274, 0.19368017, 0, 2.232366)
+transform = Transform3D(0.42261824, 0, 0.9063078, 0, 1, 0, -0.9063078, 0, 0.42261824, 0.19368017, 0, 2.232366)
 
-[node name="Skeleton3D" parent="Chameleon_Character/metarig" parent_id_path=PackedInt32Array(508333357, 1761366284) index="0" unique_id=357803507]
+[node name="Skeleton3D" parent="Chameleon_Character/metarig" parent_id_path=PackedInt32Array(508333357, 1773344528) index="0" unique_id=537901438]
 transform = Transform3D(0.98908025, 0, 0.14737786, 0, 1, 0, -0.14737786, 0, 0.98908025, 0.00032317638, 0, 0)
 bones/0/scale = Vector3(0.99999994, 1, 1)
 bones/1/rotation = Quaternion(-0.0006536161, 0.012634613, 0.0045310366, 0.9999097)
-bones/2/rotation = Quaternion(-0.017392835, 0.005865114, -0.00080790184, 0.9998313)
-bones/2/scale = Vector3(0.9999994, 0.99999994, 0.9999997)
+bones/2/position = Vector3(-1.7389043e-07, 0.120874025, -1.0869955e-08)
+bones/2/rotation = Quaternion(-0.20222862, 0.014838505, 0.047474235, 0.97807443)
+bones/2/scale = Vector3(0.9999992, 0.99999994, 0.99999964)
 bones/3/rotation = Quaternion(0.20823935, 0.0054066763, -0.0014094329, 0.9780619)
-bones/4/rotation = Quaternion(-0.1115797, 0.012021329, -0.030979972, 0.9931997)
+bones/4/position = Vector3(-1.8586506e-07, 0.13556425, -5.4970247e-08)
+bones/4/rotation = Quaternion(0.056479685, -0.029013006, -0.049939793, 0.9967318)
+bones/4/scale = Vector3(1, 0.99999994, 0.99999994)
 bones/5/position = Vector3(0.028318133, 0.10592836, 0.027719382)
 bones/5/rotation = Quaternion(-0.6123423, -0.27372202, -0.4450348, 0.5933442)
 bones/5/scale = Vector3(1.0000011, 1.0000007, 1.0000002)
@@ -28,12 +32,12 @@ bones/9/rotation = Quaternion(0.365933, -0.018021869, 0.40842295, 0.8360377)
 bones/9/scale = Vector3(1.0000001, 1.0000006, 0.9999996)
 bones/12/rotation = Quaternion(-0.72367954, 0.36363643, 0.26819083, 0.521661)
 bones/12/scale = Vector3(1.0000019, 1.0000004, 1.0000015)
-bones/13/position = Vector3(-0.04770618, 0.13755617, -0.016438467)
-bones/13/rotation = Quaternion(0.29110667, -0.60911644, 0.5111735, 0.53191704)
-bones/13/scale = Vector3(0.99999803, 1.000002, 1.0000002)
-bones/14/position = Vector3(-0.0054808883, 0.13947982, -0.017703135)
-bones/14/rotation = Quaternion(0.36184546, 0.39988795, -0.06188807, 0.83983773)
-bones/14/scale = Vector3(0.99999994, 1.0000019, 0.99999887)
+bones/13/position = Vector3(-0.03839557, 0.12964755, -0.017348364)
+bones/13/rotation = Quaternion(0.18621497, -0.61466926, 0.5778861, 0.5035408)
+bones/13/scale = Vector3(0.9999985, 1.0000018, 0.9999999)
+bones/14/position = Vector3(-0.1105894, 0.166986, -0.046115477)
+bones/14/rotation = Quaternion(0.2476657, 0.5335663, 0.05654711, 0.80670387)
+bones/14/scale = Vector3(0.9999998, 1.0000011, 0.9999999)
 bones/15/rotation = Quaternion(0.21851899, -0.13268656, 0.10570056, 0.9609741)
 bones/15/scale = Vector3(1.0000011, 1.0000014, 0.9999973)
 bones/16/rotation = Quaternion(0.17725414, -0.03252838, -0.425343, 0.88690835)
@@ -49,6 +53,9 @@ bones/27/scale = Vector3(0.9999999, 0.9999999, 0.9999998)
 bones/29/scale = Vector3(1, 1.0000001, 1.0000001)
 bones/30/scale = Vector3(1, 1.0000002, 1.0000001)
 bones/31/scale = Vector3(1, 1, 1.0000001)
+
+[node name="Chameleon" parent="Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1199226496]
+surface_material_override/0 = ExtResource("2_q8sah")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=882239289]
 transform = Transform3D(0.9999983, -0.0018505134, 9.646553e-05, 0.0018505355, 0.9999983, -0.00023198078, -9.6039825e-05, 0.00023215736, 0.99999994, 0.18273991, 1.1225652, 3.4521103)

@@ -11,7 +11,7 @@ shading_mode = 0
 albedo_texture = ExtResource("1_dhoo6")
 
 [node name="WantedPoster" type="Node3D" unique_id=1115739554]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.6, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=411219225]
 transform = Transform3D(1.3, 0, 0, 0, -4.371139e-08, -1.3, 0, 1, -5.6824803e-08, 0, 0, 0)
@@ -19,12 +19,12 @@ mesh = SubResource("PlaneMesh_oecxv")
 surface_material_override/0 = SubResource("StandardMaterial3D_ivgya")
 
 [node name="Label3D" type="Label3D" parent="MeshInstance3D" unique_id=678738030]
-transform = Transform3D(1, 0, 0, 0, 1.1924881e-08, 1, 0, -1, 1.1924881e-08, 0, 0.02, 0.665)
+transform = Transform3D(1, 0, 0, 0, 1.1924882e-08, 1, 0, -1, 1.1924882e-08, 0, 0.020000003, 0.7103134)
 sorting_offset = 1.0
 no_depth_test = true
 modulate = Color(0, 0, 0, 1)
-font_size = 48
+font_size = 42
 
 [node name="Sprite3D" type="Sprite3D" parent="MeshInstance3D" unique_id=1192608160]
-transform = Transform3D(1, 0, 0, 0, 1.1924879e-08, 1, 0, -1, 1.1924882e-08, 0.014329241, 0.02, -4.6522214e-08)
+transform = Transform3D(1, 0, 0, 0, 1.1924882e-08, 1, 0, -1, 1.1924882e-08, 0.014329241, 0.020000003, 0.06458945)
 no_depth_test = true
