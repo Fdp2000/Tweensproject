@@ -94,7 +94,7 @@ func _custom_physics_process(delta, direction):
 			# IF THE CHARGE ENDS (Time out or hit a wall)
 			if charge_time_left <= 0 or is_on_wall():
 				if is_on_wall():
-					AudioManager.play_3d_sfx("charge_wall_impact", global_position)
+					rpc("play_wall_impact_rpc")
 				is_charging = false
 				charge_time_left = 0.0
 				is_debuffed = true
@@ -113,7 +113,7 @@ func _custom_physics_process(delta, direction):
 			charge_time_left = Balance.cop_charge_duration
 			charge_cooldown_left = Balance.cop_charge_cooldown
 			
-			AudioManager.play_3d_sfx("cop_vocals_grunt", global_position)
+			rpc("play_grunt_rpc")
 			
 			if direction != Vector3.ZERO:
 				charge_direction = direction
@@ -328,5 +328,12 @@ func play_footstep_sound():
 			AudioManager.play_3d_sfx("footstep_cop_debuff", global_position)
 		else:
 			AudioManager.play_3d_sfx("footstep_cop", global_position)
-			
 		last_footstep_time = current_time
+
+@rpc("any_peer", "call_local")
+func play_grunt_rpc():
+	AudioManager.play_3d_sfx("cop_vocals_grunt", global_position)
+
+@rpc("any_peer", "call_local")
+func play_wall_impact_rpc():
+	AudioManager.play_3d_sfx("charge_wall_impact", global_position)
