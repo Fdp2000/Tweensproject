@@ -1,14 +1,12 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://doxbpf613nmo5"]
 
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="1_se8bu"]
-[ext_resource type="Texture2D" uid="uid://cr6e0yrtncxvf" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_5.png" id="2_nfl8o"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_se8bu")
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
-shader_parameter/albedo_texture = ExtResource("2_nfl8o")
-shader_parameter/use_stepped = false
+shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0
 shader_parameter/shadow_tint = Color(0, 0, 0, 1)

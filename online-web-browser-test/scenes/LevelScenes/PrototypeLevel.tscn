@@ -34,18 +34,15 @@
 [ext_resource type="ArrayMesh" uid="uid://qv4wgr0qt1yt" path="res://Assets/Models/LowPolyMuseumAssets/Railing.res" id="31_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://dnv58nobc7b7j" path="res://Assets/Models/LowPolyMuseumAssets/WallBigOuter.res" id="34_oc075"]
 [ext_resource type="Texture2D" uid="uid://d0etc28un66rp" path="res://Assets/Textures/pexels-photo-6555895.jpeg" id="36_r7r08"]
-[ext_resource type="PackedScene" uid="uid://c8wgihwxib64e" path="res://rock_1icy.res" id="37_bgrk7"]
 [ext_resource type="PackedScene" uid="uid://bvwgdm21faobm" path="res://Assets/Models/Security Cams/SecCam.tscn" id="38_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://6khnohw17drg" path="res://Assets/Models/new_array_mesh.res" id="39_88xne"]
 [ext_resource type="PackedScene" uid="uid://djq8usr0n1wxf" path="res://icycliff1.res" id="39_bva6v"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="40_0hqwr"]
 [ext_resource type="ArrayMesh" uid="uid://bhxw5640dfg4r" path="res://Assets/Models/mediumpine.tres" id="41_c8qq2"]
-[ext_resource type="PackedScene" uid="uid://cg8j4jqfcc0ia" path="res://rock_4_icy.res" id="41_jeskk"]
 [ext_resource type="Texture2D" uid="uid://c7nd4mv7qn7bt" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeLeaf.png" id="42_p8w5a"]
 [ext_resource type="Texture2D" uid="uid://dr8d66b6lkxj6" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeTrunk.png" id="43_0t7hq"]
 [ext_resource type="PackedScene" uid="uid://ct6cicuc4et7s" path="res://rock_3_icy.res" id="43_ipwqt"]
 [ext_resource type="ArrayMesh" uid="uid://boev4i360s4n5" path="res://Assets/Models/smolpine.tres" id="44_xwy5l"]
-[ext_resource type="PackedScene" uid="uid://bwykgu7qwxkdw" path="res://rock_2_icy.res" id="45_8oxyp"]
 [ext_resource type="ArrayMesh" uid="uid://d3rbwblcji7go" path="res://Assets/Models/binkstone.res" id="46_217hv"]
 [ext_resource type="ArrayMesh" uid="uid://b5xvphu3ri6cj" path="res://Assets/environments/Ultimate Nature Pack by Quaternius/OBJ/WoodLog.obj" id="47_w6te4"]
 [ext_resource type="ArrayMesh" uid="uid://2e2socd2besa" path="res://Assets/environments/Ultimate Nature Pack by Quaternius/OBJ/TreeStump.obj" id="49_xo0rd"]
@@ -65,7 +62,6 @@
 [ext_resource type="PackedScene" uid="uid://bf05ftf00cgpm" path="res://scenes/Zones/Vent.tscn" id="67_0k1pn"]
 [ext_resource type="ArrayMesh" uid="uid://f26ltpsyvk7a" path="res://Assets/Models/LowPolyMuseumAssets/Picture2Image.res" id="67_w6te4"]
 [ext_resource type="PackedScene" uid="uid://j2tkw6s7dfx4" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/GardenWall_5 Asia.fbx" id="68_7u4t4"]
-[ext_resource type="Texture2D" uid="uid://bctfhk8g45ieu" path="res://Assets/Untitled_Artwork 7.png" id="68_w6te4"]
 [ext_resource type="PackedScene" uid="uid://di7ed08mgdyh4" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/GardenWall_Gate_1 Asia.fbx" id="69_fppg6"]
 [ext_resource type="PackedScene" uid="uid://cdv3ij2wxp3op" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Stairs_2 Asia.fbx" id="70_ol4g5"]
 [ext_resource type="PackedScene" uid="uid://bru4vl6kld8l" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/FootBridge_1_1 Asia.fbx" id="71_nkopf"]
@@ -86,7 +82,6 @@
 [ext_resource type="PackedScene" uid="uid://e3j3v8a7dod5" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Bambo_4 Asia.fbx" id="89_tmse1"]
 [ext_resource type="PackedScene" uid="uid://kyip6gvmh566" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Rock_2 Asia.fbx" id="90_0k1pn"]
 [ext_resource type="PackedScene" uid="uid://cwqc8xjlc2ndy" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Sakura_1 Asia.fbx" id="91_lah1j"]
-[ext_resource type="PackedScene" uid="uid://dkvcuuaon20wc" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Sakura_4 Asia.fbx" id="92_bgrk7"]
 [ext_resource type="PackedScene" uid="uid://cd7ng3x8roe0x" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Sakura_2 Asia.fbx" id="93_flkct"]
 [ext_resource type="PackedScene" uid="uid://bq14kcjrpvq75" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Wall_1_BelTower Asia.fbx" id="94_bva6v"]
 [ext_resource type="PackedScene" uid="uid://dk3i2wxswdt5s" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Tile_1_1 Asia.fbx" id="95_e22mm"]
@@ -204,8 +199,29 @@ shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_udqms"]
-albedo_color = Color(0.31289667, 0.39174598, 0.22813222, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r7agv"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/albedo_color = Color(0.23137255, 0.47058824, 0.16862746, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jeskk"]
 albedo_color = Color(0.45840496, 0.45840508, 0.4584049, 1)
@@ -2748,31 +2764,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_efmy8")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fvyjn"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(1, 1, 1, 1)
-shader_parameter/albedo_texture = ExtResource("68_w6te4")
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w6te4"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
@@ -2866,30 +2857,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_twyjh")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8oxyp"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvnvx"]
 resource_name = "Green_3"
 vertex_color_use_as_albedo = true
@@ -2956,102 +2923,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wuxae")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqn0r"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_32j54"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvq4d"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0ykah"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_phtfi"]
 resource_name = "Rock_3"
 vertex_color_use_as_albedo = true
@@ -3089,54 +2960,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_nga1o")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ldlms"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_seusb"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uj2i5"]
 resource_name = "Rock_3"
@@ -3176,30 +2999,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_56v0r")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s2bfj"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.46401095, 0.33663186, 0.23284145, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_1mve5"]
 _surfaces = [{
 "aabb": AABB(-2.4032326, -6.7323333e-07, -1.5490316, 4.78203, 2.3405938, 2.854828),
@@ -3231,78 +3030,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_1mve5")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_s283j"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.46401095, 0.33663186, 0.23284145, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvehj"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sgvkr"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.46401095, 0.33663186, 0.23284145, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nvtc4"]
 resource_name = "Concrate_2"
@@ -3370,54 +3097,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_51g4a")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4fhc1"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2a4x"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ylwoy"]
 resource_name = "Rock_2"
 vertex_color_use_as_albedo = true
@@ -3455,30 +3134,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_jfw2k")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sa2x"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i61ge"]
 resource_name = "Rock_1"
@@ -3518,30 +3173,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_m6q7g")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3u1s1"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xk2n"]
 resource_name = "Rock_1"
 vertex_color_use_as_albedo = true
@@ -3580,54 +3211,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e2y7j")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_volbp"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w87a1"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhb4q"]
 resource_name = "Rock_1"
 vertex_color_use_as_albedo = true
@@ -3665,54 +3248,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_v6pup")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g5e81"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6tj66"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.16206557, 0.1620656, 0.16206557, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k3dy4"]
 resource_name = "Rock_1"
@@ -3779,54 +3314,6 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_yt1uq")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0nfu5"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.46401095, 0.33663186, 0.23284145, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gve0t"]
-render_priority = 0
-shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.8077505, 0.59561765, 0.42469814, 1)
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mjf4u"]
 render_priority = 0
@@ -5001,9 +4488,9 @@ mesh = ExtResource("6_orgo4")
 shape = SubResource("ConvexPolygonShape3D_2yjpi")
 
 [node name="Floor23" type="MeshInstance3D" parent="Arena 2/NavigationRegion3D/Floor" unique_id=105131449]
-transform = Transform3D(10.378368, 0, 0, 0, 0.36, 0, 0, 0, 11.9750395, -19.118, -0.926, -17.855)
+transform = Transform3D(10.378368, 0, 0, 0, 0.36, 0, 0, 0, 11.9750395, -19.116322, -0.926, -17.85676)
 mesh = ExtResource("6_orgo4")
-surface_material_override/0 = SubResource("StandardMaterial3D_udqms")
+surface_material_override/0 = SubResource("ShaderMaterial_r7agv")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Arena 2/NavigationRegion3D/Floor/Floor23" unique_id=1692767534]
 
@@ -8872,7 +8359,7 @@ mesh = ExtResource("15_46wyf")
 
 [node name="IceMisc" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=1342205140]
 
-[node name="Rock_1 Asia" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=765852360 instance=ExtResource("37_bgrk7")]
+[node name="Rock_1 Asia" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=765852360]
 transform = Transform3D(-3.059797e-08, 0, 1, 0, 0.6, 0, -0.7, 0, -4.371139e-08, 12.5046215, 0.10842365, -37.004566)
 
 [node name="Clif_1  Asia3" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=873864 instance=ExtResource("39_bva6v")]
@@ -8884,7 +8371,7 @@ transform = Transform3D(0.44538325, 0.06255651, -0.15759781, -0.050775424, 0.449
 [node name="Clif_1  Asia4" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=1993611465 instance=ExtResource("39_bva6v")]
 transform = Transform3D(0.1, 0, 0.34641013, 0, 0.19999999, 0, -0.17320506, 0, 0.2, 19.7, 0.16441244, -36.4)
 
-[node name="Rock_4 Asia2" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=797113276 instance=ExtResource("41_jeskk")]
+[node name="Rock_4 Asia2" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=797113276]
 transform = Transform3D(1.6, 0, 0, 0, 2.3000002, 0, 0, 0, 1, 17.699999, 0.19999999, -30)
 
 [node name="Rock_3 Asia2" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=65057842 instance=ExtResource("43_ipwqt")]
@@ -8893,10 +8380,10 @@ transform = Transform3D(1, 0, 0, 0, 1.2, 0, 0, 0, 1, 30, 0.19999999, -30.2)
 [node name="Rock_2 Asia" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=908190074 instance=ExtResource("90_0k1pn")]
 transform = Transform3D(-2.9802322e-08, 0, -1.1035274, 0, 1.0639998, 0, 0.6136295, 0, 8.940697e-08, 38.300003, 0.19999999, -30.2)
 
-[node name="Rock_2 Asia" parent="Arena 2/NavigationRegion3D/IceMisc/Rock_2 Asia" unique_id=225091132 instance=ExtResource("45_8oxyp")]
+[node name="Rock_2 Asia" parent="Arena 2/NavigationRegion3D/IceMisc/Rock_2 Asia" unique_id=225091132]
 transform = Transform3D(1.0000001, 0, 0, 0, 1, 0, -1.7763568e-15, 0, 0.99999994, -0.97779083, 0, 0.5437088)
 
-[node name="Rock_2 Asia3" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=824880232 instance=ExtResource("45_8oxyp")]
+[node name="Rock_2 Asia3" parent="Arena 2/NavigationRegion3D/IceMisc" unique_id=824880232]
 transform = Transform3D(-2.9802322e-08, 0, -1.1035274, 0, 1.0639998, 0, 0.6136295, 0, 8.940697e-08, 37.4, 0.19999999, -38.4)
 
 [node name="EgyptMisc" type="Node3D" parent="Arena 2/NavigationRegion3D" unique_id=1288077728]
@@ -11112,7 +10599,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_4873o")
 [node name="Picture2Image2" type="MeshInstance3D" parent="JailBoard" unique_id=1873373757]
 transform = Transform3D(-5.5076352e-08, 0, 1, 0, 0.34999996, 0, -1.2600001, 0, -4.371139e-08, -5.033321, 2.9995959, -46.192524)
 mesh = SubResource("ArrayMesh_xo0rd")
-surface_material_override/0 = SubResource("ShaderMaterial_fvyjn")
 
 [node name="GrassBink" type="MeshInstance3D" parent="." unique_id=877010700]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.201141, 0.14375621, -1.6525683)
@@ -11267,7 +10753,7 @@ transform = Transform3D(-0.46669036, 0, 0.4666906, 0, 0.66, 0, -0.4666906, 0, -0
 [node name="Clif_2  Asia" parent="." unique_id=1275928194 instance=ExtResource("78_xsvq8")]
 transform = Transform3D(1.32, 0, 0, 0, 0.7514, 0, 0, 0, 0.049999997, -18.649712, -0.92599636, -28.578709)
 
-[node name="Building_10 Asia" parent="." unique_id=1008788136 instance=ExtResource("79_2nf86")]
+[node name="Building_10 Asia" parent="." unique_id=1102934613 instance=ExtResource("79_2nf86")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -27.1, -1, -25)
 
 [node name="Building_LV0_1 Asia" parent="." unique_id=249287301 instance=ExtResource("80_jrgyu")]
@@ -11291,13 +10777,13 @@ transform = Transform3D(0.15999998, 0, 0, 0, 1, 0, 0, 0, 0.36, -9.020651, -0.925
 [node name="Small_Hill Asia3" parent="." unique_id=990965769 instance=ExtResource("81_uvule")]
 transform = Transform3D(0.15999998, 0, 0, 0, 1.25, 0, 0, 0, 0.36, -9.020651, -0.92599714, -22.138306)
 
-[node name="Tower_1 Asia" parent="." unique_id=1910963955 instance=ExtResource("65_pmpka")]
+[node name="Tower_1 Asia" parent="." unique_id=316600361 instance=ExtResource("65_pmpka")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -1, -13)
 
-[node name="Rock_4_2 Asia" parent="." unique_id=850938206 instance=ExtResource("83_sus27")]
+[node name="Rock_4_2 Asia" parent="." unique_id=1383387528 instance=ExtResource("83_sus27")]
 transform = Transform3D(0.25881907, 0, 0.9659258, 0, 1, 0, -0.9659258, 0, 0.25881907, -12.9, -1, -12)
 
-[node name="Rock_4_2 Asia2" parent="." unique_id=1662251175 instance=ExtResource("83_sus27")]
+[node name="Rock_4_2 Asia2" parent="." unique_id=1388327545 instance=ExtResource("83_sus27")]
 transform = Transform3D(1.7881394e-08, 0, 0.56477034, 0, 1.6, 0, -1.1378834, 0, 2.0861625e-08, -12.9, 0.99999994, -8.5)
 
 [node name="Wall_1_8 Asia" parent="." unique_id=656032043 instance=ExtResource("84_jd4a4")]
@@ -11306,7 +10792,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, -1, -8.761)
 [node name="Wall_1_7 Asia" parent="." unique_id=375740666 instance=ExtResource("85_fufty")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -24.991, -1, -8.761)
 
-[node name="Building_10 Asia2" parent="." unique_id=37665675 instance=ExtResource("79_2nf86")]
+[node name="Building_10 Asia2" parent="." unique_id=106196971 instance=ExtResource("79_2nf86")]
 transform = Transform3D(5.3644182e-08, 0, -1.0000001, 0, 1.5600001, 0, 1.8000003, 0, 2.9802322e-08, -30.4, 4, -18)
 
 [node name="Block_1 Asia" parent="." unique_id=777498693 instance=ExtResource("86_wkjx1")]
@@ -11315,7 +10801,7 @@ transform = Transform3D(0.19999999, 0, 0, 0, 1, 0, 0, 0, 0.8033256, -28.8, 3.100
 [node name="Tora _1 Asia" parent="." unique_id=818233852 instance=ExtResource("87_5i3ml")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 4.2, -2.2)
 
-[node name="Tree_1 Asia" parent="." unique_id=1165892606 instance=ExtResource("88_xpwt7")]
+[node name="Tree_1 Asia" parent="." unique_id=562229859 instance=ExtResource("88_xpwt7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, -1, -22)
 
 [node name="Bambo_4 Asia" parent="." unique_id=606301520 instance=ExtResource("89_tmse1")]
@@ -11330,11 +10816,11 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -25.99007, -0.92599636, -
 [node name="Sakura_1 Asia" parent="." unique_id=1403876093 instance=ExtResource("91_lah1j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, -1, -15)
 
-[node name="Sakura_4 Asia" parent="." unique_id=2096602552 instance=ExtResource("92_bgrk7")]
-transform = Transform3D(0.42261827, 0, -0.90630776, 0, 1, 0, 0.90630776, 0, 0.42261827, -17.7, -1, -22)
-
 [node name="Sakura_2 Asia" parent="." unique_id=1458295044 instance=ExtResource("93_flkct")]
 transform = Transform3D(0.22258441, 0, -0.8306962, 0, 0.86, 0, 0.8306962, 0, 0.22258441, -19, -1, -26.7)
+
+[node name="Sakura_2 Asia2" parent="." unique_id=665573010 instance=ExtResource("93_flkct")]
+transform = Transform3D(-0.39563686, 0, -0.38206217, 0, 0.55, 0, 0.38206217, 0, -0.39563686, -17.869274, -1, -22.38779)
 
 [node name="Wall_1_BelTower Asia" parent="." unique_id=87593919 instance=ExtResource("94_bva6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 4.4, -3)
@@ -11522,8 +11008,6 @@ transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, -25.
 [node name="Platform_1_3" type="MeshInstance3D" parent="." unique_id=1053165709]
 transform = Transform3D(1.1, 0, 0, 0, 1, 1.9470718e-07, 0, -2.8037834e-07, 1.4399999, 33.4, 0, 4.8999996)
 mesh = SubResource("ArrayMesh_ipwqt")
-surface_material_override/0 = SubResource("ShaderMaterial_8oxyp")
-surface_material_override/1 = SubResource("ShaderMaterial_8oxyp")
 
 [node name="Katana  Asia" parent="." unique_id=790974547 instance=ExtResource("101_sus27")]
 transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -20.300001, 0.19999999, -21.5)
@@ -11531,118 +11015,90 @@ transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.965
 [node name="Island_2" type="MeshInstance3D" parent="." unique_id=2054901973]
 transform = Transform3D(-0.47743455, -1.1189838e-14, 2.7594215e-08, -7.217643e-10, 0.0694388, -0.028937485, -8.249804e-09, -0.0060749426, -0.33075702, 18.3, 1.7881393e-07, 1.5000002)
 mesh = SubResource("ArrayMesh_eslt8")
-surface_material_override/0 = SubResource("ShaderMaterial_sqn0r")
-surface_material_override/1 = SubResource("ShaderMaterial_32j54")
 
 [node name="Island_4" type="MeshInstance3D" parent="." unique_id=1923471593]
 transform = Transform3D(-1.5119839, -6.002239e-14, 2.011673e-07, 0, 0.3801328, 3.94285e-08, -2.622605e-08, 8.846941e-07, -2.4204946, 22.3, 0, 26.3)
 mesh = SubResource("ArrayMesh_eslt8")
-surface_material_override/0 = SubResource("ShaderMaterial_hvq4d")
-surface_material_override/1 = SubResource("ShaderMaterial_0ykah")
 
 [node name="Island_3" type="MeshInstance3D" parent="." unique_id=62440775]
 transform = Transform3D(5.280045e-09, -0.02266244, -0.4286717, 4.6194407e-10, 0.25903988, -0.037503902, 0.20102505, -4.4518568e-14, -1.695358e-08, 28.3, -0.3000001, 6.3)
 mesh = SubResource("ArrayMesh_eslt8")
-surface_material_override/0 = SubResource("ShaderMaterial_32j54")
-surface_material_override/1 = SubResource("ShaderMaterial_32j54")
 
 [node name="Island_5" type="MeshInstance3D" parent="." unique_id=809135896]
 transform = Transform3D(5.830236e-09, 1.2943987e-07, -0.27618697, 6.4109674e-18, 0.05517334, 4.470349e-09, 0.22112757, -9.446004e-15, -1.0881379e-08, 34.3, -5.9604645e-08, 0.3000002)
 mesh = SubResource("ArrayMesh_eslt8")
-surface_material_override/0 = SubResource("ShaderMaterial_32j54")
-surface_material_override/1 = SubResource("ShaderMaterial_32j54")
 
 [node name="Island_6" type="MeshInstance3D" parent="." unique_id=207347556]
 transform = Transform3D(5.830236e-09, 1.2943987e-07, -0.22094958, 6.4109674e-18, 0.05517334, 3.5762793e-09, 0.22112757, -9.446004e-15, -8.705103e-09, 25.3, -5.9604645e-08, 1.3000002)
 mesh = SubResource("ArrayMesh_eslt8")
-surface_material_override/0 = SubResource("ShaderMaterial_32j54")
-surface_material_override/1 = SubResource("ShaderMaterial_32j54")
 
 [node name="Rock_4" type="MeshInstance3D" parent="." unique_id=804561136]
 transform = Transform3D(1.3999999, 0, 0, 0, 1.7000002, 5.296035e-07, 0, -1.947072e-07, 1.5999999, 28.8, -0.10000008, 2.5)
 mesh = SubResource("ArrayMesh_e30a0")
-surface_material_override/0 = SubResource("ShaderMaterial_ldlms")
 
 [node name="Rock_14" type="MeshInstance3D" parent="." unique_id=1414337886]
 transform = Transform3D(2.03, 0, 0, 0, 1.7000002, 5.296035e-07, 0, -1.947072e-07, 1.5999999, 36.899998, -0.10000008, -6.5)
 mesh = SubResource("ArrayMesh_e30a0")
-surface_material_override/0 = SubResource("ShaderMaterial_seusb")
 
 [node name="Rock_5" type="MeshInstance3D" parent="." unique_id=337223116]
 transform = Transform3D(1.3999999, 0, 0, 0, 1.7000002, 5.296035e-07, 0, -1.947072e-07, 1.5999999, 22.199999, -0.10000008, -2.7)
 mesh = SubResource("ArrayMesh_e30a0")
-surface_material_override/0 = SubResource("ShaderMaterial_ldlms")
 
 [node name="Rock_13" type="MeshInstance3D" parent="." unique_id=1119126358]
 transform = Transform3D(0.8183173, 2.3915026, 0.6323253, 0.8628253, 0.24096277, -1.2063873, -0.96319175, 2.247649, -0.5434622, 22.399998, -0.10000008, -2.1999998)
 mesh = SubResource("ArrayMesh_e30a0")
-surface_material_override/0 = SubResource("ShaderMaterial_seusb")
 
 [node name="Rock_6" type="MeshInstance3D" parent="." unique_id=41367147]
 transform = Transform3D(5.0399995, 0, 0, 0, -0.114086784, -1.2751292, 0, 1.304019, -0.11155897, 21.199999, 3.8999999, -6.7)
 mesh = SubResource("ArrayMesh_e30a0")
-surface_material_override/0 = SubResource("ShaderMaterial_ldlms")
 
 [node name="Rock_9" type="MeshInstance3D" parent="." unique_id=1333594634]
 transform = Transform3D(2.1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 23.4, -0.100000024, 8)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_s2bfj")
 
 [node name="Rock_12" type="MeshInstance3D" parent="." unique_id=222948843]
 transform = Transform3D(1.4699999, 0, 0, 0, 1, 1.9470718e-07, 0, -1.3629503e-07, 0.7, 31.4, -0.100000024, 2)
 mesh = SubResource("ArrayMesh_073g0")
-surface_material_override/0 = SubResource("ShaderMaterial_seusb")
 
 [node name="Rock_8" type="MeshInstance3D" parent="." unique_id=112728546]
 transform = Transform3D(1.8000001, 0, 0, 0, 1.9000001, 3.6994368e-07, 0, -1.9470718e-07, 1, 16.202078, -0.100000024, 8)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_s283j")
 
 [node name="Rock_16" type="MeshInstance3D" parent="." unique_id=333330266]
 transform = Transform3D(-1.7464412, -0.41508085, -0.10439331, -0.10802038, -0.3813753, 0.9778078, -0.42222568, 1.8144587, 0.18164128, 21.202078, 5.4999995, 2)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_s283j")
 
 [node name="Rock_18" type="MeshInstance3D" parent="." unique_id=276030919]
 transform = Transform3D(-1.7464411, -0.4150808, -0.10439331, -0.070809945, -0.53806454, 0.95825595, -0.43003356, 1.774315, 0.2661716, 26.302078, 5.7999997, 2.5)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_s283j")
 
 [node name="Rock_17" type="MeshInstance3D" parent="." unique_id=650537153]
 transform = Transform3D(-0.40894204, 2.2539175, 0.052782785, -0.13292417, -0.17802228, 1.0663087, 1.4387203, 0.6242061, 0.113519736, 16.002077, 5.2999997, 5)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_s283j")
 
 [node name="Rock_7" type="MeshInstance3D" parent="." unique_id=652814082]
 transform = Transform3D(-5.5076356e-08, 1.9470721e-07, -1.0800002, 0, 1.9000003, 3.995392e-07, 1.26, 8.510921e-15, -4.72083e-08, 12.802078, -0.100000024, -4.2)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_jvehj")
 
 [node name="Rock_11" type="MeshInstance3D" parent="." unique_id=1568965654]
 transform = Transform3D(1.26, -1.3500312e-14, 0, -2.1345228e-21, 1.9000005, 3.6254482e-07, 1.0658141e-14, -1.9470725e-07, 0.9800002, 15.802078, -0.100000024, -5.4999995)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_jvehj")
 
 [node name="Rock_10" type="MeshInstance3D" parent="." unique_id=488961770]
 transform = Transform3D(-2.8800006, 1.7021844e-14, -8.7422784e-08, 0, 1.9000003, 3.699437e-07, 2.517776e-07, 1.9470718e-07, -1, 32.20208, -0.100000024, 8)
 mesh = SubResource("ArrayMesh_yn6ub")
-surface_material_override/0 = SubResource("ShaderMaterial_sgvkr")
 
 [node name="Stairs_3" type="MeshInstance3D" parent="." unique_id=83943868]
 transform = Transform3D(-4.371139e-08, 3.1153147e-07, -2.4, 0, 0.99999994, 2.9206078e-07, 1, 1.3617473e-14, -1.04907336e-07, 35.600002, 0, 1)
 mesh = SubResource("ArrayMesh_dgrhn")
-surface_material_override/0 = SubResource("ShaderMaterial_4fhc1")
-surface_material_override/1 = SubResource("ShaderMaterial_q2a4x")
 
 [node name="Rock_3" type="MeshInstance3D" parent="." unique_id=1370276070]
 transform = Transform3D(0.12940958, 1.7603605e-07, -1.352296, -3.105881e-22, 1.1231999, 3.2710807e-07, 0.4829629, -4.7168722e-08, 0.3623468, 14, -0.100000024, 7)
 mesh = SubResource("ArrayMesh_61flt")
-surface_material_override/0 = SubResource("ShaderMaterial_8sa2x")
 
 [node name="Rock_15" type="MeshInstance3D" parent="." unique_id=350565649]
 transform = Transform3D(0, -1.804235e-07, 1.9109995, 1.5130054e-15, 1.1119679, 4.465025e-07, -0.475, -3.5171866e-15, -4.0680167e-08, 33.6, -0.100000024, 7.2000003)
 mesh = SubResource("ArrayMesh_61flt")
-surface_material_override/0 = SubResource("ShaderMaterial_8sa2x")
 
 [node name="Clif_2  Asia7" parent="." unique_id=787731735 instance=ExtResource("102_jd4a4")]
 transform = Transform3D(-2.3841856e-07, 0, 1.9372692, 0, 1.3, 0, -2.9856403, 0, -1.1324883e-07, 41, -3.7, 28)
@@ -11719,134 +11175,106 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 23.1
 [node name="Tile_1_6" type="MeshInstance3D" parent="." unique_id=219620576]
 transform = Transform3D(6.7964997, 0, 0, 0, -1.0561943e-06, 4.6514997, 0, -4.43, -1.109004e-06, 26, 4.1, 32.8)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_3u1s1")
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="Tile_1_6" unique_id=1888398038]
 transform = Transform3D(0.18951444, -0.19688536, -0.63557833, -0.047644217, 0.84846, -0.16950132, 0.68386877, 0.11367215, 0.16432333, 0.5885377, 0.3160286, -0.47296578)
 mesh = SubResource("ArrayMesh_dt4rj")
-surface_material_override/0 = SubResource("ShaderMaterial_volbp")
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="Tile_1_6" unique_id=1427497544]
 transform = Transform3D(0.011005436, -0.0078047537, 0.67240727, -0.08083467, 0.9140568, 0.0061259447, -1.2053672, -0.061369978, 0.005728384, -1.4713461, 0.31603098, -0.47296578)
 mesh = SubResource("ArrayMesh_dt4rj")
-surface_material_override/0 = SubResource("ShaderMaterial_volbp")
 
 [node name="Tile_1_9" type="MeshInstance3D" parent="." unique_id=827573480]
 transform = Transform3D(-6.7964997, -9.233543e-14, 4.0664702e-07, -5.9416885e-07, 1.0561939e-06, -4.6514993, 0, -4.43, -1.1090038e-06, 23.3, 8.099999, 34.8)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_3u1s1")
 
 [node name="Tile_1_10" type="MeshInstance3D" parent="." unique_id=2099783634]
 transform = Transform3D(-6.7964997, -9.233543e-14, 4.0664702e-07, -5.9416885e-07, 1.0561939e-06, -4.6514993, 0, -4.43, -1.1090038e-06, 27.3, 2.3999996, 31.8)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_3u1s1")
 
 [node name="Tile_1_11" type="MeshInstance3D" parent="." unique_id=1204532145]
 transform = Transform3D(6.7964997, 1.8467083e-13, -8.1329404e-07, 1.1883378e-06, -1.0561939e-06, 4.6514997, 0, -4.4300003, -1.109004e-06, 24.699999, 2.1999996, 31.8)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_3u1s1")
 
 [node name="Tile_1_12" type="MeshInstance3D" parent="." unique_id=1759133761]
 transform = Transform3D(-3.5650135e-07, -5.758998, -3.37359e-06, 1.4260054e-06, -1.3730515e-06, 14.149862, -8.155801, 2.517335e-07, 2.4740405e-06, 37.899998, 1.1999996, -2.3000007)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_13" type="MeshInstance3D" parent="." unique_id=1804906822]
 transform = Transform3D(-8.155799, 1.1920929e-07, 2.474039e-06, 1.4260052e-06, -1.3730513e-06, 14.149862, 0, 5.758997, 3.37359e-06, 27.250004, 1.1999996, -6.5499997)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_14" type="MeshInstance3D" parent="." unique_id=1444481686]
 transform = Transform3D(-15.496018, 1.1920929e-07, 2.4740386e-06, 2.70941e-06, -1.3730513e-06, 14.149859, 0, 5.758997, 3.3735894e-06, 19.250004, 1.1999996, -6.5499997)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_20" type="MeshInstance3D" parent="." unique_id=900727157]
 transform = Transform3D(4.064115e-07, 5.758997, 2.5605543e-06, 1.625646e-06, -1.3730512e-06, 10.739745, 9.29761, -3.7094304e-07, -1.8777954e-06, 12.350004, 1.4999995, 4.4500003)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_21" type="MeshInstance3D" parent="." unique_id=518143152]
 transform = Transform3D(1.8288516e-07, 5.758997, 2.304499e-06, 7.3154064e-07, -1.3730512e-06, 9.6657715, 4.1839247, -3.7094304e-07, -1.690016e-06, 12.250004, 1.4999995, -2.6499999)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_19" type="MeshInstance3D" parent="." unique_id=451659896]
 transform = Transform3D(1.0160286e-06, -9.214395, -3.2386463e-06, 4.0641144e-06, -2.1968817e-06, 13.583867, -23.244024, -2.1203907e-07, 2.3750772e-06, 37.950005, 1.1999996, 3.4500003)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_15" type="MeshInstance3D" parent="." unique_id=832085286]
 transform = Transform3D(-27.892832, 3.9339085e-07, 2.4740393e-06, -4.5474735e-13, 19.004692, 4.2915344e-06, -4.876938e-06, 4.7683716e-06, -14.149863, 18.250004, -1.4000006, 4.4500003)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_16" type="MeshInstance3D" parent="." unique_id=1208482084]
 transform = Transform3D(-27.892832, 3.9339085e-07, 2.4740393e-06, -4.5474735e-13, 19.004692, 4.2915344e-06, -4.876938e-06, 4.7683716e-06, -14.149863, 16.550003, -1.4000006, -3.5499997)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_17" type="MeshInstance3D" parent="." unique_id=1999882878]
 transform = Transform3D(-34.977615, 3.9339085e-07, 2.2451904e-06, -5.702532e-13, 19.004692, 3.894567e-06, -6.115681e-06, 4.7683716e-06, -12.841, 29.550003, -1.4000006, -3.0499997)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_18" type="MeshInstance3D" parent="." unique_id=1302065807]
 transform = Transform3D(-26.656055, 8.074848e-07, -1.5668304, -4.362436e-13, 19.00469, 5.452394e-06, 2.332098, 4.7159406e-06, -17.908993, 32.450005, -1.4000006, 3.5500002)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_w87a1")
 
 [node name="Tile_1_7" type="MeshInstance3D" parent="." unique_id=39529374]
 transform = Transform3D(-7.6829996, -9.233543e-14, 4.453753e-07, -6.7166917e-07, 1.0561942e-06, -5.0944996, 0, -4.4299994, -1.2146234e-06, 20.5, 4.2999997, 32.8)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_3u1s1")
 
 [node name="Tile_1_8" type="MeshInstance3D" parent="." unique_id=1262669468]
 transform = Transform3D(6.501, 0, 0, 0, -1.0561943e-06, 4.873, 0, -4.43, -1.1618138e-06, 20.699999, 7.999999, 34.8)
 mesh = SubResource("ArrayMesh_wmagv")
-surface_material_override/0 = SubResource("ShaderMaterial_3u1s1")
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="Tile_1_8" unique_id=607306213]
 transform = Transform3D(1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470721e-07, 1, 0.4614675, 0, 0)
 mesh = SubResource("ArrayMesh_w7v5v")
-surface_material_override/0 = SubResource("ShaderMaterial_g5e81")
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="Tile_1_8" unique_id=1609691290]
 transform = Transform3D(0.9350002, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470721e-07, 1, 0.6152904, -0.20316172, 0.41042483)
 mesh = SubResource("ArrayMesh_w7v5v")
-surface_material_override/0 = SubResource("ShaderMaterial_g5e81")
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="Tile_1_8" unique_id=1077598028]
 transform = Transform3D(-0.9350002, -3.9949387e-14, 8.742278e-08, 2.1437257e-14, 1, 7.192282e-07, -8.174032e-08, 7.192282e-07, -1, 0.1538229, -0.20316172, 0.3488611)
 mesh = SubResource("ArrayMesh_w7v5v")
-surface_material_override/0 = SubResource("ShaderMaterial_g5e81")
 
 [node name="Tile_1_7" type="MeshInstance3D" parent="Tile_1_8" unique_id=929186187]
 transform = Transform3D(-1.0285002, -3.9949387e-14, 8.742278e-08, 2.3580997e-14, 1, 7.192282e-07, -8.991435e-08, 7.192282e-07, -1, 0.5691438, 0.2483058, -0.34886122)
 mesh = SubResource("ArrayMesh_w7v5v")
-surface_material_override/0 = SubResource("ShaderMaterial_g5e81")
 
 [node name="Tile_1_8" type="MeshInstance3D" parent="Tile_1_8" unique_id=831437630]
 transform = Transform3D(8.3652374e-08, -1.0000002, -8.8437207e-07, -6.11021e-07, 5.0248394e-07, -1.7600002, 2.345969, 8.0728746e-08, -4.5840198e-07, 2.66113, 8.961627, -1.1902317)
 mesh = SubResource("ArrayMesh_w7v5v")
-surface_material_override/0 = SubResource("ShaderMaterial_6tj66")
 
 [node name="Tile_1_9" type="MeshInstance3D" parent="Tile_1_8" unique_id=888840468]
 transform = Transform3D(1.0254604e-07, -4.7676383e-07, 1.7600003, -4.2482282e-07, -1.0000001, -9.418342e-07, 2.3459687, -1.3601559e-07, -7.693245e-08, 0.60759926, 9.356662, -1.190232)
 mesh = SubResource("ArrayMesh_w7v5v")
-surface_material_override/0 = SubResource("ShaderMaterial_6tj66")
 
 [node name="Clif_2" type="MeshInstance3D" parent="." unique_id=963393666]
 transform = Transform3D(-0.3780003, -4.3387853e-09, -7.4505806e-08, -3.604543e-09, 0.45499986, 1.5542977e-07, -2.2351742e-08, 1.0848049e-07, -0.6519197, 17.7, -1.3, 17.1)
 mesh = SubResource("ArrayMesh_ow7u5")
-surface_material_override/0 = SubResource("ShaderMaterial_0nfu5")
-surface_material_override/1 = SubResource("ShaderMaterial_gve0t")
 
 [node name="Clif_3" type="MeshInstance3D" parent="." unique_id=214118948]
 transform = Transform3D(0.2672866, -9.573107e-08, 0.4609769, -3.6045407e-09, 0.5914997, 1.5542976e-07, -0.26728654, -1.03707876e-07, 0.46097678, 31.7, 0.59999996, 12.5)
 mesh = SubResource("ArrayMesh_ow7u5")
-surface_material_override/0 = SubResource("ShaderMaterial_0nfu5")
-surface_material_override/1 = SubResource("ShaderMaterial_gve0t")
 
 [node name="Jenssten" type="MeshInstance3D" parent="." unique_id=339104215]
 transform = Transform3D(12.9168005, 0, 0, 0, 0.099999994, 0, 0, 0, 5.376, 25, 4.1, -2)

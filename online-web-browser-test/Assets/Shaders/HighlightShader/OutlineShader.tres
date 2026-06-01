@@ -12,7 +12,7 @@ default_value = 1.0
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_33qqf"]
 parameter_name = "Outline_Size"
 default_value_enabled = true
-default_value = 0.025
+default_value = 0.001
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_h6jq7"]
 input_name = "normal"
