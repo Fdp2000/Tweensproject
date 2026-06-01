@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ewmqyyk0te3e"
+path="res://.godot/imported/chinese exhibition.mp3-50979b417aeef041b94b52f7078480a8.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/chinese exhibition.mp3"
+dest_files=["res://.godot/imported/chinese exhibition.mp3-50979b417aeef041b94b52f7078480a8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
