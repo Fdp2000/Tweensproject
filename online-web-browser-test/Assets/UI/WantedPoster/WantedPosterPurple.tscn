@@ -1,11 +1,11 @@
-[gd_scene format=3 uid="uid://dnhxcud0ch57x"]
+[gd_scene format=3 uid="uid://bucfs61yqfi8m"]
 
-[ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="1_0w56w"]
-[ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="2_0w56w"]
+[ext_resource type="PackedScene" uid="uid://qxe4dnmverhh" path="res://Assets/Models/Chameleon/Chameleon_Character.glb" id="1_i6kvu"]
+[ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="2_ggvqi"]
 
-[node name="WantedPosterOrange" type="Node2D" unique_id=1410591658]
+[node name="WantedPosterBlack" type="Node2D" unique_id=135904429]
 
-[node name="Chameleon_Character" parent="." unique_id=508333357 instance=ExtResource("1_0w56w")]
+[node name="Chameleon_Character" parent="." unique_id=508333357 instance=ExtResource("1_i6kvu")]
 transform = Transform3D(-0.37724274, 0, 0.92611444, 0, 1, 0, -0.92611444, 0, -0.37724274, 0.19368017, 0, 2.232366)
 
 [node name="Skeleton3D" parent="Chameleon_Character/metarig" parent_id_path=PackedInt32Array(508333357, 1761366284) index="0" unique_id=357803507]
@@ -52,13 +52,13 @@ bones/30/scale = Vector3(1, 1.0000002, 1.0000001)
 bones/31/scale = Vector3(1, 1, 1.0000001)
 
 [node name="Chameleon" parent="Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1551583372]
-surface_material_override/0 = ExtResource("2_0w56w")
+surface_material_override/0 = ExtResource("2_ggvqi")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=838746600]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=97560854]
 transform = Transform3D(0.9999983, -0.0018505134, 9.646553e-05, 0.0018505355, 0.9999983, -0.00023198078, -9.6039825e-05, 0.00023215736, 0.99999994, 0.18273991, 1.1225652, 3.4521103)
 fov = 57.5
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2062429847]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5645564, 6.0658426, 2.7695594)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=190670745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4198427, 47.73012, 535.41315)
 
 [editable path="Chameleon_Character"]
