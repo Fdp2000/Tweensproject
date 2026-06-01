@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bnwgi0kumh80d"]
+
+[ext_resource type="PackedScene" uid="uid://c1ryx88gj6ufv" path="res://Assets/Models/Prototype Models/RPG-Mini-Asset-Package/FBX/Imported Model/Gempurse.fbx" id="1_i2eau"]
+[ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="2_ukrgv"]
+
+[node name="Gempurse" unique_id=2091288860 instance=ExtResource("1_i2eau")]
+script = ExtResource("2_ukrgv")
