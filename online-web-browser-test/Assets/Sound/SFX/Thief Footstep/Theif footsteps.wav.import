@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cknkjuitp242u"
-path="res://.godot/imported/Theif footsteps.wav-f336270145f5144a1a8960ef8cc275ad.sample"
+path="res://.godot/imported/Theif footsteps.wav-d26a6ad1522f89bf0f76fbca3cc54426.sample"
 
 [deps]
 
-source_file="res://Assets/Sound/SFX/Theif footsteps.wav"
-dest_files=["res://.godot/imported/Theif footsteps.wav-f336270145f5144a1a8960ef8cc275ad.sample"]
+source_file="res://Assets/Sound/SFX/Thief Footstep/Theif footsteps.wav"
+dest_files=["res://.godot/imported/Theif footsteps.wav-d26a6ad1522f89bf0f76fbca3cc54426.sample"]
 
 [params]
 

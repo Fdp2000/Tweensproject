@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c3asgd0e13ajt"
-path="res://.godot/imported/ArtifactPickup.wav-9e575eb09d53eef2ab6c665f919af822.sample"
+path="res://.godot/imported/ArtifactPickup.wav-f64aecf2d9c7288016f5b5a99e6ab86e.sample"
 
 [deps]
 
-source_file="res://Assets/Sound/fredes mappe/ArtifactPickup.wav"
-dest_files=["res://.godot/imported/ArtifactPickup.wav-9e575eb09d53eef2ab6c665f919af822.sample"]
+source_file="res://Assets/Sound/SFX/Aritfact Pick/ArtifactPickup.wav"
+dest_files=["res://.godot/imported/ArtifactPickup.wav-f64aecf2d9c7288016f5b5a99e6ab86e.sample"]
 
 [params]
 
