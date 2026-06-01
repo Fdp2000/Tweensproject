@@ -40,8 +40,6 @@ extends Node
 
 
 var menu_camera: Camera3D
-var menu_camera_spot: Marker3D
-var skins_camera_spot: Marker3D
 
 const COP_SCENE = preload("res://scenes/PlayerScenes/Cop.tscn")
 const THIEF_SCENE = preload("res://scenes/PlayerScenes/Thief.tscn")
@@ -56,6 +54,7 @@ var lobby_ui: Node = null
 var tutorial_intro_cancelled := false
 var has_requested_lobby := false
 var tutorial_intro_tweens: Array[Tween] = []
+var menu_camera_start_rotation: Vector3
 var camera_is_on_skins := false
 
 var selected_chameleon_skin := 0
@@ -68,14 +67,9 @@ func _ready() -> void:
 	await get_tree().process_frame
 
 	menu_camera = get_tree().get_first_node_in_group("menu_camera") as Camera3D
-	menu_camera_spot = menu_root.get_node_or_null("MenuCameraSpot") as Marker3D
-	skins_camera_spot = menu_root.get_node_or_null("SkinsCameraSpot") as Marker3D
 
-	if menu_camera and menu_camera_spot:
-		menu_camera.global_position = menu_camera_spot.global_position
-		menu_camera.global_rotation = menu_camera_spot.global_rotation
 	if menu_camera:
-		menu_camera.make_current()
+		menu_camera_start_rotation = menu_camera.rotation_degrees
 		print("Found camera: ", menu_camera.get_path())
 	
 	client.lobby_joined.connect(_lobby_joined)
@@ -149,6 +143,9 @@ func show_main_menu() -> void:
 	if lobby_ui:
 		lobby_ui.hide()
 
+	if menu_camera and not menu_camera.current:
+		menu_camera.make_current()
+
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
@@ -190,8 +187,10 @@ func _on_skins_pressed() -> void:
 
 func _on_skins_back_pressed() -> void:
 	set_skin_viewports_active(false)
-
 	var tween := create_tween()
+
+	tween.set_parallel(true)
+
 	tween.tween_property(
 		skins_panel,
 		"modulate:a",
@@ -199,17 +198,22 @@ func _on_skins_back_pressed() -> void:
 		0.5
 	)
 
-	_rotate_camera_to_menu()
+	tween.tween_property(
+		menu_camera,
+		"rotation_degrees",
+		menu_camera_start_rotation,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	await tween.finished
-	await get_tree().create_timer(0.7).timeout
 
 	skins_panel.hide()
 	skins_panel.modulate.a = 1.0
+
 	main_menu_panel.show()
 
 func _animate_skins_panel_in() -> void:
-	await get_tree().create_timer(0.7).timeout
+	await get_tree().create_timer(0.35).timeout
 
 	var original_pos := skins_panel.position
 
@@ -220,30 +224,20 @@ func _animate_skins_panel_in() -> void:
 	tween.tween_property(skins_panel, "position", original_pos - Vector2(80, 0), 0.9)
 
 func _rotate_camera_to_skins() -> void:
-	print("Skins button pressed, moving camera")
+	print("Skins button pressed, rotating camera")
 
 	if menu_camera == null:
 		print("MenuCamera not found!")
 		return
 
-	if skins_camera_spot == null:
-		print("SkinsCameraSpot not found!")
-		return
+	var target_rotation := menu_camera_start_rotation
+	target_rotation.y += 90.0
 
 	var tween := create_tween()
-	tween.set_parallel(true)
-
 	tween.tween_property(
 		menu_camera,
-		"global_position",
-		skins_camera_spot.global_position,
-		1.2
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-	tween.tween_property(
-		menu_camera,
-		"global_rotation",
-		skins_camera_spot.global_rotation,
+		"rotation_degrees",
+		target_rotation,
 		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
@@ -253,24 +247,12 @@ func _rotate_camera_to_menu() -> void:
 		print("MenuCamera not found!")
 		return
 
-	if menu_camera_spot == null:
-		print("MenuCameraSpot not found!")
-		return
-
 	var tween := create_tween()
-	tween.set_parallel(true)
 
 	tween.tween_property(
 		menu_camera,
-		"global_position",
-		menu_camera_spot.global_position,
-		1.2
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-	tween.tween_property(
-		menu_camera,
-		"global_rotation",
-		menu_camera_spot.global_rotation,
+		"rotation_degrees",
+		menu_camera_start_rotation,
 		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
@@ -368,6 +350,9 @@ func show_lobby() -> void:
 
 	lobby_ui.show_lobby()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	if menu_camera and not menu_camera.current:
+		menu_camera.make_current()
 
 
 func _on_host_pressed() -> void:
@@ -502,6 +487,7 @@ func _mp_peer_disconnected(id: int) -> void:
 	print("[Multiplayer] Peer disconnected: ", id)
 	GameManager.remove_player(id)
 
+
 func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0, 1000, 0)) -> Transform3D:
 	var spawns = get_tree().get_nodes_in_group(group_name)
 	if spawns.size() == 0: return Transform3D(Basis(), fallback_pos)
@@ -528,7 +514,7 @@ func _on_player_joined(id: int) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 	if not spawned:
 		return
 
@@ -547,7 +533,7 @@ func _on_player_joined(id: int) -> void:
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
-		var spawned = get_node_or_null("/root/World/main/SpawnedObjects")
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
 
 		if spawned:
 			for i in 3:
@@ -568,14 +554,15 @@ func _on_game_started() -> void:
 
 				if role == GameManager.PlayerRole.COP:
 					if pf:
-						pf.global_transform = spawn_trans
-						pf.team_index = role
-					else:
-						pf = COP_SCENE.instantiate()
-						pf.name = str(id)
-						pf.team_index = role
-						pf.global_transform = spawn_trans
-						spawned.add_child(pf, true)
+						pf.name = pf.name + "_deleted"
+						spawned.remove_child(pf)
+						pf.queue_free()
+
+					pf = COP_SCENE.instantiate()
+					pf.name = str(id)
+					pf.team_index = role
+					pf.global_transform = spawn_trans
+					spawned.add_child(pf, true)
 				else:
 					if pf:
 						pf.global_transform = spawn_trans
@@ -667,6 +654,8 @@ func _on_game_ended() -> void:
 		current_hud.queue_free()
 		current_hud = null
 
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
 	show_lobby()
 	
 	if lobby_fade_rect:
