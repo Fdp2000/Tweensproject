@@ -12870,6 +12870,15 @@ spot_attenuation = 0.14
 spot_angle = 31.68
 spot_angle_attenuation = 2.0000005
 
+[node name="ArchLight5" type="SpotLight3D" parent="Lights" unique_id=1661379405]
+transform = Transform3D(-0.06959059, 0.475645, 0.8768803, 0.986049, -0.100441, 0.13273649, 0.15121017, 0.87388414, -0.46201953, -13.308701, 4.331944, 4.0129175)
+light_color = Color(0.9281362, 0.49536973, 0, 1)
+light_energy = 3.252
+spot_range = 4096.0
+spot_attenuation = 0.14
+spot_angle = 31.68
+spot_angle_attenuation = 2.0000005
+
 [node name="ArchLight3" type="SpotLight3D" parent="Lights" unique_id=1878720709]
 transform = Transform3D(-0.99875534, 0.029549524, 0.040182676, -4.833297e-09, -0.8056182, 0.5924351, 0.04987807, 0.59169775, 0.80461544, -0.006671965, 4.6032286, -7.288561)
 light_energy = 4.14
