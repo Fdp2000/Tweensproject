@@ -1,15 +1,10 @@
 [gd_scene format=3 uid="uid://d16n72gkvedkt"]
 
 [ext_resource type="Texture2D" uid="uid://d3t7qejypgtxb" path="res://Assets/Textures/rightPhoto.png" id="1_0ih8x"]
+[ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_j2xlo"]
 [ext_resource type="Texture2D" uid="uid://umfokr7m3c36" path="res://icon.svg" id="2_ovaji"]
 [ext_resource type="Texture2D" uid="uid://dl75yj34ys2iq" path="res://Assets/Models/Prototype Models/Dingus the cat_Maxwell.jpg" id="3_j2xlo"]
 [ext_resource type="Texture2D" uid="uid://bjktwtfip5vv2" path="res://Assets/UI/computer-mouse-solid.png" id="4_ovaji"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ovaji"]
-font_size = 88
-
-[sub_resource type="LabelSettings" id="LabelSettings_j2xlo"]
-font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_8crvg"]
 font_size = 40
@@ -18,13 +13,24 @@ font_size = 40
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_606lv"]
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7sle7"]
+bg_color = Color(0.60038817, 0.60038817, 0.60038817, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="Tutorial" type="Node3D" unique_id=1108260321]
 
 [node name="TutorialCanvas" type="CanvasLayer" parent="." unique_id=267317684]
-visible = false
 
-[node name="Control" type="Control" parent="TutorialCanvas" unique_id=373467567]
+[node name="Control" type="Control" parent="TutorialCanvas" unique_id=756830320]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,7 +38,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="TutorialCanvas/Control" unique_id=1073821125]
+[node name="Panel" type="Panel" parent="TutorialCanvas/Control" unique_id=913264431]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -41,232 +47,286 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TutorialCanvas/Control/Panel" unique_id=1161129352]
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialCanvas/Control/Panel" unique_id=667966037]
+custom_minimum_size = Vector2(1152, 652)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.5
-offset_right = -1.5
-offset_bottom = -117.0
+offset_bottom = 22.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer" unique_id=281085459]
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer" unique_id=1473382751]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer" unique_id=2053170773]
+[node name="Title" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer" unique_id=1271393677]
 layout_mode = 2
-text = "THIEF"
-label_settings = SubResource("LabelSettings_ovaji")
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 70
+text = "CHAMELEON"
 horizontal_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer" unique_id=770165069]
+[node name="MarginContainer" type="MarginContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer" unique_id=1866430245]
 layout_mode = 2
 theme_override_constants/margin_left = 27
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 27
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1557319734]
+[node name="HBoxContainer" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1678198791]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 90
+theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1900836753]
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1895260612]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1501668829]
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=902680508]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j2xlo")
 text = "1. STEAL"
-label_settings = SubResource("LabelSettings_j2xlo")
+label_settings = SubResource("LabelSettings_8crvg")
+horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=612516244]
-custom_minimum_size = Vector2(220, 220)
+[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1048856059]
+custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 texture = ExtResource("1_0ih8x")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1602583748]
+[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=610362498]
 layout_mode = 2
-text = "Steal Artifacts in the museum "
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 26
+text = "Steal Artifacts In The Museum!"
+horizontal_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=29790453]
+[node name="VBoxContainer2" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1095172331]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=460495431]
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1369731962]
 layout_mode = 2
-text = "2. CAPTURE"
-label_settings = SubResource("LabelSettings_8crvg")
+theme_override_fonts/font = ExtResource("1_j2xlo")
+text = "2. HIDE"
+label_settings = SubResource("LabelSettings_7xyp7")
+horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1211442540]
-custom_minimum_size = Vector2(220, 220)
+[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=390579519]
+custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 texture = ExtResource("2_ovaji")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1108257482]
+[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=59187065]
 layout_mode = 2
-text = "Rescue your friends that have 
-been caught by the guards! "
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 26
+text = "Hide From The Guards!
+Stand Still To Turn Invisible!"
+horizontal_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1956542940]
+[node name="VBoxContainer3" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=153048317]
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=2136953949]
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=356357545]
 layout_mode = 2
-text = "3. CHARGE"
-label_settings = SubResource("LabelSettings_7xyp7")
+theme_override_fonts/font = ExtResource("1_j2xlo")
+text = "3. RESCUE"
+label_settings = SubResource("LabelSettings_606lv")
+horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=624286392]
-custom_minimum_size = Vector2(220, 220)
+[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=915108628]
+custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
 texture = ExtResource("3_j2xlo")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=2061302649]
+[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1114583422]
 layout_mode = 2
-text = "Avoid the guards by hiding!
-You can even turn invisible
- if you stand still for a couple
-of seconds!"
-
-[node name="MarginContainer" type="MarginContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=719015876]
-layout_mode = 2
-
-[node name="ControlsPanel" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=271409267]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel" unique_id=1232051598]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-
-[node name="ControlsTitle" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer" unique_id=1802412868]
-layout_mode = 2
-text = "CONTROLS"
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 26
+text = "Rescue Your Captured Teammates!"
 horizontal_alignment = 1
 
-[node name="MovementTitle" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer" unique_id=157615072]
+[node name="MarginContainer2" type="MarginContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer" unique_id=837438958]
+custom_minimum_size = Vector2(600, 120)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="ControlsPanel" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2" unique_id=38836599]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7sle7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel" unique_id=1257553683]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ControlsTitle" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer" unique_id=1415288078]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 34
+text = "CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MovementRow" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer" unique_id=6287876]
+layout_mode = 2
+
+[node name="Keys" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow" unique_id=2048097623]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="MovementTitle" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=1528524027]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 30
 text = "MOVEMENT"
 horizontal_alignment = 1
 
-[node name="MovementRow" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer" unique_id=1922321114]
-layout_mode = 2
-
-[node name="Keys" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow" unique_id=375916358]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="TopRow" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=1678704883]
+[node name="TopRow" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=1719981323]
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="WKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/TopRow" unique_id=1136925214]
-custom_minimum_size = Vector2(42, 42)
+[node name="WKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/TopRow" unique_id=656002525]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/TopRow/WKey" unique_id=176688150]
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/TopRow/WKey" unique_id=992542419]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "W"
 horizontal_alignment = 1
 
-[node name="BottomRow" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=1356135517]
+[node name="BottomRow" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=999626255]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="AKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=1920098454]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="AKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=330874858]
-custom_minimum_size = Vector2(42, 42)
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/AKey" unique_id=629119030]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/AKey" unique_id=279283605]
-layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "A"
 horizontal_alignment = 1
 
-[node name="SKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=685601019]
-custom_minimum_size = Vector2(42, 42)
+[node name="SKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=1151135447]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/SKey" unique_id=15306107]
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/SKey" unique_id=972757011]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "S"
 horizontal_alignment = 1
 
-[node name="DKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=564948767]
-custom_minimum_size = Vector2(42, 42)
+[node name="DKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow" unique_id=2112425570]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/DKey" unique_id=905313458]
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/Keys/BottomRow/DKey" unique_id=1861853500]
 layout_mode = 2
+theme_override_font_sizes/font_size = 24
 text = "D"
 horizontal_alignment = 1
 
-[node name="OtherKeys" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys" unique_id=285451707]
+[node name="MouseRow" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow" unique_id=592935418]
 layout_mode = 2
-theme_override_constants/separation = 30
+size_flags_horizontal = 3
 
-[node name="InteractKey" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys" unique_id=1544650203]
-layout_mode = 2
-
-[node name="InteractKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/InteractKey" unique_id=511267235]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/InteractKey/InteractKey" unique_id=44038107]
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-text = "E"
-label_settings = SubResource("LabelSettings_606lv")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/InteractKey" unique_id=757609721]
-layout_mode = 2
-text = "Interact"
-
-[node name="AltKey" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys" unique_id=927020439]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-
-[node name="AltKey" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/AltKey" unique_id=848635431]
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/MouseRow" unique_id=1663429109]
 layout_mode = 2
 size_flags_horizontal = 6
-
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/AltKey/AltKey" unique_id=725549568]
-custom_minimum_size = Vector2(42, 42)
-layout_mode = 2
-text = "SHIFT"
-label_settings = SubResource("LabelSettings_606lv")
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 30
+text = "CAM LOOK"
 horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/AltKey" unique_id=1199536481]
+[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/MouseRow" unique_id=804621386]
+clip_contents = true
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
-text = "CHARGE"
-
-[node name="Mouse" type="HBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys" unique_id=1729815935]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/Mouse" unique_id=2057342858]
-custom_minimum_size = Vector2(45, 45)
-layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
 texture = ExtResource("4_ovaji")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/MarginContainer/ControlsPanel/VBoxContainer/MovementRow/Keys/OtherKeys/Mouse" unique_id=371680361]
+[node name="ChargeRow" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow" unique_id=2082374639]
 layout_mode = 2
-text = "CAMERA"
+size_flags_horizontal = 3
 
-[node name="NextButton" type="Button" parent="TutorialCanvas/Control/Panel" unique_id=518063835]
+[node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/ChargeRow" unique_id=1161909057]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 30
+text = "Cam Swap"
+
+[node name="AltKey2" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/ChargeRow" unique_id=1847155050]
+custom_minimum_size = Vector2(75, 60)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 10
+
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/ChargeRow/AltKey2" unique_id=712953268]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "SHIFT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractRow" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow" unique_id=861953324]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/InteractRow" unique_id=874038612]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 10
+theme_override_fonts/font = ExtResource("1_j2xlo")
+theme_override_font_sizes/font_size = 30
+text = "INTERACT"
+horizontal_alignment = 1
+
+[node name="InteractKey2" type="PanelContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/InteractRow" unique_id=894596971]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+
+[node name="Label" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer/MovementRow/InteractRow/InteractKey2" unique_id=1313905572]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="TutorialCanvas/Control/Panel" unique_id=1515015576]
 custom_minimum_size = Vector2(100, 31)
 layout_mode = 1
 anchors_preset = -1
@@ -278,5 +338,6 @@ offset_left = -100.0
 offset_top = -63.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_j2xlo")
 theme_override_font_sizes/font_size = 40
 text = "NEXT"
