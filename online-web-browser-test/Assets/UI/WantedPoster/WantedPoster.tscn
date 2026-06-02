@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dbxxj8t3aplww"]
 
 [ext_resource type="Texture2D" uid="uid://cexrkooa25yop" path="res://Assets/UI/WantedPoster/wanted clean.png" id="1_dhoo6"]
+[ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="2_oecxv"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_oecxv"]
 
@@ -11,7 +12,7 @@ shading_mode = 0
 albedo_texture = ExtResource("1_dhoo6")
 
 [node name="WantedPoster" type="Node3D" unique_id=1115739554]
-transform = Transform3D(0.5, 0, 0, 0, 0.6, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(-2.1855694e-08, 0, 0.5, 0, 0.6, 0, -0.5, 0, -2.1855694e-08, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=411219225]
 transform = Transform3D(1.3, 0, 0, 0, -4.371139e-08, -1.3, 0, 1, -5.6824803e-08, 0, 0, 0)
@@ -23,8 +24,10 @@ transform = Transform3D(1, 0, 0, 0, 1.1924882e-08, 1, 0, -1, 1.1924882e-08, 0, 0
 sorting_offset = 1.0
 no_depth_test = true
 modulate = Color(0, 0, 0, 1)
+font = ExtResource("2_oecxv")
 font_size = 42
 
 [node name="Sprite3D" type="Sprite3D" parent="MeshInstance3D" unique_id=1192608160]
 transform = Transform3D(1, 0, 0, 0, 1.1924882e-08, 1, 0, -1, 1.1924882e-08, 0.014329241, 0.020000003, 0.06458945)
+sorting_offset = 1.0
 no_depth_test = true
