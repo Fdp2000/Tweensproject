@@ -67,13 +67,27 @@ func _ready() -> void:
 
 	GameManager.lobby_updated.connect(update_ui)
 	GameManager.game_started.connect(_on_game_started)
-	GameManager.game_ended.connect(show_lobby)
 
 	call_deferred("update_ui")
 	hide()
 
 
 func show_lobby() -> void:
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
+
+	if client_ui:
+		if client_ui.get("has_requested_lobby") != null and not client_ui.has_requested_lobby:
+			hide()
+			return
+
+		if client_ui.get("is_joining_room") != null and client_ui.is_joining_room:
+			hide()
+			return
+
+	if GameManager.players.is_empty():
+		hide()
+		return
+
 	show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 

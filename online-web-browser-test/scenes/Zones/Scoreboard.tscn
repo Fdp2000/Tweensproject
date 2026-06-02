@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cb5c0n8y2j6f3"]
 
 [ext_resource type="Script" uid="uid://bjkkb8aovxjfw" path="res://scripts/UI/scoreboard.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="2_w6pyl"]
 
-[node name="Scoreboard" type="Control"]
+[node name="Scoreboard" type="Control" unique_id=1575503841]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=636165153]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -26,22 +27,23 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.15, 0.15, 0.18, 0.9)
 
-[node name="WinnerLabel" type="Label" parent="."]
+[node name="WinnerLabel" type="Label" parent="." unique_id=1082409375]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 80.0
 offset_bottom = 140.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 48
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("2_w6pyl")
+theme_override_font_sizes/font_size = 60
 text = "ROUND OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1353617950]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -55,39 +57,41 @@ offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CopSide" type="VBoxContainer" parent="HBoxContainer"]
+[node name="CopSide" type="VBoxContainer" parent="HBoxContainer" unique_id=2108743248]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="HBoxContainer/CopSide"]
+[node name="Title" type="Label" parent="HBoxContainer/CopSide" unique_id=576404335]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.4, 0.6, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_w6pyl")
+theme_override_font_sizes/font_size = 40
 text = "TEAM COP"
 horizontal_alignment = 1
 
-[node name="CopList" type="VBoxContainer" parent="HBoxContainer/CopSide"]
+[node name="CopList" type="VBoxContainer" parent="HBoxContainer/CopSide" unique_id=2072800920]
 layout_mode = 2
 
-[node name="ThiefSide" type="VBoxContainer" parent="HBoxContainer"]
+[node name="ThiefSide" type="VBoxContainer" parent="HBoxContainer" unique_id=1740575531]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Title" type="Label" parent="HBoxContainer/ThiefSide"]
+[node name="Title" type="Label" parent="HBoxContainer/ThiefSide" unique_id=1059347156]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_w6pyl")
+theme_override_font_sizes/font_size = 40
 text = "TEAM THIEF"
 horizontal_alignment = 1
 
-[node name="ThiefList" type="VBoxContainer" parent="HBoxContainer/ThiefSide"]
+[node name="ThiefList" type="VBoxContainer" parent="HBoxContainer/ThiefSide" unique_id=2120993451]
 layout_mode = 2
 
-[node name="CountdownLabel" type="Label" parent="."]
+[node name="CountdownLabel" type="Label" parent="." unique_id=147677687]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -95,13 +99,14 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -200.0
-offset_top = -100.0
+offset_top = -115.0
 offset_right = 200.0
-offset_bottom = -60.0
+offset_bottom = -79.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 24
+theme_override_fonts/font = ExtResource("2_w6pyl")
+theme_override_font_sizes/font_size = 32
 text = "Returning to lobby in 5..."
 horizontal_alignment = 1

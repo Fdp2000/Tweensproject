@@ -62,6 +62,16 @@ var selected_chameleon_skin := 0
 var selected_rhino_skin := 0
 var chameleon_preview: Node3D
 var rhino_preview: Node3D
+var host_button_original_text := ""
+var host_loading_tween: Tween
+var is_host_loading := false
+var join_button_original_text := ""
+var join_feedback_tween: Tween
+var is_join_loading := false
+var is_joining_room := false
+var is_hosting_room := false
+
+
 
 func _ready() -> void:
 	await get_tree().process_frame
@@ -130,7 +140,10 @@ func _ready() -> void:
 	chameleon_next.pressed.connect(_on_chameleon_next)
 	rhino_prev.pressed.connect(_on_rhino_prev)
 	rhino_next.pressed.connect(_on_rhino_next)
-
+	
+	host_button_original_text = host_button.text
+	join_button_original_text = join_button.text
+	
 	_update_chameleon_preview()
 	_update_rhino_preview()
 
@@ -394,26 +407,35 @@ func show_lobby() -> void:
 
 
 func _on_host_pressed() -> void:
+	if is_host_loading:
+		return
+
 	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 	save_selected_skins()
 
 	has_requested_lobby = true
+	is_hosting_room = true
+	is_joining_room = false
 
 	local_player_name = name_input.text.strip_edges()
 	if local_player_name == "":
 		local_player_name = "Player"
 
 	current_room_code = ""
+
+	show_host_loading()
+
 	client.start(SIGNALING_URL, "", false)
 
 
 func _on_join_pressed() -> void:
+	if is_join_loading:
+		return
+
 	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 	save_selected_skins()
-
-	has_requested_lobby = true
 
 	local_player_name = name_input.text.strip_edges()
 	current_room_code = room_input.text.strip_edges().to_upper()
@@ -422,11 +444,19 @@ func _on_join_pressed() -> void:
 		local_player_name = "Player"
 
 	if current_room_code == "":
-		print("No room code entered.")
-		return	
+		show_join_wrong_code()
+		return
+
+	GameManager.full_teardown()
+	
+	has_requested_lobby = true
+	is_joining_room = true
+	is_hosting_room = false
+
+	show_join_loading()
 
 	client.start(SIGNALING_URL, current_room_code, false)
-
+	_check_join_timeout()
 
 func _on_tutorial_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
@@ -460,11 +490,63 @@ func _on_quit_pressed() -> void:
 	tutorial_intro_cancelled = true
 	get_tree().quit()
 
+func show_play_panel() -> void:
+	main_menu_canvas.show()
+	main_menu_panel.hide()
+	play_panel.show()
+	skins_panel.hide()
+	tutorial_canvas.hide()
+	tutorial_cop_canvas.hide()
+
+	if lobby_ui:
+		lobby_ui.hide()
+
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _check_join_timeout() -> void:
+	await get_tree().create_timer(2.5).timeout
+
+	if not is_joining_room:
+		return
+
+	if GameManager.players.size() < 2:
+		print("Join timeout: no valid host found.")
+
+		GameManager.full_teardown()
+
+		has_requested_lobby = false
+		is_joining_room = false
+		is_hosting_room = false
+
+		show_play_panel()
+		show_join_wrong_code()
+
 
 func _connected(id: int, _use_mesh: bool) -> void:
 	print("[Signaling] Connected with ID: ", id)
 
-	if id == 1:
+	# If we tried to JOIN a room, but got ID 1,
+	# that means we became the first player in that room.
+	# For joining, that usually means the room code was wrong/empty.
+	if is_joining_room and id == 1:
+		print("Wrong room code: joined as host/first player instead of client.")
+
+		GameManager.full_teardown()
+		has_requested_lobby = false
+		is_joining_room = false
+		is_hosting_room = false
+
+		show_join_wrong_code()
+
+		# Stop the client connection so it does not continue into an empty room.
+		if client:
+			client.stop()
+
+		return
+
+	# Only real hosting should add player 1.
+	if is_hosting_room and id == 1:
 		GameManager.add_player(
 			1,
 			local_player_name,
@@ -474,10 +556,29 @@ func _connected(id: int, _use_mesh: bool) -> void:
 
 
 func _disconnected() -> void:
+	hide_host_loading()
+
+	if is_joining_room or is_join_loading:
+		print("[Signaling] Disconnected / Wrong code")
+
+		GameManager.full_teardown()
+
+		has_requested_lobby = false
+		is_joining_room = false
+		is_hosting_room = false
+
+		show_play_panel()
+		show_join_wrong_code()
+		return
+
+	hide_join_feedback()
+
 	print("[Signaling] Disconnected")
 
 	GameManager.full_teardown()
 	has_requested_lobby = false
+	is_joining_room = false
+	is_hosting_room = false
 
 	if lobby_ui:
 		lobby_ui.hide()
@@ -489,17 +590,27 @@ func _lobby_joined(lobby_id: String) -> void:
 	if not has_requested_lobby:
 		return
 
+	hide_host_loading()
+
 	print("[Signaling] Joined lobby: ", lobby_id)
 
 	current_room_code = lobby_id
-	DisplayServer.clipboard_set(lobby_id)
 
-	if not GameManager.players.is_empty():
-		show_lobby()
-	else:
-		if not GameManager.lobby_updated.is_connected(show_lobby):
-			GameManager.lobby_updated.connect(show_lobby, CONNECT_ONE_SHOT)
+	if is_hosting_room:
+		hide_join_feedback()
+		DisplayServer.clipboard_set(lobby_id)
 
+		if not GameManager.players.is_empty():
+			show_lobby()
+		else:
+			if not GameManager.lobby_updated.is_connected(show_lobby):
+				GameManager.lobby_updated.connect(show_lobby, CONNECT_ONE_SHOT)
+
+		return
+
+	if is_joining_room:
+		print("Joined signaling lobby, waiting for multiplayer host...")
+		return
 
 func _lobby_sealed() -> void:
 	print("[Signaling] Lobby sealed")
@@ -519,8 +630,43 @@ func _mp_server_connected() -> void:
 			selected_rhino_skin
 		)
 
+	if is_joining_room:
+		print("Connected to multiplayer. Waiting for real lobby data...")
+
+		if not GameManager.lobby_updated.is_connected(_show_join_lobby_after_sync):
+			GameManager.lobby_updated.connect(_show_join_lobby_after_sync, CONNECT_ONE_SHOT)
+
+
+func _show_join_lobby_after_sync() -> void:
+	if not is_joining_room:
+		return
+
+	print("Join sync received. Players: ", GameManager.players)
+
+	# When JOINING, a valid lobby should already have at least:
+	# 1 host + 1 joining player
+	if GameManager.players.size() < 2:
+		print("Wrong code: lobby has less than 2 players.")
+
+		GameManager.full_teardown()
+		has_requested_lobby = false
+		is_joining_room = false
+		is_hosting_room = false
+
+		show_join_wrong_code()
+		return
+
+	hide_join_feedback()
+	show_lobby()
 
 func _mp_server_disconnect() -> void:
+	hide_host_loading()
+
+	if is_join_loading:
+		show_join_wrong_code()
+	else:
+		hide_join_feedback()
+
 	print("[Multiplayer] Server disconnected")
 
 
@@ -810,6 +956,152 @@ func save_selected_skins() -> void:
 	GameManager.selected_chameleon_skin = selected_chameleon_skin
 	GameManager.selected_rhino_skin = selected_rhino_skin
 
+
+func show_host_loading() -> void:
+	is_host_loading = true
+
+	host_button.text = "⏳ SERVER WAKING UP..."
+	host_button.disabled = true
+	join_button.disabled = true
+	play_back_button.disabled = true
+
+	host_button.pivot_offset = host_button.size / 2.0
+
+	if host_loading_tween and host_loading_tween.is_valid():
+		host_loading_tween.kill()
+
+	host_loading_tween = create_tween()
+	host_loading_tween.set_loops()
+	host_loading_tween.set_parallel(true)
+
+	host_loading_tween.tween_property(
+		host_button,
+		"scale",
+		Vector2(1.04, 1.04),
+		0.45
+	)
+
+	host_loading_tween.tween_property(
+		host_button,
+		"modulate",
+		Color(1.4, 1.2, 0.55, 1.0),
+		0.45
+	)
+
+	host_loading_tween.chain().tween_property(
+		host_button,
+		"scale",
+		Vector2.ONE,
+		0.45
+	)
+
+	host_loading_tween.tween_property(
+		host_button,
+		"modulate",
+		Color.WHITE,
+		0.45
+	)
+
+
+func hide_host_loading() -> void:
+	is_host_loading = false
+
+	if host_loading_tween and host_loading_tween.is_valid():
+		host_loading_tween.kill()
+
+	host_button.text = host_button_original_text
+	host_button.scale = Vector2.ONE
+	host_button.modulate = Color.WHITE
+
+	host_button.disabled = false
+	join_button.disabled = false
+	play_back_button.disabled = false
+	
+	
+func show_join_loading() -> void:
+	is_join_loading = true
+
+	join_button.text = "🔍 FINDING ROOM..."
+	join_button.disabled = true
+	host_button.disabled = true
+	play_back_button.disabled = true
+
+	join_button.pivot_offset = join_button.size / 2.0
+
+	if join_feedback_tween and join_feedback_tween.is_valid():
+		join_feedback_tween.kill()
+
+	join_feedback_tween = create_tween()
+	join_feedback_tween.set_loops()
+	join_feedback_tween.set_parallel(true)
+
+	join_feedback_tween.tween_property(
+		join_button,
+		"scale",
+		Vector2(1.04, 1.04),
+		0.45
+	)
+
+	join_feedback_tween.tween_property(
+		join_button,
+		"modulate",
+		Color(0.6, 1.2, 1.8, 1.0),
+		0.45
+	)
+
+	join_feedback_tween.chain().tween_property(
+		join_button,
+		"scale",
+		Vector2.ONE,
+		0.45
+	)
+
+	join_feedback_tween.tween_property(
+		join_button,
+		"modulate",
+		Color.WHITE,
+		0.45
+	)
+
+
+func show_join_wrong_code() -> void:
+	is_join_loading = false
+
+	if join_feedback_tween and join_feedback_tween.is_valid():
+		join_feedback_tween.kill()
+
+	join_button.disabled = true
+	host_button.disabled = false
+	play_back_button.disabled = false
+
+	join_button.text = "❌ WRONG CODE!"
+	join_button.scale = Vector2.ONE
+	join_button.modulate = Color(1.6, 0.35, 0.35, 1.0)
+
+	var shake := create_tween()
+	shake.tween_property(join_button, "position:x", join_button.position.x + 10, 0.06)
+	shake.tween_property(join_button, "position:x", join_button.position.x - 10, 0.06)
+	shake.tween_property(join_button, "position:x", join_button.position.x + 6, 0.06)
+	shake.tween_property(join_button, "position:x", join_button.position.x, 0.06)
+
+	await get_tree().create_timer(1.2).timeout
+
+	hide_join_feedback()
+
+
+func hide_join_feedback() -> void:
+	is_join_loading = false
+
+	if join_feedback_tween and join_feedback_tween.is_valid():
+		join_feedback_tween.kill()
+
+	join_button.text = join_button_original_text
+	join_button.scale = Vector2.ONE
+	join_button.modulate = Color.WHITE
+
+	join_button.disabled = false
+	host_button.disabled = false
+	play_back_button.disabled = false
 
 @rpc("any_peer", "call_local")
 func ping(argument: float) -> void:

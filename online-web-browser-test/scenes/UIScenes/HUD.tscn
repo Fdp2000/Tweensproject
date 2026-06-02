@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cjywmrukxi5d6"]
 
 [ext_resource type="Script" uid="uid://cpnxd6rp0q1n5" path="res://scripts/UI/hud.gd" id="1_script"]
+[ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="2_yhb3b"]
 
 [node name="HUD" type="CanvasLayer" unique_id=1369908268]
 script = ExtResource("1_script")
@@ -20,7 +21,8 @@ alignment = 1
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 48
+theme_override_fonts/font = ExtResource("2_yhb3b")
+theme_override_font_sizes/font_size = 52
 text = "05:00"
 horizontal_alignment = 1
 
@@ -28,12 +30,12 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("2_yhb3b")
+theme_override_font_sizes/font_size = 36
 text = "Stolen Cash: $0 / $10000"
 horizontal_alignment = 1
 
 [node name="GameOverPanel" type="ColorRect" parent="." unique_id=678552370]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -54,6 +56,7 @@ alignment = 1
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
-theme_override_font_sizes/font_size = 64
+theme_override_fonts/font = ExtResource("2_yhb3b")
+theme_override_font_sizes/font_size = 76
 text = "GAME OVER"
 horizontal_alignment = 1
