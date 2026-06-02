@@ -122,13 +122,22 @@ func _run():
 					col_shape.name = "CollisionShape3D"
 					var box = BoxShape3D.new()
 					
-					# Get the exact local bounding box of the mesh!
 					var aabb = child.mesh.get_aabb()
-					box.size = aabb.size
+					var s = child.scale
+					
+					# Counter-act the parent's scale so Jolt Physics doesn't complain about non-uniform scaling!
+					var safe_scale = Vector3(
+						1.0 / s.x if s.x != 0 else 1.0,
+						1.0 / s.y if s.y != 0 else 1.0,
+						1.0 / s.z if s.z != 0 else 1.0
+					)
+					static_body.scale = safe_scale
+					
+					box.size = aabb.size * s.abs()
 					col_shape.shape = box
 					
-					# Offset the shape by the AABB's local position center
-					col_shape.position = aabb.position + (aabb.size / 2.0)
+					# Offset the shape by the AABB's local position center, scaled up!
+					col_shape.position = (aabb.position + (aabb.size / 2.0)) * s
 					
 					static_body.add_child(col_shape)
 					col_shape.owner = root
