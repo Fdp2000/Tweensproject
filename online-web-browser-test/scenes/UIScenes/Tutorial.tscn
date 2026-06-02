@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://d16n72gkvedkt"]
 
-[ext_resource type="Texture2D" uid="uid://d3t7qejypgtxb" path="res://Assets/Textures/rightPhoto.png" id="1_0ih8x"]
 [ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_j2xlo"]
-[ext_resource type="Texture2D" uid="uid://umfokr7m3c36" path="res://icon.svg" id="2_ovaji"]
-[ext_resource type="Texture2D" uid="uid://dl75yj34ys2iq" path="res://Assets/Models/Prototype Models/Dingus the cat_Maxwell.jpg" id="3_j2xlo"]
+[ext_resource type="Texture2D" uid="uid://blls8uulxpjlr" path="res://Assets/UI/Guard.png" id="2_j2xlo"]
+[ext_resource type="Texture2D" uid="uid://cesepnbnwlubp" path="res://Assets/UI/Hide.png" id="3_8crvg"]
+[ext_resource type="Texture2D" uid="uid://tdu3bhrcpbjr" path="res://Assets/UI/Capture.png" id="4_7xyp7"]
 [ext_resource type="Texture2D" uid="uid://bjktwtfip5vv2" path="res://Assets/UI/computer-mouse-solid.png" id="4_ovaji"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8crvg"]
@@ -95,16 +95,16 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("1_0ih8x")
-expand_mode = 3
-stretch_mode = 5
+texture = ExtResource("2_j2xlo")
+expand_mode = 1
 
 [node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=610362498]
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("1_j2xlo")
 theme_override_font_sizes/font_size = 26
-text = "Steal Artifacts In The Museum!"
+text = "Steal Artifacts In The Museum!
+Reach The Cash Goal To Win!"
 horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer" unique_id=1095172331]
@@ -122,9 +122,8 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("2_ovaji")
-expand_mode = 3
-stretch_mode = 5
+texture = ExtResource("3_8crvg")
+expand_mode = 1
 
 [node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=59187065]
 layout_mode = 2
@@ -150,9 +149,8 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(300, 250)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("3_j2xlo")
-expand_mode = 3
-stretch_mode = 5
+texture = ExtResource("4_7xyp7")
+expand_mode = 1
 
 [node name="Label2" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1114583422]
 layout_mode = 2
@@ -175,7 +173,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_7sle7")
 [node name="VBoxContainer" type="VBoxContainer" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel" unique_id=1257553683]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 10
 
 [node name="ControlsTitle" type="Label" parent="TutorialCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer2/ControlsPanel/VBoxContainer" unique_id=1415288078]
 layout_mode = 2
