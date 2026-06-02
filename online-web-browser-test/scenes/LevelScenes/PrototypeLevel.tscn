@@ -4016,7 +4016,7 @@ size = Vector3(0.025396552, 0.00406365, 0.0023310548)
 size = Vector3(0.01643151, 0.0030083875, 0.001)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4fhc1"]
-size = Vector3(0.026953548, 0.0018503037, 0.014405642)
+size = Vector3(0.025683805, 0.0018503037, 0.014405642)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qov1v"]
 resource_name = "Wood Light"
@@ -14940,11 +14940,11 @@ mesh = ExtResource("87_0isio")
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Stairs_2 Asia4/Stairs_3" unique_id=544291189]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Stairs_2 Asia4/Stairs_3/StaticBody3D" unique_id=1115678668]
-transform = Transform3D(0.8985567, -0.43885738, -1.7443895e-09, 0.43885738, 0.8985567, 7.571259e-10, 1.2349943e-09, -1.4392185e-09, 0.99999994, -0.004514262, 0.0015035681, 0.00011961162)
+transform = Transform3D(0.8985567, -0.43885738, -1.7443895e-09, 0.43885738, 0.8985567, 7.571259e-10, 1.2349943e-09, -1.4392185e-09, 0.99999994, -0.005084738, 0.0012249502, 0.00011961162)
 shape = SubResource("BoxShape3D_4fhc1")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Stairs_2 Asia4/Stairs_3/StaticBody3D" unique_id=256553570]
-transform = Transform3D(0.89855665, -0.43885735, -1.7443824e-09, 0.43885735, 0.89855665, 7.5715434e-10, 1.2349943e-09, -1.4392469e-09, 0.9999999, 0.00019260496, 0.0033793906, -0.0063182265)
+transform = Transform3D(0.8985567, -0.43885738, -1.7443895e-09, 0.43885738, 0.8985567, 7.571259e-10, 1.235037e-09, -1.4392754e-09, 0.99999994, 0.00019261241, 0.0033793906, -0.006318219)
 shape = SubResource("BoxShape3D_8sa2x")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="NavigationRegion3D/Stairs_2 Asia4/Stairs_3/StaticBody3D" unique_id=544344561]
