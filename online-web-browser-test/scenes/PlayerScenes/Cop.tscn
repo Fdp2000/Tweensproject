@@ -213,7 +213,7 @@ collision_mask = 7
 floor_max_angle = 1.3089969
 floor_snap_length = 0.6
 script = ExtResource("2_cop")
-capture_distance_buffer = 0.75
+capture_distance_buffer = 0.4
 skin_materials = Array[Material]([SubResource("ShaderMaterial_o5rqf"), SubResource("ShaderMaterial_g6ngg"), SubResource("ShaderMaterial_sscd4"), SubResource("ShaderMaterial_po44e")])
 skin_mesh_paths = Array[NodePath]([NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Body"), NodePath("Næsehorn2/metarig/Skeleton3D/Rhino_Head")])
 
@@ -248,34 +248,27 @@ transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5
 script = ExtResource("8_ppjyx")
 
 [node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.019061502, 0.017964141, 0.0023912173, 0.99965405)
-bones/2/rotation = Quaternion(-0.031698022, 0.036433913, 0.008890247, 0.99879366)
-bones/3/rotation = Quaternion(-0.0836619, 0.029770935, 0.01235448, 0.9959729)
-bones/4/rotation = Quaternion(0.5304285, -0.019820606, -0.060329333, 0.84534794)
-bones/5/rotation = Quaternion(-0.5899889, -0.4013945, -0.46510893, 0.52389824)
-bones/6/rotation = Quaternion(-0.32022044, 0.62909317, -0.49886337, 0.502828)
-bones/7/rotation = Quaternion(0.12904426, -0.07393237, 0.0053656087, 0.9888644)
-bones/8/rotation = Quaternion(-0.15804796, 0.03453303, -0.057889674, 0.985128)
-bones/9/rotation = Quaternion(0.13888481, 0.043708164, -0.19966301, 0.9689868)
-bones/10/rotation = Quaternion(0.15281051, 0.037055537, -0.1474206, 0.97649527)
-bones/11/rotation = Quaternion(0.181323, 0.020255862, -0.027665759, 0.9828257)
-bones/12/rotation = Quaternion(0.42696086, 0.1878884, -0.06248508, 0.88232535)
-bones/13/rotation = Quaternion(-0.5932723, 0.39549124, 0.4571011, 0.53167045)
-bones/14/rotation = Quaternion(-0.31965357, -0.6983983, 0.42892104, 0.4754872)
-bones/15/rotation = Quaternion(0.18660119, 0.050961323, -0.0059413263, 0.9810952)
-bones/16/rotation = Quaternion(-0.17562611, -0.041713737, -0.005250437, 0.9835589)
-bones/17/rotation = Quaternion(0.13827497, -0.04632896, 0.21727754, 0.96515507)
-bones/18/rotation = Quaternion(0.15198529, -0.041594416, 0.17863928, 0.9712149)
-bones/19/rotation = Quaternion(0.18126588, -0.024291579, 0.04950319, 0.981887)
-bones/20/rotation = Quaternion(0.42696097, -0.18788844, 0.062485, 0.88232535)
-bones/23/rotation = Quaternion(0.94860566, 0.1051378, -0.12596425, 0.27060407)
-bones/24/rotation = Quaternion(0.3167032, -0.02578206, -0.022020303, 0.94791853)
-bones/25/rotation = Quaternion(0.9725958, -0.071653634, 0.08673495, 0.20347047)
-bones/26/rotation = Quaternion(0.30083057, 0.039972734, 0.016542673, 0.9526959)
-
-[node name="AnimationTree" parent="Næsehorn2" index="1" unique_id=1575708714]
-parameters/AnimationNodeStateMachine/Debuff_Movement/blend_position = Vector2(0, 0)
-parameters/AnimationNodeStateMachine/Normal_Movement/blend_position = Vector2(0, 0)
+bones/1/rotation = Quaternion(0.027632251, 0.01727642, 0.002217925, 0.9994664)
+bones/2/rotation = Quaternion(-0.023570942, 0.035264015, 0.0075412625, 0.9990716)
+bones/3/rotation = Quaternion(-0.07800823, 0.032918524, 0.012980024, 0.99632454)
+bones/5/rotation = Quaternion(-0.5916711, -0.39907748, -0.46330607, 0.5253664)
+bones/6/rotation = Quaternion(-0.30403447, 0.63680303, -0.4972161, 0.50479823)
+bones/7/rotation = Quaternion(0.14406584, -0.079257056, 0.00013914342, 0.9863891)
+bones/8/rotation = Quaternion(-0.15068118, 0.038721934, -0.039842114, 0.98701996)
+bones/9/rotation = Quaternion(0.13878758, 0.044193458, -0.20296016, 0.9682934)
+bones/10/rotation = Quaternion(0.15271328, 0.037817385, -0.15273245, 0.9756646)
+bones/11/rotation = Quaternion(0.18133943, 0.02075204, -0.031129722, 0.9827087)
+bones/13/rotation = Quaternion(-0.59192777, 0.39879227, 0.46377423, 0.52488077)
+bones/14/rotation = Quaternion(-0.28032362, -0.694649, 0.45992988, 0.4768083)
+bones/15/rotation = Quaternion(0.16101307, 0.08087352, 0.00057151646, 0.9836331)
+bones/16/rotation = Quaternion(-0.15845679, -0.029591851, -0.022806212, 0.98665893)
+bones/17/rotation = Quaternion(0.13884036, -0.0434851, 0.19802886, 0.9693385)
+bones/18/rotation = Quaternion(0.15269615, -0.036736503, 0.1445005, 0.9769616)
+bones/19/rotation = Quaternion(0.18128563, -0.019989425, 0.025573866, 0.98289466)
+bones/23/rotation = Quaternion(0.9429863, 0.10774688, -0.12611441, 0.28855294)
+bones/24/rotation = Quaternion(0.34358355, -0.03268131, -0.023773676, 0.93825215)
+bones/25/rotation = Quaternion(0.9672391, -0.06978986, 0.0800568, 0.230584)
+bones/26/rotation = Quaternion(0.3259683, 0.034522012, 0.022243954, 0.94448835)
 
 [node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)

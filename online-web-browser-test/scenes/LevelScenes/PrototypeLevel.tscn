@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://djq8usr0n1wxf" path="res://icycliff1.res" id="39_bva6v"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="40_0hqwr"]
 [ext_resource type="ArrayMesh" uid="uid://bhxw5640dfg4r" path="res://Assets/Models/mediumpine.tres" id="41_c8qq2"]
+[ext_resource type="Texture2D" uid="uid://c7nd4mv7qn7bt" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeLeaf.png" id="42_p8w5a"]
 [ext_resource type="Texture2D" uid="uid://dr8d66b6lkxj6" path="res://Assets/environments/LowpolyForestPack/TreesTexture/SpruceTreeTrunk.png" id="43_0t7hq"]
 [ext_resource type="PackedScene" uid="uid://ct6cicuc4et7s" path="res://rock_3_icy.res" id="43_ipwqt"]
 [ext_resource type="ArrayMesh" uid="uid://boev4i360s4n5" path="res://Assets/Models/smolpine.tres" id="44_xwy5l"]
@@ -248,7 +249,8 @@ shader_parameter/pattern_blend = 0.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e22mm"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.101960786, 0.20392157, 0.06666667, 1)
+shader_parameter/albedo_color = Color(0.49625334, 0.91, 0.3458, 1)
+shader_parameter/albedo_texture = ExtResource("51_dauag")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0
@@ -1859,6 +1861,7 @@ points = PackedVector3Array(-0.20644854, 0.3667239, 0.9882418, 0.014150023, -0.3
 render_priority = 0
 shader = ExtResource("40_0hqwr")
 shader_parameter/albedo_color = Color(0.11594231, 0.23212498, 0, 1)
+shader_parameter/albedo_texture = ExtResource("42_p8w5a")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0

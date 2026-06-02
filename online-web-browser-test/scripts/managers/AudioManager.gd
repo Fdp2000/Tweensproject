@@ -1,48 +1,47 @@
-extends Node
+extends Node3D
 
 # THE MASTER AUDIO CONFIGURATION
 # Keys are the sound names you will call in code.
 # The paths assume you have placed your files in res://Assets/Sound/SFX/
 var MUSIC_CONFIG = {
-	"main_menu":    {"path": "res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby.mp3", "volume": -5.0, "bus": "Music"},
-	"match_start":  {"path": "res://Assets/Sound/Music/Intro Cutscene/Brassfall Surge.ogg", "volume": 0.0, "bus": "Music"},
-	"base_tension": {"path": "res://Assets/Sound/Music/BaseMap Song/Stealth Drum Loop.ogg", "volume": -8.0, "bus": "Music"},
-	"biome_forest": {"path": "res://Assets/Sound/Music/Biome_Forest.ogg", "volume": -8.0, "bus": "Music"},
-	"biome_egypt":  {"path": "res://Assets/Sound/Music/Biome_Egypt.ogg", "volume": -8.0, "bus": "Music"},
-	"biome_island": {"path": "res://Assets/Sound/Music/Biome_Island.ogg", "volume": -8.0, "bus": "Music"},
-	"biome_antarctica": {"path": "res://Assets/Sound/Music/Biome_Antarctica.ogg", "volume": -8.0, "bus": "Music"},
-	"biome_asia":   {"path": "res://Assets/Sound/Music/Biome_Asia.ogg", "volume": -8.0, "bus": "Music"}
+	"main_menu":    {"path": "res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby.mp3", "volume": -6.0, "bus": "Music"},
+	"match_start":  {"path": "res://Assets/Sound/Music/Intro Cutscene/Brassfall Surge.ogg", "volume": -5, "bus": "Music"},
+	"base_tension": {"path": "res://Assets/Sound/Music/BaseMap Song/Stealth Drum Loop.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_forest": {"path": "res://Assets/Sound/Music/Biome_Forest.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_egypt":  {"path": "res://Assets/Sound/Music/Biome_Egypt.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_island": {"path": "res://Assets/Sound/Music/Biome_Island.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_antarctica": {"path": "res://Assets/Sound/Music/Biome_Antarctica.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_asia":   {"path": "res://Assets/Sound/Music/Biome_Asia.ogg", "volume": -18.0, "bus": "Music"}
 }
 
 var SFX_CONFIG = {
 	# --- 2D / UI SOUNDS ---
-	"ui_click":       {"path": "res://Assets/Sound/SFX/UI Click/click1.wav",       "volume": -5.0, "bus": "UI"},
-	"countdown_tick": {"path": "res://Assets/Sound/SFX/Countdown/Beep.wav", "volume": -8.0, "bus": "UI"},
-	"countdown_go":   {"path": "res://Assets/Sound/SFX/Countdown/GO!.wav",  "volume": -5.0, "bus": "UI"},
-	"jailed":         {"path": "res://Assets/Sound/SFX/Jail Capture/Jail.wav", "volume":  0.0, "bus": "UI"},
-	"rescue_progress":{"path": "res://Assets/Sound/SFX/Rescue_Progress.wav","volume": -5.0, "bus": "Quiet SFX"},
+	"ui_click":       {"path": "res://Assets/Sound/SFX/UI Click/click1.wav",       "volume": -15.0, "bus": "UI"},
+	"countdown_tick": {"path": "res://Assets/Sound/SFX/Countdown/Beep.wav", "volume": -20.0, "bus": "UI"},
+	"countdown_go":   {"path": "res://Assets/Sound/SFX/Countdown/GO!.wav",  "volume": -17.0, "bus": "UI"},
+	"rescue_progress":{"path": "res://Assets/Sound/SFX/Rescue Progress/Rescue Progress.wav","volume": -28, "bus": "Quiet SFX"},
 	
-	# --- 3D / SPATIAL SOUNDS ---
-	"join_lobby":     {"path": "res://Assets/Sound/SFX/PlayerJoin/virtual_vibes-cinematic-thud-fx-379991.wav", "volume": -2.0, "bus": "SFX", "max_distance": 20.0},
+	# Lobby / Pre-game SFX
+	"join_lobby":     {"path": "res://Assets/Sound/SFX/PlayerJoin/virtual_vibes-cinematic-thud-fx-379991.wav", "volume": -4.5, "bus": "SFX", "max_distance": 20.0, "unit_size": 6.0, "attenuation": AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC},
 	"footstep_thief": {
 		"paths": ["res://Assets/Sound/SFX/Thief Footstep/Final Theif footsteps1.wav", "res://Assets/Sound/SFX/Thief Footstep/Final Theif footsteps2.wav"], 
-		"volume": -8.0, "bus": "Quiet SFX", "random_pitch": [0.9, 1.1],
-		"max_distance": 15.0 # Fades completely to zero at 15 meters
+		"volume": -12.0, "bus": "Quiet SFX", "random_pitch": [0.9, 1.1],
+		"max_distance": 15.0, "unit_size": 4.5
 	},
 	"footstep_cop": {
 		"paths": ["res://Assets/Sound/SFX/Cop Footsteps/CopFootsteps1.wav", "res://Assets/Sound/SFX/Cop Footsteps/CopFootsteps3.wav", "res://Assets/Sound/SFX/Cop Footsteps/CopFootsteps4.wav"], 
-		"volume": -8.0, "bus": "SFX", "random_pitch": [0.85, 1.05],
-		"max_distance": 25.0 # Cops are louder and can be heard from further away
+		"volume": -12.0, "bus": "SFX", "random_pitch": [0.85, 1.05],
+		"max_distance": 40.0, "unit_size": 13.0
 	},
 	"footstep_cop_charge": {
 		"path": "res://Assets/Sound/SFX/Cop Footsteps/Cop Chargefootstep.wav", 
-		"volume": -2.0, "bus": "SFX", "random_pitch": [0.95, 1.05],
-		"max_distance": 40.0 # Charge should be extremely loud and terrifying
+		"volume": -10.0, "bus": "SFX", "random_pitch": [0.95, 1.05],
+		"max_distance": 55.0, "unit_size": 18.0
 	},
 	"footstep_cop_debuff": {
 		"path": "res://Assets/Sound/SFX/Cop Footsteps/CopWALKFootsteps.wav", 
 		"volume": -12.0, "bus": "Quiet SFX", "random_pitch": [0.8, 0.95],
-		"max_distance": 15.0 # Exhausted dragging feet
+		"max_distance": 20.0, "unit_size": 10.0
 	},
 	"cop_exhausted_breath": {
 		"paths": [
@@ -50,19 +49,17 @@ var SFX_CONFIG = {
 			"res://Assets/Sound/SFX/Cops Breath/Breath2.wav",
 			"res://Assets/Sound/SFX/Cops Breath/Breath3.wav"
 		],
-		"volume": 0.0, "bus": "SFX", "max_distance": 20.0
+		"volume": -8.0, "bus": "SFX", "max_distance": 25.0, "unit_size": 12.0
 	},
-	"cop_vocals_grunt": {"path": "res://Assets/Sound/SFX/RhinoCharge.mp3", "volume": 0.0, "bus": "Loud SFX", "max_distance": 60.0},
-	"charge_wall_impact": {"path": "res://Assets/Sound/SFX/RhinoImpact.mp3", "volume": 5.0, "bus": "Loud SFX", "max_distance": 80.0},
-	"cop_vocals_exhausted": {
-		"paths": ["res://Assets/Sound/SFX/Cops Breath/Breath1.wav", "res://Assets/Sound/SFX/Cops Breath/Breath2.wav", "res://Assets/Sound/SFX/Cops Breath/Breath3.wav"],
-		"volume": -5.0, "bus": "SFX", "random_pitch": [0.9, 1.1], "max_distance": 20.0
-	},
-	"capture":          {"path": "res://Assets/Sound/SFX/Capture/bonk_BEtiM8g.wav", "volume": -2.0,  "bus": "Loud SFX", "max_distance": 50.0},
-	"artifact_pickup":  {"path": "res://Assets/Sound/SFX/Aritfact Pick/ArtifactPickup.wav", "volume": 0.0, "bus": "SFX", "max_distance": 20.0},
-	"artifact_drop":    {"path": "res://Assets/Sound/SFX/Aritfact Pick/Artifact Drop.wav",  "volume": 0.0, "bus": "SFX", "max_distance": 20.0},
-	"artifact_delivery":{"path": "res://Assets/Sound/SFX/Artifact Delivery/ArtifactDelivery.wav", "volume": 5.0, "bus": "Loud SFX", "max_distance": 150.0},
-	"cop_ping":         {"path": "res://Assets/Sound/SFX/Cop Ping/freesound_community-sonar-ping-95840.wav", "volume": 2.0, "bus": "SFX", "max_distance": 200.0}
+	"cop_vocals_grunt": {"path": "res://Assets/Sound/SFX/RhinoCharge.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
+	"charge_wall_impact": {"path": "res://Assets/Sound/SFX/RhinoImpact.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
+
+	"capture":          {"path": "res://Assets/Sound/SFX/Capture/bonk_BEtiM8g.wav", "volume": -9.0,  "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 45.4},
+	"jailed":           {"path": "res://Assets/Sound/SFX/Jail Capture/Jail.wav", "volume": -4.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0},
+	"artifact_pickup":  {"path": "res://Assets/Sound/SFX/Aritfact Pick/ArtifactPickup.wav", "volume": -14.0, "bus": "SFX", "max_distance": 10.0, "unit_size": 3.0},
+	"artifact_drop":    {"path": "res://Assets/Sound/SFX/Aritfact Pick/Artifact Drop.wav",  "volume": -14.0, "bus": "SFX", "max_distance": 10.0, "unit_size": 3.0},
+	"artifact_delivery":{"path": "res://Assets/Sound/SFX/Artifact Delivery/ArtifactDelivery.wav", "volume": -2.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0},
+	"cop_ping":         {"path": "res://Assets/Sound/SFX/Cop Ping/freesound_community-sonar-ping-95840.wav", "volume": -18.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0}
 }
 
 # POOL CONFIGURATION
@@ -76,10 +73,25 @@ var stream_cache: Dictionary = {}
 # Music State
 var music_player_a: AudioStreamPlayer
 var music_player_b: AudioStreamPlayer
+var current_music_player: AudioStreamPlayer
+var current_biome: String = ""
+
+# --- Hypnosis Audio Effects ---
+var hypno_chorus: AudioEffectChorus
+var hypno_lowpass: AudioEffectLowPassFilter
+var hypno_reverb: AudioEffectReverb
+var master_bus_idx: int
+var hypno_chorus_idx: int
+var hypno_lowpass_idx: int
+var hypno_reverb_idx: int
+var hypno_tween: Tween
+
 var active_music_player: int = 1 # 1 = A, 2 = B
 var current_music_track: String = ""
 var music_time_memory: Dictionary = {}
 var crossfade_tween: Tween
+
+var _sfx_cooldowns: Dictionary = {}
 
 func _ready():
 	# Keeps audio playing even if the game is paused (crucial for UI sounds)
@@ -87,6 +99,53 @@ func _ready():
 	_initialize_2d_pool()
 	_initialize_3d_pool()
 	_initialize_music_players()
+	
+	# Setup Hypno Effects dynamically so we don't corrupt the .tres file
+	master_bus_idx = AudioServer.get_bus_index("Master")
+	
+	hypno_chorus = AudioEffectChorus.new()
+	hypno_chorus.voice_count = 2
+	hypno_chorus.wet = 0.8
+	
+	hypno_lowpass = AudioEffectLowPassFilter.new()
+	hypno_lowpass.cutoff_hz = 20000.0 # Normal hearing
+	
+	hypno_reverb = AudioEffectReverb.new()
+	hypno_reverb.room_size = 0.6
+	hypno_reverb.wet = 0.4
+	
+	AudioServer.add_bus_effect(master_bus_idx, hypno_chorus)
+	hypno_chorus_idx = AudioServer.get_bus_effect_count(master_bus_idx) - 1
+	
+	AudioServer.add_bus_effect(master_bus_idx, hypno_lowpass)
+	hypno_lowpass_idx = AudioServer.get_bus_effect_count(master_bus_idx) - 1
+	
+	AudioServer.add_bus_effect(master_bus_idx, hypno_reverb)
+	hypno_reverb_idx = AudioServer.get_bus_effect_count(master_bus_idx) - 1
+	
+	_set_hypno_effects_enabled(false)
+
+func _set_hypno_effects_enabled(enabled: bool):
+	AudioServer.set_bus_effect_enabled(master_bus_idx, hypno_chorus_idx, enabled)
+	AudioServer.set_bus_effect_enabled(master_bus_idx, hypno_lowpass_idx, enabled)
+	AudioServer.set_bus_effect_enabled(master_bus_idx, hypno_reverb_idx, enabled)
+
+func set_hypnotized(is_hypnotized: bool):
+	if hypno_tween:
+		hypno_tween.kill()
+	
+	hypno_tween = create_tween()
+	
+	if is_hypnotized:
+		_set_hypno_effects_enabled(true)
+		hypno_tween.tween_property(hypno_lowpass, "cutoff_hz", 800.0, 1.5).set_trans(Tween.TRANS_SINE)
+		hypno_tween.parallel().tween_property(hypno_chorus, "wet", 0.8, 1.5)
+		hypno_tween.parallel().tween_property(hypno_reverb, "wet", 0.4, 1.5)
+	else:
+		hypno_tween.tween_property(hypno_lowpass, "cutoff_hz", 20000.0, 0.6).set_trans(Tween.TRANS_SINE)
+		hypno_tween.parallel().tween_property(hypno_chorus, "wet", 0.0, 0.6)
+		hypno_tween.parallel().tween_property(hypno_reverb, "wet", 0.0, 0.6)
+		hypno_tween.tween_callback(func(): _set_hypno_effects_enabled(false))
 
 func _initialize_2d_pool():
 	for i in range(POOL_SIZE_2D):
@@ -110,6 +169,7 @@ func _initialize_3d_pool():
 		player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_INVERSE_DISTANCE
 		player.unit_size = 2.0
 		player.max_distance = 30.0 # Sounds completely fade out at 30 meters
+		
 		add_child(player)
 		pool_3d.append(player)
 
@@ -171,12 +231,19 @@ func play_2d_sfx(sound_name: String):
 # ---------------------------------------------------------
 # 3D SPATIAL AUDIO (Mono)
 # ---------------------------------------------------------
-func play_3d_sfx(sound_name: String, global_pos: Vector3):
-	if not SFX_CONFIG.has(sound_name):
-		printerr("AudioManager ERROR: Sound name '", sound_name, "' not found in SFX_CONFIG.")
+func play_3d_sfx(sfx_name: String, global_pos: Vector3):
+	if not SFX_CONFIG.has(sfx_name):
+		push_warning("SFX not found: " + sfx_name)
 		return
 		
-	var config = SFX_CONFIG[sound_name]
+	# Global cooldown for lobby join so it doesn't clip if 8 players spawn at once
+	if sfx_name == "join_lobby":
+		var now = Time.get_ticks_msec()
+		if _sfx_cooldowns.has(sfx_name) and now - _sfx_cooldowns[sfx_name] < 200:
+			return
+		_sfx_cooldowns[sfx_name] = now
+		
+	var config = SFX_CONFIG[sfx_name]
 	if config.get("disabled", false):
 		return
 		
@@ -189,8 +256,10 @@ func play_3d_sfx(sound_name: String, global_pos: Vector3):
 	# Find an idle 3D player in the pool
 	for player in pool_3d:
 		if not player.playing:
+			player.global_position = global_pos
 			player.stream = stream
 			player.volume_db = config.get("volume", 0.0)
+			player.max_db = player.volume_db # MAGIC TRICK: Clamp the volume so it never exceeds 100% when inside the bubble!
 			player.bus = config.get("bus", "Master")
 			player.max_distance = config.get("max_distance", 30.0) 
 			player.unit_size = config.get("unit_size", 1.0)
@@ -272,12 +341,19 @@ func stop_music(fade_time: float = 1.0):
 	if current_player.playing:
 		music_time_memory[current_music_track] = current_player.get_playback_position()
 	
-	if crossfade_tween:
-		crossfade_tween.kill()
-	crossfade_tween = create_tween()
-	
 	if current_player.playing:
+		if crossfade_tween:
+			crossfade_tween.kill()
+		crossfade_tween = create_tween()
 		crossfade_tween.tween_property(current_player, "volume_db", -80.0, fade_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		crossfade_tween.tween_callback(current_player.stop)
 		
 	current_music_track = ""
+
+func _input(event):
+	# DEV SHORTCUT: Mute/Unmute Master Bus
+	if event is InputEventKey and event.physical_keycode == KEY_M and event.pressed and not event.echo:
+		var master_bus_idx = AudioServer.get_bus_index("Master")
+		var is_muted = not AudioServer.is_bus_mute(master_bus_idx)
+		AudioServer.set_bus_mute(master_bus_idx, is_muted)
+		print("Master Audio Muted: ", is_muted)

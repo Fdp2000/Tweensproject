@@ -8,7 +8,7 @@ var charge_direction = Vector3.ZERO
 var charge_ui_ref: Control
 @export var is_debuffed = false
 var was_debuffed = false
-@export var capture_distance_buffer: float = 1.0
+@export var capture_distance_buffer: float = 1
 var debuff_timer = 0.0
 var capture_cooldowns: Dictionary = {}
 
@@ -26,6 +26,8 @@ var breath_streams = [
 	preload("res://Assets/Sound/SFX/Cops Breath/Breath2.wav"),
 	preload("res://Assets/Sound/SFX/Cops Breath/Breath3.wav")
 ]
+
+var charge_footstep_timer: float = 0.0
 
 func _ready():
 	super._ready()
@@ -90,17 +92,26 @@ func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
 		charge_ui_ref.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 func _custom_physics_process(delta, direction):
+	# --- FLAWLESS CHARGE FOOTSTEPS ---
+	if is_charging:
+		charge_footstep_timer -= delta
+		if charge_footstep_timer <= 0.0:
+			AudioManager.play_3d_sfx("footstep_cop_charge", global_position)
+			charge_footstep_timer = 0.22 # Exactly 5 thunderous steps per 1.2s charge
+	else:
+		charge_footstep_timer = 0.0
+
 	# --- BREATH AUDIO SYNC ---
 	if is_debuffed and not was_debuffed:
-		breath_player.stream = breath_streams.pick_random()
-		breath_player.pitch_scale = randf_range(0.9, 1.05)
-		
-		var config_vol = 0.0
-		if AudioManager.SFX_CONFIG.has("cop_exhausted_breath"):
-			config_vol = AudioManager.SFX_CONFIG["cop_exhausted_breath"].get("volume", 0.0)
-		breath_player.volume_db = config_vol
-		
-		breath_player.play()
+		var config = AudioManager.SFX_CONFIG.get("cop_exhausted_breath", {})
+		if not config.get("disabled", false):
+			breath_player.stream = breath_streams.pick_random()
+			breath_player.volume_db = config.get("volume", 0.0)
+			breath_player.max_db = breath_player.volume_db
+			breath_player.max_distance = config.get("max_distance", 20.0)
+			if config.has("unit_size"): breath_player.unit_size = config["unit_size"]
+			if config.has("attenuation_model"): breath_player.attenuation_model = config["attenuation_model"]
+			breath_player.play()
 	elif not is_debuffed and was_debuffed:
 		if breath_player.playing:
 			var t = create_tween()
@@ -232,6 +243,10 @@ func _custom_physics_process(delta, direction):
 			speed_ratio = 1.0 
 		elif horizontal_speed > 0.1:
 			speed_ratio = horizontal_speed / current_native_speed
+			# Fix the audio machine-gun bug: Clamp the timescale when exhausted 
+			# so the walk animation doesn't play at 3x speed while physically braking!
+			if is_debuffed:
+				speed_ratio = min(speed_ratio, 1.25)
 		else:
 			speed_ratio = 1.0 
 			
@@ -354,24 +369,35 @@ func play_footstep_sound():
 	var is_moving = (has_movement_input or is_charging) if is_multiplayer_authority() else (sync_velocity.length_squared() > 0.1)
 	var grounded = is_on_floor() if is_multiplayer_authority() else true
 	
+	if is_charging:
+		grounded = true # Force grounded to true because the Rhino's massive speed makes it bounce off the floor slightly!
+	
 	if not grounded or not is_moving:
 		return
 		
 	var current_time = Time.get_ticks_msec()
 	var debounce_time = 40 if is_charging else 120
+	if is_debuffed:
+		debounce_time = 350 # Increase buffer to prevent double-trigger during the heavy blend transition!
 	
 	if current_time - last_footstep_time > debounce_time: 
-		if is_charging:
-			AudioManager.play_3d_sfx("footstep_cop_charge", global_position)
-		elif is_debuffed:
+		if is_debuffed:
 			AudioManager.play_3d_sfx("footstep_cop_debuff", global_position)
-		else:
+		elif not is_charging:
 			AudioManager.play_3d_sfx("footstep_cop", global_position)
 		last_footstep_time = current_time
 
 @rpc("any_peer", "call_local")
 func play_grunt_rpc():
 	if grunt_player:
+		var config = AudioManager.SFX_CONFIG.get("cop_vocals_grunt", {})
+		if config.get("disabled", false):
+			return
+		grunt_player.volume_db = config.get("volume", 0.0)
+		grunt_player.max_db = grunt_player.volume_db
+		grunt_player.max_distance = config.get("max_distance", 60.0)
+		if config.has("unit_size"): grunt_player.unit_size = config["unit_size"]
+		if config.has("attenuation_model"): grunt_player.attenuation_model = config["attenuation_model"]
 		grunt_player.play()
 
 @rpc("any_peer", "call_local")

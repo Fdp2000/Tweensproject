@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/Stealth Drum Loop.ogg-6a7534251f6aaf5fe9b43e6
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

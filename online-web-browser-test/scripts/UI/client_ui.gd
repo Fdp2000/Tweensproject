@@ -67,6 +67,22 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 
+	# --- RENDER KEEPALIVE HEARTBEAT ---
+	# Render shuts down free servers after 15 mins of no inbound HTTP traffic.
+	# We ping it every 5 minutes (300 seconds) to keep it awake while the game is running!
+	var keepalive_timer = Timer.new()
+	keepalive_timer.wait_time = 300.0
+	keepalive_timer.autostart = true
+	add_child(keepalive_timer)
+	
+	var http_req = HTTPRequest.new()
+	add_child(http_req)
+	
+	keepalive_timer.timeout.connect(func():
+		var ping_url = SIGNALING_URL.replace("wss://", "https://").replace("ws://", "http://")
+		http_req.request(ping_url)
+	)
+
 	menu_camera = get_tree().get_first_node_in_group("menu_camera") as Camera3D
 	menu_camera_spot = menu_root.get_node_or_null("MenuCameraSpot") as Marker3D
 	skins_camera_spot = menu_root.get_node_or_null("SkinsCameraSpot") as Marker3D
@@ -362,7 +378,7 @@ func show_lobby() -> void:
 	if not has_requested_lobby:
 		return
 	# Duck the volume slightly (-4 decibels) so players can chat in the lobby!
-	AudioManager.play_music("main_menu", 1.0, -5.0)
+	AudioManager.play_music("main_menu", 1.0, -6.0)
 	set_skin_viewports_active(false)
 	main_menu_canvas.hide()
 	tutorial_canvas.hide()
@@ -558,6 +574,11 @@ func _on_player_joined(id: int) -> void:
 	spawned.add_child(pf, true)
 	var skin_index = GameManager.players[id].get("chameleon_skin", 0)
 	pf.rpc("apply_skin", skin_index)
+	
+	# Wait for the node to fully initialize in the tree before triggering the RPCs
+	await get_tree().process_frame
+	if is_instance_valid(pf):
+		pf.rpc("_set_spawn_transform", spawn_trans, true, true)
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
@@ -568,6 +589,8 @@ func _on_game_started() -> void:
 				await get_tree().physics_frame
 
 			var assigned_spawns = {}
+			var roles_to_spawn = [] # Queue for new nodes to prevent MultiplayerSpawner name collisions!
+			
 			for id in GameManager.players.keys():
 				var role = GameManager.players[id]["role"]
 				var spawn_trans = Transform3D()
@@ -596,20 +619,29 @@ func _on_game_started() -> void:
 						spawned.remove_child(pf)
 						pf.queue_free()
 
-					var new_pf
-					if role == GameManager.PlayerRole.COP:
-						new_pf = COP_SCENE.instantiate()
-					else:
-						new_pf = THIEF_SCENE.instantiate()
+					# Queue this spawn for NEXT frame so the client has time to delete the old node!
+					roles_to_spawn.append({"id": id, "role": role, "trans": spawn_trans})
 						
-					new_pf.name = str(id)
-					new_pf.team_index = role
-					new_pf.global_transform = spawn_trans
-					spawned.add_child(new_pf, true)
-						
-			# FIX: Wait a fraction of a second to ensure MultiplayerSpawner has fully
-			# replicated the new nodes to all clients before we fire the configuration RPCs!
-			await get_tree().create_timer(0.25).timeout
+			# FIX: Wait 1 frame so the clients process the despawn packet and fully delete the old nodes!
+			# If we don't do this, the new node gets renamed to @Node@... on the client and breaks all RPCs!
+			await get_tree().process_frame
+			
+			for data in roles_to_spawn:
+				var new_pf
+				if data["role"] == GameManager.PlayerRole.COP:
+					new_pf = COP_SCENE.instantiate()
+				else:
+					new_pf = THIEF_SCENE.instantiate()
+					
+				new_pf.name = str(data["id"])
+				new_pf.team_index = data["role"]
+				new_pf.global_transform = data["trans"]
+				spawned.add_child(new_pf, true)
+				
+			# Wait for Godot to fully process the NEW spawn queue
+			# Since RPCs and MultiplayerSpawner use the same reliable network channel, 
+			# they are guaranteed to arrive in order on the clients!
+			await get_tree().process_frame
 			
 			for id in GameManager.players.keys():
 				var pf = spawned.get_node_or_null(str(id))
@@ -618,7 +650,8 @@ func _on_game_started() -> void:
 					var spawn_trans = assigned_spawns.get(id, pf.global_transform)
 					pf.player_name = GameManager.players.get(id, {}).get("name", "Player " + str(id))
 					
-					pf.rpc("_set_spawn_transform", spawn_trans)
+					# Don't play smoke or sound when teleporting into the match! Do force camo!
+					pf.rpc("_set_spawn_transform", spawn_trans, false, false, true)
 					pf.rpc("sync_team", role)
 					pf.rpc("_sync_name", pf.player_name)
 					

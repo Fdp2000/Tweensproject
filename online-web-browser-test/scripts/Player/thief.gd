@@ -102,8 +102,11 @@ func _ready():
 	super._ready()
 	
 	rescue_audio_player = AudioStreamPlayer.new()
-	rescue_audio_player.stream = preload("res://Assets/Sound/SFX/Rescue Progress/Rescue Progress.wav")
-	rescue_audio_player.bus = "SFX"
+	var rescue_config = AudioManager.SFX_CONFIG.get("rescue_progress", {})
+	if rescue_config.has("path"):
+		rescue_audio_player.stream = load(rescue_config["path"])
+	rescue_audio_player.bus = rescue_config.get("bus", "SFX")
+	rescue_audio_player.volume_db = rescue_config.get("volume", 0.0)
 	add_child(rescue_audio_player)
 	
 	last_pos = global_position
@@ -289,8 +292,8 @@ func _custom_physics_process(delta, direction):
 	if active_rescuer_id != -1 and (multiplayer.get_unique_id() == active_rescuer_id or multiplayer.get_unique_id() == str(name).to_int()):
 		if not rescue_audio_player.playing:
 			rescue_audio_player.play()
-		rescue_audio_player.stream_paused = is_rescue_halted
-		rescue_audio_player.pitch_scale = 1.0 + (rescue_progress / Balance.thief_rescue_time) * 1.5
+		# Cranked base pitch to 3.0, and max pitch to 8.0 (3.0 + 5.0) for maximum tension!
+		rescue_audio_player.pitch_scale = 3.0 + (rescue_progress / Balance.thief_rescue_time) * 5.0
 	else:
 		if rescue_audio_player.playing:
 			rescue_audio_player.stop()
@@ -634,6 +637,14 @@ func _process(delta):
 			is_rescuing = false
 			current_interact_target = null
 
+func force_camo():
+	if stealth_manager:
+		stealth_manager.stationary_time = 999.0
+		stealth_manager.current_alpha = 0.0
+		stealth_manager.current_eye_alpha = 0.0
+		stealth_manager.target_alpha = 0.0
+		stealth_manager._last_rendered_alpha = -1.0
+
 @rpc("any_peer", "call_local")
 func on_captured():
 	if is_hypnotized: return
@@ -641,9 +652,8 @@ func on_captured():
 	# Play the global 3D capture bonk for everyone
 	AudioManager.play_3d_sfx("capture", global_position)
 	
-	# If I am the one who just got captured, blast the devastating jail sound in my ears
 	if multiplayer.get_unique_id() == str(name).to_int():
-		AudioManager.play_2d_sfx("jailed")
+		AudioManager.set_hypnotized(true)
 	
 	is_hypnotized = true
 	disable_body_rotation = true 
@@ -685,6 +695,9 @@ func on_captured():
 @rpc("any_peer", "call_local")
 func dev_toggle_hypnotize():
 	if not is_hypnotized:
+		if multiplayer.get_unique_id() == str(name).to_int():
+			AudioManager.set_hypnotized(true)
+			
 		is_hypnotized = true
 		disable_body_rotation = true
 		collision_layer = 8 
@@ -699,6 +712,9 @@ func dev_toggle_hypnotize():
 			
 		print("[DEV] Thief HYPNOTIZED via hotkey")
 	else:
+		if multiplayer.get_unique_id() == str(name).to_int():
+			AudioManager.set_hypnotized(false)
+			
 		is_hypnotized = false
 		disable_body_rotation = false
 		collision_layer = 2
@@ -766,6 +782,9 @@ func sync_world_ping(pos: Vector3):
 func rescue_successful():
 	if not is_hypnotized: return
 	
+	if multiplayer.get_unique_id() == str(name).to_int():
+		AudioManager.set_hypnotized(false)
+	
 	is_hypnotized = false
 	disable_body_rotation = false 
 	
@@ -782,6 +801,10 @@ func rescue_successful():
 
 @rpc("any_peer", "call_local")
 func on_jailed(cell_pos: Vector3, cell_rot_y: float):
+	if multiplayer.get_unique_id() == str(name).to_int() and is_hypnotized:
+		# Remove the hypnosis audio effect once they are safely in jail!
+		AudioManager.set_hypnotized(false)
+		
 	is_hypnotized = false
 	is_jailed = true
 	disable_body_rotation = true 
@@ -792,6 +815,9 @@ func on_jailed(cell_pos: Vector3, cell_rot_y: float):
 	
 	global_position = cell_pos
 	rotation.y = cell_rot_y + PI
+	
+	# Play the global 3D jail slam sound so everyone hears the door shut
+	AudioManager.play_3d_sfx("jailed", global_position)
 	
 	if pitch_pivot:
 		pitch_pivot.rotation.y = 0

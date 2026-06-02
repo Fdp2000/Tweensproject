@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Brassfall Surge.ogg-651161d6a0b9a5dfe74301d59
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

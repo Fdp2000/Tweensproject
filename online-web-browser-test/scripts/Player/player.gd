@@ -84,10 +84,10 @@ func _ready():
 			if listener: listener.make_current()
 			
 			# Hide visuals for 1 frame to prevent the chameleon closeup flash
-			visible = false
+			_set_meshes_visible(false)
 			get_tree().process_frame.connect(func():
 				if is_inside_tree():
-					visible = true
+					_set_meshes_visible(true)
 			, CONNECT_ONE_SHOT)
 		
 		# Tell the local camera to ALWAYS ignore Layer 10 (Bit value 512).
@@ -352,20 +352,35 @@ func _custom_physics_process(_delta, direction):
 
 
 @rpc("any_peer", "call_local")
-func _set_spawn_transform(trans: Transform3D, play_smoke: bool = false):
+func _set_spawn_transform(trans: Transform3D, play_smoke: bool = false, play_sound: bool = false, force_camo: bool = false):
 	global_transform = trans
 	
-	if play_smoke and has_method("play_lobby_smoke"):
-		call("play_lobby_smoke")
+	if play_smoke:
+		if has_method("play_lobby_smoke"):
+			call("play_lobby_smoke")
+			
+	if play_sound:
+		AudioManager.play_3d_sfx("join_lobby", trans.origin)
+		
+	if force_camo:
+		if has_method("force_camo"):
+			call("force_camo")
 	
-	# FIX: Hide the player for 1 frame when teleporting to prevent the camera from colliding 
+	# FIX: Hide the meshes for 1 frame when teleporting to prevent the camera from colliding 
 	# with the old environment and flashing a closeup of the chameleon's face!
 	if is_multiplayer_authority() and is_inside_tree():
-		visible = false
+		_set_meshes_visible(false)
 		get_tree().process_frame.connect(func():
 			if is_inside_tree():
-				visible = true
+				_set_meshes_visible(true)
 		, CONNECT_ONE_SHOT)
+
+func _set_meshes_visible(is_vis: bool):
+	for path in skin_mesh_paths:
+		var mesh = get_node_or_null(path)
+		if mesh:
+			if mesh is Node3D:
+				mesh.visible = is_vis
 
 @rpc("any_peer", "call_local")
 func _sync_name(n: String):
