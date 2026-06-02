@@ -31,7 +31,6 @@
 [ext_resource type="ArrayMesh" uid="uid://ccuyur5mh2xux" path="res://Assets/Models/LowPolyMuseumAssets/WallBigCorner1.res" id="17_srhcg"]
 [ext_resource type="ArrayMesh" uid="uid://ds2vbsght50d7" path="res://Assets/Models/Asia Pack Reimport/Building_Pagoda.res" id="17_volbp"]
 [ext_resource type="ArrayMesh" uid="uid://bbgxqn83hphsm" path="res://Assets/Models/LowPolyMuseumAssets/Arch5.res" id="18_5p3k1"]
-[ext_resource type="Material" uid="uid://dyrcv8tp8ri1p" path="res://Assets/Shaders/celShader/goldCel.tres" id="19_hdtnq"]
 [ext_resource type="PackedScene" uid="uid://luuvjiwopxmb" path="res://Assets/Models/Penguin.glb" id="19_tmse1"]
 [ext_resource type="ArrayMesh" uid="uid://3tnlb0pxraht" path="res://Assets/Models/Asia Pack Reimport/Building_11.res" id="19_w7v5v"]
 [ext_resource type="ArrayMesh" uid="uid://b7m4god2p3e8n" path="res://Assets/Models/Asia Pack Reimport/Balkon.res" id="21_g5e81"]
@@ -7503,7 +7502,6 @@ shape = SubResource("BoxShape3D_jjl2b")
 [node name="Pedestal7" type="MeshInstance3D" parent="NavigationRegion3D/KEEP" unique_id=1729753783]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 35.859474, 0.6761467, 5.377689)
 mesh = ExtResource("7_3gp6a")
-surface_material_override/0 = ExtResource("19_hdtnq")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/KEEP/Pedestal7" unique_id=1916685107]
 
