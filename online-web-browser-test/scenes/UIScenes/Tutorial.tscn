@@ -294,7 +294,7 @@ size_flags_vertical = 10
 custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "SHIFT"
+text = "ALT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
