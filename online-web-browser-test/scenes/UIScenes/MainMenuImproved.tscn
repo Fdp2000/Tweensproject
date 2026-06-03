@@ -108,39 +108,6 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aoji6"]
-bg_color = Color(1, 0.41960785, 0.41960785, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tq8xy"]
-bg_color = Color(0.9273209, 0, 0.19651514, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o57w0"]
-bg_color = Color(1, 0.54305315, 0.52867025, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c4gm7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3etf2"]
@@ -403,7 +370,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="MainMenuPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1660272269]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -469,17 +435,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_fxnex")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_tfxki")
 theme_override_styles/hover = SubResource("StyleBoxFlat_33nbu")
 text = "Skins"
-
-[node name="QuitButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=512990143]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_fonts/font = ExtResource("1_kuebs")
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_aoji6")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_tq8xy")
-theme_override_styles/hover = SubResource("StyleBoxFlat_o57w0")
-text = "Quit"
 
 [node name="PlayPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1119582336]
 layout_mode = 1
@@ -766,27 +721,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1524457, 1.6060051)
 
 [node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 146192529, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.0030985302, 0.018061426, 0.00264569, 0.99982864)
-bones/2/rotation = Quaternion(-0.04068655, 0.036437042, 0.009164271, 0.99846536)
-bones/3/rotation = Quaternion(-0.09537119, 0.03389468, 0.0150448335, 0.9947508)
-bones/5/rotation = Quaternion(-0.60462207, -0.3810192, -0.45287794, 0.53306484)
-bones/6/rotation = Quaternion(-0.3802184, 0.647862, -0.4352826, 0.49622366)
-bones/7/rotation = Quaternion(0.15757777, -0.020980028, -0.002449449, 0.98728067)
-bones/8/rotation = Quaternion(-0.15784137, 0.0324937, -0.046435613, 0.98583674)
-bones/9/rotation = Quaternion(0.13743407, 0.050540987, -0.24580131, 0.95819587)
-bones/10/rotation = Quaternion(0.15118232, 0.04818265, -0.22161245, 0.96213835)
-bones/11/rotation = Quaternion(0.18129084, 0.029065177, -0.07598896, 0.98005843)
-bones/13/rotation = Quaternion(-0.59207827, 0.39671552, 0.45103392, 0.53724176)
-bones/14/rotation = Quaternion(-0.33294, -0.6952251, 0.394329, 0.5003175)
-bones/15/rotation = Quaternion(0.18727462, 0.024488995, 0.017416112, 0.98184794)
-bones/16/rotation = Quaternion(-0.12480615, -0.0315428, 0.009267026, 0.9916364)
-bones/17/rotation = Quaternion(0.1374547, -0.049764864, 0.24055836, 0.9595631)
-bones/18/rotation = Quaternion(0.15097368, -0.047605127, 0.21807234, 0.9630084)
-bones/19/rotation = Quaternion(0.18118763, -0.029565003, 0.07797472, 0.97990656)
-bones/23/rotation = Quaternion(0.95569384, 0.105782576, -0.13146716, 0.24119651)
-bones/24/rotation = Quaternion(0.28361186, -0.028676474, -0.021278506, 0.9582742)
-bones/25/rotation = Quaternion(0.979549, -0.06863507, 0.08586053, 0.16852589)
-bones/26/rotation = Quaternion(0.24744338, 0.040927075, 0.012384006, 0.9679584)
+bones/1/rotation = Quaternion(0.027556803, 0.017316513, 0.0021989897, 0.99946785)
+bones/2/rotation = Quaternion(-0.02383724, 0.0351929, 0.007881557, 0.99906516)
+bones/3/rotation = Quaternion(-0.07829388, 0.033417616, 0.013193904, 0.99628276)
+bones/5/rotation = Quaternion(-0.5916432, -0.399064, -0.46316907, 0.5255291)
+bones/6/rotation = Quaternion(-0.3027571, 0.6336754, -0.5010309, 0.50572896)
+bones/7/rotation = Quaternion(0.13841063, -0.078720815, 0.00041504754, 0.9872413)
+bones/8/rotation = Quaternion(-0.15135317, 0.03882547, -0.042446747, 0.9868046)
+bones/9/rotation = Quaternion(0.13889591, 0.043857004, -0.20061538, 0.96878177)
+bones/10/rotation = Quaternion(0.15282962, 0.037232496, -0.14896329, 0.9762515)
+bones/11/rotation = Quaternion(0.1813646, 0.020301806, -0.028684562, 0.98278785)
+bones/13/rotation = Quaternion(-0.59172416, 0.39906445, 0.46321732, 0.52539504)
+bones/14/rotation = Quaternion(-0.2825435, -0.69430375, 0.45949197, 0.47642267)
+bones/15/rotation = Quaternion(0.15826479, 0.07825873, -0.00032684885, 0.9842905)
+bones/16/rotation = Quaternion(-0.15868028, -0.02926257, -0.02027382, 0.986688)
+bones/17/rotation = Quaternion(0.13876511, -0.043721605, 0.19967657, 0.96900046)
+bones/18/rotation = Quaternion(0.15260707, -0.03719677, 0.1474624, 0.9765154)
+bones/19/rotation = Quaternion(0.18126556, -0.020370523, 0.02764207, 0.98283464)
+bones/23/rotation = Quaternion(0.94339484, 0.107421376, -0.12616429, 0.28731453)
+bones/24/rotation = Quaternion(0.34235153, -0.032428633, -0.02377262, 0.93871117)
+bones/25/rotation = Quaternion(0.96753, -0.07019063, 0.08057572, 0.22905567)
+bones/26/rotation = Quaternion(0.3252521, 0.03424094, 0.021755233, 0.9447568)
 
 [node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=227015707]
 custom_minimum_size = Vector2(45, 67)

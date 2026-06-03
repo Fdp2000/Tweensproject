@@ -11,7 +11,6 @@ extends Node
 @onready var play_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton")
 @onready var tutorial_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/TutorialButton")
 @onready var skins_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/SkinsButton")
-@onready var quit_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/QuitButton")
 
 @onready var name_input: LineEdit = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/NameInput")
 @onready var room_input: LineEdit = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/RoomInput")
@@ -124,7 +123,6 @@ func _ready() -> void:
 	host_button.pressed.connect(_on_host_pressed)
 	join_button.pressed.connect(_on_join_pressed)
 	tutorial_button.pressed.connect(_on_tutorial_pressed)
-	quit_button.pressed.connect(_on_quit_pressed)
 
 	play_button.pressed.connect(_on_play_pressed)
 	play_back_button.pressed.connect(_on_play_back_pressed)
@@ -483,12 +481,6 @@ func _on_cop_back_pressed() -> void:
 func _on_cop_next_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
 	show_main_menu()
-
-
-func _on_quit_pressed() -> void:
-	AudioManager.play_2d_sfx("ui_click")
-	tutorial_intro_cancelled = true
-	get_tree().quit()
 
 func show_play_panel() -> void:
 	main_menu_canvas.show()
