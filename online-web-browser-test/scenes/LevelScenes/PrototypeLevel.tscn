@@ -81,6 +81,7 @@
 [ext_resource type="PackedScene" uid="uid://bru4vl6kld8l" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/FootBridge_1_1 Asia.fbx" id="71_nkopf"]
 [ext_resource type="PackedScene" uid="uid://bw2pbwpprgunp" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Gong Asia.fbx" id="72_5v6qp"]
 [ext_resource type="PackedScene" uid="uid://b2l8kpsel471n" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/BuildingWall_6_1  Asia.fbx" id="73_vdvdf"]
+[ext_resource type="Texture2D" uid="uid://bctfhk8g45ieu" path="res://Assets/Untitled_Artwork 7.png" id="75_q2a4x"]
 [ext_resource type="Shader" uid="uid://bhuh8brxkxoy5" path="res://Assets/Shaders/CamoShader/finalCamo.gdshader" id="76_eslt8"]
 [ext_resource type="PackedScene" uid="uid://d2apsbknplqln" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Altana_1 Asia.fbx" id="77_r7agv"]
 [ext_resource type="PackedScene" uid="uid://dchrl3shnvpr4" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Clif_2  Asia.fbx" id="78_xsvq8"]
@@ -4220,6 +4221,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_efmy8")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_61flt"]
+albedo_texture = ExtResource("75_q2a4x")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_4v80x"]
 size = Vector3(1.5981165, 2.2505548, 1e-05)
 
@@ -8073,7 +8077,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_ygkih")
 
 [node name="Floor31" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=676761101]
-transform = Transform3D(-2.4216194, 0, -7.333609e-07, 0, 0.35999998, 0, 2.1170467e-07, 0, -8.38867, 9.381891, 4.0743184, -2.9545188)
+transform = Transform3D(-2.4216194, 0, -9.493008e-07, 0, 0.35999998, 0, 2.1170467e-07, 0, -10.858734, 9.381891, 4.0743184, 0.11728048)
 mesh = ExtResource("6_orgo4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor/Floor31" unique_id=1554847641]
@@ -10776,6 +10780,16 @@ mesh = ExtResource("10_4r0pn")
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBig111" unique_id=680496917]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBig111/StaticBody3D" unique_id=1469220498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
+shape = SubResource("BoxShape3D_x8xu2")
+
+[node name="WallBig133" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=891587108]
+transform = Transform3D(-1.5, 0, -1.509958e-07, 0, 1, 0, 2.2649371e-07, 0, -1, -0.17494297, 4.1629996, 11.833)
+mesh = ExtResource("10_4r0pn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBig133" unique_id=1603591946]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBig133/StaticBody3D" unique_id=903611471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_x8xu2")
 
@@ -14828,11 +14842,14 @@ transform = Transform3D(0.258819, 0, 0.9659259, 0, 1, 0, -0.9659259, 0, 0.258819
 [node name="VisualRing2" type="Node3D" parent="NavigationRegion3D/Van/DeliveryZone" parent_id_path=PackedInt32Array(1941149271, 1495220169) index="2" unique_id=1383707949]
 transform = Transform3D(1, 0, 0, 0, 0.125, 0, 0, 0, 1, 0, 0.15267849, 0)
 
+[node name="Van" parent="NavigationRegion3D/Van/WhiteVan" parent_id_path=PackedInt32Array(1941149271, 628082721) index="0" unique_id=784682784]
+surface_material_override/0 = null
+
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Van/WhiteVan/Van/StaticBody3D" parent_id_path=PackedInt32Array(1941149271, 628082721, 1461634472) index="1" unique_id=35192665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06667435, 1.010426, 0)
 shape = SubResource("BoxShape3D_d0kxi")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Van" parent_id_path=PackedInt32Array(1941149271, 628082721, 784682784) index="1" unique_id=1918125771]
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Van" index="1" unique_id=1918125771]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Van/WhiteVan/Door1/StaticBody3D" parent_id_path=PackedInt32Array(1941149271, 628082721, 1037144885) index="1" unique_id=1004440322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01978314, 0.028477013, -0.41415787)
@@ -14846,7 +14863,7 @@ shape = SubResource("BoxShape3D_sfnlw")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Doors2" parent_id_path=PackedInt32Array(1941149271, 628082721, 1968327037) index="1" unique_id=630395098]
 
-[node name="Van2" type="MeshInstance3D" parent="NavigationRegion3D/Van/WhiteVan" parent_id_path=PackedInt32Array(1941149271, 628082721) index="3" unique_id=784682784]
+[node name="Van2" type="MeshInstance3D" parent="NavigationRegion3D/Van/WhiteVan" parent_id_path=PackedInt32Array(1941149271, 628082721) index="3" unique_id=1760642482]
 transform = Transform3D(4, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_r2dvg")
 surface_material_override/0 = SubResource("ShaderMaterial_7ht04")
@@ -15313,6 +15330,7 @@ shape = SubResource("BoxShape3D_xs6gw")
 [node name="Picture2Image2" type="MeshInstance3D" parent="NavigationRegion3D/JailBoard" unique_id=1873373757]
 transform = Transform3D(-5.5076352e-08, 0, 1, 0, 0.34999996, 0, -1.2600001, 0, -4.371139e-08, -5.033321, 2.9995959, -46.192524)
 mesh = SubResource("ArrayMesh_xo0rd")
+surface_material_override/0 = SubResource("StandardMaterial3D_61flt")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/JailBoard/Picture2Image2" unique_id=469492087]
 
