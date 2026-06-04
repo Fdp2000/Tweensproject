@@ -468,6 +468,8 @@ func _on_tutorial_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 
+	main_menu_panel.hide()
+
 	tutorial_canvas.show()
 	tutorial_cop_canvas.hide()
 
