@@ -43,6 +43,7 @@ var is_mobile_interact: bool = false
 var last_pos: Vector3 = Vector3.ZERO
 var nav_agent: NavigationAgent3D
 var current_speed_mult: float = 1.0
+var current_physical_biome: String = "base_tension"
 
 var nearby_interactables: Array[Node3D] = []
 var interaction_scanner: Area3D

@@ -7,6 +7,9 @@ extends Node3D
 @export_range(-360, 360, 0.1, "radians_as_degrees") var max_pitch: float = deg_to_rad(30.0)
 @export_range(-360, 360, 0.1, "radians_as_degrees") var min_pitch: float = deg_to_rad(-30.0)
 
+@export_category("Audio Settings")
+@export_enum("base_tension", "biome_forest", "biome_egypt", "biome_island", "biome_antarctica", "biome_asia") var camera_biome: String = "base_tension"
+
 @export_category("Starting Position")
 @export_range(-360, 360, 0.1, "radians_as_degrees") var start_yaw: float = 0.0:
 	set(value):

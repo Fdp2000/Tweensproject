@@ -7,11 +7,11 @@ var MUSIC_CONFIG = {
 	"main_menu":    {"path": "res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby.mp3", "volume": -6.0, "bus": "Music"},
 	"match_start":  {"path": "res://Assets/Sound/Music/Intro Cutscene/Brassfall Surge.ogg", "volume": -5, "bus": "Music"},
 	"base_tension": {"path": "res://Assets/Sound/Music/BaseMap Song/Stealth Drum Loop.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_forest": {"path": "res://Assets/Sound/Music/Biome_Forest.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_egypt":  {"path": "res://Assets/Sound/Music/Biome_Egypt.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_island": {"path": "res://Assets/Sound/Music/Biome_Island.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_antarctica": {"path": "res://Assets/Sound/Music/Biome_Antarctica.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_asia":   {"path": "res://Assets/Sound/Music/Biome_Asia.ogg", "volume": -18.0, "bus": "Music"}
+	"biome_forest": {"path": "res://Assets/Sound/Music/Biomes/forest exhibit.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_egypt":  {"path": "res://Assets/Sound/Music/Biomes/egyptianexhibition.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_island": {"path": "res://Assets/Sound/Music/Biomes/tropical exhibit.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_antarctica": {"path": "res://Assets/Sound/Music/Biomes/arcticexhibition.ogg", "volume": -18.0, "bus": "Music"},
+	"biome_asia":   {"path": "res://Assets/Sound/Music/Biomes/chinese exhibition.ogg", "volume": -18.0, "bus": "Music"}
 }
 
 var SFX_CONFIG = {

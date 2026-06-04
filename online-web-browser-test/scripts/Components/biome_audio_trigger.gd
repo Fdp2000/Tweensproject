@@ -12,13 +12,37 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 
 func _on_body_entered(body: Node3D):
-	# We ONLY want the music to change when the LOCAL player walks into the area.
-	# We don't want the music to change just because a clone or a physics prop fell into the room!
+	print("[BiomeAudio] Body entered Area3D: ", body.name, " (", body.get_class(), ")")
 	if body is CharacterBody3D and body.has_method("is_multiplayer_authority"):
+		print("[BiomeAudio] Body is CharacterBody3D with is_multiplayer_authority")
 		if body.is_multiplayer_authority():
+			print("[BiomeAudio] SUCCESS: Body is local authority! Trying to play: ", biome_music_track)
+			if "current_physical_biome" in body:
+				body.current_physical_biome = biome_music_track
+				
+			# Don't change actual music if we are looking through cameras!
+			var cam_manager = body.get("camera_manager")
+			if cam_manager and cam_manager.is_on_cameras:
+				print("[BiomeAudio] BLOCKED: Player is currently looking through cameras.")
+				return
+				
 			AudioManager.play_music(biome_music_track, crossfade_duration)
+		else:
+			print("[BiomeAudio] BLOCKED: Body is not local multiplayer authority (network clone).")
+	else:
+		print("[BiomeAudio] BLOCKED: Body is not a valid player CharacterBody3D.")
 
 func _on_body_exited(body: Node3D):
+	print("[BiomeAudio] Body exited Area3D: ", body.name)
 	if body is CharacterBody3D and body.has_method("is_multiplayer_authority"):
 		if body.is_multiplayer_authority():
+			print("[BiomeAudio] SUCCESS: Local authority left biome! Reverting to: ", default_music_track)
+			if "current_physical_biome" in body:
+				body.current_physical_biome = default_music_track
+				
+			var cam_manager = body.get("camera_manager")
+			if cam_manager and cam_manager.is_on_cameras:
+				print("[BiomeAudio] BLOCKED REVERT: Player is on cameras.")
+				return
+				
 			AudioManager.play_music(default_music_track, crossfade_duration)

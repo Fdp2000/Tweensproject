@@ -12,6 +12,9 @@ var saved_orientations: Dictionary = {}
 
 var last_ping_msec: int = 0
 
+var current_music_biome_from_cam: String = ""
+var cam_switch_timer: SceneTreeTimer = null
+
 func setup(parent: Node3D):
 	thief = parent
 
@@ -133,6 +136,23 @@ func switch_to_camera(index: int):
 	# Force an immediate sync when switching to a camera so the physical model starts lerping to our view if we are primary
 	if new_cam.has_method("sync_rotation"):
 		new_cam.rpc("sync_rotation", cam_yaw, cam_pitch, thief.multiplayer.get_unique_id())
+		
+	# --- AUDIO BIOME TRANSITION WITH SETTLE DELAY ---
+	var target_biome = new_cam.get("camera_biome") if "camera_biome" in new_cam else ""
+	if target_biome == "":
+		target_biome = "base_tension"
+		
+	if cam_switch_timer:
+		cam_switch_timer.timeout.disconnect(_on_cam_settle_timeout)
+		
+	cam_switch_timer = thief.get_tree().create_timer(0.4)
+	cam_switch_timer.timeout.connect(_on_cam_settle_timeout.bind(target_biome))
+
+func _on_cam_settle_timeout(target_biome: String):
+	if not is_on_cameras: return
+	if current_music_biome_from_cam != target_biome:
+		current_music_biome_from_cam = target_biome
+		AudioManager.play_music(target_biome, 1.0)
 
 func cycle_camera(dir: int):
 	if not is_on_cameras: return
@@ -229,3 +249,12 @@ func release_cameras():
 			print("[Audio Debug] Audio returned to Thief! Thief's AudioListener3D is now active at position: ", listener.global_position)
 		else:
 			print("[Audio Debug] WARNING: Could not find Thief's AudioListener3D to reactivate!")
+
+	# --- RETURN TO THIEF'S PHYSICAL BIOME MUSIC ---
+	if cam_switch_timer:
+		cam_switch_timer.timeout.disconnect(_on_cam_settle_timeout)
+		cam_switch_timer = null
+	
+	current_music_biome_from_cam = ""
+	var physical_biome = thief.get("current_physical_biome") if "current_physical_biome" in thief else "base_tension"
+	AudioManager.play_music(physical_biome, 1.0)
