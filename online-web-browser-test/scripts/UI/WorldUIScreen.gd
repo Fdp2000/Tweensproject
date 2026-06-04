@@ -6,14 +6,31 @@ extends Node3D
 @export var top_right: Marker3D
 @export var bottom_left: Marker3D
 
+var screen_has_keyboard_focus := false
+
+
 func _input(event: InputEvent) -> void:
 	if viewport == null:
 		return
+
+	# Keyboard input: send it to the viewport after the player has clicked this screen.
+	if event is InputEventKey:
+		if screen_has_keyboard_focus:
+			var key_event := event.duplicate()
+			viewport.push_input(key_event)
+		return
+
+	# Optional text input support. Useful for some keyboard layouts.
+	if event is InputEventFromWindow and screen_has_keyboard_focus:
+		viewport.push_input(event.duplicate())
 
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var viewport_pos = get_mouse_position_on_screen(mouse_pos)
 
 	if viewport_pos == null:
+		# If clicking outside this screen, release keyboard focus.
+		if event is InputEventMouseButton and event.pressed:
+			screen_has_keyboard_focus = false
 		return
 
 	if event is InputEventMouseMotion:
@@ -22,10 +39,12 @@ func _input(event: InputEvent) -> void:
 		new_event.global_position = viewport_pos
 		new_event.relative = event.relative
 		new_event.velocity = event.velocity
+		new_event.button_mask = event.button_mask
 		viewport.push_input(new_event)
 
 	elif event is InputEventMouseButton:
 		if event.pressed:
+			screen_has_keyboard_focus = true
 			print("Viewport click position: ", viewport_pos)
 
 		var new_event := InputEventMouseButton.new()
@@ -34,6 +53,7 @@ func _input(event: InputEvent) -> void:
 		new_event.button_index = event.button_index
 		new_event.pressed = event.pressed
 		new_event.double_click = event.double_click
+		new_event.button_mask = event.button_mask
 		viewport.push_input(new_event)
 
 

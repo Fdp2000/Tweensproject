@@ -180,6 +180,8 @@ func show_main_menu() -> void:
 	play_panel.show()
 	skins_panel.show()
 
+	set_skin_viewports_active(true)
+
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 
@@ -220,7 +222,6 @@ func _on_skins_pressed() -> void:
 
 func _on_skins_back_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
-	set_skin_viewports_active(false)
 	move_camera_to(menu_camera_spot)
 
 func _animate_skins_panel_in() -> void:
@@ -469,7 +470,6 @@ func _on_tutorial_pressed() -> void:
 
 	tutorial_canvas.show()
 	tutorial_cop_canvas.hide()
-	skins_panel.hide()
 
 
 func _on_tutorial_next_pressed() -> void:
@@ -489,9 +489,11 @@ func _on_cop_next_pressed() -> void:
 	show_main_menu()
 
 func show_play_panel() -> void:
-	main_menu_panel.hide()
+	main_menu_panel.show()
 	play_panel.show()
-	skins_panel.hide()
+	skins_panel.show()
+	set_skin_viewports_active(true)
+
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 
@@ -807,7 +809,12 @@ func _on_game_started() -> void:
 
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
+
+	main_menu_panel.hide()
+	play_panel.hide()
 	skins_panel.hide()
+
+	set_skin_viewports_active(false)
 
 	if lobby_ui:
 		lobby_ui.hide()
