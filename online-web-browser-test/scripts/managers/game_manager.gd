@@ -413,7 +413,13 @@ func client_return_to_lobby():
 		if current_vent:
 			current_vent.rpc("close_vent")
 			current_vent = null
+			
+	# EVERYBODY waits 0.5 seconds.
+	# The screen is pitch black right now. This network buffer lets the despawn packets 
+	# arrive and completely clear out the clients' MultiplayerSpawners before we try to respawn!
+	await get_tree().create_timer(0.5).timeout
 		
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
 		# Respawn all players in the lobby!
 		for id in players.keys():
 			player_joined.emit(id)
@@ -500,8 +506,27 @@ func host_start_game():
 func trigger_pre_game_start(assignments: Dictionary):
 	pre_game_started.emit(assignments)
 	
-	# Give the clients enough time to fade to black before doing the heavy teleportation & spawning logic
-	await get_tree().create_timer(pre_game_fade_delay).timeout
+	# Dynamically grab the fade time from the CutsceneManager so we don't break your timings!
+	var fade_time = 1.0
+	var cutscene = get_tree().get_root().find_child("CutsceneManager", true, false)
+	if cutscene and "pre_game_fade_to_black_time" in cutscene:
+		fade_time = cutscene.pre_game_fade_to_black_time
+	
+	# Wait exactly until the screen is 100% pitch black
+	await get_tree().create_timer(fade_time).timeout
+	
+	# NUKE THE LOBBY PLAYERS HERE! The screen is fully black now!
+	if multiplayer.is_server():
+		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		if spawned:
+			for child in spawned.get_children():
+				spawned.remove_child(child)
+				child.queue_free()
+				
+	# Wait the remaining buffer time for the network to sync the deletions
+	var remaining_time = max(0.0, pre_game_fade_delay - fade_time)
+	if remaining_time > 0.0:
+		await get_tree().create_timer(remaining_time).timeout
 	
 	if multiplayer.is_server():
 		rpc("start_game", assignments)

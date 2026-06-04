@@ -100,6 +100,14 @@ var debug_path_mesh: MeshInstance3D
 var debug_label: Label3D
 var custom_path_index: int = 0
 
+func _exit_tree():
+	# If the match ends or the node is destroyed while we are hypnotized,
+	# we MUST tell the AudioManager to turn off the filters so they don't persist into the lobby!
+	if is_hypnotized and multiplayer.get_unique_id() == str(name).to_int():
+		AudioManager.set_hypnotized(false)
+		
+	if debug_path_mesh and is_instance_valid(debug_path_mesh):
+		debug_path_mesh.queue_free()
 func _ready():
 	super._ready()
 	
@@ -738,9 +746,8 @@ func dev_toggle_hypnotize():
 		
 		print("[DEV] Thief UN-hypnotized via hotkey")
 
-func _exit_tree():
-	if debug_path_mesh and is_instance_valid(debug_path_mesh):
-		debug_path_mesh.queue_free()
+
+
 
 func draw_debug_path():
 	if not debug_path_mesh: return
