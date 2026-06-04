@@ -327,8 +327,10 @@ func end_game_with_winner(winner_team: int):
 
 @rpc("any_peer", "call_local")
 func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array):
-	#Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	
+	# Play the Thief Win music if the thieves won
+	if winner_text == "THE THIEVES ESCAPED WITH THE LOOT":
+		AudioManager.play_music("thief_win", 0.5)
+		
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 
 	if client_ui and client_ui.get("current_hud"):

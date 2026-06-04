@@ -17845,9 +17845,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.986057, 0, 1.3978119)
 
 [node name="Area3D" type="Area3D" parent="BiomeTriggers/biome_forest" unique_id=1953627094]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 14
 script = ExtResource("142_8sa2x")
 biome_music_track = "biome_forest"
+crossfade_duration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BiomeTriggers/biome_forest/Area3D" unique_id=1120812102]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.347111, 2.3746948, 10.925909)
@@ -17858,9 +17859,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.330395, 0, 0)
 
 [node name="Area3D" type="Area3D" parent="BiomeTriggers/biome_egypt" unique_id=732214504]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 14
 script = ExtResource("142_8sa2x")
 biome_music_track = "biome_egypt"
+crossfade_duration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BiomeTriggers/biome_egypt/Area3D" unique_id=1739819472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.538601, 2.3746948, 6.3192043)
@@ -17871,9 +17873,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.333015, 3.8146973e-06, -5
 
 [node name="Area3D" type="Area3D" parent="BiomeTriggers/biome_island" unique_id=1603621350]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 14
 script = ExtResource("142_8sa2x")
 biome_music_track = "biome_island"
+crossfade_duration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BiomeTriggers/biome_island/Area3D" unique_id=533063580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8191223, 2.3746948, 18.317272)
@@ -17884,9 +17887,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.813267, 1.9073486e-06, -57
 
 [node name="Area3D" type="Area3D" parent="BiomeTriggers/biome_antarctica" unique_id=1714720708]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 14
 script = ExtResource("142_8sa2x")
 biome_music_track = "biome_antarctica"
+crossfade_duration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BiomeTriggers/biome_antarctica/Area3D" unique_id=1061323296]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0125465, 2.3746948, 19.59637)
@@ -17897,8 +17901,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.887913, -1.9073486e-06, -
 
 [node name="Area3D" type="Area3D" parent="BiomeTriggers/biome_asia" unique_id=974886805]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 14
 script = ExtResource("142_8sa2x")
+crossfade_duration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BiomeTriggers/biome_asia/Area3D" unique_id=865254143]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9828339, 2.382164, 3.8674889)

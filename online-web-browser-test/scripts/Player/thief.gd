@@ -91,6 +91,7 @@ func spawn_smoke():
 var rescue_progress: float = 0.0
 var active_rescuer_id: int = -1
 var rescue_audio_player: AudioStreamPlayer
+var rescue_success_player: AudioStreamPlayer3D
 var is_rescuing: bool = false
 var current_interact_target: Node3D = null
 var outline_mat: StandardMaterial3D = null
@@ -109,6 +110,18 @@ func _ready():
 	rescue_audio_player.bus = rescue_config.get("bus", "SFX")
 	rescue_audio_player.volume_db = rescue_config.get("volume", 0.0)
 	add_child(rescue_audio_player)
+	
+	rescue_success_player = AudioStreamPlayer3D.new()
+	var success_config = AudioManager.SFX_CONFIG.get("rescue_success", {})
+	if success_config.has("path"):
+		rescue_success_player.stream = load(success_config["path"])
+	rescue_success_player.bus = success_config.get("bus", "Loud SFX")
+	rescue_success_player.volume_db = -80.0
+	rescue_success_player.max_db = success_config.get("volume", 0.0)
+	rescue_success_player.max_distance = success_config.get("max_distance", 55.0)
+	rescue_success_player.unit_size = success_config.get("unit_size", 18.0)
+	rescue_success_player.attenuation_model = AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC
+	add_child(rescue_success_player)
 	
 	last_pos = global_position
 	nav_agent = NavigationAgent3D.new()
@@ -799,6 +812,23 @@ func rescue_successful():
 		
 	if multiplayer.is_server():
 		GameManager.rpc("thief_rescued")
+
+	play_rescue_success_audio()
+
+func play_rescue_success_audio():
+	if not rescue_success_player.stream: return
+	
+	rescue_success_player.volume_db = -80.0
+	rescue_success_player.play()
+	
+	var tween = create_tween()
+	# Fade in over 0.15s (using EXPO OUT for an extremely punchy fade in)
+	tween.tween_property(rescue_success_player, "volume_db", rescue_success_player.max_db, 0.15).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	# Wait for 3 seconds of playtime
+	tween.tween_interval(3.0)
+	# Fade out over 1 second (smooth traditional fade out)
+	tween.tween_property(rescue_success_player, "volume_db", -80.0, 1.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_callback(rescue_success_player.stop)
 
 @rpc("any_peer", "call_local")
 func on_jailed(cell_pos: Vector3, cell_rot_y: float):
