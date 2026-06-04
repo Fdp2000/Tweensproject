@@ -194,6 +194,13 @@ shadow_mesh = SubResource("ArrayMesh_g3m62")
 
 [node name="SecCam" type="Node3D" unique_id=220581430]
 script = ExtResource("1_seccam")
+Set_Max_Yaw_To_Current = null
+Set_Min_Yaw_To_Current = null
+Set_Max_Pitch_To_Current = null
+Set_Min_Pitch_To_Current = null
+enable_preview_sliders = null
+preview_yaw_slider = null
+preview_pitch_slider = null
 
 [node name="Sketchfab_model" type="Node3D" parent="." unique_id=2081310004]
 transform = Transform3D(1, 0, 0, 0, 2.220446e-16, 1, 0, -1, 2.220446e-16, 0, 0, 0)
@@ -210,7 +217,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 mesh = SubResource("ArrayMesh_m26tn")
 
 [node name="pivotPoint" type="MeshInstance3D" parent="." unique_id=1654055905]
-transform = Transform3D(0.07488063, 0, 0.0042297416, 0, 0.074999996, 0, -0.0042297416, 0, 0.07488063, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.074999996, 0, 0, 0, 0.074999996, 0, 0, 0, 0.074999996, 0, 0.02632384, -0.19379231)
 mesh = SubResource("SphereMesh_jtbk8")
 
 [node name="Camera_2" type="Node3D" parent="pivotPoint" unique_id=106286865]

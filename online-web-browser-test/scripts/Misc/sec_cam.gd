@@ -18,12 +18,51 @@ extends Node3D
 		start_pitch = value
 		_update_editor_rotation()
 
+@export_category("Quick Set Limits")
+@export var Set_Max_Yaw_To_Current: bool = false:
+	set(value):
+		if is_node_ready() and pivot:
+			max_yaw = pivot.rotation.y
+		notify_property_list_changed()
+@export var Set_Min_Yaw_To_Current: bool = false:
+	set(value):
+		if is_node_ready() and pivot:
+			min_yaw = pivot.rotation.y
+		notify_property_list_changed()
+@export var Set_Max_Pitch_To_Current: bool = false:
+	set(value):
+		if is_node_ready() and pivot:
+			max_pitch = pivot.rotation.x
+		notify_property_list_changed()
+@export var Set_Min_Pitch_To_Current: bool = false:
+	set(value):
+		if is_node_ready() and pivot:
+			min_pitch = pivot.rotation.x
+		notify_property_list_changed()
+
 @export_category("Preview Tool")
-@export var preview_camera_sweep: bool = false
+@export var enable_preview_sliders: bool = false:
+	set(value):
+		enable_preview_sliders = value
+		if not value:
+			_update_editor_rotation()
+		else:
+			_update_preview_slider()
+
+@export_range(0, 100, 1) var preview_yaw_slider: float = 50.0:
+	set(value):
+		preview_yaw_slider = value
+		if enable_preview_sliders:
+			_update_preview_slider()
+
+@export_range(0, 100, 1) var preview_pitch_slider: float = 50.0:
+	set(value):
+		preview_pitch_slider = value
+		if enable_preview_sliders:
+			_update_preview_slider()
 
 @onready var pivot = $pivotPoint
-# UPDATE PATH: Camera is no longer inside pivotPoint!
-@onready var cam = $CameraMount/Camera3D
+@onready var cam = find_child("Camera3D", true, false)
 @onready var red_light = $pivotPoint/Camera_2/Object_9
 
 # The Queue: First person in this list is the primary controller
@@ -37,36 +76,39 @@ func _ready():
 		return
 		
 	# Game logic only
+	add_to_group("SecurityCameras")
 	pivot.rotation.y = start_yaw
-	pivot.rotation.x = start_pitch
-	target_rotation = Vector3(start_pitch, start_yaw, 0)
+	pivot.rotation.x = -start_pitch
+	target_rotation = Vector3(-start_pitch, start_yaw, 0)
 	_update_red_light()
 
 func _update_editor_rotation():
-	if is_node_ready() and pivot and not preview_camera_sweep:
+	if is_node_ready() and pivot and not enable_preview_sliders:
 		pivot.rotation.y = start_yaw
-		pivot.rotation.x = start_pitch
+		pivot.rotation.x = -start_pitch
+		if cam:
+			cam.rotation.y = start_yaw
+			cam.rotation.x = start_pitch
+
+func _update_preview_slider():
+	if is_node_ready() and pivot and enable_preview_sliders:
+		var actual_min_y = min(min_yaw, max_yaw)
+		var actual_max_y = max(min_yaw, max_yaw)
+		var actual_min_p = min(min_pitch, max_pitch)
+		var actual_max_p = max(min_pitch, max_pitch)
+		
+		var current_yaw = lerp(actual_min_y, actual_max_y, preview_yaw_slider / 100.0)
+		var current_pitch = lerp(actual_min_p, actual_max_p, preview_pitch_slider / 100.0)
+		
+		pivot.rotation.y = current_yaw
+		pivot.rotation.x = -current_pitch
+		
+		if cam:
+			cam.rotation.y = current_yaw
+			cam.rotation.x = current_pitch
 
 func _process(delta):
 	if Engine.is_editor_hint():
-		if preview_camera_sweep and is_node_ready() and pivot:
-			var time = Time.get_ticks_msec() / 1000.0
-			# Sine wave from -1 to 1 for sweeping left/right
-			var sweep_y = sin(time * 1.5)
-			# Cosine wave for sweeping up/down (slightly different frequency so it hits all corners)
-			var sweep_x = cos(time * 2.1)
-			
-			var center_y = (min_yaw + max_yaw) / 2.0
-			var range_y = (max_yaw - min_yaw) / 2.0
-			var center_x = (min_pitch + max_pitch) / 2.0
-			var range_x = (max_pitch - min_pitch) / 2.0
-			
-			pivot.rotation.y = center_y + sweep_y * range_y
-			pivot.rotation.x = center_x + sweep_x * range_x
-		elif is_node_ready() and pivot:
-			# Snap back to the starting position when disabled
-			pivot.rotation.y = start_yaw
-			pivot.rotation.x = start_pitch
 		return
 		
 	# SMOOTH LERP FOR EVERYONE!
