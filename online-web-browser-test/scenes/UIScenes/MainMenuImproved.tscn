@@ -12,58 +12,58 @@ font_size = 190
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv1oc"]
 bg_color = Color(0, 0.5019608, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_en882"]
 bg_color = Color(0, 0.31228623, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufndw"]
 bg_color = Color(2.0936877e-06, 0.6012054, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1vedx"]
 bg_color = Color(0.9019608, 0.6627451, 0.23529412, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oxbh3"]
 bg_color = Color(0.7777824, 0.5608209, 0.15615332, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w7kfu"]
 bg_color = Color(0.94744676, 0.7123532, 0.3103075, 1)
@@ -78,36 +78,36 @@ corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fxnex"]
 bg_color = Color(1, 0.30980393, 0.84705883, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfxki"]
 bg_color = Color(0.78466666, 0.00010608017, 0.65272796, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33nbu"]
 bg_color = Color(1, 0.44885468, 0.8625478, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kuebs"]
 viewport_path = NodePath("MainMenuScreen3D/MainMenuViewport")
@@ -351,7 +351,6 @@ size = Vector3(4, 2.25, 0.05)
 [node name="MainMenuUi" type="Node3D" unique_id=354039283]
 
 [node name="MainMenuScreen3D" type="Node3D" parent="." unique_id=1446650885 node_paths=PackedStringArray("viewport", "top_left", "top_right", "bottom_left")]
-visible = false
 script = ExtResource("1_agky4")
 viewport = NodePath("MainMenuViewport")
 top_left = NodePath("TopLeft")
@@ -386,6 +385,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 60.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -720,27 +720,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1524457, 1.6060051)
 
 [node name="Skeleton3D" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn/Næsehorn/Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 146192529, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.010404545, 0.018156804, 0.0026800323, 0.9997775)
-bones/2/rotation = Quaternion(-0.037821375, 0.036582448, 0.009181093, 0.99857247)
-bones/3/rotation = Quaternion(-0.09096154, 0.0318688, 0.014031007, 0.9952455)
-bones/5/rotation = Quaternion(-0.59777915, -0.39001554, -0.46009755, 0.5280703)
-bones/6/rotation = Quaternion(-0.34427518, 0.63657343, -0.4775373, 0.49820387)
-bones/7/rotation = Quaternion(0.14068107, -0.051852245, 0.0023424677, 0.98869354)
-bones/8/rotation = Quaternion(-0.16436607, 0.033535335, -0.047114026, 0.98470277)
-bones/9/rotation = Quaternion(0.13826384, 0.046780493, -0.22046594, 0.96441156)
-bones/10/rotation = Quaternion(0.15215918, 0.042079274, -0.18088137, 0.97075176)
-bones/11/rotation = Quaternion(0.1813154, 0.024227563, -0.04940381, 0.9818845)
-bones/13/rotation = Quaternion(-0.5968607, 0.38959587, 0.45405966, 0.5346046)
-bones/14/rotation = Quaternion(-0.34122673, -0.70070064, 0.39801437, 0.48390874)
-bones/15/rotation = Quaternion(0.21140605, 0.04295462, -0.014115992, 0.97635204)
-bones/16/rotation = Quaternion(-0.17100196, -0.043571133, 0.0112126665, 0.984243)
-bones/17/rotation = Quaternion(0.13795294, -0.047872998, 0.22768815, 0.9627229)
-bones/18/rotation = Quaternion(0.15160216, -0.04435109, 0.1964801, 0.96770114)
-bones/19/rotation = Quaternion(0.18127453, -0.026657267, 0.06227185, 0.981097)
-bones/23/rotation = Quaternion(0.9531177, 0.104599364, -0.12919922, 0.25285035)
-bones/24/rotation = Quaternion(0.29623476, -0.0256478, -0.02084873, 0.9545432)
-bones/25/rotation = Quaternion(0.97660273, -0.0715015, 0.087454475, 0.18299322)
-bones/26/rotation = Quaternion(0.2738914, 0.041592024, 0.013640376, 0.96076405)
+bones/1/rotation = Quaternion(0.027605187, 0.017290805, 0.0022111305, 0.9994669)
+bones/2/rotation = Quaternion(-0.0236589, 0.035257313, 0.007647917, 0.999069)
+bones/3/rotation = Quaternion(-0.07810513, 0.033091217, 0.013059756, 0.9963103)
+bones/5/rotation = Quaternion(-0.5916611, -0.39907265, -0.46325693, 0.5254248)
+bones/6/rotation = Quaternion(-0.30361742, 0.6357576, -0.4985741, 0.5050274)
+bones/7/rotation = Quaternion(0.1423289, -0.0791778, 0.00024776653, 0.9866476)
+bones/8/rotation = Quaternion(-0.15104125, 0.038870454, -0.040752877, 0.9869219)
+bones/9/rotation = Quaternion(0.1388284, 0.04406706, -0.20207976, 0.9684775)
+bones/10/rotation = Quaternion(0.15275726, 0.037597775, -0.1513174, 0.97588664)
+bones/11/rotation = Quaternion(0.18134905, 0.020582924, -0.030211555, 0.98273915)
+bones/13/rotation = Quaternion(-0.5918547, 0.39888996, 0.4635744, 0.5250653)
+bones/14/rotation = Quaternion(-0.28105167, -0.6947249, 0.45948935, 0.47669375)
+bones/15/rotation = Quaternion(0.16057791, 0.079960115, 0.00036364916, 0.98377895)
+bones/16/rotation = Quaternion(-0.15876955, -0.029492693, -0.021928228, 0.9866315)
+bones/17/rotation = Quaternion(0.13881412, -0.043567576, 0.1986033, 0.969221)
+bones/18/rotation = Quaternion(0.15266563, -0.036894996, 0.14552031, 0.976809)
+bones/19/rotation = Quaternion(0.18127878, -0.020120582, 0.026285734, 0.98287445)
+bones/23/rotation = Quaternion(0.9431268, 0.10763238, -0.12613887, 0.28812546)
+bones/24/rotation = Quaternion(0.34319472, -0.032624472, -0.023786947, 0.9383961)
+bones/25/rotation = Quaternion(0.9673311, -0.069947615, 0.080254935, 0.23008049)
+bones/26/rotation = Quaternion(0.32571137, 0.03442116, 0.0220686, 0.9445848)
 
 [node name="PreviousButton" type="Button" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=227015707]
 custom_minimum_size = Vector2(250, 150)
@@ -750,6 +750,10 @@ anchor_left = 0.006
 anchor_top = 0.611
 anchor_right = 0.006
 anchor_bottom = 0.611
+offset_left = -2.1
+offset_top = -244.4
+offset_right = 247.9
+offset_bottom = -79.399994
 grow_vertical = 0
 theme_override_font_sizes/font_size = 120
 theme_override_styles/normal = SubResource("StyleBoxFlat_eynkw")
@@ -765,6 +769,10 @@ anchor_left = 0.95
 anchor_top = 0.611
 anchor_right = 0.995
 anchor_bottom = 0.611
+offset_left = -332.5
+offset_top = -244.4
+offset_right = -98.25
+offset_bottom = -79.399994
 grow_vertical = 0
 theme_override_font_sizes/font_size = 120
 theme_override_styles/normal = SubResource("StyleBoxFlat_hjern")
