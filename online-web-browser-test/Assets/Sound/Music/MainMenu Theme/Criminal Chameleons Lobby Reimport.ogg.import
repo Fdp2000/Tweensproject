@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://kbm43ul054b0"
+path="res://.godot/imported/Criminal Chameleons Lobby Reimport.ogg-ade1b75e610684d75b08f732db6acd7a.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby Reimport.ogg"
+dest_files=["res://.godot/imported/Criminal Chameleons Lobby Reimport.ogg-ade1b75e610684d75b08f732db6acd7a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
