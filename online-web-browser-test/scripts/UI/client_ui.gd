@@ -3,22 +3,25 @@ extends Node
 @onready var client: Node = $Client
 @onready var menu_root: Node = get_tree().get_root().find_child("MainMenuUI", true, false)
 
-@onready var main_menu_canvas: CanvasLayer = menu_root.get_node("MainMenuCanvas")
-@onready var main_menu_panel: Control = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel")
-@onready var play_panel: Control = menu_root.get_node("MainMenuCanvas/Root/PlayPanel")
-@onready var skins_panel: Control = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel")
+@onready var main_menu_viewport: SubViewport = menu_root.get_node("MainMenuScreen3D/MainMenuViewport")
+@onready var play_viewport: SubViewport = menu_root.get_node("PlayScreen3D/PlayViewport")
+@onready var skins_viewport: SubViewport = menu_root.get_node("SkinsScreen3D/SkinsViewport")
 
-@onready var play_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton")
-@onready var tutorial_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/TutorialButton")
-@onready var skins_button: Button = menu_root.get_node("MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer/SkinsButton")
+@onready var main_menu_panel: Control = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel")
+@onready var play_panel: Control = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel")
+@onready var skins_panel: Control = menu_root.get_node("SkinsScreen3D/SkinsViewport/Root/SkinsPanel")
 
-@onready var name_input: LineEdit = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/NameInput")
-@onready var room_input: LineEdit = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/RoomInput")
-@onready var join_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/JoinButton")
-@onready var host_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/HostButton")
-@onready var play_back_button: Button = menu_root.get_node("MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/BackButton")
+@onready var play_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton")
+@onready var tutorial_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/TutorialButton")
+@onready var skins_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/SkinsButton")
 
-@onready var skins_back_button: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/BackButton")
+@onready var name_input: LineEdit = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/NameInput")
+@onready var room_input: LineEdit = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/RoomInput")
+@onready var join_button: Button = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/JoinButton")
+@onready var host_button: Button = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/HostButton")
+@onready var play_back_button: Button = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/BackButton")
+
+@onready var skins_back_button: Button = menu_root.get_node("SkinsScreen3D/SkinsViewport/Root/SkinsPanel/BackButton")
 
 @onready var tutorial_canvas: CanvasLayer = menu_root.get_node("Tutorial/TutorialCanvas")
 @onready var tutorial_cop_canvas: CanvasLayer = menu_root.get_node("TutorialCop/TutorialCopCanvas")
@@ -29,18 +32,23 @@ extends Node
 @export var chameleon_skin_materials: Array[Material]
 @export var rhino_skin_materials: Array[Material]
 
-@onready var chameleon_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
-@onready var rhino_spawn: Node3D = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn")
+@onready var chameleon_spawn: Node3D = menu_root.get_node_or_null(
+	"SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviewSpawn"
+) as Node3D
+@onready var rhino_spawn: Node3D = menu_root.get_node_or_null(
+	"SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn"
+) as Node3D
 
-@onready var chameleon_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviousButton")
-@onready var chameleon_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/NextButton")
-@onready var rhino_prev: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviousButton")
-@onready var rhino_next: Button = menu_root.get_node("MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/NextButton")
+@onready var chameleon_prev: Button = menu_root.get_node("SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviousButton")
+@onready var chameleon_next: Button = menu_root.get_node("SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/NextButton")
+@onready var rhino_prev: Button = menu_root.get_node("SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviousButton")
+@onready var rhino_next: Button = menu_root.get_node("SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/NextButton")
 
 
 var menu_camera: Camera3D
 var menu_camera_spot: Marker3D
 var skins_camera_spot: Marker3D
+var play_camera_spot: Marker3D
 
 const COP_SCENE = preload("res://scenes/PlayerScenes/Cop.tscn")
 const THIEF_SCENE = preload("res://scenes/PlayerScenes/Thief.tscn")
@@ -95,6 +103,7 @@ func _ready() -> void:
 	menu_camera = get_tree().get_first_node_in_group("menu_camera") as Camera3D
 	menu_camera_spot = menu_root.get_node_or_null("MenuCameraSpot") as Marker3D
 	skins_camera_spot = menu_root.get_node_or_null("SkinsCameraSpot") as Marker3D
+	play_camera_spot = menu_root.get_node_or_null("PlayCameraSpot") as Marker3D
 
 	if menu_camera and menu_camera_spot:
 		menu_camera.global_position = menu_camera_spot.global_position
@@ -167,31 +176,30 @@ func show_main_menu() -> void:
 	AudioManager.play_music("main_menu", 1.0, 0.0)
 	reset_tutorial_button()
 
-	main_menu_canvas.show()
 	main_menu_panel.show()
-	play_panel.hide()
-	skins_panel.hide()
+	play_panel.show()
+	skins_panel.show()
+
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 
 	if lobby_ui:
 		lobby_ui.hide()
 
+	move_camera_to(menu_camera_spot)
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 
 func _on_play_pressed() -> void:
+	print("PLAY BUTTON PRESSED")
 	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
-
-	main_menu_panel.hide()
-	play_panel.show()
+	move_camera_to(play_camera_spot)
 
 
 func _on_play_back_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
-	play_panel.hide()
-	main_menu_panel.show()
+	move_camera_to(menu_camera_spot)
 
 func cancel_tutorial_intro() -> void:
 	tutorial_intro_cancelled = true
@@ -207,38 +215,13 @@ func _on_skins_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 	set_skin_viewports_active(true)
-
-	main_menu_panel.hide()
-	play_panel.hide()
-
-	skins_panel.modulate.a = 0.0
-	skins_panel.position.x += 80
-	skins_panel.show()
-
-	_rotate_camera_to_skins()
-	_animate_skins_panel_in()
+	move_camera_to(skins_camera_spot)
 
 
 func _on_skins_back_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
 	set_skin_viewports_active(false)
-
-	var tween := create_tween()
-	tween.tween_property(
-		skins_panel,
-		"modulate:a",
-		0.0,
-		0.5
-	)
-
-	_rotate_camera_to_menu()
-
-	await tween.finished
-	await get_tree().create_timer(0.7).timeout
-
-	skins_panel.hide()
-	skins_panel.modulate.a = 1.0
-	main_menu_panel.show()
+	move_camera_to(menu_camera_spot)
 
 func _animate_skins_panel_in() -> void:
 	await get_tree().create_timer(0.7).timeout
@@ -384,6 +367,31 @@ func reset_tutorial_button() -> void:
 	tutorial_button.modulate = Color.WHITE
 	tutorial_button.text = "Tutorial"
 
+func move_camera_to(target_spot: Node3D) -> void:
+	if menu_camera == null:
+		print("Menu camera missing.")
+		return
+
+	if target_spot == null:
+		print("Camera target spot missing.")
+		return
+
+	var tween := create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(
+		menu_camera,
+		"global_position",
+		target_spot.global_position,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	tween.tween_property(
+		menu_camera,
+		"global_rotation",
+		target_spot.global_rotation,
+		1.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func show_lobby() -> void:
 	if not has_requested_lobby:
@@ -391,7 +399,6 @@ func show_lobby() -> void:
 	# Duck the volume slightly (-4 decibels) so players can chat in the lobby!
 	AudioManager.play_music("main_menu", 1.0, -6.0)
 	set_skin_viewports_active(false)
-	main_menu_canvas.hide()
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 	skins_panel.hide()
@@ -460,7 +467,6 @@ func _on_tutorial_pressed() -> void:
 	AudioManager.play_2d_sfx("ui_click")
 	cancel_tutorial_intro()
 
-	main_menu_canvas.hide()
 	tutorial_canvas.show()
 	tutorial_cop_canvas.hide()
 	skins_panel.hide()
@@ -483,7 +489,6 @@ func _on_cop_next_pressed() -> void:
 	show_main_menu()
 
 func show_play_panel() -> void:
-	main_menu_canvas.show()
 	main_menu_panel.hide()
 	play_panel.show()
 	skins_panel.hide()
@@ -800,7 +805,6 @@ func _on_game_started() -> void:
 						skin_index = GameManager.players[id].get("chameleon_skin", 0)
 					pf.rpc("apply_skin", skin_index)
 
-	main_menu_canvas.hide()
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 	skins_panel.hide()
@@ -818,20 +822,6 @@ func _on_game_started() -> void:
 
 
 func set_skin_viewports_active(active: bool) -> void:
-	var chameleon_vp = menu_root.get_node(
-		"MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport"
-	)
-
-	var rhino_vp = menu_root.get_node(
-		"MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport"
-	)
-
-	if chameleon_vp:
-		chameleon_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
-
-	if rhino_vp:
-		rhino_vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS if active else SubViewport.UPDATE_DISABLED
-
 	if chameleon_spawn:
 		chameleon_spawn.visible = active
 
@@ -839,13 +829,12 @@ func set_skin_viewports_active(active: bool) -> void:
 		rhino_spawn.visible = active
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Secret Developer Tool: Press 'T' on the main menu to instantly wipe the tutorial save!
+	# Secret Developer Tool: Press 'T' to reset tutorial save.
 	if event is InputEventKey and event.pressed and event.keycode == KEY_T:
-		if main_menu_canvas.visible:
-			var config = ConfigFile.new()
-			config.set_value("tutorial", "has_seen", false)
-			config.save("user://settings.cfg")
-			print("DEV TOOL: Tutorial save reset! The tutorial intro will play on the next launch.")
+		var config = ConfigFile.new()
+		config.set_value("tutorial", "has_seen", false)
+		config.save("user://settings.cfg")
+		print("DEV TOOL: Tutorial save reset! The tutorial intro will play on the next launch.")
 
 var lobby_fade_canvas: CanvasLayer
 var lobby_fade_rect: ColorRect
@@ -884,14 +873,28 @@ func _update_chameleon_preview() -> void:
 		print("No chameleon materials assigned.")
 		return
 
-	var mesh := chameleon_spawn.find_child("Chameleon", true, false) as MeshInstance3D
-	if mesh:
-		mesh.set_surface_override_material(0, chameleon_skin_materials[selected_chameleon_skin])
+	if chameleon_spawn == null:
+		print("ERROR: chameleon_spawn is null. Check the node path.")
+		return
 
+	var mesh := chameleon_spawn.find_child("Chameleon", true, false) as MeshInstance3D
+
+	if mesh == null:
+		print("ERROR: Could not find Chameleon mesh under PreviewSpawn.")
+		return
+
+	mesh.set_surface_override_material(
+		0,
+		chameleon_skin_materials[selected_chameleon_skin]
+	)
 
 func _update_rhino_preview() -> void:
 	if rhino_skin_materials.is_empty():
 		print("No rhino materials assigned.")
+		return
+
+	if rhino_spawn == null:
+		print("ERROR: rhino_spawn is null. Check the node path.")
 		return
 
 	var body := rhino_spawn.find_child("Rhino_Body", true, false) as MeshInstance3D
@@ -902,12 +905,16 @@ func _update_rhino_preview() -> void:
 			0,
 			rhino_skin_materials[selected_rhino_skin]
 		)
+	else:
+		print("ERROR: Could not find Rhino_Body under PreviewSpawn.")
 
 	if head:
 		head.set_surface_override_material(
 			0,
 			rhino_skin_materials[selected_rhino_skin]
 		)
+	else:
+		print("ERROR: Could not find Rhino_Head under PreviewSpawn.")
 
 func _on_chameleon_next() -> void:
 	if chameleon_skin_materials.is_empty():

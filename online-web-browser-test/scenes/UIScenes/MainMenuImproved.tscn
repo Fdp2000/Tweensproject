@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://4xnr376si33e"]
 
+[ext_resource type="Script" uid="uid://uuiu22ejg8o3" path="res://scripts/UI/WorldUIScreen.gd" id="1_agky4"]
 [ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_kuebs"]
 [ext_resource type="PackedScene" uid="uid://dfcub4m2b5i2f" path="res://scenes/PlayerScenes/DummyThief.tscn" id="1_xa0ng"]
 [ext_resource type="PackedScene" uid="uid://dummycop123" path="res://scenes/PlayerScenes/DummyCop.tscn" id="2_kuebs"]
@@ -107,6 +108,12 @@ corner_radius_top_left = 6
 corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kuebs"]
+viewport_path = NodePath("MainMenuScreen3D/MainMenuViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kuebs"]
+size = Vector3(4, 2.25, 0.05)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c4gm7"]
 
@@ -242,25 +249,18 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_agky4"]
+viewport_path = NodePath("PlayScreen3D/PlayViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_agky4"]
+size = Vector3(4, 2.25, 0.05)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xa0ng"]
 bg_color = Color(0.22091639, 0.24780053, 0.29337206, 0)
 border_color = Color(0.8001019, 0.8001019, 0.8001019, 0.85)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kuebs"]
 bg_color = Color(0.29337206, 0.3133042, 0.3491902, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
-[sub_resource type="LabelSettings" id="LabelSettings_agky4"]
-font_size = 34
-font_color = Color(0, 0.5019608, 0, 1)
-outline_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c4gm7"]
 bg_color = Color(0, 0.5019608, 0, 1)
@@ -286,21 +286,6 @@ corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6j5t"]
 bg_color = Color(0.29337206, 0.3133042, 0.3491902, 0)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 18
-corner_radius_top_right = 18
-corner_radius_bottom_right = 18
-corner_radius_bottom_left = 18
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w30gc"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_ba607"]
-font_size = 34
-font_color = Color(0, 0, 1, 1)
-outline_size = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eynkw"]
 bg_color = Color(0, 0, 1, 1)
@@ -357,19 +342,36 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_h6j5t"]
+viewport_path = NodePath("SkinsScreen3D/SkinsViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6j5t"]
+size = Vector3(4, 2.25, 0.05)
+
 [node name="MainMenuUi" type="Node3D" unique_id=354039283]
 
-[node name="MainMenuCanvas" type="CanvasLayer" parent="." unique_id=489370159]
+[node name="MainMenuScreen3D" type="Node3D" parent="." unique_id=1446650885 node_paths=PackedStringArray("viewport", "top_left", "top_right", "bottom_left")]
+script = ExtResource("1_agky4")
+viewport = NodePath("MainMenuViewport")
+top_left = NodePath("TopLeft")
+top_right = NodePath("TopRight")
+bottom_left = NodePath("BottomLeft")
 
-[node name="Root" type="Control" parent="MainMenuCanvas" unique_id=1924021199]
+[node name="MainMenuViewport" type="SubViewport" parent="MainMenuScreen3D" unique_id=824578961]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Root" type="Control" parent="MainMenuScreen3D/MainMenuViewport" unique_id=1924021199]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
-[node name="MainMenuPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1660272269]
+[node name="MainMenuPanel" type="Panel" parent="MainMenuScreen3D/MainMenuViewport/Root" unique_id=1660272269]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -378,23 +380,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_n5gp1")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenuCanvas/Root/MainMenuPanel" unique_id=802465796]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel" unique_id=802465796]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 60
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 60
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer" unique_id=1181363896]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer" unique_id=1181363896]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1596677310]
+[node name="Label" type="Label" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1596677310]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 size_flags_vertical = 1
@@ -403,10 +401,11 @@ text = "Chamillion Heist"
 label_settings = SubResource("LabelSettings_n5gp1")
 horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1505386144]
+[node name="PlayButton" type="Button" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1505386144]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_kuebs")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_yv1oc")
@@ -414,21 +413,23 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_en882")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ufndw")
 text = "Play"
 
-[node name="TutorialButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1588659385]
+[node name="TutorialButton" type="Button" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1588659385]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_kuebs")
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 72
 theme_override_styles/normal = SubResource("StyleBoxFlat_1vedx")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_oxbh3")
 theme_override_styles/hover = SubResource("StyleBoxFlat_w7kfu")
 text = "Tutorial"
 
-[node name="SkinsButton" type="Button" parent="MainMenuCanvas/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1188589368]
+[node name="SkinsButton" type="Button" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1188589368]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 1
 theme_override_fonts/font = ExtResource("1_kuebs")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_fxnex")
@@ -436,40 +437,73 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_tfxki")
 theme_override_styles/hover = SubResource("StyleBoxFlat_33nbu")
 text = "Skins"
 
-[node name="PlayPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1119582336]
+[node name="MainMenuSprite3D" type="Sprite3D" parent="MainMenuScreen3D" unique_id=1038489769]
+pixel_size = 0.002083
+texture = SubResource("ViewportTexture_kuebs")
+
+[node name="ClickArea" type="Area3D" parent="MainMenuScreen3D" unique_id=1773026657]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MainMenuScreen3D/ClickArea" unique_id=1123298505]
+shape = SubResource("BoxShape3D_kuebs")
+
+[node name="TopLeft" type="Marker3D" parent="MainMenuScreen3D" unique_id=1748287918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.125, 0)
+
+[node name="TopRight" type="Marker3D" parent="MainMenuScreen3D" unique_id=1939739168]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.125, 0)
+
+[node name="BottomLeft" type="Marker3D" parent="MainMenuScreen3D" unique_id=1424940378]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.125, 0)
+
+[node name="PlayScreen3D" type="Node3D" parent="." unique_id=435357503 node_paths=PackedStringArray("viewport", "top_left", "top_right", "bottom_left")]
+script = ExtResource("1_agky4")
+viewport = NodePath("PlayViewport")
+top_left = NodePath("TopLeft")
+top_right = NodePath("TopRight")
+bottom_left = NodePath("BottomLeft")
+
+[node name="PlayViewport" type="SubViewport" parent="PlayScreen3D" unique_id=27031821]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Root" type="Control" parent="PlayScreen3D/PlayViewport" unique_id=1185527298]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="PlayPanel" type="Panel" parent="PlayScreen3D/PlayViewport/Root" unique_id=1119582336]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -210.0
-offset_top = -260.0
-offset_right = 210.0
-offset_bottom = 260.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_c4gm7")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenuCanvas/Root/PlayPanel" unique_id=287929225]
+[node name="MarginContainer" type="MarginContainer" parent="PlayScreen3D/PlayViewport/Root/PlayPanel" unique_id=287929225]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -121.0
-offset_top = -105.5
-offset_right = 121.0
-offset_bottom = 105.5
+offset_left = -247.0
+offset_top = -143.0
+offset_right = 247.0
+offset_bottom = 143.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer" unique_id=1178172983]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer" unique_id=1178172983]
 layout_mode = 2
 theme_override_constants/separation = 22
 
-[node name="NameInput" type="LineEdit" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=1941708653]
+[node name="NameInput" type="LineEdit" parent="PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=1941708653]
 custom_minimum_size = Vector2(400, 70)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kuebs")
@@ -480,7 +514,7 @@ placeholder_text = "Enter Name"
 alignment = 1
 max_length = 12
 
-[node name="HostButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=359355649]
+[node name="HostButton" type="Button" parent="PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=359355649]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kuebs")
@@ -490,11 +524,11 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_hino7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_3d4q7")
 text = "Host"
 
-[node name="JoinRow" type="HBoxContainer" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=1970956856]
+[node name="JoinRow" type="HBoxContainer" parent="PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=1970956856]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="RoomInput" type="LineEdit" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow" unique_id=846124850]
+[node name="RoomInput" type="LineEdit" parent="PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow" unique_id=846124850]
 custom_minimum_size = Vector2(170, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -505,7 +539,7 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_oy723")
 placeholder_text = "Enter Room Key"
 alignment = 1
 
-[node name="JoinButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow" unique_id=579092210]
+[node name="JoinButton" type="Button" parent="PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow" unique_id=579092210]
 custom_minimum_size = Vector2(320, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kuebs")
@@ -515,7 +549,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_rib5t")
 theme_override_styles/hover = SubResource("StyleBoxFlat_87v0x")
 text = "Join"
 
-[node name="BackButton" type="Button" parent="MainMenuCanvas/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=2053387462]
+[node name="BackButton" type="Button" parent="PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer" unique_id=2053387462]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_kuebs")
@@ -525,7 +559,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_iplbr")
 theme_override_styles/hover = SubResource("StyleBoxFlat_adc3p")
 text = "Back"
 
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/PlayPanel" unique_id=852455375]
+[node name="Label" type="Label" parent="PlayScreen3D/PlayViewport/Root/PlayPanel" unique_id=852455375]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -542,24 +576,60 @@ theme_override_font_sizes/font_size = 50
 text = "Join The Heist!"
 horizontal_alignment = 1
 
-[node name="SkinsPanel" type="Panel" parent="MainMenuCanvas/Root" unique_id=1485494093]
-visible = false
-custom_minimum_size = Vector2(1152, 648)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -324.0
-offset_right = 576.0
-offset_bottom = 324.0
+[node name="PlaySprite3D" type="Sprite3D" parent="PlayScreen3D" unique_id=1550463949]
+pixel_size = 0.002083
+texture = SubResource("ViewportTexture_agky4")
+
+[node name="ClickArea" type="Area3D" parent="PlayScreen3D" unique_id=1063949751]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayScreen3D/ClickArea" unique_id=1991980788]
+shape = SubResource("BoxShape3D_agky4")
+
+[node name="TopLeft" type="Marker3D" parent="PlayScreen3D" unique_id=1755545265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.125, 0)
+
+[node name="TopRight" type="Marker3D" parent="PlayScreen3D" unique_id=1312462242]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.125, 0)
+
+[node name="BottomLeft" type="Marker3D" parent="PlayScreen3D" unique_id=932975200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.125, 0)
+
+[node name="SkinsScreen3D" type="Node3D" parent="." unique_id=2051849736 node_paths=PackedStringArray("viewport", "top_left", "top_right", "bottom_left")]
+script = ExtResource("1_agky4")
+viewport = NodePath("SkinsViewport")
+top_left = NodePath("TopLeft")
+top_right = NodePath("TopRight")
+bottom_left = NodePath("BottomLeft")
+
+[node name="SkinsViewport" type="SubViewport" parent="SkinsScreen3D" unique_id=1121017549]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Root" type="Control" parent="SkinsScreen3D/SkinsViewport" unique_id=401725838]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
+
+[node name="SkinsPanel" type="Panel" parent="SkinsScreen3D/SkinsViewport/Root" unique_id=1485494093]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -648.0
+offset_right = 576.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_xa0ng")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=1516884474]
+[node name="HBoxContainer" type="HBoxContainer" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel" unique_id=1516884474]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -569,7 +639,7 @@ grow_vertical = 2
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=420295641]
+[node name="MarginContainer2" type="MarginContainer" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer" unique_id=420295641]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
@@ -578,64 +648,27 @@ theme_override_constants/margin_top = 65
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 35
 
-[node name="ChameleonSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2" unique_id=519792314]
+[node name="ChameleonSkinPanel" type="Panel" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2" unique_id=519792314]
 custom_minimum_size = Vector2(350, 400)
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_kuebs")
 
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=1534710073]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -44.0
-offset_right = 44.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("1_kuebs")
-text = "Chameleon"
-label_settings = SubResource("LabelSettings_agky4")
-horizontal_alignment = 1
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=1769352185]
-custom_minimum_size = Vector2(380, 360)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -190.0
-offset_top = -180.0
-offset_right = 190.0
-offset_bottom = 180.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer" unique_id=257552327]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(380, 360)
-render_target_update_mode = 0
-
-[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport" unique_id=564513877]
+[node name="PreviewSpawn" type="Node3D" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=564513877]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100.06988, 1.418527, 2.5919046)
 
-[node name="Chameleon_Character" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=1423752438 instance=ExtResource("1_xa0ng")]
+[node name="Chameleon_Character" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviewSpawn" unique_id=1423752438 instance=ExtResource("1_xa0ng")]
 transform = Transform3D(0.82609826, 0, 0.5635261, 0, 1, 0, -0.5635261, 0, 0.82609826, 0, -1.0704265, 0)
 
-[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=229907666]
+[node name="NextButton" type="Button" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=229907666]
 custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.929
-anchor_top = 0.982
+anchor_top = 0.611
 anchor_right = 0.995
-anchor_bottom = 0.994
-grow_horizontal = 0
+anchor_bottom = 0.611
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_c4gm7")
@@ -643,17 +676,15 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_l0428")
 theme_override_styles/hover = SubResource("StyleBoxFlat_qt2cq")
 text = ">"
 
-[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=2043417476]
+[node name="PreviousButton" type="Button" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel" unique_id=2043417476]
 custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.006
-anchor_top = 0.95
+anchor_top = 0.611
 anchor_right = 0.04
-anchor_bottom = 0.98
-offset_top = -49.0
-offset_right = 32.75
-offset_bottom = 6.0
+anchor_bottom = 0.611
+grow_horizontal = 0
 grow_vertical = 0
 theme_override_font_sizes/font_size = 35
 theme_override_styles/normal = SubResource("StyleBoxFlat_w30gc")
@@ -661,7 +692,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_31b6e")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jw0i5")
 text = "<"
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer" unique_id=106660259]
+[node name="MarginContainer" type="MarginContainer" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer" unique_id=106660259]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
@@ -670,89 +701,50 @@ theme_override_constants/margin_top = 65
 theme_override_constants/margin_right = 35
 theme_override_constants/margin_bottom = 35
 
-[node name="RhinoSkinPanel" type="Panel" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer" unique_id=1526376200]
+[node name="RhinoSkinPanel" type="Panel" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer" unique_id=1526376200]
 custom_minimum_size = Vector2(350, 400)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_h6j5t")
 
-[node name="Label" type="Label" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=2108810433]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -22.5
-offset_right = 22.5
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("1_kuebs")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_w30gc")
-text = "Rhino"
-label_settings = SubResource("LabelSettings_ba607")
-horizontal_alignment = 1
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=1174571718]
-custom_minimum_size = Vector2(380, 360)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -190.0
-offset_top = -180.0
-offset_right = 190.0
-offset_bottom = 180.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer" unique_id=535220147]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(380, 360)
-render_target_update_mode = 0
-
-[node name="PreviewSpawn" type="Node3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport" unique_id=1783558948]
+[node name="PreviewSpawn" type="Node3D" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=1783558948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 
-[node name="Næsehorn" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn" unique_id=2043154851 instance=ExtResource("2_kuebs")]
+[node name="Næsehorn" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn" unique_id=2043154851 instance=ExtResource("2_kuebs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1524457, 1.6060051)
 
-[node name="Skeleton3D" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 146192529, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.027556803, 0.017316513, 0.0021989897, 0.99946785)
-bones/2/rotation = Quaternion(-0.02383724, 0.0351929, 0.007881557, 0.99906516)
-bones/3/rotation = Quaternion(-0.07829388, 0.033417616, 0.013193904, 0.99628276)
-bones/5/rotation = Quaternion(-0.5916432, -0.399064, -0.46316907, 0.5255291)
-bones/6/rotation = Quaternion(-0.3027571, 0.6336754, -0.5010309, 0.50572896)
-bones/7/rotation = Quaternion(0.13841063, -0.078720815, 0.00041504754, 0.9872413)
-bones/8/rotation = Quaternion(-0.15135317, 0.03882547, -0.042446747, 0.9868046)
-bones/9/rotation = Quaternion(0.13889591, 0.043857004, -0.20061538, 0.96878177)
-bones/10/rotation = Quaternion(0.15282962, 0.037232496, -0.14896329, 0.9762515)
-bones/11/rotation = Quaternion(0.1813646, 0.020301806, -0.028684562, 0.98278785)
-bones/13/rotation = Quaternion(-0.59172416, 0.39906445, 0.46321732, 0.52539504)
-bones/14/rotation = Quaternion(-0.2825435, -0.69430375, 0.45949197, 0.47642267)
-bones/15/rotation = Quaternion(0.15826479, 0.07825873, -0.00032684885, 0.9842905)
-bones/16/rotation = Quaternion(-0.15868028, -0.02926257, -0.02027382, 0.986688)
-bones/17/rotation = Quaternion(0.13876511, -0.043721605, 0.19967657, 0.96900046)
-bones/18/rotation = Quaternion(0.15260707, -0.03719677, 0.1474624, 0.9765154)
-bones/19/rotation = Quaternion(0.18126556, -0.020370523, 0.02764207, 0.98283464)
-bones/23/rotation = Quaternion(0.94339484, 0.107421376, -0.12616429, 0.28731453)
-bones/24/rotation = Quaternion(0.34235153, -0.032428633, -0.02377262, 0.93871117)
-bones/25/rotation = Quaternion(0.96753, -0.07019063, 0.08057572, 0.22905567)
-bones/26/rotation = Quaternion(0.3252521, 0.03424094, 0.021755233, 0.9447568)
+[node name="Skeleton3D" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn/Næsehorn/Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 146192529, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.020826016, 0.01785735, 0.0022698762, 0.9996211)
+bones/2/rotation = Quaternion(-0.030004345, 0.036382344, 0.00870501, 0.9988495)
+bones/3/rotation = Quaternion(-0.081962414, 0.029639052, 0.012002739, 0.9961223)
+bones/5/rotation = Quaternion(-0.58991206, -0.4017728, -0.46535957, 0.52347195)
+bones/6/rotation = Quaternion(-0.31594586, 0.6287636, -0.50025785, 0.50455606)
+bones/7/rotation = Quaternion(0.13120075, -0.07778906, 0.004013809, 0.9882911)
+bones/8/rotation = Quaternion(-0.15907681, 0.037217468, -0.05783181, 0.984868)
+bones/9/rotation = Quaternion(0.13900232, 0.043338258, -0.19708638, 0.96951395)
+bones/10/rotation = Quaternion(0.15290125, 0.036401413, -0.14324217, 0.9771274)
+bones/11/rotation = Quaternion(0.18134846, 0.019775277, -0.024977978, 0.9829028)
+bones/13/rotation = Quaternion(-0.59253174, 0.3967637, 0.45797846, 0.5307924)
+bones/14/rotation = Quaternion(-0.31248268, -0.6965524, 0.43724105, 0.4753836)
+bones/15/rotation = Quaternion(0.1770076, 0.05617798, -0.004543561, 0.9825944)
+bones/16/rotation = Quaternion(-0.1726716, -0.039676953, -0.008432356, 0.984144)
+bones/17/rotation = Quaternion(0.13835739, -0.045925736, 0.21455562, 0.96577126)
+bones/18/rotation = Quaternion(0.15208687, -0.04085856, 0.17385487, 0.9720982)
+bones/19/rotation = Quaternion(0.18126258, -0.02366372, 0.04611082, 0.9820682)
+bones/23/rotation = Quaternion(0.9475927, 0.10538765, -0.12549612, 0.27424893)
+bones/24/rotation = Quaternion(0.32192972, -0.026712084, -0.022428626, 0.94612086)
+bones/25/rotation = Quaternion(0.9716745, -0.071464315, 0.08587865, 0.20824616)
+bones/26/rotation = Quaternion(0.30604044, 0.038919114, 0.017686974, 0.95105827)
 
-[node name="PreviousButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=227015707]
+[node name="PreviousButton" type="Button" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=227015707]
 custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.006
-anchor_top = 0.944
+anchor_top = 0.611
 anchor_right = 0.006
-anchor_bottom = 0.995
-offset_top = -8.0
-offset_right = 8.0
+anchor_bottom = 0.611
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_eynkw")
@@ -760,15 +752,14 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_gdxcs")
 theme_override_styles/hover = SubResource("StyleBoxFlat_pcaly")
 text = "<"
 
-[node name="NextButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=2090941298]
+[node name="NextButton" type="Button" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=2090941298]
 custom_minimum_size = Vector2(45, 67)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.95
-anchor_top = 0.994
+anchor_top = 0.611
 anchor_right = 0.995
-anchor_bottom = 0.994
-grow_horizontal = 0
+anchor_bottom = 0.611
 grow_vertical = 0
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxFlat_hjern")
@@ -776,7 +767,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_xq778")
 theme_override_styles/hover = SubResource("StyleBoxFlat_d4mk5")
 text = ">"
 
-[node name="BackButton" type="Button" parent="MainMenuCanvas/Root/SkinsPanel" unique_id=811892826]
+[node name="BackButton" type="Button" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel" unique_id=811892826]
 custom_minimum_size = Vector2(70, 55)
 layout_mode = 1
 anchors_preset = -1
@@ -798,7 +789,25 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_lxfkr")
 text = "Back"
 icon_alignment = 2
 
-[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character"]
-[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Chameleon_Character/Chameleon_Character"]
-[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn"]
-[editable path="MainMenuCanvas/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/SubViewportContainer/SubViewport/PreviewSpawn/Næsehorn/Næsehorn2"]
+[node name="SkinsSprite3D" type="Sprite3D" parent="SkinsScreen3D" unique_id=243884504]
+pixel_size = 0.002083
+texture = SubResource("ViewportTexture_h6j5t")
+
+[node name="ClickArea" type="Area3D" parent="SkinsScreen3D" unique_id=2136150193]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SkinsScreen3D/ClickArea" unique_id=2066470536]
+shape = SubResource("BoxShape3D_h6j5t")
+
+[node name="TopLeft" type="Marker3D" parent="SkinsScreen3D" unique_id=1601478759]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.125, 0)
+
+[node name="TopRight" type="Marker3D" parent="SkinsScreen3D" unique_id=1836067058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.125, 0)
+
+[node name="BottomLeft" type="Marker3D" parent="SkinsScreen3D" unique_id=1564693286]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.125, 0)
+
+[editable path="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviewSpawn/Chameleon_Character"]
+[editable path="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer2/ChameleonSkinPanel/PreviewSpawn/Chameleon_Character/Chameleon_Character"]
+[editable path="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn/Næsehorn"]
+[editable path="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn/Næsehorn/Næsehorn2"]
