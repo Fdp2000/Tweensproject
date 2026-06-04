@@ -4536,9 +4536,6 @@ data = PackedVector3Array(-0.0018999999, 0.0008, -0.0016999999, -0.0026, 0.0008,
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_s1l08"]
 data = PackedVector3Array(-0.0019999999, 0.0008, 0.0019999999, -0.0022, 0.0008, -0.0001, -0.0018999999, 0.0008, -0.00029999999, -0.0018999999, 0.0008, -0.00029999999, -0.0022, 0.0008, -0.0001, -0.0026999998, 0, -0.00029999999, 0.0016, 0.0008, -0.0004, 0.0019999999, 0.0008, 0.0019999999, -0.0001, 0.0011, 0.0008, 0.0015, 0.0008, -0.0016999999, 0.0016, 0.0008, -0.0004, -0.0002, 0.0008, -0.0018, -0.0021, 0.0008, -0.0009, -0.0018999999, 0.0008, -0.00029999999, -0.0026999998, 0, -0.00029999999, -0.0021, 0.0008, -0.0009, -0.0002, 0.0008, -0.0018, -0.0018999999, 0.0008, -0.00029999999, 0.0019999999, 0.0008, 0.0019999999, -0.00059999997, 0.0008, 0.0023999999, -0.0001, 0.0011, 0.0008, -0.0021, 0.0008, -0.0009, -0.0018999999, 0.0008, -0.0016999999, -0.0002, 0.0008, -0.0018, -0.0002, 0.0008, -0.0018, 0.0016, 0.0008, -0.0004, -0.0001, 0.0011, 0.0008, -0.0001, 0.0011, 0.0008, -0.0018999999, 0.0008, -0.00029999999, -0.0002, 0.0008, -0.0018, -0.0023, 0, 0.0023, -0.0026999998, 0, -0.00029999999, -0.0022, 0.0008, -0.0001, -0.0022, 0.0008, -0.0001, -0.0019999999, 0.0008, 0.0019999999, -0.0023, 0, 0.0023, 0.0019999999, 0.0008, 0.0019999999, 0.0016, 0.0008, -0.0004, 0.0022, 0, -0.0004, 0.0022, 0, -0.0004, 0.0023, 0, 0.0023, 0.0019999999, 0.0008, 0.0019999999, 0.0022, 0, -0.0004, 0.0016, 0.0008, -0.0004, 0.0015, 0.0008, -0.0016999999, 0.0015, 0.0008, -0.0016999999, 0.0018, 0, -0.0019999999, 0.0022, 0, -0.0004, -0.0023, 0, -0.0023, -0.0018999999, 0.0008, -0.0016999999, -0.0021, 0.0008, -0.0009, -0.0021, 0.0008, -0.0009, -0.0026999998, 0, -0.00029999999, -0.0023, 0, -0.0023, 0.0018, 0, -0.0019999999, 0.0015, 0.0008, -0.0016999999, -0.0002, 0.0008, -0.0018, -0.0002, 0.0008, -0.0018, -0.0007, 0, -0.0023999999, 0.0018, 0, -0.0019999999, -0.0007, 0, -0.0023999999, -0.0002, 0.0008, -0.0018, -0.0018999999, 0.0008, -0.0016999999, -0.0018999999, 0.0008, -0.0016999999, -0.0023, 0, -0.0023, -0.0007, 0, -0.0023999999, -0.0001, 0.0011, 0.0008, -0.00059999997, 0.0008, 0.0023999999, -0.0019999999, 0.0008, 0.0019999999, -0.0019999999, 0.0008, 0.0019999999, -0.0018999999, 0.0008, -0.00029999999, -0.0001, 0.0011, 0.0008, -0.0019999999, 0.0008, 0.0019999999, -0.00059999997, 0.0008, 0.0023999999, -0.00059999997, 0, 0.0026999998, -0.00059999997, 0, 0.0026999998, -0.0023, 0, 0.0023, -0.0019999999, 0.0008, 0.0019999999, -0.00059999997, 0, 0.0026999998, -0.00059999997, 0.0008, 0.0023999999, 0.0019999999, 0.0008, 0.0019999999, 0.0019999999, 0.0008, 0.0019999999, 0.0023, 0, 0.0023, -0.00059999997, 0, 0.0026999998)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_in7xl"]
-data = PackedVector3Array(-0.0019999999, 0.0008, 0.0019999999, -0.0022, 0.0008, -0.0001, -0.0018999999, 0.0008, -0.00029999999, -0.0018999999, 0.0008, -0.00029999999, -0.0022, 0.0008, -0.0001, -0.0026999998, 0, -0.00029999999, 0.0016, 0.0008, -0.0004, 0.0019999999, 0.0008, 0.0019999999, -0.0001, 0.0011, 0.0008, 0.0015, 0.0008, -0.0016999999, 0.0016, 0.0008, -0.0004, -0.0002, 0.0008, -0.0018, -0.0021, 0.0008, -0.0009, -0.0018999999, 0.0008, -0.00029999999, -0.0026999998, 0, -0.00029999999, -0.0021, 0.0008, -0.0009, -0.0002, 0.0008, -0.0018, -0.0018999999, 0.0008, -0.00029999999, 0.0019999999, 0.0008, 0.0019999999, -0.00059999997, 0.0008, 0.0023999999, -0.0001, 0.0011, 0.0008, -0.0021, 0.0008, -0.0009, -0.0018999999, 0.0008, -0.0016999999, -0.0002, 0.0008, -0.0018, -0.0002, 0.0008, -0.0018, 0.0016, 0.0008, -0.0004, -0.0001, 0.0011, 0.0008, -0.0001, 0.0011, 0.0008, -0.0018999999, 0.0008, -0.00029999999, -0.0002, 0.0008, -0.0018, -0.0023, 0, 0.0023, -0.0026999998, 0, -0.00029999999, -0.0022, 0.0008, -0.0001, -0.0022, 0.0008, -0.0001, -0.0019999999, 0.0008, 0.0019999999, -0.0023, 0, 0.0023, 0.0019999999, 0.0008, 0.0019999999, 0.0016, 0.0008, -0.0004, 0.0022, 0, -0.0004, 0.0022, 0, -0.0004, 0.0023, 0, 0.0023, 0.0019999999, 0.0008, 0.0019999999, 0.0022, 0, -0.0004, 0.0016, 0.0008, -0.0004, 0.0015, 0.0008, -0.0016999999, 0.0015, 0.0008, -0.0016999999, 0.0018, 0, -0.0019999999, 0.0022, 0, -0.0004, -0.0023, 0, -0.0023, -0.0018999999, 0.0008, -0.0016999999, -0.0021, 0.0008, -0.0009, -0.0021, 0.0008, -0.0009, -0.0026999998, 0, -0.00029999999, -0.0023, 0, -0.0023, 0.0018, 0, -0.0019999999, 0.0015, 0.0008, -0.0016999999, -0.0002, 0.0008, -0.0018, -0.0002, 0.0008, -0.0018, -0.0007, 0, -0.0023999999, 0.0018, 0, -0.0019999999, -0.0007, 0, -0.0023999999, -0.0002, 0.0008, -0.0018, -0.0018999999, 0.0008, -0.0016999999, -0.0018999999, 0.0008, -0.0016999999, -0.0023, 0, -0.0023, -0.0007, 0, -0.0023999999, -0.0001, 0.0011, 0.0008, -0.00059999997, 0.0008, 0.0023999999, -0.0019999999, 0.0008, 0.0019999999, -0.0019999999, 0.0008, 0.0019999999, -0.0018999999, 0.0008, -0.00029999999, -0.0001, 0.0011, 0.0008, -0.0019999999, 0.0008, 0.0019999999, -0.00059999997, 0.0008, 0.0023999999, -0.00059999997, 0, 0.0026999998, -0.00059999997, 0, 0.0026999998, -0.0023, 0, 0.0023, -0.0019999999, 0.0008, 0.0019999999, -0.00059999997, 0, 0.0026999998, -0.00059999997, 0.0008, 0.0023999999, 0.0019999999, 0.0008, 0.0019999999, 0.0019999999, 0.0008, 0.0019999999, 0.0023, 0, 0.0023, -0.00059999997, 0, 0.0026999998)
-
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1r0w2"]
 data = PackedVector3Array(-0.00049999997, 0, -0.0026, 0, 0.0008, -0.0019999999, -0.0014, 0.0008, -0.0018, 0.0019999999, 0.0008, 0.0009, 0.0019999999, 0.0008, 0.0019999999, 0.00059999997, 0.0011999999, 0.0014, 0.0002, 0.0009, 0.0018999999, 0.0019999999, 0.0008, 0.0019999999, 0, 0.00059999997, 0.0023, -0.0021, 0, 0.0015, -0.0016999999, 0.0008, 0.0009, -0.0004, 0.0008, 0.0018999999, 0.0018, 0, -0.0019999999, 0, 0.0008, -0.0019999999, -0.00049999997, 0, -0.0026, -0.0018, 0.0008, -0.0013, -0.0026, 0, -0.00059999997, -0.0021, 0.0004, -0.0019999999, -0.0021, 0, 0.0015, -0.0026, 0, -0.00059999997, -0.0016999999, 0.0008, 0.0009, -0.0018, 0.0008, -0.0013, -0.0021, 0.0004, -0.0019999999, -0.0014, 0.0008, -0.0018, -0.0018, 0.0011, -0.0008, -0.0018, 0.0008, -0.0013, -0.0014, 0.0008, -0.0018, 0.0025, 0, 0.0008, 0.0023, 0, 0.0023, 0.0019999999, 0.0008, 0.0019999999, 0.0019999999, 0.0008, 0.0019999999, 0.0019999999, 0.0008, 0.0009, 0.0025, 0, 0.0008, -0.0004, 0.0008, 0.0018999999, 0.0002, 0.0009, 0.0018999999, 0, 0.00059999997, 0.0023, -0.0016999999, 0.0008, 0.0009, 0.00059999997, 0.0011999999, 0.0014, -0.0004, 0.0008, 0.0018999999, -0.0021, 0.0004, -0.0019999999, -0.0023, 0, -0.0023, -0.00049999997, 0, -0.0026, -0.00049999997, 0, -0.0026, -0.0014, 0.0008, -0.0018, -0.0021, 0.0004, -0.0019999999, 0.0019999999, 0.0008, 0.0009, 0, 0.0008, -0.0019999999, 0.0018, 0, -0.0019999999, 0.0018, 0, -0.0019999999, 0.0025, 0, 0.0008, 0.0019999999, 0.0008, 0.0009, 0.0019999999, 0.0008, 0.0019999999, 0.0002, 0.0009, 0.0018999999, 0.00059999997, 0.0011999999, 0.0014, 0.00059999997, 0.0011999999, 0.0014, -0.0018, 0.0011, -0.0008, 0, 0.0008, -0.0019999999, 0, 0.0008, -0.0019999999, 0.0019999999, 0.0008, 0.0009, 0.00059999997, 0.0011999999, 0.0014, -0.0004, 0.0008, 0.0018999999, 0, 0, 0.0025, -0.0021, 0, 0.0015, -0.0004, 0.0008, 0.0018999999, 0, 0.00059999997, 0.0023, 0, 0, 0.0025, -0.0021, 0.0004, -0.0019999999, -0.0026, 0, -0.00059999997, -0.0023, 0, -0.0023, -0.0018, 0.0008, -0.0013, -0.0018, 0.0011, -0.0008, -0.0026, 0, -0.00059999997, -0.0026, 0, -0.00059999997, -0.0018, 0.0011, -0.0008, -0.0016999999, 0.0008, 0.0009, -0.0018, 0.0011, -0.0008, -0.0014, 0.0008, -0.0018, 0, 0.0008, -0.0019999999, -0.0004, 0.0008, 0.0018999999, 0.00059999997, 0.0011999999, 0.0014, 0.0002, 0.0009, 0.0018999999, -0.0016999999, 0.0008, 0.0009, -0.0018, 0.0011, -0.0008, 0.00059999997, 0.0011999999, 0.0014, 0.0019999999, 0.0008, 0.0019999999, 0.0023, 0, 0.0023, 0, 0, 0.0025, 0, 0, 0.0025, 0, 0.00059999997, 0.0023, 0.0019999999, 0.0008, 0.0019999999)
 
@@ -15768,6 +15765,9 @@ shape = SubResource("BoxShape3D_jqi5k")
 [node name="Stairs_2 Asia3" parent="NavigationRegion3D" unique_id=1621005949 instance=ExtResource("70_ol4g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.20336, -0.9259999, -24.636557)
 
+[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=22700643]
+visible = false
+
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia3" unique_id=702406281]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, -0.31175995, -0.0018175393, 0.24512672)
 mesh = ExtResource("87_0isio")
@@ -16045,7 +16045,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0780516e-08, 0.018928064, -
 shape = SubResource("BoxShape3D_jcgw2")
 
 [node name="Tile_1_1 Asia" parent="NavigationRegion3D" unique_id=167606739 instance=ExtResource("95_e22mm")]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -11.5, -0.95, -20)
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -11.5, -1.0343871, -20)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia" unique_id=1700272393]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16057,7 +16057,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_j8whl")
 
 [node name="Tile_1_1 Asia3" parent="NavigationRegion3D" unique_id=19588662 instance=ExtResource("95_e22mm")]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -16.5, -0.95, -18)
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -16.5, -1.034, -18)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia3" unique_id=24534678]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16069,7 +16069,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_volbp")
 
 [node name="Tile_1_1 Asia2" parent="NavigationRegion3D" unique_id=896681135 instance=ExtResource("95_e22mm")]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -15.5, -0.95, -18.4)
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -15.5, -1.034, -18.4)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia2" unique_id=1955674952]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16081,7 +16081,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_w7v5v")
 
 [node name="Tile_1_2 Asia" parent="NavigationRegion3D" unique_id=1383037206 instance=ExtResource("96_hdtnq")]
-transform = Transform3D(1.7, 0, 0, 0, 1, 0, 0, 0, 2.1, -13.5, -0.95, -19.3)
+transform = Transform3D(1.7, 0, 0, 0, 1, 0, 0, 0, 2.1, -13.5, -1.034, -19.3)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia" unique_id=453953725]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16093,7 +16093,7 @@ mesh = ExtResource("126_58se0")
 shape = SubResource("ConcavePolygonShape3D_g5e81")
 
 [node name="Tile_1_3 Asia" parent="NavigationRegion3D" unique_id=2017232386 instance=ExtResource("97_r7agv")]
-transform = Transform3D(1.9000001, 0, 0, 0, 1, 0, 0, 0, 2, -11.5, -0.95, -19)
+transform = Transform3D(1.9000001, 0, 0, 0, 1, 0, 0, 0, 2, -11.5, -1.034, -19)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia" unique_id=1890982386]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16105,7 +16105,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_6tj66")
 
 [node name="Tile_1_3 Asia3" parent="NavigationRegion3D" unique_id=1403507289 instance=ExtResource("97_r7agv")]
-transform = Transform3D(1.9760001, 0, 0, 0, 1, 0, 0, 0, 3.2, -17.5, -0.95, -18.5)
+transform = Transform3D(1.9760001, 0, 0, 0, 1, 0, 0, 0, 3.2, -17.5, -1.034, -18.5)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia3" unique_id=296041653]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16117,7 +16117,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_ow7u5")
 
 [node name="Tile_1_3 Asia2" parent="NavigationRegion3D" unique_id=1969104848 instance=ExtResource("97_r7agv")]
-transform = Transform3D(1.9000001, 0, 0, 0, 1, 0, 0, 0, 2, -15.2, -0.95, -19.4)
+transform = Transform3D(1.9000001, 0, 0, 0, 1, 0, 0, 0, 2, -15.2, -1.034, -19.4)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia2" unique_id=1223884470]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16129,7 +16129,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_0nfu5")
 
 [node name="Tile_1_4 Asia" parent="NavigationRegion3D" unique_id=341526133 instance=ExtResource("98_xsvq8")]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -12.5, -0.98, -19.9)
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -12.5, -1.034, -19.9)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia" unique_id=1818015970]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16141,7 +16141,7 @@ mesh = ExtResource("130_4ojxq")
 shape = SubResource("ConcavePolygonShape3D_ufdy8")
 
 [node name="Tile_1_4 Asia2" parent="NavigationRegion3D" unique_id=191142971 instance=ExtResource("98_xsvq8")]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -14.4, -0.98, -18.6)
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -14.4, -1.034, -18.6)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia2" unique_id=890531013]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16153,7 +16153,7 @@ mesh = ExtResource("130_4ojxq")
 shape = SubResource("ConcavePolygonShape3D_ooolc")
 
 [node name="Tile_1_5 Asia" parent="NavigationRegion3D" unique_id=1807898580 instance=ExtResource("99_2nf86")]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -12.4, -0.954, -19.1)
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -12.4, -1.034, -19.1)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia" unique_id=1285167544]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16165,7 +16165,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_0isio")
 
 [node name="Tile_1_5 Asia3" parent="NavigationRegion3D" unique_id=1960649800 instance=ExtResource("99_2nf86")]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -16.4, -0.954, -19.1)
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -16.4, -1.034, -19.1)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia3" unique_id=1805356201]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16177,7 +16177,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_dmg4k")
 
 [node name="Tile_1_5 Asia12" parent="NavigationRegion3D" unique_id=582423091 instance=ExtResource("99_2nf86")]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -22.5, -0.954, -15.3)
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -22.5, -1.034, -15.3)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia12" unique_id=410459094]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16189,7 +16189,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_rkynm")
 
 [node name="Tile_1_5 Asia5" parent="NavigationRegion3D" unique_id=1784610339 instance=ExtResource("99_2nf86")]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -18.4, -0.954, -24.1)
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -18.4, -1.034, -24.1)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia5" unique_id=517461472]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16201,7 +16201,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_ked6s")
 
 [node name="Tile_1_1 Asia4" parent="NavigationRegion3D" unique_id=388853881 instance=ExtResource("95_e22mm")]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -21.599998, -0.95, -23.7)
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -21.599998, -1.034, -23.7)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia4" unique_id=1824313351]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16213,7 +16213,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_dmbrw")
 
 [node name="Tile_1_1 Asia5" parent="NavigationRegion3D" unique_id=430219124 instance=ExtResource("95_e22mm")]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -20.599998, -0.95, -24.1)
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -20.599998, -1.034, -24.1)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia5" unique_id=407302703]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16225,7 +16225,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_mu5rw")
 
 [node name="Tile_1_2 Asia2" parent="NavigationRegion3D" unique_id=639953422 instance=ExtResource("96_hdtnq")]
-transform = Transform3D(1.7, 0, 0, 0, 1, 0, 0, 0, 2.1, -18.599998, -0.95, -25)
+transform = Transform3D(1.7, 0, 0, 0, 1, 0, 0, 0, 2.1, -18.599998, -1.034, -25)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia2" unique_id=1598539577]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16237,7 +16237,7 @@ mesh = ExtResource("126_58se0")
 shape = SubResource("ConcavePolygonShape3D_g3j5m")
 
 [node name="Tile_1_3 Asia4" parent="NavigationRegion3D" unique_id=2068211440 instance=ExtResource("97_r7agv")]
-transform = Transform3D(1.7112663, 0, 1.6, 0, 1, 0, -0.98800004, 0, 2.7712812, -22.699999, -0.95, -24.7)
+transform = Transform3D(1.7112663, 0, 1.6, 0, 1, 0, -0.98800004, 0, 2.7712812, -22.699999, -1.034, -24.7)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia4" unique_id=871114107]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16249,7 +16249,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_aohxw")
 
 [node name="Tile_1_3 Asia5" parent="NavigationRegion3D" unique_id=475989025 instance=ExtResource("97_r7agv")]
-transform = Transform3D(1.9000001, 0, 0, 0, 1, 0, 0, 0, 2, -20.3, -0.95, -25.1)
+transform = Transform3D(1.9000001, 0, 0, 0, 1, 0, 0, 0, 2, -20.3, -1.034, -25.1)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia5" unique_id=1331272791]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16261,7 +16261,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_teik1")
 
 [node name="Tile_1_4 Asia3" parent="NavigationRegion3D" unique_id=1306839278 instance=ExtResource("98_xsvq8")]
-transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -19.499998, -0.98, -24.300001)
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -19.499998, -1.034, -24.300001)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia3" unique_id=424563404]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16273,7 +16273,7 @@ mesh = ExtResource("130_4ojxq")
 shape = SubResource("ConcavePolygonShape3D_ygkih")
 
 [node name="Tile_1_1 Asia6" parent="NavigationRegion3D" unique_id=1085468420 instance=ExtResource("95_e22mm")]
-transform = Transform3D(1.4942918, 0, 0.15688032, 0, 0.99999994, 0, -0.13073361, 0, 1.7931502, -24.06336, -0.95, -23.360853)
+transform = Transform3D(1.4942918, 0, 0.15688032, 0, 0.99999994, 0, -0.13073361, 0, 1.7931502, -24.06336, -1.034, -23.360853)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia6" unique_id=1297985263]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16285,7 +16285,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_4djh4")
 
 [node name="Tile_1_3 Asia6" parent="NavigationRegion3D" unique_id=1805338513 instance=ExtResource("97_r7agv")]
-transform = Transform3D(1.8927699, 0, 0.1743114, 0, 0.99999994, 0, -0.16559583, 0, 1.9923892, -23.851658, -0.95, -24.383192)
+transform = Transform3D(1.8927699, 0, 0.1743114, 0, 0.99999994, 0, -0.16559583, 0, 1.9923892, -23.851658, -1.034, -24.383192)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia6" unique_id=479722165]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16297,7 +16297,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_o44xg")
 
 [node name="Tile_1_4 Asia4" parent="NavigationRegion3D" unique_id=707000705 instance=ExtResource("98_xsvq8")]
-transform = Transform3D(1.6794982, 0, 1.0357307, 0, 0.9999999, 0, -2.0015473, 0, 0.8690812, -23.08498, -0.98, -23.555964)
+transform = Transform3D(1.6794982, 0, 1.0357307, 0, 0.9999999, 0, -2.0015473, 0, 0.8690812, -23.08498, -1.034, -23.555964)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia4" unique_id=1974544973]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16309,7 +16309,7 @@ mesh = ExtResource("130_4ojxq")
 shape = SubResource("ConcavePolygonShape3D_eqsjo")
 
 [node name="Tile_1_5 Asia4" parent="NavigationRegion3D" unique_id=837805355 instance=ExtResource("99_2nf86")]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -21.499998, -0.954, -24.800001)
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -21.499998, -1.034, -24.800001)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia4" unique_id=590591562]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16321,7 +16321,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_0g4xr")
 
 [node name="Tile_1_5 Asia6" parent="NavigationRegion3D" unique_id=92594829 instance=ExtResource("99_2nf86")]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -23.999998, -0.954, -22.500002)
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -23.999998, -1.034, -22.500002)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia6" unique_id=809498171]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16333,7 +16333,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_8guhe")
 
 [node name="Tile_1_5 Asia7" parent="NavigationRegion3D" unique_id=1126859725 instance=ExtResource("99_2nf86")]
-transform = Transform3D(-1.4000001, 0, -1.1920929e-07, 0, 0.99999994, 0, 1.4901161e-07, 0, -1.3000002, -23.73333, -0.954, -16.76667)
+transform = Transform3D(-1.4000001, 0, -1.1920929e-07, 0, 0.99999994, 0, 1.4901161e-07, 0, -1.3000002, -23.73333, -1.034, -16.76667)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia7" unique_id=491479685]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16345,7 +16345,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_40aqq")
 
 [node name="Tile_1_1 Asia7" parent="NavigationRegion3D" unique_id=484192534 instance=ExtResource("95_e22mm")]
-transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -20.53333, -0.95, -17.16667)
+transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -20.53333, -1.034, -17.16667)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia7" unique_id=1153958436]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16356,8 +16356,20 @@ mesh = ExtResource("124_kjq3c")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Tile_1_1 Asia7/Tile_1_2/StaticBody3D" unique_id=176316684]
 shape = SubResource("ConcavePolygonShape3D_526xe")
 
+[node name="Tile_1_1 Asia12" parent="NavigationRegion3D" unique_id=1670236681 instance=ExtResource("95_e22mm")]
+transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -24.714685, -1.034, -16.47688)
+
+[node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia12" unique_id=1441779799]
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+mesh = ExtResource("124_kjq3c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Tile_1_1 Asia12/Tile_1_2" unique_id=1271410433]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Tile_1_1 Asia12/Tile_1_2/StaticBody3D" unique_id=134953627]
+shape = SubResource("ConcavePolygonShape3D_526xe")
+
 [node name="Tile_1_1 Asia8" parent="NavigationRegion3D" unique_id=1309264313 instance=ExtResource("95_e22mm")]
-transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -21.533329, -0.95, -16.76667)
+transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -21.533329, -1.034, -16.76667)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia8" unique_id=1587547022]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16369,7 +16381,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_ta84n")
 
 [node name="Tile_1_2 Asia3" parent="NavigationRegion3D" unique_id=2064005109 instance=ExtResource("96_hdtnq")]
-transform = Transform3D(-1.7000004, 0, -3.5762787e-07, 0, 1, 0, 8.940697e-08, 0, -2.1000001, -23.533333, -0.95, -15.86667)
+transform = Transform3D(-1.7000004, 0, -3.5762787e-07, 0, 1, 0, 8.940697e-08, 0, -2.1000001, -23.533333, -1.034, -15.86667)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia3" unique_id=403324407]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16380,29 +16392,8 @@ mesh = ExtResource("126_58se0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Tile_1_2 Asia3/Tile_1_3/StaticBody3D" unique_id=1586494781]
 shape = SubResource("ConcavePolygonShape3D_s1l08")
 
-[node name="Tile_1_2 Asia4" parent="NavigationRegion3D" unique_id=1174091304 instance=ExtResource("96_hdtnq")]
-transform = Transform3D(2.254201, 0, -3.4958117e-07, 0, 1, 0, -1.1855366e-07, 0, -2.0527496, -24.733334, -0.95, -16.366669)
-
-[node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia4" unique_id=474794996]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
-mesh = ExtResource("126_58se0")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Tile_1_2 Asia4/Tile_1_3" unique_id=760020854]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Tile_1_2 Asia4/Tile_1_3/StaticBody3D" unique_id=1907323263]
-shape = SubResource("ConcavePolygonShape3D_in7xl")
-
-[node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia4" unique_id=1490148320]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
-mesh = ExtResource("126_58se0")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Tile_1_2 Asia4/Tile_1_4" unique_id=30961152]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Tile_1_2 Asia4/Tile_1_4/StaticBody3D" unique_id=843729277]
-shape = SubResource("ConcavePolygonShape3D_in7xl")
-
 [node name="Tile_1_3 Asia7" parent="NavigationRegion3D" unique_id=2072251226 instance=ExtResource("97_r7agv")]
-transform = Transform3D(-1.7112662, 0, -1.6000003, 0, 1, 0, 0.9880001, 0, -2.7712808, -19.43333, -0.95, -16.16667)
+transform = Transform3D(-1.7112662, 0, -1.6000003, 0, 1, 0, 0.9880001, 0, -2.7712808, -19.43333, -1.034, -16.16667)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia7" unique_id=633627108]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16414,7 +16405,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_1r0w2")
 
 [node name="Tile_1_3 Asia8" parent="NavigationRegion3D" unique_id=450294995 instance=ExtResource("97_r7agv")]
-transform = Transform3D(-1.9, 0, -1.4901161e-07, 0, 0.99999994, 0, 8.940697e-08, 0, -1.9999996, -21.83333, -0.95, -15.766668)
+transform = Transform3D(-1.9, 0, -1.4901161e-07, 0, 0.99999994, 0, 8.940697e-08, 0, -1.9999996, -21.83333, -1.034, -15.766668)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia8" unique_id=1154406876]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16426,7 +16417,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_unt55")
 
 [node name="Tile_1_3 Asia10" parent="NavigationRegion3D" unique_id=414340396 instance=ExtResource("97_r7agv")]
-transform = Transform3D(-1.9, 0, -1.4901161e-07, 0, 0.99999994, 0, 8.940697e-08, 0, -1.9999996, -26.03333, -0.95, -16.666668)
+transform = Transform3D(-1.9, 0, -1.4901161e-07, 0, 0.99999994, 0, 8.940697e-08, 0, -1.9999996, -26.03333, -1.034, -16.666668)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia10" unique_id=1250489893]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16438,7 +16429,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_6gph1")
 
 [node name="Tile_1_4 Asia5" parent="NavigationRegion3D" unique_id=217069182 instance=ExtResource("98_xsvq8")]
-transform = Transform3D(-1.9999999, 0, -1.7881393e-07, 0, 1, 0, 1.1920929e-07, 0, -1.8200003, -22.633331, -0.98, -16.566668)
+transform = Transform3D(-1.9999999, 0, -1.7881393e-07, 0, 1, 0, 1.1920929e-07, 0, -1.8200003, -22.633331, -1.034, -16.566668)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia5" unique_id=2107566481]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16450,7 +16441,7 @@ mesh = ExtResource("130_4ojxq")
 shape = SubResource("ConcavePolygonShape3D_7x8tf")
 
 [node name="Tile_1_1 Asia9" parent="NavigationRegion3D" unique_id=1274400819 instance=ExtResource("95_e22mm")]
-transform = Transform3D(-1.4942918, 0, -0.1568805, 0, 0.9999999, 0, 0.13073373, 0, -1.7931501, -18.069967, -0.95, -17.505816)
+transform = Transform3D(-1.4942918, 0, -0.1568805, 0, 0.9999999, 0, 0.13073373, 0, -1.7931501, -18.069967, -1.034, -17.505816)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia9" unique_id=2019023443]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16462,7 +16453,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_6r6mt")
 
 [node name="Tile_1_3 Asia9" parent="NavigationRegion3D" unique_id=1014167187 instance=ExtResource("97_r7agv")]
-transform = Transform3D(-1.8927697, 0, -0.1743114, 0, 0.9999999, 0, 0.16559598, 0, -1.992389, -18.281672, -0.95, -16.483479)
+transform = Transform3D(-1.8927697, 0, -0.1743114, 0, 0.9999999, 0, 0.16559598, 0, -1.992389, -18.281672, -1.034, -16.483479)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia9" unique_id=427905816]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16474,7 +16465,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_1vajf")
 
 [node name="Tile_1_4 Asia6" parent="NavigationRegion3D" unique_id=1795666290 instance=ExtResource("98_xsvq8")]
-transform = Transform3D(-1.6794978, 0, -1.0357308, 0, 0.9999999, 0, 2.0015473, 0, -0.869081, -19.048347, -0.98, -17.310705)
+transform = Transform3D(-1.6794978, 0, -1.0357308, 0, 0.9999999, 0, 2.0015473, 0, -0.869081, -19.048347, -1.034, -17.310705)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia6" unique_id=762589535]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16486,7 +16477,7 @@ mesh = ExtResource("130_4ojxq")
 shape = SubResource("ConcavePolygonShape3D_ubhhp")
 
 [node name="Tile_1_5 Asia8" parent="NavigationRegion3D" unique_id=1276008291 instance=ExtResource("99_2nf86")]
-transform = Transform3D(-1.4000001, 0, -1.1920929e-07, 0, 0.99999994, 0, 1.4901161e-07, 0, -1.3000002, -20.633333, -0.954, -16.066668)
+transform = Transform3D(-1.4000001, 0, -1.1920929e-07, 0, 0.99999994, 0, 1.4901161e-07, 0, -1.3000002, -20.633333, -1.034, -16.066668)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia8" unique_id=2674927]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16498,7 +16489,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_t2p8q")
 
 [node name="Tile_1_5 Asia9" parent="NavigationRegion3D" unique_id=1090542667 instance=ExtResource("99_2nf86")]
-transform = Transform3D(-0.5777283, 0, 1.1481072, 0, 0.99999994, 0, -0.5777281, 0, -1.1481073, -18.333334, -0.954, -18.266668)
+transform = Transform3D(-0.5777283, 0, 1.1481072, 0, 0.99999994, 0, -0.5777281, 0, -1.1481073, -18.333334, -1.034, -18.266668)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia9" unique_id=430208277]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16510,7 +16501,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_3uewi")
 
 [node name="Tile_1_5 Asia2" parent="NavigationRegion3D" unique_id=2094952244 instance=ExtResource("99_2nf86")]
-transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -14.4, -0.954, -19.800001)
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1.3, -14.4, -1.034, -19.800001)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia2" unique_id=135982926]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16522,7 +16513,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_m3mt2")
 
 [node name="Tile_1_1 Asia10" parent="NavigationRegion3D" unique_id=594958691 instance=ExtResource("95_e22mm")]
-transform = Transform3D(-6.556708e-08, 0, -1.8, 0, 1, 0, 1.5, 0, -7.86805e-08, -23.071426, -0.95, -14.314285)
+transform = Transform3D(-6.556708e-08, 0, -1.8, 0, 1, 0, 1.5, 0, -7.86805e-08, -23.071426, -1.034, -14.314285)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia10" unique_id=2030839487]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16534,7 +16525,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_a4otf")
 
 [node name="Tile_1_1 Asia11" parent="NavigationRegion3D" unique_id=1910004132 instance=ExtResource("95_e22mm")]
-transform = Transform3D(-6.556708e-08, 0, -1.8, 0, 1, 0, 1.5, 0, -7.86805e-08, -22.671429, -0.95, -13.314286)
+transform = Transform3D(-6.556708e-08, 0, -1.8, 0, 1, 0, 1.5, 0, -7.86805e-08, -22.671429, -1.034, -13.314286)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia11" unique_id=1050208459]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16546,7 +16537,7 @@ mesh = ExtResource("124_kjq3c")
 shape = SubResource("ConcavePolygonShape3D_m25wp")
 
 [node name="Tile_1_2 Asia5" parent="NavigationRegion3D" unique_id=913418100 instance=ExtResource("96_hdtnq")]
-transform = Transform3D(-7.430937e-08, 0, -2.1000001, 0, 1, 0, 1.7, 0, -9.1793915e-08, -21.77143, -0.95, -11.314286)
+transform = Transform3D(-7.430937e-08, 0, -2.1000001, 0, 1, 0, 1.7, 0, -9.1793915e-08, -21.77143, -1.034, -11.314286)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia5" unique_id=1721029324]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16558,7 +16549,7 @@ mesh = ExtResource("126_58se0")
 shape = SubResource("ConcavePolygonShape3D_l1byc")
 
 [node name="Tile_1_3 Asia11" parent="NavigationRegion3D" unique_id=1485676793 instance=ExtResource("97_r7agv")]
-transform = Transform3D(-8.305164e-08, 0, -2, 0, 1, 0, 1.9000001, 0, -8.742278e-08, -21.671429, -0.95, -13.014287)
+transform = Transform3D(-8.305164e-08, 0, -2, 0, 1, 0, 1.9000001, 0, -8.742278e-08, -21.671429, -1.034, -13.014287)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia11" unique_id=1193691863]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16570,7 +16561,7 @@ mesh = ExtResource("128_gsulu")
 shape = SubResource("ConcavePolygonShape3D_p7n1d")
 
 [node name="Tile_1_4 Asia7" parent="NavigationRegion3D" unique_id=1525723805 instance=ExtResource("98_xsvq8")]
-transform = Transform3D(-8.742278e-08, 0, -1.8199999, 0, 1, 0, 2, 0, -7.9554724e-08, -22.471428, -0.98, -12.214286)
+transform = Transform3D(-8.742278e-08, 0, -1.8199999, 0, 1, 0, 2, 0, -7.9554724e-08, -22.471428, -1.034, -12.214286)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia7" unique_id=878505341]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16582,7 +16573,7 @@ mesh = ExtResource("130_4ojxq")
 shape = SubResource("ConcavePolygonShape3D_fu2ol")
 
 [node name="Tile_1_5 Asia10" parent="NavigationRegion3D" unique_id=948724978 instance=ExtResource("99_2nf86")]
-transform = Transform3D(-6.119594e-08, 0, -1.3, 0, 1, 0, 1.4, 0, -5.6824803e-08, -21.971426, -0.954, -14.214287)
+transform = Transform3D(-6.119594e-08, 0, -1.3, 0, 1, 0, 1.4, 0, -5.6824803e-08, -21.971426, -1.034, -14.214287)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia10" unique_id=185885938]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -16594,7 +16585,7 @@ mesh = ExtResource("132_rhmf7")
 shape = SubResource("ConcavePolygonShape3D_1i1c7")
 
 [node name="Tile_1_5 Asia11" parent="NavigationRegion3D" unique_id=1564753607 instance=ExtResource("99_2nf86")]
-transform = Transform3D(-6.119594e-08, 0, -1.3, 0, 1, 0, 1.4, 0, -5.6824803e-08, -21.271427, -0.954, -12.214286)
+transform = Transform3D(-6.119594e-08, 0, -1.3, 0, 1, 0, 1.4, 0, -5.6824803e-08, -21.271427, -1.034, -12.214286)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia11" unique_id=84636847]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -17969,6 +17960,7 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -31.034086, 0.44226974,
 [editable path="NavigationRegion3D/SecCams/SecCam9"]
 [editable path="NavigationRegion3D/SecCams/SecCam10"]
 [editable path="NavigationRegion3D/SecCams/SecCam7"]
+[editable path="NavigationRegion3D/Stairs_2 Asia3"]
 [editable path="Vent"]
 [editable path="Vent/PivotPoint/Sketchfab_Scene"]
 [editable path="Vent6"]
