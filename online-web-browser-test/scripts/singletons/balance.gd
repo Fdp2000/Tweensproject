@@ -9,7 +9,7 @@ var base_thief_speed: float = 6.5
 # The speed the Mixamo animation was originally recorded at. 
 # (Most Mixamo jogs are around 4.0 m/s. Mixamo sprints are around 6.0 m/s).
 var anim_native_speed: float = 4.0
-var cop_base_speed: float = 7.0
+var cop_base_speed: float = 6.8
 var hypno_thief_speed: float = 2.6
 var thief_braking_friction: float = 6.5
 var cop_braking_friction: float = 6.5
@@ -17,7 +17,7 @@ var cop_braking_friction: float = 6.5
 # ==========================================
 # 2. STEALTH & CAMERA PERSPECTIVE
 # ==========================================
-var thief_camo_activation_time: float = 2.0
+var thief_camo_activation_time: float = 1.0
 var thief_camo_fade_duration_sec: float = 1.0 # Literal timer: Fades over 1.0 seconds
 var cop_fov_angle: float = 90.0
 var thief_spring_arm_length: float = 4.711 # (Your current X distance)
@@ -50,8 +50,8 @@ var camera_wall_radius: float = 0.5
 # ==========================================
 # 5. MATCH STRUCTURE & SCALING
 # ==========================================
-var min_players_for_2_cops: int = 5
-var min_players_for_3_cops: int = 8
+var min_players_for_2_cops: int = 6
+var min_players_for_3_cops: int = 9
 
 var quota_2p: int = 5000
 var quota_3p: int = 10000
