@@ -10,7 +10,7 @@ radius = 4.0
 [node name="Van" type="Node3D" unique_id=1658847018]
 
 [node name="DeliveryZone" type="Area3D" parent="." unique_id=1495220169]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2364895, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.94531417, 0, 0)
 collision_mask = 5
 script = ExtResource("1_script")
 

@@ -43,7 +43,7 @@ var artifact_small_speed_multiplier: float = 0.9 # 90% Speed
 var artifact_medium_speed_multiplier: float = 0.75 # 75% Speed
 var artifact_large_speed_multiplier: float = 0.5 # 50% Speed
 
-var delivery_zone_radius: float = 2.5
+var delivery_zone_radius: float = 3.25
 var interact_shape_size: float = 2.0
 var camera_wall_radius: float = 0.5
 

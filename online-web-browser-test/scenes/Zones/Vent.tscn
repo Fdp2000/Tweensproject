@@ -55,7 +55,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.2509804)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -101,7 +101,6 @@ shape = SubResource("CylinderShape3D_vent")
 
 [node name="VisualRing" type="Node3D" parent="." unique_id=184920184]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.688961, 0)
-visible = false
 script = ExtResource("dotted_ring_script")
 radius = 1.5
 sync_with_balance = false

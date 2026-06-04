@@ -36,6 +36,7 @@
 [ext_resource type="ArrayMesh" uid="uid://3tnlb0pxraht" path="res://Assets/Models/Asia Pack Reimport/Building_11.res" id="19_w7v5v"]
 [ext_resource type="ArrayMesh" uid="uid://b7m4god2p3e8n" path="res://Assets/Models/Asia Pack Reimport/Balkon.res" id="21_g5e81"]
 [ext_resource type="ArrayMesh" uid="uid://cpkvnajf3o4nm" path="res://Assets/Models/Asia Pack Reimport/Building_7.res" id="24_6tj66"]
+[ext_resource type="PackedScene" uid="uid://bf05ftf00cgpm" path="res://scenes/Zones/Vent.tscn" id="25_wmagv"]
 [ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="28_0k1pn"]
 [ext_resource type="ArrayMesh" uid="uid://depsnqnqhdn61" path="res://Assets/Models/jenssten.tres" id="28_gp0hk"]
 [ext_resource type="Material" uid="uid://wfem3gmpye7n" path="res://Assets/Shaders/celShader/museumCel.tres" id="31_e22mm"]
@@ -6405,7 +6406,10 @@ size = Vector3(56.55761, 5.7493896, 19.139538)
 size = Vector3(56.20103, 5.7493896, 20.070644)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_msxbo"]
-size = Vector3(20.944017, 10.100876, 21.171074)
+size = Vector3(20.944017, 10.100876, 16.919643)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j0lmw"]
+size = Vector3(17.111656, 10.100876, 21.503654)
 
 [node name="PrototypeLevel" type="Node3D" unique_id=1441468162]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
@@ -8496,6 +8500,15 @@ script = ExtResource("6_artifact")
 
 [node name="Penguin_01_Cube_045" type="MeshInstance3D" parent="NavigationRegion3D/Floor/Penguin" unique_id=278086669]
 mesh = SubResource("ArrayMesh_5xndk")
+
+[node name="Vent" parent="NavigationRegion3D/Floor" unique_id=581943021 instance=ExtResource("25_wmagv")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -1.5451547, -0.09778434, -8.614092)
+
+[node name="Vent2" parent="NavigationRegion3D/Floor" unique_id=329498044 instance=ExtResource("25_wmagv")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.48199916, 1.5484879, -8.331175)
+
+[node name="Vent3" parent="NavigationRegion3D/Floor" unique_id=2058133686 instance=ExtResource("25_wmagv")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0.5787421, 0.17363065, -8.627271)
 
 [node name="KEEP" type="Node3D" parent="NavigationRegion3D" unique_id=1401781386]
 
@@ -17906,8 +17919,12 @@ script = ExtResource("142_8sa2x")
 crossfade_duration = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BiomeTriggers/biome_asia/Area3D" unique_id=865254143]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9828339, 2.382164, 3.8674889)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9828339, 2.382164, 1.7417736)
 shape = SubResource("BoxShape3D_msxbo")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="BiomeTriggers/biome_asia/Area3D" unique_id=1974423353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.066654205, 2.382164, 4.033779)
+shape = SubResource("BoxShape3D_j0lmw")
 
 [editable path="NavigationRegion3D/Van"]
 [editable path="NavigationRegion3D/Van/WhiteVan"]

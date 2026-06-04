@@ -22,7 +22,7 @@ func _setup_visuals():
 	if visual_ring:
 		if visual_ring is DottedRing:
 			visual_ring.radius = vent_radius
-			visual_ring.set_alpha(0.0 if not is_open else 0.5)
+			visual_ring.set_alpha(0.0 if not is_open else visual_ring.max_alpha)
 		elif visual_ring is MeshInstance3D:
 			var mesh = visual_ring.mesh as CylinderMesh
 			if mesh:

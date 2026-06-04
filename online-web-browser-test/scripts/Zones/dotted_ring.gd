@@ -38,7 +38,7 @@ class_name DottedRing
 var multimesh_instance: MultiMeshInstance3D
 var _material: StandardMaterial3D
 var _current_rotation: float = 0.0
-var max_alpha: float = 0.25
+var max_alpha: float = 0.5
 var _dots_need_update: bool = false
 
 func _request_update_dots():
@@ -147,9 +147,8 @@ func _update_dots():
 	for i in range(actual_dot_count):
 		var final_pos = raw_positions[i]
 		
-		# If this dot is significantly higher or lower than the median floor (e.g. hit a wall, pillar, or van door)
-		if abs(final_pos.y - median_y) > 0.2:
-			final_pos.y = median_y
+		# Force EVERY dot to be perfectly level with the true floor!
+		final_pos.y = median_y
 			
 		# Convert to local position for the multimesh
 		var local_pos = to_local(final_pos)

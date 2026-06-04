@@ -11,7 +11,11 @@ func _update_sizes():
 	if col and col.shape:
 		# If it's a Sphere or Cylinder, update the radius
 		if col.shape is SphereShape3D or col.shape is CylinderShape3D:
-			col.shape.radius = Balance.delivery_zone_radius
+			var scale_factor = col.global_transform.basis.get_scale().x
+			if scale_factor > 0.0:
+				col.shape.radius = Balance.delivery_zone_radius / scale_factor
+			else:
+				col.shape.radius = Balance.delivery_zone_radius
 		# If it's a Box, update the X and Z size (keeping Y height the same)
 		elif col.shape is BoxShape3D:
 			col.shape.size.x = Balance.delivery_zone_radius * 2.0
