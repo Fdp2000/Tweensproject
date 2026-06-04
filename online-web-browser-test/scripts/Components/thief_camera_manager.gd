@@ -20,8 +20,14 @@ func handle_input(event: InputEvent) -> bool:
 		var actual_sens = thief.mouse_sensitivity * 0.001
 		cam_yaw -= event.relative.x * actual_sens
 		cam_pitch -= event.relative.y * actual_sens
-		cam_yaw = clamp(cam_yaw, -1.0, 1.0)
-		cam_pitch = clamp(cam_pitch, -0.5, 0.5)
+		var current_cam = available_cameras[current_cam_index] if available_cameras.size() > 0 else null
+		var min_y = current_cam.get("min_yaw") if current_cam and "min_yaw" in current_cam else -1.0
+		var max_y = current_cam.get("max_yaw") if current_cam and "max_yaw" in current_cam else 1.0
+		var min_p = current_cam.get("min_pitch") if current_cam and "min_pitch" in current_cam else -0.5
+		var max_p = current_cam.get("max_pitch") if current_cam and "max_pitch" in current_cam else 0.5
+		
+		cam_yaw = clamp(cam_yaw, min_y, max_y)
+		cam_pitch = clamp(cam_pitch, min_p, max_p)
 		update_camera_rotation()
 		return true # Tell the main script we handled this!
 		
@@ -79,8 +85,12 @@ func switch_to_camera(index: int):
 		if listener:
 			listener.clear_current()
 		
-	cam_yaw = 0.0
-	cam_pitch = 0.0
+	if "target_rotation" in new_cam:
+		cam_yaw = new_cam.target_rotation.y
+		cam_pitch = -new_cam.target_rotation.x
+	else:
+		cam_yaw = 0.0
+		cam_pitch = 0.0
 	update_camera_rotation()
 
 func cycle_camera(dir: int):

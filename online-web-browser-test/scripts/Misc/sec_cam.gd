@@ -1,9 +1,25 @@
+@tool
 extends Node3D
 
-@export var max_yaw: float = 60.0
-@export var min_yaw: float = -60.0
-@export var max_pitch: float = 30.0
-@export var min_pitch: float = -30.0
+@export_category("Camera Limits")
+@export_range(-360, 360, 0.1, "radians_as_degrees") var max_yaw: float = deg_to_rad(60.0)
+@export_range(-360, 360, 0.1, "radians_as_degrees") var min_yaw: float = deg_to_rad(-60.0)
+@export_range(-360, 360, 0.1, "radians_as_degrees") var max_pitch: float = deg_to_rad(30.0)
+@export_range(-360, 360, 0.1, "radians_as_degrees") var min_pitch: float = deg_to_rad(-30.0)
+
+@export_category("Starting Position")
+@export_range(-360, 360, 0.1, "radians_as_degrees") var start_yaw: float = 0.0:
+	set(value):
+		start_yaw = value
+		_update_editor_rotation()
+		
+@export_range(-360, 360, 0.1, "radians_as_degrees") var start_pitch: float = 0.0:
+	set(value):
+		start_pitch = value
+		_update_editor_rotation()
+
+@export_category("Preview Tool")
+@export var preview_camera_sweep: bool = false
 
 @onready var pivot = $pivotPoint
 # UPDATE PATH: Camera is no longer inside pivotPoint!
@@ -16,9 +32,43 @@ var primary_controller_id: int = 0
 var target_rotation: Vector3 = Vector3.ZERO
 
 func _ready():
+	if Engine.is_editor_hint():
+		_update_editor_rotation()
+		return
+		
+	# Game logic only
+	pivot.rotation.y = start_yaw
+	pivot.rotation.x = start_pitch
+	target_rotation = Vector3(start_pitch, start_yaw, 0)
 	_update_red_light()
 
+func _update_editor_rotation():
+	if is_node_ready() and pivot and not preview_camera_sweep:
+		pivot.rotation.y = start_yaw
+		pivot.rotation.x = start_pitch
+
 func _process(delta):
+	if Engine.is_editor_hint():
+		if preview_camera_sweep and is_node_ready() and pivot:
+			var time = Time.get_ticks_msec() / 1000.0
+			# Sine wave from -1 to 1 for sweeping left/right
+			var sweep_y = sin(time * 1.5)
+			# Cosine wave for sweeping up/down (slightly different frequency so it hits all corners)
+			var sweep_x = cos(time * 2.1)
+			
+			var center_y = (min_yaw + max_yaw) / 2.0
+			var range_y = (max_yaw - min_yaw) / 2.0
+			var center_x = (min_pitch + max_pitch) / 2.0
+			var range_x = (max_pitch - min_pitch) / 2.0
+			
+			pivot.rotation.y = center_y + sweep_y * range_y
+			pivot.rotation.x = center_x + sweep_x * range_x
+		elif is_node_ready() and pivot:
+			# Snap back to the starting position when disabled
+			pivot.rotation.y = start_yaw
+			pivot.rotation.x = start_pitch
+		return
+		
 	# SMOOTH LERP FOR EVERYONE!
 	# This ensures that when control is handed over, the camera 
 	# smoothly travels from the old rotation to the new rotation.
