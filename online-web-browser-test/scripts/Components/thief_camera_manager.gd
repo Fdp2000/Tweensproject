@@ -106,6 +106,18 @@ func switch_to_camera(index: int):
 		var listener = thief.find_child("AudioListener3D", true, false)
 		if listener:
 			listener.clear_current()
+			print("[Audio Debug] Thief's AudioListener3D disabled! Current Camera3D is now: ", new_cam3d.name, " at position ", new_cam3d.global_position)
+		else:
+			print("[Audio Debug] WARNING: Thief had no AudioListener3D to clear!")
+			
+		# Explicitly force an AudioListener3D onto the Security Camera to guarantee spatial audio works
+		var cam_listener = new_cam3d.get_node_or_null("ActiveListener")
+		if not cam_listener:
+			cam_listener = AudioListener3D.new()
+			cam_listener.name = "ActiveListener"
+			new_cam3d.add_child(cam_listener)
+		cam_listener.make_current()
+		print("[Audio Debug] Attached and activated explicit AudioListener3D onto Security Camera!")
 		
 	# Load the user's personal orientation, or default to the camera's start rotation
 	if saved_orientations.has(new_cam.get_path()):
@@ -145,14 +157,54 @@ func fire_camera_ping():
 	var cam_root = available_cameras[current_cam_index]
 	var ray = cam_root.find_child("PingRay", true, false)
 	if ray:
+		# Ensure the raycast checks Layer 4 (value 8) where hypnotized thieves live!
+		ray.collision_mask |= 8 
 		ray.force_raycast_update()
-		if ray.is_colliding():
-			var collider = ray.get_collider()
-			if collider and collider.has_method("get_pinged") and collider.get("team_index") == 1:
-				collider.rpc("get_pinged")
-			else:
-				var hit_pos = ray.get_collision_point()
-				thief.rpc("sync_world_ping", hit_pos)
+		
+		var origin = ray.global_position
+		var hit_pos = ray.get_collision_point() if ray.is_colliding() else origin - ray.global_transform.basis.z * 100.0
+		var collider = ray.get_collider() if ray.is_colliding() else null
+		
+		var target_player = null
+		
+		# 1. Direct Hit Check
+		if collider and collider.has_method("get_pinged"):
+			var is_cop = collider.get("team_index") == 1
+			var is_hypnotized = collider.get("team_index") == 0 and collider.get("is_hypnotized")
+			if is_cop or is_hypnotized:
+				target_player = collider
+				
+		# 2. Generous Cylinder Check (Auto-Aim for near misses)
+		if not target_player:
+			var ray_dir = (hit_pos - origin).normalized()
+			var ray_length = origin.distance_to(hit_pos)
+			var best_dist = 2.5 # Extremely generous 2.5 meter snap radius
+			
+			var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+			if spawned:
+				for child in spawned.get_children():
+					if child.has_method("get_pinged"):
+						var is_cop = child.get("team_index") == 1
+						var is_hypnotized = child.get("team_index") == 0 and child.get("is_hypnotized")
+						if is_cop or is_hypnotized:
+							var player_center = child.global_position + Vector3(0, 1.0, 0) # Offset to center of mass
+							var to_player = player_center - origin
+							var depth = to_player.dot(ray_dir)
+							
+							# Check if player is between the camera and the wall hit point
+							if depth > 0 and depth < ray_length:
+								var closest_point_on_line = origin + ray_dir * depth
+								var dist = closest_point_on_line.distance_to(player_center)
+								
+								if dist < best_dist:
+									best_dist = dist
+									target_player = child
+									
+		# 3. Execute the Ping
+		if target_player:
+			target_player.rpc("get_pinged")
+		elif ray.is_colliding():
+			thief.rpc("sync_world_ping", hit_pos)
 
 func release_cameras():
 	is_on_cameras = false
@@ -174,3 +226,6 @@ func release_cameras():
 		var listener = thief.find_child("AudioListener3D", true, false)
 		if listener:
 			listener.make_current()
+			print("[Audio Debug] Audio returned to Thief! Thief's AudioListener3D is now active at position: ", listener.global_position)
+		else:
+			print("[Audio Debug] WARNING: Could not find Thief's AudioListener3D to reactivate!")

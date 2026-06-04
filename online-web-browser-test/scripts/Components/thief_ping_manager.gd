@@ -29,7 +29,7 @@ func trigger_ping(pos: Vector3):
 		if spawned:
 			var local_player = spawned.get_node_or_null(str(multiplayer.get_unique_id()))
 			if local_player and local_player.get("team_index") == 0: # 0 is Thief team
-				AudioManager.play_3d_sfx("cop_ping", pos)
+				pass # Ground ping is now completely silent as requested
 
 	# Optional map ping (the old 2d one)
 	# EventBus.emit_signal("map_ping", pos)

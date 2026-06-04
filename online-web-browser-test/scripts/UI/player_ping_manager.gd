@@ -18,6 +18,7 @@ func trigger_ping():
 		
 	if cop_ping_visual:
 		cop_ping_visual.visible = true
+		AudioManager.play_3d_sfx("cop_ping", player.global_position)
 		
 		# --- FIX: SAFE DISCONNECT ---
 		if ping_timer and ping_timer.timeout.is_connected(_hide_ping):
@@ -34,7 +35,21 @@ func _ready_ping_visual():
 	if PING_SCENE:
 		cop_ping_visual = PING_SCENE.instantiate()
 		player.add_child(cop_ping_visual)
-		cop_ping_visual.position = Vector3(0, 2.5, 0)
+		
+		var is_thief = player.get("team_index") == 0
+		
+		if is_thief:
+			cop_ping_visual.position = Vector3(0, 2, 0) # Smaller offset for thief
+			cop_ping_visual.scale = Vector3(0.8, 0.8, 0.8) # Scale down the thief ping
+			var mesh_node = cop_ping_visual.get_node_or_null("MeshInstance3D")
+			if mesh_node:
+				var hypno_shader = load("res://Assets/Shaders/HypnoShader/hypnoShaderV2.tres")
+				var new_mat = ShaderMaterial.new()
+				new_mat.shader = hypno_shader
+				mesh_node.material_override = new_mat
+		else:
+			cop_ping_visual.position = Vector3(0, 2.5, 0)
+			
 		cop_ping_visual.visible = false
 
 func _hide_ping():
