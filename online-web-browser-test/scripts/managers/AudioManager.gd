@@ -21,7 +21,7 @@ var SFX_CONFIG = {
 	"countdown_tick": {"path": "res://Assets/Sound/SFX/Countdown/Beep.wav", "volume": -20.0, "bus": "UI"},
 	"countdown_go":   {"path": "res://Assets/Sound/SFX/Countdown/GO!.wav",  "volume": -17.0, "bus": "UI"},
 	"rescue_progress":{"path": "res://Assets/Sound/SFX/Rescue Progress/Rescue Progress.wav","volume": -28, "bus": "Quiet SFX"},
-	"rescue_success": {"path": "res://Assets/Sound/SFX/Rescue Progress/cha milli.wav", "volume": -10.0, "bus": "Loud SFX", "max_distance": 30.0, "unit_size": 14.0},
+	"rescue_success": {"path": "res://Assets/Sound/SFX/Rescue Progress/cha milli.wav", "volume": -14.0, "bus": "Loud SFX", "max_distance": 30.0, "unit_size": 14.0},
 	
 	# Lobby / Pre-game SFX
 	"join_lobby":     {"path": "res://Assets/Sound/SFX/PlayerJoin/virtual_vibes-cinematic-thud-fx-379991.wav", "volume": -4.5, "bus": "SFX", "max_distance": 20.0, "unit_size": 6.0, "attenuation": AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC},
