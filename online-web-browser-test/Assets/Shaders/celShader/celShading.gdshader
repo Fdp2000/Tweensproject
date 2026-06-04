@@ -3,7 +3,7 @@ render_mode cull_disabled;
 
 group_uniforms Shader.Albedo;
 uniform vec4 albedo_color : source_color  = vec4(1.0);
-uniform sampler2D albedo_texture;
+uniform sampler2D albedo_texture : source_color, hint_default_white;
 
 group_uniforms Shader.Light;
 uniform bool use_stepped = true;
@@ -76,7 +76,8 @@ void fragment() {
 void light () {
 	float ndotl = clamp(dot(NORMAL,LIGHT),0.0,1.0) * ATTENUATION;
 
-	float light = ndotl;
+	// Force light to never exceed 1.0 before stepping to guarantee step count
+	float light = min(ndotl, 1.0);
 
 	if(use_stepped){
 		float light_mult = light * steps;
@@ -94,6 +95,8 @@ void light () {
 	}
 
 	vec3 diffuse = vec3(light) * (LIGHT_COLOR / PI);
+	
+	// Apply the local shadow tint
 	diffuse = (shadow_tint.rgb * (1.0 - (light)) * shadow_tint_amount) + diffuse * light;
 
 	if(use_rim){
@@ -104,6 +107,7 @@ void light () {
 		diffuse += rim_color.rgb * rim_value * rim_blend;
 	}
 
-	DIFFUSE_LIGHT += diffuse;
+	// Prevent blown-out highlights from multiple lights
+	DIFFUSE_LIGHT = max(DIFFUSE_LIGHT, diffuse);
 	SPECULAR_LIGHT += vec3(pow(light, 50.0)) * specular;
 }
