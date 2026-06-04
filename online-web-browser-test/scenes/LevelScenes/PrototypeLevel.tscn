@@ -7986,7 +7986,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_7v0me")
 
 [node name="Floor50" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1008401326]
-transform = Transform3D(-1.0585234e-07, 0, 12.3171835, 0, 0.35999998, 0, -2.4216194, 0, -5.3840125e-07, -0.11810875, 8.074319, 10.145481)
+transform = Transform3D(-1.0585234e-07, 0, 12.3171835, 0, 0.35999998, 0, -2.4216194, 0, -5.3840125e-07, -0.118, 7.877, 10.145)
 mesh = ExtResource("6_orgo4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor/Floor50" unique_id=1787751660]
@@ -8006,7 +8006,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_ni4rr")
 
 [node name="Floor52" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=807366465]
-transform = Transform3D(-2.4216194, 0, -1.0768024e-06, 0, 0.35999998, 0, 2.1170467e-07, 0, -12.3171835, 9.381891, 8.074319, 1.1454811)
+transform = Transform3D(-2.4216194, 0, -1.0768024e-06, 0, 0.35999998, 0, 2.1170467e-07, 0, -12.3171835, 9.381891, 7.877041, 1.1454811)
 mesh = ExtResource("6_orgo4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor/Floor52" unique_id=197599668]
@@ -8107,7 +8107,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_7bwct")
 
 [node name="Floor59" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=26646847]
-transform = Transform3D(0.6004612, 0, 0.6604504, 0, 0.35999998, 0, -0.6004612, 0, 0.66045046, 6.4818892, 8.074319, 7.245481)
+transform = Transform3D(0.6004612, 0, 0.6604504, 0, 0.35999998, 0, -0.6004612, 0, 0.66045046, 6.4818892, 7.8751593, 7.245481)
 mesh = ExtResource("6_orgo4")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Floor/Floor59" unique_id=1482255449]
@@ -8335,7 +8335,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07312354, -7.450581e-09)
 shape = SubResource("BoxShape3D_2ufy4")
 
 [node name="Building_11 Asia" parent="NavigationRegion3D/Floor" unique_id=1880199702 instance=ExtResource("14_sr1an")]
-transform = Transform3D(1.0000001, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, -32.199997, 4, -9.9)
+transform = Transform3D(1.0000001, 0, -2.9802322e-08, 0, 1, 0, 2.9802322e-08, 0, 1.0000001, -32.199997, 4.0293245, -9.9)
 
 [node name="Building_12" type="MeshInstance3D" parent="NavigationRegion3D/Floor/Building_11 Asia" unique_id=93608983]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -8348,7 +8348,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.023243435, -3.7252903e-0
 shape = SubResource("BoxShape3D_fgjfj")
 
 [node name="Building_11 Asia2" parent="NavigationRegion3D/Floor" unique_id=1058410247 instance=ExtResource("14_sr1an")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.199997, 4, -25.7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.199997, 4.0453324, -25.7)
 
 [node name="Building_12" type="MeshInstance3D" parent="NavigationRegion3D/Floor/Building_11 Asia2" unique_id=1920636279]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
@@ -14813,26 +14813,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.61, -0.17, -2.8)
 radius = 0.081
 height = 5.054
 
-[node name="WalkTarget2" type="Marker3D" parent="NavigationRegion3D/Jail" unique_id=1903043954]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.017673565, 0, -3.6000085)
-
-[node name="CellTarget5" type="Marker3D" parent="NavigationRegion3D/Jail" unique_id=18595314]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -8.66311e-08, 0.5, -0.9869442)
-
-[node name="CellTarget6" type="Marker3D" parent="NavigationRegion3D/Jail" unique_id=18595315]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 1.5, 0.5, 0.004)
-
-[node name="CellTarget7" type="Marker3D" parent="NavigationRegion3D/Jail" unique_id=18595316]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, -1.5, 0.5, 0.004)
-
-[node name="CellTarget8" type="Marker3D" parent="NavigationRegion3D/Jail" unique_id=18595317]
-transform = Transform3D(0.047524743, 0, 0.9988701, 0, 1, 0, -0.9988701, 0, 0.047524743, 0, 0.5, 1.5)
-
-[node name="Greybox2" type="CSGBox3D" parent="NavigationRegion3D/Jail" unique_id=2000418622]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-use_collision = true
-size = Vector3(6, 5, 6)
-
 [node name="Arena 2" type="Node3D" parent="NavigationRegion3D" unique_id=1842173714]
 
 [node name="Dinguses" type="Node3D" parent="NavigationRegion3D/Arena 2" unique_id=632446231]
@@ -14928,20 +14908,26 @@ hand_rotation_offset = Vector3(88.011, 148.183, 32.671)
 [node name="SecCams" type="Node3D" parent="NavigationRegion3D" unique_id=1710635191]
 
 [node name="SecCam" parent="NavigationRegion3D/SecCams" unique_id=220581430 instance=ExtResource("38_oetox")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3.7403092, 2.509496, -11.893364)
-max_yaw = 1.66504410640259
-min_yaw = -1.829105
-max_pitch = 1.3089969389957472
-min_pitch = -0.017453292519943295
-start_yaw = 0.5759586531581288
-start_pitch = 0.06981317007977318
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 4.1243815, 3.4205601, -50.5801)
+max_yaw = 1.5234804
+min_yaw = -1.2217304763960306
+max_pitch = -0.02792526803190967
+min_pitch = -1.1519173063162575
+start_yaw = 0.49392817831439545
+start_pitch = -0.22689280275926285
 Set_Max_Yaw_To_Current = false
 Set_Min_Yaw_To_Current = false
 Set_Max_Pitch_To_Current = false
 Set_Min_Pitch_To_Current = false
-enable_preview_sliders = true
-preview_yaw_slider = 100.0
-preview_pitch_slider = 89.0
+enable_preview_sliders = false
+preview_yaw_slider = 0.0
+preview_pitch_slider = 100.0
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam" index="1" unique_id=1654055905]
+transform = Transform3D(0.0660358, 0.007998497, 0.034645297, 0, 0.07307775, -0.016871328, -0.03555661, 0.014854821, 0.0643433, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam/CameraMount" parent_id_path=PackedInt32Array(220581430, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.88047737, -0.106646635, 0.46193734, 0, 0.97437006, 0.22495104, -0.4740882, -0.1980643, 0.8579108, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="SecCam2" parent="NavigationRegion3D/SecCams" unique_id=1489687397 instance=ExtResource("38_oetox")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 11.914747, 4.409189, -11.8966255)
@@ -14964,6 +14950,220 @@ transform = Transform3D(0.068409, -0.012553805, -0.028064381, 0, 0.06846256, -0.
 
 [node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam2/CameraMount" parent_id_path=PackedInt32Array(1489687397, 1455180780) index="0" unique_id=122643301]
 transform = Transform3D(0.9121201, 0.16738407, -0.37419176, 0, 0.91283417, 0.40833047, 0.40992305, -0.37244642, 0.8326144, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam11" parent="NavigationRegion3D/SecCams" unique_id=1531800142 instance=ExtResource("38_oetox")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -24.531761, 2.9665337, -13.55469)
+max_yaw = 0.43772858
+min_yaw = -2.426007660272118
+max_pitch = -1.2618730491919004
+min_pitch = 0.2548180707911725
+start_yaw = -1.0140362954087059
+start_pitch = -0.42062434973063384
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 34.0
+preview_pitch_slider = 47.0
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam11" index="1" unique_id=1654055905]
+transform = Transform3D(0.03963287, -0.025999574, -0.058122773, 0, 0.06846256, -0.030624783, 0.06367287, 0.01618331, 0.036178242, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam11/CameraMount" parent_id_path=PackedInt32Array(1531800142, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.5284383, 0.34666097, -0.77497035, 0, 0.9128341, 0.40833047, 0.84897166, -0.21577746, 0.48237658, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam3" parent="NavigationRegion3D/SecCams" unique_id=939605638 instance=ExtResource("38_oetox")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -3.079422, 3.7788947, -12.437481)
+max_yaw = 1.6056331
+min_yaw = -1.7406287
+max_pitch = -1.3369222070276567
+min_pitch = 0.071907565
+start_yaw = -0.4398229715025708
+start_pitch = -0.5218534463463042
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 45.0
+preview_pitch_slider = 48.0
+
+[node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam3/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(939605638, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.09302521, 0.13406706)
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam3" index="1" unique_id=1654055905]
+transform = Transform3D(0.06786203, -0.01591843, -0.027683, 0, 0.06501725, -0.037386578, 0.031933445, 0.033828385, 0.05882937, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam3/CameraMount" parent_id_path=PackedInt32Array(939605638, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.90482706, 0.21224573, -0.36910668, 0, 0.8668967, 0.49848774, 0.42577928, -0.45104516, 0.78439164, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam4" parent="NavigationRegion3D/SecCams" unique_id=404788709 instance=ExtResource("38_oetox")]
+transform = Transform3D(1.1924882e-08, 0, -0.99999994, 0, 1, 0, 1.0000001, 0, 1.192488e-08, 36.584, 3.158, -33.74)
+max_yaw = 1.6056331
+min_yaw = -1.7406287
+max_pitch = -1.3369222070276567
+min_pitch = 0.071907565
+start_yaw = 0.20420352248333637
+start_pitch = -0.4398229715025708
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 70.0
+preview_pitch_slider = 100.0
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam4" index="1" unique_id=1654055905]
+transform = Transform3D(0.07344171, 0.0064756973, 0.013761557, 0, 0.06786203, -0.031933445, -0.015209046, 0.031269956, 0.06645205, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam4/CameraMount" parent_id_path=PackedInt32Array(404788709, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.97922283, -0.086342625, 0.18348743, 0, 0.90482694, 0.42577928, -0.2027873, -0.41693273, 0.88602734, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam5" parent="NavigationRegion3D/SecCams" unique_id=867899694 instance=ExtResource("38_oetox")]
+transform = Transform3D(1.1924882e-08, 0, -0.99999994, 0, 1, 0, 1.0000001, 0, 1.192488e-08, 35.701427, 3.7884734, -27.40801)
+max_yaw = 1.7355381
+min_yaw = -0.14159197
+max_pitch = -1.3369222070276567
+min_pitch = 0.071907565
+start_yaw = 0.7504915783575618
+start_pitch = -0.4136430327226559
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 100.0
+preview_pitch_slider = 60.0
+
+[node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam5/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(867899694, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam5" index="1" unique_id=1654055905]
+transform = Transform3D(0.054851525, 0.020559577, 0.04683603, 0, 0.06867469, -0.030146083, -0.051149875, 0.022047449, 0.050225493, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam5/CameraMount" parent_id_path=PackedInt32Array(867899694, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.7313537, -0.2741277, 0.62448037, 0, 0.91566247, 0.40194777, -0.6819984, -0.29396597, 0.6696732, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam6" parent="NavigationRegion3D/SecCams" unique_id=527288256 instance=ExtResource("38_oetox")]
+transform = Transform3D(1.1924882e-08, 0, -0.99999994, 0, 1, 0, 1.0000001, 0, 1.192488e-08, 36.393406, 3.7884734, 5.2846303)
+max_yaw = 0.1910217
+min_yaw = -1.6967206
+max_pitch = -1.3369222070276567
+min_pitch = 0.071907565
+start_yaw = -0.6998770300497266
+start_pitch = -0.5218534463463042
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 100.0
+preview_pitch_slider = 37.0
+
+[node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam6/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(527288256, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam6" index="1" unique_id=1654055905]
+transform = Transform3D(0.0573691, -0.024081577, -0.04187915, 0, 0.06501725, -0.03738658, 0.048309267, 0.028597796, 0.04973309, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam6/CameraMount" parent_id_path=PackedInt32Array(527288256, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.7649214, 0.3210877, -0.5583886, 0, 0.8668966, 0.4984877, 0.6441236, -0.3813039, 0.6631078, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam8" parent="NavigationRegion3D/SecCams" unique_id=68353345 instance=ExtResource("38_oetox")]
+transform = Transform3D(-0.834848, 0, 0.55048066, 0, 1, 0, -0.5504808, 0, -0.8348478, -39.456688, 3.7884734, -3.9556494)
+max_yaw = -0.375301
+min_yaw = -2.0755363
+max_pitch = -1.3369222070276567
+min_pitch = 0.071907565
+start_yaw = -1.5498523757709648
+start_pitch = -0.26878070480712635
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 26.0
+preview_pitch_slider = 57.0
+
+[node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam8/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(68353345, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam8" index="1" unique_id=1654055905]
+transform = Transform3D(0.0015706818, -0.019912342, -0.07229129, 0, 0.072307155, -0.019916708, 0.074983545, 0.0004171042, 0.0015142871, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam8/CameraMount" parent_id_path=PackedInt32Array(68353345, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.020942423, 0.26549783, -0.9638838, 0, 0.96409523, 0.2655561, 0.9997806, -0.0055613886, 0.020190494, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam9" parent="NavigationRegion3D/SecCams" unique_id=1079123194 instance=ExtResource("38_oetox")]
+transform = Transform3D(-0.834848, 0, 0.55048066, 0, 1, 0, -0.5504808, 0, -0.8348478, -38.38813, 3.7884734, -28.118204)
+max_yaw = -0.841884
+min_yaw = -2.4947736
+max_pitch = -1.3369222070276567
+min_pitch = 0.071907565
+start_yaw = -2.113593724165133
+start_pitch = -0.4276056667386107
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 0.0
+preview_pitch_slider = 59.0
+
+[node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam9/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(1079123194, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam9" index="1" unique_id=1654055905]
+transform = Transform3D(-0.038740005, -0.026631609, -0.058437735, 0, 0.068247095, -0.03110199, 0.064220026, -0.016065218, -0.035251904, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam9/CameraMount" parent_id_path=PackedInt32Array(1079123194, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(-0.5165334, 0.35508806, -0.77916974, 0, 0.90996104, 0.41469318, 0.856267, 0.21420288, -0.47002533, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam10" parent="NavigationRegion3D/SecCams" unique_id=1035098128 instance=ExtResource("38_oetox")]
+transform = Transform3D(0.834848, 0, -0.55048066, 0, 1, 0, 0.5504808, 0, 0.8348478, -10.130012, 3.7884734, -38.074486)
+max_pitch = -1.3369222070276567
+min_pitch = 0.071907565
+start_yaw = -0.43458698374658766
+start_pitch = -0.4363323129985824
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 45.0
+preview_pitch_slider = 58.0
+
+[node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam10/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(1035098128, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam10" index="1" unique_id=1654055905]
+transform = Transform3D(0.06802829, -0.013345306, -0.0286191, 0, 0.06797308, -0.031696368, 0.031577684, 0.02875, 0.06165457, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam10/CameraMount" parent_id_path=PackedInt32Array(1035098128, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.9070439, 0.17793737, -0.38158792, 0, 0.9063075, 0.42261818, 0.42103574, -0.38333327, 0.8220608, -0.025421388, 0.04192185, -0.24309254)
+
+[node name="SecCam7" parent="NavigationRegion3D/SecCams" unique_id=333764158 instance=ExtResource("38_oetox")]
+transform = Transform3D(1.1924882e-08, 0, -0.99999994, 0, 1, 0, 1.0000001, 0, 1.192488e-08, 6.3176436, 8.152581, 4.1058974)
+max_yaw = 1.122246709032354
+min_yaw = -1.6967206
+max_pitch = -1.6091935703387716
+min_pitch = -0.19024088846738152
+start_yaw = -0.6475171524898966
+start_pitch = -0.8412486994612667
+Set_Max_Yaw_To_Current = false
+Set_Min_Yaw_To_Current = false
+Set_Max_Pitch_To_Current = false
+Set_Min_Pitch_To_Current = false
+enable_preview_sliders = false
+preview_yaw_slider = 60.0
+preview_pitch_slider = 0.0
+
+[node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam7" index="1" unique_id=1654055905]
+transform = Transform3D(0.059818793, -0.03372578, -0.030154327, 0, 0.04998993, -0.0559107, 0.045240596, 0.044593476, 0.039871164, 0, 0.02632384, -0.19379231)
+
+[node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam7/CameraMount" parent_id_path=PackedInt32Array(333764158, 1455180780) index="0" unique_id=122643301]
+transform = Transform3D(0.7975839, 0.44967702, -0.40205765, 0, 0.66653234, 0.74547595, 0.60320795, -0.5945796, 0.5316155, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="Domes" type="Node3D" parent="NavigationRegion3D" unique_id=1869795061]
 
@@ -17629,4 +17829,14 @@ shadow_enabled = true
 [editable path="NavigationRegion3D/Van"]
 [editable path="NavigationRegion3D/Van/WhiteVan"]
 [editable path="NavigationRegion3D/Jail"]
+[editable path="NavigationRegion3D/SecCams/SecCam"]
 [editable path="NavigationRegion3D/SecCams/SecCam2"]
+[editable path="NavigationRegion3D/SecCams/SecCam11"]
+[editable path="NavigationRegion3D/SecCams/SecCam3"]
+[editable path="NavigationRegion3D/SecCams/SecCam4"]
+[editable path="NavigationRegion3D/SecCams/SecCam5"]
+[editable path="NavigationRegion3D/SecCams/SecCam6"]
+[editable path="NavigationRegion3D/SecCams/SecCam8"]
+[editable path="NavigationRegion3D/SecCams/SecCam9"]
+[editable path="NavigationRegion3D/SecCams/SecCam10"]
+[editable path="NavigationRegion3D/SecCams/SecCam7"]
