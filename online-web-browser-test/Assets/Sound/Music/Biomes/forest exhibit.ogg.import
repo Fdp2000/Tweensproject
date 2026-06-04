@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bsukieru6njs2"
+path="res://.godot/imported/forest exhibit.ogg-3d4c689707fbc82cd924e753c2326e84.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/Biomes/forest exhibit.ogg"
+dest_files=["res://.godot/imported/forest exhibit.ogg-3d4c689707fbc82cd924e753c2326e84.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
