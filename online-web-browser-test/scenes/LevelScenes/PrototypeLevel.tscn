@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_hwn0u"]
 [ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://Assets/Models/Prototype Models/Dingus the cat.glb" id="3_ypmvb"]
 [ext_resource type="ArrayMesh" uid="uid://g8sgle1up8mo" path="res://Assets/Models/LowPolyMuseumAssets/Arch7.res" id="4_hlvdx"]
-[ext_resource type="Texture2D" uid="uid://b732erh5onxqs" path="res://Assets/Textures/Aquaset/Marble Materials/Default_marble_tile_1.png" id="4_w6te4"]
 [ext_resource type="ArrayMesh" uid="uid://b54pytv6rsvv4" path="res://Assets/Models/LowPolyMuseumAssets/Arch8.res" id="5_dgar3"]
 [ext_resource type="PackedScene" uid="uid://ch7e52146lh35" path="res://scenes/Zones/Jail.tscn" id="5_jail"]
 [ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="6_artifact"]
@@ -41,7 +40,6 @@
 [ext_resource type="Material" uid="uid://wfem3gmpye7n" path="res://Assets/Shaders/celShader/museumCel.tres" id="31_e22mm"]
 [ext_resource type="ArrayMesh" uid="uid://qv4wgr0qt1yt" path="res://Assets/Models/LowPolyMuseumAssets/Railing.res" id="31_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://dnv58nobc7b7j" path="res://Assets/Models/LowPolyMuseumAssets/WallBigOuter.res" id="34_oc075"]
-[ext_resource type="Texture2D" uid="uid://d0etc28un66rp" path="res://Assets/Textures/pexels-photo-6555895.jpeg" id="36_r7r08"]
 [ext_resource type="PackedScene" uid="uid://bvwgdm21faobm" path="res://Assets/Models/Security Cams/SecCam.tscn" id="38_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://6khnohw17drg" path="res://Assets/Models/new_array_mesh.res" id="39_88xne"]
 [ext_resource type="PackedScene" uid="uid://djq8usr0n1wxf" path="res://icycliff1.res" id="39_bva6v"]
@@ -587,9 +585,12 @@ size = Vector3(2, 0.2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bbh3k"]
 size = Vector3(2, 0.2, 2)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q2a4x"]
+load_path = "res://.godot/imported/Default_marble_tile_1.png-fed82854f9753e327248bdcc94f279f6.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sus27"]
 albedo_color = Color(0.8254343, 0.66202736, 0.51377994, 1)
-albedo_texture = ExtResource("4_w6te4")
+albedo_texture = SubResource("CompressedTexture2D_q2a4x")
 uv1_scale = Vector3(60, 60, 60)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xikmm"]
@@ -1527,8 +1528,11 @@ size = Vector3(2, 4, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_4hgdr"]
 size = Vector3(2, 4, 0.5)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_61flt"]
+load_path = "res://.godot/imported/pexels-photo-6555895.jpeg-19424ae474283668cc78ea6470c767a5.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1r7n"]
-albedo_texture = ExtResource("36_r7r08")
+albedo_texture = SubResource("CompressedTexture2D_61flt")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tmc5o"]
 size = Vector3(2, 4, 0.5)
@@ -15153,7 +15157,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 transform = Transform3D(0.0015706818, -0.019912345, -0.07229129, 0, 0.07230717, -0.019916708, 0.074983545, 0.00041710428, 0.0015142871, 0, 0.02632384, -0.19379231)
 
 [node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam8/CameraMount" parent_id_path=PackedInt32Array(68353345, 1455180780) index="0" unique_id=122643301]
-transform = Transform3D(0.02094242, 0.26549783, -0.9638836, 0, 0.96409523, 0.26555604, 0.99978036, -0.0055613886, 0.020190489, -0.025421388, 0.04192185, -0.24309254)
+transform = Transform3D(0.020942418, 0.26549783, -0.9638835, 0, 0.96409523, 0.265556, 0.9997803, -0.0055613886, 0.020190487, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="SecCam9" parent="NavigationRegion3D/SecCams" unique_id=1079123194 instance=ExtResource("38_oetox")]
 transform = Transform3D(-0.834848, 0, 0.55048066, 0, 1, 0, -0.5504808, 0, -0.8348478, -38.38813, 3.7884734, -28.118204)
@@ -15202,7 +15206,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 transform = Transform3D(0.06802828, -0.013345306, -0.0286191, 0, 0.06797308, -0.031696368, 0.031577673, 0.02875, 0.06165457, 0, 0.02632384, -0.19379231)
 
 [node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam10/CameraMount" parent_id_path=PackedInt32Array(1035098128, 1455180780) index="0" unique_id=122643301]
-transform = Transform3D(0.9070437, 0.17793733, -0.38158783, 0, 0.90630734, 0.42261806, 0.42103565, -0.38333318, 0.8220606, -0.025421388, 0.04192185, -0.24309254)
+transform = Transform3D(0.9070437, 0.17793733, -0.3815878, 0, 0.90630734, 0.42261803, 0.42103565, -0.38333318, 0.8220606, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="SecCam7" parent="NavigationRegion3D/SecCams" unique_id=333764158 instance=ExtResource("38_oetox")]
 transform = Transform3D(1.1924882e-08, 0, -0.99999994, 0, 1, 0, 1.0000001, 0, 1.192488e-08, 6.3176436, 8.152581, 4.1058974)
@@ -15570,7 +15574,7 @@ shape = SubResource("BoxShape3D_8sa2x")
 [node name="FootBridge_1_1 Asia" parent="NavigationRegion3D" unique_id=1653724722 instance=ExtResource("71_nkopf")]
 transform = Transform3D(-4.3700133e-08, 9.916947e-10, 1, 0.022687333, 0.99974257, 0, -0.99974257, 0.022687333, -4.371139e-08, -34.24906, 0.08229786, -26.127047)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 418096886) index="0" unique_id=1216567473]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 1778551804) index="0" unique_id=1216567473]
 
 [node name="FootBridge_1_1 Asia2" parent="NavigationRegion3D" unique_id=420087765 instance=ExtResource("71_nkopf")]
 transform = Transform3D(0.501329, 0.0030830123, 0.22446796, 0.0015350576, 1.0418235, -0.019638406, -0.13378368, 0.023507081, 0.8409258, -32.14906, 0.24064928, -34.980133)
@@ -15800,7 +15804,7 @@ shape = SubResource("BoxShape3D_jqi5k")
 [node name="Stairs_2 Asia3" parent="NavigationRegion3D" unique_id=1621005949 instance=ExtResource("70_ol4g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.20336, -0.9259999, -24.636557)
 
-[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=306052587]
+[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=578557960]
 visible = false
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia3" unique_id=702406281]
