@@ -143,15 +143,15 @@
 [ext_resource type="PackedScene" uid="uid://dtex24b2i1te4" path="res://Assets/Models/Artifacts/sarkofag.tscn" id="143_volbp"]
 [ext_resource type="PackedScene" uid="uid://c073t8hl180f8" path="res://Assets/Models/Artifacts/bear_LowPoly.tscn" id="144_0nfu5"]
 [ext_resource type="ArrayMesh" uid="uid://yu8cvbw8w52" path="res://Assets/Models/LowPolyMuseumAssets/Bench2.res" id="144_3u1s1"]
-[ext_resource type="PackedScene" path="res://Assets/Models/Artifacts/anvil.tscn" id="145_gve0t"]
-[ext_resource type="PackedScene" path="res://Assets/Models/Artifacts/SwordArtifact.tscn" id="146_mjf4u"]
+[ext_resource type="PackedScene" uid="uid://donwwd8qcr81" path="res://Assets/Models/Artifacts/anvil.tscn" id="145_gve0t"]
+[ext_resource type="PackedScene" uid="uid://cvtvm7mrtokpj" path="res://Assets/Models/Artifacts/SwordArtifact.tscn" id="146_mjf4u"]
 [ext_resource type="PackedScene" uid="uid://c50mdkq05tb0a" path="res://Assets/Models/Artifacts/foxArtifact.tscn" id="147_kndku"]
 [ext_resource type="PackedScene" uid="uid://bxc6iy5ufcn5o" path="res://Assets/Models/Artifacts/egyptian_pottery.tscn" id="148_nr0w7"]
 [ext_resource type="PackedScene" uid="uid://b4tlvxvctdh1s" path="res://Assets/Models/Artifacts/fanacruiser_mini.tscn" id="149_fc1pl"]
 [ext_resource type="PackedScene" uid="uid://buexavqrgp5p4" path="res://Assets/Models/Artifacts/girafArtifact.tscn" id="150_0nfu5"]
 [ext_resource type="PackedScene" uid="uid://dx17tuuy4hy6c" path="res://Assets/Models/Artifacts/arctic_island.tscn" id="150_oyqrn"]
 [ext_resource type="PackedScene" uid="uid://bn0fum5ah3k2i" path="res://Assets/Models/LowPolyMuseumAssets/InfoTableWColider.tscn" id="151_0nfu5"]
-[ext_resource type="PackedScene" path="res://Assets/Models/Artifacts/urnArtifact.tscn" id="152_gve0t"]
+[ext_resource type="PackedScene" uid="uid://cxjfwian8c01y" path="res://Assets/Models/Artifacts/urnArtifact.tscn" id="152_gve0t"]
 [ext_resource type="PackedScene" uid="uid://boju5s1hjis3b" path="res://Assets/Models/Artifacts/godot_plush.tscn" id="153_kndku"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_q60mh"]
@@ -178,7 +178,7 @@ size = Vector3(0.5173547, 4.501465, 1.1641464)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k6qtt"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(1.2479721, 1.839512, 1.839512, 1)
+shader_parameter/albedo_color = Color(0.7347555, 1.440487, 1.8247963, 1)
 shader_parameter/albedo_texture = ExtResource("1_hwn0u")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -203,7 +203,7 @@ shader_parameter/pattern_blend = 0.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfi7s"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(1.2479721, 1.839512, 1.839512, 1)
+shader_parameter/albedo_color = Color(0.7347555, 1.440487, 1.8247963, 1)
 shader_parameter/albedo_texture = ExtResource("1_hwn0u")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -228,10 +228,11 @@ shader_parameter/pattern_blend = 0.2
 [sub_resource type="BoxShape3D" id="BoxShape3D_hfjl6"]
 size = Vector3(2.132854, 4.501465, 1.1641464)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hklq8"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_roa80"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(0.32941177, 0.16078432, 0.015686275, 1)
+shader_parameter/albedo_color = Color(0.40820307, 0.2720812, 0.17313251, 1)
+shader_parameter/albedo_texture = ExtResource("1_hwn0u")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0
@@ -252,10 +253,60 @@ shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_roa80"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2bso"]
 render_priority = 0
 shader = ExtResource("40_0hqwr")
-shader_parameter/albedo_color = Color(1.6333059, 1.4199339, 0.334247, 1)
+shader_parameter/albedo_color = Color(0.40820307, 0.2720812, 0.17313251, 1)
+shader_parameter/albedo_texture = ExtResource("1_hwn0u")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s70ag"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/albedo_color = Color(1.353256, 1.196216, 0.4685975, 1)
+shader_parameter/albedo_texture = ExtResource("1_hwn0u")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ihp2j"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/albedo_color = Color(1.353256, 1.196216, 0.4685975, 1)
 shader_parameter/albedo_texture = ExtResource("1_hwn0u")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
@@ -279,6 +330,31 @@ shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fqovw"]
 size = Vector3(2.954021, 4.501465, 1.1641464)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_072iw"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/albedo_color = Color(0.552487, 0.8078506, 0.9352957, 1)
+shader_parameter/albedo_texture = ExtResource("1_hwn0u")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_q60mh"]
 size = Vector3(0.80526733, 4.501465, 0.8600464)
@@ -2028,6 +2104,30 @@ points = PackedVector3Array(0.33890283, 0.041354246, -0.852683, 0.25668728, 0.14
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sujt1"]
 points = PackedVector3Array(0.014653407, 0.037870154, 0.013941973, -0.0033236817, 0.0034027195, -0.026872851, -0.0048565567, 0.00036691356, -0.025928162, 0.027382476, 0.00108949, -0.007904303, -0.015631467, 0.0005884401, 0.016984142, -0.0031737944, 0.03532036, -0.011602559, 0.013931306, 0.0012009452, 0.022626843, -0.018872347, 0.023090828, -0.0062971213, 0.017621836, 0.02767562, -0.013954787, 0.0030126786, 0.03793426, 0.017161405, -0.022873897, 0.0003875856, -0.005530502, 0.021739341, 0.030128729, 0.010887065, 0.017465053, 0.0382837, -0.0054397495, -7.525748e-05, 0.01844836, -0.025891906, 0.018665146, 0.0011569008, -0.020430377, 0.02729726, 0.0011520709, 0.010146322, -0.013187744, 0.028428126, 0.008382994, 0.009539662, -0.00040402263, 0.022056883, -0.0226157, 0.0005852494, 0.009235235, -0.019498082, 0.0005968219, -0.014018519, -0.002696516, -0.00040402263, -0.02688783, 0.0029644812, 0.0368459, -0.013135061, 0.011987921, 0.03956984, 0.017161405, -0.0023066592, 0.018459294, -0.025661724, 0.020026095, 0.019965807, -0.015568938, 0.01181696, 0.000748587, 0.023243172, -0.013295192, 0.0005942355, 0.018531855, 0.0054609366, 0.038748138, 0.01797648, -0.0062945075, 0.032325767, 0.013829418, 0.026420295, 0.0012209335, -0.012550778, 0.023945402, 0.016867356, -0.006275652, -0.016458375, 0.026187822, 0.0030465403)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hklq8"]
+render_priority = 0
+shader = ExtResource("40_0hqwr")
+shader_parameter/albedo_color = Color(0.32941177, 0.16078432, 0.015686275, 1)
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qpwuq"]
 size = Vector3(2.0000005, 4, 2)
@@ -6814,7 +6914,7 @@ shape = SubResource("BoxShape3D_3u1s1")
 [node name="Arch13" type="MeshInstance3D" parent="NavigationRegion3D/KEEP5" unique_id=1936141189]
 transform = Transform3D(-5.507635e-08, 0, 1, 0, 1, 0, -1.26, 0, -4.371139e-08, -12.148045, -9.536743e-07, 0.7763519)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("ShaderMaterial_hklq8")
+surface_material_override/0 = SubResource("ShaderMaterial_roa80")
 
 [node name="Collider" type="StaticBody3D" parent="NavigationRegion3D/KEEP5/Arch13" unique_id=1659691837]
 
@@ -6849,7 +6949,7 @@ shape = SubResource("BoxShape3D_3u1s1")
 [node name="Arch17" type="MeshInstance3D" parent="NavigationRegion3D/KEEP5" unique_id=895005354]
 transform = Transform3D(-1.26, 0, -8.742278e-08, 0, 1, 0, 1.101527e-07, 0, -1, -34.148045, -9.536743e-07, -7.223648)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("ShaderMaterial_hklq8")
+surface_material_override/0 = SubResource("ShaderMaterial_e2bso")
 
 [node name="Collider" type="StaticBody3D" parent="NavigationRegion3D/KEEP5/Arch17" unique_id=1302234459]
 
@@ -6884,7 +6984,7 @@ shape = SubResource("BoxShape3D_3u1s1")
 [node name="Arch18" type="MeshInstance3D" parent="NavigationRegion3D/KEEP5" unique_id=836595224]
 transform = Transform3D(-1.26, 0, -8.742278e-08, 0, 1, 0, 1.101527e-07, 0, -1, -34.148045, -9.536743e-07, -29.023647)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("ShaderMaterial_roa80")
+surface_material_override/0 = SubResource("ShaderMaterial_s70ag")
 
 [node name="Collider" type="StaticBody3D" parent="NavigationRegion3D/KEEP5/Arch18" unique_id=1253359561]
 
@@ -6919,7 +7019,7 @@ shape = SubResource("BoxShape3D_3u1s1")
 [node name="Arch19" type="MeshInstance3D" parent="NavigationRegion3D/KEEP5" unique_id=1855145289]
 transform = Transform3D(-5.507635e-08, 0, 1, 0, 1, 0, -1.26, 0, -4.371139e-08, -9.148045, -9.536743e-07, -34.223648)
 mesh = ExtResource("4_hlvdx")
-surface_material_override/0 = SubResource("ShaderMaterial_roa80")
+surface_material_override/0 = SubResource("ShaderMaterial_ihp2j")
 
 [node name="Collider" type="StaticBody3D" parent="NavigationRegion3D/KEEP5/Arch19" unique_id=472016805]
 
@@ -6954,6 +7054,7 @@ shape = SubResource("BoxShape3D_3u1s1")
 [node name="Arch24" type="MeshInstance3D" parent="NavigationRegion3D/KEEP5" unique_id=186429655]
 transform = Transform3D(1.6379999, 0, 0, 0, 1, 0, 0, 0, 1, -0.14804459, -9.536743e-07, -39.223648)
 mesh = ExtResource("4_hlvdx")
+surface_material_override/0 = SubResource("ShaderMaterial_072iw")
 
 [node name="Collider" type="StaticBody3D" parent="NavigationRegion3D/KEEP5/Arch24" unique_id=983399301]
 
@@ -7255,7 +7356,7 @@ transform = Transform3D(-4.3711395e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1.
 shape = SubResource("BoxShape3D_3u1s1")
 
 [node name="Arch6" type="MeshInstance3D" parent="NavigationRegion3D/KEEP5" unique_id=937350531]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12, 0, 0.4)
+transform = Transform3D(-5.27465e-08, 0, 1, 0, 1, 0, -1.2066993, 0, -4.371139e-08, 12, 0, 0.57172036)
 mesh = ExtResource("18_5p3k1")
 surface_material_override/0 = ExtResource("19_hdtnq")
 
@@ -15012,7 +15113,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 transform = Transform3D(0.0015706818, -0.019912345, -0.07229129, 0, 0.07230717, -0.019916708, 0.074983545, 0.00041710428, 0.0015142871, 0, 0.02632384, -0.19379231)
 
 [node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam8/CameraMount" parent_id_path=PackedInt32Array(68353345, 1455180780) index="0" unique_id=122643301]
-transform = Transform3D(0.020942407, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.99977976, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
+transform = Transform3D(0.020942405, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.99977964, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="SecCam9" parent="NavigationRegion3D/SecCams" unique_id=1079123194 instance=ExtResource("38_oetox")]
 transform = Transform3D(-0.834848, 0, 0.55048066, 0, 1, 0, -0.5504808, 0, -0.8348478, -38.38813, 3.7884734, -28.118204)
@@ -15061,7 +15162,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 transform = Transform3D(0.06802828, -0.013345306, -0.0286191, 0, 0.06797308, -0.031696368, 0.031577673, 0.02875, 0.06165457, 0, 0.02632384, -0.19379231)
 
 [node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam10/CameraMount" parent_id_path=PackedInt32Array(1035098128, 1455180780) index="0" unique_id=122643301]
-transform = Transform3D(0.9070437, 0.17793733, -0.38158756, 0, 0.90630734, 0.4226178, 0.42103565, -0.38333318, 0.82206005, -0.025421388, 0.04192185, -0.24309254)
+transform = Transform3D(0.9070437, 0.17793733, -0.38158756, 0, 0.90630734, 0.42261776, 0.42103565, -0.38333318, 0.82206005, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="SecCam7" parent="NavigationRegion3D/SecCams" unique_id=333764158 instance=ExtResource("38_oetox")]
 transform = Transform3D(1.1924882e-08, 0, -0.99999994, 0, 1, 0, 1.0000001, 0, 1.192488e-08, 6.3176436, 8.152581, 4.1058974)
@@ -15424,7 +15525,7 @@ shape = SubResource("BoxShape3D_8sa2x")
 [node name="FootBridge_1_1 Asia" parent="NavigationRegion3D" unique_id=1653724722 instance=ExtResource("71_nkopf")]
 transform = Transform3D(-4.3700133e-08, 9.916947e-10, 1, 0.022687333, 0.99974257, 0, -0.99974257, 0.022687333, -4.371139e-08, -34.24906, 0.08229786, -26.127047)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 548211199) index="0" unique_id=45753599]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 1756286395) index="0" unique_id=45753599]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1/StaticBody3D" unique_id=768545802]
 shape = SubResource("ConcavePolygonShape3D_q2a4x")
@@ -15659,7 +15760,7 @@ shape = SubResource("BoxShape3D_jqi5k")
 [node name="Stairs_2 Asia3" parent="NavigationRegion3D" unique_id=1621005949 instance=ExtResource("70_ol4g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.20336, -0.9259999, -24.636557)
 
-[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=1183962040]
+[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=1434228984]
 visible = false
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia3" unique_id=702406281]
