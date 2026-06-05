@@ -19,6 +19,9 @@ extends Node3D
 ]
 @export var versus_duration: float = 3.0
 @export var fly_to_player_time: float = 1.5
+@export var chameleon_skin_materials: Array[Material]
+@export var rhino_skin_materials: Array[Material]
+
 
 @export_group("Transition & Blend Timings")
 @export var pre_game_fade_to_black_time: float = 1.0
@@ -37,6 +40,7 @@ extends Node3D
 @onready var versus_pos: Marker3D = $CutsceneMarkers/VersusPos
 @onready var left_spawn: Marker3D = $CutsceneMarkers/VersusPos/LeftSpawn
 @onready var right_spawn: Marker3D = $CutsceneMarkers/VersusPos/RightSpawn
+
 
 var default_intro_cull_mask: int
 var local_player: Node3D
@@ -238,7 +242,8 @@ func setup_versus_lineup():
 		var model = preplaced_thieves[i]
 		if i < robbers.size():
 			model.show()
-			play_emote(model, "Idle1") # Start in idle during the fade-in!
+			apply_versus_skin(model, robbers[i])
+			play_emote(model, "Idle1")
 			add_name_tag_to_model(model, get_display_name(robbers[i]))
 		else:
 			model.hide()
@@ -247,10 +252,65 @@ func setup_versus_lineup():
 		var model = preplaced_cops[i]
 		if i < cops.size():
 			model.show()
-			play_emote(model, "Idle") # Start in idle during the fade-in!
+			apply_versus_skin(model, cops[i])
+			play_emote(model, "Idle")
 			add_name_tag_to_model(model, get_display_name(cops[i]))
 		else:
 			model.hide()
+
+func apply_versus_skin(model: Node3D, real_player: Node3D) -> void:
+	var player_id := str(real_player.name).to_int()
+	var role = real_player.get("team_index")
+
+	if not GameManager.players.has(player_id):
+		print("Versus skin: No GameManager data for player ", player_id)
+		return
+
+	if role == GameManager.PlayerRole.COP:
+		var skin_index = GameManager.players[player_id].get("rhino_skin", 0)
+		apply_rhino_versus_skin(model, skin_index)
+	else:
+		var skin_index = GameManager.players[player_id].get("chameleon_skin", 0)
+		apply_chameleon_versus_skin(model, skin_index)
+
+
+func apply_chameleon_versus_skin(model: Node3D, skin_index: int) -> void:
+	if chameleon_skin_materials.is_empty():
+		print("Versus skin: No chameleon materials assigned.")
+		return
+
+	skin_index = clampi(skin_index, 0, chameleon_skin_materials.size() - 1)
+	var selected_material := chameleon_skin_materials[skin_index].duplicate()
+
+	var mesh := model.find_child("Chameleon", true, false) as MeshInstance3D
+
+	if mesh:
+		mesh.set_surface_override_material(0, selected_material)
+		print("Applied versus chameleon skin: ", skin_index)
+	else:
+		print("Versus skin: Could not find Chameleon mesh on ", model.name)
+
+
+func apply_rhino_versus_skin(model: Node3D, skin_index: int) -> void:
+	if rhino_skin_materials.is_empty():
+		print("Versus skin: No rhino materials assigned.")
+		return
+
+	skin_index = clampi(skin_index, 0, rhino_skin_materials.size() - 1)
+	var selected_material := rhino_skin_materials[skin_index].duplicate()
+
+	var body := model.find_child("Rhino_Body", true, false) as MeshInstance3D
+	var head := model.find_child("Rhino_Head", true, false) as MeshInstance3D
+
+	if body:
+		body.material_override = selected_material
+		print("Applied versus rhino body skin: ", skin_index)
+	else:
+		print("Versus skin: Could not find Rhino_Body on ", model.name)
+
+	if head:
+		head.material_override = selected_material
+		print("Applied versus rhino head skin: ", skin_index)
 
 func play_versus_taunts():
 	var preplaced_thieves = get_dummies(right_spawn)

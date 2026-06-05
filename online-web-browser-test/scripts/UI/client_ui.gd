@@ -849,6 +849,7 @@ func _on_game_started() -> void:
 			# Since RPCs and MultiplayerSpawner use the same reliable network channel, 
 			# they are guaranteed to arrive in order on the clients!
 			await get_tree().process_frame
+			await get_tree().process_frame
 			
 			for id in GameManager.players.keys():
 				var pf = spawned.get_node_or_null(str(id))
@@ -958,8 +959,11 @@ func _update_chameleon_preview() -> void:
 	)
 
 func _update_rhino_preview() -> void:
+	print("--- Updating rhino preview ---")
+	print("Selected rhino skin: ", selected_rhino_skin)
+
 	if rhino_skin_materials.is_empty():
-		print("No rhino materials assigned.")
+		print("ERROR: Rhino materials empty.")
 		return
 
 	if rhino_spawn == null:
@@ -969,19 +973,19 @@ func _update_rhino_preview() -> void:
 	var body := rhino_spawn.find_child("Rhino_Body", true, false) as MeshInstance3D
 	var head := rhino_spawn.find_child("Rhino_Head", true, false) as MeshInstance3D
 
+	var selected_material := rhino_skin_materials[selected_rhino_skin].duplicate()
+
 	if body:
-		body.set_surface_override_material(
-			0,
-			rhino_skin_materials[selected_rhino_skin]
-		)
+		body.show()
+		body.material_override = selected_material
+		print("Applied rhino preview skin to BODY: ", selected_rhino_skin)
 	else:
 		print("ERROR: Could not find Rhino_Body under PreviewSpawn.")
 
 	if head:
-		head.set_surface_override_material(
-			0,
-			rhino_skin_materials[selected_rhino_skin]
-		)
+		head.show()
+		head.material_override = selected_material
+		print("Applied rhino preview skin to HEAD: ", selected_rhino_skin)
 	else:
 		print("ERROR: Could not find Rhino_Head under PreviewSpawn.")
 

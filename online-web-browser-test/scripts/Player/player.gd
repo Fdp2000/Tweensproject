@@ -152,15 +152,28 @@ func _apply_team_colors():
 
 @rpc("any_peer", "call_remote", "reliable")
 func request_initial_sync():
-	if not multiplayer.is_server(): return
+	if not multiplayer.is_server():
+		return
+
 	var sender = multiplayer.get_remote_sender_id()
-	
 	var is_new = time_alive < 2.0
-	
-	# Send the correct transform, team, and name to the client who just loaded this player!
+
 	rpc_id(sender, "_set_spawn_transform", global_transform, is_new)
 	rpc_id(sender, "sync_team", team_index)
 	rpc_id(sender, "_sync_name", player_name)
+
+	# Extra safety: send the correct skin to late/new clients.
+	var player_id := str(name).to_int()
+	var skin_index := 0
+
+	if GameManager.players.has(player_id):
+		if team_index == GameManager.PlayerRole.COP:
+			skin_index = GameManager.players[player_id].get("rhino_skin", 0)
+		else:
+			skin_index = GameManager.players[player_id].get("chameleon_skin", 0)
+
+	rpc_id(sender, "apply_skin", skin_index)
+	print("Sent initial skin sync for player ", player_id, " skin: ", skin_index)
 
 
 

@@ -306,6 +306,30 @@ func _custom_physics_process(delta, direction):
 		var clamped_pitch = clamp(pitch, -1.0, 1.0)
 		anim_tree.set("parameters/HeadAim/blend_position", clamped_pitch)
 		
+		
+		
+@rpc("any_peer", "call_local", "reliable")
+func apply_skin(skin_index: int) -> void:
+	print("COP apply_skin called on: ", name, " index: ", skin_index)
+
+	if skin_materials.is_empty():
+		print("No rhino skin materials assigned on ", name)
+		return
+
+	skin_index = clampi(skin_index, 0, skin_materials.size() - 1)
+	var selected_material := skin_materials[skin_index].duplicate()
+
+	var body := get_node_or_null("Næsehorn2/metarig/Skeleton3D/Rhino_Body") as MeshInstance3D
+	var head := get_node_or_null("Næsehorn2/metarig/Skeleton3D/Rhino_Head") as MeshInstance3D
+
+	if body:
+		body.material_override = selected_material
+		print("Applied rhino skin to body")
+
+	if head:
+		head.material_override = selected_material
+		print("Applied rhino skin to head")
+
 func _detect_capture():
 	# We are already a child of SpawnedObjects!
 	var spawned = get_parent()
