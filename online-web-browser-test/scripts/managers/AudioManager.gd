@@ -24,7 +24,7 @@ var SFX_CONFIG = {
 	"rescue_success": {"path": "res://Assets/Sound/SFX/Rescue Progress/cha milli.wav", "volume": -12.0, "bus": "Loud SFX", "max_distance": 30.0, "unit_size": 14.0},
 	
 	# Lobby / Pre-game SFX
-	"join_lobby":     {"path": "res://Assets/Sound/SFX/PlayerJoin/virtual_vibes-cinematic-thud-fx-379991.wav", "volume": -4.5, "bus": "SFX", "max_distance": 20.0, "unit_size": 6.0, "attenuation": AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC},
+	"join_lobby":     {"path": "res://Assets/Sound/SFX/PlayerJoin/virtual_vibes-cinematic-thud-fx-379991.wav", "volume": -4.5, "bus": "Loud SFX", "max_distance": 20.0, "unit_size": 6.0, "attenuation": AudioStreamPlayer3D.ATTENUATION_LOGARITHMIC},
 	"footstep_thief": {
 		"paths": ["res://Assets/Sound/SFX/Thief Footstep/Final Theif footsteps1.wav", "res://Assets/Sound/SFX/Thief Footstep/Final Theif footsteps2.wav"], 
 		"volume": -12.0, "bus": "Quiet SFX", "random_pitch": [0.9, 1.1],
@@ -32,12 +32,12 @@ var SFX_CONFIG = {
 	},
 	"footstep_cop": {
 		"paths": ["res://Assets/Sound/SFX/Cop Footsteps/CopFootsteps1.wav", "res://Assets/Sound/SFX/Cop Footsteps/CopFootsteps3.wav", "res://Assets/Sound/SFX/Cop Footsteps/CopFootsteps4.wav"], 
-		"volume": -12.0, "bus": "SFX", "random_pitch": [0.85, 1.05],
+		"volume": -12.0, "bus": "Quiet SFX", "random_pitch": [0.85, 1.05],
 		"max_distance": 40.0, "unit_size": 13.0
 	},
 	"footstep_cop_charge": {
 		"path": "res://Assets/Sound/SFX/Cop Footsteps/Cop Chargefootstep.wav", 
-		"volume": -10.0, "bus": "SFX", "random_pitch": [0.95, 1.05],
+		"volume": -10.0, "bus": "Loud SFX", "random_pitch": [0.95, 1.05],
 		"max_distance": 55.0, "unit_size": 18.0
 	},
 	"footstep_cop_debuff": {
@@ -51,15 +51,15 @@ var SFX_CONFIG = {
 			"res://Assets/Sound/SFX/Cops Breath/Breath2.wav",
 			"res://Assets/Sound/SFX/Cops Breath/Breath3.wav"
 		],
-		"volume": -8.0, "bus": "SFX", "max_distance": 25.0, "unit_size": 12.0
+		"volume": -8.0, "bus": "Quiet SFX", "max_distance": 25.0, "unit_size": 12.0
 	},
 	"cop_vocals_grunt": {"path": "res://Assets/Sound/SFX/RhinoCharge.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
 	"charge_wall_impact": {"path": "res://Assets/Sound/SFX/RhinoImpact.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
 
 	"capture":          {"path": "res://Assets/Sound/SFX/Capture/bonk_BEtiM8g.wav", "volume": -9.0,  "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 45.4},
 	"jailed":           {"path": "res://Assets/Sound/SFX/Jail Capture/Jail.wav", "volume": -4.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0},
-	"artifact_pickup":  {"path": "res://Assets/Sound/SFX/Aritfact Pick/ArtifactPickup.wav", "volume": -14.0, "bus": "SFX", "max_distance": 10.0, "unit_size": 3.0},
-	"artifact_drop":    {"path": "res://Assets/Sound/SFX/Aritfact Pick/Artifact Drop.wav",  "volume": -14.0, "bus": "SFX", "max_distance": 10.0, "unit_size": 3.0},
+	"artifact_pickup":  {"path": "res://Assets/Sound/SFX/Aritfact Pick/ArtifactPickup.wav", "volume": -14.0, "bus": "Quiet SFX", "max_distance": 10.0, "unit_size": 3.0},
+	"artifact_drop":    {"path": "res://Assets/Sound/SFX/Aritfact Pick/Artifact Drop.wav",  "volume": -14.0, "bus": "Quiet SFX", "max_distance": 10.0, "unit_size": 3.0},
 	"artifact_delivery":{"path": "res://Assets/Sound/SFX/Artifact Delivery/ArtifactDelivery.wav", "volume": -2.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0},
 	"cop_ping":         {"path": "res://Assets/Sound/SFX/Cop Ping/freesound_community-sonar-ping-95840.wav", "volume": -18.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0}
 }

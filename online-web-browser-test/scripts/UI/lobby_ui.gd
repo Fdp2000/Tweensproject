@@ -80,10 +80,6 @@ func show_lobby() -> void:
 			hide()
 			return
 
-		if client_ui.get("is_joining_room") != null and client_ui.is_joining_room:
-			hide()
-			return
-
 	if GameManager.players.is_empty():
 		hide()
 		return

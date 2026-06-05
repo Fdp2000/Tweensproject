@@ -22,7 +22,7 @@ func fade_in(duration: float = 1.5):
 
 func _on_time_updated(time_left: int):
 	if time_left < 0:
-		time_label.text = "∞:∞"
+		time_label.text = "--:--"
 		time_label.add_theme_color_override("font_color", Color.WHITE)
 		return
 		

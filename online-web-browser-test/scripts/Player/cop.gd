@@ -40,7 +40,7 @@ func _ready():
 	add_child(grunt_player)
 	
 	breath_player = AudioStreamPlayer3D.new()
-	breath_player.bus = "SFX"
+	breath_player.bus = "Quiet SFX"
 	breath_player.max_distance = 20.0
 	add_child(breath_player)
 	

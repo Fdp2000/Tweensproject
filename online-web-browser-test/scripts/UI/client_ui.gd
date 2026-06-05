@@ -600,7 +600,7 @@ func _lobby_joined(lobby_id: String) -> void:
 	if is_hosting_room:
 		hide_join_feedback()
 		DisplayServer.clipboard_set(lobby_id)
-
+		
 		if not GameManager.players.is_empty():
 			show_lobby()
 		else:
@@ -968,7 +968,7 @@ func save_selected_skins() -> void:
 func show_host_loading() -> void:
 	is_host_loading = true
 
-	host_button.text = "⏳ SERVER WAKING UP..."
+	host_button.text = "SERVER WAKING UP..."
 	host_button.disabled = true
 	join_button.disabled = true
 	play_back_button.disabled = true
@@ -1029,7 +1029,7 @@ func hide_host_loading() -> void:
 func show_join_loading() -> void:
 	is_join_loading = true
 
-	join_button.text = "🔍 FINDING ROOM..."
+	join_button.text = "FINDING ROOM..."
 	join_button.disabled = true
 	host_button.disabled = true
 	play_back_button.disabled = true
@@ -1082,7 +1082,7 @@ func show_join_wrong_code() -> void:
 	host_button.disabled = false
 	play_back_button.disabled = false
 
-	join_button.text = "❌ WRONG CODE!"
+	join_button.text = "WRONG CODE!"
 	join_button.scale = Vector2.ONE
 	join_button.modulate = Color(1.6, 0.35, 0.35, 1.0)
 

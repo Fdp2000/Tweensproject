@@ -115,7 +115,7 @@ func _ready():
 	var rescue_config = AudioManager.SFX_CONFIG.get("rescue_progress", {})
 	if rescue_config.has("path"):
 		rescue_audio_player.stream = load(rescue_config["path"])
-	rescue_audio_player.bus = rescue_config.get("bus", "SFX")
+	rescue_audio_player.bus = rescue_config.get("bus", "Quiet SFX")
 	rescue_audio_player.volume_db = rescue_config.get("volume", 0.0)
 	add_child(rescue_audio_player)
 	
