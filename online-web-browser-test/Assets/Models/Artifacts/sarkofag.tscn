@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cjaoch3uc1eq2" path="res://Assets/Models/Artifacts/Imported Files/Sarkofag_Sarkofag_Texture.png" id="1_do6u8"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_7biyj"]
+[ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="3_8c6pi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etrlt"]
 resource_name = "Sarkofag"
@@ -69,6 +70,8 @@ shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
 [node name="Sarkofag" type="Node3D" unique_id=1554870190]
+script = ExtResource("3_8c6pi")
+artifact_size = 2
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=603861468]
 transform = Transform3D(0.40759373, 0, 0, 0, 0.40759373, 0, 0, 0, 0.40759373, 0, 0, 0)
