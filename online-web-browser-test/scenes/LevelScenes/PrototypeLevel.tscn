@@ -6569,9 +6569,9 @@ spot_angle = 13.64
 [node name="ArchLight1" type="SpotLight3D" parent="Lights" unique_id=540625740]
 transform = Transform3D(-0.04968839, -0.51923186, -0.8531878, -0.004347166, -0.85412246, 0.52005386, -0.9987554, 0.029549584, 0.04018278, 8.070719, 3.6032283, 0.5447016)
 light_energy = 4.14
-spot_range = 5.63
+spot_range = 9.556649
 spot_attenuation = 0.0
-spot_angle = 39.95
+spot_angle = 76.67581
 spot_angle_attenuation = 1.8660618
 
 [node name="ArchLight6" type="SpotLight3D" parent="Lights" unique_id=1560749942]
@@ -6693,7 +6693,7 @@ spot_attenuation = -0.16
 spot_angle = 29.04
 
 [node name="ArchLight2" type="SpotLight3D" parent="Lights" unique_id=1189370427]
-transform = Transform3D(0.049878117, 0.59169775, 0.80461544, -1.4864865e-09, -0.80561817, 0.5924352, 0.99875534, -0.029549552, -0.040182717, -7.6345844, 4.6032286, 0.61357784)
+transform = Transform3D(0.049878117, 0.59169775, 0.80461544, -1.4864865e-09, -0.80561817, 0.5924352, 0.99875534, -0.029549552, -0.040182717, -7.6345844, 3.7709692, 0.61357784)
 light_energy = 4.14
 spot_range = 13.555236
 spot_attenuation = 0.0
@@ -6727,11 +6727,11 @@ spot_angle = 31.68
 spot_angle_attenuation = 2.0000005
 
 [node name="ArchLight3" type="SpotLight3D" parent="Lights" unique_id=1878720709]
-transform = Transform3D(-0.99875534, 0.02954953, 0.04018268, -0.0043471665, -0.8541224, 0.5200539, 0.049688276, 0.5192319, 0.8531877, -0.006671965, 2.6032288, -7.388561)
+transform = Transform3D(-0.99875534, 0.02954953, 0.04018268, -0.0043471665, -0.8541224, 0.5200539, 0.049688276, 0.5192319, 0.8531877, -0.006671965, 3.5789135, -7.388561)
 light_energy = 4.14
-spot_range = 13.555236
+spot_range = 8.201284
 spot_attenuation = 0.0
-spot_angle = 6.03
+spot_angle = 55.319145
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=1119828370]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0023202896, -0.032019615, -0.0009174347)
