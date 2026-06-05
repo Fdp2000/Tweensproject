@@ -238,6 +238,9 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2l85a")
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_2uxea"]
+size = Vector3(0.16473389, 0.6472473, 0.19114685)
+
 [node name="Plant" type="Node3D" unique_id=1211902803]
 transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0)
 
@@ -245,20 +248,26 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 0, 0,
 transform = Transform3D(0.30969524, 0, 0, 0, 0.30969524, 0, 0, 0, 0.30969524, 0.0004069656, 0, 0.0043358803)
 
 [node name="Leaf 2_002" type="MeshInstance3D" parent="Modular ficus plant" unique_id=1353060618]
-transform = Transform3D(-0.09618388, 0, 0.1186425, 0, 0.15273304, 0, -0.1186425, 0, -0.09618388, -0.0013140806, 0, -0.0140004745)
+transform = Transform3D(-0.06297516, 0, 0.077679664, 0, 0.1, 0, -0.077679664, 0, -0.06297516, -0.0013140806, 0, -0.0140004745)
 mesh = SubResource("ArrayMesh_q3e8r")
 surface_material_override/0 = SubResource("ShaderMaterial_2uxea")
 
 [node name="Pot_002" type="MeshInstance3D" parent="Modular ficus plant" unique_id=1920033558]
-transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, -0.0013140808, 0, -0.0140004745)
+transform = Transform3D(2.964, 0, 0, 0, 2.964, 0, 0, 0, 2.964, -0.0013140808, 0, -0.0140004745)
 mesh = SubResource("ArrayMesh_2hlst")
 surface_material_override/0 = ExtResource("2_vqu2g")
 
 [node name="Soil_002" type="MeshInstance3D" parent="Modular ficus plant" unique_id=464541086]
-transform = Transform3D(0.26365054, 0, 0, 0, 0.5940097, 0, 0, 0, 0.26365054, -0.0013140806, 0, -0.014000476)
+transform = Transform3D(0.249, 0, 0, 0, 0.56, 0, 0, 0, 0.249, -0.0013140806, 0, -0.014000476)
 mesh = SubResource("ArrayMesh_ybwvo")
 surface_material_override/0 = SubResource("ShaderMaterial_r2704")
 
 [node name="Stem 2_002" type="MeshInstance3D" parent="Modular ficus plant" unique_id=1786415933]
-transform = Transform3D(-0.08606482, 0, 0.11311746, 0, 0.14213626, 0, -0.11311746, 0, -0.08606482, -0.0013140811, 0, -0.0140004745)
+transform = Transform3D(-0.058734413, 0, 0.0771963, 0, 0.097, 0, -0.0771963, 0, -0.058734413, -0.0013140811, 0, -0.0140004745)
 mesh = SubResource("ArrayMesh_rbebw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=386550448]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=678892194]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0027160607, 0.32209778, 0.000328064)
+shape = SubResource("BoxShape3D_2uxea")
