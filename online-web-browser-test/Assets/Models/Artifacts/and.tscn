@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bmirv4lvqlkeb"]
+
+[ext_resource type="PackedScene" uid="uid://yjrdi4axu1oo" path="res://Assets/Models/Artifacts/Imported Files/And.glb" id="1_hs21q"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_ca48t"]
+[ext_resource type="Texture2D" uid="uid://cwjw15dpa3wgx" path="res://Assets/Models/Artifacts/Imported Files/And_And.png" id="3_jhkeb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xfal"]
+render_priority = 0
+shader = ExtResource("2_ca48t")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("3_jhkeb")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
+
+[node name="And" unique_id=1476661166 instance=ExtResource("1_hs21q")]
+transform = Transform3D(2.515, 0, 0, 0, 2.515, 0, 0, 0, 2.515, 0, 0, 0)
+
+[node name="Krop_008" parent="." index="0" unique_id=437500186]
+surface_material_override/0 = SubResource("ShaderMaterial_8xfal")
