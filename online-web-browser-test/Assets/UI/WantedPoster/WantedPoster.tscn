@@ -23,7 +23,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ivgya")
 [node name="NameLabel" type="Label3D" parent="MeshInstance3D" unique_id=678738030]
 transform = Transform3D(1, 0, 0, 0, 1.1924882e-08, 1, 0, -1, 1.1924882e-08, 0, 0.020000003, 0.7103134)
 sorting_offset = 1.0
-no_depth_test = true
 modulate = Color(0, 0, 0, 1)
 font = ExtResource("2_oecxv")
 font_size = 42

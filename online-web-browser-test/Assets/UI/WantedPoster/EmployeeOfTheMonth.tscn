@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c13bmoor5hpg2"]
 
-[ext_resource type="Script" uid="uid://cxeufnjo0v8ie" path="res://scripts/UI/EmployeePoster.gd" id="1_4mmdt"]
 [ext_resource type="Texture2D" uid="uid://0g4tgvon5trc" path="res://Assets/UI/WantedPoster/employeeofthemonth2.png" id="1_joi75"]
+[ext_resource type="Script" uid="uid://cxeufnjo0v8ie" path="res://scripts/UI/EmployeePoster.gd" id="1_yhm8n"]
+[ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="3_yhm8n"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4mmdt"]
 
@@ -12,7 +13,7 @@ shading_mode = 0
 albedo_texture = ExtResource("1_joi75")
 
 [node name="EmployeeOfTheMonth" type="Node3D" unique_id=1801565520]
-script = ExtResource("1_4mmdt")
+script = ExtResource("1_yhm8n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=953008041]
 transform = Transform3D(1.5, 0, 0, 0, -5.0442942e-08, -1.5, 0, 1.154, -6.556708e-08, 0, 0, 0)
@@ -20,12 +21,13 @@ mesh = SubResource("PlaneMesh_4mmdt")
 surface_material_override/0 = SubResource("StandardMaterial3D_yhm8n")
 
 [node name="NameLabel" type="Label3D" parent="MeshInstance3D" unique_id=876985490]
-transform = Transform3D(1, 0, 0, 0, 1.1924879e-08, 1, 0, -1, 1.1924882e-08, 0, 0.020000005, 0.7577778)
+transform = Transform3D(0.99999994, 0, 0, 0, 1.1924875e-08, 0.99999994, 0, -0.99999994, 1.1924882e-08, 0, 0.020000003, 0.7577778)
 sorting_offset = 1.0
-no_depth_test = true
 modulate = Color(0, 0, 0, 1)
+font = ExtResource("3_yhm8n")
 font_size = 48
 
 [node name="CharacterImage" type="Sprite3D" parent="MeshInstance3D" unique_id=383720875]
-transform = Transform3D(1, 0, 0, 0, 1.1924879e-08, 1, 0, -1, 1.1924882e-08, 0.014329244, 0.016941782, 0.19708435)
+transform = Transform3D(1, 0, 0, 0, -3.365777e-08, 0.77, 0, -0.77, -3.365777e-08, 0.014329242, 0.01694177, 0.07304425)
 sorting_offset = 1.0
+pixel_size = 0.0058

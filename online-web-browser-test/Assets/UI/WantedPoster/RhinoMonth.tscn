@@ -4,6 +4,12 @@
 [ext_resource type="Script" uid="uid://bix6lnlhx6vd6" path="res://scripts/Components/dummy_anim_receiver.gd" id="2_f1lpm"]
 [ext_resource type="Texture2D" uid="uid://bvumt2f5v76wg" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_3.png" id="3_3ibkv"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ibkv"]
+albedo_texture = ExtResource("3_3ibkv")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gcjg2"]
+albedo_texture = ExtResource("3_3ibkv")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8hel"]
 resource_name = "Næsehorns grå"
 cull_mode = 2
@@ -36,40 +42,44 @@ transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5
 script = ExtResource("2_f1lpm")
 
 [node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.011339875, 0.017517807, 0.0024768405, 0.9997792)
-bones/2/rotation = Quaternion(-0.034421526, 0.03592732, 0.008304284, 0.9987269)
-bones/3/rotation = Quaternion(-0.088847026, 0.033371482, 0.014201674, 0.9953849)
-bones/5/rotation = Quaternion(-0.60409415, -0.38175088, -0.45321846, 0.5328505)
-bones/6/rotation = Quaternion(-0.3678338, 0.6461422, -0.4232113, 0.5177749)
-bones/7/rotation = Quaternion(0.15248628, -0.0065901233, -0.009608183, 0.9882369)
-bones/8/rotation = Quaternion(-0.14909057, 0.037239734, -0.08792737, 0.98420227)
-bones/9/rotation = Quaternion(0.13710377, 0.051599264, -0.2530505, 0.9562978)
-bones/10/rotation = Quaternion(0.1507417, 0.049951278, -0.23328784, 0.9593532)
-bones/11/rotation = Quaternion(0.18116297, 0.030388623, -0.08340381, 0.9794388)
-bones/13/rotation = Quaternion(-0.5843833, 0.40863732, 0.45556375, 0.5328916)
-bones/14/position = Vector3(-0.005797534, 0.74098086, 0.24147362)
-bones/14/rotation = Quaternion(-0.27644464, 0.8992966, -0.31283706, -0.13029595)
-bones/14/scale = Vector3(1.0000005, 1, 0.9999999)
-bones/15/position = Vector3(0.61504096, 0.04071978, -0.6184562)
-bones/15/rotation = Quaternion(0.69290316, 0.15752788, -0.3748458, 0.59545004)
-bones/15/scale = Vector3(1.0000006, 0.9999999, 1.0000008)
-bones/16/rotation = Quaternion(-0.11415012, -0.049305174, 0.015364938, 0.9921204)
-bones/17/rotation = Quaternion(0.13734324, -0.05011054, 0.24293654, 0.95896184)
-bones/18/rotation = Quaternion(0.15077072, -0.04842736, 0.22335422, 0.9617879)
-bones/19/rotation = Quaternion(0.18114483, -0.030090813, 0.0808231, 0.97966766)
-bones/23/rotation = Quaternion(0.95038486, 0.1086221, -0.12956867, 0.26111645)
-bones/24/rotation = Quaternion(0.31123263, -0.027597303, -0.020674957, 0.94970804)
-bones/25/rotation = Quaternion(0.9755326, -0.0675272, 0.08370871, 0.19175303)
-bones/26/rotation = Quaternion(0.28011423, 0.03997206, 0.017830977, 0.9589684)
+bones/4/position = Vector3(-1.2498129e-09, 0.47171912, 7.329825e-09)
+bones/4/rotation = Quaternion(0.8314829, -0.05465129, 0.016421031, 0.5526119)
+bones/4/scale = Vector3(1.0000006, 1.0000001, 1.0000002)
+bones/6/position = Vector3(0.3201958, 0.6311559, -0.07756873)
+bones/6/rotation = Quaternion(0.13451387, 0.51897, -0.66956574, 0.5140602)
+bones/6/scale = Vector3(1.0000001, 1.0000002, 1)
+bones/7/position = Vector3(0.12855704, 0.7327856, 0.29317275)
+bones/7/rotation = Quaternion(0.6767456, 0.05353757, -0.2034391, 0.70552224)
+bones/7/scale = Vector3(1.0000004, 1, 0.9999999)
+bones/8/position = Vector3(-1.8933785e-07, 0.7287384, 1.1154969e-07)
+bones/8/rotation = Quaternion(-0.0640361, 0.17680264, 0.01294424, 0.9820757)
+bones/8/scale = Vector3(0.9999998, 0.99999964, 0.99999994)
+bones/9/rotation = Quaternion(0.13721259, 0.05126359, -0.25074646, 0.956907)
+bones/9/scale = Vector3(0.9999998, 0.9999998, 0.9999998)
+bones/14/position = Vector3(-0.24419084, 0.1861536, -0.16628145)
+bones/14/rotation = Quaternion(0.40054414, -0.68320876, -0.045047287, 0.60890144)
+bones/14/scale = Vector3(1.0000008, 1.0000002, 1.0000007)
+bones/15/position = Vector3(0.04167497, 0.89053494, 0.015623685)
+bones/15/rotation = Quaternion(0.19240288, 0.023196606, -0.03547049, 0.9804004)
+bones/15/scale = Vector3(1, 0.9999996, 0.99999994)
+bones/16/position = Vector3(0.01735347, 0.6383873, -0.089452334)
+bones/16/rotation = Quaternion(-0.114094585, -0.04716534, 0.014006392, 0.9922508)
+bones/16/scale = Vector3(0.9999999, 1, 0.99999994)
+
+[node name="Rhino_Body" parent="Næsehorn2/metarig/Skeleton3D" index="0" unique_id=2039285627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025727985, 0, -0.0021839142)
+material_override = SubResource("StandardMaterial3D_3ibkv")
 
 [node name="Rhino_Head" parent="Næsehorn2/metarig/Skeleton3D" index="1" unique_id=372604927]
+material_overlay = SubResource("StandardMaterial3D_gcjg2")
 mesh = SubResource("ArrayMesh_w0733")
 
 [node name="AnimationTree" parent="Næsehorn2" index="1" unique_id=1575708714]
 active = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=800658286]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.122115225, 1.7957428, -1.5801102)
+transform = Transform3D(-0.96547264, -0.067423515, -0.25162798, 0, 0.9659258, -0.25881904, 0.26050445, -0.2498827, -0.9325749, -0.08514285, 1.4422458, -1.2605721)
+fov = 75.3
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=839181131]
 transform = Transform3D(-0.99619776, 0, 0.087120965, 0, 1, 0, -0.087120965, 0, -0.99619776, 0, 1.0061958, -3.246686)
