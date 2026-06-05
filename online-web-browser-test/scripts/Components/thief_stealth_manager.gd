@@ -28,6 +28,26 @@ func setup(parent: Node3D, camo: ShaderMaterial, hypno: ShaderMaterial):
 	camo_material = camo
 	hypno_material = hypno
 	
+	if not local_outline_mat:
+		local_outline_mat = ShaderMaterial.new()
+		var shader = preload("res://Assets/Shaders/HighlightShader/newOutline.gdshader")
+		if shader:
+			local_outline_mat.shader = shader
+			local_outline_mat.set_shader_parameter("outline_color", Color(1, 1, 1, 1))
+			local_outline_mat.set_shader_parameter("outline_width", 4.0)
+			
+	# --- FORCE SHADER COMPILATION ---
+	# Spawn a tiny, invisible dummy mesh with the shader so Godot compiles it immediately
+	# instead of lagging when the player highlights their first artifact!
+	if local_outline_mat:
+		var dummy = MeshInstance3D.new()
+		dummy.mesh = BoxMesh.new()
+		dummy.material_overlay = local_outline_mat
+		dummy.scale = Vector3(0.001, 0.001, 0.001)
+		dummy.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		thief.add_child.call_deferred(dummy)
+		thief.get_tree().create_timer(2.0).timeout.connect(dummy.queue_free)
+	
 	if not _is_dual_mesh_setup:
 		_setup_dual_meshes(thief)
 		_is_dual_mesh_setup = true
@@ -152,15 +172,18 @@ func _apply_visual_states(alpha_val: float, eye_alpha_val: float, t_alpha: float
 		
 	if not local_outline_mat:
 		local_outline_mat = ShaderMaterial.new()
-		var shader = preload("res://Assets/Shaders/HighlightShader/cartoony_outline.gdshader")
+		var shader = preload("res://Assets/Shaders/HighlightShader/newOutline.gdshader")
 		if shader:
 			local_outline_mat.shader = shader
+			local_outline_mat.set_shader_parameter("outline_color", Color(1, 1, 1, 1))
+			local_outline_mat.set_shader_parameter("outline_width", 2.0)
 			
 	var stealth_amount = 1.0 - alpha_val 
 	var is_stealthed = stealth_amount > 0.01
 	
 	if local_outline_mat:
-		local_outline_mat.set_shader_parameter("stealth_fade", stealth_amount)
+		var outline_alpha = 1.0 - stealth_amount
+		local_outline_mat.set_shader_parameter("outline_color", Color(1, 1, 1, outline_alpha))
 	
 	for c_mesh in camo_meshes:
 		if is_stealthed and not is_hypnotized and not is_jailed:

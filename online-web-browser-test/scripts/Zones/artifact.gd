@@ -177,7 +177,7 @@ func confirm_pickup(player_id: int):
 			carrier.on_artifact_pickup(self)
 			cached_attachment = carrier.get_node_or_null("Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/ArtifactAttachment")
 
-var outline_mat: StandardMaterial3D = null
+static var outline_mat: ShaderMaterial = null
 
 func _process(delta):
 	if is_carried:
@@ -318,26 +318,17 @@ func set_highlight(highlighted: bool):
 
 func _apply_visuals(node: Node, highlighted: bool):
 	if not outline_mat:
-		outline_mat = StandardMaterial3D.new()
-		outline_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		outline_mat.cull_mode = BaseMaterial3D.CULL_FRONT
-		outline_mat.albedo_color = Color.WHITE
-		outline_mat.grow = true
-		outline_mat.grow_amount = 0.08
+		outline_mat = ShaderMaterial.new()
+		outline_mat.shader = preload("res://Assets/Shaders/HighlightShader/newOutline.gdshader")
+		outline_mat.set_shader_parameter("outline_color", Color(1, 1, 1, 1))
+		outline_mat.set_shader_parameter("outline_width", 4.0)
 			
-	if node is MeshInstance3D and node.name != "HighlightMesh":
+	if node is MeshInstance3D:
 		if highlighted:
-			if not node.has_node("HighlightMesh"):
-				var outline_mesh = MeshInstance3D.new()
-				outline_mesh.name = "HighlightMesh"
-				outline_mesh.mesh = node.mesh
-				outline_mesh.material_override = outline_mat
-				outline_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-				node.add_child(outline_mesh)
+			node.material_overlay = outline_mat
 		else:
-			var outline_mesh = node.get_node_or_null("HighlightMesh")
-			if outline_mesh:
-				outline_mesh.queue_free()
+			if node.material_overlay == outline_mat:
+				node.material_overlay = null
 					
 	for child in node.get_children():
 		if child.name == "InteractionArea": continue
