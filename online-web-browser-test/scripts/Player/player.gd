@@ -226,6 +226,7 @@ func toggle_camera():
 
 @export var skin_materials: Array[Material]
 @export var skin_mesh_paths: Array[NodePath]
+@export var skin_surface_index: int = 0
 
 @rpc("any_peer", "call_local", "reliable")
 func apply_skin(skin_index: int) -> void:
@@ -241,15 +242,33 @@ func apply_skin(skin_index: int) -> void:
 	for path in skin_mesh_paths:
 		var mesh := get_node_or_null(path) as MeshInstance3D
 
-		if mesh:
-			mesh.material_override = null
-
-			for i in mesh.mesh.get_surface_count():
-				mesh.set_surface_override_material(i, selected_material)
-
-			print("Applied skin to: ", mesh.name)
-		else:
+		if mesh == null:
 			print("Skin mesh path missing on ", name, ": ", path)
+			continue
+
+		if mesh.mesh == null:
+			print("Mesh has no mesh resource: ", mesh.name)
+			continue
+
+		if skin_surface_index >= mesh.mesh.get_surface_count():
+			print("Surface index too high on ", mesh.name)
+			continue
+
+		var mat_instance := selected_material.duplicate()
+
+		mesh.set_surface_override_material(skin_surface_index, mat_instance)
+
+		# IMPORTANT FIX:
+		# If the stealth manager has saved old materials,
+		# update those saved materials too, otherwise stealth will reset the skin.
+		if mesh.has_meta("orig_mats"):
+			var orig_mats: Array = mesh.get_meta("orig_mats")
+
+			if skin_surface_index < orig_mats.size():
+				orig_mats[skin_surface_index] = mat_instance
+				mesh.set_meta("orig_mats", orig_mats)
+
+		print("Applied skin to: ", mesh.name, " surface: ", skin_surface_index)
 # --- SMOOTH INTERPOLATION (Visual frames) ---
 func _process(delta):
 	time_alive += delta
