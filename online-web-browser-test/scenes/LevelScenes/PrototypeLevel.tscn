@@ -3,7 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_hwn0u"]
 [ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://Assets/Models/Prototype Models/Dingus the cat.glb" id="3_ypmvb"]
 [ext_resource type="ArrayMesh" uid="uid://g8sgle1up8mo" path="res://Assets/Models/LowPolyMuseumAssets/Arch7.res" id="4_hlvdx"]
-[ext_resource type="Texture2D" uid="uid://b732erh5onxqs" path="res://Assets/Textures/Aquaset/Marble Materials/Default_marble_tile_1.png" id="4_w6te4"]
 [ext_resource type="ArrayMesh" uid="uid://b54pytv6rsvv4" path="res://Assets/Models/LowPolyMuseumAssets/Arch8.res" id="5_dgar3"]
 [ext_resource type="PackedScene" uid="uid://ch7e52146lh35" path="res://scenes/Zones/Jail.tscn" id="5_jail"]
 [ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="6_artifact"]
@@ -41,7 +40,6 @@
 [ext_resource type="Material" uid="uid://wfem3gmpye7n" path="res://Assets/Shaders/celShader/museumCel.tres" id="31_e22mm"]
 [ext_resource type="ArrayMesh" uid="uid://qv4wgr0qt1yt" path="res://Assets/Models/LowPolyMuseumAssets/Railing.res" id="31_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://dnv58nobc7b7j" path="res://Assets/Models/LowPolyMuseumAssets/WallBigOuter.res" id="34_oc075"]
-[ext_resource type="Texture2D" uid="uid://d0etc28un66rp" path="res://Assets/Textures/pexels-photo-6555895.jpeg" id="36_r7r08"]
 [ext_resource type="PackedScene" uid="uid://bvwgdm21faobm" path="res://Assets/Models/Security Cams/SecCam.tscn" id="38_oetox"]
 [ext_resource type="ArrayMesh" uid="uid://6khnohw17drg" path="res://Assets/Models/new_array_mesh.res" id="39_88xne"]
 [ext_resource type="PackedScene" uid="uid://djq8usr0n1wxf" path="res://icycliff1.res" id="39_bva6v"]
@@ -587,9 +585,12 @@ size = Vector3(2, 0.2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bbh3k"]
 size = Vector3(2, 0.2, 2)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q2a4x"]
+load_path = "res://.godot/imported/Default_marble_tile_1.png-fed82854f9753e327248bdcc94f279f6.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sus27"]
 albedo_color = Color(0.8254343, 0.66202736, 0.51377994, 1)
-albedo_texture = ExtResource("4_w6te4")
+albedo_texture = SubResource("CompressedTexture2D_q2a4x")
 uv1_scale = Vector3(60, 60, 60)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xikmm"]
@@ -1527,8 +1528,11 @@ size = Vector3(2, 4, 0.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_4hgdr"]
 size = Vector3(2, 4, 0.5)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_61flt"]
+load_path = "res://.godot/imported/pexels-photo-6555895.jpeg-19424ae474283668cc78ea6470c767a5.s3tc.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1r7n"]
-albedo_texture = ExtResource("36_r7r08")
+albedo_texture = SubResource("CompressedTexture2D_61flt")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tmc5o"]
 size = Vector3(2, 4, 0.5)
@@ -15829,7 +15833,7 @@ shape = SubResource("BoxShape3D_jqi5k")
 [node name="Stairs_2 Asia3" parent="NavigationRegion3D" unique_id=1621005949 instance=ExtResource("70_ol4g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.20336, -0.9259999, -24.636557)
 
-[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=306052587]
+[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=578557960]
 visible = false
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia3" unique_id=702406281]
