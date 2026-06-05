@@ -320,6 +320,7 @@ func _play_tutorial_intro() -> void:
 	tutorial_button.pivot_offset = tutorial_button.size / 2.0
 	tutorial_button.text = "Tutorial"
 
+	# Small attention pulses
 	for i in 3:
 		if tutorial_intro_cancelled:
 			return
@@ -327,33 +328,92 @@ func _play_tutorial_intro() -> void:
 		var flash := create_tween()
 		tutorial_intro_tweens.append(flash)
 		flash.set_parallel(true)
-		flash.tween_property(tutorial_button, "scale", Vector2(1.12, 1.12), 0.45)
-		flash.tween_property(tutorial_button, "modulate", Color(2.0, 1.35, 0.25, 1.0), 0.45)
+
+		flash.tween_property(
+			tutorial_button,
+			"scale",
+			Vector2(1.12, 1.12),
+			0.35
+		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+		flash.tween_property(
+			tutorial_button,
+			"modulate",
+			Color(1.8, 1.35, 0.35, 1.0),
+			0.35
+		)
+
 		await flash.finished
 
 		if tutorial_intro_cancelled:
 			return
 
-		var unflash := create_tween()
-		tutorial_intro_tweens.append(unflash)
-		unflash.set_parallel(true)
-		unflash.tween_property(tutorial_button, "scale", Vector2.ONE, 0.45)
-		unflash.tween_property(tutorial_button, "modulate", Color.WHITE, 0.45)
-		await unflash.finished
+		var normal := create_tween()
+		tutorial_intro_tweens.append(normal)
+		normal.set_parallel(true)
+
+		normal.tween_property(
+			tutorial_button,
+			"scale",
+			Vector2.ONE,
+			0.35
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+		normal.tween_property(
+			tutorial_button,
+			"modulate",
+			Color.WHITE,
+			0.35
+		)
+
+		await normal.finished
 
 	if tutorial_intro_cancelled:
 		return
 
-	await get_tree().create_timer(0.35).timeout
+	# Final small pop instead of huge screen-covering grow
+	var pop := create_tween()
+	tutorial_intro_tweens.append(pop)
+	pop.set_parallel(true)
+
+	pop.tween_property(
+		tutorial_button,
+		"scale",
+		Vector2(1.25, 1.25),
+		0.18
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	pop.tween_property(
+		tutorial_button,
+		"modulate",
+		Color(2.0, 1.5, 0.45, 1.0),
+		0.18
+	)
+
+	await pop.finished
+
 	if tutorial_intro_cancelled:
 		return
 
-	var grow := create_tween()
-	tutorial_intro_tweens.append(grow)
-	grow.set_parallel(true)
-	grow.tween_property(tutorial_button, "scale", Vector2(24.0, 24.0), 1.6)
-	grow.tween_property(tutorial_button, "modulate", Color(2.0, 1.5, 0.5, 0.0), 1.6)
-	await grow.finished
+	var settle := create_tween()
+	tutorial_intro_tweens.append(settle)
+	settle.set_parallel(true)
+
+	settle.tween_property(
+		tutorial_button,
+		"scale",
+		Vector2.ONE,
+		0.22
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	settle.tween_property(
+		tutorial_button,
+		"modulate",
+		Color.WHITE,
+		0.22
+	)
+
+	await settle.finished
 
 	if tutorial_intro_cancelled:
 		return

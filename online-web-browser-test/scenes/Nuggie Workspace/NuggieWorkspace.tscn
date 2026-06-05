@@ -13,6 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="11_3qlyf"]
 [ext_resource type="PackedScene" uid="uid://hjeyxpsyjold" path="res://Assets/Models/Van/Van.tscn" id="12_pmc3y"]
 [ext_resource type="PackedScene" uid="uid://c4hqr2luw7xlf" path="res://Assets/Models/Elephant/elephant_smith.tscn" id="13_fb0o2"]
+[ext_resource type="PackedScene" uid="uid://bohw3fv6bjsmg" path="res://Assets/Models/plant.tscn" id="14_eykym"]
+[ext_resource type="PackedScene" uid="uid://dtex24b2i1te4" path="res://Assets/Models/Artifacts/sarkofag.tscn" id="15_r0t00"]
+[ext_resource type="PackedScene" uid="uid://c073t8hl180f8" path="res://Assets/Models/Artifacts/bear_LowPoly.tscn" id="16_r0t00"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
@@ -216,3 +219,12 @@ transform = Transform3D(-0.12685685, 0, -0.991921, 0, 1, 0, 0.991921, 0, -0.1268
 
 [node name="ElephantSmith" parent="." unique_id=134688640 instance=ExtResource("13_fb0o2")]
 transform = Transform3D(-0.22923432, 0, -0.97337127, 0, 1, 0, 0.97337127, 0, -0.22923432, -26.351492, 0, 3.8421307)
+
+[node name="Plant" parent="." unique_id=1211902803 instance=ExtResource("14_eykym")]
+transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, -10.495217, 0, 7.0096006)
+
+[node name="Sarkofag2" parent="." unique_id=1554870190 instance=ExtResource("15_r0t00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.462311, 0, 3.0944335)
+
+[node name="Bear2" parent="." unique_id=1537385195 instance=ExtResource("16_r0t00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9652233, 0, 6.044386)
