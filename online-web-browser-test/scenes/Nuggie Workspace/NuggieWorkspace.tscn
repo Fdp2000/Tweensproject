@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c4hqr2luw7xlf" path="res://Assets/Models/Elephant/elephant_smith.tscn" id="13_fb0o2"]
 [ext_resource type="PackedScene" uid="uid://bohw3fv6bjsmg" path="res://Assets/Models/plant.tscn" id="14_eykym"]
 [ext_resource type="PackedScene" uid="uid://dtex24b2i1te4" path="res://Assets/Models/Artifacts/sarkofag.tscn" id="15_r0t00"]
+[ext_resource type="PackedScene" uid="uid://c073t8hl180f8" path="res://Assets/Models/Artifacts/bear_LowPoly.tscn" id="16_r0t00"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_v7yhp"]
 size = Vector2(64.835, 30.21)
@@ -224,3 +225,6 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, -10.4
 
 [node name="Sarkofag2" parent="." unique_id=1554870190 instance=ExtResource("15_r0t00")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.462311, 0, 3.0944335)
+
+[node name="Bear2" parent="." unique_id=1537385195 instance=ExtResource("16_r0t00")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9652233, 0, 6.044386)
