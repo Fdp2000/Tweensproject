@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bn0fum5ah3k2i"]
+
+[ext_resource type="ArrayMesh" uid="uid://bpvov3l65q7sh" path="res://Assets/Models/LowPolyMuseumAssets/InfoDeskSmall.res" id="1_k3byx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u6ont"]
+size = Vector3(0.41937256, 0.7852783, 0.39941406)
+
+[node name="InfoTable" type="Node3D" unique_id=1459507219]
+
+[node name="InfoDeskSmall" type="MeshInstance3D" parent="." unique_id=1347002413]
+mesh = ExtResource("1_k3byx")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2064894980]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=739916392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002105713, 0.394611, -0.00048828125)
+shape = SubResource("BoxShape3D_u6ont")

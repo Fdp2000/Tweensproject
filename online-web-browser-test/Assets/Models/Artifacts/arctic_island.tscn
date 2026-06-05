@@ -68,9 +68,18 @@ shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_iv6o6"]
+size = Vector3(2.0044556, 0.9790039, 3.072998)
+
 [node name="ArcticIsland" type="Node3D" unique_id=1677135631]
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=698100749]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.5347326, 0, 0, 0)
 mesh = SubResource("ArrayMesh_upigs")
 surface_material_override/0 = SubResource("ShaderMaterial_c6f7d")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1377215595]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=473505425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009918213, 0.4880371, -0.005004883)
+shape = SubResource("BoxShape3D_iv6o6")
