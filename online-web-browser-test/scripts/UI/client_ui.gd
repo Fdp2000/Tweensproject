@@ -440,6 +440,8 @@ func move_camera_to(target_spot: Node3D) -> void:
 		print("Menu camera missing.")
 		return
 
+	menu_camera.make_current()
+
 	if target_spot == null:
 		print("Camera target spot missing.")
 		return
@@ -635,12 +637,19 @@ func _disconnected() -> void:
 
 		GameManager.full_teardown()
 
+		var was_in_lobby = lobby_ui and lobby_ui.visible
+
 		has_requested_lobby = false
 		is_joining_room = false
 		is_hosting_room = false
 
 		show_play_panel()
-		show_join_wrong_code()
+		
+		if was_in_lobby:
+			move_camera_to(play_camera_spot)
+		else:
+			show_join_wrong_code()
+			
 		return
 
 	hide_join_feedback()
@@ -655,7 +664,8 @@ func _disconnected() -> void:
 	if lobby_ui:
 		lobby_ui.hide()
 
-	show_main_menu()
+	show_play_panel()
+	move_camera_to(play_camera_spot)
 
 
 func _lobby_joined(lobby_id: String) -> void:
@@ -754,7 +764,7 @@ func _mp_peer_disconnected(id: int) -> void:
 	print("[Multiplayer] Peer disconnected: ", id)
 	GameManager.remove_player(id)
 
-func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0, 1000, 0)) -> Transform3D:
+func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0, 1000, 0), already_assigned: Array = []) -> Transform3D:
 	var spawns = get_tree().get_nodes_in_group(group_name)
 	if spawns.size() == 0: return Transform3D(Basis(), fallback_pos)
 	
@@ -768,6 +778,12 @@ func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0,
 			if child.global_position.distance_to(spawn_marker.global_position) < 1.0:
 				is_occupied = true
 				break
+				
+		for trans in already_assigned:
+			if trans.origin.distance_to(spawn_marker.global_position) < 1.0:
+				is_occupied = true
+				break
+				
 		if not is_occupied:
 			available_spawns.append(spawn_marker)
 			
@@ -811,6 +827,7 @@ func _on_game_started() -> void:
 				await get_tree().physics_frame
 
 			var assigned_spawns = {}
+			var assigned_transforms = []
 			var roles_to_spawn = [] # Queue for new nodes to prevent MultiplayerSpawner name collisions!
 			
 			for id in GameManager.players.keys():
@@ -818,11 +835,12 @@ func _on_game_started() -> void:
 				var spawn_trans = Transform3D()
 
 				if role == GameManager.PlayerRole.COP:
-					spawn_trans = get_unoccupied_spawn("cop_spawn", Vector3(0, 3, 0))
+					spawn_trans = get_unoccupied_spawn("cop_spawn", Vector3(0, 3, 0), assigned_transforms)
 				else:
-					spawn_trans = get_unoccupied_spawn("thief_spawn", Vector3(0, 3, 0))
+					spawn_trans = get_unoccupied_spawn("thief_spawn", Vector3(0, 3, 0), assigned_transforms)
 
 				assigned_spawns[id] = spawn_trans
+				assigned_transforms.append(spawn_trans)
 				var pf = spawned.get_node_or_null(str(id))
 
 				var target_scene_path = ""
