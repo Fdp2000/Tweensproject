@@ -18,6 +18,7 @@ var capture_cooldowns: Dictionary = {}
 
 # ADDED: The Tween variable for the smooth camera FOV
 var fov_tween: Tween 
+var charge_cast: ShapeCast3D
 
 var grunt_player: AudioStreamPlayer3D
 var breath_player: AudioStreamPlayer3D
@@ -43,6 +44,17 @@ func _ready():
 	breath_player.bus = "Quiet SFX"
 	breath_player.max_distance = 20.0
 	add_child(breath_player)
+	
+	charge_cast = ShapeCast3D.new()
+	charge_cast.name = "ChargeCast"
+	var box = BoxShape3D.new()
+	box.size = Vector3(0.4, 1.0, 0.5) # Narrow core
+	charge_cast.shape = box
+	charge_cast.collision_mask = 1 # Environment Layer
+	charge_cast.add_exception(self)
+	charge_cast.position = Vector3(0, 1.0, 0) # Center of body
+	charge_cast.target_position = Vector3(0, 0, -0.8) # Cast forward
+	add_child(charge_cast)
 	
 	if is_multiplayer_authority():
 		if spring_arm:
@@ -141,9 +153,31 @@ func _custom_physics_process(delta, direction):
 				
 		if is_charging:
 			charge_time_left -= delta
-			# IF THE CHARGE ENDS (Time out or hit a wall)
-			if charge_time_left <= 0 or is_on_wall():
-				if is_on_wall():
+			
+			var head_on_wall_hit = false
+			
+			if charge_cast and charge_direction != Vector3.ZERO:
+				# Orient the cast to perfectly match the charge trajectory
+				charge_cast.global_transform.basis = Basis.looking_at(charge_direction, Vector3.UP)
+				charge_cast.force_shapecast_update()
+			
+			if is_on_wall():
+				for i in get_slide_collision_count():
+					var col = get_slide_collision(i)
+					var normal = col.get_normal()
+					# Normal points OUT from the wall. charge_direction is our movement vector.
+					# A dot product < -0.5 means the wall is opposing our movement (head-on).
+					# A dot product near 0.0 means we are just grazing or sliding along it!
+					if normal.dot(charge_direction) < -0.5:
+						# Extra check: Is the narrow core collider actually hitting it?
+						# This prevents stunning when the wide shoulders snag a tiny prop edge!
+						if charge_cast and charge_cast.is_colliding():
+							head_on_wall_hit = true
+							break
+			
+			# IF THE CHARGE ENDS (Time out or hit a wall head-on)
+			if charge_time_left <= 0 or head_on_wall_hit:
+				if head_on_wall_hit:
 					rpc("play_wall_impact_rpc")
 				is_charging = false
 				charge_time_left = 0.0
