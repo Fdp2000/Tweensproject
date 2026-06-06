@@ -131,6 +131,7 @@ func _ready() -> void:
 
 	host_button.pressed.connect(_on_host_pressed)
 	join_button.pressed.connect(_on_join_pressed)
+	room_input.text_submitted.connect(_on_room_code_submitted)
 	tutorial_button.pressed.connect(_on_tutorial_pressed)
 
 	play_button.pressed.connect(_on_play_pressed)
@@ -263,6 +264,12 @@ func _rotate_camera_to_skins() -> void:
 		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+
+func _on_room_code_submitted(_submitted_text: String) -> void:
+	if is_join_loading:
+		return
+
+	_on_join_pressed()
 
 func _rotate_camera_to_menu() -> void:
 	if menu_camera == null:
