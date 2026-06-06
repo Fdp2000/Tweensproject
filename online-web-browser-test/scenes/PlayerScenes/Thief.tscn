@@ -2425,14 +2425,23 @@ bones/26/rotation = Quaternion(-0.8470922, -0.059809834, 0.042956304, 0.5263198)
 [node name="Chameleon" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="0" unique_id=1112566209]
 surface_material_override/0 = null
 
-[node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="1" unique_id=970056815]
+[node name="ArtifactAttachment" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="1" unique_id=1382092179]
+transform = Transform3D(-0.26387298, -0.44071844, 0.85798424, -0.060149282, 0.89529836, 0.44138643, -0.9626798, 0.064863004, -0.26275414, -0.39064398, 0.8133426, 0.18098077)
+
+[node name="BoneAttachment3D" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="2" unique_id=1062541616]
+transform = Transform3D(0.9867902, 0.15812558, 0.035222776, -0.08477233, 0.6892962, -0.7195025, -0.13805076, 0.7070122, 0.69359535, 0.024246704, 0.7021842, 0.10920494)
+
+[node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D" index="0" unique_id=577983357]
+transform = Transform3D(0.6268467, 0.009296886, -0.77908695, -0.15020163, 0.9826144, -0.109125346, 0.7645276, 0.18542504, 0.61734504, 0.185, 0.31700003, 0.08700001)
+
+[node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_L" index="0" unique_id=970056815]
 surface_material_override/0 = null
 
-[node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="2" unique_id=940823346]
-surface_material_override/0 = null
+[node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D" index="1" unique_id=1023489596]
+transform = Transform3D(0.69332874, 0.027610568, -0.7200923, 0.19577907, 0.9544635, 0.22509968, 0.69351697, -0.29704705, 0.65635145, -0.185, 0.317, 0.087)
 
-[node name="ArtifactAttachment" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D" index="3" unique_id=1382092179]
-transform = Transform3D(-0.26387295, -0.44071817, 0.85798407, -0.060149476, 0.8952985, 0.44138664, -0.96268, 0.064863205, -0.26275402, -0.33817548, 0.87788886, 0.096173234)
+[node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_R" index="0" unique_id=940823346]
+surface_material_override/0 = null
 
 [node name="AnimationPlayer" parent="Chameleon_Character" index="1" unique_id=1955452292]
 libraries/ = SubResource("AnimationLibrary_7jg2g")

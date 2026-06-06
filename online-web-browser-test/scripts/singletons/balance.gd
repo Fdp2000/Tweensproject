@@ -45,7 +45,7 @@ var artifact_large_speed_multiplier: float = 0.5 # 50% Speed
 
 var delivery_zone_radius: float = 3.25
 var interact_shape_size: float = 2.25
-var camera_wall_radius: float = 0.5
+var camera_wall_radius: float = 0.15
 
 # ==========================================
 # 5. MATCH STRUCTURE & SCALING
