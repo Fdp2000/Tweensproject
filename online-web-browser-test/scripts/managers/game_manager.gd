@@ -44,6 +44,7 @@ var cached_scoreboard: Control = null
 
 var selected_chameleon_skin: int = 0
 var selected_rhino_skin: int = 0
+var employee_of_month_id: int = -1
 
 func _ready():
 	print("GameManager is ready.")
@@ -92,6 +93,10 @@ func set_player_force_role(peer_id: int, role_string: String):
 	if multiplayer.is_server():
 		forced_teams[peer_id] = role_string
 
+@rpc("any_peer", "call_local", "reliable")
+func sync_employee_of_month(chosen_id: int) -> void:
+	employee_of_month_id = chosen_id
+	print("Employee of the Month synced: ", employee_of_month_id)
 
 @rpc("any_peer", "call_local", "reliable")
 func sync_time(time_left: int):
@@ -146,6 +151,8 @@ func remove_player(id: int):
 				var player_node = spawned.get_node_or_null(str(id))
 				if player_node:
 					player_node.queue_free()
+
+
 
 
 @rpc("any_peer", "call_local")
@@ -238,6 +245,21 @@ func start_game(role_assignments: Dictionary):
 
 	if multiplayer.is_server():
 		print("SERVER PLAYERS DICTIONARY: ", players)
+
+	if multiplayer.is_server():
+		var rhino_ids := []
+
+		for id in players.keys():
+			if players[id].get("role", PlayerRole.THIEF) == PlayerRole.COP:
+				rhino_ids.append(id)
+
+		if rhino_ids.size() > 0:
+			employee_of_month_id = rhino_ids.pick_random()
+		else:
+			employee_of_month_id = -1
+
+		rpc("sync_employee_of_month", employee_of_month_id)
+		print("Host chose Employee of the Month: ", employee_of_month_id)
 
 	game_started.emit()
 

@@ -18,8 +18,9 @@ func _ready() -> void:
 
 
 func _on_game_started() -> void:
-	# Wait a tiny bit so GameManager.players roles/skins are ready.
 	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().create_timer(0.1).timeout
 	build_posters_from_players()
 
 
@@ -65,7 +66,13 @@ func build_posters_from_players() -> void:
 	# Second pass:
 	# Pick ONE random rhino for Employee of the Month.
 	if rhino_players.size() > 0 and employee_markers.size() > 0:
-		var chosen_rhino = rhino_players.pick_random()
+		var chosen_id: int = GameManager.employee_of_month_id
+
+		if chosen_id == -1 or not GameManager.players.has(chosen_id):
+			print("No valid Employee of the Month chosen.")
+			return
+
+		var chosen_rhino: Dictionary = GameManager.players[chosen_id]
 
 		var employee_name: String = chosen_rhino.get("name", "Employee")
 		var rhino_skin_index: int = chosen_rhino.get("rhino_skin", 0)
@@ -79,6 +86,8 @@ func build_posters_from_players() -> void:
 			poster.setup_poster(employee_name, rhino_texture)
 
 		spawned_posters.append(poster)
+
+		print("Employee of the Month poster created for: ", employee_name)
 	else:
 		print("No rhinos found, or no employee poster spawn point.")
 
