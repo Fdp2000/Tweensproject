@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cns5sdtsx6skt"]
+
+[ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_a4dp6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spq1a"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_j5g4a"]
+viewport_path = NodePath("Node3D/StartGameViewport")
+
+[node name="Node3D" type="Node3D" unique_id=2050935933]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=168692832]
+
+[node name="StartGameViewport" type="SubViewport" parent="Node3D" unique_id=210594237]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Root" type="Control" parent="Node3D/StartGameViewport" unique_id=740639217]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MainMenuPanel" type="Panel" parent="Node3D/StartGameViewport/Root" unique_id=1220264855]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_spq1a")
+
+[node name="MarginContainer" type="MarginContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel" unique_id=878847182]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer" unique_id=914836077]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1987581129]
+custom_minimum_size = Vector2(1980, 0)
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_a4dp6")
+theme_override_font_sizes/font_size = 180
+text = "[E] Leave Game"
+horizontal_alignment = 1
+
+[node name="MainMenuSprite3D" type="Sprite3D" parent="Node3D" unique_id=1909739206]
+pixel_size = 0.002083
+texture = SubResource("ViewportTexture_j5g4a")
