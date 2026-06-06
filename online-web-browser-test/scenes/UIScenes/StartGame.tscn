@@ -56,7 +56,7 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_tr13f")
 theme_override_font_sizes/font_size = 140
-text = "Press [E] To Start Game"
+text = "[E] Start Game"
 horizontal_alignment = 1
 script = ExtResource("2_ijvm3")
 
