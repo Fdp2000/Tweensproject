@@ -5,14 +5,14 @@
 [ext_resource type="PackedScene" uid="uid://bd366vecbeek4" path="res://scenes/UIScenes/StartGame.tscn" id="1_j52o3"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_ggw6v"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
+[ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
+[ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
 [ext_resource type="PackedScene" uid="uid://bohw3fv6bjsmg" path="res://Assets/Models/plant.tscn" id="5_bdf01"]
 [ext_resource type="ArrayMesh" uid="uid://cfrox0r0ijrnf" path="res://Assets/Models/LowPolyMuseumAssets/RopeBarrier.res" id="6_j52o3"]
-[ext_resource type="PackedScene" uid="uid://d3r4u5v3otke8" path="res://Assets/Models/Van/Imported/WhiteVan.glb" id="7_8hcqs"]
 [ext_resource type="ArrayMesh" uid="uid://de8vjbrnt64xx" path="res://Assets/Models/LowPolyMuseumAssets/Picture1Image.res" id="8_hei78"]
 [ext_resource type="Texture2D" uid="uid://pxnaec5xw5hy" path="res://Skærmbillede 2026-06-06 kl. 12.37.01.png" id="9_h5wqj"]
 [ext_resource type="Texture2D" uid="uid://cly5kof4jdp88" path="res://Skærmbillede 2026-06-06 kl. 12.41.16.png" id="10_7e4js"]
+[ext_resource type="PackedScene" uid="uid://hjeyxpsyjold" path="res://Assets/Models/Van/Van.tscn" id="10_hbusi"]
 [ext_resource type="Texture2D" uid="uid://c5b78j4p1lpd6" path="res://Skærmbillede 2026-06-06 kl. 12.43.29.png" id="11_r8xeu"]
 [ext_resource type="Texture2D" uid="uid://dbyiubgkm3tuj" path="res://Assets/UI/Tutorailthief 1Crop.png" id="11_xeelm"]
 [ext_resource type="Texture2D" uid="uid://nirucokj6nb1" path="res://Assets/UI/Tutorailthief 2Crop2.png" id="12_4xhut"]
@@ -436,6 +436,15 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k8akl")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wlwr0"]
+size = Vector3(2.4086852, 1.9660385, 2.3726978)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rvpsd"]
+size = Vector3(0.102573514, 1.1960015, 0.8303523)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tfjox"]
+size = Vector3(0.102573514, 1.1960015, 0.8303523)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmuqk"]
 albedo_texture = ExtResource("9_h5wqj")
@@ -977,8 +986,36 @@ mesh = ExtResource("6_j52o3")
 transform = Transform3D(1.4699999, 0, 0, 0, 1, 0, 0, 0, 1, 14.1, 0, -7)
 mesh = ExtResource("6_j52o3")
 
-[node name="WhiteVan" parent="." unique_id=955867393 instance=ExtResource("7_8hcqs")]
-transform = Transform3D(-1.8795896e-08, 0, -0.31046, 0, 0.43, 0, 0.43, 0, -1.3570638e-08, 19.4, 0.1, 10.900001)
+[node name="WhiteVan2" parent="." unique_id=628082721 instance=ExtResource("10_hbusi")]
+transform = Transform3D(-7.518358e-09, 0, -0.124184005, 0, 0.172, 0, 0.172, 0, -5.428255e-09, 19.4, 0.1, 8.035937)
+
+[node name="Van" parent="WhiteVan2" index="0" unique_id=784682784]
+transform = Transform3D(10.02, 0, -3.9172695e-14, 0, 5.01, 0, 7.834539e-14, 0, 5.01, 16.786537, 0.47575045, 0)
+surface_material_override/0 = null
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Van/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 1461634472) index="1" unique_id=228129659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06667435, 1.010426, 0)
+shape = SubResource("BoxShape3D_wlwr0")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="WhiteVan2/Van" index="1" unique_id=295325123]
+
+[node name="Door1" parent="WhiteVan2" index="1" unique_id=1180974588]
+transform = Transform3D(-8.358346, 0, 2.7630925, 0, 5.010006, 0, -5.5261827, 0, -4.1791706, 5.8014297, 5.6355286, 4.135559)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Door1/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 1037144885) index="1" unique_id=826655492]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01978314, 0.028477013, -0.41415787)
+shape = SubResource("BoxShape3D_rvpsd")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="WhiteVan2/Door1" index="1" unique_id=1643668420]
+
+[node name="Doors2" parent="WhiteVan2" index="2" unique_id=1968327037]
+transform = Transform3D(-7.1972156, 0, -3.485711, 0, 5.010005, 0, 6.971421, 0, -3.5986066, 5.5725975, 5.7399664, -4.1097565)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Doors2/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 946734434) index="1" unique_id=796022983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01978314, 0.026049197, 0.4109838)
+shape = SubResource("BoxShape3D_tfjox")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="WhiteVan2/Doors2" index="1" unique_id=1056567883]
 
 [node name="Picture1Image" type="MeshInstance3D" parent="." unique_id=1100721740]
 transform = Transform3D(-0.10785007, 0, 1.053123, 0, 0.12817217, 0, -0.14653584, 0, -0.77509636, 18.63103, 0.9999999, 8.81218)
@@ -1281,3 +1318,4 @@ surface_material_override/0 = ExtResource("31_k78oe")
 
 [editable path="Vent"]
 [editable path="Vent/PivotPoint/Sketchfab_Scene"]
+[editable path="WhiteVan2"]
