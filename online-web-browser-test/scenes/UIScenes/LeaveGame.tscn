@@ -2,7 +2,8 @@
 
 [ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_a4dp6"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_spq1a"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uatsh"]
+bg_color = Color(0, 0, 0, 0.5)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_j5g4a"]
 viewport_path = NodePath("Node3D/StartGameViewport")
@@ -26,33 +27,32 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="MainMenuPanel" type="Panel" parent="Node3D/StartGameViewport/Root" unique_id=1220264855]
+custom_minimum_size = Vector2(1000, 250)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -100.0
+offset_right = 950.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_spq1a")
+theme_override_styles/panel = SubResource("StyleBoxFlat_uatsh")
 
-[node name="MarginContainer" type="MarginContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel" unique_id=878847182]
+[node name="Label" type="Label" parent="Node3D/StartGameViewport/Root/MainMenuPanel" unique_id=1987581129]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 60.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -701.0
+offset_right = 701.0
+offset_bottom = 302.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer" unique_id=914836077]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 60
-
-[node name="Label" type="Label" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1987581129]
-custom_minimum_size = Vector2(1980, 0)
-layout_mode = 2
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_a4dp6")
 theme_override_font_sizes/font_size = 300
 text = "Leave Game"

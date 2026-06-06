@@ -28,32 +28,34 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="StartGamePanel" type="Panel" parent="Node3D/StartGameViewport/Root" unique_id=1508925633]
-custom_minimum_size = Vector2(1000, 200)
+custom_minimum_size = Vector2(1900, 350)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -50.0
-offset_top = -50.0
-offset_right = 50.0
-offset_bottom = 50.0
+offset_left = -950.0
+offset_top = -190.0
+offset_right = 950.0
+offset_bottom = 160.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ijvm3")
 
 [node name="Label" type="Label" parent="Node3D/StartGameViewport/Root/StartGamePanel" unique_id=1211702316]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -926.0
+offset_right = 926.0
+offset_bottom = 403.0
 grow_horizontal = 2
-grow_vertical = 2
 size_flags_vertical = 6
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_tr13f")
-theme_override_font_sizes/font_size = 200
+theme_override_font_sizes/font_size = 400
 text = "Start Game"
 horizontal_alignment = 1
 script = ExtResource("2_ijvm3")
