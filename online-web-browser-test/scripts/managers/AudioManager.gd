@@ -56,7 +56,7 @@ var SFX_CONFIG = {
 	"cop_vocals_grunt": {"path": "res://Assets/Sound/SFX/RhinoCharge.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
 	"charge_wall_impact": {"path": "res://Assets/Sound/SFX/RhinoImpact.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
 
-	"capture":          {"path": "res://Assets/Sound/SFX/Capture/bonk_BEtiM8g.wav", "volume": -9.0,  "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 45.4},
+	"capture":          {"path": "res://Assets/Sound/SFX/Capture/bonk_BEtiM8g.wav", "volume": -6.0,  "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 55},
 	"jailed":           {"path": "res://Assets/Sound/SFX/Jail Capture/Jail.wav", "volume": -4.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0},
 	"artifact_pickup":  {"path": "res://Assets/Sound/SFX/Aritfact Pick/ArtifactPickup.wav", "volume": -14.0, "bus": "Quiet SFX", "max_distance": 10.0, "unit_size": 3.0},
 	"artifact_drop":    {"path": "res://Assets/Sound/SFX/Aritfact Pick/Artifact Drop.wav",  "volume": -14.0, "bus": "Quiet SFX", "max_distance": 10.0, "unit_size": 3.0},
