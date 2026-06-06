@@ -52,6 +52,14 @@ func _ready():
 	if game_manager:
 		game_manager.pre_game_started.connect(_on_pre_game_started)
 		game_manager.game_started.connect(_on_game_started)
+		game_manager.game_ended.connect(_on_game_ended)
+
+	if versus_pos:
+		versus_pos.hide()
+
+func _on_game_ended():
+	if versus_pos:
+		versus_pos.hide()
 
 func _on_pre_game_started(_assignments):
 	cutscene_ui.background.modulate.a = 0.0
@@ -124,6 +132,9 @@ func run_cinematic_flow():
 	# Reset camera mask in case it was modified in a previous match
 	intro_camera.cull_mask = default_intro_cull_mask
 	
+	if versus_pos:
+		versus_pos.show()
+	
 	# 1. Ensure screen is black (already done in _on_game_started)
 	
 	# 2. Setup Versus Scene in the 3D world
@@ -158,8 +169,8 @@ func run_cinematic_flow():
 	await cutscene_ui.fade_to_black(versus_fade_out_time)
 	
 	# Hide the dummies from view entirely so they don't photobomb the background!
-	for model in get_dummies(right_spawn): model.hide()
-	for model in get_dummies(left_spawn): model.hide()
+	if versus_pos:
+		versus_pos.hide()
 	
 	vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
 	if vs_label:

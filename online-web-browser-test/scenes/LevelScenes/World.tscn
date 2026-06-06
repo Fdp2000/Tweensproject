@@ -628,7 +628,7 @@ transform = Transform3D(4.569557e-08, 0, 0.9999999, 0, 1, 0, -0.9999999, 0, 4.56
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103697, 2.7000003, -82.32367)
 
 [node name="Clip3ThiefStart" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123465]
-transform = Transform3D(0.6891644, 0, -0.724605, 0, 1, 0, 0.724605, 0, 0.6891644, -0.10747576, 1.1763532, 2.5747957)
+transform = Transform3D(0.6891644, 0, -0.724605, 0, 1, 0, 0.724605, 0, 0.6891644, -0.50504106, 1.2980434, 2.6333456)
 
 [node name="Clip3ThiefEnd" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=1628914548]
 transform = Transform3D(0.5884063, 0, -0.8085654, 0, 1, 0, 0.8085654, 0, 0.5884063, -4.818282, 4.194403, 6.0034294)
@@ -698,7 +698,7 @@ light_data = ExtResource("7_ofs5a")
 [node name="MainMenuUI" parent="." unique_id=354039283 instance=ExtResource("8_7aqpd")]
 
 [node name="MainMenuScreen3D" parent="MainMenuUI" index="0" unique_id=1446650885]
-transform = Transform3D(0.92786765, 0.14419353, -0.34390405, 0.015817253, 0.90616965, 0.4226182, 0.37257433, -0.39757338, 0.8385246, -2.8732843, 5.2402754, 5.9032)
+transform = Transform3D(0.74779445, 0.18805963, -0.6367394, 0, 0.9590454, 0.2832521, 0.6639303, -0.21181433, 0.71716887, -4.0120974, 4.306278, 2.839851)
 
 [node name="TextureRect" type="TextureRect" parent="MainMenuUI/MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/MarginContainer/ButtonVBoxContainer/PlayButton" parent_id_path=PackedInt32Array(354039283, 1505386144) index="0" unique_id=1739831906]
 custom_minimum_size = Vector2(50, 50)
@@ -918,7 +918,7 @@ current = true
 script = ExtResource("11_2qs0d")
 
 [node name="MenuCameraSpot" type="Marker3D" parent="MainMenuUI" unique_id=1198834167]
-transform = Transform3D(0.92520994, 0.1603651, -0.34390408, 0, 0.90630776, 0.42261827, 0.37945625, -0.39101052, 0.8385247, -3.2, 5.8, 7.846)
+transform = Transform3D(0.7477945, 0.18805966, -0.63673943, 0, 0.9590455, 0.28325206, 0.66393036, -0.21181434, 0.717169, -5.1246963, 4.690773, 4.6781774)
 
 [node name="SkinsCameraSpot" type="Marker3D" parent="MainMenuUI" unique_id=2059809806]
 transform = Transform3D(-0.68327385, 0, 0.73016226, 0, 1, 0, -0.7301622, 0, -0.6832739, -4.6442337, 2.002, 5.823334)
@@ -962,9 +962,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.658347, -0.789037, -21.3891
 
 [node name="EmployeeSpawn1" type="Marker3D" parent="PosterWallManager/EmployeePosterSpawns" unique_id=1385056571]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4432081, -0.30343437, 2.8948212)
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=932318987]
-transform = Transform3D(0.9252097, 0.16036512, -0.34390408, 0, 0.9063078, 0.42261827, 0.37945616, -0.39101055, 0.83852476, -3.251, 6.111, 7.846)
 
 [editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop"]
 [editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop/Næsehorn2"]

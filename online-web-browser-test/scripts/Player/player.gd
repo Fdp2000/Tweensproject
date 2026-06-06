@@ -329,8 +329,15 @@ func _physics_process(delta):
 		velocity.x = 0
 		velocity.z = 0
 		has_movement_input = false
+		if not is_on_floor(): velocity.y -= gravity * delta
 		_custom_physics_process(delta, Vector3.ZERO)
 		move_and_slide()
+		
+		# FIX: Ensure we keep syncing so other clients see us hit the floor!
+		if is_multiplayer_authority() and _spawn_relay_ready:
+			sync_target_position = global_position
+			sync_target_rotation = rotation
+			sync_velocity = velocity
 		return
 	# FIX: Keep sync variables updated so the MultiplayerSynchronizer can automatically broadcast them!
 	if is_multiplayer_authority() and _spawn_relay_ready:
