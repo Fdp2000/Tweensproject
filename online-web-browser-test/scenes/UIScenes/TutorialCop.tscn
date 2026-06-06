@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_6orfi"]
 [ext_resource type="Texture2D" uid="uid://blls8uulxpjlr" path="res://Assets/UI/Guard.png" id="2_6orfi"]
 [ext_resource type="Texture2D" uid="uid://tdu3bhrcpbjr" path="res://Assets/UI/Capture.png" id="3_qpiog"]
-[ext_resource type="Texture2D" uid="uid://clnagm8hx8o5t" path="res://Assets/UI/Charge.png" id="4_eogs7"]
+[ext_resource type="Texture2D" uid="uid://hlcp3or35hqi" path="res://Assets/UI/CopChargeTutorialCrop2.png" id="4_6orfi"]
 [ext_resource type="Texture2D" uid="uid://bjktwtfip5vv2" path="res://Assets/UI/computer-mouse-solid.png" id="4_vp1kd"]
 
 [sub_resource type="Image" id="Image_6orfi"]
@@ -101,7 +101,6 @@ bg_color = Color(1, 0.5411765, 0.5411765, 1)
 [node name="TutorialCop" type="Node3D" unique_id=364404085]
 
 [node name="TutorialCopCanvas" type="CanvasLayer" parent="." unique_id=1304183105]
-visible = false
 
 [node name="Control" type="Control" parent="TutorialCopCanvas" unique_id=1041721303]
 layout_mode = 3
@@ -221,7 +220,7 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(300, 260)
 layout_mode = 2
 size_flags_horizontal = 4
-texture = ExtResource("4_eogs7")
+texture = ExtResource("4_6orfi")
 expand_mode = 1
 
 [node name="Label2" type="Label" parent="TutorialCopCanvas/Control/Panel/HBoxContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1228464354]

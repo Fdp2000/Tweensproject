@@ -22,7 +22,7 @@ var round_timer: int = 300
 var active_thieves: int = 0
 
 var all_vents: Array[Node] = []
-var current_vent: Node = null
+var active_vents: Array[Node] = []
 
 var last_heartbeat_times: Dictionary = {}
 var last_server_pong_time: float = 0.0
@@ -44,6 +44,7 @@ var cached_scoreboard: Control = null
 
 var selected_chameleon_skin: int = 0
 var selected_rhino_skin: int = 0
+var employee_of_month_id: int = -1
 
 func _ready():
 	print("GameManager is ready.")
@@ -92,6 +93,10 @@ func set_player_force_role(peer_id: int, role_string: String):
 	if multiplayer.is_server():
 		forced_teams[peer_id] = role_string
 
+@rpc("any_peer", "call_local", "reliable")
+func sync_employee_of_month(chosen_id: int) -> void:
+	employee_of_month_id = chosen_id
+	print("Employee of the Month synced: ", employee_of_month_id)
 
 @rpc("any_peer", "call_local", "reliable")
 func sync_time(time_left: int):
@@ -146,6 +151,8 @@ func remove_player(id: int):
 				var player_node = spawned.get_node_or_null(str(id))
 				if player_node:
 					player_node.queue_free()
+
+
 
 
 @rpc("any_peer", "call_local")
@@ -238,6 +245,21 @@ func start_game(role_assignments: Dictionary):
 
 	if multiplayer.is_server():
 		print("SERVER PLAYERS DICTIONARY: ", players)
+
+	if multiplayer.is_server():
+		var rhino_ids := []
+
+		for id in players.keys():
+			if players[id].get("role", PlayerRole.THIEF) == PlayerRole.COP:
+				rhino_ids.append(id)
+
+		if rhino_ids.size() > 0:
+			employee_of_month_id = rhino_ids.pick_random()
+		else:
+			employee_of_month_id = -1
+
+		rpc("sync_employee_of_month", employee_of_month_id)
+		print("Host chose Employee of the Month: ", employee_of_month_id)
 
 	game_started.emit()
 
@@ -348,7 +370,7 @@ func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array)
 func start_game_clock():
 	if multiplayer.is_server():
 		timer_node.start()
-		open_random_vent()
+		open_initial_vents()
 
 # --- VENT SYSTEM LOGIC ---
 
@@ -357,26 +379,60 @@ func register_vent(vent: Node):
 		if not all_vents.has(vent):
 			all_vents.append(vent)
 
-func open_random_vent():
+func open_initial_vents():
 	if not multiplayer.is_server() or all_vents.is_empty(): return
 	
-	# Close current vent if one is open
-	if current_vent:
-		current_vent.rpc("close_vent")
+	# Close any currently open vents
+	for vent in active_vents:
+		if is_instance_valid(vent):
+			vent.rpc("close_vent")
+	active_vents.clear()
 	
-	# Pick a random vent
+	# Determine how many vents to open based on cop count
+	var cops_count = 0
+	for id in players.keys():
+		if players[id]["role"] == PlayerRole.COP:
+			cops_count += 1
+			
+	var vents_to_open = max(1, cops_count)
+	
+	# Pick random vents
 	var options = all_vents.duplicate()
-	if current_vent and options.size() > 1:
-		options.erase(current_vent)
+	options.shuffle()
 	
-	var new_vent = options.pick_random()
-	if new_vent:
-		current_vent = new_vent
-		current_vent.rpc("open_vent")
+	for i in range(min(vents_to_open, options.size())):
+		var vent = options[i]
+		vent.rpc("open_vent")
+		active_vents.append(vent)
 
 func cycle_vent(old_vent_name: String):
-	if multiplayer.is_server():
-		open_random_vent()
+	if not multiplayer.is_server(): return
+	
+	# Find and close the old vent
+	var vent_to_remove = null
+	for vent in active_vents:
+		if vent.name == old_vent_name:
+			vent_to_remove = vent
+			break
+			
+	if vent_to_remove:
+		vent_to_remove.rpc("close_vent")
+		active_vents.erase(vent_to_remove)
+		
+	# Find a new closed vent
+	var closed_vents = []
+	for vent in all_vents:
+		if not active_vents.has(vent) and vent != vent_to_remove:
+			closed_vents.append(vent)
+			
+	if closed_vents.size() > 0:
+		var new_vent = closed_vents.pick_random()
+		new_vent.rpc("open_vent")
+		active_vents.append(new_vent)
+	elif vent_to_remove:
+		# Edge case: No closed vents available! Re-open the old one
+		vent_to_remove.rpc("open_vent")
+		active_vents.append(vent_to_remove)
 
 # -------------------------
 
@@ -410,9 +466,10 @@ func client_return_to_lobby():
 		team_cash = 0
 		
 		# Reset the vents properly without clearing the array (since the map isn't destroyed)
-		if current_vent:
-			current_vent.rpc("close_vent")
-			current_vent = null
+		for vent in active_vents:
+			if is_instance_valid(vent):
+				vent.rpc("close_vent")
+		active_vents.clear()
 			
 	# EVERYBODY waits 0.5 seconds.
 	# The screen is pitch black right now. This network buffer lets the despawn packets 
@@ -444,7 +501,7 @@ func full_teardown():
 			
 	team_cash = 0
 	all_vents.clear()
-	current_vent = null
+	active_vents.clear()
 	players.clear()
 	last_heartbeat_times.clear()
 	last_server_pong_time = 0.0

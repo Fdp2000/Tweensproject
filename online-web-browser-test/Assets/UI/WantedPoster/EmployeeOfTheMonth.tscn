@@ -25,7 +25,12 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0
 mesh = SubResource("PlaneMesh_4mmdt")
 surface_material_override/0 = SubResource("StandardMaterial3D_yhm8n")
 script = ExtResource("3_ftufj")
-artifact_size = 1
+artifact_size = 3
+custom_cash_value = 5000
+custom_weight_penalty = 0.7
+hand_position_offset = Vector3(-0.133, 0.684, -0.075)
+hand_rotation_offset = Vector3(-26.984, 155.297, 42.747)
+drop_height_offset = 1.108
 
 [node name="NameLabel" type="Label3D" parent="MeshInstance3D" unique_id=876985490]
 transform = Transform3D(0.99999994, 0, 0, 0, 1.1924875e-08, 0.99999994, 0, -0.99999994, 1.1924882e-08, 0, 0.020000007, 0.87131715)

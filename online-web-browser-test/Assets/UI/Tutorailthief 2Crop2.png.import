@@ -2,9 +2,9 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tdu3bhrcpbjr"
-path.s3tc="res://.godot/imported/Capture.png-23693671d40c918267fc66703db3a5d4.s3tc.ctex"
-path.etc2="res://.godot/imported/Capture.png-23693671d40c918267fc66703db3a5d4.etc2.ctex"
+uid="uid://nirucokj6nb1"
+path.s3tc="res://.godot/imported/Tutorailthief 2Crop2.png-9b33221e9106ea59299b9f55330e5147.s3tc.ctex"
+path.etc2="res://.godot/imported/Tutorailthief 2Crop2.png-9b33221e9106ea59299b9f55330e5147.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/UI/Capture.png"
-dest_files=["res://.godot/imported/Capture.png-23693671d40c918267fc66703db3a5d4.s3tc.ctex", "res://.godot/imported/Capture.png-23693671d40c918267fc66703db3a5d4.etc2.ctex"]
+source_file="res://Assets/UI/Tutorailthief 2Crop2.png"
+dest_files=["res://.godot/imported/Tutorailthief 2Crop2.png-9b33221e9106ea59299b9f55330e5147.s3tc.ctex", "res://.godot/imported/Tutorailthief 2Crop2.png-9b33221e9106ea59299b9f55330e5147.etc2.ctex"]
 
 [params]
 

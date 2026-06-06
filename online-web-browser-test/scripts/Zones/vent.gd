@@ -17,17 +17,26 @@ func _ready():
 func _setup_visuals():
 	var col = get_node_or_null("CollisionShape3D")
 	if col and col.shape is CylinderShape3D:
-		col.shape.radius = vent_radius
+		var scale_factor = col.global_transform.basis.get_scale().x
+		if scale_factor > 0.0:
+			col.shape.radius = vent_radius / scale_factor
+		else:
+			col.shape.radius = vent_radius
 	
 	if visual_ring:
 		if visual_ring is DottedRing:
 			visual_ring.radius = vent_radius
 			visual_ring.set_alpha(0.0 if not is_open else visual_ring.max_alpha)
 		elif visual_ring is MeshInstance3D:
+			var scale_factor = visual_ring.global_transform.basis.get_scale().x
+			var fixed_radius = vent_radius
+			if scale_factor > 0.0:
+				fixed_radius = vent_radius / scale_factor
+				
 			var mesh = visual_ring.mesh as CylinderMesh
 			if mesh:
-				mesh.top_radius = vent_radius
-				balance_radius_updated(vent_radius)
+				mesh.top_radius = fixed_radius
+				mesh.bottom_radius = fixed_radius
 			
 			var mat = visual_ring.get_surface_override_material(0)
 			if mat:
@@ -35,11 +44,8 @@ func _setup_visuals():
 		visual_ring.visible = is_open
 
 func balance_radius_updated(new_radius: float):
-	if visual_ring and visual_ring is DottedRing:
-		visual_ring.radius = new_radius
-	elif visual_ring and visual_ring is MeshInstance3D and visual_ring.mesh is CylinderMesh:
-		visual_ring.mesh.bottom_radius = new_radius
-		visual_ring.mesh.top_radius = new_radius
+	vent_radius = new_radius
+	_setup_visuals()
 
 @rpc("call_local", "reliable")
 func open_vent():
