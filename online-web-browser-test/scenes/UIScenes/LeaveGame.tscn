@@ -54,8 +54,8 @@ layout_mode = 2
 size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("1_a4dp6")
-theme_override_font_sizes/font_size = 180
-text = "[E] Leave Game"
+theme_override_font_sizes/font_size = 300
+text = "Leave Game"
 horizontal_alignment = 1
 
 [node name="MainMenuSprite3D" type="Sprite3D" parent="Node3D" unique_id=1909739206]

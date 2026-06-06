@@ -3,9 +3,10 @@
 [ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_tr13f"]
 [ext_resource type="Script" uid="uid://cprcgcn8p8v36" path="res://scripts/Networking/StartGameHost.gd" id="2_ijvm3"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4k5ao"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ijvm3"]
+bg_color = Color(0, 0, 0, 0.47800002)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4ibkj"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ijvm3"]
 viewport_path = NodePath("Node3D/StartGameViewport")
 
 [node name="Node3D" type="Node3D" unique_id=626359221]
@@ -26,40 +27,37 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="MainMenuPanel" type="Panel" parent="Node3D/StartGameViewport/Root" unique_id=1508925633]
+[node name="StartGamePanel" type="Panel" parent="Node3D/StartGameViewport/Root" unique_id=1508925633]
+custom_minimum_size = Vector2(1000, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ijvm3")
+
+[node name="Label" type="Label" parent="Node3D/StartGameViewport/Root/StartGamePanel" unique_id=1211702316]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_4k5ao")
-
-[node name="MarginContainer" type="MarginContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel" unique_id=1988940330]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 60.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer" unique_id=1352834237]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_constants/separation = 60
-
-[node name="Label" type="Label" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1211702316]
-custom_minimum_size = Vector2(1980, 0)
-layout_mode = 2
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_tr13f")
-theme_override_font_sizes/font_size = 140
-text = "[E] Start Game"
+theme_override_font_sizes/font_size = 200
+text = "Start Game"
 horizontal_alignment = 1
 script = ExtResource("2_ijvm3")
 
-[node name="MainMenuSprite3D" type="Sprite3D" parent="Node3D" unique_id=409060191]
+[node name="StartGameSprite3D" type="Sprite3D" parent="Node3D" unique_id=409060191]
 pixel_size = 0.002083
-texture = SubResource("ViewportTexture_4ibkj")
+texture = SubResource("ViewportTexture_ijvm3")
