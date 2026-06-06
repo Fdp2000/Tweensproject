@@ -22,7 +22,6 @@ point_count = 4
 
 [node name="artifactParticles" type="CPUParticles3D" unique_id=1757072748]
 material_override = SubResource("StandardMaterial3D_n2a5w")
-amount = 2
 lifetime = 3.0
 mesh = SubResource("QuadMesh_k8q2s")
 emission_shape = 1
