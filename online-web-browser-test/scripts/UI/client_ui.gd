@@ -11,9 +11,9 @@ extends Node
 @onready var play_panel: Control = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel")
 @onready var skins_panel: Control = menu_root.get_node("SkinsScreen3D/SkinsViewport/Root/SkinsPanel")
 
-@onready var play_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/PlayButton")
-@onready var tutorial_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/TutorialButton")
-@onready var skins_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/SkinsButton")
+@onready var play_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/MarginContainer/ButtonVBoxContainer/PlayButton")
+@onready var tutorial_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/MarginContainer/ButtonVBoxContainer/TutorialButton")
+@onready var skins_button: Button = menu_root.get_node("MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/MarginContainer/ButtonVBoxContainer/SkinsButton")
 
 @onready var name_input: LineEdit = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/NameInput")
 @onready var room_input: LineEdit = menu_root.get_node("PlayScreen3D/PlayViewport/Root/PlayPanel/MarginContainer/VBoxContainer/JoinRow/RoomInput")
