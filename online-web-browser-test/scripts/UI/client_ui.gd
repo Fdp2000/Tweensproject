@@ -608,6 +608,10 @@ func _connected(id: int, _use_mesh: bool) -> void:
 
 	# Only real hosting should add player 1.
 	if is_hosting_room and id == 1:
+		local_player_name = name_input.text.strip_edges()
+		if local_player_name == "":
+			local_player_name = "Player"
+			
 		GameManager.add_player(
 			1,
 			local_player_name,
@@ -682,6 +686,10 @@ func _mp_server_connected() -> void:
 	print("[Multiplayer] Connected. My ID: ", my_id)
 
 	if my_id != 1:
+		local_player_name = name_input.text.strip_edges()
+		if local_player_name == "":
+			local_player_name = "Player"
+			
 		GameManager.rpc_id(
 			1,
 			"sync_player_data",
