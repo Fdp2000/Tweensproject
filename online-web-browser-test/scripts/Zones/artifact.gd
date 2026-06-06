@@ -4,8 +4,12 @@ const ARTIFACT_PARTICLES = preload("uid://b4hha0q7y1chb")
 
 
 
-enum Size { SMALL, MEDIUM, LARGE }
+enum Size { SMALL, MEDIUM, LARGE, CUSTOM }
 @export var artifact_size: Size = Size.SMALL
+
+@export_group("Custom Settings")
+@export var custom_cash_value: int = 100
+@export var custom_weight_penalty: float = 1.0
 
 # --- NEW: CUSTOM HAND OFFSETS ---
 # Tweak these in the editor so large paintings don't clip through the head!
@@ -116,6 +120,9 @@ func _ready():
 		Size.LARGE:
 			cash_value = Balance.cash_large
 			weight_penalty = Balance.artifact_large_speed_multiplier
+		Size.CUSTOM:
+			cash_value = custom_cash_value
+			weight_penalty = custom_weight_penalty
 	
 	# Add Particles
 	var particles_instance = ARTIFACT_PARTICLES.instantiate()
