@@ -153,7 +153,7 @@ func _ready() -> void:
 	
 	_update_chameleon_preview()
 	_update_rhino_preview()
-
+	play_chameleon_preview_idle()
 
 	show_main_menu()
 	animate_glow(tutorial_next_button)
@@ -1027,7 +1027,24 @@ func _on_rhino_prev() -> void:
 func save_selected_skins() -> void:
 	GameManager.selected_chameleon_skin = selected_chameleon_skin
 	GameManager.selected_rhino_skin = selected_rhino_skin
+	
+func play_chameleon_preview_idle() -> void:
+	if chameleon_spawn == null:
+		return
 
+	var anim_tree := chameleon_spawn.find_child("AnimationTree", true, false) as AnimationTree
+	if anim_tree:
+		anim_tree.active = false
+
+	var anim := chameleon_spawn.find_child("AnimationPlayer", true, false) as AnimationPlayer
+	if anim:
+		anim.active = true
+
+		if anim.has_animation("Idle1"):
+			anim.play("Idle1")
+			print("Playing Idle1 on chameleon preview")
+		else:
+			print("Idle1 not found. Available animations: ", anim.get_animation_list())
 
 func show_host_loading() -> void:
 	is_host_loading = true
