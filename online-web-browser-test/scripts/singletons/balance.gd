@@ -10,7 +10,7 @@ var base_thief_speed: float = 6.5
 # (Most Mixamo jogs are around 4.0 m/s. Mixamo sprints are around 6.0 m/s).
 var anim_native_speed: float = 4.0
 var cop_base_speed: float = 6.85
-var hypno_thief_speed: float = 2.6
+var hypno_thief_speed: float = 2.0
 var thief_braking_friction: float = 6.5
 var cop_braking_friction: float = 6.5
 
@@ -44,7 +44,7 @@ var artifact_medium_speed_multiplier: float = 0.75 # 75% Speed
 var artifact_large_speed_multiplier: float = 0.5 # 50% Speed
 
 var delivery_zone_radius: float = 3.25
-var interact_shape_size: float = 2.0
+var interact_shape_size: float = 2.25
 var camera_wall_radius: float = 0.5
 
 # ==========================================

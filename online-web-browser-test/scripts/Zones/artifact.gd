@@ -11,6 +11,10 @@ enum Size { SMALL, MEDIUM, LARGE }
 # Tweak these in the editor so large paintings don't clip through the head!
 @export var hand_position_offset: Vector3 = Vector3.ZERO
 @export var hand_rotation_offset: Vector3 = Vector3.ZERO
+@export var drop_height_offset: float = 0.0
+@export var use_custom_camo_pose: bool = false
+@export var camo_position_offset: Vector3 = Vector3.ZERO
+@export var camo_rotation_offset: Vector3 = Vector3.ZERO
 @export var pose_transition_duration: float = 0.5 # Tune this to perfectly match the AnimationTree transition time! 
 
 var initial_scale: Vector3 = Vector3.ONE # We need this to prevent the bone from stretching the artifact
@@ -189,9 +193,14 @@ func _process(delta):
 				
 				# --- CAMO BLEND CALCULATION ---
 				var is_camo = false
+				var is_tuning_drop = Input.is_key_pressed(KEY_B) or Input.is_key_pressed(KEY_N)
+				var preview_camo = Input.is_key_pressed(KEY_C)
 				if carrier and carrier.get("stealth_manager"):
 					if carrier.stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
 						is_camo = true
+						
+				if is_tuning_drop or preview_camo:
+					is_camo = true
 						
 				var visual_base: Node3D = carrier
 				if carrier:
@@ -224,9 +233,18 @@ func _process(delta):
 				hand_basis = hand_basis.rotated(hand_basis.z.normalized(), deg_to_rad(hand_rotation_offset.z))
 				hand_transform.basis = hand_basis
 				
-				# --- 2. FLOOR TRANSFORM (Camo Pose Dropped) ---
+				# --- 2. TARGET TRANSFORM (Floor or Custom Pose) ---
 				var floor_transform = Transform3D()
-				if carrier:
+				if use_custom_camo_pose:
+					floor_transform = cached_attachment.global_transform
+					if carrier:
+						floor_transform.origin += carrier.global_transform.basis * camo_position_offset
+					var c_basis = floor_transform.basis
+					c_basis = c_basis.rotated(c_basis.x.normalized(), deg_to_rad(camo_rotation_offset.x))
+					c_basis = c_basis.rotated(c_basis.y.normalized(), deg_to_rad(camo_rotation_offset.y))
+					c_basis = c_basis.rotated(c_basis.z.normalized(), deg_to_rad(camo_rotation_offset.z))
+					floor_transform.basis = c_basis
+				elif carrier:
 					# Raycast straight down from the hand, exactly like drop()
 					var drop_origin = hand_transform.origin
 					var space_state = get_world_3d().direct_space_state
@@ -235,7 +253,7 @@ func _process(delta):
 					var result = space_state.intersect_ray(query)
 					
 					if result:
-						floor_transform.origin = result.position
+						floor_transform.origin = result.position + Vector3(0, drop_height_offset, 0)
 					else:
 						floor_transform.origin = drop_origin
 				else:
@@ -244,42 +262,67 @@ func _process(delta):
 				# --- 3. BLEND AND APPLY ---
 				global_position = hand_transform.origin.lerp(floor_transform.origin, camo_blend)
 				
-				if is_camo:
-					# Lock rotation immediately to prevent bone twisting during the camo transition
-					if carrier:
-						global_transform.basis = visual_base.global_transform.basis * locked_camo_basis_local
-					else:
-						global_transform.basis = locked_camo_basis_local
+				if use_custom_camo_pose:
+					global_transform.basis = hand_transform.basis.orthonormalized().slerp(floor_transform.basis.orthonormalized(), camo_blend)
 				else:
-					# Blend back to the hand bone if camo breaks while blending
-					if camo_blend > 0.0 and carrier:
-						var locked_basis = (visual_base.global_transform.basis * locked_camo_basis_local).orthonormalized()
-						global_transform.basis = hand_transform.basis.orthonormalized().slerp(locked_basis, camo_blend)
+					if is_camo:
+						# Lock rotation immediately to prevent bone twisting during the camo transition
+						if carrier:
+							global_transform.basis = visual_base.global_transform.basis * locked_camo_basis_local
+						else:
+							global_transform.basis = locked_camo_basis_local
 					else:
-						global_transform.basis = hand_transform.basis
+						# Blend back to the hand bone if camo breaks while blending
+						if camo_blend > 0.0 and carrier:
+							var locked_basis = (visual_base.global_transform.basis * locked_camo_basis_local).orthonormalized()
+							global_transform.basis = hand_transform.basis.orthonormalized().slerp(locked_basis, camo_blend)
+						else:
+							global_transform.basis = hand_transform.basis
 				
 				# 4. Lock the scale so the bone animations don't warp the mesh
 				scale = initial_scale 
 				
 				# 5. Developer In-Game Tuning Tool
 				# Keyboard Controls for live tuning!
-				if Input.is_key_pressed(KEY_PAGEUP): hand_position_offset.y += delta * 0.5
-				if Input.is_key_pressed(KEY_PAGEDOWN): hand_position_offset.y -= delta * 0.5
-				if Input.is_key_pressed(KEY_LEFT): hand_position_offset.x -= delta * 0.5
-				if Input.is_key_pressed(KEY_RIGHT): hand_position_offset.x += delta * 0.5
-				if Input.is_key_pressed(KEY_UP): hand_position_offset.z -= delta * 0.5
-				if Input.is_key_pressed(KEY_DOWN): hand_position_offset.z += delta * 0.5
+				var tune_pos_y = 0.0
+				var tune_pos_x = 0.0
+				var tune_pos_z = 0.0
+				var tune_rot_x = 0.0
+				var tune_rot_y = 0.0
+				var tune_rot_z = 0.0
 				
-				if Input.is_key_pressed(KEY_U): hand_rotation_offset.x += delta * 45.0
-				if Input.is_key_pressed(KEY_J): hand_rotation_offset.x -= delta * 45.0
-				if Input.is_key_pressed(KEY_I): hand_rotation_offset.y += delta * 45.0
-				if Input.is_key_pressed(KEY_K): hand_rotation_offset.y -= delta * 45.0
-				if Input.is_key_pressed(KEY_O): hand_rotation_offset.z += delta * 45.0
-				if Input.is_key_pressed(KEY_L): hand_rotation_offset.z -= delta * 45.0
+				if Input.is_key_pressed(KEY_PAGEUP): tune_pos_y += delta * 0.5
+				if Input.is_key_pressed(KEY_PAGEDOWN): tune_pos_y -= delta * 0.5
+				if Input.is_key_pressed(KEY_LEFT): tune_pos_x -= delta * 0.5
+				if Input.is_key_pressed(KEY_RIGHT): tune_pos_x += delta * 0.5
+				if Input.is_key_pressed(KEY_UP): tune_pos_z -= delta * 0.5
+				if Input.is_key_pressed(KEY_DOWN): tune_pos_z += delta * 0.5
+				
+				if Input.is_key_pressed(KEY_U): tune_rot_x += delta * 45.0
+				if Input.is_key_pressed(KEY_J): tune_rot_x -= delta * 45.0
+				if Input.is_key_pressed(KEY_I): tune_rot_y += delta * 45.0
+				if Input.is_key_pressed(KEY_K): tune_rot_y -= delta * 45.0
+				if Input.is_key_pressed(KEY_O): tune_rot_z += delta * 45.0
+				if Input.is_key_pressed(KEY_L): tune_rot_z -= delta * 45.0
+				
+				if preview_camo and use_custom_camo_pose:
+					camo_position_offset += Vector3(tune_pos_x, tune_pos_y, tune_pos_z)
+					camo_rotation_offset += Vector3(tune_rot_x, tune_rot_y, tune_rot_z)
+				else:
+					hand_position_offset += Vector3(tune_pos_x, tune_pos_y, tune_pos_z)
+					hand_rotation_offset += Vector3(tune_rot_x, tune_rot_y, tune_rot_z)
+				
+				if Input.is_key_pressed(KEY_B): drop_height_offset += delta * 0.5
+				if Input.is_key_pressed(KEY_N): drop_height_offset -= delta * 0.5
+				
 				if Input.is_action_just_pressed("ui_accept") or Input.is_key_pressed(KEY_P): 
 					print("--- ARTIFACT TUNED ---")
 					print("Pos Offset: ", hand_position_offset)
 					print("Rot Offset: ", hand_rotation_offset)
+					print("Drop Offset: ", drop_height_offset)
+					if use_custom_camo_pose:
+						print("Camo Pos Offset: ", camo_position_offset)
+						print("Camo Rot Offset: ", camo_rotation_offset)
 				
 				if not debug_ui:
 					_create_debug_ui()
@@ -363,7 +406,7 @@ func drop():
 	var result = space_state.intersect_ray(query)
 	
 	if result:
-		sync_target_position = result.position
+		sync_target_position = result.position + Vector3(0, drop_height_offset, 0)
 
 @rpc("any_peer", "call_local")
 func destroy_artifact():
@@ -437,7 +480,12 @@ func _create_debug_ui():
 	
 	var update_lbl = func():
 		if is_instance_valid(lbl):
-			lbl.text = "Pos Offset: " + str(hand_position_offset) + "\nRot Offset: " + str(hand_rotation_offset) + "\n\nUse PageUp/PageDown (Y), Left/Right (X), Up/Down (Z) to move.\nUse U/J (X), I/K (Y), O/L (Z) to rotate.\nPress P to print to console."
+			var camo_str = ""
+			var camo_keys = ""
+			if use_custom_camo_pose:
+				camo_str = "\nCamo Pos: " + str(camo_position_offset) + "\nCamo Rot: " + str(camo_rotation_offset)
+				camo_keys = "\nHold C + move/rotate to tune Camo Pose."
+			lbl.text = "Pos Offset: " + str(hand_position_offset) + "\nRot Offset: " + str(hand_rotation_offset) + "\nDrop Offset: " + str(drop_height_offset) + camo_str + "\n\nUse PageUp/PageDown (Y), Left/Right (X), Up/Down (Z) to move.\nUse U/J (X), I/K (Y), O/L (Z) to rotate.\nUse B/N to adjust Drop Height." + camo_keys + "\nPress P to print to console."
 	update_lbl.call()
 	
 	var timer = Timer.new()
