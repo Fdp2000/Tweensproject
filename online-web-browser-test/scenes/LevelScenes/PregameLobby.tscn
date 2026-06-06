@@ -11,11 +11,17 @@
 [ext_resource type="Texture2D" uid="uid://pxnaec5xw5hy" path="res://Skærmbillede 2026-06-06 kl. 12.37.01.png" id="9_h5wqj"]
 [ext_resource type="Texture2D" uid="uid://cly5kof4jdp88" path="res://Skærmbillede 2026-06-06 kl. 12.41.16.png" id="10_7e4js"]
 [ext_resource type="Texture2D" uid="uid://c5b78j4p1lpd6" path="res://Skærmbillede 2026-06-06 kl. 12.43.29.png" id="11_r8xeu"]
+[ext_resource type="Texture2D" uid="uid://dbyiubgkm3tuj" path="res://Assets/UI/Tutorailthief 1Crop.png" id="11_xeelm"]
+[ext_resource type="Texture2D" uid="uid://nirucokj6nb1" path="res://Assets/UI/Tutorailthief 2Crop2.png" id="12_4xhut"]
 [ext_resource type="Texture2D" uid="uid://bk6pqus1tl57g" path="res://Skærmbillede 2026-06-06 kl. 12.41.38.png" id="12_g3wa5"]
+[ext_resource type="Texture2D" uid="uid://ckhysy5tl2x2u" path="res://Assets/UI/Tutorailthief 3Crop2.png" id="13_hbusi"]
 [ext_resource type="Texture2D" uid="uid://bmrwl4t28k52e" path="res://Skærmbillede 2026-06-06 kl. 12.38.56.png" id="13_wvkjh"]
 [ext_resource type="PackedScene" uid="uid://bag32dsr85bk7" path="res://NohaRigged.fbx" id="14_3qqk3"]
+[ext_resource type="Texture2D" uid="uid://cesepnbnwlubp" path="res://Assets/UI/Hide.png" id="14_wlwr0"]
+[ext_resource type="Texture2D" uid="uid://blls8uulxpjlr" path="res://Assets/UI/Guard.png" id="15_rvpsd"]
 [ext_resource type="PackedScene" uid="uid://baydt14pdqywi" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Samurai_Helmet Asia.fbx" id="15_xeelm"]
 [ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="16_4xhut"]
+[ext_resource type="Texture2D" uid="uid://hlcp3or35hqi" path="res://Assets/UI/CopChargeTutorialCrop2.png" id="16_tfjox"]
 [ext_resource type="ArrayMesh" uid="uid://bttkw3he7goyh" path="res://Assets/Models/Asia Pack Reimport/Samurai_Helmet.res" id="17_hbusi"]
 [ext_resource type="PackedScene" uid="uid://dh5bg82mibuo4" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Katana  Asia.fbx" id="18_wlwr0"]
 [ext_resource type="ArrayMesh" uid="uid://clv0ih1leoelm" path="res://Assets/Models/Asia Pack Reimport/Katana.res" id="19_rvpsd"]
@@ -31,10 +37,15 @@
 [ext_resource type="PackedScene" uid="uid://c073t8hl180f8" path="res://Assets/Models/Artifacts/bear_LowPoly.tscn" id="29_hlqde"]
 [ext_resource type="ArrayMesh" uid="uid://5akym5yt8bfp" path="res://Assets/Models/moai.res" id="30_jljn4"]
 [ext_resource type="PackedScene" uid="uid://diovmaqigblbx" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer2.glb" id="31_3me4u"]
+[ext_resource type="Material" uid="uid://h5p60ny43lr1" path="res://Assets/Shaders/HypnoShader/hypnoMat.tres" id="31_k78oe"]
 [ext_resource type="PackedScene" uid="uid://c0au7i4fnki7o" path="res://Assets/Models/Test Panda/RedPanda_Character_materialer.glb" id="32_bqlqa"]
 [ext_resource type="PackedScene" uid="uid://bv8w51qstr3vf" path="res://Assets/Models/Elephant/Imported/ElephantSmith.glb" id="33_1duix"]
 [ext_resource type="PackedScene" uid="uid://yjrdi4axu1oo" path="res://Assets/Models/Artifacts/Imported Files/And.glb" id="34_be1b0"]
 [ext_resource type="PackedScene" uid="uid://cp6s3mgu6vhlp" path="res://Assets/Models/Prototype Models/Dingus the cat.glb" id="35_t6joj"]
+[ext_resource type="ArrayMesh" uid="uid://ca02bg2nyxb44" path="res://Assets/Models/LowPolyMuseumAssets/Floor3.res" id="43_x7n3g"]
+[ext_resource type="ArrayMesh" uid="uid://b4hmn5t8cudht" path="res://Assets/Models/LowPolyMuseumAssets/GlassBox.res" id="44_l1gn5"]
+[ext_resource type="ArrayMesh" uid="uid://bpo1q3kvmctxv" path="res://Assets/Models/LowPolyMuseumAssets/StoneSlab.res" id="45_3ke7e"]
+[ext_resource type="ArrayMesh" uid="uid://ir2pg8414v5k" path="res://Assets/Models/LowPolyMuseumAssets/InfoDeskBig.res" id="46_4j3b7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8gwb7"]
 resource_name = "Material"
@@ -422,7 +433,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k8akl")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_van"]
-size = Vector3(1.4589844, 1.3255157, 0.49804688)
+size = Vector3(1.4589844, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmuqk"]
 albedo_texture = ExtResource("9_h5wqj")
@@ -431,6 +442,34 @@ uv1_scale = Vector3(1.71, 2.89, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4vhb"]
 albedo_texture = ExtResource("10_7e4js")
 uv1_scale = Vector3(2.49, 4.61, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n378j"]
+albedo_texture = ExtResource("11_xeelm")
+uv1_scale = Vector3(2.49, 4.988, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mncup"]
+albedo_texture = ExtResource("12_4xhut")
+uv1_scale = Vector3(2.65, 6.17, 1)
+uv1_offset = Vector3(0, -0.66, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvp7m"]
+albedo_texture = ExtResource("13_hbusi")
+uv1_scale = Vector3(2.67, 5.79, 1)
+uv1_offset = Vector3(0, -0.47, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlqde"]
+albedo_texture = ExtResource("14_wlwr0")
+uv1_scale = Vector3(2.49, 4.61, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jljn4"]
+albedo_texture = ExtResource("15_rvpsd")
+uv1_scale = Vector3(2.49, 6.29, 1)
+uv1_offset = Vector3(0, -1.76, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3me4u"]
+albedo_texture = ExtResource("16_tfjox")
+uv1_scale = Vector3(2.49, 6.46, 1)
+uv1_offset = Vector3(0, -0.82, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tbopg"]
 albedo_texture = ExtResource("11_r8xeu")
@@ -845,8 +884,7 @@ mesh = SubResource("ArrayMesh_ypmvb")
 surface_material_override/0 = SubResource("ShaderMaterial_axous")
 
 [node name="Floor5" type="MeshInstance3D" parent="." unique_id=1432043362]
-transform = Transform3D(7.3746376, 0, 0, 0, 1, 0, 0, 0, 11.994474, 19.448147, 3.7904148, -0.06674385)
-visible = false
+transform = Transform3D(7.3746376, 0, 0, 0, 1, 0, 0, 0, 11.994474, 19.448147, 4.190415, -0.06674385)
 mesh = SubResource("ArrayMesh_ypmvb")
 surface_material_override/0 = SubResource("ShaderMaterial_axous")
 
@@ -900,16 +938,6 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 22.4
 mesh = SubResource("ArrayMesh_pm873")
 surface_material_override/0 = SubResource("ShaderMaterial_nu8ta")
 
-[node name="ExhibitPanel2" type="MeshInstance3D" parent="." unique_id=1429619594]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.78221, 0.17321277, -7.0087743)
-mesh = SubResource("ArrayMesh_pm873")
-surface_material_override/0 = SubResource("ShaderMaterial_nu8ta")
-
-[node name="ExhibitPanel3" type="MeshInstance3D" parent="." unique_id=928100789]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.106924, 0.17321277, -7.0087743)
-mesh = SubResource("ArrayMesh_pm873")
-surface_material_override/0 = SubResource("ShaderMaterial_nu8ta")
-
 [node name="Spawn1" type="Marker3D" parent="." unique_id=1045373592 groups=["lobby_spawn"]]
 transform = Transform3D(-0.9381913, 0, 0.3461171, 0, 1, 0, -0.3461171, 0, -0.9381913, 19.700333, 0.2, -4.1904964)
 
@@ -947,7 +975,7 @@ collision_mask = 0
 script = ExtResource("2_van")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HostVan" unique_id=1399586928]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.398594, 0, 8.836713)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.398594, -0.33724213, 8.585736)
 shape = SubResource("BoxShape3D_van")
 
 [node name="LeaveDoor" type="Area3D" parent="." unique_id=747238585 groups=["artifact"]]
@@ -993,6 +1021,36 @@ transform = Transform3D(-0.10739949, 0, -1.0554987, 0, 0.12817217, 0, 0.14686637
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_s4vhb")
 
+[node name="Picture1Image6" type="MeshInstance3D" parent="." unique_id=1972001149]
+transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 18.39609, 1.5178287, -7.2758813)
+mesh = ExtResource("8_hei78")
+surface_material_override/0 = SubResource("StandardMaterial3D_n378j")
+
+[node name="Picture1Image7" type="MeshInstance3D" parent="." unique_id=2049579273]
+transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 19.49609, 1.5178287, -7.2758813)
+mesh = ExtResource("8_hei78")
+surface_material_override/0 = SubResource("StandardMaterial3D_mncup")
+
+[node name="Picture1Image8" type="MeshInstance3D" parent="." unique_id=2045012460]
+transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 20.59609, 1.5178287, -7.2758813)
+mesh = ExtResource("8_hei78")
+surface_material_override/0 = SubResource("StandardMaterial3D_tvp7m")
+
+[node name="Picture1Image9" type="MeshInstance3D" parent="." unique_id=1095349708]
+transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 20.59609, 0.7178287, -7.2758813)
+mesh = ExtResource("8_hei78")
+surface_material_override/0 = SubResource("StandardMaterial3D_hlqde")
+
+[node name="Picture1Image10" type="MeshInstance3D" parent="." unique_id=708842866]
+transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 19.49609, 0.7178287, -7.2758813)
+mesh = ExtResource("8_hei78")
+surface_material_override/0 = SubResource("StandardMaterial3D_jljn4")
+
+[node name="Picture1Image11" type="MeshInstance3D" parent="." unique_id=1905567981]
+transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 18.39609, 0.7178287, -7.2758813)
+mesh = ExtResource("8_hei78")
+surface_material_override/0 = SubResource("StandardMaterial3D_3me4u")
+
 [node name="Picture1Image5" type="MeshInstance3D" parent="." unique_id=673500806]
 transform = Transform3D(-0.10739949, 0, -1.0554987, 0, 0.12817217, 0, 0.14686637, 0, -0.7718581, 20.173342, 1.0848335, 8.800154)
 mesh = ExtResource("8_hei78")
@@ -1016,8 +1074,55 @@ spot_attenuation = 0.0
 spot_angle = 26.36
 spot_angle_attenuation = 0.70710945
 
+[node name="IslandLight4" type="SpotLight3D" parent="." unique_id=1954107119]
+transform = Transform3D(-0.08393147, 0.30561742, -0.94844794, -0.39388803, -0.884466, -0.25014406, -0.9153185, 0.35258734, 0.19461355, 22.551443, 3.2407045, -2.6077178)
+light_color = Color(1, 0.08235294, 1, 1)
+light_energy = 6.113
+spot_range = 19.248
+spot_attenuation = 0.0
+spot_angle = 39.57
+spot_angle_attenuation = 0.70710945
+
+[node name="IslandLight5" type="SpotLight3D" parent="." unique_id=1087636570]
+transform = Transform3D(0.5667986, 0.34549603, -0.74791163, -0.12798572, -0.8598709, -0.49420813, -0.81385446, 0.37583855, -0.44315523, 22.151443, 3.0407045, -2.7077177)
+light_color = Color(1, 0.08235294, 0, 1)
+light_energy = 3.829
+spot_range = 19.248
+spot_attenuation = 0.0
+spot_angle = 27.05
+spot_angle_attenuation = 0.70710945
+
+[node name="IslandLight6" type="SpotLight3D" parent="." unique_id=126164679]
+transform = Transform3D(0.0022009911, -0.5661964, -0.8242675, 0.35187006, -0.77111775, 0.53062695, -0.9360463, -0.29120293, 0.19753033, 19.151443, 3.8407044, -2.6077178)
+light_color = Color(1, 0.8235294, 0, 1)
+light_energy = 6.2
+spot_range = 19.248
+spot_attenuation = 0.0
+spot_angle = 43.41
+spot_angle_attenuation = 0.70710945
+
+[node name="IslandLight7" type="SpotLight3D" parent="." unique_id=2098593375]
+transform = Transform3D(-0.3356018, 0.46253136, -0.8206317, -0.052134078, -0.87893975, -0.47407496, -0.9405602, -0.11631753, 0.3190874, 22.151443, 2.8407044, -4.6077175)
+light_color = Color(0, 0.8235294, 0, 1)
+light_energy = 6.363
+spot_range = 19.248
+spot_attenuation = 0.0
+spot_angle = 41.28
+spot_angle_attenuation = 0.70710945
+
+[node name="IslandLight3" type="SpotLight3D" parent="." unique_id=138205194]
+transform = Transform3D(-0.99920845, 0.038180143, 0.011170958, -0.02126168, -0.7498982, 0.66121143, 0.033622228, 0.6604506, 0.7501163, 19.551443, 2.0407043, -4.9077177)
+light_energy = 1.999
+spot_range = 5.34
+spot_attenuation = 0.0
+spot_angle = 51.26
+spot_angle_attenuation = 0.4352764
+
 [node name="NohaRigged2" parent="." unique_id=1073086391 instance=ExtResource("14_3qqk3")]
 transform = Transform3D(0.96002054, 0, -0.2799296, 0, 1, 0, 0.2799296, 0, 0.96002054, 18.934484, 0.6, -7.9479938)
+
+[node name="NohaRigged3" parent="." unique_id=1900180325 instance=ExtResource("14_3qqk3")]
+transform = Transform3D(0.008566093, 0, -0.998727, 0, 0.9554795, 0, 0.87484056, 0, 0.00977914, 26.11545, 0.23840481, -3.4516242)
 
 [node name="Samurai_Helmet Asia" parent="." unique_id=132034663 instance=ExtResource("15_xeelm")]
 transform = Transform3D(0.50490874, 0, -0.16823247, 0, 0.51846516, 0, 0.13529, 0, 0.6278518, 18.927147, 2.2530642, -7.964733)
@@ -1074,6 +1179,14 @@ mesh = ExtResource("23_l1gn5")
 
 [node name="Sculpture1" type="MeshInstance3D" parent="." unique_id=817215842]
 transform = Transform3D(2.9, 0, 0, 0, 1.6, 0, 0, 0, 2.6999998, 22.5, 0, -10)
+mesh = ExtResource("24_3ke7e")
+
+[node name="Sculpture3" type="MeshInstance3D" parent="." unique_id=596245535]
+transform = Transform3D(-2.9, -5.9604645e-08, 0, 1.7881393e-07, -2.3999999, 0, 0, 0, 2.6999998, 24.900002, 5.9, -3.5)
+mesh = ExtResource("24_3ke7e")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="Sculpture2" type="MeshInstance3D" parent="." unique_id=1214173156]
 mesh = ExtResource("24_3ke7e")
 
 [node name="Table2" type="MeshInstance3D" parent="." unique_id=975375242]
@@ -1148,3 +1261,58 @@ transform = Transform3D(-3.4804947, 0, -0.7091273, 0, 3.5519998, 0, 0.7091273, 0
 
 [node name="Root Scene" parent="." unique_id=1243136924 instance=ExtResource("35_t6joj")]
 transform = Transform3D(0.30310887, 0, 0.16, 0, 0.35999995, 0, -0.175, 0, 0.27712813, 20, 1.6, -8)
+
+[node name="Floor3" type="MeshInstance3D" parent="." unique_id=1707099555]
+transform = Transform3D(2.2680001, 0, 0, 0, 1, 0, 0, 0, 2.24, 24.2, 0.3, -3.4)
+mesh = ExtResource("43_x7n3g")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="Floor6" type="MeshInstance3D" parent="." unique_id=1859329660]
+transform = Transform3D(0.1938212, 0.033074625, 0, -0.070545144, 0.09087179, 0, 0, 0, 0.37246874, 25.49203, 1.1328006, -3.0100315)
+mesh = ExtResource("43_x7n3g")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="Floor7" type="MeshInstance3D" parent="." unique_id=909235578]
+transform = Transform3D(0.1938212, 0.033074625, 0, -0.070545144, 0.09087179, 0, 0, 0, 0.37623248, 25.49203, 1.1328006, -3.7997508)
+mesh = ExtResource("43_x7n3g")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="GlassBox" type="MeshInstance3D" parent="." unique_id=1083739406]
+transform = Transform3D(-0.3535534, 0.61237246, -0.7071067, 0.8660254, 0.49999994, -4.9900773e-08, 0.3535533, -0.6123724, -0.7071067, 25.800001, 3.2, -6.3)
+mesh = ExtResource("44_l1gn5")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="GlassBox2" type="MeshInstance3D" parent="." unique_id=387203457]
+transform = Transform3D(-0.3535533, 0.61237234, 0.7071066, 0.8660253, 0.49999988, -7.803117e-08, -0.35355335, 0.6123724, -0.7071066, 25.800001, 3.2, -0.9000002)
+mesh = ExtResource("44_l1gn5")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="GlassBox4" type="MeshInstance3D" parent="." unique_id=853729120]
+transform = Transform3D(1.0728836e-07, -5.3644165e-08, 0.9999996, -1.6093254e-07, -1.7999995, 4.6421032e-08, 1.8, 0, -8.040358e-08, 25.575865, 1, -3.4)
+mesh = ExtResource("44_l1gn5")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="GlassBox3" type="MeshInstance3D" parent="." unique_id=532909064]
+transform = Transform3D(-0.3535533, 0.61237234, 0.7071066, 0.8660253, 0.49999988, -7.803117e-08, -0.35355335, 0.6123724, -0.7071066, 35.800003, 3.2, 1.0999998)
+mesh = ExtResource("44_l1gn5")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="StoneSlab" type="MeshInstance3D" parent="." unique_id=828353776]
+transform = Transform3D(-1.8599196e-07, -0.9999999, 0, 4.2550006, -4.371138e-08, 0, 0, 0, 3.5, 26.6, 0.4, -3.5)
+mesh = ExtResource("45_3ke7e")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="StoneSlab2" type="MeshInstance3D" parent="." unique_id=1401753050]
+transform = Transform3D(-4.595401, 8.742276e-08, 0, -4.0174265e-07, -0.9999999, 0, 0, 0, 4.025, 26.6, 4, -3.5)
+mesh = ExtResource("45_3ke7e")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="InfoDeskBig" type="MeshInstance3D" parent="." unique_id=1469069418]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.484129, 0.4, -3)
+mesh = ExtResource("46_4j3b7")
+surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="InfoDeskBig2" type="MeshInstance3D" parent="." unique_id=2040146549]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.484129, 0.4, -3.8)
+mesh = ExtResource("46_4j3b7")
+surface_material_override/0 = ExtResource("31_k78oe")
