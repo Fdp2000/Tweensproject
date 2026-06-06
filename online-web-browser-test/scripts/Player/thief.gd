@@ -593,7 +593,7 @@ func _process(delta):
 				speed = dist / delta
 			last_pos = global_position
 			
-		if debug_disable_camo:
+		if debug_disable_camo or GameManager.current_state == GameManager.GameState.LOBBY:
 			speed = 999.0
 			
 		stealth_manager.process_stealth(delta, speed, is_hypnotized, is_jailed, is_highlighted)
