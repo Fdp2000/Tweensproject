@@ -809,7 +809,7 @@ func rescue_successful():
 	is_hypnotized = false
 	disable_body_rotation = false 
 	
-	collision_layer = 4 
+	collision_layer = 2 
 	collision_mask = 15 
 	
 	is_rescue_halted = false
