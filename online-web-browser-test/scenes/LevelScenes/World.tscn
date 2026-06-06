@@ -8,7 +8,7 @@
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="6_5ee5s"]
 [ext_resource type="PackedScene" uid="uid://dfcub4m2b5i2f" path="res://scenes/PlayerScenes/DummyThief.tscn" id="6_27ueq"]
 [ext_resource type="Texture2D" uid="uid://bp4mxol2k428p" path="res://Assets/Models/Chameleon/Chameleon_Character_Chameleon_Texture_Big_Eyes.png" id="7_e1x2i"]
-[ext_resource type="LightmapGIData" path="res://scenes/LevelScenes/World.lmbake" id="7_ofs5a"]
+[ext_resource type="LightmapGIData" uid="uid://b2aicew7mmbg1" path="res://scenes/LevelScenes/World.lmbake" id="7_ofs5a"]
 [ext_resource type="PackedScene" uid="uid://dyj1djxuy4iko" path="res://scenes/LevelScenes/PregameLobby.tscn" id="7_pregame"]
 [ext_resource type="Texture2D" uid="uid://ly1a6ntk3kyu" path="res://Assets/Models/Chameleon/Chameleon Skins/Chameleon_Texture_2.png" id="8_2q7xb"]
 [ext_resource type="PackedScene" uid="uid://4xnr376si33e" path="res://scenes/UIScenes/MainMenuImproved.tscn" id="8_7aqpd"]
@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bbwtwbwchgqqx" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_1.png" id="14_lep6j"]
 [ext_resource type="Texture2D" uid="uid://bvumt2f5v76wg" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_3.png" id="15_npev6"]
 [ext_resource type="Texture2D" uid="uid://b8hy5qu3gtxn" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_2.png" id="16_ndhhb"]
-[ext_resource type="Script" uid="uid://boje3kafxq18k" path="res://scripts/UI/PosterWallManager.gd" id="24_npev6"]
+[ext_resource type="Script" path="res://scripts/UI/PosterWallManager.gd" id="24_npev6"]
 [ext_resource type="PackedScene" uid="uid://dbxxj8t3aplww" path="res://Assets/UI/WantedPoster/WantedPoster.tscn" id="25_ndhhb"]
 [ext_resource type="PackedScene" uid="uid://c13bmoor5hpg2" path="res://Assets/UI/WantedPoster/EmployeeOfTheMonth.tscn" id="26_0xh8f"]
 [ext_resource type="Texture2D" uid="uid://vrap63c3leni" path="res://Assets/UI/WantedPoster/GreenChamWanted.png" id="27_upoqm"]
@@ -610,28 +610,28 @@ pixel_size = 0.0032
 offset = Vector2(-11.23, 40.195)
 
 [node name="Clip1Start" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123460]
-transform = Transform3D(0.46663362, 0, -0.8844507, 0, 1, 0, 0.8844507, 0, 0.46663362, -35.0922, 6.685031, -28.315243)
+transform = Transform3D(0.29544127, 0, 0.9553611, 0, 1, 0, -0.9553611, 0, 0.29544127, -36.6922, 7.085031, -21.215242)
 
 [node name="Clip1End" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123461]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.800877, 4.000001, -29.886566)
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, -15.700876, 1.4000008, -37.686565)
 
 [node name="Clip2Start" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123462]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 4, 0)
+transform = Transform3D(-0.9999996, 0, 0.000907572, 0, 1, 0, -0.000907572, 0, -0.9999996, 49.161724, 1.6327368, -4.3627095)
 
 [node name="Clip2End" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123463]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 30.444614, 3.6613224, 5.6487274)
 
 [node name="Clip3CopStart" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123464]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38963032, 4, -54.61739)
+transform = Transform3D(4.569557e-08, 0, 0.9999999, 0, 1, 0, -0.9999999, 0, 4.569557e-08, -4.81037, 3.6000001, -64.61739)
 
 [node name="Clip3CopEnd" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=1901513984]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.38963032, 4, -70.623665)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4103697, 2.7000003, -82.32367)
 
 [node name="Clip3ThiefStart" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=888123465]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)
+transform = Transform3D(0.6891644, 0, -0.724605, 0, 1, 0, 0.724605, 0, 0.6891644, -0.10747576, 1.1763532, 2.5747957)
 
 [node name="Clip3ThiefEnd" type="Marker3D" parent="CutsceneManager/CutsceneMarkers" unique_id=1628914548]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -5)
+transform = Transform3D(0.5884063, 0, -0.8085654, 0, 1, 0, 0.8085654, 0, 0.5884063, -4.818282, 4.194403, 6.0034294)
 
 [node name="VersusScreen" type="CanvasLayer" parent="." unique_id=437919447]
 visible = false
