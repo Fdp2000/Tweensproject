@@ -1098,10 +1098,7 @@ mesh = SubResource("ArrayMesh_wplk8")
 
 [node name="Giraf" parent="." unique_id=1713319742 instance=ExtResource("27_mncup")]
 transform = Transform3D(0.42868257, -0.2475, 1.5383699e-15, 0.2475, 0.42868257, 8.881783e-16, -1.7763567e-15, -6.3108872e-30, 0.49499997, 16.582212, 0.05540663, -8.291445)
-artifact_size = 2
-hand_position_offset = Vector3(-0.291, -0.628, 0.349)
-hand_rotation_offset = Vector3(70.102, 158.687, -23.468)
-drop_height_offset = -0.207
+script = null
 
 [node name="Fox" parent="." unique_id=817166680 instance=ExtResource("28_tvp7m")]
 transform = Transform3D(0.35616168, 0, 0.385712, 0, 0.5249999, 0, -0.385712, 0, 0.35616168, 22.580938, 1.8801172, -7.6064196)
@@ -1147,4 +1144,4 @@ transform = Transform3D(-3.4804947, 0, -0.7091273, 0, 3.5519998, 0, 0.7091273, 0
 transform = Transform3D(-3.4804947, 0, -0.7091273, 0, 3.5519998, 0, 0.7091273, 0, -3.4804947, 22.142399, 1.9884821, -7.2420354)
 
 [node name="Root Scene" parent="." unique_id=1243136924 instance=ExtResource("35_t6joj")]
-transform = Transform3D(0.30310887, 0, 0.16, 0, 0.35999995, 0, -0.175, 0, 0.27712813, 20, 1.6, -8)
+transform = Transform3D(0.30310887, 0, 0.16, 0, 0.35999995, 0, -0.175, 0, 0.27712813, 20.001957, 1.6, -7.9981356)

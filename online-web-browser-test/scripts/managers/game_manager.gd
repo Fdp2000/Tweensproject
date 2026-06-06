@@ -484,6 +484,12 @@ func client_return_to_lobby():
 	game_ended.emit()
 
 func full_teardown():
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
+	if client_ui:
+		var menu_cam = client_ui.get("menu_camera")
+		if menu_cam:
+			menu_cam.make_current()
+
 	var scoreboard = get_tree().get_root().get_node_or_null("Scoreboard")
 	if scoreboard:
 		scoreboard.queue_free()

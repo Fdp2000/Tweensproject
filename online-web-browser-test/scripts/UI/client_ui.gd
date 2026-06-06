@@ -440,6 +440,8 @@ func move_camera_to(target_spot: Node3D) -> void:
 		print("Menu camera missing.")
 		return
 
+	menu_camera.make_current()
+
 	if target_spot == null:
 		print("Camera target spot missing.")
 		return
@@ -635,12 +637,19 @@ func _disconnected() -> void:
 
 		GameManager.full_teardown()
 
+		var was_in_lobby = lobby_ui and lobby_ui.visible
+
 		has_requested_lobby = false
 		is_joining_room = false
 		is_hosting_room = false
 
 		show_play_panel()
-		show_join_wrong_code()
+		
+		if was_in_lobby:
+			move_camera_to(play_camera_spot)
+		else:
+			show_join_wrong_code()
+			
 		return
 
 	hide_join_feedback()
@@ -655,7 +664,8 @@ func _disconnected() -> void:
 	if lobby_ui:
 		lobby_ui.hide()
 
-	show_main_menu()
+	show_play_panel()
+	move_camera_to(play_camera_spot)
 
 
 func _lobby_joined(lobby_id: String) -> void:
