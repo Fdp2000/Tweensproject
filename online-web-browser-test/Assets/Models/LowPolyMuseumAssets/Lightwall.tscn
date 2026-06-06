@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://daonmt1emi3j5"]
+
+[ext_resource type="ArrayMesh" uid="uid://yx5qdkb7agkc" path="res://Assets/Models/LowPolyMuseumAssets/LightWallSmall.res" id="1_45dg2"]
+
+[node name="LightWal" type="Node3D" unique_id=1011834200]
+
+[node name="LightWallSmall" type="MeshInstance3D" parent="." unique_id=1865350638]
+transform = Transform3D(2.14, 0, 0, 0, 2.14, 0, 0, 0, 2.14, 0, 0, 0)
+mesh = ExtResource("1_45dg2")

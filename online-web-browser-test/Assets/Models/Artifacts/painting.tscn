@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cao4b40hjchj3"]
+[gd_scene format=4 uid="uid://m6o4r2a5u2xk"]
 
 [ext_resource type="Texture2D" uid="uid://dx2x434j7iyk1" path="res://Assets/Models/Artifacts/Imported Files/Painting_PunchUVTex.png" id="1_jwprc"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_aqax6"]
