@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://bd366vecbeek4"]
+
+[ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="1_he1jj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4k5ao"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4ibkj"]
+viewport_path = NodePath("Node3D/StartGameViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0cdrx"]
+size = Vector3(4, 2.25, 0.05)
+
+[node name="Node3D" type="Node3D" unique_id=626359221]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=842733935]
+
+[node name="StartGameViewport" type="SubViewport" parent="Node3D" unique_id=252663064]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Root" type="Control" parent="Node3D/StartGameViewport" unique_id=614026314]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MainMenuPanel" type="Panel" parent="Node3D/StartGameViewport/Root" unique_id=1508925633]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4k5ao")
+
+[node name="MarginContainer" type="MarginContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel" unique_id=1988940330]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer" unique_id=1352834237]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1211702316]
+custom_minimum_size = Vector2(1980, 0)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_he1jj")
+theme_override_font_sizes/font_size = 140
+text = "[E] To start Game"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=207674038]
+custom_minimum_size = Vector2(500, 550)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+
+[node name="ButtonVBoxContainer" type="VBoxContainer" parent="Node3D/StartGameViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer/MarginContainer" unique_id=988732918]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 60
+
+[node name="MainMenuSprite3D" type="Sprite3D" parent="Node3D" unique_id=409060191]
+pixel_size = 0.002083
+texture = SubResource("ViewportTexture_4ibkj")
+
+[node name="ClickArea" type="Area3D" parent="Node3D" unique_id=798133768]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/ClickArea" unique_id=259112472]
+shape = SubResource("BoxShape3D_0cdrx")
+
+[node name="TopLeft" type="Marker3D" parent="Node3D" unique_id=888511642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.125, 0)
+
+[node name="TopRight" type="Marker3D" parent="Node3D" unique_id=1462660113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.125, 0)
+
+[node name="BottomLeft" type="Marker3D" parent="Node3D" unique_id=1714799453]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.125, 0)
