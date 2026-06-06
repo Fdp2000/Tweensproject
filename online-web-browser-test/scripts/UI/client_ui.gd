@@ -131,6 +131,7 @@ func _ready() -> void:
 
 	host_button.pressed.connect(_on_host_pressed)
 	join_button.pressed.connect(_on_join_pressed)
+	room_input.text_submitted.connect(_on_room_code_submitted)
 	tutorial_button.pressed.connect(_on_tutorial_pressed)
 
 	play_button.pressed.connect(_on_play_pressed)
@@ -263,6 +264,12 @@ func _rotate_camera_to_skins() -> void:
 		1.2
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+
+func _on_room_code_submitted(_submitted_text: String) -> void:
+	if is_join_loading:
+		return
+
+	_on_join_pressed()
 
 func _rotate_camera_to_menu() -> void:
 	if menu_camera == null:
@@ -432,6 +439,8 @@ func move_camera_to(target_spot: Node3D) -> void:
 	if menu_camera == null:
 		print("Menu camera missing.")
 		return
+
+	menu_camera.make_current()
 
 	if target_spot == null:
 		print("Camera target spot missing.")
@@ -628,12 +637,19 @@ func _disconnected() -> void:
 
 		GameManager.full_teardown()
 
+		var was_in_lobby = lobby_ui and lobby_ui.visible
+
 		has_requested_lobby = false
 		is_joining_room = false
 		is_hosting_room = false
 
 		show_play_panel()
-		show_join_wrong_code()
+		
+		if was_in_lobby:
+			move_camera_to(play_camera_spot)
+		else:
+			show_join_wrong_code()
+			
 		return
 
 	hide_join_feedback()
@@ -648,7 +664,8 @@ func _disconnected() -> void:
 	if lobby_ui:
 		lobby_ui.hide()
 
-	show_main_menu()
+	show_play_panel()
+	move_camera_to(play_camera_spot)
 
 
 func _lobby_joined(lobby_id: String) -> void:
