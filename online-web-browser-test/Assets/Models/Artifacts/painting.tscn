@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cao4b40hjchj3"]
+
+[ext_resource type="PackedScene" uid="uid://bgy60mivti4y2" path="res://Assets/Models/Artifacts/Imported Files/Painting.glb" id="1_qikel"]
+
+[node name="Painting" unique_id=323669231 instance=ExtResource("1_qikel")]
