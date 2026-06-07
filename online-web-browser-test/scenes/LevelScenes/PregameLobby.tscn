@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bd366vecbeek4" path="res://scenes/UIScenes/StartGame.tscn" id="1_j52o3"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_ggw6v"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
+[ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
+[ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
 [ext_resource type="PackedScene" uid="uid://bohw3fv6bjsmg" path="res://Assets/Models/plant.tscn" id="5_bdf01"]
 [ext_resource type="ArrayMesh" uid="uid://cfrox0r0ijrnf" path="res://Assets/Models/LowPolyMuseumAssets/RopeBarrier.res" id="6_j52o3"]
 [ext_resource type="ArrayMesh" uid="uid://de8vjbrnt64xx" path="res://Assets/Models/LowPolyMuseumAssets/Picture1Image.res" id="8_hei78"]
@@ -703,6 +703,10 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvpsd"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tfjox"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="PregameLobby" type="Node3D" unique_id=1137537174]
 
 [node name="Vent" parent="." unique_id=581943021 instance=ExtResource("1_hbusi")]
@@ -722,7 +726,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.048524857, -0.5830066, 0.12
 shape = SubResource("BoxShape3D_van")
 
 [node name="StartGme" parent="." unique_id=626359221 instance=ExtResource("1_j52o3")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.47887, 2.504574, 10.091494)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.47887, 2.2537646, 10.009141)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1511617960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.440422, 0, 0)
@@ -1038,7 +1042,7 @@ shape = SubResource("BoxShape3D_wlwr0")
 [node name="StaticBody3D2" type="StaticBody3D" parent="WhiteVan2/Van" index="1" unique_id=295325123]
 
 [node name="Door1" parent="WhiteVan2" index="1" unique_id=1180974588]
-transform = Transform3D(-8.358346, 0, 2.7630925, 0, 5.010006, 0, -5.5261827, 0, -4.1791706, 5.8014297, 5.6355286, 4.135559)
+transform = Transform3D(-7.5176196, 0, 3.312319, 0, 5.0100007, 0, -6.6246376, 0, -3.75881, 5.6143456, 5.6355286, 4.1484375)
 surface_material_override/0 = SubResource("ShaderMaterial_tfjox")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Door1/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 1037144885) index="1" unique_id=826655492]
@@ -1048,7 +1052,7 @@ shape = SubResource("BoxShape3D_rvpsd")
 [node name="StaticBody3D2" type="StaticBody3D" parent="WhiteVan2/Door1" index="1" unique_id=1643668420]
 
 [node name="Doors2" parent="WhiteVan2" index="2" unique_id=1968327037]
-transform = Transform3D(-7.1972156, 0, -3.485711, 0, 5.010005, 0, 6.971421, 0, -3.5986066, 5.5725975, 5.7399664, -4.1097565)
+transform = Transform3D(-7.1972084, 0, -3.4857066, 0, 5.01, 0, 6.971413, 0, -3.5986042, 5.5725975, 5.7399664, -4.1097565)
 surface_material_override/0 = SubResource("ShaderMaterial_tfjox")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Doors2/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 946734434) index="1" unique_id=796022983]
@@ -1058,12 +1062,12 @@ shape = SubResource("BoxShape3D_tfjox")
 [node name="StaticBody3D2" type="StaticBody3D" parent="WhiteVan2/Doors2" index="1" unique_id=1056567883]
 
 [node name="Picture1Image" type="MeshInstance3D" parent="." unique_id=1100721740]
-transform = Transform3D(-0.10785007, 0, 1.053123, 0, 0.12817217, 0, -0.14653584, 0, -0.77509636, 18.63103, 0.9999999, 8.81218)
+transform = Transform3D(-0.121870704, 0, 0.97093344, 0, 0.0935026, 0, -0.13509965, 0, -0.87585974, 18.618303, 0.8903873, 8.801425)
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_kmuqk")
 
 [node name="Picture1Image3" type="MeshInstance3D" parent="." unique_id=1379694385]
-transform = Transform3D(-0.10739949, 0, -1.0554987, 0, 0.12817217, 0, 0.14686637, 0, -0.7718581, 20.173342, 0.77001715, 8.800154)
+transform = Transform3D(-0.10739949, 0, -1.0554987, 0, 0.093502596, 0, 0.14686637, 0, -0.7718581, 20.180727, 0.7096725, 8.786893)
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_s4vhb")
 
@@ -1098,17 +1102,17 @@ mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_3me4u")
 
 [node name="Picture1Image5" type="MeshInstance3D" parent="." unique_id=673500806]
-transform = Transform3D(-0.10739949, 0, -1.0554987, 0, 0.12817217, 0, 0.14686637, 0, -0.7718581, 20.173342, 1.0848335, 8.800154)
+transform = Transform3D(-0.10739949, 0, -1.0554987, 0, 0.093502596, 0, 0.14686637, 0, -0.7718581, 20.180727, 0.9393335, 8.786893)
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_tbopg")
 
 [node name="Picture1Image4" type="MeshInstance3D" parent="." unique_id=1310471767]
-transform = Transform3D(-0.10657728, 0.020223713, 1.0395169, 0.00059264933, 0.12577754, -0.25154522, -0.1474629, -0.014110985, -0.75231105, 18.653458, 1.3758816, 8.778329)
+transform = Transform3D(-0.11361732, 0.022215972, 1.0276446, -0.0024027126, 0.08938619, -0.43157881, -0.14187123, -0.01930546, -0.8156788, 18.644377, 1.1989874, 8.776634)
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_vihxg")
 
 [node name="Picture1Image2" type="MeshInstance3D" parent="." unique_id=890825284]
-transform = Transform3D(0.09447008, 0.032073233, -0.60815257, -4.7003337e-05, -0.14271653, -0.21166307, -0.12766576, 0.023786109, -0.44994316, 20.088785, 1.4607295, 8.731624)
+transform = Transform3D(0.094462, 0.026568215, -0.5559561, -4.6999427e-05, -0.10438191, -0.21912824, -0.12765482, 0.019698389, -0.4113161, 20.103384, 1.2163954, 8.723699)
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_d4keu")
 
@@ -1362,6 +1366,31 @@ surface_material_override/0 = ExtResource("31_k78oe")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.484129, 0.4, -3.8)
 mesh = ExtResource("46_4j3b7")
 surface_material_override/0 = ExtResource("31_k78oe")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=2017613133]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.760956, -0.2915616, 13.80736)
+size = Vector3(4.3984375, 1, 3.8319092)
+material = SubResource("StandardMaterial3D_tfjox")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=1535129411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.760956, 3.6465092, 13.904574)
+size = Vector3(4.3984375, 1, 3.8319092)
+material = SubResource("StandardMaterial3D_tfjox")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1548581829]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 21.45868, 1.9397874, 13.844109)
+size = Vector3(4.3984375, 1, 3.8319092)
+material = SubResource("StandardMaterial3D_tfjox")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1707408400]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 18.074007, 1.9397873, 13.844241)
+size = Vector3(4.3984375, 1, 3.8319092)
+material = SubResource("StandardMaterial3D_tfjox")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=1069957035]
+transform = Transform3D(-4.3711385e-08, 4.371139e-08, 1, 1, 0, 4.371139e-08, 0, 1, -4.371139e-08, 19.784971, 1.9397873, 15.206689)
+size = Vector3(4.3984375, 1, 3.8319092)
+material = SubResource("StandardMaterial3D_tfjox")
 
 [editable path="Vent"]
 [editable path="Vent/PivotPoint/Sketchfab_Scene"]
