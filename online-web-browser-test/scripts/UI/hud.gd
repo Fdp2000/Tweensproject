@@ -34,7 +34,7 @@ func _on_time_updated(time_left: int):
 		time_label.add_theme_color_override("font_color", Color.RED)
 
 func _on_cash_updated():
-	cash_label.text = "Stolen Cash: $%d / $%d" % [GameManager.team_cash, GameManager.cash_quota]
+	cash_label.text = "$%d / $%d" % [GameManager.team_cash, GameManager.cash_quota]
 
 func _on_game_over(winner_team: int):
 	game_over_panel.show()

@@ -32,7 +32,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_fonts/font = ExtResource("2_yhb3b")
 theme_override_font_sizes/font_size = 36
-text = "Stolen Cash: $0 / $10000"
+text = "$0 / $10000"
 horizontal_alignment = 1
 
 [node name="GameOverPanel" type="ColorRect" parent="." unique_id=678552370]
