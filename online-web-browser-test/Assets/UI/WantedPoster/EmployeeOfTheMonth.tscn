@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cxeufnjo0v8ie" path="res://scripts/UI/EmployeePoster.gd" id="1_yhm8n"]
 [ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="3_ftufj"]
 [ext_resource type="FontFile" uid="uid://dufah6o0mdw3o" path="res://Assets/Fonts/Super Mindset.ttf" id="3_yhm8n"]
+[ext_resource type="PackedScene" uid="uid://b4hha0q7y1chb" path="res://Assets/Particles/artifact_particles.tscn" id="5_sxpsc"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_4mmdt"]
 size = Vector2(1.8, 2.2)
@@ -47,3 +48,8 @@ pixel_size = 0.0058
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="MeshInstance3D" unique_id=2117485912]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, -0.026, 1.1364961e-09)
 mesh = SubResource("BoxMesh_ftufj")
+
+[node name="artifactParticles" parent="MeshInstance3D" unique_id=1757072748 instance=ExtResource("5_sxpsc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37663502, -1.646324e-08)
+emission_shape = 3
+emission_box_extents = Vector3(1.315, 0.645, 1.385)

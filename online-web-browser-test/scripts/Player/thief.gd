@@ -231,6 +231,8 @@ func _unhandled_input(event):
 	
 	var is_interact = (event is InputEventKey and event.physical_keycode == KEY_E and event.pressed and not event.echo) or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed)
 	if is_interact:
+		if is_hypnotized or is_jailed: return
+		
 		if carried_artifact: 
 			_try_drop()
 		else:

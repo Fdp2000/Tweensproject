@@ -52,6 +52,7 @@ var col: CollisionShape3D
 var synchronizer: MultiplayerSynchronizer
 
 func _ready():
+	
 	# Make sure this node is in the artifact group
 	if not is_in_group("artifact"):
 		add_to_group("artifact")
@@ -125,9 +126,45 @@ func _ready():
 			weight_penalty = custom_weight_penalty
 	
 	# Add Particles
-	var particles_instance = ARTIFACT_PARTICLES.instantiate()
-	self.add_child(particles_instance)
-	particles_instance.emitting = true
+	var particles_instance = get_node_or_null("artifactParticles")
+	
+	if particles_instance != null:
+		# The user manually added the 'artifact_particles.tscn' to the artifact scene in the editor!
+		# We don't need to dynamically scale or move it, because the user placed it perfectly themselves.
+		particles_instance.emitting = true
+	else:
+		# Dynamic generation for artifacts that don't have it manually placed
+		particles_instance = ARTIFACT_PARTICLES.instantiate()
+		self.add_child(particles_instance)
+		
+		var final_radius = 1.0
+		var final_pos = Vector3.ZERO
+		
+		# Calculate the size of the artifact meshes to dynamically scale the particles
+		var mesh_aabb = _calculate_meshes_aabb(self)
+		var max_size = max(mesh_aabb.size.x, max(mesh_aabb.size.y, mesh_aabb.size.z))
+		final_pos = mesh_aabb.get_center()
+		
+		# If the mesh AABB is broken (e.g. bad 3D data) and max_size is tiny, fallback to the CollisionShape3D!
+		if max_size <= 0.01 and is_instance_valid(col) and col.shape:
+			if col.shape is BoxShape3D:
+				max_size = max(col.shape.size.x, max(col.shape.size.y, col.shape.size.z))
+			elif col.shape is SphereShape3D:
+				max_size = col.shape.radius * 2.0
+			elif col.shape is CapsuleShape3D or col.shape is CylinderShape3D:
+				max_size = max(col.shape.radius * 2.0, col.shape.height)
+			else:
+				max_size = 2.0 # Ultimate fallback
+				
+			final_pos = self.to_local(col.global_position)
+		
+		# Calculate radius from size plus buffer
+		final_radius = (max_size / 2.0) + 0.2
+
+		# Set the particle's emission sphere radius
+		particles_instance.emission_sphere_radius = final_radius
+		particles_instance.position = final_pos
+		particles_instance.emitting = true
 
 	initial_position = global_position
 	initial_rotation = rotation
@@ -140,7 +177,8 @@ func _calculate_meshes_aabb(node: Node) -> AABB:
 	var found_mesh = false
 	
 	for child in node.get_children():
-		if child is MeshInstance3D:
+		# Include this node's mesh if it has one
+		if child is MeshInstance3D and child.get_mesh():
 			var mesh_aabb = child.get_mesh().get_aabb()
 			# Transform mesh AABB to parent space
 			var local_aabb = child.transform * mesh_aabb
@@ -150,9 +188,13 @@ func _calculate_meshes_aabb(node: Node) -> AABB:
 			else:
 				total_aabb = total_aabb.merge(local_aabb)
 		
-		# Recurse
+		# Recurse down to children
 		var sub_aabb = _calculate_meshes_aabb(child)
 		if sub_aabb.size.length() > 0:
+			# If the child is a Node3D, transform its accumulated children's AABB into our space!
+			if child is Node3D:
+				sub_aabb = child.transform * sub_aabb
+				
 			if not found_mesh:
 				total_aabb = sub_aabb
 				found_mesh = true
