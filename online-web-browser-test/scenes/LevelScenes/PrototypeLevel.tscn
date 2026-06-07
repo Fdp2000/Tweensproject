@@ -14796,12 +14796,12 @@ transform = Transform3D(7.5497894e-08, 0, 1, 0, 0.81235856, 0, -1, 0, 7.5497894e
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.9583218)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Jail/WalkTarget" index="0" unique_id=1547733505]
-transform = Transform3D(0.815845, 0, 0.5782706, 0, 1, 0, -0.5782706, 0, 0.815845, 0, -0.38254765, 0)
+transform = Transform3D(0.815845, 0, 0.5782706, 0, 1, 0, -0.5782706, 0, 0.815845, -0.10627365, -0.38254762, 0)
 size = Vector3(0.22216797, 1, 1)
 material = SubResource("StandardMaterial3D_nr0w7")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Jail/WalkTarget" index="1" unique_id=1634028513]
-transform = Transform3D(0.6608667, 0, -0.75050336, 0, 1, 0, 0.75050336, 0, 0.6608667, 0, -0.38254765, 0)
+transform = Transform3D(0.6608667, 0, -0.75050336, 0, 1, 0, 0.75050336, 0, 0.6608667, -0.10627365, -0.38254762, 0)
 size = Vector3(0.22216797, 1, 1)
 material = SubResource("StandardMaterial3D_nr0w7")
 
