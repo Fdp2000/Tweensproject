@@ -9,5 +9,7 @@
 [node name="MainMenuUI" parent="." unique_id=354039283 instance=ExtResource("2_6fv8w")]
 
 [node name="Tutorial" parent="MainMenuUI" unique_id=1108260321 instance=ExtResource("2_tsbww")]
+visible = false
 
 [node name="TutorialCop" parent="MainMenuUI" unique_id=364404085 instance=ExtResource("3_hc151")]
+visible = false

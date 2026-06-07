@@ -81,6 +81,11 @@ var is_hosting_room := false
 
 
 func _ready() -> void:
+	# FIX: Hide full-screen canvases immediately so they don't flash for 2 frames!
+	if tutorial_canvas: tutorial_canvas.hide()
+	if tutorial_cop_canvas: tutorial_cop_canvas.hide()
+	if lobby_ui: lobby_ui.hide()
+	
 	await get_tree().process_frame
 	await get_tree().process_frame
 
