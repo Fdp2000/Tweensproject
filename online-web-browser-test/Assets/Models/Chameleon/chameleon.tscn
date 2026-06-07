@@ -366,7 +366,6 @@ graph_offset = Vector2(-24, 4)
 script = ExtResource("1_eomr5")
 left_eye_pivot = NodePath("Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_L")
 right_eye_pivot = NodePath("Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_R")
-preview_random_movement = true
 
 [node name="Chameleon_Character" type="Node3D" parent="." unique_id=1967876746]
 
@@ -629,7 +628,7 @@ bone_name = "Head"
 bone_idx = 4
 
 [node name="Eye_L" type="Node3D" parent="Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D" unique_id=577983357]
-transform = Transform3D(0.946564, 0.04865457, -0.3188247, 0.019278187, 0.9782518, 0.20652246, 0.32193917, -0.20163308, 0.92504007, 0.185, 0.31700003, 0.08700001)
+transform = Transform3D(0.61732525, -0.24050513, 0.7490438, -0.1402653, 0.9032205, 0.40560845, -0.7741027, -0.35545722, 0.5238463, 0.185, 0.31700003, 0.08700001)
 
 [node name="Eye_L" type="MeshInstance3D" parent="Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_L" unique_id=970056815]
 transform = Transform3D(1, 7.450581e-09, -2.0861626e-07, 3.7252903e-09, 0.99930596, 0.037251204, 1.937151e-07, -0.037251174, 0.9993061, -0.18500003, -1.1125116, -0.045658767)
@@ -637,7 +636,7 @@ mesh = SubResource("ArrayMesh_p1jj1")
 surface_material_override/0 = SubResource("ShaderMaterial_bl0h2")
 
 [node name="Eye_R" type="Node3D" parent="Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D" unique_id=1023489596]
-transform = Transform3D(0.9889623, 0.14249437, -0.040606454, -0.14791343, 0.96550304, -0.21430202, 0.008668825, 0.21794283, 0.975923, -0.185, 0.317, 0.087)
+transform = Transform3D(0.8433873, -0.17688794, -0.5073543, 0.30246457, 0.936732, 0.1762046, 0.4440866, -0.30206546, 0.8435303, -0.185, 0.317, 0.087)
 
 [node name="Eye_R" type="MeshInstance3D" parent="Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_R" unique_id=940823346]
 transform = Transform3D(1, 3.7252903e-09, -2.2351742e-07, 3.7252903e-09, 0.99930596, 0.037251204, 1.937151e-07, -0.037251174, 0.9993062, 0.18499999, -1.1125115, -0.045658812)
