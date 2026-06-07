@@ -49,6 +49,10 @@
 [ext_resource type="ArrayMesh" uid="uid://bpo1q3kvmctxv" path="res://Assets/Models/LowPolyMuseumAssets/StoneSlab.res" id="45_3ke7e"]
 [ext_resource type="ArrayMesh" uid="uid://ir2pg8414v5k" path="res://Assets/Models/LowPolyMuseumAssets/InfoDeskBig.res" id="46_4j3b7"]
 [ext_resource type="Script" uid="uid://niyg24f8udu4" path="res://scripts/Components/biome_audio_trigger.gd" id="46_wlwr0"]
+[ext_resource type="PackedScene" uid="uid://bgy60mivti4y2" path="res://Assets/Models/Artifacts/Imported Files/Painting.glb" id="50_k78oe"]
+[ext_resource type="PackedScene" uid="uid://dvyvhdlq161ew" path="res://Assets/Models/Artifacts/Imported Files/godot_plush_update.glb" id="51_x7n3g"]
+[ext_resource type="PackedScene" uid="uid://dew62qhd0uolh" path="res://NoahDj.tscn" id="52_k78oe"]
+[ext_resource type="Texture2D" uid="uid://w1b7eq26bd8n" path="res://NoahAtlas.jpg" id="53_x7n3g"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_van"]
 size = Vector3(1.4589844, 1, 1)
@@ -406,38 +410,6 @@ shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_k8akl"]
-_surfaces = [{
-"aabb": AABB(-0.5, 0, -0.099999994, 1, 1.6, 0.19999999),
-"format": 34359742465,
-"index_count": 204,
-"index_data": PackedByteArray("AAABAAIAAgABAAMAAwAEAAIABQADAAEAAQAAAAUABgAEAAMAAwAFAAYABwACAAQABAAGAAcAAgAHAAAACAAGAAUACQAFAAAABQAJAAgABgAIAAoACgAHAAYACwAIAAkACAALAAwADAAKAAgACQANAAsADgAMAAsACwANAA4ACgAMAA4ADQAJAA8ADwAOAA0ADgAPAAoAAAAPAAkAEAAHAAoAEQAAAAcACgASABAABwAQABMAFAASAAoABwAVABEAEwAVAAcAFgARABUAFQAXABYAEQAWABgAGAAWABcAGQAXABUAFwAZABgAFQATABkAGAAaABEAGgAYABkAGQATABoAAAARABoAGwAaABMAGgAbAAAAEwAQABsAAAAbABwAHAAbABAAEAASABwAHAAPAAAAHQAcABIADwAcAB0AEgAUAB0AHQAeAA8AHwAdABQAHgAdAB8AHwAgAB4AFAAhAB8AIAAfACEAHgAgACIAIQAiACAADwAeACMAIgAjAB4AIwAiACEAIQAUACMAIwAKAA8ACgAjABQA"),
-"name": "Material",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 36,
-"vertex_data": PackedByteArray("AAAAv9DMzD1B6sO8AAAAv9DMzD3MzMy9AAAAP9DMzD3MzMy9AAAAvwAAAADMzMy9AAAAPwAAAADMzMy9AAAAvwAAAABB6sO8AAAAPwAAAABB6sO8AAAAP9DMzD1B6sO8AAAAPwAAAABB6sM8AAAAvwAAAABB6sM8AAAAP9DMzD1B6sM8AAAAPwAAAADMzMw9AAAAP9DMzD3MzMw9AAAAvwAAAADMzMw9AAAAv9DMzD3MzMw9AAAAv9DMzD1B6sM8AAAAP83MzD9B6sO8FZrtvj4yCz5B6sO8AAAAP83MzD9B6sM8FZrtPlIzyD9B6sO8FZrtPlIzyD9B6sM8FZrtPj4yCz5B6sO8Hlfkviy4HT54/WO8HlfkPiy4HT54/WO8HlfkvpTixT94/WO8HlfkPpTixT94/WO8FZrtvlIzyD9B6sO8AAAAv83MzD9B6sO8AAAAv83MzD9B6sM8FZrtvlIzyD9B6sM8FZrtvj4yCz5B6sM8HlfkvpTixT94/WM8Hlfkviy4HT54/WM8HlfkPpTixT94/WM8HlfkPiy4HT54/WM8FZrtPj4yCz5B6sM8")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_pm873"]
-resource_name = "Cube_179"
-_surfaces = [{
-"aabb": AABB(-0.5, 0, -0.099999994, 1, 1.6, 0.19999999),
-"attribute_data": PackedByteArray("0gY8PTjzQD7SBjw9OPNAPhqoVj0480A+GqhWPTjzQD4aqFY9OPNAPtIGPD0480A+0gY8PaidQT4aqFY9qJ1BPhqoVj3A9jY+GqhWPcD2Nj7SBjw9wPY2PtIGPD3A9jY+0gY8PTjzQD4aqFY9OPNAPhqoVj2onUE+0gY8PaidQT7SBjw9OPNAPtIGPD0480A+0gY8PaidQT7SBjw9qJ1BPhqoVj0480A+GqhWPTjzQD4aqFY9qJ1BPhqoVj2onUE+0gY8PTjzQD7SBjw9OPNAPhqoVj0480A+GqhWPTjzQD4aqFY9qJ1BPhqoVj2onUE+0gY8PaidQT7SBjw9qJ1BPtIGPD2onUE+GqhWPaidQT7SBjw9qJ1BPhqoVj2onUE+GqhWPTjzQD4aqFY9OPNAPhqoVj2onUE+GqhWPaidQT5j1U4+3JolPmPVTj4s3y4+j8VUPizfLj6PxVQ+3JolPhqoVj2onUE+GqhWPaidQT4aqFY9OPNAPhqoVj0480A+GqhWPcD2Nj4aqFY9wPY2PtIGPD2onUE+0gY8PaidQT7SBjw9OPNAPtIGPD0480A+0gY8PcD2Nj7SBjw9wPY2PtIGPD0480A+0gY8PTjzQD7SBjw9qJ1BPtIGPD2onUE+j8VUPtyaJT6PxVQ+LN8uPmPVTj4s3y4+Y9VOPtyaJT7L+zw9+LVAPtIGPD0480A+GqhWPTjzQD7L+zw9ADQ3Ph2zVT34tUA+0gY8PcD2Nj4ds1U9ADQ3PhqoVj3A9jY+HbNVPfi1QD4aqFY9OPNAPtIGPD0480A+HbNVPQA0Nz7L+zw9+LVAPhqoVj3A9jY+y/s8PQA0Nz7SBjw9wPY2Php3PT0gl0A+y/s8Pfi1QD4ds1U9+LVAPso3VT0gl0A+Gnc9PdBSNz7L+zw9ADQ3Psv7PD34tUA+Gnc9PSCXQD7KN1U90FI3Ph2zVT0ANDc+y/s8PQA0Nz4adz090FI3Pso3VT3QUjc+yjdVPSCXQD4ds1U9+LVAPh2zVT0ANDc+yjdVPSCXQD4ds1U9+LVAPsv7PD34tUA+Gnc9PSCXQD7KN1U90FI3Ph2zVT0ANDc+HbNVPfi1QD7KN1U9IJdAPhp3PT3QUjc+y/s8PQA0Nz4ds1U9ADQ3Pso3VT3QUjc+Gnc9PdBSNz4adz09IJdAPsv7PD34tUA+y/s8PQA0Nz4="),
-"format": 34359742487,
-"index_count": 204,
-"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQAGAAZABoAGgAbABgAHAAdAB4AHgAfABwAIAAeAB0AHQAhACAAIgAgACEAIQAjACIAJAAlACYAJgAnACQAKAApACoAKgArACgALAAtAC4ALgAvACwAMAAvAC4ALgAxADAAMgAzADQANAA1ADIANgA1ADQANAA3ADYAOAA5ADoAOgA7ADgAPAA9AD4APgA/ADwAQABBAEIAQQBAAEMAQgBEAEAAQwBFAEEARgBEAEIARQBDAEYAQgBHAEYARgBHAEUASABJAEoASQBIAEsASgBMAEgASwBNAEkATgBMAEoATQBLAE4ASgBPAE4ATgBPAE0AUABRAFIAUgBTAFAAVABVAFYAVgBXAFQAWABZAFoAWgBbAFgAXABdAF4AXgBfAFwAYABhAGIAYgBjAGAAZABlAGYAZgBnAGQAaABpAGoAagBrAGgAbABtAG4AbgBvAGwA"),
-"material": SubResource("StandardMaterial3D_8gwb7"),
-"name": "Material",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 112,
-"vertex_data": PackedByteArray("AAAAv9DMzD1B6sO8AAAAv9DMzD3MzMy9AAAAP9DMzD3MzMy9AAAAP9DMzD1B6sO8AAAAP9DMzD3MzMy9AAAAv9DMzD3MzMy9AAAAvwAAAADMzMy9AAAAPwAAAADMzMy9AAAAP83MzD9B6sO8AAAAP83MzD9B6sM8AAAAv83MzD9B6sM8AAAAv83MzD9B6sO8AAAAv9DMzD3MzMw9AAAAP9DMzD3MzMw9AAAAPwAAAADMzMw9AAAAvwAAAADMzMw9AAAAv9DMzD3MzMy9AAAAv9DMzD1B6sO8AAAAvwAAAABB6sO8AAAAvwAAAADMzMy9AAAAP9DMzD1B6sO8AAAAP9DMzD3MzMy9AAAAPwAAAADMzMy9AAAAPwAAAABB6sO8AAAAv9DMzD3MzMw9AAAAv9DMzD1B6sM8AAAAP9DMzD1B6sM8AAAAP9DMzD3MzMw9AAAAPwAAAADMzMw9AAAAPwAAAABB6sM8AAAAvwAAAABB6sM8AAAAvwAAAADMzMw9AAAAvwAAAABB6sO8AAAAPwAAAABB6sO8AAAAvwAAAADMzMy9AAAAPwAAAADMzMy9AAAAP9DMzD3MzMw9AAAAP9DMzD1B6sM8AAAAPwAAAABB6sM8AAAAPwAAAADMzMw9HlfkvpTixT94/WO8Hlfkviy4HT54/WO8HlfkPiy4HT54/WO8HlfkPpTixT94/WO8AAAAPwAAAABB6sO8AAAAPwAAAABB6sM8AAAAP9DMzD1B6sM8AAAAP9DMzD1B6sO8AAAAP83MzD9B6sO8AAAAP83MzD9B6sM8AAAAvwAAAABB6sM8AAAAvwAAAABB6sO8AAAAv9DMzD1B6sO8AAAAv9DMzD1B6sM8AAAAv83MzD9B6sM8AAAAv83MzD9B6sO8AAAAv9DMzD1B6sM8AAAAv9DMzD3MzMw9AAAAvwAAAADMzMw9AAAAvwAAAABB6sM8HlfkPpTixT94/WM8HlfkPiy4HT54/WM8Hlfkviy4HT54/WM8HlfkvpTixT94/WM8FZrtvj4yCz5B6sO8AAAAv9DMzD1B6sO8AAAAP9DMzD1B6sO8FZrtvlIzyD9B6sO8FZrtPj4yCz5B6sO8AAAAv83MzD9B6sO8FZrtPlIzyD9B6sO8AAAAP83MzD9B6sO8FZrtPj4yCz5B6sM8AAAAP9DMzD1B6sM8AAAAv9DMzD1B6sM8FZrtPlIzyD9B6sM8FZrtvj4yCz5B6sM8AAAAP83MzD9B6sM8FZrtvlIzyD9B6sM8AAAAv83MzD9B6sM8Hlfkviy4HT54/WO8FZrtvj4yCz5B6sO8FZrtPj4yCz5B6sO8HlfkPiy4HT54/WO8HlfkvpTixT94/WO8FZrtvlIzyD9B6sO8FZrtvj4yCz5B6sO8Hlfkviy4HT54/WO8HlfkPpTixT94/WO8FZrtPlIzyD9B6sO8FZrtvlIzyD9B6sO8HlfkvpTixT94/WO8HlfkPpTixT94/WO8HlfkPiy4HT54/WO8FZrtPj4yCz5B6sO8FZrtPlIzyD9B6sO8HlfkPiy4HT54/WM8FZrtPj4yCz5B6sM8FZrtvj4yCz5B6sM8Hlfkviy4HT54/WM8HlfkPpTixT94/WM8FZrtPlIzyD9B6sM8FZrtPj4yCz5B6sM8HlfkPiy4HT54/WM8HlfkvpTixT94/WM8FZrtvlIzyD9B6sM8FZrtPlIzyD9B6sM8HlfkPpTixT94/WM8HlfkvpTixT94/WM8Hlfkviy4HT54/WM8FZrtvj4yCz5B6sM8FZrtvlIzyD9B6sM8/3///////7//f///////v/9///////+//3///////7//////////P/////////8//////////z//////////P/9///////+//3///////7//f///////v/9///////+//3//f////7//f/9/////v/9//3////+//3//f////78AAP9/////vwAA/3////+/AAD/f////78AAP9/////v////3////+/////f////7////9/////v////3////+//3///////7//f///////v/9///////+//3///////7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+//38AAP///7//fwAA////v/9/AAD///+/////f////7////9/////v////3////+/////f////7//////////P/////////8//////////z//////////P////3////+/////f////7////9/////v////3////+/////f////7////9/////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+//3//f////7//f/9/////v/9//3////+//3//f////7///////P8AQP/////9/wBA//////3//j///////f/+P//////8//4///////z//j///////f8AQP/////8/wBA/3//f/z/AMD/f/9//f8AwP9//3/9//6//3//f/3//r//f/9//P/+v/9//3/8//6//3//f/3/AMD/f/9//P8AwG3S//////8/bdL//////z9t0v//////P23S//////8///9t0mbSBUD//23SZtIFQP//bdJm0gRA//9t0mfSBEBt0gAA////P23SAAD///8/bdIAAP///z9t0gAA////PwAAbdLz/zMpAABt0vX/MykAAG3S9f8zKQAAbdLz/zMp/3+Rrf///7//f5Gt////v/9/ka3///+//3+Rrf///79tUv9/ZtIEwG1S/39m0gTAbVL/f2bSBMBtUv9/Z9IEwP9/bVL///+//39tUv///7//f21S////v/9/bVL///+/ka3/f/P/MqmRrf9/9f8zqZGt/3/1/zOpka3/f/P/Mqk=")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_k8akl")
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_wlwr0"]
 size = Vector3(2.4086852, 1.9660385, 2.3726978)
 
@@ -674,6 +646,31 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvpsd"]
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l1gn5"]
+render_priority = 0
+shader = ExtResource("2_ggw6v")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("53_x7n3g")
+shader_parameter/use_stepped = true
+shader_parameter/steps = 2.0
+shader_parameter/step_smoothness = 0.0
+shader_parameter/shadow_tint = Color(0, 0, 0, 1)
+shader_parameter/shadow_tint_amount = 0.4
+shader_parameter/specular = 0.0
+shader_parameter/normal_strength = 0.0
+shader_parameter/use_rim = true
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_amount = 2.0
+shader_parameter/rim_smoothness = 0.2
+shader_parameter/rim_mask_shadow = 1.0
+shader_parameter/rim_blend = 1.0
+shader_parameter/use_pattern = true
+shader_parameter/pattern_uv_mode = 2
+shader_parameter/pattern_tiling = 32.0
+shader_parameter/pattern_amount = 0.5
+shader_parameter/pattern_smoothness = 0.5
+shader_parameter/pattern_blend = 0.2
 
 [node name="PregameLobby" type="Node3D" unique_id=1137537174]
 
@@ -931,11 +928,6 @@ transform = Transform3D(-1.2, 0, 8.742278e-08, 0, 1, 0, -1.04907336e-07, 0, -1, 
 mesh = SubResource("ArrayMesh_g3e8t")
 surface_material_override/0 = SubResource("ShaderMaterial_nu8ta")
 
-[node name="ExhibitPanel" type="MeshInstance3D" parent="." unique_id=1609978090]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 22.456717, 0.17321277, 6.4897485)
-mesh = SubResource("ArrayMesh_pm873")
-surface_material_override/0 = SubResource("ShaderMaterial_nu8ta")
-
 [node name="Spawn1" type="Marker3D" parent="." unique_id=1045373592 groups=["lobby_spawn"]]
 transform = Transform3D(-0.9381913, 0, 0.3461171, 0, 1, 0, -0.3461171, 0, -0.9381913, 19.700333, 0.2, -4.1904964)
 
@@ -1134,11 +1126,35 @@ spot_attenuation = 0.0
 spot_angle = 51.26
 spot_angle_attenuation = 0.4352764
 
+[node name="IslandLight8" type="SpotLight3D" parent="." unique_id=1971679425]
+transform = Transform3D(0.05042554, -0.9809086, 0.1878182, -0.68835914, 0.10211957, 0.7181457, -0.7236152, -0.16549927, -0.67006797, 19.973452, 3.7757254, -10.834895)
+light_color = Color(1, 0.73333335, 0, 1)
+light_energy = 0.232
+spot_range = 45.24
+spot_attenuation = 0.0
+spot_angle = 54.3
+spot_angle_attenuation = 0.28717446
+
+[node name="IslandLight9" type="SpotLight3D" parent="." unique_id=1639372482]
+transform = Transform3D(0.050425556, -0.9809086, 0.18781821, 0.87230736, 0.13483524, 0.46999943, -0.4863509, 0.1401352, 0.86245286, 19.808952, 3.7757254, 10.167005)
+light_color = Color(1, 0.73333335, 0, 1)
+light_energy = 0.232
+spot_range = 45.24
+spot_attenuation = 0.0
+spot_angle = 71.38
+spot_angle_attenuation = 0.28717446
+
+[node name="IslandLight10" type="SpotLight3D" parent="." unique_id=2038780701]
+transform = Transform3D(0.1460277, 0.4131798, 0.898865, -0.8631223, 0.49720985, -0.08833062, -0.48342097, -0.7629317, 0.4292311, 15.801664, 1.437023, 11.124719)
+light_color = Color(1, 0.73333335, 0, 1)
+light_energy = 0.232
+spot_range = 45.24
+spot_attenuation = 0.0
+spot_angle = 29.16
+spot_angle_attenuation = 0.11662911
+
 [node name="NohaRigged2" parent="." unique_id=1073086391 instance=ExtResource("14_3qqk3")]
 transform = Transform3D(0.96002054, 0, -0.2799296, 0, 1, 0, 0.2799296, 0, 0.96002054, 18.934484, 0.6, -7.9479938)
-
-[node name="NohaRigged3" parent="." unique_id=1900180325 instance=ExtResource("14_3qqk3")]
-transform = Transform3D(0.008566093, 0, -0.998727, 0, 0.9554795, 0, 0.87484056, 0, 0.00977914, 26.11545, 0.23840481, -3.4516242)
 
 [node name="Samurai_Helmet Asia" parent="." unique_id=132034663 instance=ExtResource("15_xeelm")]
 transform = Transform3D(0.50490874, 0, -0.16823247, 0, 0.51846516, 0, 0.13529, 0, 0.6278518, 18.927147, 2.2530642, -7.964733)
@@ -1333,6 +1349,22 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.4
 mesh = ExtResource("46_4j3b7")
 surface_material_override/0 = ExtResource("31_k78oe")
 
+[node name="Painting" parent="." unique_id=27562346 instance=ExtResource("50_k78oe")]
+transform = Transform3D(1.55, 0, 0, 0, 1.55, 0, 0, 0, 1.55, 12.34604, 2.361309, 3.386807)
+
+[node name="Painting2" type="Node3D" parent="." unique_id=1846388939]
+transform = Transform3D(1.55, 0, 0, 0, 1.55, 0, 0, 0, 1.55, 12.34604, 2.361309, -3.113193)
+
+[node name="godot_plush_update" parent="." unique_id=1673088619 instance=ExtResource("51_x7n3g")]
+transform = Transform3D(-4.37, 0, -3.820375e-07, 0, 4.37, 0, 3.820375e-07, 0, -4.37, 18.4, 2, -7.4)
+
+[node name="Hip Hop Dancing2" parent="." unique_id=940806098 instance=ExtResource("52_k78oe")]
+transform = Transform3D(-0.25881904, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, -0.25881904, 26, 0.3, -3.4)
+
+[node name="mesh" parent="Hip Hop Dancing2/Skeleton3D" parent_id_path=PackedInt32Array(940806098, 1641998674) index="0" unique_id=284421775]
+surface_material_override/0 = SubResource("ShaderMaterial_l1gn5")
+
 [editable path="Vent"]
 [editable path="Vent/PivotPoint/Sketchfab_Scene"]
 [editable path="WhiteVan2"]
+[editable path="Hip Hop Dancing2"]
