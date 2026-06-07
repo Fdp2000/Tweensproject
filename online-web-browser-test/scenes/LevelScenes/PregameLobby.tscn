@@ -969,12 +969,13 @@ transform = Transform3D(0.88033664, 0, 0.47434938, 0, 1, 0, -0.47434938, 0, 0.88
 transform = Transform3D(0.9637517, 0, -0.26680094, 0, 1, 0, 0.26680094, 0, 0.9637517, 18.464191, 0.2, 5.347574)
 
 [node name="HostVan" type="Area3D" parent="." unique_id=747771727 groups=["artifact"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3144, 1, 8.607053)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.392145, 0.76954734, 8.755385)
 collision_layer = 10
 collision_mask = 0
 script = ExtResource("2_van")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HostVan" unique_id=1399586928]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("BoxShape3D_van")
 
 [node name="Plant2" parent="." unique_id=1211902803 instance=ExtResource("5_bdf01")]
