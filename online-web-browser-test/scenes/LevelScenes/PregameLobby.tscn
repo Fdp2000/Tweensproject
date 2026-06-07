@@ -694,7 +694,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.048524857, -0.5830066, 0.12
 shape = SubResource("BoxShape3D_van")
 
 [node name="StartGme" parent="." unique_id=626359221 instance=ExtResource("1_j52o3")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.47887, 2.504574, 10.047902)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.47887, 2.504574, 10.091494)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1511617960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.440422, 0, 0)
