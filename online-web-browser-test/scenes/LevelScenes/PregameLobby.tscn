@@ -1313,11 +1313,6 @@ transform = Transform3D(1.0728836e-07, -5.3644165e-08, 0.9999996, -1.6093254e-07
 mesh = ExtResource("44_l1gn5")
 surface_material_override/0 = ExtResource("31_k78oe")
 
-[node name="GlassBox3" type="MeshInstance3D" parent="." unique_id=532909064]
-transform = Transform3D(-0.3535533, 0.61237234, 0.7071066, 0.8660253, 0.49999988, -7.803117e-08, -0.35355335, 0.6123724, -0.7071066, 35.800003, 3.2, 1.0999998)
-mesh = ExtResource("44_l1gn5")
-surface_material_override/0 = ExtResource("31_k78oe")
-
 [node name="StoneSlab" type="MeshInstance3D" parent="." unique_id=828353776]
 transform = Transform3D(-1.8599196e-07, -0.9999999, 0, 4.2550006, -4.371138e-08, 0, 0, 0, 3.5, 26.6, 0.4, -3.5)
 mesh = ExtResource("45_3ke7e")

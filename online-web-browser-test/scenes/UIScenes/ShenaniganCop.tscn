@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://shenacop123"]
+
+[ext_resource type="PackedScene" uid="uid://b63255x4cig2d" path="res://Assets/Models/Rhino/næsehorn.tscn" id="1_dummy"]
+[ext_resource type="Script" uid="uid://bspkui7ll1d0g" path="res://scripts/UI/MenuWanderer.gd" id="1_script"]
+
+[node name="ShenaniganCop" type="CharacterBody3D" unique_id=535254931]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+script = ExtResource("1_script")
+
+[node name="Næsehorn2" parent="." unique_id=146192529 instance=ExtResource("1_dummy")]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(146192529, 19087762) index="0" unique_id=350655559]
+bones/1/rotation = Quaternion(0.021044752, 0.016893895, 0.0020991068, 0.99963367)
+bones/2/rotation = Quaternion(-0.028047938, 0.034443337, 0.0070034033, 0.99898845)
+bones/3/rotation = Quaternion(-0.082502685, 0.031696044, 0.012845136, 0.9960039)
+bones/5/rotation = Quaternion(-0.59540063, -0.39455965, -0.45861775, 0.5286688)
+bones/6/rotation = Quaternion(-0.34948012, 0.65079486, -0.4398195, 0.5107726)
+bones/7/rotation = Quaternion(0.16805877, -0.039567795, -0.0032790846, 0.9849771)
+bones/8/rotation = Quaternion(-0.14376192, 0.045285422, -0.085096575, 0.9849063)
+bones/9/rotation = Quaternion(0.13717382, 0.051454246, -0.25201476, 0.95656914)
+bones/10/rotation = Quaternion(0.15082946, 0.04969211, -0.23160458, 0.95976067)
+bones/11/rotation = Quaternion(0.18118745, 0.030194238, -0.08238288, 0.97952664)
+bones/13/rotation = Quaternion(-0.58475864, 0.4082534, 0.45935655, 0.5295075)
+bones/14/rotation = Quaternion(-0.28294948, -0.6895752, 0.46697712, 0.47577113)
+bones/15/rotation = Quaternion(0.16115555, 0.088090695, -0.009769501, 0.98294127)
+bones/16/rotation = Quaternion(-0.11467531, -0.015959943, -0.019467253, 0.9930841)
+bones/17/rotation = Quaternion(0.13804658, -0.047433704, 0.22472812, 0.96342653)
+bones/18/rotation = Quaternion(0.1517747, -0.04362704, 0.1904443, 0.9689129)
+bones/19/rotation = Quaternion(0.18125, -0.025941497, 0.05835242, 0.98136157)
+bones/23/rotation = Quaternion(0.9452986, 0.11071086, -0.12801942, 0.27886343)
+bones/24/rotation = Quaternion(0.33246198, -0.028173422, -0.020200921, 0.94247943)
+bones/25/rotation = Quaternion(0.9714722, -0.066791184, 0.08174523, 0.21236408)
+bones/26/rotation = Quaternion(0.30395284, 0.038217884, 0.020881608, 0.9516912)
+
+[node name="NameTag" type="Label3D" parent="." unique_id=1391553469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0)
+visible = false
+pixel_size = 0.003
+billboard = 1
+text = "Player123456"
+font_size = 72
+
+[editable path="Næsehorn2"]

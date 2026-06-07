@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://n5n57jhmdufo"]
+
+[ext_resource type="Script" uid="uid://c62ipjsiefrlp" path="res://scripts/UI/MenuShenanigansSpawner.gd" id="1_script"]
+
+[node name="MenuShenanigansSpawner" type="Node3D" unique_id=1330512118]
+script = ExtResource("1_script")
+
+[node name="A_Start" type="Marker3D" parent="." unique_id=1177429630]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -5)
+
+[node name="A_End" type="Marker3D" parent="." unique_id=763809258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -5)
+
+[node name="B_Start" type="Marker3D" parent="." unique_id=1734663887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -15)
+
+[node name="B_End" type="Marker3D" parent="." unique_id=1499848476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -15)
+
+[node name="C_Start" type="Marker3D" parent="." unique_id=1021002958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
+
+[node name="C_End" type="Marker3D" parent="." unique_id=1365058853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -25)

@@ -1023,6 +1023,7 @@ func _update_rhino_preview() -> void:
 		print("ERROR: Could not find Rhino_Head under PreviewSpawn.")
 
 func _on_chameleon_next() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	if chameleon_skin_materials.is_empty():
 		return
 
@@ -1031,6 +1032,7 @@ func _on_chameleon_next() -> void:
 
 
 func _on_chameleon_prev() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	if chameleon_skin_materials.is_empty():
 		return
 
@@ -1039,6 +1041,7 @@ func _on_chameleon_prev() -> void:
 
 
 func _on_rhino_next() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	print("Rhino next pressed")
 
 	if rhino_skin_materials.is_empty():
@@ -1051,6 +1054,7 @@ func _on_rhino_next() -> void:
 
 
 func _on_rhino_prev() -> void:
+	AudioManager.play_2d_sfx("ui_click")
 	if rhino_skin_materials.is_empty():
 		return
 
