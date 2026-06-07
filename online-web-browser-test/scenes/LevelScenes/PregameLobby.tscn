@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bd366vecbeek4" path="res://scenes/UIScenes/StartGame.tscn" id="1_j52o3"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_ggw6v"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
-[ext_resource type="Script" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
+[ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
+[ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
 [ext_resource type="PackedScene" uid="uid://bohw3fv6bjsmg" path="res://Assets/Models/plant.tscn" id="5_bdf01"]
 [ext_resource type="ArrayMesh" uid="uid://cfrox0r0ijrnf" path="res://Assets/Models/LowPolyMuseumAssets/RopeBarrier.res" id="6_j52o3"]
 [ext_resource type="ArrayMesh" uid="uid://de8vjbrnt64xx" path="res://Assets/Models/LowPolyMuseumAssets/Picture1Image.res" id="8_hei78"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://cly5kof4jdp88" path="res://Skærmbillede 2026-06-06 kl. 12.41.16.png" id="10_7e4js"]
 [ext_resource type="PackedScene" uid="uid://hjeyxpsyjold" path="res://Assets/Models/Van/Van.tscn" id="10_hbusi"]
 [ext_resource type="Texture2D" uid="uid://c5b78j4p1lpd6" path="res://Skærmbillede 2026-06-06 kl. 12.43.29.png" id="11_r8xeu"]
-[ext_resource type="Texture2D" uid="uid://dehthju8qoj1h" path="res://Assets/Models/Van/WhiteVan_VanTexture.png" id="11_rvpsd"]
 [ext_resource type="Texture2D" uid="uid://dbyiubgkm3tuj" path="res://Assets/UI/Tutorailthief 1Crop.png" id="11_xeelm"]
 [ext_resource type="Texture2D" uid="uid://nirucokj6nb1" path="res://Assets/UI/Tutorailthief 2Crop2.png" id="12_4xhut"]
 [ext_resource type="Texture2D" uid="uid://bk6pqus1tl57g" path="res://Skærmbillede 2026-06-06 kl. 12.41.38.png" id="12_g3wa5"]
@@ -26,7 +25,6 @@
 [ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="16_4xhut"]
 [ext_resource type="Texture2D" uid="uid://hlcp3or35hqi" path="res://Assets/UI/CopChargeTutorialCrop2.png" id="16_tfjox"]
 [ext_resource type="ArrayMesh" uid="uid://bttkw3he7goyh" path="res://Assets/Models/Asia Pack Reimport/Samurai_Helmet.res" id="17_hbusi"]
-[ext_resource type="Texture2D" uid="uid://tdu3bhrcpbjr" path="res://Assets/UI/Capture.png" id="17_rvpsd"]
 [ext_resource type="PackedScene" uid="uid://dh5bg82mibuo4" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Katana  Asia.fbx" id="18_wlwr0"]
 [ext_resource type="ArrayMesh" uid="uid://clv0ih1leoelm" path="res://Assets/Models/Asia Pack Reimport/Katana.res" id="19_rvpsd"]
 [ext_resource type="PackedScene" uid="uid://bxh2jkc1fsqea" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Weapon_2 Asia.fbx" id="20_tfjox"]
@@ -440,31 +438,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k8akl")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tfjox"]
-render_priority = 0
-shader = ExtResource("2_ggw6v")
-shader_parameter/albedo_color = Color(1, 1, 1, 1)
-shader_parameter/albedo_texture = ExtResource("11_rvpsd")
-shader_parameter/use_stepped = true
-shader_parameter/steps = 2.0
-shader_parameter/step_smoothness = 0.0
-shader_parameter/shadow_tint = Color(0, 0, 0, 1)
-shader_parameter/shadow_tint_amount = 0.4
-shader_parameter/specular = 0.0
-shader_parameter/normal_strength = 0.0
-shader_parameter/use_rim = true
-shader_parameter/rim_color = Color(1, 1, 1, 1)
-shader_parameter/rim_amount = 2.0
-shader_parameter/rim_smoothness = 0.2
-shader_parameter/rim_mask_shadow = 1.0
-shader_parameter/rim_blend = 1.0
-shader_parameter/use_pattern = true
-shader_parameter/pattern_uv_mode = 2
-shader_parameter/pattern_tiling = 32.0
-shader_parameter/pattern_amount = 0.5
-shader_parameter/pattern_smoothness = 0.5
-shader_parameter/pattern_blend = 0.2
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_wlwr0"]
 size = Vector3(2.4086852, 1.9660385, 2.3726978)
 
@@ -497,7 +470,6 @@ uv1_scale = Vector3(2.67, 5.79, 1)
 uv1_offset = Vector3(0, -0.47, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlqde"]
-albedo_texture = ExtResource("17_rvpsd")
 uv1_scale = Vector3(2.49, 4.61, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jljn4"]
@@ -722,7 +694,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.048524857, -0.5830066, 0.12
 shape = SubResource("BoxShape3D_van")
 
 [node name="StartGme" parent="." unique_id=626359221 instance=ExtResource("1_j52o3")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.47887, 2.504574, 10.091494)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.47887, 2.504574, 10.047902)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1511617960]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.440422, 0, 0)
@@ -995,13 +967,13 @@ transform = Transform3D(0.88033664, 0, 0.47434938, 0, 1, 0, -0.47434938, 0, 0.88
 transform = Transform3D(0.9637517, 0, -0.26680094, 0, 1, 0, 0.26680094, 0, 0.9637517, 18.464191, 0.2, 5.347574)
 
 [node name="HostVan" type="Area3D" parent="." unique_id=747771727 groups=["artifact"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.392145, 0.76954734, 8.755385)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 0)
 collision_layer = 10
 collision_mask = 0
 script = ExtResource("2_van")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HostVan" unique_id=1399586928]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.398594, -0.33724213, 8.585736)
 shape = SubResource("BoxShape3D_van")
 
 [node name="Plant2" parent="." unique_id=1211902803 instance=ExtResource("5_bdf01")]
@@ -1025,11 +997,11 @@ transform = Transform3D(1.4699999, 0, 0, 0, 1, 0, 0, 0, 1, 14.1, 0, -7)
 mesh = ExtResource("6_j52o3")
 
 [node name="WhiteVan2" parent="." unique_id=628082721 instance=ExtResource("10_hbusi")]
-transform = Transform3D(-7.518359e-09, 0, -0.124, 0, 0.14, 0, 0.172, 0, -5.4202123e-09, 19.4, 0.1, 8.035937)
+transform = Transform3D(-7.518358e-09, 0, -0.124184005, 0, 0.172, 0, 0.172, 0, -5.428255e-09, 19.4, 0.1, 8.035937)
 
 [node name="Van" parent="WhiteVan2" index="0" unique_id=784682784]
 transform = Transform3D(10.02, 0, -3.9172695e-14, 0, 5.01, 0, 7.834539e-14, 0, 5.01, 16.786537, 0.47575045, 0)
-surface_material_override/0 = SubResource("ShaderMaterial_tfjox")
+surface_material_override/0 = null
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Van/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 1461634472) index="1" unique_id=228129659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06667435, 1.010426, 0)
@@ -1039,7 +1011,6 @@ shape = SubResource("BoxShape3D_wlwr0")
 
 [node name="Door1" parent="WhiteVan2" index="1" unique_id=1180974588]
 transform = Transform3D(-8.358346, 0, 2.7630925, 0, 5.010006, 0, -5.5261827, 0, -4.1791706, 5.8014297, 5.6355286, 4.135559)
-surface_material_override/0 = SubResource("ShaderMaterial_tfjox")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Door1/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 1037144885) index="1" unique_id=826655492]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01978314, 0.028477013, -0.41415787)
@@ -1049,7 +1020,6 @@ shape = SubResource("BoxShape3D_rvpsd")
 
 [node name="Doors2" parent="WhiteVan2" index="2" unique_id=1968327037]
 transform = Transform3D(-7.1972156, 0, -3.485711, 0, 5.010005, 0, 6.971421, 0, -3.5986066, 5.5725975, 5.7399664, -4.1097565)
-surface_material_override/0 = SubResource("ShaderMaterial_tfjox")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="WhiteVan2/Doors2/StaticBody3D" parent_id_path=PackedInt32Array(628082721, 946734434) index="1" unique_id=796022983]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01978314, 0.026049197, 0.4109838)
