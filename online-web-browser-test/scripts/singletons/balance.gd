@@ -10,7 +10,7 @@ var base_thief_speed: float = 6.5
 # (Most Mixamo jogs are around 4.0 m/s. Mixamo sprints are around 6.0 m/s).
 var anim_native_speed: float = 4.0
 var cop_base_speed: float = 6.85
-var hypno_thief_speed: float = 2.0
+var hypno_thief_speed: float = 2.05
 var thief_braking_friction: float = 6.5
 var cop_braking_friction: float = 6.5
 
@@ -24,11 +24,11 @@ var thief_spring_arm_length: float = 4.711 # (Your current X distance)
 
 # ==========================================
 # 3. ABILITIES & INTERACTION TIMERS
-# ==========================================
+# ==========================================S
 var cop_charge_speed_multiplier: float = 1.6 # 1.5x Base Speed
 var cop_charge_duration: float = 1.2
 var cop_charge_cooldown: float = 4.2
-var cop_exhaustion_duration: float = 2.8
+var cop_exhaustion_duration: float = 3
 var cop_exhaustion_speed_multiplier: float = 0.35 # 0.6x Base Speed (40% slow)
 var thief_rescue_time: float = 2.0
 

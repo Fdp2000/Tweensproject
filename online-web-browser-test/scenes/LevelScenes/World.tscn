@@ -684,7 +684,7 @@ transform = Transform3D(0.5884063, 0, -0.8085654, 0, 1, 0, 0.8085654, 0, 0.58840
 [node name="VersusScreen" type="CanvasLayer" parent="." unique_id=437919447]
 visible = false
 script = ExtResource("4_frjgd")
-total_countdown_time = 2.1
+total_countdown_time = 2.2
 vs_font_size = 100
 
 [node name="Root" type="Control" parent="VersusScreen" unique_id=773497216]
@@ -806,6 +806,7 @@ texture = SubResource("ViewportTexture_kyu32")
 
 [node name="SkinsScreen3D" parent="MainMenuUI" index="2" unique_id=2051849736]
 transform = Transform3D(-1.0342671, 0, 1.220775, 0, 1.6, 0, -1.220775, 0, -1.0342671, -6.7419267, 2.1155055, 8.097846)
+visible = true
 
 [node name="SkinsPanel" parent="MainMenuUI/SkinsScreen3D/SkinsViewport/Root" parent_id_path=PackedInt32Array(354039283, 401725838) index="0" unique_id=1485494093]
 anchors_preset = -1
