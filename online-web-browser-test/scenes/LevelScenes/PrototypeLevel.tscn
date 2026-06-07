@@ -34,7 +34,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cpkvnajf3o4nm" path="res://Assets/Models/Asia Pack Reimport/Building_7.res" id="24_6tj66"]
 [ext_resource type="PackedScene" uid="uid://c4hqr2luw7xlf" path="res://Assets/Models/Elephant/elephant_smith.tscn" id="25_3u1s1"]
 [ext_resource type="PackedScene" uid="uid://bf05ftf00cgpm" path="res://scenes/Zones/Vent.tscn" id="25_wmagv"]
-[ext_resource type="PackedScene" path="res://Assets/Models/Artifacts/painting.tscn" id="27_mjf4u"]
+[ext_resource type="PackedScene" uid="uid://m6o4r2a5u2xk" path="res://Assets/Models/Artifacts/painting.tscn" id="27_mjf4u"]
 [ext_resource type="Material" uid="uid://doxbpf613nmo5" path="res://Assets/Shaders/celShader/celMaterial.tres" id="28_0k1pn"]
 [ext_resource type="ArrayMesh" uid="uid://depsnqnqhdn61" path="res://Assets/Models/jenssten.tres" id="28_gp0hk"]
 [ext_resource type="PackedScene" uid="uid://daonmt1emi3j5" path="res://Assets/Models/LowPolyMuseumAssets/Lightwall.tscn" id="28_kndku"]
@@ -64,7 +64,6 @@
 [ext_resource type="ArrayMesh" uid="uid://cuyfrnm8qpmpv" path="res://Assets/Models/palme2.res" id="57_fppg6"]
 [ext_resource type="ArrayMesh" uid="uid://dloq3sfc54a3u" path="res://Assets/Models/palme3.res" id="58_ol4g5"]
 [ext_resource type="ArrayMesh" uid="uid://5akym5yt8bfp" path="res://Assets/Models/moai.res" id="59_nkopf"]
-[ext_resource type="Material" uid="uid://dbw56odt726am" path="res://Assets/Shaders/CamoShader/camoMaterial.tres" id="61_217hv"]
 [ext_resource type="ArrayMesh" uid="uid://c8oomttniaaan" path="res://dome.res" id="62_dauag"]
 [ext_resource type="PackedScene" uid="uid://do0ts3h3tjyjv" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Tower_1 Asia.fbx" id="65_pmpka"]
 [ext_resource type="ArrayMesh" uid="uid://cspvrdluyca22" path="res://Assets/environments/GrassBink.res" id="65_ydp54"]
@@ -3812,6 +3811,39 @@ noise = SubResource("FastNoiseLite_psu83")
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f6ph4"]
 noise = SubResource("FastNoiseLite_7lbki")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ixxw1"]
+render_priority = 0
+shader = ExtResource("76_eslt8")
+shader_parameter/transparency_colour = Color(1, 1, 1, 1)
+shader_parameter/AirIOR = 1.0
+shader_parameter/IOR = 1.5
+shader_parameter/specular_intensity = 0.0
+shader_parameter/fresnel_intensity = 0.0
+shader_parameter/refraction_boost = 0.90000001341108
+shader_parameter/uv1_scale = Vector2(1, 1)
+shader_parameter/uv1_offset = Vector2(0, 0)
+shader_parameter/normal_texture = SubResource("NoiseTexture2D_1mwt7")
+shader_parameter/normalstrength = 0.0
+shader_parameter/roughness_texture = SubResource("NoiseTexture2D_f6ph4")
+shader_parameter/refraction_type = 1
+shader_parameter/simple_refraction_amount = 0.1
+shader_parameter/traced_refraction_far_clip = 50.0
+shader_parameter/traced_refraction_steps = 512
+shader_parameter/ssr_type = 0
+shader_parameter/traced_ssr_far_clip = 50.0
+shader_parameter/traced_ssr_steps = 512
+shader_parameter/ssr_screen_fade = 0.0499999988824
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_et2xy"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gjbpm"]
+noise = SubResource("FastNoiseLite_et2xy")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8855o"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_46333"]
+noise = SubResource("FastNoiseLite_8855o")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6y7ak"]
 render_priority = 0
 shader = ExtResource("76_eslt8")
@@ -3823,9 +3855,9 @@ shader_parameter/fresnel_intensity = 0.0
 shader_parameter/refraction_boost = 0.90000001341108
 shader_parameter/uv1_scale = Vector2(1, 1)
 shader_parameter/uv1_offset = Vector2(0, 0)
-shader_parameter/normal_texture = SubResource("NoiseTexture2D_1mwt7")
+shader_parameter/normal_texture = SubResource("NoiseTexture2D_gjbpm")
 shader_parameter/normalstrength = 0.0
-shader_parameter/roughness_texture = SubResource("NoiseTexture2D_f6ph4")
+shader_parameter/roughness_texture = SubResource("NoiseTexture2D_46333")
 shader_parameter/refraction_type = 1
 shader_parameter/simple_refraction_amount = 0.1
 shader_parameter/traced_refraction_far_clip = 50.0
@@ -3858,6 +3890,29 @@ blend_shape_mode = 0
 render_priority = 0
 shader = ExtResource("76_eslt8")
 shader_parameter/transparency_colour = Color(2.630161, 1.5479665, 1.7691318, 1)
+shader_parameter/AirIOR = 1.0
+shader_parameter/IOR = 1.5
+shader_parameter/specular_intensity = 0.0
+shader_parameter/fresnel_intensity = 0.0
+shader_parameter/refraction_boost = 0.90000001341108
+shader_parameter/uv1_scale = Vector2(1, 1)
+shader_parameter/uv1_offset = Vector2(0, 0)
+shader_parameter/normal_texture = SubResource("NoiseTexture2D_gjbpm")
+shader_parameter/normalstrength = 0.0
+shader_parameter/roughness_texture = SubResource("NoiseTexture2D_46333")
+shader_parameter/refraction_type = 1
+shader_parameter/simple_refraction_amount = 0.1
+shader_parameter/traced_refraction_far_clip = 50.0
+shader_parameter/traced_refraction_steps = 512
+shader_parameter/ssr_type = 0
+shader_parameter/traced_ssr_far_clip = 50.0
+shader_parameter/traced_ssr_steps = 512
+shader_parameter/ssr_screen_fade = 0.0499999988824
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ixtjp"]
+render_priority = 0
+shader = ExtResource("76_eslt8")
+shader_parameter/transparency_colour = Color(1, 1, 1, 1)
 shader_parameter/AirIOR = 1.0
 shader_parameter/IOR = 1.5
 shader_parameter/specular_intensity = 0.0
@@ -15041,7 +15096,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 transform = Transform3D(0.0015706818, -0.019912345, -0.07229129, 0, 0.07230717, -0.019916708, 0.074983545, 0.00041710428, 0.0015142871, 0, 0.02632384, -0.19379231)
 
 [node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam8/CameraMount" parent_id_path=PackedInt32Array(68353345, 1455180780) index="0" unique_id=122643301]
-transform = Transform3D(0.02094239, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.999779, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
+transform = Transform3D(0.02094239, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.9997789, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="SecCam9" parent="NavigationRegion3D/SecCams" unique_id=1079123194 instance=ExtResource("38_oetox")]
 transform = Transform3D(-0.834848, 0, 0.55048066, 0, 1, 0, -0.5504808, 0, -0.8348478, -38.38813, 3.7884734, -28.118204)
@@ -15118,7 +15173,7 @@ transform = Transform3D(0.7975839, 0.44967702, -0.40205765, 0, 0.66653234, 0.745
 
 [node name="Dome" type="MeshInstance3D" parent="NavigationRegion3D/Domes" unique_id=2108031634]
 transform = Transform3D(9.1, 0, 0, 0, 9.1, 0, 0, 0, 9.1, 0, 11.2, 0)
-material_override = ExtResource("61_217hv")
+material_override = SubResource("ShaderMaterial_ixxw1")
 mesh = ExtResource("62_dauag")
 
 [node name="Dome4" type="MeshInstance3D" parent="NavigationRegion3D/Domes" unique_id=1911000433]
@@ -15133,7 +15188,7 @@ mesh = SubResource("ArrayMesh_seusb")
 
 [node name="Dome3" type="MeshInstance3D" parent="NavigationRegion3D/Domes" unique_id=980262864]
 transform = Transform3D(3.6399999, 0, 0, 0, 4.55, 0, 0, 0, 16.380001, 0, 3.6000001, -26)
-material_override = ExtResource("61_217hv")
+material_override = SubResource("ShaderMaterial_ixtjp")
 mesh = ExtResource("62_dauag")
 
 [node name="Painting" parent="NavigationRegion3D/Domes" unique_id=1953070268 instance=ExtResource("27_mjf4u")]
@@ -15467,7 +15522,7 @@ shape = SubResource("BoxShape3D_8sa2x")
 [node name="FootBridge_1_1 Asia" parent="NavigationRegion3D" unique_id=1653724722 instance=ExtResource("71_nkopf")]
 transform = Transform3D(-4.3700133e-08, 9.916947e-10, 1, 0.022687333, 0.99974257, 0, -0.99974257, 0.022687333, -4.371139e-08, -34.24906, 0.08229786, -26.127047)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 418096886) index="0" unique_id=45753599]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 1756286395) index="0" unique_id=45753599]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1/StaticBody3D" unique_id=768545802]
 shape = SubResource("ConcavePolygonShape3D_q2a4x")
@@ -15499,7 +15554,7 @@ shape = SubResource("ConcavePolygonShape3D_nr0w7")
 [node name="FootBridge_1_1 Asia4" parent="NavigationRegion3D" unique_id=1992806986 instance=ExtResource("71_nkopf")]
 transform = Transform3D(0.51887244, -0.003106122, -0.00082826614, 0.0015350593, 1.0418235, -0.019638402, 0.00052832067, 0.02350404, 0.8703685, -16.749058, 0.31413668, -33.780136)
 
-[node name="FootBridge_1_1" parent="NavigationRegion3D/FootBridge_1_1 Asia4" index="0" unique_id=418096886]
+[node name="FootBridge_1_1" parent="NavigationRegion3D/FootBridge_1_1 Asia4" index="0" unique_id=1756286395]
 visible = false
 
 [node name="FootBridge_1_2" type="MeshInstance3D" parent="NavigationRegion3D/FootBridge_1_1 Asia4" unique_id=371773313]
@@ -15705,7 +15760,7 @@ shape = SubResource("BoxShape3D_jqi5k")
 [node name="Stairs_2 Asia3" parent="NavigationRegion3D" unique_id=1621005949 instance=ExtResource("70_ol4g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.20336, -0.9259999, -24.636557)
 
-[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=306052587]
+[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=1434228984]
 visible = false
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia3" unique_id=702406281]
@@ -15775,7 +15830,7 @@ mesh = ExtResource("103_uvule")
 [node name="Tower_1 Asia" parent="NavigationRegion3D" unique_id=316600361 instance=ExtResource("65_pmpka")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -1, -13)
 
-[node name="Tower_1" parent="NavigationRegion3D/Tower_1 Asia" index="0" unique_id=947806465]
+[node name="Tower_1" parent="NavigationRegion3D/Tower_1 Asia" index="0" unique_id=615986821]
 visible = false
 
 [node name="Tower_2" type="MeshInstance3D" parent="NavigationRegion3D/Tower_1 Asia" unique_id=71707912]
