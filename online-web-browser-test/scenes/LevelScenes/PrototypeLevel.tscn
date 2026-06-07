@@ -144,13 +144,13 @@
 [ext_resource type="PackedScene" uid="uid://bxc6iy5ufcn5o" path="res://Assets/Models/Artifacts/egyptian_pottery.tscn" id="148_nr0w7"]
 [ext_resource type="PackedScene" uid="uid://b4tlvxvctdh1s" path="res://Assets/Models/Artifacts/fanacruiser_mini.tscn" id="149_fc1pl"]
 [ext_resource type="PackedScene" uid="uid://buexavqrgp5p4" path="res://Assets/Models/Artifacts/girafArtifact.tscn" id="150_0nfu5"]
+[ext_resource type="Texture2D" uid="uid://cb6p757jvioe1" path="res://Assets/Textures/Moon.png" id="150_kndku"]
 [ext_resource type="PackedScene" uid="uid://dx17tuuy4hy6c" path="res://Assets/Models/Artifacts/arctic_island.tscn" id="150_oyqrn"]
 [ext_resource type="PackedScene" uid="uid://bn0fum5ah3k2i" path="res://Assets/Models/LowPolyMuseumAssets/InfoTableWColider.tscn" id="151_0nfu5"]
 [ext_resource type="PackedScene" uid="uid://cxjfwian8c01y" path="res://Assets/Models/Artifacts/urnArtifact.tscn" id="152_gve0t"]
 [ext_resource type="PackedScene" uid="uid://boju5s1hjis3b" path="res://Assets/Models/Artifacts/godot_plush.tscn" id="153_kndku"]
 [ext_resource type="PackedScene" uid="uid://n5n57jhmdufo" path="res://scenes/UIScenes/MenuShenanigansSpawner.tscn" id="154_kndku"]
 [ext_resource type="ArrayMesh" uid="uid://b6v0dfk368ywc" path="res://Assets/Models/LowPolyMuseumAssets/Floor2.res" id="154_nr0w7"]
-[ext_resource type="Texture2D" uid="uid://crbv5ruf574fj" path="res://Assets/IMG_0098.PNG" id="154_oyqrn"]
 [ext_resource type="PackedScene" uid="uid://2lwp8vo8ac36" path="res://Assets/Models/Artifacts/Paintings/FarmPainting.tscn" id="155_ufdy8"]
 [ext_resource type="PackedScene" uid="uid://dhb6t6ipo0ksg" path="res://Assets/Models/Artifacts/Paintings/GodPainting.tscn" id="156_ooolc"]
 [ext_resource type="PackedScene" uid="uid://d0l22tkjqt1e6" path="res://Assets/Models/Artifacts/Paintings/GoatPainting.tscn" id="157_0isio"]
@@ -6454,11 +6454,12 @@ size = Vector3(1.2060547, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjbpm"]
 transparency = 1
-blend_mode = 4
-albedo_color = Color(0.743848, 0.743848, 0.743848, 0.4392157)
-albedo_texture = ExtResource("154_oyqrn")
-uv1_scale = Vector3(0.8, 1.1, 1)
-uv1_offset = Vector3(0.08, -0.17, 0)
+cull_mode = 2
+albedo_color = Color(2.454227, 2.454227, 2.454227, 1)
+albedo_texture = ExtResource("150_kndku")
+uv1_scale = Vector3(1.03, 1.03, 1.03)
+uv1_offset = Vector3(0, -0.06, 0)
+texture_repeat = false
 billboard_mode = 1
 billboard_keep_scale = true
 
@@ -15706,7 +15707,6 @@ transform = Transform3D(0.258819, 0, 0.9659259, 0, 1, 0, -0.9659259, 0, 0.258819
 
 [node name="Van" parent="NavigationRegion3D/Van/WhiteVan" parent_id_path=PackedInt32Array(1941149271, 628082721) index="0" unique_id=784682784]
 transform = Transform3D(4, 0, 0, 0, 1.9999996, 0, 0, 0, 2, 0, 0, 0)
-surface_material_override/0 = null
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Van/WhiteVan/Van/StaticBody3D" parent_id_path=PackedInt32Array(1941149271, 628082721, 1461634472) index="1" unique_id=35192665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06667435, 1.010426, 0)
@@ -15978,7 +15978,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 transform = Transform3D(0.0015706818, -0.019912345, -0.07229129, 0, 0.07230717, -0.019916708, 0.074983545, 0.00041710428, 0.0015142871, 0, 0.02632384, -0.19379231)
 
 [node name="Camera3D" parent="NavigationRegion3D/SecCams/SecCam8/CameraMount" parent_id_path=PackedInt32Array(68353345, 1455180780) index="0" unique_id=122643301]
-transform = Transform3D(0.020942386, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.9997788, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
+transform = Transform3D(0.020942386, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.99977875, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="SecCam9" parent="NavigationRegion3D/SecCams" unique_id=1079123194 instance=ExtResource("38_oetox")]
 transform = Transform3D(-0.834848, 0, 0.55048066, 0, 1, 0, -0.5504808, 0, -0.8348478, -38.38813, 3.7884734, -28.118204)
@@ -16405,7 +16405,7 @@ shape = SubResource("BoxShape3D_8sa2x")
 [node name="FootBridge_1_1 Asia" parent="NavigationRegion3D" unique_id=1653724722 instance=ExtResource("71_nkopf")]
 transform = Transform3D(-4.3700133e-08, 9.916947e-10, 1, 0.022687333, 0.99974257, 0, -0.99974257, 0.022687333, -4.371139e-08, -34.24906, 0.08229786, -26.127047)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 1778551804) index="0" unique_id=45753599]
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" parent_id_path=PackedInt32Array(1653724722, 1756286395) index="0" unique_id=45753599]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1/StaticBody3D" unique_id=768545802]
 shape = SubResource("ConcavePolygonShape3D_q2a4x")
@@ -16437,7 +16437,7 @@ shape = SubResource("ConcavePolygonShape3D_nr0w7")
 [node name="FootBridge_1_1 Asia4" parent="NavigationRegion3D" unique_id=1992806986 instance=ExtResource("71_nkopf")]
 transform = Transform3D(0.51887244, -0.003106122, -0.00082826614, 0.0015350593, 1.0418235, -0.019638402, 0.00052832067, 0.02350404, 0.8703685, -16.749058, 0.31413668, -33.780136)
 
-[node name="FootBridge_1_1" parent="NavigationRegion3D/FootBridge_1_1 Asia4" index="0" unique_id=1778551804]
+[node name="FootBridge_1_1" parent="NavigationRegion3D/FootBridge_1_1 Asia4" index="0" unique_id=1756286395]
 visible = false
 
 [node name="FootBridge_1_2" type="MeshInstance3D" parent="NavigationRegion3D/FootBridge_1_1 Asia4" unique_id=371773313]
@@ -16640,7 +16640,7 @@ shape = SubResource("BoxShape3D_jqi5k")
 [node name="Stairs_2 Asia3" parent="NavigationRegion3D" unique_id=1621005949 instance=ExtResource("70_ol4g5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.20336, -0.9259999, -24.636557)
 
-[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=578557960]
+[node name="Stairs_2" parent="NavigationRegion3D/Stairs_2 Asia3" index="0" unique_id=1434228984]
 visible = false
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia3" unique_id=702406281]
@@ -16710,7 +16710,7 @@ mesh = ExtResource("103_uvule")
 [node name="Tower_1 Asia" parent="NavigationRegion3D" unique_id=316600361 instance=ExtResource("65_pmpka")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, -1, -13)
 
-[node name="Tower_1" parent="NavigationRegion3D/Tower_1 Asia" index="0" unique_id=1873592887]
+[node name="Tower_1" parent="NavigationRegion3D/Tower_1 Asia" index="0" unique_id=615986821]
 visible = false
 
 [node name="Tower_2" type="MeshInstance3D" parent="NavigationRegion3D/Tower_1 Asia" unique_id=71707912]
