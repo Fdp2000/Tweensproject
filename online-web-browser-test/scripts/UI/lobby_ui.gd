@@ -2,7 +2,8 @@ extends CanvasLayer
 
 var player_list: VBoxContainer
 var room_label: Label
-
+var start_button: Button
+var leave_button: Button
 
 func _ready() -> void:
 	name = "LobbyUI"
@@ -54,6 +55,15 @@ func _ready() -> void:
 	button_row.add_theme_constant_override("separation", 10)
 	inner_vbox.add_child(button_row)
 
+	start_button = Button.new()
+	start_button.text = "Start"
+	start_button.pressed.connect(_on_start_pressed)
+	button_row.add_child(start_button)
+
+	leave_button = Button.new()
+	leave_button.text = "Leave"
+	leave_button.pressed.connect(_on_leave_pressed)
+	button_row.add_child(leave_button)
 
 	GameManager.lobby_updated.connect(update_ui)
 	GameManager.game_started.connect(_on_game_started)
@@ -76,6 +86,11 @@ func show_lobby() -> void:
 
 	show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+		start_button.show()
+	else:
+		start_button.hide()
 
 	update_ui()
 
@@ -102,6 +117,12 @@ func update_ui() -> void:
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 		player_list.add_child(lbl)
 
+	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
+		start_button.show()
+		start_button.disabled = GameManager.players.size() < 1
+	else:
+		start_button.hide()
+
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 
 	if client_ui and client_ui.get("current_room_code") != null:
@@ -109,6 +130,28 @@ func update_ui() -> void:
 			room_label.text = "Room: " + client_ui.current_room_code
 		else:
 			room_label.text = "Room: Server Hosted"
+
+
+func _on_leave_pressed() -> void:
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
+
+	if client_ui:
+		if client_ui.client.rtc_mp:
+			client_ui.client.rtc_mp.close()
+
+		client_ui.client.stop()
+		client_ui._disconnected()
+
+
+func _on_start_pressed() -> void:
+	start_button.disabled = true
+	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
+
+	if client_ui and client_ui.get("local_player_name") != null:
+		GameManager.sync_player_data(multiplayer.get_unique_id(), client_ui.local_player_name)
+
+	GameManager.host_start_game()
+
 
 func _on_game_started() -> void:
 	hide()
