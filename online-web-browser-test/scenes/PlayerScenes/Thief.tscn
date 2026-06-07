@@ -2432,13 +2432,13 @@ transform = Transform3D(-0.26387298, -0.44071844, 0.85798424, -0.060149282, 0.89
 transform = Transform3D(0.9867902, 0.15812558, 0.035222776, -0.08477233, 0.6892962, -0.7195025, -0.13805076, 0.7070122, 0.69359535, 0.024246704, 0.7021842, 0.10920494)
 
 [node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D" index="0" unique_id=577983357]
-transform = Transform3D(0.6268467, 0.009296886, -0.77908695, -0.15020163, 0.9826144, -0.109125346, 0.7645276, 0.18542504, 0.61734504, 0.185, 0.31700003, 0.08700001)
+transform = Transform3D(0.567866, 0.6057047, 0.55735964, -0.08424135, 0.71634084, -0.69264644, -0.8187987, 0.34637776, 0.45781103, 0.185, 0.31700003, 0.08700001)
 
 [node name="Eye_L" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_L" index="0" unique_id=970056815]
 surface_material_override/0 = null
 
 [node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D" index="1" unique_id=1023489596]
-transform = Transform3D(0.69332874, 0.027610568, -0.7200923, 0.19577907, 0.9544635, 0.22509968, 0.69351697, -0.29704705, 0.65635145, -0.185, 0.317, 0.087)
+transform = Transform3D(0.9130929, -0.31303266, -0.26128867, 0.09027848, 0.7801023, -0.6191042, 0.39763176, 0.54171085, 0.74056613, -0.185, 0.317, 0.087)
 
 [node name="Eye_R" parent="Chameleon_Character/Chameleon_Character/metarig/Skeleton3D/BoneAttachment3D/Eye_R" index="0" unique_id=940823346]
 surface_material_override/0 = null

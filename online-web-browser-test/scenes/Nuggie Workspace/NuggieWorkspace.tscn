@@ -211,6 +211,9 @@ transform = Transform3D(2.61, 0, 0, 0, 2.61, 0, 0, 0, 2.61, 20.865583, 0, -0.726
 [node name="Chameleon_Character2" parent="." unique_id=1423752438 instance=ExtResource("7_kcrnk")]
 transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, 11.845292, 0, -0.8280649)
 
+[node name="Chameleon" parent="Chameleon_Character2/metarig/Skeleton3D" parent_id_path=PackedInt32Array(1423752438, 1242207439) index="0" unique_id=1660392370]
+surface_material_override/0 = ExtResource("2_dpteq")
+
 [node name="Næsehorn" parent="." unique_id=2043154851 instance=ExtResource("11_3qlyf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.890285, 0, -0.6751852)
 
@@ -228,3 +231,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.462311, 0, 3.0944335)
 
 [node name="Bear2" parent="." unique_id=1537385195 instance=ExtResource("16_r0t00")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9652233, 0, 6.044386)
+
+[editable path="RedPanda_Character_materialer3"]
+[editable path="Chameleon_Character2"]
