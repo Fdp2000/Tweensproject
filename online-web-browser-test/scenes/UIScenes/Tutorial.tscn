@@ -300,7 +300,7 @@ custom_minimum_size = Vector2(42, 42)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_j2xlo")
 theme_override_font_sizes/font_size = 24
-text = "ALT"
+text = "SHIFT"
 horizontal_alignment = 1
 vertical_alignment = 1
 

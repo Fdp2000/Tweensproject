@@ -76,15 +76,25 @@ func _on_timer_timeout():
 	
 	var pair = spawn_pairs[index]
 	
+	var is_reverse = randf() > 0.5
+	var start_pos: Vector3
 	var points: Array[Vector3] = []
-	if pair["mid"] != Vector3.ZERO:
-		points.append(pair["mid"])
-	points.append(pair["end"])
+	
+	if is_reverse:
+		start_pos = pair["end"]
+		if pair["mid"] != Vector3.ZERO:
+			points.append(pair["mid"])
+		points.append(pair["start"])
+	else:
+		start_pos = pair["start"]
+		if pair["mid"] != Vector3.ZERO:
+			points.append(pair["mid"])
+		points.append(pair["end"])
 	
 	# Spawn Thief
 	var thief = thief_scene.instantiate()
 	get_parent().add_child(thief)
-	thief.global_position = pair["start"]
+	thief.global_position = start_pos
 	thief.target_points = points
 	thief.scale = Vector3(1.0 / 1.5, 1.0 / 1.5, 1.0 / 1.5)
 	
@@ -95,7 +105,7 @@ func _on_timer_timeout():
 	if GameManager.current_state == GameManager.GameState.LOBBY and not is_temporarily_disabled:
 		var cop = cop_scene.instantiate()
 		get_parent().add_child(cop)
-		cop.global_position = pair["start"]
+		cop.global_position = start_pos
 		cop.target_points = points
 		cop.scale = Vector3(1.0 / 1.5, 1.0 / 1.5, 1.0 / 1.5)
 		
