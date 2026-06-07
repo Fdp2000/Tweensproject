@@ -6424,16 +6424,25 @@ size = Vector3(20.944017, 10.100876, 16.919643)
 [sub_resource type="BoxShape3D" id="BoxShape3D_j0lmw"]
 size = Vector3(17.111656, 10.100876, 21.503654)
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wmagv"]
-sky_top_color = Color(0.17022151, 0, 0.6727494, 1)
-sky_horizon_color = Color(0.64705884, 0.34117648, 0.67058825, 1)
-sky_energy_multiplier = 0.5
-ground_bottom_color = Color(0.2, 0.35686275, 0.13333334, 1)
-ground_horizon_color = Color(0.63863236, 0.27999955, 0.66208017, 1)
-ground_energy_multiplier = 0.5
+[sub_resource type="Gradient" id="Gradient_kndku"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.16923077, 0.44230768, 0.4846154, 0.5769231, 0.6653846, 0.76153845, 1)
+colors = PackedColorArray(0.7515171, 0.2670024, 0.41211244, 1, 0.21423566, 0.1317276, 0.37679747, 1, 0.19066355, 0.088567264, 0.2973361, 1, 0.10361882, 0.086385496, 0.286183, 1, 0.110316895, 0.0012693042, 0.2560433, 1, 0.08471569, 0.0008481721, 0.20787442, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nr0w7"]
+gradient = SubResource("Gradient_kndku")
+width = 512
+height = 512
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+metadata/_snap_count = 2
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fc1pl"]
+panorama = SubResource("GradientTexture2D_nr0w7")
 
 [sub_resource type="Sky" id="Sky_3u1s1"]
-sky_material = SubResource("ProceduralSkyMaterial_wmagv")
+sky_material = SubResource("PanoramaSkyMaterial_fc1pl")
 
 [sub_resource type="Environment" id="Environment_dt4rj"]
 background_mode = 2
@@ -6455,13 +6464,15 @@ size = Vector3(1.2060547, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gjbpm"]
 transparency = 1
 cull_mode = 2
-albedo_color = Color(2.454227, 2.454227, 2.454227, 1)
+shading_mode = 0
 albedo_texture = ExtResource("150_kndku")
 uv1_scale = Vector3(1.03, 1.03, 1.03)
-uv1_offset = Vector3(0, -0.06, 0)
+uv1_offset = Vector3(0, -0.04, 0)
 texture_repeat = false
 billboard_mode = 1
 billboard_keep_scale = true
+stencil_flags = 2
+stencil_outline_thickness = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tbopg"]
 render_priority = 0
@@ -19025,7 +19036,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.43866, 3.3532386, -4.73510
 shape = SubResource("BoxShape3D_32ara")
 
 [node name="Picture2Image" type="MeshInstance3D" parent="." unique_id=825090058]
-transform = Transform3D(585.67, 0, 0, 0, 351.402, 0, 0, 0, 585.67, 384, 3513.2, -1643)
+transform = Transform3D(741.45, 0, 0, 0, 444.87, 0, 0, 0, 741.45, 384, 3513.2, -1643)
 mesh = ExtResource("67_w6te4")
 surface_material_override/0 = SubResource("StandardMaterial3D_gjbpm")
 
