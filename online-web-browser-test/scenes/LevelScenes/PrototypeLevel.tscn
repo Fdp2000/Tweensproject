@@ -11339,7 +11339,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_0shhh")
 
 [node name="WallBig150" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=921198178]
-transform = Transform3D(3.293241e-07, 0, -0.9999999, 0, 1.05, 0, 2.5113523, 0, 1.3113414e-07, 11.112756, 7.863, 0.775)
+transform = Transform3D(3.293241e-07, 0, -0.9999999, 0, 1.05, 0, 2.5113523, 0, 1.3113414e-07, 11.112756, 7.863, 0.5749999)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -11350,7 +11350,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_0shhh")
 
 [node name="WallBig151" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1726013624]
-transform = Transform3D(3.293241e-07, 0, -0.9999999, 0, 1.05, 0, 2.5113523, 0, 1.3113414e-07, 11.012756, 4.0629997, 0.775)
+transform = Transform3D(3.293241e-07, 0, -0.9999999, 0, 1.05, 0, 2.5113523, 0, 1.3113414e-07, 11.112757, 4.0629997, 0.5749999)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -12235,6 +12235,94 @@ surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter10" unique_id=1893695786]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter10/StaticBody3D" unique_id=1604482244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_niy81")
+
+[node name="WallBigOuter24" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=2063533172]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 20.400002, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter24" unique_id=285591041]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter24/StaticBody3D" unique_id=521042459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_381lw")
+
+[node name="WallBigOuter40" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=445391156]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 18.400002, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter40" unique_id=2097796370]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter40/StaticBody3D" unique_id=1696866855]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_381lw")
+
+[node name="WallBigOuter41" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1817069476]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 16.400002, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter41" unique_id=1497842885]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter41/StaticBody3D" unique_id=1676308007]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_381lw")
+
+[node name="WallBigOuter42" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=892528688]
+transform = Transform3D(-1.6105101, 0, 8.742278e-08, 0, 1, 0, -1.4079527e-07, 0, -1, 13.800001, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter42" unique_id=763524179]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter42/StaticBody3D" unique_id=1536440709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_381lw")
+
+[node name="WallBigOuter36" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1413974134]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 22.400002, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter36" unique_id=965000200]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter36/StaticBody3D" unique_id=1142021910]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_6kqmx")
+
+[node name="WallBigOuter37" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1814197011]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 24.400002, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter37" unique_id=1338832043]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter37/StaticBody3D" unique_id=408520376]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_rewhr")
+
+[node name="WallBigOuter38" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1129424311]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 26.400002, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter38" unique_id=2085720587]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter38/StaticBody3D" unique_id=2100413733]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
+shape = SubResource("BoxShape3D_nlcgm")
+
+[node name="WallBigOuter39" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1453298752]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 28.400002, 0, -7.8999996)
+mesh = ExtResource("34_oc075")
+surface_material_override/0 = SubResource("ShaderMaterial_6qnw4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Walls/WallBigOuter39" unique_id=1210155556]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Walls/WallBigOuter39/StaticBody3D" unique_id=104412746]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004)
 shape = SubResource("BoxShape3D_niy81")
 
@@ -13140,6 +13228,17 @@ surface_material_override/0 = SubResource("ShaderMaterial_oyb6h")
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Railings/Railing35" unique_id=788926905]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Railings/Railing35/StaticBody3D" unique_id=632552382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.8999996)
+shape = SubResource("BoxShape3D_a5u2g")
+
+[node name="Railing54" type="MeshInstance3D" parent="NavigationRegion3D/Railings" unique_id=1696980626]
+transform = Transform3D(10.515044, 0, 1.4305114e-06, 0, 1, 0, -3.0994413e-06, 0, 4.9337707, 22.552067, 3.9000003, -11.740862)
+mesh = ExtResource("31_oetox")
+surface_material_override/0 = SubResource("ShaderMaterial_oyb6h")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Railings/Railing54" unique_id=1031513059]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Railings/Railing54/StaticBody3D" unique_id=1177584570]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.8999996)
 shape = SubResource("BoxShape3D_a5u2g")
 
