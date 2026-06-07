@@ -1,12 +1,12 @@
 [gd_scene format=4 uid="uid://m6o4r2a5u2xk"]
 
-[ext_resource type="Texture2D" uid="uid://dx2x434j7iyk1" path="res://Assets/Models/Artifacts/Imported Files/Painting_PunchUVTex.png" id="1_jwprc"]
-[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_aqax6"]
+[ext_resource type="Texture2D" uid="uid://dx2x434j7iyk1" path="res://Assets/Models/Artifacts/Imported Files/Painting_PunchUVTex.png" id="1_qbpoc"]
+[ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_c81rf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0t45"]
 resource_name = "PaintingTex"
 cull_mode = 2
-albedo_texture = ExtResource("1_jwprc")
+albedo_texture = ExtResource("1_qbpoc")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ionln"]
 _surfaces = [{
@@ -44,9 +44,9 @@ shadow_mesh = SubResource("ArrayMesh_ionln")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jwprc"]
 render_priority = 0
-shader = ExtResource("2_aqax6")
+shader = ExtResource("2_c81rf")
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
-shader_parameter/albedo_texture = ExtResource("1_jwprc")
+shader_parameter/albedo_texture = ExtResource("1_qbpoc")
 shader_parameter/use_stepped = true
 shader_parameter/steps = 2.0
 shader_parameter/step_smoothness = 0.0
