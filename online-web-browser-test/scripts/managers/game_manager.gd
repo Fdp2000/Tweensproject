@@ -349,9 +349,9 @@ func end_game_with_winner(winner_team: int):
 
 @rpc("any_peer", "call_local")
 func show_scoreboard(winner_text: String, cops_data: Array, thieves_data: Array):
-	# Play the Thief Win music if the thieves won
+	# Play the Thief Win music if the thieves won (force restarting it from the beginning!)
 	if winner_text == "THE THIEVES ESCAPED WITH THE LOOT":
-		AudioManager.play_music("thief_win", 0.5)
+		AudioManager.play_music("thief_win", 0.5, 0.0, true)
 		
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 

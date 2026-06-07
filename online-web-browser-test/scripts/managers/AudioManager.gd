@@ -321,8 +321,8 @@ func play_music(track_name: String, crossfade_time: float = 2.0, volume_offset: 
 	# Restore time position if it exists, otherwise start at 0
 	var start_time = music_time_memory.get(track_name, 0.0)
 	
-	# Always restart cutscene and victory tracks from the beginning!
-	if force_restart or track_name == "thief_win" or track_name == "match_start":
+	# Always restart cutscene tracks from the beginning (or if explicitly forced)!
+	if force_restart or track_name == "match_start":
 		start_time = 0.0
 		music_time_memory[track_name] = 0.0
 		

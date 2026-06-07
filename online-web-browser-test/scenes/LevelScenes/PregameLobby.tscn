@@ -48,6 +48,7 @@
 [ext_resource type="ArrayMesh" uid="uid://b4hmn5t8cudht" path="res://Assets/Models/LowPolyMuseumAssets/GlassBox.res" id="44_l1gn5"]
 [ext_resource type="ArrayMesh" uid="uid://bpo1q3kvmctxv" path="res://Assets/Models/LowPolyMuseumAssets/StoneSlab.res" id="45_3ke7e"]
 [ext_resource type="ArrayMesh" uid="uid://ir2pg8414v5k" path="res://Assets/Models/LowPolyMuseumAssets/InfoDeskBig.res" id="46_4j3b7"]
+[ext_resource type="Script" uid="uid://niyg24f8udu4" path="res://scripts/Components/biome_audio_trigger.gd" id="46_wlwr0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_van"]
 size = Vector3(1.4589844, 1, 1)
@@ -665,6 +666,15 @@ shader_parameter/pattern_amount = 0.5
 shader_parameter/pattern_smoothness = 0.5
 shader_parameter/pattern_blend = 0.2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_k78oe"]
+size = Vector3(1.93927, 3.6026611, 2.0916138)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wlwr0"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvpsd"]
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="PregameLobby" type="Node3D" unique_id=1137537174]
 
 [node name="Vent" parent="." unique_id=581943021 instance=ExtResource("1_hbusi")]
@@ -1184,7 +1194,7 @@ transform = Transform3D(2.9, 0, 0, 0, 1.6, 0, 0, 0, 2.6999998, 22.5, 0, -10)
 mesh = ExtResource("24_3ke7e")
 
 [node name="Sculpture3" type="MeshInstance3D" parent="." unique_id=596245535]
-transform = Transform3D(-2.9, -5.9604645e-08, 0, 1.7881393e-07, -2.3999999, 0, 0, 0, 2.6999998, 24.900002, 5.9, -3.5)
+transform = Transform3D(-2.9, -5.9604645e-08, 0, 1.7881393e-07, -2.3999999, 0, 0, 0, 2.6999998, 24.900002, 5.8383236, -3.5)
 mesh = ExtResource("24_3ke7e")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -1266,6 +1276,18 @@ transform = Transform3D(2.2680001, 0, 0, 0, 1, 0, 0, 0, 2.24, 24.2, 0.3, -3.4)
 mesh = ExtResource("43_x7n3g")
 surface_material_override/0 = ExtResource("31_k78oe")
 
+[node name="Area3D" type="Area3D" parent="Floor3" unique_id=538031720]
+collision_layer = 0
+collision_mask = 14
+script = ExtResource("46_wlwr0")
+biome_music_track = "thief_win"
+default_music_track = "main_menu"
+crossfade_duration = 0.3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3/Area3D" unique_id=693461623]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21850586, 1.3013306, 0)
+shape = SubResource("BoxShape3D_k78oe")
+
 [node name="Floor6" type="MeshInstance3D" parent="." unique_id=1859329660]
 transform = Transform3D(0.1938212, 0.033074625, 0, -0.070545144, 0.09087179, 0, 0, 0, 0.37246874, 25.49203, 1.1328006, -3.0100315)
 mesh = ExtResource("43_x7n3g")
@@ -1279,12 +1301,12 @@ surface_material_override/0 = ExtResource("31_k78oe")
 [node name="GlassBox" type="MeshInstance3D" parent="." unique_id=1083739406]
 transform = Transform3D(-0.3535534, 0.61237246, -0.7071067, 0.8660254, 0.49999994, -4.9900773e-08, 0.3535533, -0.6123724, -0.7071067, 25.800001, 3.2, -6.3)
 mesh = ExtResource("44_l1gn5")
-surface_material_override/0 = ExtResource("31_k78oe")
+surface_material_override/0 = SubResource("StandardMaterial3D_wlwr0")
 
 [node name="GlassBox2" type="MeshInstance3D" parent="." unique_id=387203457]
 transform = Transform3D(-0.3535533, 0.61237234, 0.7071066, 0.8660253, 0.49999988, -7.803117e-08, -0.35355335, 0.6123724, -0.7071066, 25.800001, 3.2, -0.9000002)
 mesh = ExtResource("44_l1gn5")
-surface_material_override/0 = ExtResource("31_k78oe")
+surface_material_override/0 = SubResource("StandardMaterial3D_rvpsd")
 
 [node name="GlassBox4" type="MeshInstance3D" parent="." unique_id=853729120]
 transform = Transform3D(1.0728836e-07, -5.3644165e-08, 0.9999996, -1.6093254e-07, -1.7999995, 4.6421032e-08, 1.8, 0, -8.040358e-08, 25.575865, 1, -3.4)
