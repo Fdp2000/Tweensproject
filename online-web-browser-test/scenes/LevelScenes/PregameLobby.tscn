@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://bd366vecbeek4" path="res://scenes/UIScenes/StartGame.tscn" id="1_j52o3"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_ggw6v"]
-[ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
-[ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
+[ext_resource type="Script" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
+[ext_resource type="Script" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
 [ext_resource type="PackedScene" uid="uid://bohw3fv6bjsmg" path="res://Assets/Models/plant.tscn" id="5_bdf01"]
 [ext_resource type="ArrayMesh" uid="uid://cfrox0r0ijrnf" path="res://Assets/Models/LowPolyMuseumAssets/RopeBarrier.res" id="6_j52o3"]
 [ext_resource type="ArrayMesh" uid="uid://de8vjbrnt64xx" path="res://Assets/Models/LowPolyMuseumAssets/Picture1Image.res" id="8_hei78"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://wtk5dty4utxh" path="res://scripts/Zones/artifact.gd" id="16_4xhut"]
 [ext_resource type="Texture2D" uid="uid://hlcp3or35hqi" path="res://Assets/UI/CopChargeTutorialCrop2.png" id="16_tfjox"]
 [ext_resource type="ArrayMesh" uid="uid://bttkw3he7goyh" path="res://Assets/Models/Asia Pack Reimport/Samurai_Helmet.res" id="17_hbusi"]
+[ext_resource type="Texture2D" uid="uid://tdu3bhrcpbjr" path="res://Assets/UI/Capture.png" id="17_rvpsd"]
 [ext_resource type="PackedScene" uid="uid://dh5bg82mibuo4" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Katana  Asia.fbx" id="18_wlwr0"]
 [ext_resource type="ArrayMesh" uid="uid://clv0ih1leoelm" path="res://Assets/Models/Asia Pack Reimport/Katana.res" id="19_rvpsd"]
 [ext_resource type="PackedScene" uid="uid://bxh2jkc1fsqea" path="res://Assets/Low Poly Asia Mega Pack - RG/Meshes Asia/Weapon_2 Asia.fbx" id="20_tfjox"]
@@ -470,6 +471,7 @@ uv1_scale = Vector3(2.67, 5.79, 1)
 uv1_offset = Vector3(0, -0.47, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlqde"]
+albedo_texture = ExtResource("17_rvpsd")
 uv1_scale = Vector3(2.49, 4.61, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jljn4"]
@@ -967,13 +969,12 @@ transform = Transform3D(0.88033664, 0, 0.47434938, 0, 1, 0, -0.47434938, 0, 0.88
 transform = Transform3D(0.9637517, 0, -0.26680094, 0, 1, 0, 0.26680094, 0, 0.9637517, 18.464191, 0.2, 5.347574)
 
 [node name="HostVan" type="Area3D" parent="." unique_id=747771727 groups=["artifact"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.3144, 1, 8.607053)
 collision_layer = 10
 collision_mask = 0
 script = ExtResource("2_van")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HostVan" unique_id=1399586928]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.398594, -0.33724213, 8.585736)
 shape = SubResource("BoxShape3D_van")
 
 [node name="Plant2" parent="." unique_id=1211902803 instance=ExtResource("5_bdf01")]
