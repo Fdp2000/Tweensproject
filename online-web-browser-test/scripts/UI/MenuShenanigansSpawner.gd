@@ -9,16 +9,17 @@ extends Node3D
 var spawn_pairs: Array[Dictionary] = []
 var spawn_timer: Timer
 var last_pair_index: int = -1
-
-@export_category("Debug")
-@export var trigger_event_A: bool = false:
-	set(value): _debug_trigger("A")
-@export var trigger_event_B: bool = false:
-	set(value): _debug_trigger("B")
-@export var trigger_event_C: bool = false:
-	set(value): _debug_trigger("C")
+var is_temporarily_disabled: bool = false
 
 func _ready():
+	# Hook into GameManager to disable spawning during the 1.6s pre-game cutscene and the 5.0s scoreboard screen!
+	if GameManager.has_signal("pre_game_started"):
+		GameManager.pre_game_started.connect(func(_assignments): _set_disabled(true))
+	if GameManager.has_signal("game_over"):
+		GameManager.game_over.connect(func(_winner): _set_disabled(true))
+	if GameManager.has_signal("game_ended"):
+		GameManager.game_ended.connect(func(): _set_disabled(false))
+		
 	# Find all child markers and group them by prefixes like "A_Start", "A_End", "B_Start", "B_End"
 	var markers = {}
 	for child in get_children():
@@ -54,10 +55,16 @@ func _ready():
 func _start_timer():
 	spawn_timer.start(randf_range(spawn_interval_min, spawn_interval_max))
 
+func _set_disabled(disabled: bool):
+	is_temporarily_disabled = disabled
+	if disabled:
+		# Immediately delete any walkers currently on the screen!
+		for child in get_parent().get_children():
+			if child.name.contains("ShenaniganThief") or child.name.contains("ShenaniganCop"):
+				child.queue_free()
+
 func _on_timer_timeout():
-	# If we're not in the lobby, wipe any existing actors and stop spawning
-	if GameManager.current_state != GameManager.GameState.LOBBY:
-		# The individual wanderers handle their own deletion, but we just won't spawn new ones
+	if not is_inside_tree() or GameManager.current_state != GameManager.GameState.LOBBY or is_temporarily_disabled:
 		_start_timer() # Keep timer running quietly in background so it's ready when we return to lobby
 		return
 		
@@ -85,7 +92,7 @@ func _on_timer_timeout():
 	await get_tree().create_timer(chase_delay).timeout
 	
 	# Double check we are still in lobby before spawning the cop!
-	if GameManager.current_state == GameManager.GameState.LOBBY:
+	if GameManager.current_state == GameManager.GameState.LOBBY and not is_temporarily_disabled:
 		var cop = cop_scene.instantiate()
 		get_parent().add_child(cop)
 		cop.global_position = pair["start"]
@@ -97,53 +104,3 @@ func _on_timer_timeout():
 	
 	# Only start the countdown for the next event AFTER this one finishes!
 	_start_timer()
-
-func _input(event):
-	# Developer keyboard shortcuts!
-	if event is InputEventKey and event.pressed and not event.echo:
-		if event.keycode == KEY_7: _debug_trigger("A")
-		if event.keycode == KEY_8: _debug_trigger("B")
-		if event.keycode == KEY_9: _debug_trigger("C")
-
-func _debug_trigger(group_name: String):
-	if not is_inside_tree() or GameManager.current_state != GameManager.GameState.LOBBY:
-		return
-		
-	# Find the pair with this group name
-	var found_pair = null
-	for pair in spawn_pairs:
-		if pair["group"] == group_name:
-			found_pair = pair
-			break
-			
-	if found_pair != null:
-		# Restart the timer so it doesn't overlap with our manual debug spawn
-		spawn_timer.stop()
-		
-		var points: Array[Vector3] = []
-		if found_pair["mid"] != Vector3.ZERO:
-			points.append(found_pair["mid"])
-		points.append(found_pair["end"])
-		
-		# Spawn Thief
-		var thief = thief_scene.instantiate()
-		get_parent().add_child(thief)
-		thief.global_position = found_pair["start"]
-		thief.target_points = points
-		thief.scale = Vector3(1.0 / 1.5, 1.0 / 1.5, 1.0 / 1.5)
-		
-		# Wait for chase delay, then spawn Cop chasing the Thief!
-		await get_tree().create_timer(chase_delay).timeout
-		
-		# Double check we are still in lobby before spawning the cop!
-		if GameManager.current_state == GameManager.GameState.LOBBY:
-			# Spawn Cop
-			var cop = cop_scene.instantiate()
-			get_parent().add_child(cop)
-			cop.global_position = found_pair["start"]
-			cop.target_points = points
-			cop.scale = Vector3(1.0 / 1.5, 1.0 / 1.5, 1.0 / 1.5)
-			
-			await cop.tree_exited
-		
-		_start_timer()
