@@ -929,13 +929,7 @@ func set_skin_viewports_active(active: bool) -> void:
 	if rhino_spawn:
 		rhino_spawn.visible = active
 
-func _unhandled_input(event: InputEvent) -> void:
-	# Secret Developer Tool: Press 'T' to reset tutorial save.
-	if event is InputEventKey and event.pressed and event.keycode == KEY_T:
-		var config = ConfigFile.new()
-		config.set_value("tutorial", "has_seen", false)
-		config.save("user://settings.cfg")
-		print("DEV TOOL: Tutorial save reset! The tutorial intro will play on the next launch.")
+
 
 var lobby_fade_canvas: CanvasLayer
 var lobby_fade_rect: ColorRect
