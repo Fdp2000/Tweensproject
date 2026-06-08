@@ -182,6 +182,7 @@ func show_main_menu() -> void:
 	AudioManager.play_music("main_menu", 1.0, 0.0)
 	reset_tutorial_button()
 
+	menu_root.show()
 	main_menu_panel.show()
 	play_panel.show()
 	skins_panel.show()
@@ -477,6 +478,7 @@ func show_lobby() -> void:
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 	skins_panel.hide()
+	menu_root.hide()
 
 	# The level visibility is now handled by GameManager when the camera actually switches!
 
@@ -562,6 +564,7 @@ func _on_cop_next_pressed() -> void:
 	show_main_menu()
 
 func show_play_panel() -> void:
+	menu_root.show()
 	main_menu_panel.show()
 	play_panel.show()
 	skins_panel.show()
@@ -907,6 +910,7 @@ func _on_game_started() -> void:
 	main_menu_panel.hide()
 	play_panel.hide()
 	skins_panel.hide()
+	menu_root.hide()
 
 	set_skin_viewports_active(false)
 
