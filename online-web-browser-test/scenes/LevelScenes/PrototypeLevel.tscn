@@ -8768,11 +8768,10 @@ transform = Transform3D(-4.3711395e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -1.
 shape = SubResource("BoxShape3D_3u1s1")
 
 [node name="Bench" parent="NavigationRegion3D/KEEP5" unique_id=1427661941 instance=ExtResource("7_ow7u5")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.659872, 0.17399985, -22.599611)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.486984, 0.17399985, -22.599611)
 
 [node name="Bench2" type="MeshInstance3D" parent="NavigationRegion3D/KEEP5" unique_id=1586452709]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.586884, 0.17399985, -11.964879)
-visible = false
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.450172, 0.17399985, -11.964879)
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
@@ -23790,6 +23789,9 @@ transform = Transform3D(-0.23341386, 0, -0.26080254, 0, 0.35, 0, 0.26080254, 0, 
 [node name="Bench" parent="NavigationRegion3D" unique_id=285019669 instance=ExtResource("7_ow7u5")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.4704695, 0.17399949, -24.131968)
 
+[node name="Bench2" parent="NavigationRegion3D/Bench" index="0" unique_id=1278611576]
+transform = Transform3D(1.27, 0, 0, 0, 1.27, 0, 0, 0, 1.27, 0, 0, -0.17442894)
+
 [node name="Giraf" parent="NavigationRegion3D" unique_id=1713319742 instance=ExtResource("150_0nfu5")]
 transform = Transform3D(-2.1637137e-08, 0, -0.495, 0, 0.495, 0, 0.495, 0, -2.1637137e-08, 17.821262, -0.6260795, -20.969261)
 artifact_size = 2
@@ -23798,10 +23800,10 @@ hand_rotation_offset = Vector3(70.102, 158.687, -23.468)
 drop_height_offset = -0.207
 
 [node name="Bench2" parent="NavigationRegion3D" unique_id=574323336 instance=ExtResource("7_ow7u5")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.1785192, 0.17399937, -25.64705)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.2296586, 0.17399937, -25.64705)
 
 [node name="Bench3" parent="NavigationRegion3D" unique_id=1942466142 instance=ExtResource("7_ow7u5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.832827, 0.17399925, -12.121065)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.832827, 0.17399925, -12.045341)
 
 [node name="Plant17" parent="NavigationRegion3D" unique_id=1154571349 instance=ExtResource("142_dt4rj")]
 transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, -6.6932354, 0.1773619, -12.381226)
@@ -23841,13 +23843,13 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, -30.1
 visible = false
 
 [node name="Bench4" parent="NavigationRegion3D" unique_id=1192391837 instance=ExtResource("7_ow7u5")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30.429916, 0.17399997, -23.297594)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30.205208, 0.17399997, -23.297594)
 
 [node name="Bench5" parent="NavigationRegion3D" unique_id=912380082 instance=ExtResource("7_ow7u5")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30.429916, 0.17399997, -24.96749)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30.205208, 0.17399997, -24.96749)
 
 [node name="Bench6" parent="NavigationRegion3D" unique_id=1425009934 instance=ExtResource("7_ow7u5")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30.354286, 0.17399973, -10.4167185)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30.107468, 0.17399973, -10.4167185)
 
 [node name="InfoTable6" parent="NavigationRegion3D" unique_id=1320250135 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.041985, 0.63569933, -37.09758)
@@ -24139,6 +24141,7 @@ visibility_range_end_margin = 2.0
 multimesh = SubResource("MultiMesh_dmg4k")
 
 [node name="MergedBatch_2_8Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4141387" unique_id=108746225]
+visible = false
 material_override = ExtResource("155_oyqrn")
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
@@ -24565,5 +24568,6 @@ material = SubResource("ShaderMaterial_s2bfj")
 [editable path="NavigationRegion3D/Vents/Vent3/PivotPoint/Sketchfab_Scene"]
 [editable path="NavigationRegion3D/Vents/Vent4"]
 [editable path="NavigationRegion3D/Vents/Vent4/PivotPoint/Sketchfab_Scene"]
+[editable path="NavigationRegion3D/Bench"]
 [editable path="NavigationRegion3D/InfoTable2"]
 [editable path="NavigationRegion3D/MenuShenanigansSpawner"]
