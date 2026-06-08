@@ -17724,7 +17724,7 @@ surface_material_override/1 = SubResource("ShaderMaterial_s2bfj")
 shape = SubResource("ConcavePolygonShape3D_tx1w5")
 
 [node name="Island_7" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1595055156]
-transform = Transform3D(0.26375565, 0, 0, 0, 0.05585089, 0, 0, 0, 0.098288, 12.598957, -0.047736466, 0.84535587)
+transform = Transform3D(0.25484684, 0, 0.06060376, 0, 0.05585089, 0, -0.067971475, 0, 0.22722293, 14.328548, -0.037620723, 0.6676058)
 mesh = SubResource("ArrayMesh_eslt8")
 surface_material_override/0 = SubResource("ShaderMaterial_yn6ub")
 surface_material_override/1 = SubResource("ShaderMaterial_s2bfj")
@@ -18579,7 +18579,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_rkynm")
 surface_material_override/1 = SubResource("ShaderMaterial_ked6s")
 
 [node name="Jenssten" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=339104215]
-transform = Transform3D(12.9168005, 0, 0, 0, 0.099999994, 0, 0, 0, 5.376, 25, 4.1, -2)
+transform = Transform3D(12.9168005, 0, 0, 0, -0.09999999, -4.699848e-07, 0, 8.742276e-09, -5.3759995, 25, 4.1, -2)
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 
@@ -18612,7 +18612,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0061405897, -0.00078731775,
 shape = SubResource("BoxShape3D_t30vh")
 
 [node name="Jenssten2" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1860545217]
-transform = Transform3D(7.283338, 0, 4.6637073, 0, 0.09999998, 0, -7.2833385, 0, 4.6637073, 35.4, 4.1, -0.9000001)
+transform = Transform3D(7.283338, -6.1817227e-09, -4.6637073, 0, -0.09999998, 5.76595e-07, -7.283338, -6.1817227e-09, -4.6637073, 35.4, 4.1, -0.9000001)
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 
@@ -19101,11 +19101,13 @@ directional_shadow_fade_start = 0.9
 
 [node name="Moon" type="MeshInstance3D" parent="." unique_id=825090058]
 transform = Transform3D(741.45, 0, 0, 0, 444.87, 0, 0, 0, 741.45, 384, 3513.2, -1643)
+cast_shadow = 0
 mesh = ExtResource("67_w6te4")
 surface_material_override/0 = SubResource("StandardMaterial3D_gjbpm")
 
 [node name="Moonglow" type="MeshInstance3D" parent="Moon" unique_id=5508221]
 transform = Transform3D(3.9713871, 0, 0, 0, 6.0576415, 0, 0, 0, 7.5638227, 0, 0, 0)
+cast_shadow = 0
 mesh = SubResource("QuadMesh_kndku")
 surface_material_override/0 = SubResource("StandardMaterial3D_oyqrn")
 
