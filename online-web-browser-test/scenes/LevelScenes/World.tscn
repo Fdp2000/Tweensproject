@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://bbwtwbwchgqqx" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_1.png" id="14_lep6j"]
 [ext_resource type="Texture2D" uid="uid://bvumt2f5v76wg" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_3.png" id="15_npev6"]
 [ext_resource type="Texture2D" uid="uid://b8hy5qu3gtxn" path="res://Assets/Models/Rhino/Rhino Skins/Næsrehorn_Texture_2.png" id="16_ndhhb"]
+[ext_resource type="Texture2D" uid="uid://0ch0sddnl8q6" path="res://Assets/UI/ChamillionDollarHeist.png" id="22_d4ko8"]
+[ext_resource type="Script" uid="uid://drrxb2vtsqxpb" path="res://scripts/UI/title_animator.gd" id="23_02vry"]
 [ext_resource type="Script" uid="uid://boje3kafxq18k" path="res://scripts/UI/PosterWallManager.gd" id="24_npev6"]
 [ext_resource type="PackedScene" uid="uid://dbxxj8t3aplww" path="res://Assets/UI/WantedPoster/WantedPoster.tscn" id="25_ndhhb"]
 [ext_resource type="PackedScene" uid="uid://c13bmoor5hpg2" path="res://Assets/UI/WantedPoster/EmployeeOfTheMonth.tscn" id="26_0xh8f"]
@@ -386,13 +388,13 @@ font_size = 90
 outline_size = 30
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_d4ko8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_02vry"]
 viewport_path = NodePath("MainMenuScreen3D/MainMenuViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_02vry"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fckw7"]
 viewport_path = NodePath("PlayScreen3D/PlayViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fckw7"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_wnj0b"]
 viewport_path = NodePath("SkinsScreen3D/SkinsViewport")
 
 [node name="VersusScreen" type="Node3D" unique_id=744758526]
@@ -538,7 +540,7 @@ surface_material_override/1 = null
 surface_material_override/0 = null
 
 [node name="Camera3D" parent="PrototypeLevel/NavigationRegion3D/SecCams/SecCam8/CameraMount" parent_id_path=PackedInt32Array(1441468162, 68353345, 1455180780) index="0" unique_id=122643301]
-transform = Transform3D(0.020942355, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.99977726, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
+transform = Transform3D(0.02094235, 0.26549783, -0.96388316, 0, 0.96409523, 0.26555592, 0.99977714, -0.0055613886, 0.02019048, -0.025421388, 0.04192185, -0.24309254)
 
 [node name="Picture2Image2" parent="PrototypeLevel/NavigationRegion3D/JailBoard" parent_id_path=PackedInt32Array(1441468162, 1353791459) index="1" unique_id=1873373757]
 surface_material_override/0 = null
@@ -547,167 +549,14 @@ surface_material_override/0 = null
 surface_material_override/0 = null
 surface_material_override/1 = null
 
-[node name="Platform_1_3" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="160" unique_id=1053165709]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Island_2" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="162" unique_id=2054901973]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Island_7" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="163" unique_id=1595055156]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Island_4" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="164" unique_id=1923471593]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Island_3" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="165" unique_id=62440775]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Island_5" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="166" unique_id=809135896]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Island_6" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="167" unique_id=207347556]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Rock_4" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="168" unique_id=804561136]
-surface_material_override/0 = null
-
-[node name="Rock_14" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="169" unique_id=1414337886]
-surface_material_override/0 = null
-
-[node name="Rock_5" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="170" unique_id=337223116]
-surface_material_override/0 = null
-
-[node name="Rock_13" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="171" unique_id=1119126358]
-surface_material_override/0 = null
-
-[node name="Rock_6" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="172" unique_id=41367147]
-surface_material_override/0 = null
-
-[node name="Rock_9" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="173" unique_id=1333594634]
-surface_material_override/0 = null
-
-[node name="Rock_12" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="174" unique_id=222948843]
-surface_material_override/0 = null
-
-[node name="Rock_19" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="175" unique_id=1123049352]
-surface_material_override/0 = null
-
-[node name="Rock_8" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="176" unique_id=112728546]
-surface_material_override/0 = null
-
-[node name="Rock_18" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="177" unique_id=276030919]
-surface_material_override/0 = null
-
-[node name="Rock_17" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="178" unique_id=650537153]
-surface_material_override/0 = null
-
-[node name="Rock_20" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="179" unique_id=1614037306]
-surface_material_override/0 = null
-
-[node name="Rock_21" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="180" unique_id=934953292]
-surface_material_override/0 = null
-
-[node name="Rock_7" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="181" unique_id=652814082]
-surface_material_override/0 = null
-
-[node name="Rock_11" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="182" unique_id=1568965654]
-surface_material_override/0 = null
-
-[node name="Rock_10" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="183" unique_id=488961770]
-surface_material_override/0 = null
-
-[node name="Stairs_3" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="184" unique_id=83943868]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Rock_15" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="185" unique_id=1370276070]
-surface_material_override/0 = null
-
-[node name="Rock_16" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="186" unique_id=350565649]
-surface_material_override/0 = null
-
-[node name="Tile_1_6" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="211" unique_id=219620576]
-surface_material_override/0 = null
-
-[node name="Tile_1_4" parent="PrototypeLevel/NavigationRegion3D/Tile_1_6" index="0" unique_id=1888398038]
-surface_material_override/0 = null
-
-[node name="Tile_1_5" parent="PrototypeLevel/NavigationRegion3D/Tile_1_6" index="1" unique_id=1427497544]
-surface_material_override/0 = null
-
-[node name="Tile_1_10" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="212" unique_id=2099783634]
-surface_material_override/0 = null
-
-[node name="Tile_1_11" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="213" unique_id=1204532145]
-surface_material_override/0 = null
-
-[node name="Tile_1_12" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="214" unique_id=1759133761]
-surface_material_override/0 = null
-
-[node name="Tile_1_13" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="215" unique_id=1804906822]
-surface_material_override/0 = null
-
-[node name="Tile_1_14" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="216" unique_id=1444481686]
-surface_material_override/0 = null
-
-[node name="Tile_1_20" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="217" unique_id=900727157]
-surface_material_override/0 = null
-
-[node name="Tile_1_21" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="218" unique_id=518143152]
-surface_material_override/0 = null
-
-[node name="Tile_1_19" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="219" unique_id=451659896]
-surface_material_override/0 = null
-
 [node name="Tile_1_15" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="220" unique_id=832085286]
-surface_material_override/0 = null
-
-[node name="Tile_1_16" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="221" unique_id=1208482084]
-surface_material_override/0 = null
-
-[node name="Tile_1_17" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="222" unique_id=1999882878]
 surface_material_override/0 = null
 
 [node name="Tile_1_18" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="223" unique_id=1302065807]
 surface_material_override/0 = null
 
-[node name="Tile_1_7" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="224" unique_id=39529374]
-surface_material_override/0 = null
-
-[node name="Tile_1_8" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="225" unique_id=1262669468]
-surface_material_override/0 = null
-
-[node name="Tile_1_5" parent="PrototypeLevel/NavigationRegion3D/Tile_1_8" index="0" unique_id=607306213]
-surface_material_override/0 = null
-
-[node name="Tile_1_6" parent="PrototypeLevel/NavigationRegion3D/Tile_1_8" index="1" unique_id=1609691290]
-surface_material_override/0 = null
-
-[node name="Tile_1_7" parent="PrototypeLevel/NavigationRegion3D/Tile_1_8" index="2" unique_id=1077598028]
-surface_material_override/0 = null
-
-[node name="Tile_1_8" parent="PrototypeLevel/NavigationRegion3D/Tile_1_8" index="3" unique_id=929186187]
-surface_material_override/0 = null
-
-[node name="Tile_1_9" parent="PrototypeLevel/NavigationRegion3D/Tile_1_8" index="4" unique_id=831437630]
-surface_material_override/0 = null
-
-[node name="Tile_1_10" parent="PrototypeLevel/NavigationRegion3D/Tile_1_8" index="5" unique_id=888840468]
-surface_material_override/0 = null
-
 [node name="Clif_3" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="226" unique_id=963393666]
 transform = Transform3D(-0.37800032, -4.3387853e-09, -7.4505806e-08, -3.604543e-09, 0.45499986, 1.5542977e-07, -2.2351742e-08, 1.0848049e-07, -0.6519197, 17.704332, -1.3000001, 17.079351)
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="Clif_4" parent="PrototypeLevel/NavigationRegion3D" parent_id_path=PackedInt32Array(1441468162, 1119828370) index="227" unique_id=214118948]
 surface_material_override/0 = null
 surface_material_override/1 = null
 
@@ -1164,14 +1013,24 @@ expand_mode = 1
 
 [node name="MainMenuSprite3D" parent="MainMenuUI/MainMenuScreen3D" index="1" unique_id=1038489769]
 transform = Transform3D(0.9999999, 0, 0, 0, 0.99999964, 0, 0, 0, 0.9999997, 0, 0, 0)
-texture = SubResource("ViewportTexture_d4ko8")
+texture = SubResource("ViewportTexture_02vry")
+
+[node name="Sprite3D" type="Sprite3D" parent="MainMenuUI/MainMenuScreen3D/MainMenuSprite3D" index="0" unique_id=617473882]
+transform = Transform3D(0.29500002, -3.7252903e-09, 1.4901161e-08, 0, 0.29500002, 0, 0, 0, 0.29500002, 0.47684583, 0.81654215, 0.23731565)
+texture = ExtResource("22_d4ko8")
+
+[node name="Node" type="Node" parent="MainMenuUI/MainMenuScreen3D/MainMenuSprite3D/Sprite3D" unique_id=1667576203]
+script = ExtResource("23_02vry")
+scale_multiplier = 1.15
+rotation_wobble_degrees = 0.5
+animation_duration = 3.0
 
 [node name="PlayScreen3D" parent="MainMenuUI" index="1" unique_id=435357503]
 transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 4.108334, 2.1325784, 8.546358)
 visible = true
 
 [node name="PlaySprite3D" parent="MainMenuUI/PlayScreen3D" index="1" unique_id=1550463949]
-texture = SubResource("ViewportTexture_02vry")
+texture = SubResource("ViewportTexture_fckw7")
 
 [node name="SkinsScreen3D" parent="MainMenuUI" index="2" unique_id=2051849736]
 transform = Transform3D(-1.0342671, 0, 1.220775, 0, 1.6, 0, -1.220775, 0, -1.0342671, -6.7419267, 2.1155055, 8.097846)
@@ -1269,27 +1128,27 @@ transform = Transform3D(0.47794083, 0, -0.87839204, 0, 1, 0, 0.87839204, 0, 0.47
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23755622, -1.1524457, 1.735261)
 
 [node name="Skeleton3D" parent="MainMenuUI/SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn/Næsehorn/Næsehorn2/metarig" parent_id_path=PackedInt32Array(354039283, 2043154851, 146192529, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.02666021, 0.016812172, 0.0022967968, 0.9995006)
-bones/2/rotation = Quaternion(-0.02370513, 0.034056578, 0.0066791503, 0.9991165)
-bones/3/rotation = Quaternion(-0.07815284, 0.03125061, 0.012318795, 0.9963754)
-bones/5/rotation = Quaternion(-0.59253544, -0.39691237, -0.46426064, 0.52518994)
-bones/6/rotation = Quaternion(-0.31832206, 0.64759225, -0.46920195, 0.50906295)
-bones/7/rotation = Quaternion(0.16081823, -0.06659397, -0.0031579358, 0.9847298)
-bones/8/rotation = Quaternion(-0.14455283, 0.04085169, -0.044057544, 0.9876713)
-bones/9/rotation = Quaternion(0.13790497, 0.04846063, -0.23180267, 0.9617179)
-bones/10/rotation = Quaternion(0.15176567, 0.04490313, -0.19909456, 0.96711546)
-bones/11/rotation = Quaternion(0.18133084, 0.026331367, -0.061294056, 0.9811569)
-bones/13/rotation = Quaternion(-0.5865528, 0.40583235, 0.46288168, 0.5263046)
-bones/14/rotation = Quaternion(-0.273688, -0.6899303, 0.4727657, 0.47495645)
-bones/15/rotation = Quaternion(0.15437077, 0.09130723, -0.0026949283, 0.9837812)
-bones/16/rotation = Quaternion(-0.12666938, -0.01694866, -0.03365818, 0.99122894)
-bones/17/rotation = Quaternion(0.13880622, -0.043596253, 0.19880146, 0.9691802)
-bones/18/rotation = Quaternion(0.15266173, -0.03691531, 0.14563918, 0.9767912)
-bones/19/rotation = Quaternion(0.18127969, -0.020103408, 0.02648736, 0.9828693)
-bones/23/rotation = Quaternion(0.9425239, 0.109532796, -0.12597628, 0.28944993)
-bones/24/rotation = Quaternion(0.34470746, -0.029810024, -0.021937886, 0.9379803)
-bones/25/rotation = Quaternion(0.9681863, -0.0677136, 0.07990568, 0.22725587)
-bones/26/rotation = Quaternion(0.32274157, 0.037256543, 0.023718566, 0.94545615)
+bones/1/rotation = Quaternion(0.026613422, 0.01680903, 0.0022952124, 0.9995018)
+bones/2/rotation = Quaternion(-0.023734303, 0.03406102, 0.006679233, 0.99911565)
+bones/3/rotation = Quaternion(-0.07818612, 0.031216968, 0.012324464, 0.9963737)
+bones/5/rotation = Quaternion(-0.5925474, -0.39689684, -0.4642486, 0.5251989)
+bones/6/rotation = Quaternion(-0.31861562, 0.64766455, -0.46887073, 0.5090924)
+bones/7/rotation = Quaternion(0.16096587, -0.06628859, -0.0031469476, 0.98472637)
+bones/8/rotation = Quaternion(-0.14451195, 0.040888276, -0.044454504, 0.987658)
+bones/9/rotation = Quaternion(0.13789529, 0.048504766, -0.23209983, 0.9616454)
+bones/10/rotation = Quaternion(0.15175456, 0.0449757, -0.19957171, 0.9670155)
+bones/11/rotation = Quaternion(0.18133102, 0.026389128, -0.06160566, 0.98113585)
+bones/13/rotation = Quaternion(-0.5865359, 0.4058499, 0.46286416, 0.5263254)
+bones/14/rotation = Quaternion(-0.27372766, -0.6899444, 0.47272143, 0.47495738)
+bones/15/rotation = Quaternion(0.1544625, 0.091284, -0.0027318068, 0.9837689)
+bones/16/rotation = Quaternion(-0.12642676, -0.01684076, -0.033649947, 0.991262)
+bones/17/rotation = Quaternion(0.13879989, -0.043625638, 0.1990015, 0.96913874)
+bones/18/rotation = Quaternion(0.15265247, -0.036962505, 0.14598607, 0.9767391)
+bones/19/rotation = Quaternion(0.18127914, -0.020148162, 0.026732864, 0.9828619)
+bones/23/rotation = Quaternion(0.94254607, 0.109558344, -0.12599196, 0.28936142)
+bones/24/rotation = Quaternion(0.34461588, -0.029751556, -0.021913253, 0.9380163)
+bones/25/rotation = Quaternion(0.96822274, -0.067713596, 0.07988789, 0.22710687)
+bones/26/rotation = Quaternion(0.32260236, 0.037293278, 0.023683745, 0.94550306)
 
 [node name="NameTag" parent="MainMenuUI/SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn/Næsehorn" index="1" unique_id=1391553469]
 visible = false
@@ -1331,7 +1190,7 @@ offset_bottom = -474.0
 grow_vertical = 2
 
 [node name="SkinsSprite3D" parent="MainMenuUI/SkinsScreen3D" index="1" unique_id=243884504]
-texture = SubResource("ViewportTexture_fckw7")
+texture = SubResource("ViewportTexture_wnj0b")
 
 [node name="Tutorial" parent="MainMenuUI" unique_id=1108260321 instance=ExtResource("9_2qs0d")]
 visible = false
@@ -1425,6 +1284,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4432081, -0.2399106, 2.894
 [editable path="PrototypeLevel/NavigationRegion3D/Vents/Vent3/PivotPoint/Sketchfab_Scene"]
 [editable path="PrototypeLevel/NavigationRegion3D/Vents/Vent4"]
 [editable path="PrototypeLevel/NavigationRegion3D/Vents/Vent4/PivotPoint/Sketchfab_Scene"]
+[editable path="PrototypeLevel/NavigationRegion3D/Bench"]
 [editable path="PrototypeLevel/NavigationRegion3D/InfoTable2"]
 [editable path="PrototypeLevel/NavigationRegion3D/MenuShenanigansSpawner"]
 [editable path="CutsceneManager/CutsceneMarkers/VersusPos/LeftSpawn/CopPreviewPos1/DummyCop"]

@@ -7,9 +7,6 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n5gp1"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_n5gp1"]
-font_size = 190
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yv1oc"]
 bg_color = Color(0, 0.5019608, 0, 1)
 border_width_left = 2
@@ -394,15 +391,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 60
 
-[node name="Label" type="Label" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=1596677310]
-custom_minimum_size = Vector2(1980, 0)
-layout_mode = 2
-size_flags_vertical = 1
-theme_override_fonts/font = ExtResource("1_kuebs")
-text = "				         Chamillion Heist "
-label_settings = SubResource("LabelSettings_n5gp1")
-horizontal_alignment = 1
-
 [node name="MarginContainer" type="MarginContainer" parent="MainMenuScreen3D/MainMenuViewport/Root/MainMenuPanel/MarginContainer/VBoxContainer" unique_id=541771019]
 custom_minimum_size = Vector2(500, 550)
 layout_mode = 2
@@ -746,27 +734,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 200, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1524457, 1.6060051)
 
 [node name="Skeleton3D" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel/PreviewSpawn/Næsehorn/Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 146192529, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.020751493, 0.01667714, 0.002129043, 0.9996434)
-bones/2/rotation = Quaternion(-0.02823563, 0.034468234, 0.0070423298, 0.9989821)
-bones/3/rotation = Quaternion(-0.082689196, 0.031760525, 0.01287069, 0.9959861)
-bones/5/rotation = Quaternion(-0.59574157, -0.3941344, -0.4582564, 0.5289152)
-bones/6/rotation = Quaternion(-0.35047236, 0.6506698, -0.43877032, 0.5111542)
-bones/7/rotation = Quaternion(0.16732112, -0.03882222, -0.0036298041, 0.9851312)
-bones/8/rotation = Quaternion(-0.14376798, 0.046233322, -0.08642538, 0.9847457)
-bones/9/rotation = Quaternion(0.13715124, 0.05151331, -0.2524262, 0.95646065)
-bones/10/rotation = Quaternion(0.15080276, 0.049784493, -0.23220083, 0.959616)
-bones/11/rotation = Quaternion(0.18118632, 0.030203205, -0.082429975, 0.97952265)
-bones/13/rotation = Quaternion(-0.58471715, 0.40827212, 0.4592226, 0.529655)
-bones/14/rotation = Quaternion(-0.28368744, -0.6896607, 0.4663349, 0.47583744)
-bones/15/rotation = Quaternion(0.16236842, 0.08680594, -0.010415009, 0.98284936)
-bones/16/rotation = Quaternion(-0.11532609, -0.016004018, -0.01768248, 0.9930414)
-bones/17/rotation = Quaternion(0.13800782, -0.047615904, 0.22595671, 0.9631356)
-bones/18/rotation = Quaternion(0.15172671, -0.043950606, 0.19257887, 0.96848375)
-bones/19/rotation = Quaternion(0.18124118, -0.02622082, 0.059876096, 0.98126405)
-bones/23/rotation = Quaternion(0.94547176, 0.11062229, -0.12803592, 0.2783034)
-bones/24/rotation = Quaternion(0.33173224, -0.028171513, -0.020225996, 0.9427359)
-bones/25/rotation = Quaternion(0.97161305, -0.06685574, 0.081779584, 0.21168497)
-bones/26/rotation = Quaternion(0.3031526, 0.038255204, 0.020778634, 0.95194715)
+bones/1/rotation = Quaternion(0.026996575, 0.016840454, 0.0023072236, 0.99949104)
+bones/2/rotation = Quaternion(-0.023482008, 0.03402261, 0.006678531, 0.99912286)
+bones/3/rotation = Quaternion(-0.077898204, 0.031507958, 0.012275416, 0.9963878)
+bones/5/rotation = Quaternion(-0.5924441, -0.39703152, -0.46435255, 0.5251217)
+bones/6/rotation = Quaternion(-0.31629655, 0.64709526, -0.47155213, 0.50878567)
+bones/7/rotation = Quaternion(0.15995042, -0.06771621, -0.0030311274, 0.98479503)
+bones/8/rotation = Quaternion(-0.14493452, 0.039412413, -0.04147601, 0.9877857)
+bones/9/rotation = Quaternion(0.1379806, 0.04811439, -0.22946718, 0.9622844)
+bones/10/rotation = Quaternion(0.15185168, 0.04433666, -0.1953697, 0.9678874)
+bones/11/rotation = Quaternion(0.1813297, 0.02588206, -0.058871727, 0.9813174)
+bones/13/rotation = Quaternion(-0.5866824, 0.40569785, 0.46301606, 0.52614564)
+bones/14/rotation = Quaternion(-0.2734514, -0.689579, 0.47327095, 0.47509977)
+bones/15/rotation = Quaternion(0.15296748, 0.09117927, -0.0024900015, 0.98401284)
+bones/16/rotation = Quaternion(-0.12832674, -0.018254748, -0.033668995, 0.99099225)
+bones/17/rotation = Quaternion(0.1388677, -0.043399185, 0.19743161, 0.96946025)
+bones/18/rotation = Quaternion(0.15273204, -0.036549766, 0.1432713, 0.977144)
+bones/19/rotation = Quaternion(0.18129498, -0.019798182, 0.024807345, 0.9829165)
+bones/23/rotation = Quaternion(0.9423816, 0.10938892, -0.12589149, 0.2900044)
+bones/24/rotation = Quaternion(0.34516805, -0.030197226, -0.022145214, 0.9377937)
+bones/25/rotation = Quaternion(0.96793365, -0.067764185, 0.07952877, 0.22844638)
+bones/26/rotation = Quaternion(0.3237716, 0.036995593, 0.023981454, 0.9451075)
 
 [node name="PreviousButton" type="Button" parent="SkinsScreen3D/SkinsViewport/Root/SkinsPanel/HBoxContainer/MarginContainer/RhinoSkinPanel" unique_id=227015707]
 custom_minimum_size = Vector2(250, 150)
