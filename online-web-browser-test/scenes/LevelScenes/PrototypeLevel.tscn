@@ -23630,7 +23630,6 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -4.246769, 0.6556162, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5329385, -1.0867195)
 
 [node name="300x300x20mm-vent_001_vent-grilles_0" parent="NavigationRegion3D/Vents/Vent/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(581943021, 1711548117, 1812499697) index="0" unique_id=496260524]
-visible = false
 cast_shadow = 0
 
 [node name="Vent6" parent="NavigationRegion3D/Vents" unique_id=1096604727 instance=ExtResource("25_wmagv")]
@@ -23640,7 +23639,6 @@ transform = Transform3D(8.347416e-09, 0, -0.7, 0, 0.7, 0, 0.7, 0, 8.347416e-09, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5329385, -1.0867195)
 
 [node name="300x300x20mm-vent_001_vent-grilles_0" parent="NavigationRegion3D/Vents/Vent6/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(1096604727, 1711548117, 1812499697) index="0" unique_id=496260524]
-visible = false
 cast_shadow = 0
 
 [node name="Vent7" parent="NavigationRegion3D/Vents" unique_id=1086104084 instance=ExtResource("25_wmagv")]
@@ -23650,41 +23648,30 @@ transform = Transform3D(8.347416e-09, 0, -0.7, 0, 0.7, 0, 0.7, 0, 8.347416e-09, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5329385, -1.0867195)
 
 [node name="300x300x20mm-vent_001_vent-grilles_0" parent="NavigationRegion3D/Vents/Vent7/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(1086104084, 1711548117, 1812499697) index="0" unique_id=496260524]
-visible = false
 cast_shadow = 0
 
 [node name="Vent2" parent="NavigationRegion3D/Vents" unique_id=1546660434 instance=ExtResource("25_wmagv")]
 transform = Transform3D(-0.7, 0, 6.119594e-08, 0, 0.7, 0, -6.119594e-08, 0, -0.7, -11.004616, -0.75459146, -14.685406)
 
-[node name="VisualRing" parent="NavigationRegion3D/Vents/Vent2" index="1" unique_id=184920184]
-visible = false
-
 [node name="300x300x20mm-vent_001_vent-grilles_0" parent="NavigationRegion3D/Vents/Vent2/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(1546660434, 1711548117, 1812499697) index="0" unique_id=496260524]
-visible = false
 cast_shadow = 0
 
 [node name="Vent5" parent="NavigationRegion3D/Vents" unique_id=586865541 instance=ExtResource("25_wmagv")]
 transform = Transform3D(-0.7, 0, 6.119594e-08, 0, 0.7, 0, -6.119594e-08, 0, -0.7, 3.5311666, 0.30010384, -12.322028)
 
-[node name="VisualRing" parent="NavigationRegion3D/Vents/Vent5" index="1" unique_id=184920184]
-visible = false
-
 [node name="300x300x20mm-vent_001_vent-grilles_0" parent="NavigationRegion3D/Vents/Vent5/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(586865541, 1711548117, 1812499697) index="0" unique_id=496260524]
-visible = false
 cast_shadow = 0
 
 [node name="Vent3" parent="NavigationRegion3D/Vents" unique_id=482278551 instance=ExtResource("25_wmagv")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -37.8954, 0.52053386, -27.815899)
 
 [node name="300x300x20mm-vent_001_vent-grilles_0" parent="NavigationRegion3D/Vents/Vent3/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(482278551, 1711548117, 1812499697) index="0" unique_id=496260524]
-visible = false
 cast_shadow = 0
 
 [node name="Vent4" parent="NavigationRegion3D/Vents" unique_id=1157775514 instance=ExtResource("25_wmagv")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -31.034086, 0.44226974, -5.913929)
 
 [node name="300x300x20mm-vent_001_vent-grilles_0" parent="NavigationRegion3D/Vents/Vent4/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(1157775514, 1711548117, 1812499697) index="0" unique_id=496260524]
-visible = false
 cast_shadow = 0
 
 [node name="Plant" parent="NavigationRegion3D" unique_id=1211902803 instance=ExtResource("142_dt4rj")]
@@ -24169,6 +24156,7 @@ material_override = SubResource("ShaderMaterial_2uxea")
 multimesh = SubResource("MultiMesh_g3j5m")
 
 [node name="MergedBatch_7_7Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4141387" unique_id=1150173329]
+visible = false
 material_override = SubResource("StandardMaterial3D_2ygie")
 multimesh = SubResource("MultiMesh_aohxw")
 

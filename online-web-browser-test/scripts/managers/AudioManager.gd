@@ -101,6 +101,7 @@ func _ready():
 	_initialize_2d_pool()
 	_initialize_3d_pool()
 	_initialize_music_players()
+	_preload_all_audio()
 	
 	# Setup Hypno Effects dynamically so we don't corrupt the .tres file
 	master_bus_idx = AudioServer.get_bus_index("Master")
@@ -174,6 +175,18 @@ func _initialize_3d_pool():
 		
 		add_child(player)
 		pool_3d.append(player)
+
+func _preload_all_audio():
+	# Forcibly load all audio into RAM during the loading screen 
+	# instead of lagging the game the first time they are played!
+	for config_dict in [MUSIC_CONFIG, SFX_CONFIG]:
+		for key in config_dict.keys():
+			var config = config_dict[key]
+			if config.has("path"):
+				_get_stream(config["path"])
+			elif config.has("paths"):
+				for p in config["paths"]:
+					_get_stream(p)
 
 # Helper function to load AudioStreams into memory and cache them
 func _get_stream(path_data: Variant) -> AudioStream:
