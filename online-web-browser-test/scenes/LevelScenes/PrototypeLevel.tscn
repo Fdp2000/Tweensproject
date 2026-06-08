@@ -6582,6 +6582,7 @@ transform = Transform3D(-0.9661873, 0, 0.25784117, 0, 1, 0, -0.25784117, 0, -0.9
 [node name="ForrestLight1" type="SpotLight3D" parent="Lights" unique_id=1642369139]
 transform = Transform3D(0.9848077, 0.026176302, -0.17166394, 0.044943463, -0.99331075, 0.10636755, -0.16773129, -0.112466745, -0.9793966, -33.60655, 2.5909033, 2.2070234)
 light_energy = 4.042
+light_bake_mode = 1
 spot_range = 15.0
 spot_attenuation = 0.0
 spot_angle = 25.36
@@ -6589,18 +6590,21 @@ spot_angle = 25.36
 [node name="ForrestLight2" type="SpotLight3D" parent="Lights" unique_id=1447025595]
 transform = Transform3D(-0.92072976, -0.3046523, -0.24381071, 0, -0.6248339, 0.7807577, -0.39020082, 0.7188669, 0.5753032, -24.661661, 3.2407043, -1.155617)
 light_energy = 1.999
+light_bake_mode = 1
 spot_attenuation = 0.0
 spot_angle = 34.67
 
 [node name="ForrestLight4" type="SpotLight3D" parent="Lights" unique_id=1730360803]
 transform = Transform3D(-0.9870141, 0.15858655, -0.025565349, 0.10996936, 0.7831033, 0.6120916, 0.11708978, 0.60133135, -0.7903738, -31.653088, 2.9386833, 9.977592)
 light_energy = 1.999
+light_bake_mode = 1
 spot_attenuation = 0.0
 spot_angle = 59.285458
 
 [node name="IslandLight" type="SpotLight3D" parent="Lights" unique_id=60640782]
 transform = Transform3D(-0.9207298, -0.3046523, -0.24381071, 0, -0.6248339, 0.7807577, -0.39020085, 0.7188669, 0.5753032, -25.56166, 3.2407043, -34.155617)
 light_energy = 1.999
+light_bake_mode = 1
 spot_range = 7.534
 spot_attenuation = 0.0
 spot_angle = 16.17
@@ -6609,6 +6613,7 @@ spot_angle = 16.17
 transform = Transform3D(0.6317486, -0.77330476, -0.05379103, -0.50486976, -0.4631219, 0.7284399, -0.5882178, -0.43303347, -0.6829948, -34.161663, 3.6407044, -36.75562)
 light_color = Color(1.4906151, 0.8618851, 0.2844692, 1)
 light_energy = 1.885
+light_bake_mode = 1
 spot_range = 7.106
 spot_attenuation = 0.0
 spot_angle = 80.29
@@ -6617,6 +6622,7 @@ spot_angle_attenuation = 0.9330351
 [node name="IslandLight2" type="SpotLight3D" parent="Lights" unique_id=426415803]
 transform = Transform3D(0.9924758, -0.095596865, -0.07650536, -0.021261675, -0.74989825, 0.6612115, -0.12058098, -0.65460974, -0.7462884, -19.56166, 2.9407043, -35.155617)
 light_energy = 1.999
+light_bake_mode = 1
 spot_attenuation = 0.0
 spot_angle = 26.36
 spot_angle_attenuation = 0.7071091
@@ -6625,6 +6631,7 @@ spot_angle_attenuation = 0.7071091
 transform = Transform3D(-0.11213392, 0.9739779, 0.19695945, 0.92673796, 0.17402944, -0.33297244, -0.3585845, 0.14519228, -0.92213684, -27.36166, 1.7407043, -36.95562)
 light_color = Color(1.673333, 1.0929288, 0, 1)
 light_energy = 1.999
+light_bake_mode = 1
 spot_range = 6.91
 spot_attenuation = -0.42
 spot_angle = 32.13
@@ -6634,6 +6641,7 @@ spot_angle_attenuation = 0.49999988
 transform = Transform3D(0.0804546, -0.95761734, -0.27657947, 0.9901449, 0.108693495, -0.08831114, 0.11463066, -0.26674873, 0.95692474, -23.56166, 1.7407043, -32.95562)
 light_color = Color(1.673333, 1.0929288, 0, 1)
 light_energy = 1.999
+light_bake_mode = 1
 spot_range = 8.735
 spot_attenuation = 0.0
 spot_angle = 43.54
@@ -6643,6 +6651,7 @@ spot_angle_attenuation = 6.062865
 transform = Transform3D(0.9083127, 0.010421202, -0.4181621, -0.12416296, -0.9479158, -0.29332453, -0.39943925, 0.3183506, -0.85971, -16.661661, 2.7407043, -36.55562)
 light_color = Color(1.673333, 1.0929288, 0, 1)
 light_energy = 1.999
+light_bake_mode = 1
 spot_range = 8.735
 spot_attenuation = 0.0
 spot_angle = 41.73
@@ -6652,6 +6661,7 @@ spot_angle_attenuation = 5.2780285
 transform = Transform3D(-0.20184119, -0.035935715, -0.9787589, -0.9793546, 0.018809812, 0.20127346, 0.011177366, 0.9991772, -0.038990386, -22.861662, 2.7407043, -34.55562)
 light_color = Color(1.673333, 1.0929288, 0, 1)
 light_energy = 0.309
+light_bake_mode = 1
 spot_range = 16.584
 spot_attenuation = 0.0
 spot_angle = 41.18
@@ -6661,6 +6671,7 @@ spot_angle_attenuation = 1.5157155
 transform = Transform3D(0.8081194, -0.4269082, 0.4058232, -0.5881952, -0.5484681, 0.59431404, -0.031136444, -0.71898, -0.694333, -23.66166, 2.5407045, -38.355618)
 light_color = Color(1.673333, 1.0929288, 0, 1)
 light_energy = 1.999
+light_bake_mode = 1
 spot_range = 11.707
 spot_attenuation = 0.0
 spot_angle = 46.08
@@ -6668,6 +6679,7 @@ spot_angle = 46.08
 [node name="ForrestLight3" type="SpotLight3D" parent="Lights" unique_id=1002135067]
 transform = Transform3D(0.9262476, 0.04530026, -0.37418357, 0.30607826, -0.66974425, 0.6765787, -0.2199581, -0.74120885, -0.63421434, -26.377544, 2.2784357, 1.9423954)
 light_energy = 1.661
+light_bake_mode = 1
 spot_range = 8.484
 spot_attenuation = -0.28
 spot_angle = 21.768274
@@ -6675,6 +6687,7 @@ spot_angle = 21.768274
 [node name="ArchLight1" type="SpotLight3D" parent="Lights" unique_id=540625740]
 transform = Transform3D(-0.04968839, -0.51923186, -0.8531878, -0.004347166, -0.85412246, 0.52005386, -0.9987554, 0.029549584, 0.04018278, 8.070719, 3.6032283, 0.5447016)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 9.556649
 spot_attenuation = 0.0
 spot_angle = 76.67581
@@ -6683,6 +6696,7 @@ spot_angle_attenuation = 1.8660618
 [node name="ArchLight6" type="SpotLight3D" parent="Lights" unique_id=1560749942]
 transform = Transform3D(-0.99875534, 0.029549703, 0.040182896, -8.381904e-09, -0.80561805, 0.5924353, 0.04987835, 0.59169793, 0.8046153, 15.170718, 3.0032287, -0.45529842)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 13.555236
 spot_attenuation = 0.0
 spot_angle = 26.69
@@ -6690,6 +6704,7 @@ spot_angle = 26.69
 [node name="ArchLight22" type="SpotLight3D" parent="Lights" unique_id=1414234414]
 transform = Transform3D(-0.99875534, 0.029549705, 0.0401829, 0.004347175, -0.7509826, 0.66030777, 0.049688544, 0.6596606, 0.7499194, 8.170718, 3.0032287, -5.4552984)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 13.555236
 spot_attenuation = 0.0
 spot_angle = 26.69
@@ -6697,6 +6712,7 @@ spot_angle = 26.69
 [node name="ArchLight23" type="SpotLight3D" parent="Lights" unique_id=1425408239]
 transform = Transform3D(-0.99875534, 0.029549701, 0.040182892, 0.004347175, -0.7509826, 0.66030777, 0.049688544, 0.6596606, 0.7499194, -8.829282, 3.0032287, -5.4552984)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 13.555236
 spot_attenuation = 0.0
 spot_angle = 26.69
@@ -6704,6 +6720,7 @@ spot_angle = 26.69
 [node name="ArchLight9" type="SpotLight3D" parent="Lights" unique_id=1793395130]
 transform = Transform3D(0.21195978, -0.7611141, -0.61300766, -0.40127975, -0.63972473, 0.6555356, -0.89109355, 0.107040435, -0.44101566, 33.17072, 3.6032288, 3.5447016)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 13.555236
 spot_attenuation = 0.0
 spot_angle = 26.69
@@ -6711,6 +6728,7 @@ spot_angle = 26.69
 [node name="ArchLight20" type="SpotLight3D" parent="Lights" unique_id=1051777954]
 transform = Transform3D(-0.24308425, -0.8605194, -0.44767892, 0.3033509, -0.5058126, 0.80754685, -0.9213514, 0.060498107, 0.3839944, 34.07072, 3.1032288, -33.6553)
 light_energy = 1.999
+light_bake_mode = 1
 spot_range = 6.712
 spot_attenuation = 0.0
 spot_angle = 26.69
@@ -6719,6 +6737,7 @@ spot_angle_attenuation = 1.6245039
 [node name="ArchLight21" type="SpotLight3D" parent="Lights" unique_id=732002588]
 transform = Transform3D(-0.9213514, 0.06049815, 0.38399437, 0.30335087, -0.5058126, 0.80754685, 0.24308427, 0.8605194, 0.44767895, 23.97072, 3.1032288, -36.0553)
 light_energy = 1.999
+light_bake_mode = 1
 spot_range = 5.63
 spot_attenuation = 0.0
 spot_angle = 26.69
@@ -6728,6 +6747,7 @@ spot_angle_attenuation = 0.3298768
 transform = Transform3D(-0.79049826, 0.23242936, 0.56664735, -0.3173441, -0.94675076, -0.054367628, 0.52383715, -0.2227997, 0.8221648, 36.070717, 2.803229, -31.355295)
 light_color = Color(0, 0.5556819, 0.5556819, 1)
 light_energy = 1.774
+light_bake_mode = 1
 spot_range = 12.784
 spot_attenuation = 0.0
 spot_angle = 32.51
@@ -6737,6 +6757,7 @@ spot_angle_attenuation = 0.30778605
 transform = Transform3D(-0.54983824, 0.8228881, 0.14329427, -0.61232835, -0.28042516, -0.7391994, -0.568095, -0.4941833, 0.6580661, 19.070717, 0.90322906, -32.355293)
 light_color = Color(0, 0.5556819, 0.5556819, 1)
 light_energy = 1.774
+light_bake_mode = 1
 spot_range = 12.784
 spot_attenuation = 0.0
 spot_angle = 88.28
@@ -6745,6 +6766,7 @@ spot_angle_attenuation = 0.30778605
 [node name="ArchLight12" type="SpotLight3D" parent="Lights" unique_id=119275242]
 transform = Transform3D(0.9771931, 0.17334795, 0.12265455, 0.11715993, -0.92184436, 0.36942738, 0.1771079, -0.34663165, -0.92112935, 32.17072, 3.6032286, -5.8552985)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 13.555236
 spot_attenuation = 0.0
 spot_angle = 50.77
@@ -6752,6 +6774,7 @@ spot_angle = 50.77
 [node name="ArchLight10" type="SpotLight3D" parent="Lights" unique_id=1166399291]
 transform = Transform3D(-0.8067582, -0.33699661, -0.4853601, 0.1012779, -0.88812554, 0.44830328, -0.5821374, 0.3125162, 0.75063294, 12.170719, 9.203229, -11.455299)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 23.314
 spot_attenuation = 0.0
 spot_angle = 26.69
@@ -6759,6 +6782,7 @@ spot_angle = 26.69
 [node name="ArchLight15" type="SpotLight3D" parent="Lights" unique_id=1999244588]
 transform = Transform3D(0.23365796, -0.97079307, -0.054449797, 0.52660966, 0.07927547, 0.8464028, -0.8173654, -0.22644253, 0.5297524, -25.129282, 7.203229, -8.5553)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 23.314
 spot_attenuation = 0.0
 spot_angle = 16.75
@@ -6767,6 +6791,7 @@ spot_angle_attenuation = 1.1486988
 [node name="ArchLight17" type="SpotLight3D" parent="Lights" unique_id=891955104]
 transform = Transform3D(0.84998953, -0.03253311, -0.5257941, 0.52660966, 0.079275474, 0.84640276, 0.014146464, -0.99632174, 0.08451557, -17.129282, 1.7032292, -18.0553)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 10.419
 spot_attenuation = 0.0
 spot_angle = 16.75
@@ -6775,6 +6800,7 @@ spot_angle_attenuation = 1.1486988
 [node name="ArchLight16" type="SpotLight3D" parent="Lights" unique_id=1135305118]
 transform = Transform3D(0.3040069, -0.94736314, -0.10041355, 0.52660966, 0.079275474, 0.8464028, -0.7938905, -0.31019104, 0.5229909, -20.829283, 1.6032293, -20.255299)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 23.314
 spot_attenuation = 0.0
 spot_angle = 23.09
@@ -6784,6 +6810,7 @@ spot_angle_attenuation = 0.23325877
 transform = Transform3D(-0.33582944, 0.42410925, 0.841041, -0.43715158, -0.86108863, 0.25966305, 0.8343363, -0.2804599, 0.47457895, 37.470722, 3.3032286, 7.344701)
 light_color = Color(1.230681, 0.73780066, 0, 1)
 light_energy = 0.901
+light_bake_mode = 1
 spot_range = 32.88
 spot_attenuation = 0.01
 spot_angle = 59.58
@@ -6792,6 +6819,7 @@ spot_angle = 59.58
 transform = Transform3D(-0.33582947, 0.42410925, 0.841041, -0.43715158, -0.86108863, 0.25966305, 0.8343363, -0.2804599, 0.47457895, 36.470722, 3.3032286, 3.3447008)
 light_color = Color(1.230681, 0.73780066, 0, 1)
 light_energy = 0.901
+light_bake_mode = 1
 spot_range = 32.88
 spot_attenuation = 0.01
 spot_angle = 59.58
@@ -6800,6 +6828,7 @@ spot_angle = 59.58
 transform = Transform3D(-0.8657216, -0.31907216, -0.3856413, 0.26706845, -0.94609565, 0.1832425, -0.42332107, 0.055644378, 0.90426934, 20.17072, 4.8032303, 17.5447)
 light_color = Color(0.58810025, 0.3680289, 2.529901e-07, 1)
 light_energy = 1.097
+light_bake_mode = 1
 spot_range = 31.917
 spot_attenuation = -0.3
 spot_angle = 54.77
@@ -6808,6 +6837,7 @@ spot_angle = 54.77
 transform = Transform3D(-0.7482828, -0.25873482, -0.610843, 0.042160954, -0.93749106, 0.34544596, -0.6620388, 0.23273754, 0.71241695, -0.82928085, 24.40323, 68.5447)
 light_color = Color(0.58810025, 0.3680289, 2.529901e-07, 1)
 light_energy = 1.548
+light_bake_mode = 1
 spot_range = 97.133
 spot_attenuation = -0.16
 spot_angle = 29.04
@@ -6815,6 +6845,7 @@ spot_angle = 29.04
 [node name="ArchLight2" type="SpotLight3D" parent="Lights" unique_id=1189370427]
 transform = Transform3D(0.049878117, 0.59169775, 0.80461544, -1.4864865e-09, -0.80561817, 0.5924352, 0.99875534, -0.029549552, -0.040182717, -7.6345844, 3.7709692, 0.61357784)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 13.555236
 spot_attenuation = 0.0
 spot_angle = 59.26556
@@ -6823,6 +6854,7 @@ spot_angle = 59.26556
 transform = Transform3D(-0.06959059, 0.475645, 0.8768803, 0.986049, -0.100441, 0.13273649, 0.15121017, 0.87388414, -0.46201953, -13.7087, 3.2319438, -5.587082)
 light_color = Color(0.9281362, 0.49536973, 0, 1)
 light_energy = 3.252
+light_bake_mode = 1
 spot_range = 45.034
 spot_attenuation = 0.14
 spot_angle = 38.46
@@ -6832,6 +6864,7 @@ spot_angle_attenuation = 0.8705513
 transform = Transform3D(-0.029725347, -0.8908649, -0.45329478, 0.98604894, -0.10044104, 0.13273643, -0.16377962, -0.44302523, 0.88142204, -38.5087, 3.2319438, 2.8129182)
 light_color = Color(0.9281362, 0.49536973, 0, 1)
 light_energy = 3.252
+light_bake_mode = 1
 spot_range = 17.624
 spot_attenuation = 0.14
 spot_angle = 24.07
@@ -6841,6 +6874,7 @@ spot_angle_attenuation = 0.87055033
 transform = Transform3D(-0.06959059, 0.475645, 0.8768803, 0.986049, -0.100441, 0.13273649, 0.15121017, 0.87388414, -0.46201953, -13.308701, 4.331944, 4.0129175)
 light_color = Color(0.9281362, 0.49536973, 0, 1)
 light_energy = 3.252
+light_bake_mode = 1
 spot_range = 4096.0
 spot_attenuation = 0.14
 spot_angle = 31.68
@@ -6849,6 +6883,7 @@ spot_angle_attenuation = 2.0000005
 [node name="ArchLight3" type="SpotLight3D" parent="Lights" unique_id=1878720709]
 transform = Transform3D(-0.99875534, 0.02954953, 0.04018268, -0.0043471665, -0.8541224, 0.5200539, 0.049688276, 0.5192319, 0.8531877, -0.006671965, 3.5789135, -7.388561)
 light_energy = 4.14
+light_bake_mode = 1
 spot_range = 8.201284
 spot_attenuation = 0.0
 spot_angle = 55.319145
@@ -6856,6 +6891,7 @@ spot_angle = 55.319145
 [node name="PaintingLight" type="SpotLight3D" parent="Lights" unique_id=493679737]
 transform = Transform3D(2.9802319e-08, 0.6093152, -0.7929281, 1.3322676e-15, 0.7929281, 0.6093152, 1, -1.8159009e-08, 2.3631094e-08, 34.55616, 3.1544619, -13.144911)
 light_energy = 7.525
+light_bake_mode = 1
 spot_range = 15.782
 spot_angle = 53.46
 spot_angle_attenuation = 0.32987696
@@ -6863,6 +6899,7 @@ spot_angle_attenuation = 0.32987696
 [node name="PaintingLight4" type="SpotLight3D" parent="Lights" unique_id=1188213166]
 transform = Transform3D(2.9802319e-08, 0.6093152, -0.7929281, 1.3322676e-15, 0.7929281, 0.6093152, 1, -1.8159009e-08, 2.3631095e-08, 34.55616, 3.1544619, -20.844912)
 light_energy = 7.525
+light_bake_mode = 1
 spot_range = 15.782
 spot_angle = 53.46
 spot_angle_attenuation = 0.035896853
@@ -6870,6 +6907,7 @@ spot_angle_attenuation = 0.035896853
 [node name="PaintingLight2" type="SpotLight3D" parent="Lights" unique_id=1766145600]
 transform = Transform3D(-4.371139e-08, -0.6087614, 0.7933533, 0, 0.7933533, 0.6087614, -1, 2.6609808e-08, -3.4678575e-08, -37.805855, 2.9220784, -14.982377)
 light_energy = 7.525
+light_bake_mode = 1
 spot_range = 15.782
 spot_angle = 58.07
 spot_angle_attenuation = 0.43527523
@@ -6877,6 +6915,7 @@ spot_angle_attenuation = 0.43527523
 [node name="PaintingLight3" type="SpotLight3D" parent="Lights" unique_id=767973416]
 transform = Transform3D(-4.3545057e-08, -0.53729963, 0.8433915, 3.8096966e-09, 0.8433915, 0.53729963, -1, 2.6609806e-08, -3.4678575e-08, -37.805855, 2.9220784, -20.772434)
 light_energy = 7.525
+light_bake_mode = 1
 spot_range = 15.782
 spot_angle = 75.14
 spot_angle_attenuation = 0.61557335
@@ -7758,7 +7797,7 @@ shape = SubResource("BoxShape3D_3u1s1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 
 [node name="Arch12" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=1849548537]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436313, 5.5660706)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436337, 5.5660706)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7774,7 +7813,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch13" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=747339716]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436313, -4.1045647)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436337, -4.1045647)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7790,7 +7829,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch14" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=2071369048]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436313, 5.5660706)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436337, 5.5660706)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7806,7 +7845,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch16" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=1176108301]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436313, 10.466071)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436337, 10.466071)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7822,7 +7861,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch17" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=1832498133]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436313, 10.466071)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436337, 10.466071)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7838,7 +7877,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch18" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=317169172]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436313, -9.033929)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436337, -9.033929)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7854,7 +7893,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch19" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=503148009]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436313, -9.033929)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436337, -9.033929)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7870,7 +7909,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch15" type="MeshInstance3D" parent="NavigationRegion3D/KEEP3" unique_id=1789684583]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436313, -4.1045647)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436337, -4.1045647)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7889,7 +7928,7 @@ shape = SubResource("BoxShape3D_q60mh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
 
 [node name="Arch12" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=1849901528]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436313, 5.5660706)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436337, 5.5660706)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7905,7 +7944,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch13" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=1515735913]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436313, -4.1045647)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, 9.46154, 0.18436337, -4.1045647)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7921,7 +7960,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch14" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=135995424]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436313, 5.5660706)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436337, 5.5660706)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7937,7 +7976,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch16" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=541624232]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436313, 10.466071)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436337, 10.466071)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7953,7 +7992,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch17" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=1972105007]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436313, 10.466071)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436337, 10.466071)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7969,7 +8008,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch18" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=108216886]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436313, -9.033929)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, 4.8041344, 0.18436337, -9.033929)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -7985,7 +8024,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch19" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=1209749541]
-transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436313, -9.033929)
+transform = Transform3D(-4.8956753e-08, 0, 1, 0, 1, 0, -1.12, 0, -4.371139e-08, -5.1958656, 0.18436337, -9.033929)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -8001,7 +8040,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7484837, 1.751, 0.028027058
 shape = SubResource("BoxShape3D_q60mh")
 
 [node name="Arch15" type="MeshInstance3D" parent="NavigationRegion3D/KEEP2" unique_id=2111254704]
-transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436313, -4.1045647)
+transform = Transform3D(1.12, 0, 0, 0, 1, 0, 0, 0, 1, -9.695866, 0.18436337, -4.1045647)
 cast_shadow = 0
 mesh = ExtResource("5_dgar3")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -8151,7 +8190,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10000014, 0)
 shape = SubResource("BoxShape3D_nr0w7")
 
 [node name="Floor71" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=2050659021]
-transform = Transform3D(-3.7596163e-07, 0, 17.947992, 0, 0.36, 0, -8.601, 0, -7.845316e-07, -26.661, 0.102863, -37.438)
+transform = Transform3D(-3.7596163e-07, 0, 17.947992, 0, 0.36, 0, -8.601, 0, -7.845316e-07, -26.661, 0.102863014, -37.438004)
 cast_shadow = 0
 mesh = ExtResource("6_orgo4")
 surface_material_override/0 = SubResource("ShaderMaterial_rhg5f")
@@ -8164,7 +8203,7 @@ shape = SubResource("BoxShape3D_fc1pl")
 debug_color = Color(0, 0.0013348806, 0.06781401, 1)
 
 [node name="Floor66" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=589171441]
-transform = Transform3D(4.755179, 0, 0, 0, 0.36, 0, 0, 0, 8.98128, -0.318, 0.174, -48.055)
+transform = Transform3D(4.755179, 0, 0, 0, 0.36, 0, 0, 0, 8.98128, -0.318, 0.17399997, -48.055)
 cast_shadow = 0
 mesh = ExtResource("6_orgo4")
 surface_material_override/0 = SubResource("ShaderMaterial_8855o")
@@ -8232,7 +8271,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_rkynm")
 
 [node name="Floor24" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=749739028]
-transform = Transform3D(-15.110907, 2.2351742e-08, 0, -1.1920929e-06, -0.36000007, 0, 0, 0, 4.903778, -24.118, 4.074, -33.855)
+transform = Transform3D(-15.110907, 2.2351742e-08, 0, -1.1920929e-06, -0.36000007, 0, 0, 0, 4.903778, -24.118, 4.074, -33.855003)
 mesh = ExtResource("6_orgo4")
 surface_material_override/0 = SubResource("ShaderMaterial_llnlr")
 
@@ -8243,7 +8282,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_ked6s")
 
 [node name="Floor65" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1851161516]
-transform = Transform3D(16.421774, 0, 0, 0, 0.36, 0, 0, 0, 7.0124025, -28.718107, 3.9743187, 0.14548111)
+transform = Transform3D(16.421774, 0, 0, 0, 0.36, 0, 0, 0, 7.0124025, -28.718105, 3.9743187, 0.14548111)
 visible = false
 cast_shadow = 0
 mesh = ExtResource("6_orgo4")
@@ -8267,7 +8306,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_mu5rw")
 
 [node name="Floor26" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=2040447378]
-transform = Transform3D(-2.291176e-07, 0, 15.396479, 0, 0.35999998, 0, -5.2416, 0, -6.730015e-07, 23.882, 0.17399997, -33.855)
+transform = Transform3D(-2.291176e-07, 0, 15.396479, 0, 0.35999998, 0, -5.2416, 0, -6.730015e-07, 23.882, 0.17399997, -33.855003)
 cast_shadow = 0
 mesh = ExtResource("6_orgo4")
 surface_material_override/0 = SubResource("ShaderMaterial_ylo45")
@@ -8415,7 +8454,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_58se0")
 
 [node name="Floor25" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=618155776]
-transform = Transform3D(5.2416, 0, 8.753886e-14, 0, 0.35999998, 0, 1.4210855e-14, 0, 10.9771185, -34.118, 0.174, -17.855)
+transform = Transform3D(5.2416, 0, 8.753886e-14, 0, 0.35999998, 0, 1.4210855e-14, 0, 10.9771185, -34.118, 0.17399997, -17.855)
 cast_shadow = 0
 mesh = ExtResource("6_orgo4")
 surface_material_override/0 = SubResource("ShaderMaterial_46333")
@@ -8427,7 +8466,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("BoxShape3D_gsulu")
 
 [node name="Floor27" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1595347920]
-transform = Transform3D(3.809, 0, -3.1143186e-14, 0, 0.374, 0, 1.03268385e-14, 0, 11.487, 32.882, 0.174, -17.13)
+transform = Transform3D(3.809, 0, -3.1143186e-14, 0, 0.374, 0, 1.03268385e-14, 0, 11.487, 32.882, 0.17399997, -17.13)
 cast_shadow = 0
 mesh = ExtResource("6_orgo4")
 surface_material_override/0 = SubResource("ShaderMaterial_ixtjp")
@@ -8704,7 +8743,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.199997, 4.0453324, -25.7)
 transform = Transform3D(-9.467887e-08, 0, 1.5000002, 0, 1, 0, -2.166, 0, -6.5567086e-08, -29.2, 3.8999999, -17.8)
 
 [node name="Balkon2" type="MeshInstance3D" parent="NavigationRegion3D/Floor/Balkon Asia" unique_id=863939757]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 99.99999, 3.1391643e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("21_g5e81")
 
@@ -8835,6 +8874,7 @@ hand_rotation_offset = Vector3(34.625, 51.33, 27.145)
 drop_height_offset = 0.02
 
 [node name="Penguin_01_Cube_045" type="MeshInstance3D" parent="NavigationRegion3D/Floor/Penguin" unique_id=278086669]
+transform = Transform3D(0.9999999, 0, -2.9802322e-08, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_5xndk")
 
@@ -9575,7 +9615,7 @@ transform = Transform3D(1, 0, 1.2967405e-12, 0, 1, 0, -1.2967405e-12, 0, 1, 0, 2
 shape = SubResource("CylinderShape3D_hfjl6")
 
 [node name="Column25" type="MeshInstance3D" parent="NavigationRegion3D/Columns" unique_id=597662096]
-transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.2806, -9.536743e-07, -18.114464)
+transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.280598, -9.536743e-07, -18.114464)
 cast_shadow = 0
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -9595,7 +9635,7 @@ transform = Transform3D(1, 0, 1.2967405e-12, 0, 1, 0, -1.2967405e-12, 0, 1, 0, 2
 shape = SubResource("CylinderShape3D_hfjl6")
 
 [node name="Column26" type="MeshInstance3D" parent="NavigationRegion3D/Columns" unique_id=1683047919]
-transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.2806, -9.536743e-07, -21.114464)
+transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.280598, -9.536743e-07, -21.114464)
 cast_shadow = 0
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -9615,7 +9655,7 @@ transform = Transform3D(1, 0, 1.2967405e-12, 0, 1, 0, -1.2967405e-12, 0, 1, 0, 2
 shape = SubResource("CylinderShape3D_hfjl6")
 
 [node name="Column27" type="MeshInstance3D" parent="NavigationRegion3D/Columns" unique_id=447512496]
-transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.2806, -9.536743e-07, -24.114464)
+transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.280598, -9.536743e-07, -24.114464)
 cast_shadow = 0
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -9635,7 +9675,7 @@ transform = Transform3D(1, 0, 1.2967405e-12, 0, 1, 0, -1.2967405e-12, 0, 1, 0, 2
 shape = SubResource("CylinderShape3D_hfjl6")
 
 [node name="Column28" type="MeshInstance3D" parent="NavigationRegion3D/Columns" unique_id=712332835]
-transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.2806, -9.536743e-07, -27.114464)
+transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.280598, -9.536743e-07, -27.114464)
 cast_shadow = 0
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -9655,7 +9695,7 @@ transform = Transform3D(1, 0, 1.2967405e-12, 0, 1, 0, -1.2967405e-12, 0, 1, 0, 2
 shape = SubResource("CylinderShape3D_hfjl6")
 
 [node name="Column29" type="MeshInstance3D" parent="NavigationRegion3D/Columns" unique_id=182309883]
-transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.2806, -9.536743e-07, -14.914464)
+transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.280598, -9.536743e-07, -14.914464)
 cast_shadow = 0
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -9675,7 +9715,7 @@ transform = Transform3D(1, 0, 1.2967405e-12, 0, 1, 0, -1.2967405e-12, 0, 1, 0, 2
 shape = SubResource("CylinderShape3D_hfjl6")
 
 [node name="Column30" type="MeshInstance3D" parent="NavigationRegion3D/Columns" unique_id=1359790677]
-transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.2806, -9.536743e-07, -11.914464)
+transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.280598, -9.536743e-07, -11.914464)
 cast_shadow = 0
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -9695,7 +9735,7 @@ transform = Transform3D(1, 0, 1.2967405e-12, 0, 1, 0, -1.2967405e-12, 0, 1, 0, 2
 shape = SubResource("CylinderShape3D_hfjl6")
 
 [node name="Column31" type="MeshInstance3D" parent="NavigationRegion3D/Columns" unique_id=932445168]
-transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.2806, -9.536743e-07, -8.914464)
+transform = Transform3D(-6.119594e-08, 0, -1.512, 0, 1.2, 0, 1.4, 0, -6.6091616e-08, -29.280598, -9.536743e-07, -8.914464)
 cast_shadow = 0
 mesh = ExtResource("9_xm6hp")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -10573,7 +10613,7 @@ mesh = ExtResource("11_08156")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
 [node name="WallBig2" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1439253672]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -9.661876, 0.163, 11.833)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -9.661876, 0.16299999, 11.833)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -10585,7 +10625,7 @@ transform = Transform3D(0.9999946, 0, -1.7053026e-13, 0, 1, 0, 1.7053026e-13, 0,
 shape = SubResource("BoxShape3D_6tolr")
 
 [node name="WallBig3" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=859763156]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -7.6828327, 0.163, 11.833)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -7.6828327, 0.16299999, 11.833)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -10597,7 +10637,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_iyqty")
 
 [node name="WallBig6" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1778154458]
-transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -5.689309, 0.163, 11.833)
+transform = Transform3D(-0.99999994, 0, -8.742277e-08, 0, 1, 0, 8.742277e-08, 0, -0.99999994, -5.689309, 0.16299999, 11.833)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -10719,7 +10759,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_1evfo")
 
 [node name="WallBig27" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1084141290]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 11.087, 0.163, -2.8128214)
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 11.087, 0.16299999, -2.8128214)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -10730,7 +10770,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_5k3s5")
 
 [node name="WallBig28" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=2032935905]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 11.087, 0.163, -4.8095245)
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 11.087, 0.16299999, -4.8095245)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -10741,7 +10781,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_d7jpg")
 
 [node name="WallBig29" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=374261474]
-transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 11.087, 0.163, -6.7893057)
+transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 11.087, 0.16299999, -6.7893057)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -10774,7 +10814,7 @@ mesh = ExtResource("11_08156")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
 [node name="WallBig34" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=2104824665]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 3.312756, 0.163, -10.525)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 3.312756, 0.16299999, -10.525)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -10786,7 +10826,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_0shhh")
 
 [node name="WallBig35" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1352295683]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 5.276587, 0.163, -10.525)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 5.276587, 0.16299999, -10.525)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -10846,7 +10886,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_3amwa")
 
 [node name="WallBig36" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1690942533]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 7.247552, 0.163, -10.525)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 7.247552, 0.16299999, -10.525)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -12017,7 +12057,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9999999, -0.75)
 shape = SubResource("BoxShape3D_wil4o")
 
 [node name="WallBig73" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=352772273]
-transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 38.2, 0.099999964, -32)
+transform = Transform3D(1.3113416e-07, 0, -1, 0, 1, 0, 1, 0, 1.3113416e-07, 38.2, 0.099999964, -31.999998)
 cast_shadow = 0
 mesh = ExtResource("7_21tra")
 surface_material_override/0 = SubResource("ShaderMaterial_2q3td")
@@ -12460,7 +12500,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_nlcgm")
 
 [node name="WallBigOuter12" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=818459814]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.400003, 0, -27.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.400005, 0, -27.899998)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_4hw7b")
@@ -12472,7 +12512,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_xq67s")
 
 [node name="WallBigOuter13" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1067798026]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.400003, 0, -27.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.400005, 0, -27.899998)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_4hw7b")
@@ -12484,7 +12524,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_mwjhi")
 
 [node name="WallBigOuter14" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=525936415]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.400003, 0, -27.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.400005, 0, -27.899998)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_4hw7b")
@@ -12496,7 +12536,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_8cq4f")
 
 [node name="WallBigOuter15" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1312562186]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.400003, 0, -27.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.400005, 0, -27.899998)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_4hw7b")
@@ -12508,7 +12548,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_ga6pu")
 
 [node name="WallBigOuter16" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=567922809]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.400003, 0, -27.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.400005, 0, -27.899998)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_4hw7b")
@@ -12520,7 +12560,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_mbgpd")
 
 [node name="WallBigOuter17" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1432763845]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.400003, 0, -27.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.400005, 0, -27.899998)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_4hw7b")
@@ -12532,7 +12572,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_gpbby")
 
 [node name="WallBigOuter18" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1932607966]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.400003, 0, -27.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.400005, 0, -27.899998)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_4hw7b")
@@ -12855,7 +12895,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.93969727, 2, -0.88610077)
 shape = SubResource("BoxShape3D_stpr3")
 
 [node name="Rock2Icy" type="MeshInstance3D" parent="NavigationRegion3D/Walls" unique_id=1505973106]
-transform = Transform3D(173.35478, 0, 3.4130197, 0, 107.45271, 0, -22.327219, 0, 26.499645, 19.548277, 0.17399955, -30.111626)
+transform = Transform3D(173.35478, 0, 3.4130197, 0, 107.45271, 0, -22.327219, 0, 26.499645, 19.548279, 0.17399955, -30.111626)
 cast_shadow = 0
 mesh = ExtResource("43_ow7u5")
 surface_material_override/0 = SubResource("ShaderMaterial_2q3td")
@@ -12890,7 +12930,7 @@ use_collision = true
 [node name="Hedges" type="Node3D" parent="NavigationRegion3D" unique_id=1162582514]
 
 [node name="10449RectangularBoxHedgeV1Iterations3" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=259857611]
-transform = Transform3D(-2.0926416e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.047874067, 4.6058685e-10, 1.32467926e-11, 28.578638, -0.8000005, -23.262667)
+transform = Transform3D(-2.0926416e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.047874067, 4.6058685e-10, 1.32467926e-11, 28.57864, -0.8000005, -23.262667)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -12901,7 +12941,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_87ayg")
 
 [node name="10449RectangularBoxHedgeV1Iterations7" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1272272382]
-transform = Transform3D(-9.424324e-10, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.021560341, 4.6058685e-10, 1.32467926e-11, 25.578638, -0.8000005, -18.711264)
+transform = Transform3D(-9.424324e-10, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.021560341, 4.6058685e-10, 1.32467926e-11, 25.57864, -0.8000005, -18.711264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -12912,7 +12952,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_y26hl")
 
 [node name="10449RectangularBoxHedgeV1Iterations22" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1464786659]
-transform = Transform3D(-0.014229825, -9.201388e-10, -6.9320945e-11, -2.0010808e-18, -0.00027776125, 0.011496382, -1.2440108e-09, 0.010536996, 0.0003030513, 23.578638, -0.8000005, -24.711264)
+transform = Transform3D(-0.014229825, -9.201388e-10, -6.9320945e-11, -2.0010808e-18, -0.00027776125, 0.011496382, -1.2440108e-09, 0.010536996, 0.0003030513, 23.57864, -0.8000005, -24.711264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -12923,7 +12963,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_hhl4f")
 
 [node name="10449RectangularBoxHedgeV1Iterations29" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=549040603]
-transform = Transform3D(-0.012949139, -9.201388e-10, -6.9320945e-11, -1.8209835e-18, -0.00027776125, 0.011496382, -1.1320498e-09, 0.010536996, 0.0003030513, 19.078638, -0.8000005, -22.711264)
+transform = Transform3D(-0.012949139, -9.201388e-10, -6.9320945e-11, -1.8209835e-18, -0.00027776125, 0.011496382, -1.1320498e-09, 0.010536996, 0.0003030513, 19.07864, -0.8000005, -22.711264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -12956,7 +12996,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_o0l07")
 
 [node name="10449RectangularBoxHedgeV1Iterations16" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=315122599]
-transform = Transform3D(-0.02695043, -9.2169106e-10, -5.079906e-12, 0, -0.0002777613, 0.011496384, -2.3560816e-09, 0.0105369985, 0.00030305132, 22.578638, -0.8000005, -16.811264)
+transform = Transform3D(-0.02695043, -9.2169106e-10, -5.079906e-12, 0, -0.0002777613, 0.011496384, -2.3560816e-09, 0.0105369985, 0.00030305132, 22.57864, -0.8000005, -16.811264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -12967,7 +13007,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_yhx5t")
 
 [node name="10449RectangularBoxHedgeV1Iterations15" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1509259052]
-transform = Transform3D(-1.1780404e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.026950426, 4.6058685e-10, 1.32467926e-11, 21.578638, -0.8000005, -10.711264)
+transform = Transform3D(-1.1780404e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.026950426, 4.6058685e-10, 1.32467926e-11, 21.57864, -0.8000005, -10.711264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -12978,7 +13018,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_pobmg")
 
 [node name="10449RectangularBoxHedgeV1Iterations18" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1900127268]
-transform = Transform3D(-1.1780404e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.026950426, 4.6058685e-10, 1.32467926e-11, 19.278639, -0.8000005, -14.011264)
+transform = Transform3D(-1.1780404e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.026950426, 4.6058685e-10, 1.32467926e-11, 19.27864, -0.8000005, -14.011264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -12989,7 +13029,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_rgajb")
 
 [node name="10449RectangularBoxHedgeV1Iterations19" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=132906531]
-transform = Transform3D(-1.1780404e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.026950426, 4.6058685e-10, 1.32467926e-11, 16.578638, -0.8000005, -14.011264)
+transform = Transform3D(-1.1780404e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.026950426, 4.6058685e-10, 1.32467926e-11, 16.57864, -0.8000005, -14.011264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13055,7 +13095,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_mbn2c")
 
 [node name="10449RectangularBoxHedgeV1Iterations34" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=379386329]
-transform = Transform3D(-0.007, 3.3428905e-13, -2.7644477e-11, -1.6125951e-11, -0.00028986472, 0.011995833, -2.123315e-13, 0.01099618, 0.00031621606, 28.203306, -0.90681, -14.978745)
+transform = Transform3D(-0.007, 3.3428905e-13, -2.7644477e-11, -1.6125951e-11, -0.00028986472, 0.011995833, -2.123315e-13, 0.01099618, 0.00031621606, 28.203308, -0.90681, -14.978745)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13099,7 +13139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_43sqn")
 
 [node name="10449RectangularBoxHedgeV1Iterations28" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1748669461]
-transform = Transform3D(-0.02156034, -9.2013885e-10, -6.9320945e-11, -3.0319406e-18, -0.00027776128, 0.011496382, -1.8848647e-09, 0.010536997, 0.0003030513, 17.578638, -0.8000005, -25.011265)
+transform = Transform3D(-0.02156034, -9.2013885e-10, -6.9320945e-11, -3.0319406e-18, -0.00027776128, 0.011496382, -1.8848647e-09, 0.010536997, 0.0003030513, 17.57864, -0.8000005, -25.011265)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13110,7 +13150,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_k852w")
 
 [node name="10449RectangularBoxHedgeV1Iterations20" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1333939164]
-transform = Transform3D(-0.0377306, -9.2169106e-10, -5.079906e-12, 0, -0.0002777613, 0.011496384, -3.2985141e-09, 0.0105369985, 0.00030305132, 19.278639, -0.8000005, -19.411264)
+transform = Transform3D(-0.0377306, -9.2169106e-10, -5.079906e-12, 0, -0.0002777613, 0.011496384, -3.2985141e-09, 0.0105369985, 0.00030305132, 19.27864, -0.8000005, -19.411264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13121,7 +13161,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_xyo77")
 
 [node name="10449RectangularBoxHedgeV1Iterations21" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1553583412]
-transform = Transform3D(4.5943587e-09, -0.0105369985, -0.00030305132, -7.779456e-18, -0.00027776134, 0.011496385, -0.035035558, -1.3827952e-09, 3.086982e-12, 22.278639, -0.8000005, -23.411264)
+transform = Transform3D(4.5943587e-09, -0.0105369985, -0.00030305132, -7.779456e-18, -0.00027776134, 0.011496385, -0.035035558, -1.3827952e-09, 3.086982e-12, 22.27864, -0.8000005, -23.411264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13132,7 +13172,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_cgow4")
 
 [node name="10449RectangularBoxHedgeV1Iterations14" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1600090734]
-transform = Transform3D(-0.02156034, -9.2013885e-10, -6.9320945e-11, -3.0319406e-18, -0.00027776128, 0.011496382, -1.8848647e-09, 0.010536997, 0.0003030513, 26.578638, -0.8000005, -12.711264)
+transform = Transform3D(-0.02156034, -9.2013885e-10, -6.9320945e-11, -3.0319406e-18, -0.00027776128, 0.011496382, -1.8848647e-09, 0.010536997, 0.0003030513, 26.57864, -0.8000005, -12.711264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13143,7 +13183,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_cy2m7")
 
 [node name="10449RectangularBoxHedgeV1Iterations17" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=1636408978]
-transform = Transform3D(1.9791078e-09, -0.010536996, -0.0003030513, -5.4735083e-18, -0.00027776128, 0.011496383, -0.015092236, -1.3807254e-09, -8.256773e-11, 24.578638, -0.8000005, -11.311264)
+transform = Transform3D(1.9791078e-09, -0.010536996, -0.0003030513, -5.4735083e-18, -0.00027776128, 0.011496383, -0.015092236, -1.3807254e-09, -8.256773e-11, 24.57864, -0.8000005, -11.311264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13154,7 +13194,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_g7shc")
 
 [node name="10449RectangularBoxHedgeV1Iterations8" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=2035768641]
-transform = Transform3D(-0.0377306, -9.2169106e-10, -5.079906e-12, 0, -0.0002777613, 0.011496384, -3.2985141e-09, 0.0105369985, 0.00030305132, 24.078638, -0.8000005, -7.4112635)
+transform = Transform3D(-0.0377306, -9.2169106e-10, -5.079906e-12, 0, -0.0002777613, 0.011496384, -3.2985141e-09, 0.0105369985, 0.00030305132, 24.07864, -0.8000005, -7.4112635)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13220,7 +13260,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_l56g8")
 
 [node name="10449RectangularBoxHedgeV1Iterations5" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=821752216]
-transform = Transform3D(-0.04583407, -9.2065644e-10, -4.790727e-11, 0, -0.00027776125, 0.011496382, -4.0069414e-09, 0.010536998, 0.0003030513, 23.578638, -0.8000005, -28.247355)
+transform = Transform3D(-0.04583407, -9.2065644e-10, -4.790727e-11, 0, -0.00027776125, 0.011496382, -4.0069414e-09, 0.010536998, 0.0003030513, 23.57864, -0.8000005, -28.247355)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13242,7 +13282,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1748047, -0.051753998, 74.
 shape = SubResource("BoxShape3D_mpxfm")
 
 [node name="10449RectangularBoxHedgeV1Iterations4" type="MeshInstance3D" parent="NavigationRegion3D/Hedges" unique_id=315044308]
-transform = Transform3D(-1.5867485e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.03630058, 4.6058685e-10, 1.32467926e-11, 28.578638, -0.8000005, -11.011264)
+transform = Transform3D(-1.5867485e-09, 0.010536998, 0.0003030513, 0, -0.00027776128, 0.011496383, 0.03630058, 4.6058685e-10, 1.32467926e-11, 28.57864, -0.8000005, -11.011264)
 mesh = ExtResource("16_atqpw")
 surface_material_override/0 = SubResource("ShaderMaterial_xsvq8")
 
@@ -13543,7 +13583,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.8999996)
 shape = SubResource("BoxShape3D_5pe5x")
 
 [node name="Railing" type="MeshInstance3D" parent="NavigationRegion3D/Railings" unique_id=1776631312]
-transform = Transform3D(-2.2380232e-07, 0, 3.704, 0, 1, 0, -5.1200004, 0, -1.6190698e-07, 26.25207, 0, -23.321169)
+transform = Transform3D(-2.2380232e-07, 0, 3.704, 0, 1, 0, -5.1200004, 0, -1.6190698e-07, 26.252071, 0, -23.321169)
 cast_shadow = 0
 mesh = ExtResource("31_oetox")
 surface_material_override/0 = SubResource("ShaderMaterial_hfjl6")
@@ -13555,7 +13595,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.8999996)
 shape = SubResource("BoxShape3D_5mwum")
 
 [node name="Railing2" type="MeshInstance3D" parent="NavigationRegion3D/Railings" unique_id=1654483760]
-transform = Transform3D(-1.7904186e-07, 0, 3.704, 0, 1, 0, -4.096, 0, -1.6190698e-07, 26.25207, 0, -11.121168)
+transform = Transform3D(-1.7904186e-07, 0, 3.704, 0, 1, 0, -4.096, 0, -1.6190698e-07, 26.252071, 0, -11.121168)
 cast_shadow = 0
 mesh = ExtResource("31_oetox")
 surface_material_override/0 = SubResource("ShaderMaterial_hfjl6")
@@ -13567,7 +13607,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.8999996)
 shape = SubResource("BoxShape3D_aid2b")
 
 [node name="Railing12" type="MeshInstance3D" parent="NavigationRegion3D/Railings" unique_id=1267967219]
-transform = Transform3D(1.7370643e-06, 0, -3.7040005, 0, 2.28, 0, 5.677057, 0, 1.133349e-06, -25.947931, -1, -23.321169)
+transform = Transform3D(1.7370643e-06, 0, -3.7040005, 0, 2.28, 0, 5.677057, 0, 1.133349e-06, -25.94793, -1, -23.321169)
 cast_shadow = 0
 mesh = ExtResource("31_oetox")
 surface_material_override/0 = SubResource("ShaderMaterial_wpevi")
@@ -13905,7 +13945,7 @@ shape = SubResource("BoxShape3D_bdcjp")
 transform = Transform3D(0.44538325, 0.06255661, -0.15759763, -0.050775435, 0.44979197, -0.13974617, 0.2401841, 0.30744833, 0.22412786, 16.400002, 4.2000012, -40.49996)
 
 [node name="Clif_2" type="MeshInstance3D" parent="NavigationRegion3D/IceMisc/Clif_1  Asia3" unique_id=1069463731]
-transform = Transform3D(1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 0, 0, 0)
+transform = Transform3D(1.0000001, 1.4901161e-08, 2.9802322e-08, 0, 1.0000001, 1.937151e-07, 0, -1.7881393e-07, 1.0000001, 0, 0, 0)
 mesh = SubResource("ArrayMesh_k7ebh")
 surface_material_override/0 = SubResource("ShaderMaterial_rsn0t")
 surface_material_override/1 = SubResource("ShaderMaterial_2q3td")
@@ -13919,7 +13959,7 @@ shape = SubResource("ConvexPolygonShape3D_e6hc3")
 transform = Transform3D(0.44538325, 0.06255651, -0.15759781, -0.050775424, 0.44979203, -0.1397462, 0.24018434, 0.3074486, 0.2241279, 12.400002, 2.2000003, -41.49998)
 
 [node name="Clif_2" type="MeshInstance3D" parent="NavigationRegion3D/IceMisc/Clif_1  Asia2" unique_id=1058887610]
-transform = Transform3D(1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 0, 0, 0)
+transform = Transform3D(1.0000001, 1.4901161e-08, 0, 0, 1, 2.0861626e-07, 5.9604645e-08, -1.7881393e-07, 1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_k7ebh")
 surface_material_override/0 = SubResource("ShaderMaterial_rsn0t")
 surface_material_override/1 = SubResource("ShaderMaterial_2q3td")
@@ -13947,7 +13987,7 @@ shape = SubResource("ConcavePolygonShape3D_j2ii1")
 transform = Transform3D(1, 0, 0, 0, 1.2, 0, 0, 0, 1, 30, 0.19999999, -30.2)
 
 [node name="Rock_4" type="MeshInstance3D" parent="NavigationRegion3D/IceMisc/Rock_3 Asia2" unique_id=979364774]
-transform = Transform3D(1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 1.947072e-07, 0, -1.9470718e-07, 1, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_6o281")
 surface_material_override/0 = SubResource("ShaderMaterial_o3iyr")
@@ -13961,7 +14001,7 @@ shape = SubResource("ConvexPolygonShape3D_jk7ia")
 transform = Transform3D(-2.9802322e-08, 0, -1.1035274, 0, 1.0639998, 0, 0.6136295, 0, 8.940697e-08, 38.300003, 0.19999999, -30.2)
 
 [node name="Rock_3" type="MeshInstance3D" parent="NavigationRegion3D/IceMisc/Rock_2 Asia" unique_id=1282100976]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.000015, 0, 0, 0, 100.00001, 3.139165e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("43_ow7u5")
 surface_material_override/0 = SubResource("ShaderMaterial_2q3td")
@@ -13972,7 +14012,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_2q3td")
 shape = SubResource("ConvexPolygonShape3D_sujt1")
 
 [node name="Rock_4" type="MeshInstance3D" parent="NavigationRegion3D/IceMisc/Rock_2 Asia" unique_id=962336829]
-transform = Transform3D(100.00002, 0, 0, 0, 93.79013, 3.139165e-05, -2.2737368e-13, -2.9442263e-05, 100, -12.289604, 0, 0.48129654)
+transform = Transform3D(100.00003, 0, 0, 0, 93.79014, 3.139165e-05, -4.5474735e-13, -2.9442263e-05, 100, -12.289608, 0, 0.48129654)
 mesh = ExtResource("43_ow7u5")
 surface_material_override/0 = SubResource("ShaderMaterial_2q3td")
 
@@ -14222,7 +14262,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_18g45")
 
 [node name="WallBig66" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=952513426]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -41.899998)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -41.9)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14234,7 +14274,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8894043, 2, -0.8694439)
 shape = SubResource("BoxShape3D_81jpm")
 
 [node name="WallBig67" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=440542363]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -43.899998)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -43.9)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14246,7 +14286,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_xb4mg")
 
 [node name="WallBig68" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=565007409]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -45.899998)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -45.9)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14258,7 +14298,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_urrv4")
 
 [node name="WallBig69" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=899812955]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -47.899998)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -47.9)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14270,7 +14310,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_8c5fs")
 
 [node name="WallBig70" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1744359908]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -49.899998)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -49.9)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14282,7 +14322,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_k0ku3")
 
 [node name="WallBig71" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1563249895]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -51.899998)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -51.9)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14294,7 +14334,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_o4bdp")
 
 [node name="WallBig80" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=121417482]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3000069, 0, -55.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3000069, 0, -55.9)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -14305,7 +14345,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0554199, 2, -0.869442)
 shape = SubResource("BoxShape3D_xpx2a")
 
 [node name="WallBig81" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=968445717]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30000687, 0, -55.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.30000687, 0, -55.9)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -14316,7 +14356,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_mqk77")
 
 [node name="WallBig82" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1481499043]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6999931, 0, -55.899998)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6999931, 0, -55.9)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -14327,7 +14367,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9883423, 2, -0.869442)
 shape = SubResource("BoxShape3D_uvvn4")
 
 [node name="WallBig72" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=2002572343]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -53.899998)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -4.300007, 0, -53.9)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14339,7 +14379,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1376953, 2, -0.8694439)
 shape = SubResource("BoxShape3D_jujf6")
 
 [node name="WallBig75" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=485592748]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999931, 0, -49.999996)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999931, 0, -50)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -14351,7 +14391,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_bn64e")
 
 [node name="WallBig76" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=442997166]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999931, 0, -47.999996)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999931, 0, -48)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -14362,7 +14402,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_p1a5o")
 
 [node name="WallBig77" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=617063180]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999931, 0, -45.999996)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999931, 0, -46)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -14373,7 +14413,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_rph4v")
 
 [node name="WallBig78" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=2086242860]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999927, 0, -43.999996)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999927, 0, -44)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -14384,7 +14424,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -0.8694438)
 shape = SubResource("BoxShape3D_06fh4")
 
 [node name="WallBig79" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=996936708]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999927, 0, -41.999996)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 3.6999927, 0, -42)
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
 
@@ -14674,7 +14714,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.970459, 2, -0.8694439)
 shape = SubResource("BoxShape3D_6gph1")
 
 [node name="WallBig65" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1867270201]
-transform = Transform3D(-1.7484554e-08, 0, -1, 0, 1, 0, 0.39999998, 0, -4.371139e-08, -10.300003, 0.099999964, -36.499996)
+transform = Transform3D(-1.7484554e-08, 0, -1, 0, 1, 0, 0.39999998, 0, -4.371139e-08, -10.300003, 0.099999964, -36.5)
 cast_shadow = 0
 mesh = ExtResource("10_4r0pn")
 surface_material_override/0 = SubResource("ShaderMaterial_768q3")
@@ -14917,7 +14957,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_ltxyy")
 
 [node name="WallBigOuter10" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1134847691]
-transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -16.303999, -0.9, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -16.303997, -0.9, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_vj0nb")
@@ -14929,7 +14969,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_pvuku")
 
 [node name="WallBigOuter11" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1091003416]
-transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -18.303999, -0.9, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -18.303997, -0.9, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_vj0nb")
@@ -14941,7 +14981,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_wldli")
 
 [node name="WallBigOuter12" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1403148048]
-transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -20.303999, -0.9, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -20.303997, -0.9, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_vj0nb")
@@ -14953,7 +14993,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_aesa0")
 
 [node name="WallBigOuter13" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=121310322]
-transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -22.303999, -0.9, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -22.303997, -0.9, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_vj0nb")
@@ -14965,7 +15005,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_idkp6")
 
 [node name="WallBigOuter14" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=617360343]
-transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -24.303999, -0.9, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -24.303997, -0.9, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_vj0nb")
@@ -14977,7 +15017,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_2n8qn")
 
 [node name="WallBigOuter15" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=144165877]
-transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -26.303999, -0.9, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -26.303997, -0.9, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_vj0nb")
@@ -14989,7 +15029,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_tu5h5")
 
 [node name="WallBigOuter16" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1229191986]
-transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -28.303999, -0.9, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1.26, 0, 0, 0, 1, -28.303997, -0.9, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_vj0nb")
@@ -15001,7 +15041,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_clt3d")
 
 [node name="WallBigOuter17" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1430120925]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.303999, 0.100000024, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.303997, 0.100000024, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_f1qyv")
@@ -15013,7 +15053,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_qgoww")
 
 [node name="WallBigOuter18" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=2034364013]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.303999, 0.100000024, -27.997002)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.303997, 0.100000024, -27.997002)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_ixxw1")
@@ -15120,7 +15160,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3841858e-07, 2, -0.8861004
 shape = SubResource("BoxShape3D_76chp")
 
 [node name="WallBigOuter23" type="MeshInstance3D" parent="NavigationRegion3D/More Walls" unique_id=1769293549]
-transform = Transform3D(-6.9938224e-08, 0, 1, 0, 1, 0, -1.6, 0, -4.371139e-08, -7.885025, 0.100000024, -37.297)
+transform = Transform3D(-6.9938224e-08, 0, 1, 0, 1, 0, -1.6, 0, -4.371139e-08, -7.885025, 0.100000024, -37.297005)
 cast_shadow = 0
 mesh = ExtResource("34_oc075")
 surface_material_override/0 = SubResource("ShaderMaterial_eoim2")
@@ -15158,7 +15198,7 @@ shape = SubResource("BoxShape3D_stpr3")
 [node name="Stones" type="Node3D" parent="NavigationRegion3D" unique_id=1566668606]
 
 [node name="Rock_13" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1420323644]
-transform = Transform3D(-86.29553, 1.5258789e-05, -54.822742, 49.822765, 1.2471289e-05, -94.95576, -3.8146973e-06, -111.0892, -1.6212463e-05, -24.399736, 0.3999998, -5.0319943)
+transform = Transform3D(-86.29553, 1.5258789e-05, -54.822742, 49.822765, 1.2471289e-05, -94.95576, -3.8146973e-06, -111.0892, -1.6212463e-05, -24.399734, 0.3999998, -5.0319943)
 cast_shadow = 0
 mesh = ExtResource("39_88xne")
 surface_material_override/0 = SubResource("ShaderMaterial_mu5rw")
@@ -15236,7 +15276,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
 shape = SubResource("ConvexPolygonShape3D_mwjhi")
 
 [node name="Jenssten19" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=861831982]
-transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -27.306343, 0.7234196, -36.899006)
+transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -27.306343, 0.7234196, -36.89901)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
@@ -15247,7 +15287,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
 shape = SubResource("ConvexPolygonShape3D_8cq4f")
 
 [node name="Jenssten21" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1897926605]
-transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -18.806343, 0.5826277, -32.989567)
+transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -18.806343, 0.5826277, -32.98957)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
@@ -15258,7 +15298,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
 shape = SubResource("ConvexPolygonShape3D_ga6pu")
 
 [node name="Jenssten22" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=107669477]
-transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -18.161676, 0.36769122, -32.046516)
+transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -18.161674, 0.36769122, -32.046516)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
@@ -15269,7 +15309,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
 shape = SubResource("ConvexPolygonShape3D_mbgpd")
 
 [node name="Jenssten20" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1562319218]
-transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -28.106344, 0.6250141, -36.599007)
+transform = Transform3D(-1.0978953e-08, -0.38831565, -0.12650351, 0.26002944, -1.7572587e-08, -7.5191215e-16, -2.941801e-09, -0.10404888, 0.47211742, -28.106342, 0.6250141, -36.599007)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
@@ -15280,7 +15320,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_e80ep")
 shape = SubResource("ConvexPolygonShape3D_gpbby")
 
 [node name="Jenssten6" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1665967476]
-transform = Transform3D(-7.2229964e-09, -1.1566877, -0.3123506, 0.17107199, -5.234399e-08, -3.713102e-15, -1.9353956e-09, -0.3099335, 1.1657082, -23.906343, 0.2608177, -3.6990044)
+transform = Transform3D(-7.2229964e-09, -1.1566877, -0.3123506, 0.17107199, -5.234399e-08, -3.713102e-15, -1.9353956e-09, -0.3099335, 1.1657082, -23.906342, 0.2608177, -3.6990044)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_7v0me")
@@ -15291,7 +15331,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_7v0me")
 shape = SubResource("ConvexPolygonShape3D_tfb4n")
 
 [node name="Jenssten2" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1194041156]
-transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -22.706343, -0.039182305, -3.4990044)
+transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -22.70634, -0.039182305, -3.4990044)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_uen0u")
@@ -15302,13 +15342,13 @@ surface_material_override/0 = SubResource("ShaderMaterial_uen0u")
 shape = SubResource("ConvexPolygonShape3D_c8b1s")
 
 [node name="Jenssten9" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=916720014]
-transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -20.906343, -0.039182305, -3.9990044)
+transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -20.906342, -0.039182305, -3.9990044)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_uen0u")
 
 [node name="Jenssten28" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=2135827152]
-transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -19.406343, -0.039182305, -4.199004)
+transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -19.406342, -0.039182305, -4.199004)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_uen0u")
@@ -15320,7 +15360,7 @@ mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_uen0u")
 
 [node name="Jenssten29" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1642929266]
-transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -17.606344, -0.039182305, -4.299004)
+transform = Transform3D(0.71279997, 0, 0, 0, 1.748736, 0, 0, 0, 0.58124995, -17.606342, -0.039182305, -4.299004)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_uen0u")
@@ -15360,7 +15400,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_qsy1o")
 shape = SubResource("ConvexPolygonShape3D_r6u34")
 
 [node name="Jenssten11" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1097082224]
-transform = Transform3D(0.099999994, 0, 0, 0, 0.105000004, 0, 0, 0, 0.099999964, -34.3, 0.45602828, -35.7)
+transform = Transform3D(0.099999994, 0, 0, 0, 0.105000004, 0, 0, 0, 0.099999964, -34.3, 0.45602828, -35.700005)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_fufty")
@@ -15371,7 +15411,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_fufty")
 shape = SubResource("ConvexPolygonShape3D_ohdm2")
 
 [node name="Jenssten13" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=426516661]
-transform = Transform3D(0.099999994, 0, 0, 0, 0.105000004, 0, 0, 0, 0.099999964, -34.3, 0.45602828, -35.3)
+transform = Transform3D(0.099999994, 0, 0, 0, 0.105000004, 0, 0, 0, 0.099999964, -34.3, 0.45602828, -35.300003)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_fufty")
@@ -15382,7 +15422,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_fufty")
 shape = SubResource("ConvexPolygonShape3D_753e6")
 
 [node name="Jenssten12" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1674935440]
-transform = Transform3D(0.099999994, 0, 0, 0, 0.105000004, 0, 0, 0, 0.099999964, -34.7, 0.45602828, -35.399998)
+transform = Transform3D(0.099999994, 0, 0, 0, 0.105000004, 0, 0, 0, 0.099999964, -34.7, 0.45602828, -35.4)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_fufty")
@@ -15393,7 +15433,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_fufty")
 shape = SubResource("ConvexPolygonShape3D_niy81")
 
 [node name="Jenssten14" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=729383178]
-transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710674, 0, 0.07071065, -24.974058, 0.61403185, -36.437374)
+transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710674, 0, 0.07071065, -24.974056, 0.61403185, -36.437378)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_fufty")
@@ -15404,7 +15444,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_fufty")
 shape = SubResource("ConvexPolygonShape3D_skvxr")
 
 [node name="Jenssten17" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=616741150]
-transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710674, 0, 0.07071065, -24.474056, 0.61403185, -36.737377)
+transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710674, 0, 0.07071065, -24.474056, 0.62393826, -36.73738)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_wkjx1")
@@ -15416,7 +15456,7 @@ drop_height_offset = 0.135
 emission_sphere_radius = 5.0
 
 [node name="Jenssten15" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1149228600]
-transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710674, 0, 0.07071065, -24.556902, 0.61403185, -36.35453)
+transform = Transform3D(0.070710674, 0, -0.07071065, 0, 0.105000004, 0, 0.070710674, 0, 0.07071065, -24.5569, 0.61403185, -36.35453)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_fufty")
@@ -15438,7 +15478,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_fufty")
 shape = SubResource("ConvexPolygonShape3D_bdkub")
 
 [node name="Jenssten23" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1761749372]
-transform = Transform3D(3.0727527, 4.6692605e-10, 2.242595e-11, 1.8503105e-09, 0.77499956, 1.5674431e-09, 1.3406183e-09, 5.675638e-10, 2.1, -33.967724, -0.35513306, -34.718014)
+transform = Transform3D(3.0727527, 4.6692605e-10, 2.242595e-11, 1.8503105e-09, 0.77499956, 1.5674431e-09, 1.3406183e-09, 5.675638e-10, 2.1, -33.967724, -0.35513306, -34.718018)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_dphet")
@@ -15449,7 +15489,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_dphet")
 shape = SubResource("ConcavePolygonShape3D_pxudu")
 
 [node name="Jenssten24" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=865860752]
-transform = Transform3D(3.0727527, 4.6692605e-10, 4.0367043e-11, 1.8503105e-09, 0.77499956, 2.8213947e-09, 1.3406307e-09, 5.675691e-10, 3.7799997, -26.022661, -0.12697059, -36.986824)
+transform = Transform3D(3.0727527, 4.6692605e-10, 4.0367043e-11, 1.8503105e-09, 0.77499956, 2.8213947e-09, 1.3406307e-09, 5.675691e-10, 3.7799997, -26.02266, -0.12697059, -36.986824)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_ohkkp")
@@ -15460,7 +15500,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_ohkkp")
 shape = SubResource("ConcavePolygonShape3D_kuig1")
 
 [node name="Jenssten25" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=1952868673]
-transform = Transform3D(3.0727527, 4.6692605e-10, 2.8257063e-11, 1.8503105e-09, 0.77499956, 1.9749749e-09, 1.340636e-09, 5.6757266e-10, 2.6459997, -19.070732, -0.21695954, -33.764996)
+transform = Transform3D(3.0727527, 4.6692605e-10, 2.8257063e-11, 1.8503105e-09, 0.77499956, 1.9749749e-09, 1.340636e-09, 5.6757266e-10, 2.6459997, -19.070732, -0.21695954, -33.765)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_145h8")
@@ -15471,7 +15511,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_145h8")
 shape = SubResource("ConcavePolygonShape3D_jiyws")
 
 [node name="Jenssten26" type="MeshInstance3D" parent="NavigationRegion3D/Stones" unique_id=2039917134]
-transform = Transform3D(-2.9498677, -5.842028e-06, -1.6953772e-11, -1.7763621e-09, 0.35649967, -1.1849899e-09, 5.8794964e-08, 3.9973654e-07, -1.5876012, -11.125654, -0.029434264, -34.08009)
+transform = Transform3D(-2.9498677, -5.842028e-06, -1.6953772e-11, -1.7763621e-09, 0.35649967, -1.1849899e-09, 5.8794964e-08, 3.9973654e-07, -1.5876012, -11.125654, -0.029434264, -34.080093)
 cast_shadow = 0
 mesh = ExtResource("28_gp0hk")
 surface_material_override/0 = SubResource("ShaderMaterial_bbh3k")
@@ -15580,7 +15620,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_imnlu")
 shape = SubResource("ConvexPolygonShape3D_hhl4f")
 
 [node name="Mediumpine30" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=2065617027]
-transform = Transform3D(37.3, 0, 0, 0, -1.6304348e-06, 37.3, 0, -37.3, -1.6304348e-06, -21.1, 0.19999999, 0.59999967)
+transform = Transform3D(37.3, 0, 0, 0, -1.6304348e-06, 37.3, 0, -37.3, -1.6304348e-06, -21.099998, 0.19999999, 0.59999967)
 cast_shadow = 0
 mesh = ExtResource("41_c8qq2")
 surface_material_override/0 = SubResource("ShaderMaterial_ag47p")
@@ -15808,7 +15848,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 shape = SubResource("ConvexPolygonShape3D_cy2m7")
 
 [node name="Smolpine13" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=660277231]
-transform = Transform3D(18.22, 0, 0, 0, -7.964215e-07, 14.575999, 0, -18.22, -6.371372e-07, -19.677805, 2.2, 9.597974)
+transform = Transform3D(18.22, 0, 0, 0, -7.964215e-07, 14.575999, 0, -18.22, -6.371372e-07, -19.677803, 2.2, 9.597974)
 cast_shadow = 0
 mesh = ExtResource("44_xwy5l")
 surface_material_override/0 = SubResource("ShaderMaterial_p8w5a")
@@ -15834,7 +15874,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_3niol")
 shape = SubResource("ConvexPolygonShape3D_q1ssh")
 
 [node name="Smolpine16" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=535758695]
-transform = Transform3D(32.844, 0, 0, 0, -1.3160188e-06, 32.844, 0, -30.107002, -1.4356569e-06, -23.4, 0.19999999, 6)
+transform = Transform3D(32.844, 0, 0, 0, -1.3160188e-06, 32.844, 0, -30.107002, -1.4356569e-06, -23.399998, 0.19999999, 6)
 cast_shadow = 0
 mesh = ExtResource("44_xwy5l")
 surface_material_override/0 = SubResource("ShaderMaterial_0hqwr")
@@ -15918,7 +15958,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_imnlu")
 shape = SubResource("ConvexPolygonShape3D_mpxfm")
 
 [node name="Mediumpine34" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=2139293497]
-transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -30.034807, 0.19999999, 3.806866)
+transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -30.034805, 0.19999999, 3.806866)
 cast_shadow = 0
 mesh = ExtResource("41_c8qq2")
 surface_material_override/0 = SubResource("ShaderMaterial_ag47p")
@@ -15954,7 +15994,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_imnlu")
 shape = SubResource("ConvexPolygonShape3D_5tg8y")
 
 [node name="Mediumpine21" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=751206483]
-transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -20.04099, 0.19999999, 1.0388403)
+transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -20.040989, 0.19999999, 1.0388403)
 cast_shadow = 0
 mesh = ExtResource("41_c8qq2")
 surface_material_override/0 = SubResource("ShaderMaterial_7bwct")
@@ -15966,7 +16006,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_imnlu")
 shape = SubResource("ConvexPolygonShape3D_8fqm3")
 
 [node name="Mediumpine24" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=718543377]
-transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -24.04099, 0.19999999, 8.03884)
+transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -24.040989, 0.19999999, 8.03884)
 cast_shadow = 0
 mesh = ExtResource("41_c8qq2")
 surface_material_override/0 = SubResource("ShaderMaterial_7bwct")
@@ -15978,7 +16018,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_imnlu")
 shape = SubResource("ConvexPolygonShape3D_vp6ul")
 
 [node name="Mediumpine32" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=1529676213]
-transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -23.84099, 0.19999999, 6.8388405)
+transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -23.840988, 0.19999999, 6.8388405)
 cast_shadow = 0
 mesh = ExtResource("41_c8qq2")
 surface_material_override/0 = SubResource("ShaderMaterial_7bwct")
@@ -16038,7 +16078,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_imnlu")
 shape = SubResource("ConvexPolygonShape3D_aid2b")
 
 [node name="Mediumpine23" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=651093759]
-transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -29.04099, 0.19999999, 4.0388403)
+transform = Transform3D(-37.158062, -3.2509122, -1.4210188e-07, 0, -1.6304348e-06, 37.3, -3.2509122, 37.158062, 1.6242305e-06, -29.040989, 0.19999999, 4.0388403)
 cast_shadow = 0
 mesh = ExtResource("41_c8qq2")
 surface_material_override/0 = SubResource("ShaderMaterial_7bwct")
@@ -16133,7 +16173,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_bnjwj")
 shape = SubResource("ConvexPolygonShape3D_ke80a")
 
 [node name="Binkstone3" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=1430978584]
-transform = Transform3D(-45.675186, 0.5705946, -109.966354, 8.024846, 49.001915, 0.004909494, 171.76971, -2.1375754, -29.241297, -29.252241, 3.3534067, 14.269092)
+transform = Transform3D(-45.675186, 0.5705946, -109.966354, 8.024846, 49.001915, 0.004909494, 171.76971, -2.1375754, -29.241297, -29.25224, 3.3534067, 14.269092)
 cast_shadow = 0
 mesh = ExtResource("46_217hv")
 surface_material_override/0 = SubResource("ShaderMaterial_kjq3c")
@@ -16166,7 +16206,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_58se0")
 shape = SubResource("ConvexPolygonShape3D_e18pb")
 
 [node name="WoodLog" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=1768836209]
-transform = Transform3D(0.8660254, -7.1967072e-09, 0.5, 0.12940948, 0.96592563, -0.22414383, -0.48296288, 0.25881904, 0.8365162, -24.3, 0.04338476, 5.33124)
+transform = Transform3D(0.8660254, -7.1967072e-09, 0.5, 0.12940948, 0.96592563, -0.22414383, -0.48296288, 0.25881904, 0.8365162, -24.3, 0.04338473, 5.33124)
 cast_shadow = 0
 mesh = ExtResource("47_w6te4")
 surface_material_override/0 = SubResource("ShaderMaterial_2nf86")
@@ -16192,7 +16232,7 @@ surface_material_override/2 = SubResource("ShaderMaterial_ipwqt")
 shape = SubResource("ConvexPolygonShape3D_qpwuq")
 
 [node name="TreeStump2" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=824970015]
-transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, -25.03547, 0.09342523, 4.2603006)
+transform = Transform3D(0.91, 0, 0, 0, 0.91, 0, 0, 0, 0.91, -25.03547, 0.093425214, 4.2603006)
 cast_shadow = 0
 mesh = ExtResource("49_xo0rd")
 surface_material_override/0 = SubResource("ShaderMaterial_8oxyp")
@@ -16216,7 +16256,7 @@ transform = Transform3D(1, -5.9604645e-08, -1.7763568e-15, 5.9604645e-08, 1, 7.1
 shape = SubResource("ConcavePolygonShape3D_61flt")
 
 [node name="Skævpalme2" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=976578068]
-transform = Transform3D(29.344898, -109.51668, -4.7871263e-06, 1.7442041e-13, -4.9559985e-06, 113.38001, -109.51668, -29.344898, -1.2827066e-06, -17.1, 0.28292292, -32.1)
+transform = Transform3D(29.344898, -109.51668, -4.7871263e-06, 1.7442041e-13, -4.9559985e-06, 113.38001, -109.51668, -29.344898, -1.2827066e-06, -17.099998, 0.28292292, -32.1)
 cast_shadow = 0
 mesh = ExtResource("56_7u4t4")
 
@@ -16246,7 +16286,7 @@ mesh = ExtResource("58_ol4g5")
 shape = SubResource("ConcavePolygonShape3D_3u1s1")
 
 [node name="Palme4" type="MeshInstance3D" parent="NavigationRegion3D/Wood" unique_id=2009889713]
-transform = Transform3D(159.86, -2.3863078e-13, -3.2126312e-21, 1.7794344e-29, -5.9395475e-06, 79.93, -2.9398573e-13, -135.88101, -3.4938516e-06, -18.1, 0.45797318, -33.7)
+transform = Transform3D(159.86, -2.3863078e-13, -3.2126312e-21, 1.7794344e-29, -5.9395475e-06, 79.93, -2.9398573e-13, -135.88101, -3.4938516e-06, -18.099998, 0.45797318, -33.700005)
 cast_shadow = 0
 mesh = ExtResource("58_ol4g5")
 
@@ -16320,7 +16360,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_seusb")
 [node name="Island Misc" type="Node3D" parent="NavigationRegion3D" unique_id=403201556]
 
 [node name="Moai" type="MeshInstance3D" parent="NavigationRegion3D/Island Misc" unique_id=1999474401]
-transform = Transform3D(0.52, 0, 0, 0, -2.2729921e-08, 0.52, 0, -0.52, -2.2729921e-08, -19.416594, 1.2594907, -31.819115)
+transform = Transform3D(0.52, 0, 0, 0, -2.2729921e-08, 0.52, 0, -0.52, -2.2729921e-08, -19.416592, 1.2594907, -31.819115)
 cast_shadow = 0
 mesh = ExtResource("59_nkopf")
 surface_material_override/0 = SubResource("ShaderMaterial_5i3ml")
@@ -16443,10 +16483,11 @@ preview_yaw_slider = 0.0
 preview_pitch_slider = 100.0
 
 [node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(220581430, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, 1, 7.5166837e-22, 0, 7.5166837e-22, 1, 0, 0, 0)
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam" index="1" unique_id=1654055905]
-transform = Transform3D(0.0660358, 0.007998497, 0.034645297, 0, 0.07307775, -0.016871328, -0.03555661, 0.014854821, 0.0643433, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.0660358, 0.007998497, 0.034645297, 0, 0.07307775, -0.016871328, -0.03555661, 0.014854821, 0.0643433, 0, 0.026323795, -0.19379234)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(220581430, 106286865) index="0" unique_id=850329107]
@@ -16484,7 +16525,7 @@ preview_pitch_slider = 29.0
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam2" index="1" unique_id=1654055905]
-transform = Transform3D(0.068409, -0.012553805, -0.028064381, 0, 0.06846256, -0.030624783, 0.030744227, 0.02793348, 0.062446076, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.068409, -0.012553805, -0.028064381, 0, 0.06846256, -0.030624783, 0.030744227, 0.02793348, 0.062446076, 0, 0.026323795, -0.19379234)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam2/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(1489687397, 106286865) index="0" unique_id=850329107]
@@ -16523,7 +16564,7 @@ preview_pitch_slider = 47.0
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam11" index="1" unique_id=1654055905]
-transform = Transform3D(0.03963287, -0.025999574, -0.058122773, 0, 0.06846256, -0.030624783, 0.06367287, 0.01618331, 0.036178242, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.03963287, -0.025999574, -0.058122773, 0, 0.06846256, -0.030624783, 0.06367287, 0.01618331, 0.036178242, 0, 0.026323795, -0.19379234)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam11/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(1531800142, 106286865) index="0" unique_id=850329107]
@@ -16562,7 +16603,7 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam3" index="1" unique_id=1654055905]
-transform = Transform3D(0.06786203, -0.01591843, -0.027683, 0, 0.06501725, -0.037386578, 0.031933445, 0.033828385, 0.05882937, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.06786203, -0.01591843, -0.027683, 0, 0.06501725, -0.037386578, 0.031933445, 0.033828385, 0.05882937, 2.3841858e-07, 0.026323795, -0.19379234)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam3/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(939605638, 106286865) index="0" unique_id=850329107]
@@ -16598,10 +16639,11 @@ preview_yaw_slider = 70.0
 preview_pitch_slider = 100.0
 
 [node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam4/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(404788709, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, 1, 6.2158816e-24, 0, 6.2158816e-24, 1, 0, 0, 0)
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam4" index="1" unique_id=1654055905]
-transform = Transform3D(0.07344171, 0.0064756973, 0.0137615595, 0, 0.06786203, -0.03193345, -0.015209046, 0.031269956, 0.066452056, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.07344171, 0.0064756977, 0.01376156, 0, 0.06786203, -0.03193345, -0.015209047, 0.031269956, 0.066452056, 0, 0.026323795, -0.19379044)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam4/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(404788709, 106286865) index="0" unique_id=850329107]
@@ -16640,7 +16682,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam5" index="1" unique_id=1654055905]
-transform = Transform3D(0.054851525, 0.020559577, 0.04683603, 0, 0.06867469, -0.030146083, -0.051149875, 0.022047449, 0.050225493, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.05485153, 0.020559577, 0.04683603, 0, 0.06867469, -0.030146083, -0.05114988, 0.022047449, 0.050225496, 0, 0.026323795, -0.19379044)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam5/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(867899694, 106286865) index="0" unique_id=850329107]
@@ -16680,7 +16722,7 @@ transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam6" index="1" unique_id=1654055905]
-transform = Transform3D(0.0573691, -0.024081577, -0.04187915, 0, 0.06501725, -0.03738658, 0.048309267, 0.028597796, 0.04973309, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.057369106, -0.024081578, -0.04187915, 0, 0.06501725, -0.03738658, 0.04830927, 0.028597798, 0.049733095, 0, 0.026323795, -0.19379044)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam6/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(527288256, 106286865) index="0" unique_id=850329107]
@@ -16716,11 +16758,11 @@ preview_yaw_slider = 26.0
 preview_pitch_slider = 57.0
 
 [node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam8/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(68353345, 975578141) index="0" unique_id=1255325842]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam8" index="1" unique_id=1654055905]
-transform = Transform3D(0.0015706818, -0.019912345, -0.07229129, 0, 0.07230717, -0.019916708, 0.074983545, 0.00041710428, 0.0015142871, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.0015706792, -0.019912347, -0.07229129, 0, 0.07230717, -0.019916708, 0.074983545, 0.00041710585, 0.0015142858, 0, 0.026323795, -0.19379044)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam8/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(68353345, 106286865) index="0" unique_id=850329107]
@@ -16755,11 +16797,11 @@ preview_yaw_slider = 0.0
 preview_pitch_slider = 59.0
 
 [node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam9/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(1079123194, 975578141) index="0" unique_id=1255325842]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam9" index="1" unique_id=1654055905]
-transform = Transform3D(-0.038740005, -0.026631609, -0.058437735, 0, 0.068247095, -0.03110199, 0.064220026, -0.016065218, -0.035251904, 0, 0.02632384, -0.19379231)
+transform = Transform3D(-0.03874001, -0.026631609, -0.05843774, 0, 0.068247095, -0.03110199, 0.06422003, -0.01606522, -0.035251904, -3.8146973e-06, 0.026323795, -0.19379044)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam9/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(1079123194, 106286865) index="0" unique_id=850329107]
@@ -16793,11 +16835,11 @@ preview_yaw_slider = 45.0
 preview_pitch_slider = 58.0
 
 [node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam10/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(1035098128, 975578141) index="0" unique_id=1255325842]
-transform = Transform3D(1, 0, 0, 0, -4.3711385e-08, -1, 0, 0.99999994, -4.371139e-08, 0, -0.09776306, 0.1274848)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 0.99999994, -4.371139e-08, -1.9073486e-06, -0.097761154, 0.1274848)
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam10" index="1" unique_id=1654055905]
-transform = Transform3D(0.06802828, -0.013345306, -0.0286191, 0, 0.06797308, -0.031696368, 0.031577673, 0.02875, 0.06165457, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.068028286, -0.013345308, -0.028619101, 0, 0.06797308, -0.031696368, 0.03157767, 0.028750002, 0.061654575, -1.9073486e-06, 0.026323795, -0.19379425)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam10/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(1035098128, 106286865) index="0" unique_id=850329107]
@@ -16832,10 +16874,11 @@ preview_yaw_slider = 60.0
 preview_pitch_slider = 0.0
 
 [node name="Object_4" parent="NavigationRegion3D/SecCams/SecCam7/Sketchfab_model/root/GLTF_SceneRootNode/Stand_0" parent_id_path=PackedInt32Array(333764158, 975578141) index="0" unique_id=1255325842]
+transform = Transform3D(1, 0, 0, 0, 1, 6.2158816e-24, 0, 6.2158816e-24, 1, 0, 0, 0)
 cast_shadow = 0
 
 [node name="pivotPoint" parent="NavigationRegion3D/SecCams/SecCam7" index="1" unique_id=1654055905]
-transform = Transform3D(0.059818793, -0.03372578, -0.030154327, 0, 0.04998993, -0.0559107, 0.045240596, 0.044593476, 0.039871164, 0, 0.02632384, -0.19379231)
+transform = Transform3D(0.059818797, -0.03372578, -0.030154329, 0, 0.04998993, -0.0559107, 0.045240596, 0.044593476, 0.039871164, 0, 0.026324272, -0.19379234)
 cast_shadow = 0
 
 [node name="Object_8" parent="NavigationRegion3D/SecCams/SecCam7/pivotPoint/Camera_2" parent_id_path=PackedInt32Array(333764158, 106286865) index="0" unique_id=850329107]
@@ -16856,14 +16899,14 @@ transform = Transform3D(0.7975839, 0.44967702, -0.40205765, 0, 0.66653234, 0.745
 [node name="Domes" type="Node3D" parent="NavigationRegion3D" unique_id=1869795061]
 
 [node name="Dome4" type="MeshInstance3D" parent="NavigationRegion3D/Domes" unique_id=1911000433]
-transform = Transform3D(20.384, 0, 0, 0, 9.1, 0, 0, 0, 5.005, 22.9, 3.2, -33.5)
+transform = Transform3D(20.384, 0, 0, 0, 9.1, 0, 0, 0, 5.005, 22.900002, 3.2, -33.5)
 visible = false
 material_override = SubResource("ShaderMaterial_6y7ak")
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_seusb")
 
 [node name="Dome5" type="MeshInstance3D" parent="NavigationRegion3D/Domes" unique_id=2049838295]
-transform = Transform3D(-7.4845076e-07, 0, 22.017998, 0, 15.215203, 0, -17.122557, 0, -9.624372e-07, -23.500002, 2.8, -21.199999)
+transform = Transform3D(-7.4845076e-07, 0, 22.017998, 0, 15.215203, 0, -17.122557, 0, -9.624372e-07, -23.5, 2.8, -21.199999)
 visible = false
 material_override = SubResource("ShaderMaterial_tmse1")
 cast_shadow = 0
@@ -16897,7 +16940,7 @@ shape = SubResource("BoxShape3D_a8bow")
 [node name="JailBoard" type="Node3D" parent="NavigationRegion3D" unique_id=1353791459]
 
 [node name="Picture2Image" type="MeshInstance3D" parent="NavigationRegion3D/JailBoard" unique_id=403990116]
-transform = Transform3D(-2.2030541e-07, 0, 1.0000001, 0, 1, 0, -5.0400004, 0, -4.3711392e-08, -5.133321, 2.199596, -46.192524)
+transform = Transform3D(-2.2030541e-07, 0, 1.0000001, 0, 1, 0, -5.0400004, 0, -4.3711392e-08, -5.133321, 2.199596, -46.192528)
 cast_shadow = 0
 mesh = ExtResource("67_w6te4")
 surface_material_override/0 = SubResource("StandardMaterial3D_4873o")
@@ -16909,7 +16952,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.078106984)
 shape = SubResource("BoxShape3D_xs6gw")
 
 [node name="Picture2Image2" type="MeshInstance3D" parent="NavigationRegion3D/JailBoard" unique_id=1873373757]
-transform = Transform3D(-5.5076352e-08, 0, 1, 0, 0.34999996, 0, -1.2600001, 0, -4.371139e-08, -5.033321, 2.9995959, -46.192524)
+transform = Transform3D(-5.5076352e-08, 0, 1, 0, 0.34999996, 0, -1.2600001, 0, -4.371139e-08, -5.033321, 2.9995959, -46.192528)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_xo0rd")
 surface_material_override/0 = SubResource("StandardMaterial3D_61flt")
@@ -17059,7 +17102,7 @@ mesh = ExtResource("65_ydp54")
 surface_material_override/0 = SubResource("ShaderMaterial_gsulu")
 
 [node name="GrassBink28" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1833781798]
-transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -31.598032, 0.14375621, -1.4686649)
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -31.59803, 0.14375621, -1.4686649)
 cast_shadow = 0
 mesh = ExtResource("65_ydp54")
 surface_material_override/0 = SubResource("ShaderMaterial_gsulu")
@@ -17071,7 +17114,7 @@ mesh = ExtResource("65_ydp54")
 surface_material_override/0 = SubResource("ShaderMaterial_gsulu")
 
 [node name="GrassBink30" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1247821868]
-transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -30.890924, 0.14375621, -2.6934097)
+transform = Transform3D(0.25881907, 0, -0.9659258, 0, 1, 0, 0.9659258, 0, 0.25881907, -30.890923, 0.14375621, -2.6934097)
 cast_shadow = 0
 mesh = ExtResource("65_ydp54")
 surface_material_override/0 = SubResource("ShaderMaterial_gsulu")
@@ -17128,7 +17171,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_w6te4")
 transform = Transform3D(-5.507635e-08, 0, -1.4, 0, 1.3, 0, 1.26, 0, -6.119594e-08, -28.052471, -0.9334154, -21.408237)
 
 [node name="GardenWall_6" type="MeshInstance3D" parent="NavigationRegion3D/GardenWall_5 Asia" unique_id=1357558927]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -1.0842022e-19, 0, 0, 100, 3.1391646e-05, -4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 mesh = ExtResource("83_ufdy8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/GardenWall_5 Asia/GardenWall_6" unique_id=185710498]
@@ -17140,7 +17183,7 @@ shape = SubResource("ConvexPolygonShape3D_ow7u5")
 transform = Transform3D(-1.4, 0, 1.1015269e-07, 0, 1.3, 0, -1.2239188e-07, 0, -1.2599999, -25.95247, -0.9334154, -13.722237)
 
 [node name="GardenWall_6" type="MeshInstance3D" parent="NavigationRegion3D/GardenWall_5 Asia2" unique_id=585920059]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 2.1684043e-19, 0, 0, 100.00001, 3.139165e-05, 9.094947e-13, -3.1391646e-05, 100.00001, 0, 0, 0)
 mesh = ExtResource("83_ufdy8")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/GardenWall_5 Asia2/GardenWall_6" unique_id=1486332684]
@@ -17152,7 +17195,7 @@ shape = SubResource("ConvexPolygonShape3D_0nfu5")
 transform = Transform3D(-5.507635e-08, 0, -1.4, 0, 1.3, 0, 1.26, 0, -6.119594e-08, -25.965576, -0.83700806, -16.56233)
 
 [node name="GardenWall_Gate_2" type="MeshInstance3D" parent="NavigationRegion3D/GardenWall_Gate_1 Asia" unique_id=1557614752]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -1.0842022e-19, 0, 0, 100, 3.1391646e-05, -4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 mesh = ExtResource("85_ooolc")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/GardenWall_Gate_1 Asia/GardenWall_Gate_2" unique_id=1633675395]
@@ -17164,7 +17207,7 @@ shape = SubResource("ConcavePolygonShape3D_gve0t")
 transform = Transform3D(-1.47, 0, -2.4416022e-07, 0, 1.47, 0, 2.2196383e-07, 0, -1.6170001, -27.810396, -0.92599964, -16.43792)
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia" unique_id=22700643]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 4.3368087e-19, -1.8189894e-12, 0, 100, 3.1391646e-05, -1.8189894e-12, -3.139165e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("87_0isio")
 
@@ -17186,7 +17229,7 @@ shape = SubResource("BoxShape3D_61flt")
 transform = Transform3D(1.47, 0, 1.02797586e-07, 0, 1.47, 0, -9.345237e-08, 0, 1.6170001, -9.810396, -0.92599964, -19.63792)
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia2" unique_id=293284214]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 2.1684043e-19, -4.5474735e-13, 0, 100, 3.1391646e-05, -4.5474735e-13, -3.139165e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("87_0isio")
 
@@ -17208,7 +17251,7 @@ shape = SubResource("BoxShape3D_8sa2x")
 transform = Transform3D(1.47, 0, 1.1873121e-07, 0, 1.47, 0, -9.345237e-08, 0, 1.867635, 28.189604, -0.92599964, -16.53792)
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia4" unique_id=1481768478]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, -4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("87_0isio")
 
@@ -17230,7 +17273,7 @@ shape = SubResource("BoxShape3D_8sa2x")
 transform = Transform3D(-1.47, 0, 2.8200506e-07, 0, 1.47, 0, -2.2196383e-07, 0, -1.867635, 9.489604, -0.92599964, -19.53792)
 
 [node name="Stairs_3" type="MeshInstance3D" parent="NavigationRegion3D/Stairs_2 Asia5" unique_id=945626516]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 1.8189894e-12, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("87_0isio")
 
@@ -17252,6 +17295,7 @@ shape = SubResource("BoxShape3D_8sa2x")
 transform = Transform3D(-4.3700133e-08, 9.916947e-10, 1, 0.022687333, 0.99974257, 0, -0.99974257, 0.022687333, -4.371139e-08, -34.24906, 0.08229786, -26.127047)
 
 [node name="FootBridge_1_1" parent="NavigationRegion3D/FootBridge_1_1 Asia" index="0" unique_id=418096886]
+transform = Transform3D(1, -1.8626451e-09, 0, 1.8626451e-09, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 0, 0, 0)
 cast_shadow = 0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/FootBridge_1_1 Asia/FootBridge_1_1" index="0" unique_id=45753599]
@@ -17263,7 +17307,7 @@ shape = SubResource("ConcavePolygonShape3D_q2a4x")
 transform = Transform3D(0.501329, 0.0030830123, 0.22446796, 0.0015350576, 1.0418235, -0.019638406, -0.13378368, 0.023507081, 0.8409258, -32.14906, 0.24064928, -34.980133)
 
 [node name="FootBridge_1_2" type="MeshInstance3D" parent="NavigationRegion3D/FootBridge_1_1 Asia2" unique_id=1825241948]
-transform = Transform3D(1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 0, 0, 0)
+transform = Transform3D(1.0000001, 0, 2.9802322e-08, -2.3283064e-10, 1, 1.9744039e-07, 0, -1.937151e-07, 1, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_oubgi")
 
@@ -17276,7 +17320,7 @@ shape = SubResource("ConcavePolygonShape3D_kndku")
 transform = Transform3D(0.44909254, -0.014441999, -0.43590158, 0.0015350576, 1.0418235, -0.019638406, 0.25989377, 0.018802036, 0.75334716, -24.14906, 0.44064933, -35.980133)
 
 [node name="FootBridge_1_2" type="MeshInstance3D" parent="NavigationRegion3D/FootBridge_1_1 Asia3" unique_id=1686225512]
-transform = Transform3D(1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 0, 0, 0)
+transform = Transform3D(1, 1.8626451e-09, 5.9604645e-08, 0, 1, 1.9464642e-07, -5.9604645e-08, -1.937151e-07, 1, 0, 0, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_oubgi")
 
@@ -17289,11 +17333,12 @@ shape = SubResource("ConcavePolygonShape3D_nr0w7")
 transform = Transform3D(0.51887244, -0.003106122, -0.00082826614, 0.0015350593, 1.0418235, -0.019638402, 0.00052832067, 0.02350404, 0.8703685, -16.749058, 0.31413668, -33.780136)
 
 [node name="FootBridge_1_1" parent="NavigationRegion3D/FootBridge_1_1 Asia4" index="0" unique_id=418096886]
+transform = Transform3D(1, -6.548362e-10, 2.3283064e-10, 9.5496944e-11, 1, 1.9557774e-07, 0, -1.937151e-07, 1, 0, 0, 0)
 visible = false
 cast_shadow = 0
 
 [node name="FootBridge_1_2" type="MeshInstance3D" parent="NavigationRegion3D/FootBridge_1_1 Asia4" unique_id=371773313]
-transform = Transform3D(0.9998477, 0.017452408, 0, -0.017452406, 0.9998478, 0, 0, 0, 1, -0.00031661987, -0.05327165, 0.0014381409)
+transform = Transform3D(0.9998477, 0.017452408, 2.3283064e-10, -0.017452406, 0.9998479, 0, 1.0186341e-10, 0, 1, -0.00031661987, -0.05327165, 0.0014381409)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_oubgi")
 
@@ -17306,7 +17351,7 @@ shape = SubResource("ConcavePolygonShape3D_fc1pl")
 transform = Transform3D(0.96592575, 0, -0.25881916, 0, 0.9, 0, 0.25881916, 0, 0.96592575, -21.3, -0.6, -18.7)
 
 [node name="Gong2" type="MeshInstance3D" parent="NavigationRegion3D/Gong Asia" unique_id=624163313]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 0, 0, 0, 100.00001, 3.1391646e-05, 0, -3.139165e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("90_dmg4k")
 
@@ -17320,7 +17365,7 @@ shape = SubResource("BoxShape3D_m0hte")
 transform = Transform3D(-5.507635e-08, 0, -1, 0, 1.5, 0, 1.26, 0, -4.371139e-08, -29.159458, 0.99999994, -25.619589)
 
 [node name="BuildingWall_6_2" type="MeshInstance3D" parent="NavigationRegion3D/BuildingWall_6_1  Asia" unique_id=113056433]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.0842022e-19, -2.2737368e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("92_rkynm")
 
@@ -17334,7 +17379,7 @@ shape = SubResource("BoxShape3D_yh7x5")
 transform = Transform3D(-4.406108e-08, 0, -1, 0, 1.5, 0, 1.008, 0, -4.371139e-08, -29.159458, 0.99999994, -27.919588)
 
 [node name="BuildingWall_6_2" type="MeshInstance3D" parent="NavigationRegion3D/BuildingWall_6_1  Asia7" unique_id=623485432]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.0842022e-19, 0, 0, 100, 3.1391646e-05, 4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("92_rkynm")
 
@@ -17348,7 +17393,7 @@ shape = SubResource("BoxShape3D_00odw")
 transform = Transform3D(-5.507635e-08, 0, -1, 0, 1.5, 0, 1.26, 0, -4.371139e-08, -29.159458, 0.99999994, -22.619589)
 
 [node name="BuildingWall_6_2" type="MeshInstance3D" parent="NavigationRegion3D/BuildingWall_6_1  Asia2" unique_id=2074007312]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.0842022e-19, -2.2737368e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("92_rkynm")
 
@@ -17362,7 +17407,7 @@ shape = SubResource("BoxShape3D_tms5q")
 transform = Transform3D(-5.507635e-08, 0, -1, 0, 1.5, 0, 1.26, 0, -4.371139e-08, -29.159458, 0.99999994, -19.619589)
 
 [node name="BuildingWall_6_2" type="MeshInstance3D" parent="NavigationRegion3D/BuildingWall_6_1  Asia3" unique_id=676108435]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.0842022e-19, -2.2737368e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("92_rkynm")
 
@@ -17376,7 +17421,7 @@ shape = SubResource("BoxShape3D_vinq2")
 transform = Transform3D(-5.507635e-08, 0, -1, 0, 1.5, 0, 1.26, 0, -4.371139e-08, -29.159458, 0.99999994, -13.419588)
 
 [node name="BuildingWall_6_2" type="MeshInstance3D" parent="NavigationRegion3D/BuildingWall_6_1  Asia4" unique_id=1511046701]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.0842022e-19, -2.2737368e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("92_rkynm")
 
@@ -17390,7 +17435,7 @@ shape = SubResource("BoxShape3D_21fyq")
 transform = Transform3D(-5.507635e-08, 0, -1, 0, 1.5, 0, 1.26, 0, -4.371139e-08, -29.159458, 0.99999994, -10.419588)
 
 [node name="BuildingWall_6_2" type="MeshInstance3D" parent="NavigationRegion3D/BuildingWall_6_1  Asia5" unique_id=1878947700]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.0842022e-19, -2.2737368e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("92_rkynm")
 
@@ -17404,7 +17449,7 @@ shape = SubResource("BoxShape3D_u00mt")
 transform = Transform3D(-5.507635e-08, 0, -1, 0, 1.5, 0, 1.26, 0, -4.371139e-08, -29.159458, 0.99999994, -8.019588)
 
 [node name="BuildingWall_6_2" type="MeshInstance3D" parent="NavigationRegion3D/BuildingWall_6_1  Asia6" unique_id=1362946770]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.0842022e-19, -2.2737368e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("92_rkynm")
 
@@ -17418,7 +17463,7 @@ shape = SubResource("BoxShape3D_0fy6e")
 transform = Transform3D(-0.46669036, 0, 0.4666906, 0, 0.66, 0, -0.4666906, 0, -0.46669036, -21, -1, -20.4)
 
 [node name="Altana_2" type="MeshInstance3D" parent="NavigationRegion3D/Altana_1 Asia" unique_id=1291192354]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 3.8146973e-06, 0, 99.99999, 3.1391646e-05, -3.8146973e-06, -3.1391646e-05, 100, 0, 0, 0)
 mesh = ExtResource("94_ked6s")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Altana_1 Asia/Altana_2" unique_id=2038381149]
@@ -17538,7 +17583,7 @@ mesh = ExtResource("103_uvule")
 transform = Transform3D(0.15999998, 0, 0, 0, 1.3, 0, 0, 0, 0.36, -9.020651, -0.92599714, -16.538305)
 
 [node name="Small_Hill2" type="MeshInstance3D" parent="NavigationRegion3D/Small_Hill Asia4" unique_id=1391174172]
-transform = Transform3D(100, 0, 0, 0, 100.97115, 2.712582e-05, 0, -3.1696505e-05, 86.41095, 0, -2.1442247e-07, -0.68305594)
+transform = Transform3D(100, 0, 0, 0, 100.97116, 2.7125821e-05, 0, -3.169651e-05, 86.41096, 0, -2.1606684e-07, -0.68305206)
 mesh = ExtResource("103_uvule")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Small_Hill Asia4/Small_Hill2" unique_id=759198334]
@@ -17551,7 +17596,7 @@ shape = SubResource("ConvexPolygonShape3D_h0uo3")
 transform = Transform3D(0.15999998, 0, 0, 0, 1.105, 0, 0, 0, 0.36, -9.020651, -0.92599714, -13.138306)
 
 [node name="Small_Hill2" type="MeshInstance3D" parent="NavigationRegion3D/Small_Hill Asia5" unique_id=1538534527]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, -6.495801e-07, -2.0692773)
+transform = Transform3D(99.99999, 0, 0, 0, 99.999985, 3.1391646e-05, 0, -3.1391643e-05, 99.999985, 0, -6.556511e-07, -2.0692787)
 mesh = ExtResource("103_uvule")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Small_Hill Asia5/Small_Hill2" unique_id=1362261125]
@@ -17571,7 +17616,7 @@ mesh = ExtResource("103_uvule")
 transform = Transform3D(0.15999998, 0, 0, 0, 1.25, 0, 0, 0, 0.36, -9.020651, -0.92599714, -22.138306)
 
 [node name="Small_Hill2" type="MeshInstance3D" parent="NavigationRegion3D/Small_Hill Asia3" unique_id=743538938]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 0, 0, 0, 99.99999, 3.1391646e-05, 0, -3.1391643e-05, 99.999985, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("103_uvule")
 
@@ -17583,7 +17628,7 @@ visible = false
 cast_shadow = 0
 
 [node name="Tower_2" type="MeshInstance3D" parent="NavigationRegion3D/Tower_1 Asia" unique_id=71707912]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, -1.540848e-08, -0.049084645)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, -1.4901161e-08, -0.049084663)
 mesh = ExtResource("102_g3j5m")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Tower_1 Asia/Tower_2" unique_id=2146326576]
@@ -17607,7 +17652,7 @@ surface_material_override/1 = SubResource("ShaderMaterial_27b83")
 shape = SubResource("ConvexPolygonShape3D_0ieg8")
 
 [node name="Rock_4_4" type="MeshInstance3D" parent="NavigationRegion3D/Rock_4_2 Asia" unique_id=866089556]
-transform = Transform3D(88.28532, -6.541317e-06, 10.655571, 0, 120.000015, 1.9262849e-05, -15.567093, -3.7097674e-05, 60.430748, -2.3441076, 2.3, 0.5245762)
+transform = Transform3D(88.28532, -6.5413165e-06, 10.655571, 0, 120.000015, 1.9262849e-05, -15.567094, -3.7097674e-05, 60.430748, -2.3441086, 2.3, 0.5245762)
 cast_shadow = 0
 mesh = ExtResource("104_aohxw")
 surface_material_override/0 = SubResource("ShaderMaterial_xikmm")
@@ -17657,7 +17702,7 @@ transform = Transform3D(5.3644182e-08, 0, -1.0000001, 0, 1.5600001, 0, 1.8000003
 transform = Transform3D(0.19999999, 0, 0, 0, 1, 0, 0, 0, 0.8033256, -28.8, 3.1000001, -7.9448175)
 
 [node name="Block_2" type="MeshInstance3D" parent="NavigationRegion3D/Block_1 Asia" unique_id=2065980500]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 99.99999, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("110_sfnur")
 
@@ -17700,7 +17745,7 @@ shape = SubResource("BoxShape3D_wwbl5")
 transform = Transform3D(1.1827292, 0, -1.4095218, 0, 1.84, 0, 1.4095218, 0, 1.1827292, -27.96636, -0.9084071, -18.441236)
 
 [node name="Bambo_5" type="MeshInstance3D" parent="NavigationRegion3D/Bambo_4 Asia" unique_id=183169272]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.8189894e-12, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("116_ni4rr")
 
@@ -17715,7 +17760,7 @@ shape = SubResource("BoxShape3D_jaaxk")
 transform = Transform3D(-1.1827294, 0, 1.4095217, 0, 1.84, 0, -1.4095217, 0, -1.1827294, -27.96636, -0.9084071, -14.4412365)
 
 [node name="Bambo_5" type="MeshInstance3D" parent="NavigationRegion3D/Bambo_4 Asia2" unique_id=332988785]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 1.8189894e-12, -3.8146973e-06, 0, 100, 3.1391646e-05, 3.8146973e-06, -3.1391646e-05, 99.99999, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("116_ni4rr")
 
@@ -17755,7 +17800,7 @@ shape = SubResource("ConcavePolygonShape3D_6dmxd")
 transform = Transform3D(0.22258441, 0, -0.8306962, 0, 0.86, 0, 0.8306962, 0, 0.22258441, -19, -1, -26.7)
 
 [node name="Sakura_3" type="MeshInstance3D" parent="NavigationRegion3D/Sakura_2 Asia" unique_id=1720702041]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 0, -1.9073486e-06, 0, 100, 3.1391646e-05, 1.9073486e-06, -3.1391646e-05, 100.00001, 0, 0, 0)
 mesh = ExtResource("120_qsy1o")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/Sakura_2 Asia/Sakura_3" unique_id=642715913]
@@ -17793,7 +17838,7 @@ shape = SubResource("BoxShape3D_jcgw2")
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -11.5, -1.0343871, -20)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia" unique_id=1700272393]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -17806,7 +17851,7 @@ shape = SubResource("ConcavePolygonShape3D_j8whl")
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -16.5, -1.034, -18)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia3" unique_id=24534678]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -17819,7 +17864,7 @@ shape = SubResource("ConcavePolygonShape3D_volbp")
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -15.5, -1.034, -18.4)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia2" unique_id=1955674952]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -17832,7 +17877,7 @@ shape = SubResource("ConcavePolygonShape3D_w7v5v")
 transform = Transform3D(1.7, 0, 0, 0, 1, 0, 0, 0, 2.1, -13.5, -1.034, -19.3)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia" unique_id=453953725]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("126_58se0")
 
@@ -17858,7 +17903,7 @@ shape = SubResource("ConcavePolygonShape3D_6tj66")
 transform = Transform3D(1.9760001, 0, 0, 0, 1, 0, 0, 0, 3.2, -17.5, -1.034, -18.5)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia3" unique_id=296041653]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("128_gsulu")
 
@@ -17884,7 +17929,7 @@ shape = SubResource("ConcavePolygonShape3D_0nfu5")
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -12.5, -1.034, -19.9)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia" unique_id=1818015970]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("130_4ojxq")
 
@@ -17897,7 +17942,7 @@ shape = SubResource("ConcavePolygonShape3D_ufdy8")
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -14.4, -1.034, -18.6)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia2" unique_id=890531013]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("130_4ojxq")
 
@@ -17962,7 +18007,7 @@ shape = SubResource("ConcavePolygonShape3D_ked6s")
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -21.599998, -1.034, -23.7)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia4" unique_id=1824313351]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -17975,7 +18020,7 @@ shape = SubResource("ConcavePolygonShape3D_dmbrw")
 transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1.8, -20.599998, -1.034, -24.1)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia5" unique_id=407302703]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -17988,7 +18033,7 @@ shape = SubResource("ConcavePolygonShape3D_mu5rw")
 transform = Transform3D(1.7, 0, 0, 0, 1, 0, 0, 0, 2.1, -18.599998, -1.034, -25)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia2" unique_id=1598539577]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("126_58se0")
 
@@ -18001,7 +18046,7 @@ shape = SubResource("ConcavePolygonShape3D_g3j5m")
 transform = Transform3D(1.7112663, 0, 1.6, 0, 1, 0, -0.98800004, 0, 2.7712812, -22.699999, -1.034, -24.7)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia4" unique_id=871114107]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.8189894e-12, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("128_gsulu")
 
@@ -18027,7 +18072,7 @@ shape = SubResource("ConcavePolygonShape3D_teik1")
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1.8199999, -19.499998, -1.034, -24.300001)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia3" unique_id=424563404]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("130_4ojxq")
 
@@ -18040,7 +18085,7 @@ shape = SubResource("ConcavePolygonShape3D_ygkih")
 transform = Transform3D(1.4942918, 0, 0.15688032, 0, 0.99999994, 0, -0.13073361, 0, 1.7931502, -24.06336, -1.034, -23.360853)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia6" unique_id=1297985263]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.000015, -2.2737368e-13, 9.536743e-07, 0, 100.00001, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -18053,7 +18098,7 @@ shape = SubResource("ConcavePolygonShape3D_4djh4")
 transform = Transform3D(1.8927699, 0, 0.1743114, 0, 0.99999994, 0, -0.16559583, 0, 1.9923892, -23.851658, -1.034, -24.383192)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia6" unique_id=479722165]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 4.5474735e-13, 0, 0, 100.00001, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("128_gsulu")
 
@@ -18066,7 +18111,7 @@ shape = SubResource("ConcavePolygonShape3D_o44xg")
 transform = Transform3D(1.6794982, 0, 1.0357307, 0, 0.9999999, 0, -2.0015473, 0, 0.8690812, -23.08498, -1.034, -23.555964)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia4" unique_id=1974544973]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 1.9073486e-06, 0, 100, 3.1391646e-05, -1.5258789e-05, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("130_4ojxq")
 
@@ -18105,7 +18150,7 @@ shape = SubResource("ConcavePolygonShape3D_8guhe")
 transform = Transform3D(-1.4000001, 0, -1.1920929e-07, 0, 0.99999994, 0, 1.4901161e-07, 0, -1.3000002, -23.73333, -1.034, -16.76667)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia7" unique_id=491479685]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.000015, 0, 9.094947e-13, 0, 100.00001, 3.1391646e-05, 0, -3.139165e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("132_rhmf7")
 
@@ -18118,7 +18163,7 @@ shape = SubResource("ConcavePolygonShape3D_40aqq")
 transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -20.53333, -1.034, -17.16667)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia7" unique_id=1153958436]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 4.3368087e-19, -9.094947e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -18131,7 +18176,7 @@ shape = SubResource("ConcavePolygonShape3D_526xe")
 transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -24.714685, -1.034, -16.47688)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia12" unique_id=1441779799]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 4.3368087e-19, -9.094947e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -18144,7 +18189,7 @@ shape = SubResource("ConcavePolygonShape3D_526xe")
 transform = Transform3D(-1.5, 0, -2.0861626e-07, 0, 1, 0, 8.940697e-08, 0, -1.7999998, -21.533329, -1.034, -16.76667)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia8" unique_id=1587547022]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 4.3368087e-19, -9.094947e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -18157,7 +18202,7 @@ shape = SubResource("ConcavePolygonShape3D_ta84n")
 transform = Transform3D(-1.7000004, 0, -3.5762787e-07, 0, 1, 0, 8.940697e-08, 0, -2.1000001, -23.533333, -1.034, -15.86667)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia3" unique_id=403324407]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, -4.3368087e-19, 1.8189894e-12, 0, 100, 3.1391646e-05, 4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("126_58se0")
 
@@ -18170,7 +18215,7 @@ shape = SubResource("ConcavePolygonShape3D_s1l08")
 transform = Transform3D(-1.7112662, 0, -1.6000003, 0, 1, 0, 0.9880001, 0, -2.7712808, -19.43333, -1.034, -16.16667)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia7" unique_id=633627108]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.8189894e-12, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("128_gsulu")
 
@@ -18183,7 +18228,7 @@ shape = SubResource("ConcavePolygonShape3D_1r0w2")
 transform = Transform3D(-1.9, 0, -1.4901161e-07, 0, 0.99999994, 0, 8.940697e-08, 0, -1.9999996, -21.83333, -1.034, -15.766668)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia8" unique_id=1154406876]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -2.1684043e-19, 0, 0, 100.00001, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("128_gsulu")
 
@@ -18196,7 +18241,7 @@ shape = SubResource("ConcavePolygonShape3D_unt55")
 transform = Transform3D(-1.9, 0, -1.4901161e-07, 0, 0.99999994, 0, 8.940697e-08, 0, -1.9999996, -26.03333, -1.034, -16.666668)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia10" unique_id=1250489893]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -2.1684043e-19, 0, 0, 100.00001, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("128_gsulu")
 
@@ -18209,7 +18254,7 @@ shape = SubResource("ConcavePolygonShape3D_6gph1")
 transform = Transform3D(-1.9999999, 0, -1.7881393e-07, 0, 1, 0, 1.1920929e-07, 0, -1.8200003, -22.633331, -1.034, -16.566668)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia5" unique_id=2107566481]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, -2.1684043e-19, 0, 0, 100, 3.1391646e-05, 4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("130_4ojxq")
 
@@ -18222,7 +18267,7 @@ shape = SubResource("ConcavePolygonShape3D_7x8tf")
 transform = Transform3D(-1.4942918, 0, -0.1568805, 0, 0.9999999, 0, 0.13073373, 0, -1.7931501, -18.069967, -1.034, -17.505816)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia9" unique_id=2019023443]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 2.2737368e-13, -9.536743e-07, 0, 100, 3.1391646e-05, 0, -3.139165e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -18235,7 +18280,7 @@ shape = SubResource("ConcavePolygonShape3D_6r6mt")
 transform = Transform3D(-1.8927697, 0, -0.1743114, 0, 0.9999999, 0, 0.16559598, 0, -1.992389, -18.281672, -1.034, -16.483479)
 
 [node name="Tile_1_4" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_3 Asia9" unique_id=427905816]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 2.2737368e-13, 9.536743e-07, 0, 100, 3.1391646e-05, 0, -3.139165e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("128_gsulu")
 
@@ -18248,7 +18293,7 @@ shape = SubResource("ConcavePolygonShape3D_1vajf")
 transform = Transform3D(-1.6794978, 0, -1.0357308, 0, 0.9999999, 0, 2.0015473, 0, -0.869081, -19.048347, -1.034, -17.310705)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia6" unique_id=762589535]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, -3.8146973e-06, 0, 100, 3.1391646e-05, -7.6293945e-06, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("130_4ojxq")
 
@@ -18261,7 +18306,7 @@ shape = SubResource("ConcavePolygonShape3D_ubhhp")
 transform = Transform3D(-1.4000001, 0, -1.1920929e-07, 0, 0.99999994, 0, 1.4901161e-07, 0, -1.3000002, -20.633333, -1.034, -16.066668)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia8" unique_id=2674927]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.000015, 0, 9.094947e-13, 0, 100.00001, 3.1391646e-05, 0, -3.139165e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("132_rhmf7")
 
@@ -18274,7 +18319,7 @@ shape = SubResource("ConcavePolygonShape3D_t2p8q")
 transform = Transform3D(-0.5777283, 0, 1.1481072, 0, 0.99999994, 0, -0.5777281, 0, -1.1481073, -18.333334, -1.034, -18.266668)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia9" unique_id=430208277]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 3.637979e-12, 0, 0, 100.00001, 3.1391646e-05, -1.9073486e-06, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("132_rhmf7")
 
@@ -18300,7 +18345,7 @@ shape = SubResource("ConcavePolygonShape3D_m3mt2")
 transform = Transform3D(-6.556708e-08, 0, -1.8, 0, 1, 0, 1.5, 0, -7.86805e-08, -23.071426, -1.034, -14.314285)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia10" unique_id=2030839487]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -1.0842022e-19, 4.5474735e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -18313,7 +18358,7 @@ shape = SubResource("ConcavePolygonShape3D_a4otf")
 transform = Transform3D(-6.556708e-08, 0, -1.8, 0, 1, 0, 1.5, 0, -7.86805e-08, -22.671429, -1.034, -13.314286)
 
 [node name="Tile_1_2" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_1 Asia11" unique_id=1050208459]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -1.0842022e-19, 4.5474735e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("124_kjq3c")
 
@@ -18326,7 +18371,7 @@ shape = SubResource("ConcavePolygonShape3D_m25wp")
 transform = Transform3D(-7.430937e-08, 0, -2.1000001, 0, 1, 0, 1.7, 0, -9.1793915e-08, -21.77143, -1.034, -11.314286)
 
 [node name="Tile_1_3" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_2 Asia5" unique_id=1721029324]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 1.0842022e-19, -4.5474735e-13, 0, 99.99999, 3.1391643e-05, 2.2737368e-13, -3.1391643e-05, 99.99999, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("126_58se0")
 
@@ -18352,7 +18397,7 @@ shape = SubResource("ConcavePolygonShape3D_p7n1d")
 transform = Transform3D(-8.742278e-08, 0, -1.8199999, 0, 1, 0, 2, 0, -7.9554724e-08, -22.471428, -1.034, -12.214286)
 
 [node name="Tile_1_5" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_4 Asia7" unique_id=878505341]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 4.5474735e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("130_4ojxq")
 
@@ -18365,7 +18410,7 @@ shape = SubResource("ConcavePolygonShape3D_fu2ol")
 transform = Transform3D(-6.119594e-08, 0, -1.3, 0, 1, 0, 1.4, 0, -5.6824803e-08, -21.971426, -1.034, -14.214287)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia10" unique_id=185885938]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -1.0842022e-19, 4.5474735e-13, 0, 100, 3.1391646e-05, 4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("132_rhmf7")
 
@@ -18378,7 +18423,7 @@ shape = SubResource("ConcavePolygonShape3D_1i1c7")
 transform = Transform3D(-6.119594e-08, 0, -1.3, 0, 1, 0, 1.4, 0, -5.6824803e-08, -21.271427, -1.034, -12.214286)
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D/Tile_1_5 Asia11" unique_id=84636847]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -1.0842022e-19, 4.5474735e-13, 0, 100, 3.1391646e-05, 4.5474735e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("132_rhmf7")
 
@@ -18407,7 +18452,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002544403, 0.36714458, -0.0
 shape = SubResource("BoxShape3D_simee")
 
 [node name="Pedestal2" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=436769463]
-transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -20.6, -0.6, -21.699999)
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, -20.599998, -0.6, -21.699999)
 cast_shadow = 0
 mesh = ExtResource("7_3gp6a")
 
@@ -18426,7 +18471,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002544403, 0.36714458, -0.0
 shape = SubResource("BoxShape3D_simee")
 
 [node name="Pedestal3" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=232226540]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.9, 3.2, -10.799999)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.899998, 3.2, -10.799999)
 cast_shadow = 0
 mesh = ExtResource("7_3gp6a")
 
@@ -18463,7 +18508,7 @@ shape = SubResource("BoxShape3D_cxexk")
 transform = Transform3D(0.39999986, 0, 7.8678134e-08, 0, 0.27999988, 0, -1.4901161e-08, 0, 0.79199976, 38.5, 0.18033046, -33.6)
 
 [node name="Small_Hill2" type="MeshInstance3D" parent="NavigationRegion3D/Small_Hill Asia7" unique_id=1788269138]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 0, 0, 0, 100, 3.1391643e-05, -1.1368684e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("103_uvule")
 surface_material_override/0 = SubResource("ShaderMaterial_46s8j")
@@ -18477,7 +18522,7 @@ shape = SubResource("ConcavePolygonShape3D_bjgs1")
 transform = Transform3D(1.4901161e-08, 0, 0.59999985, 0, 0.4724999, 0, -0.3999999, 0, 2.9802322e-08, 23, 0.19999999, -37.3)
 
 [node name="Small_Hill2" type="MeshInstance3D" parent="NavigationRegion3D/Small_Hill Asia8" unique_id=1406150223]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 2.1684043e-19, 0, 0, 100.00001, 3.1391646e-05, 2.2737368e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("103_uvule")
 surface_material_override/0 = SubResource("ShaderMaterial_46s8j")
@@ -18491,7 +18536,7 @@ shape = SubResource("ConcavePolygonShape3D_msxbo")
 transform = Transform3D(0.3, 0, 0, 0, 0.09, 0, 0, 0, 0.19999999, 27, 0.19999999, -34)
 
 [node name="Island_2" type="MeshInstance3D" parent="NavigationRegion3D/Island_1 Asia2" unique_id=1410542348]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 1.9470717e-07, 0, -1.9470718e-07, 1, 0, -1.4841328, 0)
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 1.9470717e-07, 0, -1.9470718e-07, 1, 0, -1.4841328, 0)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_axwos")
 surface_material_override/0 = SubResource("ShaderMaterial_m0mgm")
@@ -18507,7 +18552,7 @@ shape = SubResource("ConcavePolygonShape3D_j0lmw")
 transform = Transform3D(-3.3527612e-09, 0, 0.47494745, 0, 0.768, 0, -0.13697833, 0, -2.9057263e-08, 24.88294, 0.17400354, -30.355171)
 
 [node name="Clif_3" type="MeshInstance3D" parent="NavigationRegion3D/Clif_2  Asia2" unique_id=801377707]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -4.3368087e-19, 1.8189894e-12, 0, 100, 3.1391643e-05, -1.1368684e-13, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("50_2nf86")
 surface_material_override/0 = SubResource("ShaderMaterial_wxmwk")
@@ -18522,7 +18567,7 @@ shape = SubResource("ConvexPolygonShape3D_dmidt")
 transform = Transform3D(0.13697833, 0, 8.296652e-09, 0, 0.76799995, 0, 2.6347515e-09, 0, 0.47494745, 37.882942, 0.17400354, -35.35517)
 
 [node name="Clif_3" type="MeshInstance3D" parent="NavigationRegion3D/Clif_2  Asia5" unique_id=851827686]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, -2.1684043e-19, 4.5474735e-13, 0, 100.00001, 3.1391646e-05, 1.1368684e-13, -3.1391646e-05, 100, 0, 0, 0)
 mesh = ExtResource("50_2nf86")
 surface_material_override/0 = SubResource("ShaderMaterial_wxmwk")
 surface_material_override/1 = SubResource("ShaderMaterial_ux7rd")
@@ -18536,7 +18581,7 @@ shape = SubResource("ConvexPolygonShape3D_wa405")
 transform = Transform3D(0.51777804, 0, 4.8398965e-09, -2.3805107e-16, 0.8438329, -0.051744346, -3.1340024e-17, 0.22610432, 0.19311251, 32.08294, 0.17400354, -38.85517)
 
 [node name="Clif_3" type="MeshInstance3D" parent="NavigationRegion3D/Clif_2  Asia3" unique_id=1775353761]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.99999, 0, -5.684342e-14, -1.5881868e-21, 100, 3.1471252e-05, -1.6940659e-21, -2.2888184e-05, 100, 0, 0, 0)
 mesh = ExtResource("50_2nf86")
 surface_material_override/0 = SubResource("ShaderMaterial_wxmwk")
 surface_material_override/1 = SubResource("ShaderMaterial_ux7rd")
@@ -18550,7 +18595,7 @@ shape = SubResource("ConvexPolygonShape3D_32ara")
 transform = Transform3D(0.93200046, 0, 4.839897e-09, 0, 0.7265778, -0.12850916, 0, 0.6096713, 0.15315127, 23.58294, 1.3740036, -40.35517)
 
 [node name="Clif_3" type="MeshInstance3D" parent="NavigationRegion3D/Clif_2  Asia4" unique_id=1467169385]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 1.1368684e-13, 5.684342e-14, 0, 100, 3.1471252e-05, 0, -4.5776367e-05, 100, 0, 0, 0)
 mesh = ExtResource("50_2nf86")
 surface_material_override/0 = SubResource("ShaderMaterial_wxmwk")
 surface_material_override/1 = SubResource("ShaderMaterial_ux7rd")
@@ -18572,7 +18617,7 @@ camo_position_offset = Vector3(-0.26, 0.905, 0.15)
 camo_rotation_offset = Vector3(73.575, 149.971, -29.477)
 
 [node name="Samurai_Helmet2" type="MeshInstance3D" parent="NavigationRegion3D/Samurai_Helmet Asia" unique_id=1721886141]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, -4.5474735e-13, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("138_3ge7c")
 
@@ -18610,7 +18655,7 @@ hand_position_offset = Vector3(0.13, -0.09, -0.13)
 hand_rotation_offset = Vector3(17.32, 4.23, -17.74)
 
 [node name="Katana2" type="MeshInstance3D" parent="NavigationRegion3D/Katana  Asia" unique_id=752717991]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100.00001, 2.5831923e-07, 1.9073486e-06, -4.7683716e-07, 100, 3.1352043e-05, 0, -3.1434574e-05, 100, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("142_4f2fh")
 
@@ -18704,7 +18749,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 shape = SubResource("ConvexPolygonShape3D_87cgb")
 
 [node name="Rock_5" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=337223116]
-transform = Transform3D(1.3999999, 0, 0, 0, 1.7000002, 5.296035e-07, 0, -1.947072e-07, 1.5999999, 22.199999, -0.10000008, -2.7)
+transform = Transform3D(1.3999999, 0, 0, 0, 1.7000002, 5.296035e-07, 0, -1.947072e-07, 1.5999999, 22.2, -0.10000008, -2.7)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_e30a0")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
@@ -18726,7 +18771,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 shape = SubResource("ConvexPolygonShape3D_voem5")
 
 [node name="Rock_6" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=41367147]
-transform = Transform3D(5.0399995, 0, 0, 0, -0.114086784, -1.2751292, 0, 1.304019, -0.11155897, 21.199999, 3.8999999, -6.7)
+transform = Transform3D(5.0399995, 0, 0, 0, -0.114086784, -1.2751292, 0, 1.304019, -0.11155897, 21.2, 3.8999999, -6.7)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_e30a0")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
@@ -18737,7 +18782,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 shape = SubResource("ConvexPolygonShape3D_7x8al")
 
 [node name="Rock_9" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1333594634]
-transform = Transform3D(2.1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 23.4, -0.100000024, 8)
+transform = Transform3D(2.1, 0, 0, 0, 1, 1.9470718e-07, 0, -1.9470718e-07, 1, 23.400002, -0.100000024, 8)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_yn6ub")
 surface_material_override/0 = SubResource("ShaderMaterial_8sa2x")
@@ -18749,7 +18794,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012217522, 1.1702962, 0.02
 shape = SubResource("BoxShape3D_i22rh")
 
 [node name="Rock_12" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=222948843]
-transform = Transform3D(1.4699999, 0, 0, 0, 1, 1.9470718e-07, 0, -1.3629503e-07, 0.7, 31.4, -0.100000024, 2)
+transform = Transform3D(1.4699999, 0, 0, 0, 1, 1.9470718e-07, 0, -1.3629503e-07, 0.7, 31.400002, -0.100000024, 2)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_073g0")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
@@ -18760,7 +18805,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 shape = SubResource("ConvexPolygonShape3D_ss04f")
 
 [node name="Rock_8" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=112728546]
-transform = Transform3D(1.8000001, 0, 0, 0, 1.9000001, 3.6994368e-07, 0, -1.9470718e-07, 1, 16.202078, -0.100000024, 8)
+transform = Transform3D(1.8000001, 0, 0, 0, 1.9000001, 3.6994368e-07, 0, -1.9470718e-07, 1, 16.20208, -0.100000024, 8)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_yn6ub")
 surface_material_override/0 = SubResource("ShaderMaterial_wmagv")
@@ -18777,7 +18822,7 @@ transform = Transform3D(1, -7.45058e-08, -1.49012e-08, 7.4505806e-08, 1, 3.57627
 shape = SubResource("BoxShape3D_ehbig")
 
 [node name="Rock_17" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=650537153]
-transform = Transform3D(-0.40894204, 2.2539175, 0.052782785, -0.13292417, -0.17802228, 1.0663087, 1.4387203, 0.6242061, 0.113519736, 16.002077, 5.2999997, 5)
+transform = Transform3D(-0.40894204, 2.2539175, 0.052782785, -0.13292417, -0.17802228, 1.0663087, 1.4387203, 0.6242061, 0.113519736, 16.002079, 5.2999997, 5)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_yn6ub")
 surface_material_override/0 = SubResource("ShaderMaterial_volbp")
@@ -18789,7 +18834,7 @@ transform = Transform3D(1, 1.6653357e-15, 2.9802347e-08, 0, 1, -5.5879347e-08, -
 shape = SubResource("BoxShape3D_opwvj")
 
 [node name="Rock_20" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1614037306]
-transform = Transform3D(-0.40894204, 2.2539175, 0.052782785, -0.13292417, -0.17802228, 1.0663087, 1.4387203, 0.6242061, 0.113519736, 16.002077, 5.2999997, 5)
+transform = Transform3D(-0.40894204, 2.2539175, 0.052782785, -0.13292417, -0.17802228, 1.0663087, 1.4387203, 0.6242061, 0.113519736, 16.002079, 5.2999997, 5)
 mesh = SubResource("ArrayMesh_yn6ub")
 surface_material_override/0 = SubResource("ShaderMaterial_volbp")
 
@@ -18811,7 +18856,7 @@ transform = Transform3D(1, 1.6653357e-15, 2.9802347e-08, 0, 1, -5.5879347e-08, -
 shape = SubResource("BoxShape3D_opwvj")
 
 [node name="Rock_7" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=652814082]
-transform = Transform3D(-5.5076356e-08, 1.9470721e-07, -0.94133013, 0, 1.9000003, 3.482391e-07, 1.26, 8.510921e-15, -4.114684e-08, 13.037115, -0.10000012, -4.2)
+transform = Transform3D(-5.5076356e-08, 1.9470721e-07, -0.94133013, 0, 1.9000003, 3.482391e-07, 1.26, 8.510921e-15, -4.114684e-08, 13.037115, -0.10000014, -4.2)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_yn6ub")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
@@ -18877,7 +18922,7 @@ shape = SubResource("ConvexPolygonShape3D_mjf4u")
 transform = Transform3D(-2.3841856e-07, 0, 1.9372692, 0, 1.3, 0, -2.9856403, 0, -1.1324883e-07, 41, -3.7, 28)
 
 [node name="Clif_3" type="MeshInstance3D" parent="NavigationRegion3D/Clif_2  Asia7" unique_id=583852815]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100.00001, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("50_2nf86")
 surface_material_override/0 = SubResource("ShaderMaterial_bwkyl")
@@ -18887,7 +18932,7 @@ surface_material_override/1 = SubResource("ShaderMaterial_bwkyl")
 transform = Transform3D(1.49282, 0, -1.6777244, 0, 1.3, 0, 2.5856402, 0, 0.9686346, 13, -6.7000003, 28)
 
 [node name="Clif_3" type="MeshInstance3D" parent="NavigationRegion3D/Clif_2  Asia8" unique_id=1834263796]
-transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
+transform = Transform3D(99.999985, 0, 0, 0, 100, 3.1391646e-05, 7.6293945e-06, -3.1391643e-05, 99.99999, 0, 0, 0)
 cast_shadow = 0
 mesh = ExtResource("50_2nf86")
 surface_material_override/0 = SubResource("ShaderMaterial_bwkyl")
@@ -19246,7 +19291,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00020372495, 0.01, -0.0002
 shape = SubResource("BoxShape3D_f33nb")
 
 [node name="Tile_1_6" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=219620576]
-transform = Transform3D(6.7964997, 0, 0, 0, -1.0561943e-06, 4.6514997, 0, -4.43, -1.109004e-06, 26, 4.1, 32.8)
+transform = Transform3D(6.7964997, 0, 0, 0, -1.0561943e-06, 4.6514997, 0, -4.43, -1.109004e-06, 26, 4.1, 32.799995)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_wmagv")
 surface_material_override/0 = SubResource("ShaderMaterial_g5e81")
@@ -19294,7 +19339,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013676971, 0.043518495, 0.
 shape = SubResource("BoxShape3D_fvmq8")
 
 [node name="Tile_1_11" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1204532145]
-transform = Transform3D(6.7964997, 1.8467083e-13, -8.1329404e-07, 1.1883378e-06, -1.0561939e-06, 4.6514997, 0, -4.4300003, -1.109004e-06, 24.699999, 2.1999996, 31.8)
+transform = Transform3D(6.7964997, 1.8467083e-13, -8.1329404e-07, 1.1883378e-06, -1.0561939e-06, 4.6514997, 0, -4.4300003, -1.109004e-06, 24.7, 2.1999996, 31.8)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_wmagv")
 surface_material_override/0 = SubResource("ShaderMaterial_gve0t")
@@ -19383,7 +19428,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 shape = SubResource("ConcavePolygonShape3D_vt3av")
 
 [node name="Tile_1_16" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1208482084]
-transform = Transform3D(-27.892832, 3.9339085e-07, 2.4740393e-06, -4.5474735e-13, 19.004692, 4.2915344e-06, -4.876938e-06, 4.7683716e-06, -14.149863, 17.456392, -1.4000006, -3.5499997)
+transform = Transform3D(-27.892832, 3.9339085e-07, 2.4740393e-06, -4.5474735e-13, 19.004692, 4.2915344e-06, -4.876938e-06, 4.7683716e-06, -14.149863, 17.456394, -1.4000006, -3.5499997)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_wmagv")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
@@ -19441,7 +19486,7 @@ mesh = SubResource("ArrayMesh_wmagv")
 surface_material_override/0 = SubResource("ShaderMaterial_mjf4u")
 
 [node name="Tile_1_7" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=39529374]
-transform = Transform3D(-7.6829996, -9.233543e-14, 4.453753e-07, -6.7166917e-07, 1.0561942e-06, -5.0944996, 0, -4.4299994, -1.2146234e-06, 20.5, 4.2999997, 32.8)
+transform = Transform3D(-7.6829996, -9.233543e-14, 4.453753e-07, -6.7166917e-07, 1.0561942e-06, -5.0944996, 0, -4.4299994, -1.2146234e-06, 20.5, 4.2999997, 32.799995)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_wmagv")
 surface_material_override/0 = SubResource("ShaderMaterial_kndku")
@@ -19453,7 +19498,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013676971, 0.043518495, 0.
 shape = SubResource("BoxShape3D_tjhu1")
 
 [node name="Tile_1_8" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1262669468]
-transform = Transform3D(6.501, 0, 0, 0, -1.0561943e-06, 4.873, 0, -4.43, -1.1618138e-06, 20.699999, 7.999999, 34.8)
+transform = Transform3D(6.501, 0, 0, 0, -1.0561943e-06, 4.873, 0, -4.43, -1.1618138e-06, 20.7, 7.999999, 34.799995)
 cast_shadow = 0
 mesh = SubResource("ArrayMesh_wmagv")
 surface_material_override/0 = SubResource("ShaderMaterial_nr0w7")
@@ -19625,7 +19670,7 @@ size = Vector3(2.322998, 3.6918945, 1)
 material = SubResource("StandardMaterial3D_kndku")
 
 [node name="SmallHill5" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1273755710]
-transform = Transform3D(34.0235, 0, 0, 0, 3.7193314e-07, -17.893997, 0, 4.0456, -5.684342e-14, -25.863047, 2.0523937, -38.541832)
+transform = Transform3D(34.0235, 0, 0, 0, 3.7193314e-07, -17.893997, 0, 4.0456, -5.684342e-14, -25.863045, 2.0523937, -38.541832)
 cast_shadow = 0
 mesh = ExtResource("103_uvule")
 surface_material_override/0 = SubResource("ShaderMaterial_b2xmb")
@@ -19636,7 +19681,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_b2xmb")
 shape = SubResource("ConcavePolygonShape3D_ohkkp")
 
 [node name="SmallHill4" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1722737408]
-transform = Transform3D(84.038025, 0, 0, 0, -20.291792, 1.6269165e-06, 0, 9.785479e-07, -37.219513, -31.663046, 4.0523934, -33.341835)
+transform = Transform3D(84.038025, 0, 0, 0, -20.291792, 1.6269165e-06, 0, 9.785479e-07, -37.219513, -31.663044, 4.0523934, -33.341835)
 cast_shadow = 0
 mesh = ExtResource("103_uvule")
 surface_material_override/0 = SubResource("ShaderMaterial_b2xmb")
@@ -19658,7 +19703,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_b2xmb")
 shape = SubResource("ConcavePolygonShape3D_bbh3k")
 
 [node name="SmallHill3" type="MeshInstance3D" parent="NavigationRegion3D" unique_id=1739776258]
-transform = Transform3D(35.724667, 0, 0, 0, 1.945496e-06, -17.894, 0, 21.161596, 0, -19.163046, 2.1523938, -38.64183)
+transform = Transform3D(35.724667, 0, 0, 0, 1.945496e-06, -17.894, 0, 21.161596, 0, -19.163044, 2.1523938, -38.64183)
 cast_shadow = 0
 mesh = ExtResource("103_uvule")
 surface_material_override/0 = SubResource("ShaderMaterial_b2xmb")
@@ -20098,7 +20143,9 @@ environment = SubResource("Environment_dt4rj")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=863165025]
 transform = Transform3D(-0.42532268, 0.90065604, 0.088989936, 0.4117982, 0.1050271, 0.90520257, 0.8059296, 0.42164913, -0.4155591, 0, 0, 0)
 light_color = Color(1, 1, 0.70980394, 1)
+light_bake_mode = 1
 shadow_enabled = true
+shadow_blur = 0.0
 directional_shadow_mode = 0
 directional_shadow_split_1 = 0.0
 directional_shadow_fade_start = 0.9
