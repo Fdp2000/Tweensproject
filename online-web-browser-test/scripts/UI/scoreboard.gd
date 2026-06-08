@@ -42,7 +42,7 @@ func populate(winner_text: String, cops_data: Array, thieves_data: Array):
 		
 	for data in thieves_data:
 		var lbl = Label.new()
-		lbl.text = data["name"] + " - Cash: $" + str(data["cash"])
+		lbl.text = data["name"] + " - Cash: " + Balance.format_money(data["cash"])
 		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		lbl.add_theme_color_override("font_outline_color", Color.BLACK)
 		lbl.add_theme_constant_override("outline_size", 4)

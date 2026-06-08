@@ -772,6 +772,10 @@ uv1_scale = Vector3(2.49, 4.61, 1)
 albedo_texture = ExtResource("13_wvkjh")
 uv1_scale = Vector3(-2.63, -4.74, -4.74)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqlqa"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
 [node name="PregameLobby" type="Node3D" unique_id=1137537174]
 
 [node name="Vent" parent="." unique_id=581943021 instance=ExtResource("1_hbusi")]
@@ -2037,6 +2041,31 @@ script = ExtResource("2_van")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Van/HostVan" unique_id=1399586928]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 shape = SubResource("BoxShape3D_van")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=798475120]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.857714, 1.7885131, 13.395452)
+size = Vector3(1, 4.5770264, 3.3886719)
+material = SubResource("StandardMaterial3D_bqlqa")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=277903918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.154057, 1.7885131, 13.395452)
+size = Vector3(1, 4.5770264, 3.3886719)
+material = SubResource("StandardMaterial3D_bqlqa")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="." unique_id=1563492516]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.572441, 1.7885131, 14.560003)
+size = Vector3(1, 4.5770264, 3.3886719)
+material = SubResource("StandardMaterial3D_bqlqa")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="." unique_id=825089197]
+transform = Transform3D(-4.371139e-08, 0, 1, -1, -4.371139e-08, -4.371139e-08, 4.371139e-08, -1, 1.9106855e-15, 19.572441, 3.6131048, 14.071009)
+size = Vector3(1, 4.5770264, 3.3886719)
+material = SubResource("StandardMaterial3D_bqlqa")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="." unique_id=1033813556]
+transform = Transform3D(-4.371139e-08, 0, 1, -1, -4.371139e-08, -4.371139e-08, 4.371139e-08, -1, 1.9106855e-15, 19.572441, -0.84692633, 13.871903)
+size = Vector3(1, 4.5770264, 3.3886719)
+material = SubResource("StandardMaterial3D_bqlqa")
 
 [editable path="Vent"]
 [editable path="Vent/PivotPoint/Sketchfab_Scene"]
