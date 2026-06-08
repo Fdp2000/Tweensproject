@@ -415,7 +415,7 @@ func _drop_dummy():
 
 func get_local_player() -> Node3D:
 	if not multiplayer.has_multiplayer_peer(): return null
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	if spawned:
 		return spawned.get_node_or_null(str(multiplayer.get_unique_id()))
 	return null

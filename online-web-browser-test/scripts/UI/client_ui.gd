@@ -777,7 +777,7 @@ func get_unoccupied_spawn(group_name: String, fallback_pos: Vector3 = Vector3(0,
 	var spawns = get_tree().get_nodes_in_group(group_name)
 	if spawns.size() == 0: return Transform3D(Basis(), fallback_pos)
 	
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	if not spawned: return spawns.pick_random().global_transform.orthonormalized()
 	
 	var available_spawns = []
@@ -805,7 +805,7 @@ func _on_player_joined(id: int) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	if not spawned:
 		return
 
@@ -829,7 +829,7 @@ func _on_player_joined(id: int) -> void:
 
 func _on_game_started() -> void:
 	if multiplayer.is_server():
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = GameManager.get_spawned_objects()
 
 		if spawned:
 			for i in 3:

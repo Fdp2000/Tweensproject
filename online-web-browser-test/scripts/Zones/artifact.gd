@@ -231,7 +231,7 @@ func confirm_pickup(player_id: int):
 	if has_node("MultiplayerSynchronizer"):
 		$MultiplayerSynchronizer.set_multiplayer_authority(player_id)
 	
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	if spawned:
 		var carrier = spawned.get_node_or_null(str(carrier_id))
 		if carrier and carrier.has_method("on_artifact_pickup"):
@@ -245,7 +245,7 @@ func _process(delta):
 		if is_multiplayer_authority():
 			# I am carrying it, so I control it
 			if cached_attachment:
-				var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+				var spawned = GameManager.get_spawned_objects()
 				var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null
 				
 				# --- CAMO BLEND CALCULATION ---
@@ -302,17 +302,20 @@ func _process(delta):
 					c_basis = c_basis.rotated(c_basis.z.normalized(), deg_to_rad(camo_rotation_offset.z))
 					floor_transform.basis = c_basis
 				elif carrier:
-					# Raycast straight down from the hand, exactly like drop()
-					var drop_origin = hand_transform.origin
-					var space_state = get_world_3d().direct_space_state
-					var query = PhysicsRayQueryParameters3D.create(drop_origin + Vector3(0, 1, 0), drop_origin + Vector3(0, -10, 0))
-					query.collision_mask = 1
-					var result = space_state.intersect_ray(query)
-					
-					if result:
-						floor_transform.origin = result.position + Vector3(0, drop_height_offset, 0)
+					if camo_blend > 0.0:
+						# Raycast straight down from the hand, exactly like drop()
+						var drop_origin = hand_transform.origin
+						var space_state = get_world_3d().direct_space_state
+						var query = PhysicsRayQueryParameters3D.create(drop_origin + Vector3(0, 1, 0), drop_origin + Vector3(0, -10, 0))
+						query.collision_mask = 1
+						var result = space_state.intersect_ray(query)
+						
+						if result:
+							floor_transform.origin = result.position + Vector3(0, drop_height_offset, 0)
+						else:
+							floor_transform.origin = drop_origin
 					else:
-						floor_transform.origin = drop_origin
+						floor_transform.origin = hand_transform.origin
 				else:
 					floor_transform = hand_transform
 					
@@ -438,7 +441,7 @@ func _apply_visuals(node: Node, highlighted: bool):
 func drop():
 	AudioManager.play_3d_sfx("artifact_drop", global_position)
 	if carrier_id != -1:
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = GameManager.get_spawned_objects()
 		var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null
 		if carrier and carrier.has_method("on_artifact_drop"):
 			carrier.on_artifact_drop()
@@ -469,7 +472,7 @@ func drop():
 func destroy_artifact():
 	AudioManager.play_3d_sfx("artifact_delivery", global_position)
 	if carrier_id != -1:
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = GameManager.get_spawned_objects()
 		var carrier = spawned.get_node_or_null(str(carrier_id)) if spawned else null
 		if carrier and carrier.has_method("on_artifact_drop"):
 			carrier.on_artifact_drop()

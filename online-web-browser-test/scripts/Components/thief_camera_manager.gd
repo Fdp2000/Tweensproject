@@ -200,7 +200,7 @@ func fire_camera_ping():
 			var ray_length = origin.distance_to(hit_pos)
 			var best_dist = 2.5 # Extremely generous 2.5 meter snap radius
 			
-			var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+			var spawned = GameManager.get_spawned_objects()
 			if spawned:
 				for child in spawned.get_children():
 					if child.has_method("get_pinged"):

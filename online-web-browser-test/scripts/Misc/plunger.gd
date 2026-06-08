@@ -46,7 +46,7 @@ func _physics_process(delta):
 				print("SERVER: Plunger hit player! Sending damage RPC...")
 				
 				# Credit the hit to the shooter
-				var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+				var spawned = GameManager.get_spawned_objects()
 				if spawned:
 					var shooter = spawned.get_node_or_null(str(shooter_id))
 					if shooter and shooter.has_method("register_hit"):

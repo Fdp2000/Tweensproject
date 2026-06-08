@@ -406,7 +406,7 @@ func _detect_capture():
 @rpc("any_peer", "call_local")
 func request_capture(thief_id: int):
 	if not multiplayer.is_server(): return
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	if not spawned: return
 	
 	var thief = spawned.get_node_or_null(str(thief_id))

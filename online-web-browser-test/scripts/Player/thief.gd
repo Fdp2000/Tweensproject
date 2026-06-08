@@ -391,7 +391,7 @@ func _custom_physics_process(delta, direction):
 						
 		if multiplayer.is_server():
 			if active_rescuer_id != -1:
-				var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+				var spawned = GameManager.get_spawned_objects()
 				var rescuer = spawned.get_node_or_null(str(active_rescuer_id)) if spawned else null
 				if rescuer and rescuer.global_position.distance_to(global_position) <= Balance.interact_shape_size:
 					if not is_rescue_halted:
@@ -773,7 +773,7 @@ func draw_debug_path():
 @rpc("any_peer", "call_local")
 func request_start_rescue(target_id: int):
 	if not multiplayer.is_server(): return
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	var target = spawned.get_node_or_null(str(target_id)) if spawned else null
 	if target and target.get("is_hypnotized"):
 		target.active_rescuer_id = multiplayer.get_remote_sender_id()
@@ -782,7 +782,7 @@ func request_start_rescue(target_id: int):
 @rpc("any_peer", "call_local")
 func request_stop_rescue(target_id: int):
 	if not multiplayer.is_server(): return
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	var target = spawned.get_node_or_null(str(target_id)) if spawned else null
 	if target and target.active_rescuer_id == multiplayer.get_remote_sender_id():
 		target.active_rescuer_id = -1

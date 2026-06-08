@@ -119,7 +119,7 @@ func wait_for_local_player() -> Node3D:
 	return null
 
 func find_local_player() -> Node3D:
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	if spawned == null: return null
 	var my_id := multiplayer.get_unique_id()
 	
@@ -245,7 +245,7 @@ func get_dummies(parent_node: Node3D) -> Array:
 	return dummies
 
 func setup_versus_lineup():
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = GameManager.get_spawned_objects()
 	if spawned == null: return
 	
 	var robbers := []

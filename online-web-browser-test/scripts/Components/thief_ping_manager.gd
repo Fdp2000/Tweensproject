@@ -25,7 +25,7 @@ func trigger_ping(pos: Vector3):
 	if not ping_visual: return
 	
 	if multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = GameManager.get_spawned_objects()
 		if spawned:
 			var local_player = spawned.get_node_or_null(str(multiplayer.get_unique_id()))
 			if local_player and local_player.get("team_index") == 0: # 0 is Thief team

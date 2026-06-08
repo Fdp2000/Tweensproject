@@ -46,6 +46,17 @@ var selected_chameleon_skin: int = 0
 var selected_rhino_skin: int = 0
 var employee_of_month_id: int = -1
 
+var _cached_spawned_objects: Node = null
+
+func get_spawned_objects() -> Node:
+	if is_instance_valid(_cached_spawned_objects):
+		return _cached_spawned_objects
+		
+	var root = get_tree().get_root()
+	if root:
+		_cached_spawned_objects = root.find_child("SpawnedObjects", true, false)
+	return _cached_spawned_objects
+
 func _ready():
 	print("GameManager is ready.")
 	heartbeat_timer = Timer.new()
@@ -146,7 +157,7 @@ func remove_player(id: int):
 			check_game_validity()
 			
 		if multiplayer.is_server():
-			var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+			var spawned = get_spawned_objects()
 			if spawned:
 				var player_node = spawned.get_node_or_null(str(id))
 				if player_node:
@@ -191,7 +202,7 @@ func start_game(role_assignments: Dictionary):
 			var assigned_role = role_assignments[id_str]
 			players[id]["role"] = assigned_role
 
-			var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+			var spawned = get_spawned_objects()
 
 			if spawned:
 				var player_node = spawned.get_node_or_null(str(id))
@@ -331,7 +342,7 @@ func end_game_with_winner(winner_team: int):
 		var cops_data = []
 		var thieves_data = []
 		
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = get_spawned_objects()
 
 		if spawned:
 			for player in spawned.get_children():
@@ -450,7 +461,7 @@ func client_return_to_lobby():
 		cached_scoreboard.process_mode = Node.PROCESS_MODE_DISABLED
 		
 	if multiplayer.has_multiplayer_peer() and multiplayer.is_server():
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = get_spawned_objects()
 
 		if spawned:
 			for child in spawned.get_children():
@@ -494,7 +505,7 @@ func full_teardown():
 	if scoreboard:
 		scoreboard.queue_free()
 		
-	var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+	var spawned = get_spawned_objects()
 	if spawned:
 		for child in spawned.get_children():
 			spawned.remove_child(child)
@@ -580,7 +591,7 @@ func trigger_pre_game_start(assignments: Dictionary):
 	
 	# NUKE THE LOBBY PLAYERS HERE! The screen is fully black now!
 	if multiplayer.is_server():
-		var spawned = get_tree().get_root().find_child("SpawnedObjects", true, false)
+		var spawned = get_spawned_objects()
 		if spawned:
 			for child in spawned.get_children():
 				spawned.remove_child(child)
