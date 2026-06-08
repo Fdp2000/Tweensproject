@@ -18,4 +18,9 @@ func _process(delta: float) -> void:
 
 
 func _update_visibility() -> void:
-	visible = multiplayer.has_multiplayer_peer() and multiplayer.is_server()
+	var is_host = multiplayer.has_multiplayer_peer() and multiplayer.is_server()
+	visible = is_host
+	
+	var parent = get_parent()
+	if parent and parent is Control:
+		parent.visible = is_host

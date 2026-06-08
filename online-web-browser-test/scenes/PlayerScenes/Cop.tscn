@@ -210,6 +210,7 @@ size = Vector2(1.5, 1.5)
 [node name="Cop" type="CharacterBody3D" unique_id=1223235874]
 collision_layer = 2
 collision_mask = 7
+floor_constant_speed = true
 floor_max_angle = 1.3089969
 floor_snap_length = 0.6
 script = ExtResource("2_cop")
@@ -248,27 +249,27 @@ transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5
 script = ExtResource("8_ppjyx")
 
 [node name="Skeleton3D" parent="Næsehorn2/metarig" parent_id_path=PackedInt32Array(2043154851, 19087762) index="0" unique_id=350655559]
-bones/1/rotation = Quaternion(0.026716612, 0.016815955, 0.002298706, 0.99949896)
-bones/2/rotation = Quaternion(-0.023669973, 0.03405123, 0.006679054, 0.99911743)
-bones/3/rotation = Quaternion(-0.078112714, 0.031291153, 0.01231196, 0.9963773)
-bones/5/rotation = Quaternion(-0.592521, -0.39693114, -0.46427515, 0.52517927)
-bones/6/rotation = Quaternion(-0.31799307, 0.6475141, -0.4695792, 0.5090201)
-bones/7/rotation = Quaternion(0.16067776, -0.06680728, -0.0031447306, 0.9847384)
-bones/8/rotation = Quaternion(-0.14461356, 0.040658046, -0.04362697, 0.98768955)
-bones/9/rotation = Quaternion(0.1379168, 0.048406478, -0.23143767, 0.96180683)
-bones/10/rotation = Quaternion(0.15177928, 0.04481441, -0.19851117, 0.9672374)
-bones/11/rotation = Quaternion(0.18133073, 0.026261007, -0.060914677, 0.9811825)
-bones/13/rotation = Quaternion(-0.58657324, 0.40581113, 0.46290287, 0.52627957)
-bones/14/rotation = Quaternion(-0.27364767, -0.68988615, 0.47283775, 0.4749723)
-bones/15/rotation = Quaternion(0.15418655, 0.0912949, -0.0026599125, 0.9838113)
-bones/16/rotation = Quaternion(-0.12694262, -0.017122993, -0.03366101, 0.99119085)
-bones/17/rotation = Quaternion(0.1388154, -0.043563582, 0.19857574, 0.96922666)
-bones/18/rotation = Quaternion(0.15267305, -0.036857232, 0.14524856, 0.97684973)
-bones/19/rotation = Quaternion(0.18128163, -0.020053033, 0.02621041, 0.9828774)
-bones/23/rotation = Quaternion(0.9425002, 0.1095078, -0.12596133, 0.28954294)
-bones/24/rotation = Quaternion(0.34479097, -0.02987377, -0.021969693, 0.9379468)
-bones/25/rotation = Quaternion(0.96814466, -0.06772093, 0.079865575, 0.2274456)
-bones/26/rotation = Quaternion(0.32290938, 0.037212264, 0.023760537, 0.9453996)
+bones/1/rotation = Quaternion(0.0278195, 0.017176896, 0.0022649239, 0.9994628)
+bones/2/rotation = Quaternion(-0.023041476, 0.035114866, 0.006964012, 0.9990934)
+bones/3/rotation = Quaternion(-0.07747444, 0.032191005, 0.0124405995, 0.99639684)
+bones/5/rotation = Quaternion(-0.59181494, -0.39874288, -0.4638947, 0.52493894)
+bones/6/rotation = Quaternion(-0.30576178, 0.6414485, -0.48969096, 0.505229)
+bones/7/rotation = Quaternion(0.15071286, -0.07751168, -0.0008648348, 0.98553383)
+bones/8/rotation = Quaternion(-0.14806941, 0.03640629, -0.03531826, 0.9876755)
+bones/9/rotation = Quaternion(0.1385761, 0.045236066, -0.2100322, 0.9667662)
+bones/10/rotation = Quaternion(0.15249555, 0.03958555, -0.16410238, 0.9737805)
+bones/11/rotation = Quaternion(0.18130109, 0.02211358, -0.03851139, 0.9824245)
+bones/13/rotation = Quaternion(-0.59081167, 0.40030476, 0.46384427, 0.524925)
+bones/14/rotation = Quaternion(-0.2763281, -0.6921968, 0.46619752, 0.4766196)
+bones/15/rotation = Quaternion(0.15711832, 0.08453926, 0.00014892594, 0.98395485)
+bones/16/rotation = Quaternion(-0.15148719, -0.027094522, -0.027512666, 0.9877048)
+bones/17/rotation = Quaternion(0.13897796, -0.043049634, 0.19499715, 0.9699526)
+bones/18/rotation = Quaternion(0.15285723, -0.0358849, 0.13901629, 0.9777635)
+bones/19/rotation = Quaternion(0.1813205, -0.019292794, 0.021793116, 0.98299325)
+bones/23/rotation = Quaternion(0.94230103, 0.108310044, -0.1259077, 0.29066303)
+bones/24/rotation = Quaternion(0.34545666, -0.03264899, -0.023593418, 0.9375698)
+bones/25/rotation = Quaternion(0.96695364, -0.068611555, 0.07888652, 0.23252991)
+bones/26/rotation = Quaternion(0.32680506, 0.035444308, 0.023601066, 0.94413203)
 
 [node name="smokeParticles" parent="." unique_id=685362775 instance=ExtResource("3_ksubn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050722957, 0.23179841, -0.028223217)

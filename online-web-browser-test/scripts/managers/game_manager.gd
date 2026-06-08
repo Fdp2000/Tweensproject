@@ -569,6 +569,10 @@ func host_start_game():
 func trigger_pre_game_start(assignments: Dictionary):
 	pre_game_started.emit(assignments)
 	
+	var proto_level = get_tree().get_root().find_child("PrototypeLevel", true, false)
+	if proto_level:
+		proto_level.visible = true
+	
 	# Dynamically grab the fade time from the CutsceneManager so we don't break your timings!
 	var fade_time = 1.0
 	var cutscene = get_tree().get_root().find_child("CutsceneManager", true, false)
