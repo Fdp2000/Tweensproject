@@ -49,7 +49,7 @@ var employee_of_month_id: int = -1
 var _cached_spawned_objects: Node = null
 
 func get_spawned_objects() -> Node:
-	if is_instance_valid(_cached_spawned_objects):
+	if is_instance_valid(_cached_spawned_objects) and not _cached_spawned_objects.is_queued_for_deletion() and _cached_spawned_objects.is_inside_tree():
 		return _cached_spawned_objects
 		
 	var root = get_tree().get_root()
