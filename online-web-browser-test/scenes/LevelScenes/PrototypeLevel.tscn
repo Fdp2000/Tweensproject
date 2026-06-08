@@ -8963,9 +8963,6 @@ shape = SubResource("BoxShape3D_xwy5l")
 [node name="ElephantSmith" parent="NavigationRegion3D/KEEP" unique_id=134688640 instance=ExtResource("25_3u1s1")]
 transform = Transform3D(0.014571739, 0, -0.42975304, 0, 0.43, 0, 0.42975304, 0, 0.014571739, -0.26866388, 0.13811308, -0.17413944)
 
-[node name="Krop_001" parent="NavigationRegion3D/KEEP/ElephantSmith" index="1" unique_id=101788576]
-cast_shadow = 0
-
 [node name="And" parent="NavigationRegion3D/KEEP" unique_id=1476661166 instance=ExtResource("29_mjf4u")]
 transform = Transform3D(-3.8083048, 0, -3.526034, 0, 5.19, 0, 3.526034, 0, -3.8083048, 8.155293, 0.91407067, -8.519466)
 hand_position_offset = Vector3(-0.221, -0.084, -0.13)
@@ -16348,7 +16345,6 @@ transform = Transform3D(0.258819, 0, 0.9659259, 0, 1, 0, -0.9659259, 0, 0.258819
 
 [node name="Van" parent="NavigationRegion3D/Van/WhiteVan" parent_id_path=PackedInt32Array(1941149271, 628082721) index="0" unique_id=784682784]
 transform = Transform3D(4, 0, 0, 0, 1.9999996, 0, 0, 0, 2, 0, 0, 0)
-cast_shadow = 0
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Van/WhiteVan/Van/StaticBody3D" parent_id_path=PackedInt32Array(1941149271, 628082721, 1461634472) index="1" unique_id=35192665]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06667435, 1.010426, 0)
@@ -16356,23 +16352,17 @@ shape = SubResource("BoxShape3D_d0kxi")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Van" index="1" unique_id=1918125771]
 
-[node name="Door1" parent="NavigationRegion3D/Van/WhiteVan" parent_id_path=PackedInt32Array(1941149271, 628082721) index="1" unique_id=1180974588]
-cast_shadow = 0
-
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Van/WhiteVan/Door1/StaticBody3D" parent_id_path=PackedInt32Array(1941149271, 628082721, 1037144885) index="1" unique_id=1004440322]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01978314, 0.028477013, -0.41415787)
 shape = SubResource("BoxShape3D_bo120")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Door1" index="1" unique_id=44704770]
-
-[node name="Doors2" parent="NavigationRegion3D/Van/WhiteVan" parent_id_path=PackedInt32Array(1941149271, 628082721) index="2" unique_id=1968327037]
-cast_shadow = 0
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Door1" parent_id_path=PackedInt32Array(1941149271, 628082721, 1180974588) index="1" unique_id=44704770]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="NavigationRegion3D/Van/WhiteVan/Doors2/StaticBody3D" parent_id_path=PackedInt32Array(1941149271, 628082721, 946734434) index="1" unique_id=972889333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.01978314, 0.026049197, 0.4109838)
 shape = SubResource("BoxShape3D_sfnlw")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Doors2" index="1" unique_id=630395098]
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D/Van/WhiteVan/Doors2" parent_id_path=PackedInt32Array(1941149271, 628082721, 1968327037) index="1" unique_id=630395098]
 
 [node name="Jail" parent="NavigationRegion3D" unique_id=300588336 instance=ExtResource("5_jail")]
 transform = Transform3D(7.5497894e-08, 0, 1, 0, 0.81235856, 0, -1, 0, 7.5497894e-08, 7.5516105, 0.07941294, -52.95801)
