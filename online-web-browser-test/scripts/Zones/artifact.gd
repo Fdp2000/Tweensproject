@@ -171,6 +171,14 @@ func _ready():
 	sync_target_position = global_position
 	sync_target_rotation = rotation
 	initial_scale = scale
+	
+	_disable_shadows(self)
+
+func _disable_shadows(node: Node):
+	if node is MeshInstance3D:
+		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	for child in node.get_children():
+		_disable_shadows(child)
 
 func _calculate_meshes_aabb(node: Node) -> AABB:
 	var total_aabb = AABB()

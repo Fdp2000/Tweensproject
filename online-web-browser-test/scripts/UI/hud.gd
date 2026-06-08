@@ -28,7 +28,7 @@ func _on_time_updated(time_left: int):
 		
 	var minutes = time_left / 60
 	var seconds = time_left % 60
-	time_label.text = "%02d:%02d" % [minutes, seconds]
+	time_label.text = "%d:%02d" % [minutes, seconds]
 	
 	if time_left <= 60:
 		time_label.add_theme_color_override("font_color", Color.RED)

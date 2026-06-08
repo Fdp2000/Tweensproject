@@ -18,6 +18,8 @@ var favorite_idles = ["Idle1"]
 var is_currently_moving = false
 var is_camo_posing = false # <--- ADDED FOR STEALTH TOGGLE
 var sync_mesh_rot_y: float = 0.0 # <--- ADDED FOR MULTIPLAYER CAMERA SYNC
+var last_sent_mesh_rot_y: float = -999.0
+var last_sent_rescue_progress: float = -999.0
 
 var ui_manager: Node = null
 var camera_manager: Node = null
@@ -501,7 +503,9 @@ func _custom_physics_process(delta, direction):
 			
 		if is_multiplayer_authority() and pitch_pivot:
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, target_rot, 10.0 * delta)
-			rpc("sync_mesh_rot", visual_mesh.global_rotation.y)
+			if abs(angle_difference(last_sent_mesh_rot_y, visual_mesh.global_rotation.y)) > 0.05:
+				last_sent_mesh_rot_y = visual_mesh.global_rotation.y
+				rpc("sync_mesh_rot", visual_mesh.global_rotation.y)
 		else:
 			visual_mesh.global_rotation.y = lerp_angle(visual_mesh.global_rotation.y, sync_mesh_rot_y, 10.0 * delta)
 

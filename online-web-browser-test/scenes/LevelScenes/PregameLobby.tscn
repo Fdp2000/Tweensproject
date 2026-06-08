@@ -1087,6 +1087,8 @@ size = Vector3(14.684479, 0.42242432, 24.23883)
 [node name="Arch7" type="MeshInstance3D" parent="." unique_id=1951291620]
 transform = Transform3D(1.3027651, 0, 0, 0, 1, 0, 0, 0, 1, 19.440422, 0, 11.140028)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("5_4j3b7")
 surface_material_override/0 = SubResource("ShaderMaterial_u7vus")
 
@@ -1099,22 +1101,30 @@ shape = SubResource("BoxShape3D_1duix")
 [node name="WallBigCorner2" type="MeshInstance3D" parent="." unique_id=1924690706]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.10059, 0, 11.108394)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_n378j")
 surface_material_override/0 = SubResource("ShaderMaterial_axous")
 
 [node name="WallBigCorner3" type="MeshInstance3D" parent="." unique_id=543997255]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 25.789366, 0, 11.108394)
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_n378j")
 surface_material_override/0 = SubResource("ShaderMaterial_axous")
 
 [node name="WallBigCorner4" type="MeshInstance3D" parent="." unique_id=440956112]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.10059, 0, -10.691312)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_n378j")
 surface_material_override/0 = SubResource("ShaderMaterial_axous")
 
 [node name="WallBigCorner5" type="MeshInstance3D" parent="." unique_id=1094160504]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 25.789366, 0, -10.667725)
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_n378j")
 surface_material_override/0 = SubResource("ShaderMaterial_axous")
 
@@ -1122,6 +1132,8 @@ surface_material_override/0 = SubResource("ShaderMaterial_axous")
 transform = Transform3D(-0.99999994, 0, -1.5099579e-07, 0, 1, 0, 1.5099579e-07, 0, -0.99999994, 15.073487, 0, 11.106293)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1136,6 +1148,8 @@ shape = SubResource("BoxShape3D_be1b0")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, 9.110064)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1150,6 +1164,8 @@ shape = SubResource("BoxShape3D_t6joj")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, 7.13892)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1164,6 +1180,8 @@ shape = SubResource("BoxShape3D_7c4bo")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, 5.156776)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1178,6 +1196,8 @@ shape = SubResource("BoxShape3D_4maqi")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, 3.1871157)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1192,6 +1212,8 @@ shape = SubResource("BoxShape3D_u7vus")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, 1.2079439)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1206,6 +1228,8 @@ shape = SubResource("BoxShape3D_axous")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, -0.7948632)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1220,6 +1244,8 @@ shape = SubResource("BoxShape3D_xnqhl")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, -2.7915661)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1234,6 +1260,8 @@ shape = SubResource("BoxShape3D_nu8ta")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, -4.7713475)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1248,6 +1276,8 @@ shape = SubResource("BoxShape3D_kmuqk")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.093362, 0, -6.724072)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1262,6 +1292,8 @@ shape = SubResource("BoxShape3D_s4vhb")
 transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 13.102756, 0, -8.718485)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1276,6 +1308,8 @@ shape = SubResource("BoxShape3D_tbopg")
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 15.078256, 0, -10.695221)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1290,6 +1324,8 @@ shape = SubResource("BoxShape3D_vihxg")
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 17.081343, 0, -10.691335)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1304,6 +1340,8 @@ shape = SubResource("BoxShape3D_d4keu")
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 19.051397, 0, -10.691335)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1318,6 +1356,8 @@ shape = SubResource("BoxShape3D_a74fl")
 transform = Transform3D(1.031876, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 21.015228, 0, -10.691335)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1332,6 +1372,8 @@ shape = SubResource("BoxShape3D_wplk8")
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 23.031006, 0, -10.669182)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1346,6 +1388,8 @@ shape = SubResource("BoxShape3D_xphb0")
 transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 24.90659, 0, -10.671929)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1359,6 +1403,8 @@ shape = SubResource("BoxShape3D_ok4ir")
 [node name="WallBig16" type="MeshInstance3D" parent="." unique_id=1954536515]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, 9.110064)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1372,6 +1418,8 @@ shape = SubResource("BoxShape3D_rcubq")
 [node name="WallBig17" type="MeshInstance3D" parent="." unique_id=141472317]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, 7.13892)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1385,6 +1433,8 @@ shape = SubResource("BoxShape3D_v3wsa")
 [node name="WallBig18" type="MeshInstance3D" parent="." unique_id=511148851]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, 5.156776)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1398,6 +1448,8 @@ shape = SubResource("BoxShape3D_f21pq")
 [node name="WallBig19" type="MeshInstance3D" parent="." unique_id=1297469832]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, 3.1871157)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1411,6 +1463,8 @@ shape = SubResource("BoxShape3D_2x7l6")
 [node name="WallBig20" type="MeshInstance3D" parent="." unique_id=421892443]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, 1.2079439)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1424,6 +1478,8 @@ shape = SubResource("BoxShape3D_eqwuj")
 [node name="WallBig21" type="MeshInstance3D" parent="." unique_id=1813052325]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, -0.7948632)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1437,6 +1493,8 @@ shape = SubResource("BoxShape3D_qyb81")
 [node name="WallBig22" type="MeshInstance3D" parent="." unique_id=379308605]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, -2.7915661)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1450,6 +1508,8 @@ shape = SubResource("BoxShape3D_amlph")
 [node name="WallBig23" type="MeshInstance3D" parent="." unique_id=1869310823]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, -4.7713475)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1463,6 +1523,8 @@ shape = SubResource("BoxShape3D_4hmic")
 [node name="WallBig24" type="MeshInstance3D" parent="." unique_id=851851513]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, -6.724072)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1476,6 +1538,8 @@ shape = SubResource("BoxShape3D_u47s1")
 [node name="WallBig25" type="MeshInstance3D" parent="." unique_id=1033881117]
 transform = Transform3D(-4.3711385e-08, 0, -0.99999994, 0, 1, 0, 0.99999994, 0, -4.3711385e-08, 25.796528, 0, -8.718485)
 visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1490,6 +1554,8 @@ shape = SubResource("BoxShape3D_ul1ha")
 transform = Transform3D(-0.99999994, 0, -1.5099579e-07, 0, 1, 0, 1.5099579e-07, 0, -0.99999994, 17.05253, 0, 11.106293)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1504,6 +1570,8 @@ shape = SubResource("BoxShape3D_oryyh")
 transform = Transform3D(-0.99999994, 0, -1.5099579e-07, 0, 1, 0, 1.5099579e-07, 0, -0.99999994, 23.795288, 0, 11.106293)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1518,6 +1586,8 @@ shape = SubResource("BoxShape3D_0o8g3")
 transform = Transform3D(-0.99999994, 0, -1.5099579e-07, 0, 1, 0, 1.5099579e-07, 0, -0.99999994, 21.802565, 0, 11.106293)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("9_mncup")
 surface_material_override/0 = SubResource("ShaderMaterial_xnqhl")
 
@@ -1531,6 +1601,8 @@ shape = SubResource("BoxShape3D_e10g3")
 [node name="Floor4" type="MeshInstance3D" parent="." unique_id=19255906]
 transform = Transform3D(7.3746376, 0, 0, 0, 1, 0, 0, 0, 11.994474, 19.448147, 0.21353507, -0.06674385)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("10_tvp7m")
 surface_material_override/0 = SubResource("ShaderMaterial_nu8ta")
 
@@ -1543,6 +1615,8 @@ shape = SubResource("BoxShape3D_0u0qb")
 
 [node name="Floor5" type="MeshInstance3D" parent="." unique_id=1432043362]
 transform = Transform3D(28.44977, 0, 0, 0, 1, 0, 0, 0, 25.5956, 19.448147, 4.190415, -0.06674385)
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("10_tvp7m")
 surface_material_override/0 = SubResource("ShaderMaterial_nu8ta")
 
@@ -1557,6 +1631,8 @@ shape = SubResource("BoxShape3D_4cqwi")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.627277, -4.0856207e-14, -7.146302)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("11_hlqde")
 surface_material_override/0 = SubResource("ShaderMaterial_kmuqk")
 
@@ -1578,6 +1654,8 @@ shape = SubResource("BoxShape3D_ht3wo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.627277, -4.0856207e-14, -0.02642107)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("11_hlqde")
 surface_material_override/0 = SubResource("ShaderMaterial_kmuqk")
 
@@ -1599,6 +1677,8 @@ shape = SubResource("BoxShape3D_ht3wo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.627277, -4.0856207e-14, 6.3925867)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("11_hlqde")
 surface_material_override/0 = SubResource("ShaderMaterial_kmuqk")
 
@@ -1620,6 +1700,8 @@ shape = SubResource("BoxShape3D_ht3wo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.165033, -4.0856207e-14, -7.146302)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("11_hlqde")
 surface_material_override/0 = SubResource("ShaderMaterial_kmuqk")
 
@@ -1641,6 +1723,8 @@ shape = SubResource("BoxShape3D_ht3wo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.165033, -4.0856207e-14, -0.02642107)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("11_hlqde")
 surface_material_override/0 = SubResource("ShaderMaterial_kmuqk")
 
@@ -1662,6 +1746,8 @@ shape = SubResource("BoxShape3D_ht3wo")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.165033, -4.0856207e-14, 6.3925867)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("11_hlqde")
 surface_material_override/0 = SubResource("ShaderMaterial_kmuqk")
 
@@ -1682,6 +1768,8 @@ shape = SubResource("BoxShape3D_ht3wo")
 [node name="WallSmall2" type="MeshInstance3D" parent="." unique_id=1759765955]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 17.216822, 0, -8.166509)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("12_jljn4")
 surface_material_override/0 = SubResource("ShaderMaterial_s4vhb")
 
@@ -1694,6 +1782,8 @@ shape = SubResource("BoxShape3D_jm4jj")
 [node name="WallSmall4" type="MeshInstance3D" parent="." unique_id=720610743]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 19.216822, 0, -8.166509)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("12_jljn4")
 surface_material_override/0 = SubResource("ShaderMaterial_s4vhb")
 
@@ -1706,6 +1796,8 @@ shape = SubResource("BoxShape3D_4t1nw")
 [node name="WallSmall6" type="MeshInstance3D" parent="." unique_id=923427947]
 transform = Transform3D(-1.2, 0, 1.509958e-07, 0, 1, 0, -1.8119498e-07, 0, -1, 21.416822, 0, -8.166509)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("12_jljn4")
 surface_material_override/0 = SubResource("ShaderMaterial_s4vhb")
 
@@ -1756,10 +1848,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant2/Modular ficus plant" parent_id_path=PackedInt32Array(1211902803, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant2/Modular ficus plant" parent_id_path=PackedInt32Array(1211902803, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant2/Modular ficus plant" parent_id_path=PackedInt32Array(1211902803, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1775,10 +1871,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant6/Modular ficus plant" parent_id_path=PackedInt32Array(2064872586, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant6/Modular ficus plant" parent_id_path=PackedInt32Array(2064872586, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant6/Modular ficus plant" parent_id_path=PackedInt32Array(2064872586, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1794,10 +1894,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant7/Modular ficus plant" parent_id_path=PackedInt32Array(1343336804, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant7/Modular ficus plant" parent_id_path=PackedInt32Array(1343336804, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant7/Modular ficus plant" parent_id_path=PackedInt32Array(1343336804, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1813,10 +1917,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant4/Modular ficus plant" parent_id_path=PackedInt32Array(308846358, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant4/Modular ficus plant" parent_id_path=PackedInt32Array(308846358, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant4/Modular ficus plant" parent_id_path=PackedInt32Array(308846358, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1832,10 +1940,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant5/Modular ficus plant" parent_id_path=PackedInt32Array(731097477, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant5/Modular ficus plant" parent_id_path=PackedInt32Array(731097477, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant5/Modular ficus plant" parent_id_path=PackedInt32Array(731097477, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1851,10 +1963,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant3/Modular ficus plant" parent_id_path=PackedInt32Array(330969046, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant3/Modular ficus plant" parent_id_path=PackedInt32Array(330969046, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant3/Modular ficus plant" parent_id_path=PackedInt32Array(330969046, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1870,10 +1986,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant8/Modular ficus plant" parent_id_path=PackedInt32Array(1474105173, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant8/Modular ficus plant" parent_id_path=PackedInt32Array(1474105173, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant8/Modular ficus plant" parent_id_path=PackedInt32Array(1474105173, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1889,10 +2009,14 @@ cast_shadow = 0
 [node name="Pot_002" parent="Plant9/Modular ficus plant" parent_id_path=PackedInt32Array(1862613940, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Soil_002" parent="Plant9/Modular ficus plant" parent_id_path=PackedInt32Array(1862613940, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="Stem 2_002" parent="Plant9/Modular ficus plant" parent_id_path=PackedInt32Array(1862613940, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1901,6 +2025,8 @@ cast_shadow = 0
 [node name="RopeBarrier" type="MeshInstance3D" parent="." unique_id=1621064691]
 transform = Transform3D(1.4699999, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 0, -7)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("6_j52o3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="RopeBarrier" unique_id=818166221]
@@ -1913,6 +2039,8 @@ shape = SubResource("BoxShape3D_kp2ck")
 [node name="RopeBarrier2" type="MeshInstance3D" parent="." unique_id=1050913815]
 transform = Transform3D(1.4699999, 0, 0, 0, 1, 0, 0, 0, 1, 14.1, 0, -7)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("6_j52o3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="RopeBarrier2" unique_id=1794594538]
@@ -1925,6 +2053,8 @@ shape = SubResource("BoxShape3D_v0o4i")
 [node name="Picture1Image6" type="MeshInstance3D" parent="." unique_id=1972001149]
 transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 18.39609, 1.5178287, -7.2758813)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_n378j")
 
@@ -1938,6 +2068,8 @@ shape = SubResource("BoxShape3D_ogjo7")
 [node name="Picture1Image7" type="MeshInstance3D" parent="." unique_id=2049579273]
 transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 19.49609, 1.5178287, -7.2758813)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_mncup")
 
@@ -1951,6 +2083,8 @@ shape = SubResource("BoxShape3D_un3ya")
 [node name="Picture1Image8" type="MeshInstance3D" parent="." unique_id=2045012460]
 transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 20.59609, 1.5178287, -7.2758813)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_tvp7m")
 
@@ -1964,6 +2098,8 @@ shape = SubResource("BoxShape3D_nntiw")
 [node name="Picture1Image9" type="MeshInstance3D" parent="." unique_id=1095349708]
 transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 20.59609, 0.7178287, -7.2758813)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_hlqde")
 
@@ -1977,6 +2113,8 @@ shape = SubResource("BoxShape3D_0ggyw")
 [node name="Picture1Image10" type="MeshInstance3D" parent="." unique_id=708842866]
 transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 19.49609, 0.7178287, -7.2758813)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_jljn4")
 
@@ -1990,6 +2128,8 @@ shape = SubResource("BoxShape3D_8n0j1")
 [node name="Picture1Image11" type="MeshInstance3D" parent="." unique_id=1905567981]
 transform = Transform3D(0.337, 0, 0, 0, 0.297, 0, 0, 0, 1.487, 18.39609, 0.7178287, -7.2758813)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_3me4u")
 
@@ -2005,6 +2145,8 @@ transform = Transform3D(0.96002054, 0, -0.2799296, 0, 1, 0, 0.2799296, 0, 0.9600
 
 [node name="mesh" parent="NohaRigged2/Skeleton3D" parent_id_path=PackedInt32Array(1073086391, 585527288) index="0" unique_id=1263317343]
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 surface_material_override/0 = SubResource("ShaderMaterial_1duix")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="NohaRigged2/Skeleton3D/mesh" index="0" unique_id=1814286032]
@@ -2019,6 +2161,8 @@ transform = Transform3D(0.50490874, 0, -0.1682325, 0, 0.51846516, 0, 0.13529, 0,
 [node name="Samurai_Helmet2" type="MeshInstance3D" parent="Samurai_Helmet Asia" unique_id=2126424011]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("17_hbusi")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Samurai_Helmet Asia/Samurai_Helmet2" unique_id=1250091633]
@@ -2034,6 +2178,8 @@ transform = Transform3D(-0.25357035, 0.8014642, -0.54162455, -0.5621965, -0.5777
 [node name="Katana2" type="MeshInstance3D" parent="Katana  Asia" unique_id=1553907581]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("19_rvpsd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Katana  Asia/Katana2" unique_id=972484805]
@@ -2049,6 +2195,8 @@ transform = Transform3D(0.20950612, -0.8181538, 0.5354732, 0.97557634, 0.2118717
 [node name="Weapon_3" type="MeshInstance3D" parent="Weapon_2 Asia" unique_id=1436735834]
 transform = Transform3D(100, 0, 0, 0, 100, 3.1391646e-05, 0, -3.1391646e-05, 100, 0, 0, 0)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("21_k78oe")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Weapon_2 Asia/Weapon_3" unique_id=110859480]
@@ -2061,6 +2209,8 @@ shape = SubResource("BoxShape3D_xscxg")
 [node name="Bench2" type="MeshInstance3D" parent="." unique_id=489170859]
 transform = Transform3D(-3.3, 0, 1.5099579e-07, 0, 0.99999994, 0, -4.982861e-07, 0, -0.9999999, 23.619514, 0.21121216, 11.229275)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("22_x7n3g")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Bench2" unique_id=1688834644]
@@ -2073,6 +2223,8 @@ shape = SubResource("BoxShape3D_5iwpg")
 [node name="Bench3" type="MeshInstance3D" parent="." unique_id=1074543191]
 transform = Transform3D(-3.3, 0, 1.5099579e-07, 0, 0.99999994, 0, -4.982861e-07, 0, -0.9999999, 15.219514, 0.21121216, 11.229275)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("22_x7n3g")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Bench3" unique_id=685413491]
@@ -2085,6 +2237,8 @@ shape = SubResource("BoxShape3D_flpxi")
 [node name="Sculpture" type="MeshInstance3D" parent="." unique_id=1388398521]
 transform = Transform3D(2.5, 0, 0, 0, 1, 0, 0, 0, 2.7600002, 14.88663, 0, -7.8526797)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("23_l1gn5")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sculpture" unique_id=953635028]
@@ -2097,6 +2251,8 @@ shape = SubResource("BoxShape3D_mef32")
 [node name="Sculpture1" type="MeshInstance3D" parent="." unique_id=817215842]
 transform = Transform3D(2.9, 0, 0, 0, 1.6, 0, 0, 0, 2.6999998, 24.637135, 0, -7.779078)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("24_3ke7e")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sculpture1" unique_id=797797257]
@@ -2109,6 +2265,8 @@ shape = SubResource("BoxShape3D_2cgod")
 [node name="Sculpture3" type="MeshInstance3D" parent="." unique_id=596245535]
 transform = Transform3D(-2.9, -3.623899e-07, 0, 4.3788785e-07, -2.3999999, 0, 0, 0, 2.6999998, 24.900002, 5.8383236, -3.5)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("24_3ke7e")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2170,6 +2328,8 @@ script = null
 [node name="Moai" type="MeshInstance3D" parent="." unique_id=2006359017]
 transform = Transform3D(-0.3313843, 0.044865392, 0.2356354, 0.26909745, -0.036432534, 0.29017693, 0.06106615, 0.40401414, 1.778998e-08, 23.504284, 0.9351901, -7.727894)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("30_jljn4")
 surface_material_override/0 = SubResource("ShaderMaterial_xphb0")
 
@@ -2207,6 +2367,8 @@ transform = Transform3D(0.3031089, 0, 0.15999998, 0, 0.35999995, 0, -0.17499998,
 [node name="Floor3" type="MeshInstance3D" parent="." unique_id=1707099555]
 transform = Transform3D(2.2680001, 0, 0, 0, 1, 0, 0, 0, 2.24, 24.2, 0.3, -3.4)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("43_x7n3g")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2232,6 +2394,8 @@ shape = SubResource("BoxShape3D_8qtar")
 [node name="Floor6" type="MeshInstance3D" parent="." unique_id=1859329660]
 transform = Transform3D(0.1938212, 0.033074617, 0, -0.07054514, 0.09087178, 0, 0, 0, 0.37246874, 25.49203, 1.1328006, -3.0100315)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("43_x7n3g")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2245,6 +2409,8 @@ shape = SubResource("BoxShape3D_shx7f")
 [node name="Floor7" type="MeshInstance3D" parent="." unique_id=909235578]
 transform = Transform3D(0.1938212, 0.033074617, 0, -0.07054514, 0.09087178, 0, 0, 0, 0.37623248, 25.49203, 1.1328006, -3.7997508)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("43_x7n3g")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2258,6 +2424,8 @@ shape = SubResource("BoxShape3D_lx16o")
 [node name="GlassBox" type="MeshInstance3D" parent="." unique_id=1083739406]
 transform = Transform3D(-0.35355335, 0.6123724, -0.7071067, 0.8660254, 0.49999994, -3.1006863e-08, 0.3535533, -0.6123724, -0.7071067, 25.800001, 3.2, -6.3)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("44_l1gn5")
 surface_material_override/0 = SubResource("StandardMaterial3D_wlwr0")
 
@@ -2271,6 +2439,8 @@ shape = SubResource("BoxShape3D_8kiih")
 [node name="GlassBox2" type="MeshInstance3D" parent="." unique_id=387203457]
 transform = Transform3D(-0.35355332, 0.61237234, 0.70710653, 0.8660253, 0.49999988, -2.2419282e-08, -0.35355332, 0.61237234, -0.70710653, 25.800001, 3.2, -0.9000002)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("44_l1gn5")
 surface_material_override/0 = SubResource("StandardMaterial3D_rvpsd")
 
@@ -2284,6 +2454,8 @@ shape = SubResource("BoxShape3D_rdfbd")
 [node name="GlassBox4" type="MeshInstance3D" parent="." unique_id=853729120]
 transform = Transform3D(7.868049e-08, -5.364419e-08, 0.9999996, -2.7179243e-07, -1.7999995, -2.9802317e-08, 1.8, -2.7179237e-07, -4.371137e-08, 25.575865, 1, -3.4)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("44_l1gn5")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2297,6 +2469,8 @@ shape = SubResource("BoxShape3D_nq4pr")
 [node name="StoneSlab" type="MeshInstance3D" parent="." unique_id=828353776]
 transform = Transform3D(-1.8599198e-07, -0.9999999, 0, 4.2550006, -4.3711385e-08, 0, 0, 0, 3.5, 26.6, 0.4, -3.5)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("45_3ke7e")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2310,6 +2484,8 @@ shape = SubResource("BoxShape3D_rp51i")
 [node name="StoneSlab2" type="MeshInstance3D" parent="." unique_id=1401753050]
 transform = Transform3D(-4.595401, 1.5099579e-07, 0, -6.9388625e-07, -0.9999999, 0, 0, 0, 4.025, 26.6, 4, -3.5)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("45_3ke7e")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2323,6 +2499,8 @@ shape = SubResource("BoxShape3D_rbfqo")
 [node name="InfoDeskBig" type="MeshInstance3D" parent="." unique_id=1469069418]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.484129, 0.4, -3)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("46_4j3b7")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2335,6 +2513,8 @@ shape = SubResource("BoxShape3D_1uirv")
 [node name="InfoDeskBig2" type="MeshInstance3D" parent="." unique_id=2040146549]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.484129, 0.4, -3.8)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("46_4j3b7")
 surface_material_override/0 = ExtResource("31_k78oe")
 
@@ -2350,6 +2530,8 @@ transform = Transform3D(1.913, 0, 0, 0, 1.913, 0, 0, 0, 1.913, 12.4, 2.5, 3.3000
 [node name="Cube" parent="FarmPainting" index="0" unique_id=1357956312]
 transform = Transform3D(0.03305686, 0, 0, 0, -3.543622e-08, 0.53476125, 0, -0.8106862, -2.3375156e-08, 0, 0, 0)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="FarmPainting/Cube" index="0" unique_id=1225054272]
 transform = Transform3D(30.250908, 0, 0, 0, 1.233523, 0, 0, 0, 1.8699933, 0, 0, 0)
@@ -2363,6 +2545,8 @@ transform = Transform3D(1.57, 0, 0, 0, 1.57, 0, 0, 0, 1.57, 12.4, 2.4, -3.300000
 
 [node name="Cube" parent="GoatPainting" index="0" unique_id=1357956312]
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="GoatPainting/Cube" index="0" unique_id=127884418]
 transform = Transform3D(30.250908, 0, 0, 0, 1.2335229, 0, 0, 0, 1.8699932, 0, 0, 0)
@@ -2377,6 +2561,8 @@ transform = Transform3D(-2.1, 0, 3.1709118e-07, 0, 2.1, 0, -3.1709118e-07, 0, -2
 [node name="Cube" parent="GodPainting" index="0" unique_id=1357956312]
 transform = Transform3D(0.03305686, 0, 0, 0, -3.543622e-08, 0.53476125, 0, -0.8106862, -2.3375156e-08, 0, 0, 0)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="GodPainting/Cube" index="0" unique_id=2072895815]
 transform = Transform3D(30.250908, 0, 0, 0, 1.233523, 0, 0, 0, 1.8699933, 0, 0, 0)
@@ -2390,6 +2576,8 @@ transform = Transform3D(-1.85, 0, 2.7934223e-07, 0, 1.85, 0, -2.7934223e-07, 0, 
 
 [node name="Cube" parent="Painting" index="0" unique_id=1357956312]
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Painting/Cube" index="0" unique_id=130500156]
 transform = Transform3D(30.250908, 0, 0, 0, 1.2335229, 0, 0, 0, 1.8699932, 0, 0, 0)
@@ -2401,6 +2589,8 @@ shape = SubResource("BoxShape3D_k4ci6")
 [node name="InfoDeskSmall" type="MeshInstance3D" parent="." unique_id=160183963]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12.599999, 0.21502376, 3.3)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("60_t6joj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InfoDeskSmall" unique_id=854930012]
@@ -2412,6 +2602,8 @@ shape = SubResource("BoxShape3D_eqgy3")
 [node name="InfoDeskSmall2" type="MeshInstance3D" parent="." unique_id=1203074975]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12.599999, 0.21153909, -3.3)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("60_t6joj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InfoDeskSmall2" unique_id=2024960810]
@@ -2423,6 +2615,8 @@ shape = SubResource("BoxShape3D_3pxau")
 [node name="InfoDeskSmall3" type="MeshInstance3D" parent="." unique_id=1316179607]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 26.099998, 0.22077554, 2.9)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("60_t6joj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InfoDeskSmall3" unique_id=616761108]
@@ -2434,6 +2628,8 @@ shape = SubResource("BoxShape3D_wimic")
 [node name="InfoDeskSmall4" type="MeshInstance3D" parent="." unique_id=1278117367]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 26.099998, 0.21319214, 9.200001)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("60_t6joj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="InfoDeskSmall4" unique_id=326197045]
@@ -2446,6 +2642,8 @@ shape = SubResource("BoxShape3D_bmknk")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 25, 4, 3)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("61_7c4bo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LightWallSmall" unique_id=315670728]
@@ -2458,6 +2656,8 @@ shape = SubResource("BoxShape3D_0nqtm")
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 25, 4, 9)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("61_7c4bo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LightWallSmall2" unique_id=451467139]
@@ -2470,6 +2670,8 @@ shape = SubResource("BoxShape3D_o0kdn")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.8, 4, 9)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("61_7c4bo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LightWallSmall3" unique_id=2137272211]
@@ -2482,6 +2684,8 @@ shape = SubResource("BoxShape3D_pcfym")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.8, 4, 3.1999998)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("61_7c4bo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LightWallSmall4" unique_id=968066190]
@@ -2494,6 +2698,8 @@ shape = SubResource("BoxShape3D_r76u2")
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14.8, 4, -3.4000003)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("61_7c4bo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LightWallSmall5" unique_id=887749704]
@@ -2506,6 +2712,8 @@ shape = SubResource("BoxShape3D_1ucbk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4, 4, -5.1000004)
 visible = false
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("61_7c4bo")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LightWallSmall6" unique_id=638350837]
@@ -2517,6 +2725,8 @@ shape = SubResource("BoxShape3D_i8uk4")
 [node name="Floor2" type="MeshInstance3D" parent="." unique_id=1887632894]
 transform = Transform3D(1, 0, 0, 0, 0.034068048, 0, 0, 0, 9.8160515, 19.383291, 0.22597927, 1.6825035)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("62_4maqi")
 surface_material_override/0 = SubResource("ShaderMaterial_tbopg")
 
@@ -2532,6 +2742,8 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 26.1
 
 [node name="mesh" parent="Hip Hop Dancing/Skeleton3D" parent_id_path=PackedInt32Array(804576936, 738449079) index="0" unique_id=181780034]
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 surface_material_override/0 = SubResource("ShaderMaterial_be1b0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Hip Hop Dancing/Skeleton3D/mesh" index="0" unique_id=872062521]
@@ -2546,30 +2758,40 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 19.4
 [node name="Picture1Image" type="MeshInstance3D" parent="Van" unique_id=1100721740]
 transform = Transform3D(-0.16166739, 0, -0.5999168, 0, 0.12817217, 0, 0.08347489, 0, -1.1618702, -2.0088835, 0.89820135, 0.88648224)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_kmuqk")
 
 [node name="Picture1Image3" type="MeshInstance3D" parent="Van" unique_id=1379694385]
 transform = Transform3D(0.1765015, 0, -0.31749105, 0, 0.12817219, 0, 0.044176992, 0, 1.2684803, -2.066636, 0.6244339, -0.8274746)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_s4vhb")
 
 [node name="Picture1Image5" type="MeshInstance3D" parent="Van" unique_id=673500806]
 transform = Transform3D(0.1765015, 0, -0.31749105, 0, 0.12817219, 0, 0.044176992, 0, 1.2684803, -2.066636, 0.9242052, -0.8274746)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_tbopg")
 
 [node name="Picture1Image4" type="MeshInstance3D" parent="Van" unique_id=1310471767]
 transform = Transform3D(-0.16238281, -0.016192509, -0.56624675, 0.00059264817, 0.12280841, -0.374293, 0.08207221, -0.032924265, -1.1176367, -2.0471888, 1.2928942, 0.83844376)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_vihxg")
 
 [node name="Picture1Image2" type="MeshInstance3D" parent="Van" unique_id=890825284]
 transform = Transform3D(-0.15371142, 0.010085084, -0.19023076, 0.0012935842, -0.14133961, -0.2361137, -0.039928216, -0.04340357, 0.7246806, -2.087926, 1.2583829, -0.72699547)
 cast_shadow = 0
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 mesh = ExtResource("8_hei78")
 surface_material_override/0 = SubResource("StandardMaterial3D_d4keu")
 
@@ -2612,6 +2834,8 @@ material = SubResource("StandardMaterial3D_bqlqa")
 
 [node name="MergedBatch_0_6Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4212108" unique_id=1264422761]
 material_override = ExtResource("63_be1b0")
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 multimesh = SubResource("MultiMesh_be1b0")
 
 [node name="MergedBatch_1_8Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4212108" unique_id=1089550223]
@@ -2620,10 +2844,14 @@ multimesh = SubResource("MultiMesh_t6joj")
 
 [node name="MergedBatch_2_8Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4212108" unique_id=563314368]
 material_override = SubResource("ShaderMaterial_r2704")
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 multimesh = SubResource("MultiMesh_7c4bo")
 
 [node name="MergedBatch_3_8Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4212108" unique_id=2008913021]
 material_override = ExtResource("65_7c4bo")
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 multimesh = SubResource("MultiMesh_4maqi")
 
 [node name="MergedBatch_4_8Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4212108" unique_id=300158927]
@@ -2632,10 +2860,14 @@ multimesh = SubResource("MultiMesh_u7vus")
 
 [node name="MergedBatch_5_6Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4212108" unique_id=794567982]
 material_override = SubResource("ShaderMaterial_kmuqk")
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 multimesh = SubResource("MultiMesh_axous")
 
 [node name="MergedBatch_6_30Items" type="MultiMeshInstance3D" parent="MultiMeshMerger_Output_4212108" unique_id=562828890]
 material_override = SubResource("ShaderMaterial_xnqhl")
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 multimesh = SubResource("MultiMesh_xnqhl")
 
 [editable path="Vent"]

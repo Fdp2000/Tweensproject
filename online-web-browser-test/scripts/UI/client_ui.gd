@@ -182,10 +182,6 @@ func show_main_menu() -> void:
 	AudioManager.play_music("main_menu", 1.0, 0.0)
 	reset_tutorial_button()
 
-	var proto_level = get_tree().get_root().find_child("PrototypeLevel", true, false)
-	if proto_level:
-		proto_level.visible = true
-
 	main_menu_panel.show()
 	play_panel.show()
 	skins_panel.show()
@@ -482,9 +478,7 @@ func show_lobby() -> void:
 	tutorial_cop_canvas.hide()
 	skins_panel.hide()
 
-	var proto_level = get_tree().get_root().find_child("PrototypeLevel", true, false)
-	if proto_level:
-		proto_level.visible = false
+	# The level visibility is now handled by GameManager when the camera actually switches!
 
 	if lobby_ui == null:
 		lobby_ui = preload("res://scripts/UI/lobby_ui.gd").new()
@@ -581,9 +575,7 @@ func show_play_panel() -> void:
 	tutorial_canvas.hide()
 	tutorial_cop_canvas.hide()
 
-	var proto_level = get_tree().get_root().find_child("PrototypeLevel", true, false)
-	if proto_level:
-		proto_level.visible = true
+	# The level visibility is now handled directly by GameManager during teardown!
 
 	if lobby_ui:
 		lobby_ui.hide()
