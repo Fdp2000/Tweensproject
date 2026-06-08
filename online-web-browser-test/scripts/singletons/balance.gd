@@ -35,9 +35,9 @@ var thief_rescue_time: float = 2.0
 # ==========================================
 # 4. ECONOMY & RADII
 # ==========================================
-var cash_small: int = 500
-var cash_medium: int = 1500
-var cash_large: int = 4000
+var cash_small: int = 4_500_000
+var cash_medium: int = 7_000_000
+var cash_large: int = 12_000_000
 
 var artifact_small_speed_multiplier: float = 0.9 # 90% Speed
 var artifact_medium_speed_multiplier: float = 0.75 # 75% Speed
@@ -53,25 +53,25 @@ var camera_wall_radius: float = 0.15
 var min_players_for_2_cops: int = 6
 var min_players_for_3_cops: int = 9
 
-var quota_2p: int = 5000
-var quota_3p: int = 10000
-var quota_4p: int = 15000
-var quota_5p: int = 15000 # (2nd Cop spawns here, so maybe quota stays flat!)
-var quota_6p: int = 20000
-var quota_7p: int = 25000
-var quota_8p: int = 25000
-var quota_9p: int = 30000
-var quota_10p: int = 35000
+var quota_2p: int = 10_000_000
+var quota_3p: int = 21_000_000
+var quota_4p: int = 33_000_000
+var quota_5p: int = 45_000_000
+var quota_6p: int = 33_000_000
+var quota_7p: int = 45_000_000
+var quota_8p: int = 57_000_000
+var quota_9p: int = 41_000_000
+var quota_10p: int = 53_000_000
 
 var timer_2p: int = 180
-var timer_3p: int = 200
-var timer_4p: int = 220
-var timer_5p: int = 240
-var timer_6p: int = 260
-var timer_7p: int = 280
-var timer_8p: int = 300
-var timer_9p: int = 320
-var timer_10p: int = 340
+var timer_3p: int = 180
+var timer_4p: int = 180
+var timer_5p: int = 180
+var timer_6p: int = 210
+var timer_7p: int = 210
+var timer_8p: int = 210
+var timer_9p: int = 240
+var timer_10p: int = 240
 
 # ==========================================
 # 6. PING CONSTRAINTS
@@ -163,3 +163,15 @@ func _apply_dict_to_state(data: Dictionary):
 		if key in self: # Safe check to ensure variable exists
 			set(key, data[key])
 	balance_updated.emit()
+
+func format_money(amount: int) -> String:
+	if amount >= 1_000_000:
+		var millions = float(amount) / 1_000_000.0
+		var str_val = "%.1f" % millions
+		if str_val.ends_with(".0"):
+			str_val = str_val.left(str_val.length() - 2)
+		return "$" + str_val + "M"
+	elif amount >= 1_000:
+		return "$" + str(amount / 1000) + "K"
+	else:
+		return "$" + str(amount)

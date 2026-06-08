@@ -17704,6 +17704,7 @@ shape = SubResource("BoxShape3D_mjpaf")
 [node name="Katana  Asia" parent="NavigationRegion3D" unique_id=1657169606 instance=ExtResource("101_sus27")]
 transform = Transform3D(0.9650509, -0.042555727, -0.2585846, 0.041105673, 0.99909407, -0.0110142315, 0.25881907, 0, 0.96592593, -20.3, 0.1546691, -21.5)
 script = ExtResource("6_artifact")
+artifact_size = 1
 hand_position_offset = Vector3(0.13, -0.09, -0.13)
 hand_rotation_offset = Vector3(17.32, 4.23, -17.74)
 
