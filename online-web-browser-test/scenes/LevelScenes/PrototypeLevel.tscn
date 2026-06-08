@@ -6438,7 +6438,7 @@ size = Vector3(17.111656, 10.100876, 21.503654)
 [sub_resource type="Gradient" id="Gradient_kndku"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0.16923077, 0.44230768, 0.4846154, 0.5769231, 0.6653846, 0.76153845, 1)
-colors = PackedColorArray(0.7515171, 0.2670024, 0.41211244, 1, 0.21423566, 0.1317276, 0.37679747, 1, 0.19066355, 0.088567264, 0.2973361, 1, 0.10361882, 0.086385496, 0.286183, 1, 0.110316895, 0.0012693042, 0.2560433, 1, 0.08471569, 0.0008481721, 0.20787442, 1, 1, 1, 1, 1)
+colors = PackedColorArray(0.7515171, 0.2670024, 0.41211244, 1, 0.21423566, 0.1317276, 0.37679747, 1, 0.19066355, 0.088567264, 0.2973361, 1, 0.10361882, 0.086385496, 0.286183, 1, 0.110316895, 0.0012693042, 0.2560433, 1, 0.08471569, 0.0008481721, 0.20787442, 1, 0.19037011, 5.90083e-05, 0.6723395, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nr0w7"]
 gradient = SubResource("Gradient_kndku")
@@ -8785,18 +8785,23 @@ shape = SubResource("BoxShape3D_fgjfj")
 
 [node name="InfoTable" parent="NavigationRegion3D/KEEP5" unique_id=1459507219 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(-0.8865429, 0, 0.46264637, 0, 1, 0, -0.46264637, 0, -0.8865429, -20.294079, 0.47620457, -32.22055)
+visible = false
 
 [node name="InfoTable2" parent="NavigationRegion3D/KEEP5" unique_id=523128792 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(0.83798546, 0, 0.5456925, 0, 1, 0, -0.5456925, 0, 0.83798546, 23.793777, 0.690111, -37.42563)
+visible = false
 
 [node name="InfoTable3" parent="NavigationRegion3D/KEEP5" unique_id=1095475639 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(0.98025393, 0, -0.1977429, 0, 1, 0, 0.1977429, 0, 0.98025393, 34.507614, 0.1739999, -35.44366)
+visible = false
 
 [node name="InfoTable4" parent="NavigationRegion3D/KEEP5" unique_id=737403234 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(-0.74605733, 0, 0.66588175, 0, 1, 0, -0.66588175, 0, -0.74605733, 28.311398, 0.21988416, -1.0638632)
+visible = false
 
 [node name="InfoTable5" parent="NavigationRegion3D/KEEP5" unique_id=1218541512 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(-0.19707556, 0, -0.9803883, 0, 1, 0, 0.9803883, 0, -0.19707556, 36.23186, 0.7209864, 4.49615)
+visible = false
 
 [node name="KEEP4" type="Node3D" parent="NavigationRegion3D" unique_id=216519733]
 
@@ -10300,6 +10305,7 @@ mesh = SubResource("ArrayMesh_5xndk")
 
 [node name="InfoTable" parent="NavigationRegion3D/Floor" unique_id=264940049 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -38.87823, 0.17399997, -14.963959)
+visible = false
 
 [node name="InfoDeskSmall" type="MeshInstance3D" parent="NavigationRegion3D/Floor" unique_id=1269173472]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -38.876682, 0.1740002, -20.758755)
@@ -23751,18 +23757,28 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, -6.69
 
 [node name="InfoTable" parent="NavigationRegion3D" unique_id=870544359 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(0.9515139, 0, -0.30760574, 0, 1, 0, 0.30760574, 0, 0.9515139, 7.4441543, 0.17363042, -9.222358)
+visible = false
 
 [node name="InfoTable2" parent="NavigationRegion3D" unique_id=1923360222 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(0.9771087, 0, 0.21274048, 0, 1, 0, -0.21274048, 0, 0.9771087, -7.9954824, 0.17363042, -9.109659)
+visible = false
+
+[node name="InfoDeskSmall" parent="NavigationRegion3D/InfoTable2" index="0" unique_id=1347002413]
+visible = false
+visibility_range_end = 75.0
+visibility_range_end_margin = 2.0
 
 [node name="InfoTable3" parent="NavigationRegion3D" unique_id=1852109122 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(0.86820745, 0, 0.49620137, 0, 1, 0, -0.49620137, 0, 0.86820745, -25.209171, 0.17363042, -2.9467103)
+visible = false
 
 [node name="InfoTable4" parent="NavigationRegion3D" unique_id=1898527189 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(-0.35404626, 0, -0.93522793, 0, 1, 0, 0.93522793, 0, -0.35404626, -24.454617, 0.17363048, 3.7104106)
+visible = false
 
 [node name="InfoTable5" parent="NavigationRegion3D" unique_id=1268773897 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(-0.29552466, 0, -0.95533514, 0, 1, 0, 0.95533514, 0, -0.29552466, -31.10017, 1.0063114, 10.093091)
+visible = false
 
 [node name="Plant18" parent="NavigationRegion3D" unique_id=959412987 instance=ExtResource("142_dt4rj")]
 transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, -30.104637, 0.17736238, -14.40403)
@@ -23781,9 +23797,11 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -30.
 
 [node name="InfoTable6" parent="NavigationRegion3D" unique_id=1320250135 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.041985, 0.63569933, -37.09758)
+visible = false
 
 [node name="InfoTable7" parent="NavigationRegion3D" unique_id=1750367280 instance=ExtResource("151_0nfu5")]
 transform = Transform3D(0.98006713, 0, 0.19866666, 0, 1, 0, -0.19866666, 0, 0.98006713, 16.261406, 0.25159568, -3.5527852)
+visible = false
 
 [node name="Urn" parent="NavigationRegion3D" unique_id=1397797249 instance=ExtResource("152_gve0t")]
 transform = Transform3D(-0.18999547, 0, 0.17007856, 0, 0.255, 0, -0.17007856, 0, -0.18999547, 35.85852, 1.4222405, 5.369993)
@@ -23973,16 +23991,12 @@ directional_shadow_fade_start = 0.9
 [node name="Moon" type="MeshInstance3D" parent="." unique_id=825090058]
 transform = Transform3D(741.45, 0, 0, 0, 444.87, 0, 0, 0, 741.45, 384, 3513.2, -1643)
 cast_shadow = 0
-visibility_range_end = 75.0
-visibility_range_end_margin = 2.0
 mesh = ExtResource("67_w6te4")
 surface_material_override/0 = SubResource("StandardMaterial3D_gjbpm")
 
 [node name="Moonglow" type="MeshInstance3D" parent="Moon" unique_id=5508221]
 transform = Transform3D(3.9713871, 0, 0, 0, 6.0576415, 0, 0, 0, 7.5638227, 0, 0, 0)
 cast_shadow = 0
-visibility_range_end = 75.0
-visibility_range_end_margin = 2.0
 mesh = SubResource("QuadMesh_kndku")
 surface_material_override/0 = SubResource("StandardMaterial3D_oyqrn")
 
@@ -24446,4 +24460,5 @@ occluder = ExtResource("157_ooolc")
 [editable path="NavigationRegion3D/Vents/Vent3/PivotPoint/Sketchfab_Scene"]
 [editable path="NavigationRegion3D/Vents/Vent4"]
 [editable path="NavigationRegion3D/Vents/Vent4/PivotPoint/Sketchfab_Scene"]
+[editable path="NavigationRegion3D/InfoTable2"]
 [editable path="NavigationRegion3D/MenuShenanigansSpawner"]

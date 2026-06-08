@@ -584,7 +584,7 @@ func show_play_panel() -> void:
 
 
 func _check_join_timeout() -> void:
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(8.0).timeout
 
 	if not is_joining_room:
 		return
@@ -871,9 +871,9 @@ func _on_game_started() -> void:
 					# Queue this spawn for NEXT frame so the client has time to delete the old node!
 					roles_to_spawn.append({"id": id, "role": role, "trans": spawn_trans})
 						
-			# FIX: Wait 1 frame so the clients process the despawn packet and fully delete the old nodes!
-			# If we don't do this, the new node gets renamed to @Node@... on the client and breaks all RPCs!
-			await get_tree().process_frame
+			# FIX: Wait 0.5 seconds so clients process the despawn packet and delete old nodes!
+			# If we only wait 1 frame, clients with high ping receive Spawn and Despawn simultaneously!
+			await get_tree().create_timer(0.5).timeout
 			
 			for data in roles_to_spawn:
 				var new_pf
@@ -888,10 +888,8 @@ func _on_game_started() -> void:
 				spawned.add_child(new_pf, true)
 				
 			# Wait for Godot to fully process the NEW spawn queue
-			# Since RPCs and MultiplayerSpawner use the same reliable network channel, 
-			# they are guaranteed to arrive in order on the clients!
-			await get_tree().process_frame
-			await get_tree().process_frame
+			# We give a 0.5 second buffer to guarantee the client has spawned the node before sending RPCs
+			await get_tree().create_timer(0.5).timeout
 			
 			for id in GameManager.players.keys():
 				var pf = spawned.get_node_or_null(str(id))

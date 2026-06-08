@@ -199,11 +199,11 @@ func _custom_physics_process(delta, direction):
 			
 			rpc("play_grunt_rpc")
 			
-			if direction != Vector3.ZERO:
-				charge_direction = direction
-			else:
+			if camera:
 				charge_direction = -camera.global_transform.basis.z.normalized()
-				charge_direction.y = 0
+			else:
+				charge_direction = -global_transform.basis.z.normalized()
+			charge_direction.y = 0
 			charge_direction = charge_direction.normalized()
 
 			# Inside the dash input block (Start Charge):

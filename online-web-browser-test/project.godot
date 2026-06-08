@@ -93,6 +93,7 @@ pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
+mesh_lod/lod_change/threshold_pixels=2.0
 occlusion_culling/use_occlusion_culling=true
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"

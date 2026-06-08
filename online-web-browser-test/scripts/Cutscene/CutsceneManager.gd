@@ -101,6 +101,7 @@ func _on_game_started():
 		var precompiler = Node3D.new()
 		precompiler.set_script(precompiler_script)
 		intro_camera.add_child(precompiler)
+		await precompiler.finished_precompiling
 	# ---------------------------------------------
 	
 	# Start orchestrating the cutscene
@@ -108,7 +109,8 @@ func _on_game_started():
 
 func wait_for_local_player() -> Node3D:
 	var attempts := 0
-	while attempts < 60:
+	# 600 frames = 10 seconds. We give WebGL 10 seconds to compile shaders and unfreeze!
+	while attempts < 600:
 		var player = find_local_player()
 		if player != null:
 			return player

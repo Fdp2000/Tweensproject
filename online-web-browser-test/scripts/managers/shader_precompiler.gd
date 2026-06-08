@@ -1,5 +1,7 @@
 extends Node3D
 
+signal finished_precompiling
+
 const HEAVY_MATERIALS = [
 	preload("res://Assets/Shaders/CamoShader/camoMaterial.tres"),
 	preload("res://Assets/Shaders/celShader/celMaterial.tres"),
@@ -53,4 +55,5 @@ func _ready():
 	await get_tree().process_frame
 	
 	# 5. The shaders are now fully cached in the browser! Delete the evidence.
+	emit_signal("finished_precompiling")
 	queue_free()
