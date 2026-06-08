@@ -1099,7 +1099,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 shape = SubResource("BoxShape3D_1duix")
 
 [node name="WallBigCorner2" type="MeshInstance3D" parent="." unique_id=1924690706]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.10059, 0, 11.108394)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.089347, 0, 11.108394)
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
@@ -1844,18 +1844,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 12.79
 [node name="Leaf 2_002" parent="Plant2/Modular ficus plant" parent_id_path=PackedInt32Array(1211902803, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant2/Modular ficus plant" parent_id_path=PackedInt32Array(1211902803, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant2/Modular ficus plant" parent_id_path=PackedInt32Array(1211902803, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant2/Modular ficus plant" parent_id_path=PackedInt32Array(1211902803, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1867,18 +1870,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 12.79
 [node name="Leaf 2_002" parent="Plant6/Modular ficus plant" parent_id_path=PackedInt32Array(2064872586, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant6/Modular ficus plant" parent_id_path=PackedInt32Array(2064872586, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant6/Modular ficus plant" parent_id_path=PackedInt32Array(2064872586, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant6/Modular ficus plant" parent_id_path=PackedInt32Array(2064872586, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1890,18 +1896,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 12.79
 [node name="Leaf 2_002" parent="Plant7/Modular ficus plant" parent_id_path=PackedInt32Array(1343336804, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant7/Modular ficus plant" parent_id_path=PackedInt32Array(1343336804, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant7/Modular ficus plant" parent_id_path=PackedInt32Array(1343336804, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant7/Modular ficus plant" parent_id_path=PackedInt32Array(1343336804, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1913,18 +1922,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 26.19
 [node name="Leaf 2_002" parent="Plant4/Modular ficus plant" parent_id_path=PackedInt32Array(308846358, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant4/Modular ficus plant" parent_id_path=PackedInt32Array(308846358, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant4/Modular ficus plant" parent_id_path=PackedInt32Array(308846358, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant4/Modular ficus plant" parent_id_path=PackedInt32Array(308846358, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1936,18 +1948,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 12.59
 [node name="Leaf 2_002" parent="Plant5/Modular ficus plant" parent_id_path=PackedInt32Array(731097477, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant5/Modular ficus plant" parent_id_path=PackedInt32Array(731097477, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant5/Modular ficus plant" parent_id_path=PackedInt32Array(731097477, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant5/Modular ficus plant" parent_id_path=PackedInt32Array(731097477, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1959,18 +1974,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 26.19
 [node name="Leaf 2_002" parent="Plant3/Modular ficus plant" parent_id_path=PackedInt32Array(330969046, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant3/Modular ficus plant" parent_id_path=PackedInt32Array(330969046, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant3/Modular ficus plant" parent_id_path=PackedInt32Array(330969046, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant3/Modular ficus plant" parent_id_path=PackedInt32Array(330969046, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -1982,18 +2000,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 26.19
 [node name="Leaf 2_002" parent="Plant8/Modular ficus plant" parent_id_path=PackedInt32Array(1474105173, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant8/Modular ficus plant" parent_id_path=PackedInt32Array(1474105173, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant8/Modular ficus plant" parent_id_path=PackedInt32Array(1474105173, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant8/Modular ficus plant" parent_id_path=PackedInt32Array(1474105173, 195829062) index="3" unique_id=1786415933]
 visible = false
@@ -2005,18 +2026,21 @@ transform = Transform3D(3.2289808, 0, 0, 0, 3.2289808, 0, 0, 0, 3.2289808, 26.19
 [node name="Leaf 2_002" parent="Plant9/Modular ficus plant" parent_id_path=PackedInt32Array(1862613940, 195829062) index="0" unique_id=1353060618]
 visible = false
 cast_shadow = 0
+surface_material_override/0 = null
 
 [node name="Pot_002" parent="Plant9/Modular ficus plant" parent_id_path=PackedInt32Array(1862613940, 195829062) index="1" unique_id=1920033558]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Soil_002" parent="Plant9/Modular ficus plant" parent_id_path=PackedInt32Array(1862613940, 195829062) index="2" unique_id=464541086]
 visible = false
 cast_shadow = 0
 visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
+surface_material_override/0 = null
 
 [node name="Stem 2_002" parent="Plant9/Modular ficus plant" parent_id_path=PackedInt32Array(1862613940, 195829062) index="3" unique_id=1786415933]
 visible = false

@@ -45,8 +45,9 @@ func _run():
 					break
 					
 			if is_duplicate:
-				print("🗑️ Z-FIGHTING FIX: Deleting exact duplicate mesh -> ", current.name, " at ", global_pos)
-				current.queue_free()
+				print("🙈 Z-FIGHTING FIX: Hiding exact duplicate mesh -> ", current.name, " at ", global_pos)
+				current.visible = false
+				current.name = "HIDDEN_DUPLICATE_" + current.name
 				deleted_count += 1
 			else:
 				seen_meshes[group_key].append(global_pos)

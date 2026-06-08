@@ -78,13 +78,28 @@ func _run():
 		mmesh.mesh = group["mesh"]
 		mm_instance.multimesh = mmesh
 		
+		var base_mesh = group["mesh"]
+		var surface_count = base_mesh.get_surface_count()
+		
 		# Apply the material!
-		# Note: MultiMeshInstance3D does not support overriding individual surfaces. 
-		# We apply the first valid material as a global override.
-		for i in range(group["materials"].size()):
-			if group["materials"][i]:
-				mm_instance.material_override = group["materials"][i]
-				break
+		if surface_count == 1:
+			# For single-surface meshes, material_override is completely safe and fast!
+			if group["materials"].size() > 0 and group["materials"][0]:
+				mm_instance.material_override = group["materials"][0]
+			mmesh.mesh = base_mesh
+		else:
+			# MultiMeshInstance3D does not support overriding individual surfaces!
+			# If we use material_override on a multi-surface mesh, it forces ALL surfaces to use the same material,
+			# causing Z-fighting and broken visuals. Instead, we bake the materials directly into a duplicated Mesh!
+			if base_mesh.has_method("surface_set_material"):
+				var new_mesh = base_mesh.duplicate()
+				for i in range(surface_count):
+					if i < group["materials"].size() and group["materials"][i]:
+						new_mesh.surface_set_material(i, group["materials"][i])
+				mmesh.mesh = new_mesh
+			else:
+				print("⚠️ WARNING: Multi-surface mesh does not support surface_set_material: ", base_mesh)
+				mmesh.mesh = base_mesh
 		
 		# We MUST add the MultiMesh to the tree FIRST so it calculates its true Global Transform!
 		multimesh_root.add_child(mm_instance)
@@ -103,6 +118,7 @@ func _run():
 			# we simply make it invisible! 
 			# An invisible MeshInstance costs 0 GPU draw calls, but preserves 100% of your physics/hierarchy!
 			original.visible = false
+			original.set_meta("merged_hidden", true)
 			
 		merged_count += 1
 		

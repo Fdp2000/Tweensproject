@@ -20,8 +20,9 @@ func _run():
 		var current = nodes_to_check.pop_back()
 		nodes_to_check.append_array(current.get_children())
 		
-		if current is MeshInstance3D and not current.visible and current.mesh != null:
+		if current is MeshInstance3D and current.has_meta("merged_hidden"):
 			current.visible = true
+			current.remove_meta("merged_hidden")
 			restored_count += 1
 			
 	print("✅ UNDO COMPLETE! Restored " + str(restored_count) + " meshes back to normal!")
