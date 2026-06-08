@@ -743,8 +743,8 @@ func dev_toggle_hypnotize():
 			
 		is_hypnotized = false
 		disable_body_rotation = false
-		collision_layer = 2
-		collision_mask = 3
+		collision_layer = 4
+		collision_mask = 15
 		
 		pitch_pivot.rotation = Vector3.ZERO
 		
@@ -813,7 +813,7 @@ func rescue_successful():
 	is_hypnotized = false
 	disable_body_rotation = false 
 	
-	collision_layer = 2 
+	collision_layer = 4 
 	collision_mask = 15 
 	
 	is_rescue_halted = false
@@ -866,6 +866,8 @@ func on_jailed(cell_pos: Vector3, cell_rot_y: float):
 		pitch_pivot.rotation.z = 0
 		
 func handle_mobile_interact_press():
+	if is_hypnotized or is_jailed: return
+	
 	if not carried_artifact:
 		var target = get_closest_interactable()
 		if target and not target.has_method("on_captured"):

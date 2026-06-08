@@ -39,7 +39,7 @@ func _ready() -> void:
 
 	room_label = Label.new()
 	room_label.add_theme_font_size_override("font_size", 16)
-	room_label.add_theme_color_override("font_color", Color(0.8, 0.8, 0.8))
+	room_label.add_theme_color_override("font_color", Color(1.0, 1.0, 1.0, 1.0))
 	room_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
 	inner_vbox.add_child(room_label)
 
