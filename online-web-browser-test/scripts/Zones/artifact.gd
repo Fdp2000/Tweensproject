@@ -250,14 +250,9 @@ func _process(delta):
 				
 				# --- CAMO BLEND CALCULATION ---
 				var is_camo = false
-				var is_tuning_drop = Input.is_key_pressed(KEY_B) or Input.is_key_pressed(KEY_N)
-				var preview_camo = Input.is_key_pressed(KEY_C)
 				if carrier and carrier.get("stealth_manager"):
 					if carrier.stealth_manager.stationary_time >= Balance.thief_camo_activation_time:
 						is_camo = true
-						
-				if is_tuning_drop or preview_camo:
-					is_camo = true
 						
 				var visual_base: Node3D = carrier
 				if carrier:
@@ -342,50 +337,7 @@ func _process(delta):
 				# 4. Lock the scale so the bone animations don't warp the mesh
 				scale = initial_scale 
 				
-				# 5. Developer In-Game Tuning Tool
-				# Keyboard Controls for live tuning!
-				var tune_pos_y = 0.0
-				var tune_pos_x = 0.0
-				var tune_pos_z = 0.0
-				var tune_rot_x = 0.0
-				var tune_rot_y = 0.0
-				var tune_rot_z = 0.0
-				
-				if Input.is_key_pressed(KEY_PAGEUP): tune_pos_y += delta * 0.5
-				if Input.is_key_pressed(KEY_PAGEDOWN): tune_pos_y -= delta * 0.5
-				if Input.is_key_pressed(KEY_LEFT): tune_pos_x -= delta * 0.5
-				if Input.is_key_pressed(KEY_RIGHT): tune_pos_x += delta * 0.5
-				if Input.is_key_pressed(KEY_UP): tune_pos_z -= delta * 0.5
-				if Input.is_key_pressed(KEY_DOWN): tune_pos_z += delta * 0.5
-				
-				if Input.is_key_pressed(KEY_U): tune_rot_x += delta * 45.0
-				if Input.is_key_pressed(KEY_J): tune_rot_x -= delta * 45.0
-				if Input.is_key_pressed(KEY_I): tune_rot_y += delta * 45.0
-				if Input.is_key_pressed(KEY_K): tune_rot_y -= delta * 45.0
-				if Input.is_key_pressed(KEY_O): tune_rot_z += delta * 45.0
-				if Input.is_key_pressed(KEY_L): tune_rot_z -= delta * 45.0
-				
-				if preview_camo and use_custom_camo_pose:
-					camo_position_offset += Vector3(tune_pos_x, tune_pos_y, tune_pos_z)
-					camo_rotation_offset += Vector3(tune_rot_x, tune_rot_y, tune_rot_z)
-				else:
-					hand_position_offset += Vector3(tune_pos_x, tune_pos_y, tune_pos_z)
-					hand_rotation_offset += Vector3(tune_rot_x, tune_rot_y, tune_rot_z)
-				
-				if Input.is_key_pressed(KEY_B): drop_height_offset += delta * 0.5
-				if Input.is_key_pressed(KEY_N): drop_height_offset -= delta * 0.5
-				
-				if Input.is_action_just_pressed("ui_accept") or Input.is_key_pressed(KEY_P): 
-					print("--- ARTIFACT TUNED ---")
-					print("Pos Offset: ", hand_position_offset)
-					print("Rot Offset: ", hand_rotation_offset)
-					print("Drop Offset: ", drop_height_offset)
-					if use_custom_camo_pose:
-						print("Camo Pos Offset: ", camo_position_offset)
-						print("Camo Rot Offset: ", camo_rotation_offset)
-				
-				if not debug_ui:
-					_create_debug_ui()
+
 			
 			# Relay position to others by keeping sync targets updated
 			sync_target_position = global_position
@@ -518,40 +470,3 @@ func reset_artifact():
 func _exit_tree() -> void:
 	if synchronizer:
 		synchronizer.public_visibility = false
-
-func _create_debug_ui():
-	debug_ui = CanvasLayer.new()
-	debug_ui.layer = 100
-	
-	var panel = PanelContainer.new()
-	panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	panel.position = Vector2(800, 50)
-	debug_ui.add_child(panel)
-	
-	var vbox = VBoxContainer.new()
-	panel.add_child(vbox)
-	
-	var title = Label.new()
-	title.text = "--- ARTIFACT OFFSET TUNER ---"
-	vbox.add_child(title)
-	
-	var lbl = Label.new()
-	vbox.add_child(lbl)
-	
-	var update_lbl = func():
-		if is_instance_valid(lbl):
-			var camo_str = ""
-			var camo_keys = ""
-			if use_custom_camo_pose:
-				camo_str = "\nCamo Pos: " + str(camo_position_offset) + "\nCamo Rot: " + str(camo_rotation_offset)
-				camo_keys = "\nHold C + move/rotate to tune Camo Pose."
-			lbl.text = "Pos Offset: " + str(hand_position_offset) + "\nRot Offset: " + str(hand_rotation_offset) + "\nDrop Offset: " + str(drop_height_offset) + camo_str + "\n\nUse PageUp/PageDown (Y), Left/Right (X), Up/Down (Z) to move.\nUse U/J (X), I/K (Y), O/L (Z) to rotate.\nUse B/N to adjust Drop Height." + camo_keys + "\nPress P to print to console."
-	update_lbl.call()
-	
-	var timer = Timer.new()
-	timer.wait_time = 0.1
-	timer.autostart = true
-	timer.timeout.connect(update_lbl)
-	debug_ui.add_child(timer)
-	
-	get_tree().root.add_child(debug_ui)

@@ -225,9 +225,7 @@ func _on_path_changed():
 func _unhandled_input(event):
 	if not is_multiplayer_authority(): return
 	
-	if event is InputEventKey and event.physical_keycode == KEY_H and event.pressed and not event.echo:
-		rpc("dev_toggle_hypnotize")
-		return
+
 		
 	super._unhandled_input(event)
 	
