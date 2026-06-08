@@ -177,16 +177,31 @@ func _initialize_3d_pool():
 		pool_3d.append(player)
 
 func _preload_all_audio():
-	# Forcibly load all audio into RAM during the loading screen 
-	# instead of lagging the game the first time they are played!
+	# Forcibly load all audio into RAM and force WebGL decode buffer initialization!
+	# We play each sound silently for 1 frame to prevent the massive lag spike on first playback.
+	var silent_player = AudioStreamPlayer.new()
+	silent_player.volume_db = -80.0
+	silent_player.bus = "Master"
+	add_child(silent_player)
+	
 	for config_dict in [MUSIC_CONFIG, SFX_CONFIG]:
 		for key in config_dict.keys():
 			var config = config_dict[key]
+			var paths = []
 			if config.has("path"):
-				_get_stream(config["path"])
+				paths.append(config["path"])
 			elif config.has("paths"):
-				for p in config["paths"]:
-					_get_stream(p)
+				paths.append_array(config["paths"])
+				
+			for p in paths:
+				var stream = _get_stream(p)
+				if stream:
+					silent_player.stream = stream
+					silent_player.play()
+					# Yielding allows Web Audio API to process the buffer initialization!
+					await get_tree().process_frame
+					
+	silent_player.queue_free()
 
 # Helper function to load AudioStreams into memory and cache them
 func _get_stream(path_data: Variant) -> AudioStream:
