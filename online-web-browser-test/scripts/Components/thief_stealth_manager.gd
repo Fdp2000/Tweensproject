@@ -10,7 +10,6 @@ var hypno_material: ShaderMaterial
 var _is_dual_mesh_setup = false
 var base_meshes: Array[MeshInstance3D] = []
 var camo_meshes: Array[MeshInstance3D] = []
-var shadow_meshes: Array[MeshInstance3D] = [] 
 var local_outline_mat: ShaderMaterial = null
 
 var stationary_time = 0.0
@@ -143,24 +142,6 @@ func _setup_dual_meshes(node: Node):
 		camo_mesh.hide()
 		camo_meshes.append(camo_mesh)
 		
-		# --- BUILD THE SHADOW PROXY ---
-		var shadow_mesh = MeshInstance3D.new()
-		shadow_mesh.name = node.name + "_Shadow"
-		shadow_mesh.set_meta("is_camo", true) 
-		shadow_mesh.mesh = node.mesh
-		shadow_mesh.transform = node.transform
-		if node.skeleton: shadow_mesh.skeleton = node.skeleton
-		if node.skin: shadow_mesh.skin = node.skin
-		
-		var blank_mat = StandardMaterial3D.new()
-		for i in range(shadow_mesh.mesh.get_surface_count()):
-			shadow_mesh.set_surface_override_material(i, blank_mat)
-			
-		shadow_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_SHADOWS_ONLY
-		
-		node.get_parent().add_child.call_deferred(shadow_mesh)
-		shadow_meshes.append(shadow_mesh)
-		
 		# Permanently turn off the base mesh's shadow so they don't fight
 		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		
@@ -190,13 +171,6 @@ func _apply_visual_states(alpha_val: float, eye_alpha_val: float, t_alpha: float
 			c_mesh.show()
 		else:
 			c_mesh.hide()
-			
-	# --- TOGGLE THE SHADOW PROXY ---
-	for s_mesh in shadow_meshes:
-		if t_alpha > 0.0:
-			s_mesh.show() # Turns the invisible shadow on
-		else:
-			s_mesh.hide() # Completely deletes the shadow from the floor_OFF
 			
 	for b_mesh in base_meshes:
 		var is_eye = "Eye" in b_mesh.name

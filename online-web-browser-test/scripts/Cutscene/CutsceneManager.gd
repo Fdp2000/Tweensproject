@@ -93,6 +93,16 @@ func _on_game_started():
 		
 	intro_camera.current = true
 	
+	# --- SHADER PRECOMPILER (WEB OPTIMIZATION) ---
+	# We dynamically attach the precompiler to the active intro_camera. 
+	# Because the screen is perfectly black from fade_to_black(), the player never sees the shaders flash!
+	var precompiler_script = load("res://scripts/managers/shader_precompiler.gd")
+	if precompiler_script:
+		var precompiler = Node3D.new()
+		precompiler.set_script(precompiler_script)
+		intro_camera.add_child(precompiler)
+	# ---------------------------------------------
+	
 	# Start orchestrating the cutscene
 	await run_cinematic_flow()
 
