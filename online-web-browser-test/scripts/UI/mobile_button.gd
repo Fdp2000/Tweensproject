@@ -1,5 +1,8 @@
 extends Control
 
+signal button_down
+signal button_up
+
 @export var action_name: String = ""
 @export var button_text: String = ""
 @export var radius: float = 40.0
@@ -31,15 +34,17 @@ func _input(event):
 							player.is_mobile_shooting = true
 						elif action_name == "secondary_action" and player.has_method("toggle_camera"):
 							player.toggle_camera()
-				else:
+				elif action_name != "":
 					Input.action_press(action_name)
+				button_down.emit()
 				queue_redraw()
 				get_viewport().set_input_as_handled()
 		elif not event.pressed and event.index == touch_id:
 			touch_id = -1
 			is_pressed = false
-			if action_name != "mobile_shoot":
+			if action_name != "mobile_shoot" and action_name != "":
 				Input.action_release(action_name)
+			button_up.emit()
 			queue_redraw()
 			get_viewport().set_input_as_handled()
 

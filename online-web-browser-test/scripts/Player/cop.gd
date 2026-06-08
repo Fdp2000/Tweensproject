@@ -93,10 +93,10 @@ func _add_custom_mobile_ui(mobile_ui: Control, ui_scale: float):
 	charge_btn.button_text = "CHARGE"
 	charge_btn.radius = 60.0 * ui_scale
 	charge_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	charge_btn.offset_left = - (130 * ui_scale)
-	charge_btn.offset_top = - (300 * ui_scale)
+	charge_btn.offset_left = - (150 * ui_scale)
+	charge_btn.offset_top = - (150 * ui_scale)
 	charge_btn.offset_right = - (30 * ui_scale)
-	charge_btn.offset_bottom = - (200 * ui_scale)
+	charge_btn.offset_bottom = - (30 * ui_scale)
 	mobile_ui.add_child(charge_btn)
 	
 	if charge_ui_ref:

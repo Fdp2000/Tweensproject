@@ -132,6 +132,12 @@ func find_local_player() -> Node3D:
 	return null
 
 func get_display_name(player: Node3D) -> String:
+	var id = str(player.name).to_int()
+	if GameManager.players.has(id):
+		var dict_name = GameManager.players[id].get("name", "")
+		if dict_name != "":
+			return dict_name
+			
 	var n = player.get("player_name")
 	if n != null and str(n) != "":
 		return str(n)
@@ -160,6 +166,11 @@ func run_cinematic_flow():
 	else:
 		intro_camera.fov = 35.0
 	setup_versus_lineup()
+	
+	# Hide Mobile UI if it exists
+	if local_player and local_player.has_node("PlayerCanvas/MobileUI"):
+		var mobile_ui = local_player.get_node("PlayerCanvas/MobileUI")
+		mobile_ui.modulate.a = 0.0
 	
 	# 3. Fade into Versus Screen
 	var vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
@@ -211,6 +222,12 @@ func run_cinematic_flow():
 	var hud = get_tree().get_root().find_child("HUD", true, false)
 	if hud and hud.has_method("fade_in"):
 		hud.fade_in(1.5)
+		
+	# Fade in Mobile UI
+	if local_player and local_player.has_node("PlayerCanvas/MobileUI"):
+		var mobile_ui = local_player.get_node("PlayerCanvas/MobileUI")
+		var mobile_tween = create_tween()
+		mobile_tween.tween_property(mobile_ui, "modulate:a", 1.0, 1.5)
 		
 	get_tree().call_group("dotted_rings", "fade_in", 3.0)
 		

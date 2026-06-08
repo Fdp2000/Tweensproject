@@ -99,30 +99,22 @@ func _build_mobile_ui():
 	var screen_size = DisplayServer.window_get_size()
 	var ui_scale = clamp(min(screen_size.x, screen_size.y) / 720.0, 0.8, 2.0)
 	
-	var interact_btn = Button.new()
+	var interact_btn = load("res://scripts/UI/mobile_button.gd").new()
 	interact_btn.name = "InteractButton"
-	interact_btn.text = "INTERACT"
+	interact_btn.button_text = "INTERACT"
+	interact_btn.radius = 60.0 * ui_scale
+	interact_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	interact_btn.offset_left = - (150 * ui_scale)
+	interact_btn.offset_top = - (150 * ui_scale)
+	interact_btn.offset_right = - (30 * ui_scale)
+	interact_btn.offset_bottom = - (30 * ui_scale)
 	
-	var style = StyleBoxFlat.new()
-	style.bg_color = Color(1, 1, 1, 0.15)
-	style.set_corner_radius_all(100)
-	style.set_border_width_all(4)
-	style.border_color = Color(1, 1, 1, 0.4)
-	
-	interact_btn.add_theme_stylebox_override("normal", style)
-	interact_btn.add_theme_stylebox_override("hover", style)
-	interact_btn.add_theme_stylebox_override("pressed", style)
-	interact_btn.add_theme_font_size_override("font_size", 18 * ui_scale)
-	
-	var btn_size = 130 * ui_scale
-	interact_btn.custom_minimum_size = Vector2(btn_size, btn_size)
-	interact_btn.anchor_left = 1.0
-	interact_btn.anchor_top = 1.0
-	interact_btn.anchor_right = 1.0
-	interact_btn.anchor_bottom = 1.0
-	interact_btn.offset_left = -btn_size - (40 * ui_scale)
-	interact_btn.offset_top = -btn_size - (280 * ui_scale)
-	
+	var mobile_ui = canvas.get_node_or_null("MobileUI")
+	if mobile_ui:
+		mobile_ui.add_child(interact_btn)
+	else:
+		canvas.add_child(interact_btn)
+		
 	# Handle inputs by talking directly to the thief!
 	interact_btn.button_down.connect(func(): 
 		thief.is_mobile_interact = true
@@ -131,7 +123,6 @@ func _build_mobile_ui():
 	interact_btn.button_up.connect(func(): 
 		thief.is_mobile_interact = false
 	)
-	canvas.add_child(interact_btn)
 
 # --- PUBLIC FUNCTIONS FOR THIEF.GD TO CALL ---
 

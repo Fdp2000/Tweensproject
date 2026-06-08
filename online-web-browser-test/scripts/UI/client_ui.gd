@@ -501,8 +501,6 @@ func _on_host_pressed() -> void:
 	is_joining_room = false
 
 	local_player_name = name_input.text.strip_edges()
-	if local_player_name == "":
-		local_player_name = "Player"
 
 	current_room_code = ""
 
@@ -521,9 +519,6 @@ func _on_join_pressed() -> void:
 
 	local_player_name = name_input.text.strip_edges()
 	current_room_code = room_input.text.strip_edges().to_upper()
-
-	if local_player_name == "":
-		local_player_name = "Player"
 
 	if current_room_code == "":
 		show_join_wrong_code()
@@ -627,8 +622,6 @@ func _connected(id: int, _use_mesh: bool) -> void:
 	# Only real hosting should add player 1.
 	if is_hosting_room and id == 1:
 		local_player_name = name_input.text.strip_edges()
-		if local_player_name == "":
-			local_player_name = "Player"
 			
 		GameManager.add_player(
 			1,
@@ -713,8 +706,6 @@ func _mp_server_connected() -> void:
 
 	if my_id != 1:
 		local_player_name = name_input.text.strip_edges()
-		if local_player_name == "":
-			local_player_name = "Player"
 			
 		GameManager.rpc_id(
 			1,
