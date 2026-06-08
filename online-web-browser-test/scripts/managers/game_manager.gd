@@ -386,9 +386,8 @@ func start_game_clock():
 # --- VENT SYSTEM LOGIC ---
 
 func register_vent(vent: Node):
-	if multiplayer.is_server():
-		if not all_vents.has(vent):
-			all_vents.append(vent)
+	if not all_vents.has(vent):
+		all_vents.append(vent)
 
 func open_initial_vents():
 	if not multiplayer.is_server() or all_vents.is_empty(): return
@@ -517,8 +516,16 @@ func full_teardown():
 			art.reset_artifact()
 			
 	team_cash = 0
-	all_vents.clear()
+	
+	# Actually close the vents visually before clearing the list!
+	for vent in active_vents:
+		if is_instance_valid(vent) and vent.has_method("close_vent"):
+			vent.close_vent()
 	active_vents.clear()
+	
+	timer_node.stop()
+	current_state = GameState.LOBBY
+	
 	players.clear()
 	last_heartbeat_times.clear()
 	last_server_pong_time = 0.0

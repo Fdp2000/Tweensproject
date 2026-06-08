@@ -8,9 +8,7 @@ var is_open: bool = false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
-	# Only the server needs to know about all vents to manage them
-	if multiplayer.is_server():
-		GameManager.register_vent(self)
+	GameManager.register_vent(self)
 	
 	_setup_visuals()
 	
