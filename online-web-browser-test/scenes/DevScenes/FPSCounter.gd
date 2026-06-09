@@ -5,7 +5,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
-		if event.physical_keycode == KEY_P or event.keycode == KEY_P:
+		if event.physical_keycode == KEY_F9 or event.keycode == KEY_F9:
 			visible = not visible
 
 func _process(delta: float) -> void:

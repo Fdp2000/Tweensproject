@@ -14,9 +14,6 @@ func setup(parent_player: CharacterBody3D):
 	var canvas = player.get_node_or_null("PlayerCanvas")
 	if not canvas: return
 	
-	var screen_size = DisplayServer.window_get_size()
-	var ui_scale = clamp(min(screen_size.x, screen_size.y) / 720.0, 0.8, 2.0)
-	
 	var mobile_ui = Control.new()
 	mobile_ui.name = "MobileUI"
 	mobile_ui.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -33,21 +30,21 @@ func setup(parent_player: CharacterBody3D):
 	joystick = load("res://scripts/UI/virtual_joystick.gd").new()
 	if joystick:
 		joystick.name = "Joystick"
-		var joy_size = 200 * ui_scale
+		var joy_size = 250
 		joystick.custom_minimum_size = Vector2(joy_size, joy_size)
-		joystick.radius = 70 * ui_scale
+		joystick.radius = 85
 		joystick.anchor_top = 1.0
 		joystick.anchor_bottom = 1.0
 		joystick.anchor_left = 0.0
 		joystick.anchor_right = 0.0
-		joystick.offset_left = 40 * ui_scale
-		joystick.offset_right = (40 + 200) * ui_scale
-		joystick.offset_top = - (220 * ui_scale)
-		joystick.offset_bottom = - (20 * ui_scale)
+		joystick.offset_left = 50
+		joystick.offset_right = 300
+		joystick.offset_top = -300
+		joystick.offset_bottom = -50
 		mobile_ui.add_child(joystick)
 	
 	# We still call this so cop.gd can add its Charge button!
-	player._add_custom_mobile_ui(mobile_ui, ui_scale)
+	player._add_custom_mobile_ui(mobile_ui, 1.0)
 
 func _on_look_area_input(event):
 	if event is InputEventScreenTouch:

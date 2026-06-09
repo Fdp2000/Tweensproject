@@ -582,7 +582,7 @@ func show_play_panel() -> void:
 
 
 func _check_join_timeout() -> void:
-	await get_tree().create_timer(8.0).timeout
+	await get_tree().create_timer(10.0).timeout
 
 	if not is_joining_room:
 		return
@@ -685,7 +685,13 @@ func _lobby_joined(lobby_id: String) -> void:
 
 	if is_hosting_room:
 		hide_join_feedback()
-		DisplayServer.clipboard_set(lobby_id)
+		
+		# Web Browsers block clipboard copying unless it is triggered by a direct mouse click.
+		# Since this code runs in a network callback, we must bypass it on Web to prevent errors!
+		if not OS.has_feature("web"):
+			DisplayServer.clipboard_set(lobby_id)
+		else:
+			print("Room Code: ", lobby_id, " (Clipboard copy blocked by browser security)")
 		
 		if not GameManager.players.is_empty():
 			show_lobby()

@@ -96,18 +96,15 @@ func _build_camera_ui():
 		canvas.add_child(cam_right_btn)
 
 func _build_mobile_ui():
-	var screen_size = DisplayServer.window_get_size()
-	var ui_scale = clamp(min(screen_size.x, screen_size.y) / 720.0, 0.8, 2.0)
-	
 	var interact_btn = load("res://scripts/UI/mobile_button.gd").new()
 	interact_btn.name = "InteractButton"
 	interact_btn.button_text = "INTERACT"
-	interact_btn.radius = 60.0 * ui_scale
+	interact_btn.radius = 85.0
 	interact_btn.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
-	interact_btn.offset_left = - (150 * ui_scale)
-	interact_btn.offset_top = - (150 * ui_scale)
-	interact_btn.offset_right = - (30 * ui_scale)
-	interact_btn.offset_bottom = - (30 * ui_scale)
+	interact_btn.offset_left = -260
+	interact_btn.offset_top = -260
+	interact_btn.offset_right = -90
+	interact_btn.offset_bottom = -90
 	
 	var mobile_ui = canvas.get_node_or_null("MobileUI")
 	if mobile_ui:

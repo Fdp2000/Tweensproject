@@ -382,7 +382,7 @@ func stop_music(fade_time: float = 1.0):
 
 func _input(event):
 	# DEV SHORTCUT: Mute/Unmute Master Bus
-	if event is InputEventKey and event.physical_keycode == KEY_M and event.pressed and not event.echo:
+	if event is InputEventKey and event.physical_keycode == KEY_F8 and event.pressed and not event.echo:
 		var master_bus_idx = AudioServer.get_bus_index("Master")
 		var is_muted = not AudioServer.is_bus_mute(master_bus_idx)
 		AudioServer.set_bus_mute(master_bus_idx, is_muted)
