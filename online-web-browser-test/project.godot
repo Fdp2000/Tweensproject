@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Tweens Project"
+config/name="Chamillion $ Heist"
 run/main_scene="uid://viakckuqn6jp"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
+config/windows_native_icon="res://Assets/UI/ChamilionItchBanner.ico"
 
 [audio]
 
@@ -29,6 +30,7 @@ AudioManager="*res://scripts/managers/AudioManager.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
