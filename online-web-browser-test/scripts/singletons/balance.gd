@@ -53,15 +53,15 @@ var camera_wall_radius: float = 0.15
 var min_players_for_2_cops: int = 6
 var min_players_for_3_cops: int = 9
 
-var quota_2p: int = 13_000_000
-var quota_3p: int = 21_000_000
-var quota_4p: int = 33_000_000
-var quota_5p: int = 45_000_000
-var quota_6p: int = 33_000_000
-var quota_7p: int = 45_000_000
-var quota_8p: int = 57_000_000
-var quota_9p: int = 41_000_000
-var quota_10p: int = 53_000_000
+var quota_2p: int = 15_000_000
+var quota_3p: int = 23_000_000
+var quota_4p: int = 35_000_000
+var quota_5p: int = 47_000_000
+var quota_6p: int = 35_000_000
+var quota_7p: int = 47_000_000
+var quota_8p: int = 59_000_000
+var quota_9p: int = 43_000_000
+var quota_10p: int = 55_000_000
 
 var timer_2p: int = 180
 var timer_3p: int = 180
