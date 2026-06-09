@@ -494,6 +494,10 @@ func client_return_to_lobby():
 	game_ended.emit()
 
 func full_teardown():
+	var cutscene_manager = get_tree().get_root().find_child("CutsceneManager", true, false)
+	if cutscene_manager and cutscene_manager.has_method("cancel_cinematic"):
+		cutscene_manager.cancel_cinematic()
+
 	var client_ui = get_tree().get_root().find_child("ClientUI", true, false)
 	if client_ui:
 		var menu_cam = client_ui.get("menu_camera")
@@ -518,7 +522,7 @@ func full_teardown():
 	team_cash = 0
 	
 	# Actually close the vents visually before clearing the list!
-	for vent in active_vents:
+	for vent in all_vents:
 		if is_instance_valid(vent) and vent.has_method("close_vent"):
 			vent.close_vent()
 	active_vents.clear()

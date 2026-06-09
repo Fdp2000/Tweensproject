@@ -9,12 +9,23 @@ func _ready():
 	GameManager.time_updated.connect(_on_time_updated)
 	GameManager.cash_updated.connect(_on_cash_updated)
 	GameManager.game_over.connect(_on_game_over)
+	GameManager.pre_game_started.connect(_on_pre_game_started)
+	GameManager.game_ended.connect(_on_game_ended)
 	
 	_on_cash_updated() # Initialize text
 	_on_time_updated(GameManager.round_timer) # Initialize time instantly!
 	
+	reset_hud_state()
+
+func reset_hud_state():
 	$MarginContainer.modulate.a = 0.0 # Hide initially
 	game_over_panel.hide()
+
+func _on_pre_game_started(_assignments):
+	reset_hud_state()
+
+func _on_game_ended():
+	reset_hud_state()
 
 func fade_in(duration: float = 1.5):
 	var tween = create_tween()

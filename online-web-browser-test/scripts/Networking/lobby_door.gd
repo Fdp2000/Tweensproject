@@ -3,6 +3,7 @@ extends Area3D
 var artifact_category = 0 # To prevent errors from interact logic
 var is_carried = false
 @export var outline_size: float = 4.0
+@export var custom_interact_radius: float = 5.0
 
 var is_highlighted: bool = false:
 	set(value):

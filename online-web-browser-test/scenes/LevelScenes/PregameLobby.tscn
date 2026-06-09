@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://dyj1djxuy4iko"]
 
 [ext_resource type="PackedScene" uid="uid://cns5sdtsx6skt" path="res://scenes/UIScenes/LeaveGame.tscn" id="1_bdf01"]
-[ext_resource type="PackedScene" uid="uid://bf05ftf00cgpm" path="res://scenes/Zones/Vent.tscn" id="1_hbusi"]
 [ext_resource type="PackedScene" uid="uid://bd366vecbeek4" path="res://scenes/UIScenes/StartGame.tscn" id="1_j52o3"]
 [ext_resource type="Texture2D" uid="uid://cylap6kt4nl4u" path="res://scenes/MuseumAsset/ColorPaletteMuseum.png" id="1_nw2ok"]
+[ext_resource type="PackedScene" uid="uid://cb4pyowhdg0vx" path="res://Assets/Models/Vent/Vent.tscn" id="2_be1b0"]
 [ext_resource type="Shader" uid="uid://bad57c5pi00w6" path="res://Assets/Shaders/celShader/celShading.gdshader" id="2_ggw6v"]
 [ext_resource type="Script" uid="uid://dc75ywjlslsgn" path="res://scripts/Networking/lobby_van.gd" id="2_van"]
 [ext_resource type="Script" uid="uid://p3do26wdyrig" path="res://scripts/Networking/lobby_door.gd" id="3_door"]
@@ -68,6 +68,13 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_van"]
 size = Vector3(3.019333, 1, 2.2216797)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o0mwm"]
+points = PackedVector3Array(14.740185, 14.739927, 0.54612577, 14.740185, 14.739927, -0.9539817, -14.740185, 14.739927, 0.54612577, 14.264044, 14.263794, 1.0265692, 14.264044, 12.587229, 1.0233039, 14.740185, -0.8685827, 0.51564896, 14.740185, 13.005648, -0.95746475, -14.740185, 14.739927, -0.9539817, -14.740185, -0.8685827, 0.51564896, -14.266929, 12.587229, 1.0233039, -14.266929, 14.263794, 1.0265692, 13.539732, 10.353731, 1.2124773, 14.264044, -14.26668, 0.97084045, 14.740185, -13.008534, 0.4919207, 14.740185, 0.86569595, -0.98119307, -14.740185, 13.005648, -0.95746475, -14.740185, -13.008534, 0.4919207, -14.266929, -14.26668, 0.97084045, -13.542617, 10.353731, 1.2124773, 13.539732, -5.5779715, 1.1813475, 14.740185, -14.739927, 0.48843765, 13.539732, -11.949499, 1.1687216, 14.740185, -13.008534, -1.0081867, -14.740185, 0.86569595, -0.98119307, -14.740185, -14.739927, 0.48843765, -13.542617, -11.949499, 1.1687216, -13.542617, -5.5779715, 1.1813475, 14.740185, -14.739927, -1.0114521, -14.740185, -13.008534, -1.0081867, -14.740185, -14.739927, -1.0114521)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o0mwm"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u7vus"]
 render_priority = 0
@@ -1057,24 +1064,39 @@ buffer = PackedFloat32Array(-0.99999994, 0, -1.5099579e-07, 21.802565, 0, 1, 0, 
 
 [node name="PregameLobby" type="Node3D" unique_id=1137537174]
 
-[node name="Vent" parent="." unique_id=581943021 instance=ExtResource("1_hbusi")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 13.391039, -0.22054923, 9.23996)
-
-[node name="300x300x20mm-vent_001_vent-grilles_0" parent="Vent/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(581943021, 1711548117, 1812499697) index="0" unique_id=496260524]
-cast_shadow = 0
-
-[node name="LeaveGame" parent="Vent" unique_id=2050935933 instance=ExtResource("1_bdf01")]
-transform = Transform3D(1, 0, -5.563627e-08, 0, 1, 0, 5.563627e-08, 0, 1, -0.40908813, 2.4088225, -1.0822124)
-
-[node name="LeaveDoor" type="Area3D" parent="Vent" unique_id=747238585 groups=["artifact"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.014546394, 1.8128237, -0.9208851)
+[node name="LeaveDoor" type="Area3D" parent="." unique_id=747238585 groups=["artifact"]]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12.373622, 0.9547045, 8.97165)
 collision_layer = 10
 collision_mask = 0
 script = ExtResource("3_door")
+custom_interact_radius = 2.5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Vent/LeaveDoor" unique_id=434180412]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03923607, -0.5830066, 0.7345457)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeaveDoor" unique_id=434180412]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.121414185, 0.054288864, -0.06278801)
 shape = SubResource("BoxShape3D_van")
+
+[node name="PivotPoint" type="Node3D" parent="LeaveDoor" unique_id=1521833555]
+transform = Transform3D(0.94623905, 0, 0, 0, 0.9677784, 0, -2.4868996e-14, 0, 0.6969964, -0.03231907, 0.49035156, -0.06527138)
+
+[node name="Sketchfab_Scene" parent="LeaveDoor/PivotPoint" unique_id=1711548117 instance=ExtResource("2_be1b0")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.5737087, 0.019129157)
+
+[node name="300x300x20mm-vent_001_vent-grilles_0" parent="LeaveDoor/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001" parent_id_path=PackedInt32Array(1711548117, 1812499697) index="0" unique_id=496260524]
+layers = 2
+cast_shadow = 0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="LeaveDoor/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001/300x300x20mm-vent_001_vent-grilles_0" index="0" unique_id=971211732]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LeaveDoor/PivotPoint/Sketchfab_Scene/Sketchfab_model/6ead43e9a975401cb62898dde0c486be_fbx/RootNode/300x300x20mm-vent_001/300x300x20mm-vent_001_vent-grilles_0/StaticBody3D" unique_id=181684666]
+shape = SubResource("ConvexPolygonShape3D_o0mwm")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="LeaveDoor" unique_id=115086990]
+transform = Transform3D(0.44962433, 0, 0, 0, 0.6624667, 0, -1.0658141e-14, 0, 0.6969964, -0.032108307, 0.09887934, -0.06172943)
+size = Vector3(1.1335106, 1.1090546, 0.03742981)
+material = SubResource("StandardMaterial3D_o0mwm")
+
+[node name="LeaveGame" parent="LeaveDoor" unique_id=2050935933 instance=ExtResource("1_bdf01")]
+transform = Transform3D(0.66152287, 0, -2.5015423e-08, 0, 0.7521752, 0, 5.705366e-08, 0, 0.6969964, -0.35221767, 0.98339844, -0.06213188)
 
 [node name="StartGme" parent="." unique_id=626359221 instance=ExtResource("1_j52o3")]
 transform = Transform3D(-1, 0, -1.509958e-07, 0, 1, 0, 1.509958e-07, 0, -1, 19.47887, 2.504574, 10.091494)
@@ -2894,8 +2916,7 @@ visibility_range_end = 75.0
 visibility_range_end_margin = 2.0
 multimesh = SubResource("MultiMesh_xnqhl")
 
-[editable path="Vent"]
-[editable path="Vent/PivotPoint/Sketchfab_Scene"]
+[editable path="LeaveDoor/PivotPoint/Sketchfab_Scene"]
 [editable path="Plant2"]
 [editable path="Plant6"]
 [editable path="Plant7"]

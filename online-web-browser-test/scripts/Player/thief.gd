@@ -282,8 +282,8 @@ func _on_interactable_exited(node: Node3D):
 func get_closest_interactable() -> Node3D:
 	var closest_thief: Node3D = null
 	var closest_art: Node3D = null
-	var min_dist_thief: float = Balance.interact_shape_size
-	var min_dist_art: float = Balance.interact_shape_size
+	var closest_thief_dist: float = INF
+	var closest_art_dist: float = INF
 	
 	for i in range(nearby_interactables.size() - 1, -1, -1):
 		if not is_instance_valid(nearby_interactables[i]):
@@ -293,14 +293,17 @@ func get_closest_interactable() -> Node3D:
 		var dist = global_position.distance_to(target.global_position)
 		
 		if target.has_method("on_captured") and target != self and target.get("team_index") == 0 and target.get("is_hypnotized"):
-			if dist < min_dist_thief:
-				closest_thief = target
-				min_dist_thief = dist
+			if dist <= Balance.interact_shape_size:
+				if dist < closest_thief_dist:
+					closest_thief = target
+					closest_thief_dist = dist
 				
 		elif drop_cooldown <= 0.0 and target.is_in_group("artifact") and not target.get("is_carried"):
-			if dist < min_dist_art:
-				closest_art = target
-				min_dist_art = dist
+			var max_dist = target.get("custom_interact_radius") if target.get("custom_interact_radius") != null else Balance.interact_shape_size
+			if dist <= max_dist:
+				if dist < closest_art_dist:
+					closest_art = target
+					closest_art_dist = dist
 				
 	if closest_thief: return closest_thief
 	return closest_art

@@ -45,6 +45,7 @@ extends Node3D
 var default_intro_cull_mask: int
 var local_player: Node3D
 var spawned_dummy_models: Array[Node] = []
+var is_cinematic_running: bool = false
 
 func _ready():
 	default_intro_cull_mask = intro_camera.cull_mask
@@ -147,6 +148,7 @@ func get_display_name(player: Node3D) -> String:
 # THE CINEMATIC FLOW
 # ---------------------------------------------------------
 func run_cinematic_flow():
+	is_cinematic_running = true
 	# Reset camera mask in case it was modified in a previous match
 	intro_camera.cull_mask = default_intro_cull_mask
 	
@@ -167,10 +169,14 @@ func run_cinematic_flow():
 		intro_camera.fov = 35.0
 	setup_versus_lineup()
 	
-	# Hide Mobile UI if it exists
-	if local_player and local_player.has_node("PlayerCanvas/MobileUI"):
-		var mobile_ui = local_player.get_node("PlayerCanvas/MobileUI")
-		mobile_ui.modulate.a = 0.0
+	# Hide Mobile UI and Cop Charge UI if they exist
+	if local_player:
+		if local_player.has_node("PlayerCanvas/MobileUI"):
+			var mobile_ui = local_player.get_node("PlayerCanvas/MobileUI")
+			mobile_ui.modulate.a = 0.0
+			
+		if local_player.get("charge_ui_ref"):
+			local_player.charge_ui_ref.modulate.a = 0.0
 	
 	# 3. Fade into Versus Screen
 	var vs_label = cutscene_ui.get_node_or_null("Root/VSLabel")
@@ -178,18 +184,23 @@ func run_cinematic_flow():
 		vs_label.show()
 		
 	AudioManager.play_music("match_start", 0.0)
+	
 	await cutscene_ui.fade_in(versus_fade_in_time)
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	await get_tree().create_timer(0.10).timeout
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	# Trigger the randomized taunts now that the screen is visible!
 	play_versus_taunts()
 	
 	# 4. Wait for versus duration
 	await get_tree().create_timer(versus_duration).timeout
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	# 5. Fade to black to transition to Museum Pans
 	await cutscene_ui.fade_to_black(versus_fade_out_time)
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	# Hide the dummies from view entirely so they don't photobomb the background!
 	if versus_pos:
@@ -201,22 +212,27 @@ func run_cinematic_flow():
 	
 	# 6. Play 3 Cinematic Clips
 	await play_cinematic_clip($CutsceneMarkers/Clip1Start, $CutsceneMarkers/Clip1End, 3.0)
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	await play_cinematic_clip($CutsceneMarkers/Clip2Start, $CutsceneMarkers/Clip2End, 3.0)
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	var is_cop = local_player.get("team_index") == 1
 	var clip3_start = $CutsceneMarkers/Clip3CopStart if is_cop else $CutsceneMarkers/Clip3ThiefStart
 	var clip3_end = $CutsceneMarkers/Clip3CopEnd if is_cop else $CutsceneMarkers/Clip3ThiefEnd
 	await play_cinematic_clip(clip3_start, clip3_end, 3.0)
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	# 7. Smooth fly to the actual player camera
 	var target_cam = get_player_gameplay_camera(local_player)
 	await fly_camera_to_target(target_cam)
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	# Switch to real player camera
 	target_cam.current = true
 	
 	# 8. Delay 1 second
 	await get_tree().create_timer(1.0).timeout
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	# 9. Play Countdown and fade in UI
 	var hud = get_tree().get_root().find_child("HUD", true, false)
@@ -224,8 +240,15 @@ func run_cinematic_flow():
 		hud.fade_in(1.5)
 		
 	# Fade in Mobile UI
-	if local_player and local_player.has_node("PlayerCanvas/MobileUI"):
-		var mobile_ui = local_player.get_node("PlayerCanvas/MobileUI")
+	var mobile_ui = null
+	if local_player.has_node("PlayerCanvas/MobileUI"):
+		mobile_ui = local_player.get_node("PlayerCanvas/MobileUI")
+		
+	# Start fading game in
+	var game_fade_in_time = 1.0
+	cutscene_ui.fade_in(game_fade_in_time)
+	
+	if mobile_ui:
 		var mobile_tween = create_tween()
 		mobile_tween.tween_property(mobile_ui, "modulate:a", 1.0, 1.5)
 		
@@ -239,15 +262,29 @@ func run_cinematic_flow():
 		local_player.unlock_camera()
 		
 	await cutscene_ui.play_countdown()
+	if not is_cinematic_running or not is_instance_valid(local_player): return
 	
 	if local_player.has_method("enable_controls"):
 		local_player.enable_controls(true)
 		
 	AudioManager.play_music("base_tension", 0.1)
 	GameManager.start_game_clock()
+	is_cinematic_running = false
+
+func cancel_cinematic():
+	is_cinematic_running = false
+	if cutscene_ui and cutscene_ui.has_method("cancel_and_reset"):
+		cutscene_ui.cancel_and_reset()
+	AudioManager.stop_music()
+	
+	if intro_camera:
+		intro_camera.current = false
+	
+	if versus_pos:
+		versus_pos.hide()
 
 # ---------------------------------------------------------
-# VERSUS LINEUP LOGIC
+# START & FINISH LOGIC
 # ---------------------------------------------------------
 func get_dummies(parent_node: Node3D) -> Array:
 	var dummies = []

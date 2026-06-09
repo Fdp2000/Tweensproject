@@ -8,6 +8,8 @@ class_name CutsceneUI
 @export var vs_font_size: int = 81
 @export var vs_is_italic: bool = true
 
+var current_tween: Tween
+
 func _ready():
 	layer = 128 # Ensure this renders ON TOP of LobbyUI (which is layer 100)
 	
@@ -41,15 +43,19 @@ func _notification(what):
 
 func fade_to_black(duration: float = 1.0):
 	visible = true
-	var tween = create_tween()
-	tween.tween_property(background, "modulate:a", 1.0, duration)
-	await tween.finished
+	if current_tween and current_tween.is_valid():
+		current_tween.kill()
+	current_tween = create_tween()
+	current_tween.tween_property(background, "modulate:a", 1.0, duration)
+	await current_tween.finished
 
 func fade_in(duration: float = 1.0):
 	visible = true
-	var tween = create_tween()
-	tween.tween_property(background, "modulate:a", 0.0, duration)
-	await tween.finished
+	if current_tween and current_tween.is_valid():
+		current_tween.kill()
+	current_tween = create_tween()
+	current_tween.tween_property(background, "modulate:a", 0.0, duration)
+	await current_tween.finished
 
 func play_countdown():
 	visible = true
@@ -68,30 +74,47 @@ func play_countdown():
 		countdown_label.scale = Vector2.ONE * 0.5
 		countdown_label.modulate.a = 0.0
 		
-		var tween = create_tween()
-		tween.set_parallel(true)
+		if current_tween and current_tween.is_valid():
+			current_tween.kill()
+		current_tween = create_tween()
+		current_tween.set_parallel(true)
 		# Fade in quickly
-		tween.tween_property(countdown_label, "modulate:a", 1.0, countdown_tick_duration * 0.2)
+		current_tween.tween_property(countdown_label, "modulate:a", 1.0, countdown_tick_duration * 0.2)
 		# Fade out near the end
-		tween.tween_property(countdown_label, "modulate:a", 0.0, countdown_tick_duration * 0.3).set_delay(countdown_tick_duration * 0.7)
+		current_tween.tween_property(countdown_label, "modulate:a", 0.0, countdown_tick_duration * 0.3).set_delay(countdown_tick_duration * 0.7)
 		# Scale continuously and linearly through the entire duration
-		tween.tween_property(countdown_label, "scale", Vector2.ONE * 1.5, countdown_tick_duration).set_trans(Tween.TRANS_LINEAR)
+		current_tween.tween_property(countdown_label, "scale", Vector2.ONE * 1.5, countdown_tick_duration).set_trans(Tween.TRANS_LINEAR)
 		
 		await get_tree().create_timer(countdown_tick_duration).timeout
+		if not visible: return # Abort loop if UI was cancelled
 		
 	countdown_label.text = "GO!"
 	AudioManager.play_2d_sfx("countdown_go")
 	countdown_label.scale = Vector2.ZERO
 	countdown_label.modulate.a = 1.0
 	
-	var tween_go = create_tween()
+	if current_tween and current_tween.is_valid():
+		current_tween.kill()
+	current_tween = create_tween()
 	# Burst outwards to a massive size using the bouncy elastic effect
-	tween_go.tween_property(countdown_label, "scale", Vector2.ONE * 1.25, 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	current_tween.tween_property(countdown_label, "scale", Vector2.ONE * 1.25, 0.5).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	
 	# Wait and hold it on screen
-	tween_go.tween_interval(0.6)
+	current_tween.tween_interval(0.6)
 	
 	# Fade out smoothly
-	tween_go.tween_property(countdown_label, "modulate:a", 0.0, 0.5)
+	current_tween.tween_property(countdown_label, "modulate:a", 0.0, 0.5)
 	
-	tween_go.tween_callback(func(): visible = false)
+	current_tween.tween_callback(func(): visible = false)
+
+func cancel_and_reset():
+	if current_tween and current_tween.is_valid():
+		current_tween.kill()
+		
+	visible = false
+	background.modulate.a = 0.0
+	countdown_label.modulate.a = 0.0
+	var vs_label = $Root.get_node_or_null("VSLabel")
+	if vs_label:
+		vs_label.hide()
+

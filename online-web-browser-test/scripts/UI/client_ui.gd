@@ -757,7 +757,18 @@ func _mp_server_disconnect() -> void:
 		hide_join_feedback()
 
 	print("[Multiplayer] Server disconnected")
+	
+	GameManager.full_teardown()
+	
+	has_requested_lobby = false
+	is_joining_room = false
+	is_hosting_room = false
 
+	if lobby_ui:
+		lobby_ui.hide()
+
+	show_play_panel()
+	move_camera_to(play_camera_spot)
 
 func _mp_peer_connected(_id: int) -> void:
 	pass
