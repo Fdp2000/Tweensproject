@@ -35,7 +35,7 @@ func _ready():
 	
 	# Programmatically create the dynamic 3D audio followers
 	grunt_player = AudioStreamPlayer3D.new()
-	grunt_player.stream = preload("res://Assets/Sound/SFX/RhinoCharge.mp3")
+	grunt_player.stream = preload("res://Assets/Sound/SFX/Charge/RhinoCharge.wav")
 	grunt_player.bus = "Loud SFX"
 	grunt_player.max_distance = 60.0
 	add_child(grunt_player)

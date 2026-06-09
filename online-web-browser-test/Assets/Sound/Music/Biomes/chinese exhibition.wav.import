@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://fw4eqh0u1lyb"
+path="res://.godot/imported/chinese exhibition.wav-e4286fc445ec271291e86e31aa44574d.sample"
+
+[deps]
+
+source_file="res://Assets/Sound/Music/Biomes/chinese exhibition.wav"
+dest_files=["res://.godot/imported/chinese exhibition.wav-e4286fc445ec271291e86e31aa44574d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

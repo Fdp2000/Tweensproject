@@ -4,14 +4,14 @@ extends Node3D
 # Keys are the sound names you will call in code.
 # The paths assume you have placed your files in res://Assets/Sound/SFX/
 var MUSIC_CONFIG = {
-	"main_menu":    {"path": "res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby.mp3", "volume": -6.0, "bus": "Music"},
-	"match_start":  {"path": "res://Assets/Sound/Music/Intro Cutscene/Brassfall Surge.ogg", "volume": -5, "bus": "Music"},
-	"base_tension": {"path": "res://Assets/Sound/Music/BaseMap Song/Stealth Drum Loop.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_forest": {"path": "res://Assets/Sound/Music/Biomes/forest exhibit.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_egypt":  {"path": "res://Assets/Sound/Music/Biomes/egyptianexhibition.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_island": {"path": "res://Assets/Sound/Music/Biomes/tropical exhibit.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_antarctica": {"path": "res://Assets/Sound/Music/Biomes/arcticexhibition.ogg", "volume": -18.0, "bus": "Music"},
-	"biome_asia":   {"path": "res://Assets/Sound/Music/Biomes/chinese exhibition.ogg", "volume": -18.0, "bus": "Music"},
+	"main_menu":    {"path": "res://Assets/Sound/Music/MainMenu Theme/Criminal Chameleons Lobby Reimport.wav", "volume": -8.0, "bus": "Music"},
+	"match_start":  {"path": "res://Assets/Sound/Music/Intro Cutscene/Brassfall Surge.wav", "volume": -5, "bus": "Music"},
+	"base_tension": {"path": "res://Assets/Sound/Music/BaseMap Song/Stealth Drum Loop.wav", "volume": -18.0, "bus": "Music"},
+	"biome_forest": {"path": "res://Assets/Sound/Music/Biomes/forest exhibit.wav", "volume": -18.0, "bus": "Music"},
+	"biome_egypt":  {"path": "res://Assets/Sound/Music/Biomes/egyptianexhibition.wav", "volume": -18.0, "bus": "Music"},
+	"biome_island": {"path": "res://Assets/Sound/Music/Biomes/tropical exhibit.wav", "volume": -18.0, "bus": "Music"},
+	"biome_antarctica": {"path": "res://Assets/Sound/Music/Biomes/arcticexhibition.wav", "volume": -18.0, "bus": "Music"},
+	"biome_asia":   {"path": "res://Assets/Sound/Music/Biomes/chinese exhibition.wav", "volume": -18.0, "bus": "Music"},
 	"thief_win":    {"path": "res://Assets/Sound/Music/cha milli.wav", "volume": -10.0, "bus": "Music"}
 }
 
@@ -53,8 +53,8 @@ var SFX_CONFIG = {
 		],
 		"volume": -8.0, "bus": "Quiet SFX", "max_distance": 25.0, "unit_size": 12.0
 	},
-	"cop_vocals_grunt": {"path": "res://Assets/Sound/SFX/RhinoCharge.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
-	"charge_wall_impact": {"path": "res://Assets/Sound/SFX/RhinoImpact.mp3", "volume": 2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
+	"cop_vocals_grunt": {"path": "res://Assets/Sound/SFX/Charge/RhinoCharge.wav", "volume": -2, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
+	"charge_wall_impact": {"path": "res://Assets/Sound/SFX/Charge/RhinoImpact.wav", "volume": -2.0, "bus": "Loud SFX", "max_distance": 35.0, "unit_size": 17.0},
 
 	"capture":          {"path": "res://Assets/Sound/SFX/Capture/bonk_BEtiM8g.wav", "volume": -6.0,  "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 55},
 	"jailed":           {"path": "res://Assets/Sound/SFX/Jail Capture/Jail.wav", "volume": -4.0, "bus": "Loud SFX", "max_distance": 500.0, "unit_size": 500.0},
@@ -177,13 +177,8 @@ func _initialize_3d_pool():
 		pool_3d.append(player)
 
 func _preload_all_audio():
-	# Forcibly load all audio into RAM and force WebGL decode buffer initialization!
-	# We play each sound silently for 1 frame to prevent the massive lag spike on first playback.
-	var silent_player = AudioStreamPlayer.new()
-	silent_player.volume_db = -80.0
-	silent_player.bus = "Master"
-	add_child(silent_player)
-	
+	# Forcibly load all audio into RAM to avoid stuttering on first access.
+	# We DO NOT play them here, as rapid-fire play() calls in WebGL corrupts the AudioContext decoders!
 	for config_dict in [MUSIC_CONFIG, SFX_CONFIG]:
 		for key in config_dict.keys():
 			var config = config_dict[key]
@@ -194,14 +189,8 @@ func _preload_all_audio():
 				paths.append_array(config["paths"])
 				
 			for p in paths:
-				var stream = _get_stream(p)
-				if stream:
-					silent_player.stream = stream
-					silent_player.play()
-					# Yielding allows Web Audio API to process the buffer initialization!
-					await get_tree().process_frame
-					
-	silent_player.queue_free()
+				# This securely loads and caches the resource in RAM without spamming the WebAudio API
+				_get_stream(p)
 
 # Helper function to load AudioStreams into memory and cache them
 func _get_stream(path_data: Variant) -> AudioStream:
@@ -338,7 +327,10 @@ func play_music(track_name: String, crossfade_time: float = 2.0, volume_offset: 
 	var new_player = music_player_b if active_music_player == 1 else music_player_a
 	
 	if current_music_track != "" and old_player.playing:
-		music_time_memory[current_music_track] = old_player.get_playback_position()
+		var pos = old_player.get_playback_position()
+		if old_player.stream and old_player.stream.has_method("get_length") and old_player.stream.get_length() > 0:
+			pos = fmod(pos, old_player.stream.get_length())
+		music_time_memory[current_music_track] = pos
 		
 	current_music_track = track_name
 	active_music_player = 2 if active_music_player == 1 else 1
