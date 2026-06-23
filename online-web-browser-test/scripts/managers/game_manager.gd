@@ -658,3 +658,14 @@ func client_ping():
 @rpc("authority", "call_remote", "reliable")
 func server_pong():
 	last_server_pong_time = Time.get_ticks_msec()
+
+func is_mobile_device() -> bool:
+	if OS.has_feature("mobile"): return true
+	if OS.has_feature("web_android") or OS.has_feature("web_ios"): return true
+	if OS.has_feature("web") and DisplayServer.is_touchscreen_available():
+		var ua = JavaScriptBridge.eval("try { navigator.userAgent } catch(e) { '' }")
+		if ua:
+			for m in ["Android", "iPhone", "iPad", "iPod", "Mobile"]:
+				if m in ua: return true
+	return false
+

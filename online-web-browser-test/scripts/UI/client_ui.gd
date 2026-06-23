@@ -78,6 +78,11 @@ var is_join_loading := false
 var is_joining_room := false
 var is_hosting_room := false
 
+var active_line_edit: LineEdit = null
+var js_input_callback = null
+var js_blur_callback = null
+
+
 
 
 func _ready() -> void:
@@ -176,6 +181,10 @@ func _ready() -> void:
 		config.set_value("tutorial", "has_seen", true)
 		config.save("user://settings.cfg")
 		_play_tutorial_intro()
+
+	if is_ios_web():
+		setup_ios_web_input()
+
 
 
 func show_main_menu() -> void:
@@ -1245,3 +1254,36 @@ func hide_join_feedback() -> void:
 @rpc("any_peer", "call_local")
 func ping(argument: float) -> void:
 	print("[Multiplayer] Ping from peer %d: arg: %f" % [multiplayer.get_remote_sender_id(), argument])
+
+func is_ios_web() -> bool:
+	if OS.has_feature("web"):
+		var window = JavaScriptBridge.get_interface("window")
+		if window:
+			var ua = window.navigator.userAgent.to_lower()
+			return "iphone" in ua or "ipad" in ua or "ipod" in ua
+	return false
+
+func setup_ios_web_input():
+	if name_input:
+		name_input.focus_mode = Control.FOCUS_NONE
+		name_input.gui_input.connect(_on_ios_line_edit_gui_input.bind(name_input, "Enter your name:"))
+	if room_input:
+		room_input.focus_mode = Control.FOCUS_NONE
+		room_input.gui_input.connect(_on_ios_line_edit_gui_input.bind(room_input, "Enter Room Code:"))
+
+func _on_ios_line_edit_gui_input(event: InputEvent, line_edit: LineEdit, prompt_title: String):
+	if (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT) or (event is InputEventScreenTouch and event.pressed):
+		var window = JavaScriptBridge.get_interface("window")
+		if window:
+			var default_value = line_edit.text
+			var escaped_title = prompt_title.replace("'", "\\'")
+			var escaped_default = default_value.replace("'", "\\'")
+			
+			var result = JavaScriptBridge.eval("prompt('" + escaped_title + "', '" + escaped_default + "')")
+			if result != null:
+				var new_text = str(result).strip_edges()
+				line_edit.text = new_text
+				line_edit.text_submitted.emit(new_text)
+
+
+

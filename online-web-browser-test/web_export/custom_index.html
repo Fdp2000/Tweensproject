@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<title>$GODOT_PROJECT_NAME</title>
+		<style>
+html, body, #canvas {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	color: white;
+	background-color: black;
+	overflow: hidden;
+	touch-action: none;
+}
+
+#canvas {
+	display: block;
+}
+
+#canvas:focus {
+	outline: none;
+}
+
+#status, #status-splash, #status-progress {
+	position: absolute;
+	left: 0;
+	right: 0;
+}
+
+#status, #status-splash {
+	top: 0;
+	bottom: 0;
+}
+
+#status {
+	background-color: #242424;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;
+}
+
+#status-splash {
+	max-height: 100%;
+	max-width: 100%;
+	margin: auto;
+}
+
+#status-splash.show-image--false {
+	display: none;
+}
+
+#status-splash.fullsize--true {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+}
+
+#status-splash.use-filter--false {
+	image-rendering: pixelated;
+}
+
+#status-progress, #status-notice {
+	display: none;
+}
+
+#status-progress {
+	bottom: 10%;
+	width: 50%;
+	margin: 0 auto;
+}
+
+#status-notice {
+	background-color: #5b3943;
+	border-radius: 0.5rem;
+	border: 1px solid #9b3943;
+	color: #e0e0e0;
+	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+	line-height: 1.3;
+	margin: 0 2rem;
+	overflow: hidden;
+	padding: 1rem;
+	text-align: center;
+	z-index: 1;
+}
+
+/* --- CUSTOM MOBILE OVERLAY STYLES --- */
+#orientation-lock-overlay {
+	display: none;
+	position: fixed;
+	top: 0; left: 0; width: 100%; height: 100%;
+	background-color: rgba(15, 15, 15, 0.98);
+	z-index: 99999;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	text-align: center;
+	font-family: Arial, sans-serif;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+	#orientation-lock-overlay {
+		display: flex;
+	}
+}
+
+#webview-escape-btn {
+	position: fixed;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+	background: #3b82f6;
+	color: white;
+	border: none;
+	padding: 20px 40px;
+	font-size: 24px;
+	border-radius: 12px;
+	cursor: pointer;
+	z-index: 100000;
+	box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+	font-family: Arial, sans-serif;
+	font-weight: bold;
+}
+		</style>
+		$GODOT_HEAD_INCLUDE
+	</head>
+	<body>
+		<canvas id="canvas">
+			Your browser does not support the canvas tag.
+		</canvas>
+
+		<noscript>
+			Your browser does not support JavaScript.
+		</noscript>
+
+		<div id="status">
+			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="$GODOT_SPLASH" alt="">
+			<progress id="status-progress"></progress>
+			<div id="status-notice"></div>
+		</div>
+
+		<script src="$GODOT_URL"></script>
+		<script>
+const GODOT_CONFIG = $GODOT_CONFIG;
+const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+const engine = new Engine(GODOT_CONFIG);
+
+(function () {
+	const statusOverlay = document.getElementById('status');
+	const statusProgress = document.getElementById('status-progress');
+	const statusNotice = document.getElementById('status-notice');
+
+	let initializing = true;
+	let statusMode = '';
+
+	function setStatusMode(mode) {
+		if (statusMode === mode || !initializing) {
+			return;
+		}
+		if (mode === 'hidden') {
+			statusOverlay.remove();
+			initializing = false;
+			return;
+		}
+		statusOverlay.style.visibility = 'visible';
+		statusProgress.style.display = mode === 'progress' ? 'block' : 'none';
+		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
+		statusMode = mode;
+	}
+
+	function setStatusNotice(text) {
+		while (statusNotice.lastChild) {
+			statusNotice.removeChild(statusNotice.lastChild);
+		}
+		const lines = text.split('\n');
+		lines.forEach((line) => {
+			statusNotice.appendChild(document.createTextNode(line));
+			statusNotice.appendChild(document.createElement('br'));
+		});
+	}
+
+	function displayFailureNotice(err) {
+		console.error(err);
+		if (err instanceof Error) {
+			setStatusNotice(err.message);
+		} else if (typeof err === 'string') {
+			setStatusNotice(err);
+		} else {
+			setStatusNotice('An unknown error occurred.');
+		}
+		setStatusMode('notice');
+		initializing = false;
+	}
+
+	const missing = Engine.getMissingFeatures({
+		threads: GODOT_THREADS_ENABLED,
+	});
+
+	if (missing.length !== 0) {
+		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
+			let serviceWorkerRegistrationPromise;
+			try {
+				serviceWorkerRegistrationPromise = navigator.serviceWorker.getRegistration();
+			} catch (err) {
+				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
+			}
+			Promise.race([
+				serviceWorkerRegistrationPromise.then((registration) => {
+					if (registration != null) {
+						return Promise.reject(new Error('Service worker already exists.'));
+					}
+					return registration;
+				}).then(() => engine.installServiceWorker()),
+				new Promise((resolve) => {
+					setTimeout(() => resolve(), 2000);
+				}),
+			]).then(() => {
+				window.location.reload();
+			}).catch((err) => {
+				console.error('Error while registering service worker:', err);
+			});
+		} else {
+			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
+			displayFailureNotice(missingMsg + missing.join('\n'));
+		}
+	} else {
+		setStatusMode('progress');
+		engine.startGame({
+			'onProgress': function (current, total) {
+				if (current > 0 && total > 0) {
+					statusProgress.value = current;
+					statusProgress.max = total;
+				} else {
+					statusProgress.removeAttribute('value');
+					statusProgress.removeAttribute('max');
+				}
+			},
+		}).then(() => {
+			setStatusMode('hidden');
+		}, displayFailureNotice);
+	}
+}());
+
+/* --- CUSTOM MOBILE BRIDGE LOGIC --- */
+(function() {
+	function initMobileBridge() {
+		// 1. Inject Lock Screen Overlay DOM
+		let overlay = document.getElementById("orientation-lock-overlay");
+		if (!overlay) {
+			overlay = document.createElement("div");
+			overlay.id = "orientation-lock-overlay";
+			overlay.innerHTML = `
+				<div style="font-size: 28px; font-weight: bold; margin-bottom: 15px; letter-spacing: 1px;">ROTATE YOUR DEVICE</div>
+				<div style="font-size: 16px; color: #a9a9a9; max-width: 320px; line-height: 1.6;">Please rotate your screen to landscape mode to play Chamillion $ Heist.</div>
+				<div style="margin-top: 40px; font-size: 65px; animation: rotate-animation 2.2s infinite ease-in-out;">&#128241;&#128260;</div>
+			`;
+			document.body.appendChild(overlay);
+		}
+		
+		// 2. WebView Breakout check
+		function isWebView() {
+			var ua = navigator.userAgent || navigator.vendor || window.opera || "";
+			
+			// Check for common in-app browser user agent signatures
+			var isRestrictedUA = /FBAN|FBAV|Instagram|Twitter|Discord|Line|Snapchat/i.test(ua);
+			
+			// Android WebView signature: contains "; wv)" or "Version/4.0 ... Chrome/"
+			var isAndroidWebView = /; wv\)/.test(ua) || /Version\/4.0.*Chrome\//.test(ua);
+			
+			// iOS WebView signature: iOS device user agent that does NOT contain Safari, CriOS, or FxiOS
+			var isIOS = /iPhone|iPad|iPod/i.test(ua);
+			var isAppleWebView = isIOS && (!/Safari/i.test(ua) && !/CriOS|FxiOS/i.test(ua));
+			
+			return isRestrictedUA || isAndroidWebView || isAppleWebView;
+		}
+		
+		if (isWebView()) {
+			// Show a premium instruction card for all restricted WebViews (both Android and iOS)
+			let webviewOverlay = document.getElementById("mobile-webview-overlay");
+			if (!webviewOverlay) {
+				webviewOverlay = document.createElement("div");
+				webviewOverlay.id = "mobile-webview-overlay";
+				webviewOverlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:#111116;z-index:100001;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;font-family:Arial,sans-serif;padding:30px;box-sizing:border-box;text-align:center;";
+				webviewOverlay.innerHTML = `
+					<div style="font-size: 55px; margin-bottom: 20px; animation: bounce-animation 2s infinite ease-in-out;">🧭</div>
+					<div style="font-size: 26px; font-weight: bold; margin-bottom: 15px; letter-spacing: 0.5px; color: #57a6ff;">Open in Native Browser</div>
+					<div style="font-size: 15px; color: #a9a9a9; line-height: 1.6; max-width: 360px; margin-bottom: 30px;">
+						WebGL graphics are not supported inside this app's built-in browser.
+						<br><br>
+						Please tap the <b>menu (•••)</b>, <b>compass (🧭)</b>, or <b>share</b> icon at the corner of your screen and select <b>"Open in Safari"</b> or <b>"Open in Chrome"</b> to play!
+					</div>
+				`;
+				
+				// Add a bounce style for the compass icon
+				let style = document.createElement("style");
+				style.innerHTML = `
+					@keyframes bounce-animation {
+						0%, 100% { transform: translateY(0); }
+						50% { transform: translateY(-10px); }
+					}
+				`;
+				document.head.appendChild(style);
+				document.body.appendChild(webviewOverlay);
+			}
+			// Prevent engine initialization to save CPU/GPU if we are trapped in a WebView
+			return;
+		}	}
+	
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initMobileBridge);
+	} else {
+		initMobileBridge();
+	}
+})();
+		</script>
+	</body>
+</html>

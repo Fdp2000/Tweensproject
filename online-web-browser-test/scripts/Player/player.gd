@@ -426,14 +426,8 @@ func _sync_name(n: String):
 	player_name = n
 
 func is_mobile_device() -> bool:
-	if OS.has_feature("mobile"): return true
-	if OS.has_feature("web_android") or OS.has_feature("web_ios"): return true
-	if OS.has_feature("web") and DisplayServer.is_touchscreen_available():
-		var ua = JavaScriptBridge.eval("navigator.userAgent")
-		if ua:
-			for m in ["Android", "iPhone", "iPad", "iPod", "Mobile"]:
-				if m in ua: return true
-	return false
+	return GameManager.is_mobile_device()
+
 
 
 # ================================
